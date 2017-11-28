@@ -1,15 +1,23 @@
 {
-    "social": {
-        "btnLabel": "Autenticar-se amb {{ label }}",
-        "register": {
-            "title": "Registrar-se amb {{ label }}",
-            "errorTitle": "Registrar-se amb un compte extern",
-            "messages": {
-                "success": "<strong>Registre guardat!</strong> Si us plau, consulti el seu compte de correu electrònic per confirmar.",
-                "error": {
-                    "fail": "<strong>Error en el registre!</strong> Si us plau, torni-ho a intentar més tard."
-                }
-            }
+    "furyViewerApp": {
+        "social" : {
+            "home": {
+                "title": "Socials",
+                "createLabel": "Create a new Social",
+                "createOrEditLabel": "Create or edit a Social"
+            },
+            "created": "A new Social is created with identifier {{ param }}",
+            "updated": "A Social is updated with identifier {{ param }}",
+            "deleted": "A Social is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Social {{ id }}?"
+            },
+            "detail": {
+                "title": "Social"
+            },
+            "url": "Url",
+            "series": "Series",
+            "movie": "Movie"
         }
     }
 }

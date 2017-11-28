@@ -1,0 +1,238 @@
+ entity UserExt{
+ 	image ImageBlob,
+     locationGoogleMaps String,
+      latitude Double,
+    longitude Double
+ }
+
+entity Country{
+	name String,
+	urlGoogleMaps String,
+    latitude Double,
+    longitude Double
+}
+
+entity Genre{
+	name String,
+    description String
+}
+
+enum SeriesEmittingEnum{
+	CANCELED,
+    WAITING_NEW_SEASON,
+    WAITING_START,
+    ENDED,
+    EMITTING
+}
+
+entity Series{
+	name String,
+    description String,
+    img ImageBlob,
+    state SeriesEmittingEnum,
+    releaseDate LocalDate
+}
+entity Season{
+	number Integer,
+    img ImageBlob,
+    releaseDate LocalDate
+}
+
+entity Episode{
+	number Integer,
+    name String,
+    img ImageBlob,
+  	duration Double,
+    releaseDate LocalDate
+}
+
+entity Movie{
+	name String,
+    releaseDate LocalDate,
+    description String,
+    img ImageBlob,
+    duration Double
+}
+
+
+
+entity Company{
+	name String,
+    img ImageBlob
+}
+
+entity ReviewSeries{
+	date ZonedDateTime,
+    title String,
+    review String
+}
+
+entity ReviewMovie{
+	date ZonedDateTime,
+    title String,
+    review String
+}
+
+enum ArtistTypeEnum{
+	MAIN_ACTOR,
+    SECONDARY_ACTOR,
+    DIRECTOR,
+    SCRIPTWRITER
+    
+}
+
+entity ArtistType{
+	name ArtistTypeEnum
+}
+
+entity Artist{
+	name String,
+    surname String,
+    birthdate LocalDate,
+    sex String,
+    alive Boolean,
+    deathdate LocalDate,
+    img ImageBlob
+    
+}
+
+entity FavouriteMovie{
+	liked Boolean,
+    date ZonedDateTime
+}
+
+entity FavouriteSeries{
+	liked Boolean,
+    date ZonedDateTime
+}
+
+entity RateSeries{
+	rate Integer,
+    date ZonedDateTime
+}
+entity RateMovie{
+	rate Integer,
+    date ZonedDateTime
+}
+
+entity FavouriteArtist{
+    liked Boolean,
+    date ZonedDateTime
+}
+
+entity HatredMovie{
+	hated Boolean,
+    date ZonedDateTime
+}
+
+entity HatredSeries{
+	hated Boolean,
+    date ZonedDateTime
+}
+
+entity HatredArtist{
+	hated Boolean,
+    date ZonedDateTime
+}
+
+
+enum SeriesStatsEnum{
+	PENDING,
+    FOLLOWING,
+    SEEN
+}
+
+entity SeriesStats{
+	pending SeriesStatsEnum,
+    date ZonedDateTime
+}
+
+enum MovieStatsEnum{
+	PENDING,
+    SEEN
+}
+
+
+entity MovieStats{
+	state MovieStatsEnum,
+    date ZonedDateTime
+}
+
+
+entity Social{
+	url String
+}
+
+
+
+relationship ManyToOne{
+	//GENERES
+    
+
+	ReviewSeries{series(name)} to Series{review},
+    ReviewMovie{movie(name)} to Movie{review},
+	ReviewSeries{user(login)} to User,
+    ReviewMovie{user(login)} to User,
+    //FAVORITOS
+    FavouriteSeries{series(name)} to Series{favoriteSerie},
+    FavouriteSeries{user(login)} to User,
+    FavouriteMovie{serie(name)} to Movie{favoriteMovie},
+    FavouriteMovie{user(login)} to User,
+    FavouriteArtist{artist(name)} to Artist{favoriteArtist},
+    FavouriteArtist{user(login)} to User,
+
+	//RATES
+    RateSeries{series(name)} to Series{rateSerie},
+    RateSeries{user(login)} to User,
+    RateMovie{movie(name)} to Movie{rateMovie},
+    RateMovie{user(login)} to User,
+
+	//states
+    MovieStats{movie(name)} to Movie{stat},
+    MovieStats{user(login)} to User,
+    SeriesStats{serie(name)} to Series{stat},
+    SeriesStats{user(login)} to User, 
+    
+
+    //HATRED!!!!! <= THE MOST IMPORTANT
+	HatredMovie{movie(name)} to Movie{hatedMovie},
+    HatredMovie{user(login)} to User,
+    HatredSeries{series(name)} to Series{hatedSerie},
+    HatredSeries{user(login)} to User,
+	HatredArtist{artist(name)} to Artist{hatredArtist},
+    HatredArtist{user(login)} to User,
+    
+    Movie{director(name)} to Artist{movieDirector},
+    Series{director(name)} to Artist{seriesDirector},
+    Movie{scriptwriter(name)} to Artist{movieScriptwriter},
+    Series{scriptwriter(name)} to Artist{seriesScriptwriter},
+    
+    Movie{company(name)} to Company{movie},
+    Series{company(name)} to Company{serie},
+    
+    
+    Season{series(name)} to Series{season},
+    Episode{season(number)} to Season{episode},
+   
+    //SOCIAL
+   	Social{series(name)} to Series{social},
+    Social{movie(name)} to Movie{social},
+    
+     
+    //COUNTRY
+   	Artist{country(name)} to Country{artist},
+    Company{country(name)} to Country{company}
+}
+
+relationship ManyToMany{
+	Genre{movie(name)} to Movie{genre},
+    Genre{series(name)} to Series{genre},
+	Movie{actor(name)} to Artist{movieActor},
+    Series{actor(name)} to Artist{seriesActor},
+    Artist{artistType(name)} to ArtistType{artist}
+}
+
+ relationship OneToOne{
+ 	UserExt{user(login)} to User
+
+ }
