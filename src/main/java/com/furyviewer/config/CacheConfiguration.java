@@ -62,6 +62,7 @@ public class CacheConfiguration {
             cm.createCache(com.furyviewer.domain.Season.class.getName(), jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Season.class.getName() + ".episodes", jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Episode.class.getName(), jcacheConfiguration);
+            cm.createCache(com.furyviewer.domain.Episode.class.getName() + ".seens", jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Movie.class.getName(), jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Movie.class.getName() + ".actors", jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Movie.class.getName() + ".reviews", jcacheConfiguration);
@@ -99,6 +100,7 @@ public class CacheConfiguration {
             cm.createCache(com.furyviewer.domain.SeriesStats.class.getName(), jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.MovieStats.class.getName(), jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Social.class.getName(), jcacheConfiguration);
+            cm.createCache(com.furyviewer.domain.ChapterSeen.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

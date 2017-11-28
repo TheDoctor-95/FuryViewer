@@ -163,10 +163,19 @@ entity Social{
 	url String
 }
 
+entity ChapterSeen{
+	seen Boolean,
+    date ZonedDateTime
+    
+}
+
 
 
 relationship ManyToOne{
 	//GENERES
+    
+    ChapterSeen{episode(name)} to Episode{seen},
+    ChapterSeen{user(login)} to User,
     
 
 	ReviewSeries{series(name)} to Series{review},

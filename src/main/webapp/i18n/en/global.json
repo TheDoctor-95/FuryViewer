@@ -30,6 +30,7 @@
                 "seriesStats": "Series Stats",
                 "movieStats": "Movie Stats",
                 "social": "Social",
+                "chapterSeen": "Chapter Seen",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
