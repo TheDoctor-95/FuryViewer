@@ -1,0 +1,75 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.episode.home.title">Episodes</span>
+        <button class="btn btn-primary float-right jh-create-entity create-episode" [routerLink]="['/', { outlets: { popup: ['episode-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.episode.home.createLabel">
+            Create new Episode
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="episodes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.number">Number</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.name">Name</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.img">Img</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.duration">Duration</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.releaseDate">Release Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.season">Season</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let episode of episodes ;trackBy: trackId">
+                <td><a [routerLink]="['../episode', episode.id ]">{{episode.id}}</a></td>
+                <td>{{episode.number}}</td>
+                <td>{{episode.name}}</td>
+                <td>
+                    <a *ngIf="episode.img" (click)="openFile(episode.imgContentType, episode.img)">
+                        <img [src]="'data:' + episode.imgContentType + ';base64,' + episode.img" style="max-height: 30px;" alt="episode image"/>
+                    </a>
+                    <span *ngIf="episode.img">{{episode.imgContentType}}, {{byteSize(episode.img)}}</span>
+                </td>
+                <td>{{episode.duration}}</td>
+                <td>{{episode.releaseDate | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="episode.season">
+                        <a [routerLink]="['../season', episode.season?.id ]" >{{episode.season?.number}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../episode', episode.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'episode/'+ episode.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'episode/'+ episode.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

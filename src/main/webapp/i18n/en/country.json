@@ -1,0 +1,26 @@
+{
+    "furyViewerApp": {
+        "country" : {
+            "home": {
+                "title": "Countries",
+                "createLabel": "Create a new Country",
+                "createOrEditLabel": "Create or edit a Country"
+            },
+            "created": "A new Country is created with identifier {{ param }}",
+            "updated": "A Country is updated with identifier {{ param }}",
+            "deleted": "A Country is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Country {{ id }}?"
+            },
+            "detail": {
+                "title": "Country"
+            },
+            "name": "Name",
+            "urlGoogleMaps": "Url Google Maps",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "artist": "Artist",
+            "company": "Company"
+        }
+    }
+}

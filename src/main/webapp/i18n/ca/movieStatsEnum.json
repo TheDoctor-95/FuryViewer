@@ -1,0 +1,9 @@
+{
+    "furyViewerApp": {
+        "MovieStatsEnum" : {
+            "null": "",
+            "PENDING": "PENDING",
+            "SEEN": "SEEN"
+        }
+    }
+}

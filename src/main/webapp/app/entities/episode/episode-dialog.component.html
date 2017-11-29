@@ -1,0 +1,74 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEpisodeLabel" jhiTranslate="furyViewerApp.episode.home.createOrEditLabel">Create or edit a Episode</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!episode.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="episode.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.number" for="field_number">Number</label>
+            <input type="number" class="form-control" name="number" id="field_number"
+                [(ngModel)]="episode.number"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="episode.name"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.img" for="field_img">Img</label>
+            <div>
+                <img [src]="'data:' + episode.imgContentType + ';base64,' + episode.img" style="max-height: 100px;" *ngIf="episode.img" alt="episode image"/>
+                <div *ngIf="episode.img" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{episode.imgContentType}}, {{byteSize(episode.img)}}</span>
+                    <button type="button" (click)="clearInputImage('img', 'imgContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_img" (change)="setFileData($event, episode, 'img', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+            </div>
+            <input type="hidden" class="form-control" name="img" id="field_img"
+                [(ngModel)]="episode.img"  />
+            <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
+                [(ngModel)]="episode.imgContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.duration" for="field_duration">Duration</label>
+            <input type="number" class="form-control" name="duration" id="field_duration"
+                [(ngModel)]="episode.duration"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.releaseDate" for="field_releaseDate">Release Date</label>
+            <div class="input-group">
+                <input id="field_releaseDate" type="text" class="form-control" name="releaseDate" ngbDatepicker  #releaseDateDp="ngbDatepicker" [(ngModel)]="episode.releaseDate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="releaseDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.season" for="field_season">Season</label>
+            <select class="form-control" id="field_season" name="season" [(ngModel)]="episode.season" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="seasonOption.id === episode.season?.id ? episode.season : seasonOption" *ngFor="let seasonOption of seasons; trackBy: trackSeasonById">{{seasonOption.number}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

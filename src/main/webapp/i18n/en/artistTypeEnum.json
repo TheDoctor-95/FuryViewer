@@ -1,0 +1,11 @@
+{
+    "furyViewerApp": {
+        "ArtistTypeEnum" : {
+            "null": "",
+            "MAIN_ACTOR": "MAIN_ACTOR",
+            "SECONDARY_ACTOR": "SECONDARY_ACTOR",
+            "DIRECTOR": "DIRECTOR",
+            "SCRIPTWRITER": "SCRIPTWRITER"
+        }
+    }
+}

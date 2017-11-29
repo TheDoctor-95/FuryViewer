@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "favouriteSeries" : {
+            "home": {
+                "title": "Favourite Series",
+                "createLabel": "Create a new Favourite Series",
+                "createOrEditLabel": "Create or edit a Favourite Series"
+            },
+            "created": "A new Favourite Series is created with identifier {{ param }}",
+            "updated": "A Favourite Series is updated with identifier {{ param }}",
+            "deleted": "A Favourite Series is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Favourite Series {{ id }}?"
+            },
+            "detail": {
+                "title": "Favourite Series"
+            },
+            "liked": "Liked",
+            "date": "Date",
+            "series": "Series",
+            "user": "User"
+        }
+    }
+}

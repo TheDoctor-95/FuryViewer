@@ -1,0 +1,10 @@
+{
+    "furyViewerApp": {
+        "SeriesStatsEnum" : {
+            "null": "",
+            "PENDING": "PENDING",
+            "FOLLOWING": "FOLLOWING",
+            "SEEN": "SEEN"
+        }
+    }
+}

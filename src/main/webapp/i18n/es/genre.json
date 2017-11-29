@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "genre" : {
+            "home": {
+                "title": "Genres",
+                "createLabel": "Crear nuevo Genre",
+                "createOrEditLabel": "Crear o editar Genre"
+            },
+            "created": "Un nuevo Genre ha sido creado con el identificador {{ param }}",
+            "updated": "Un Genre ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Genre ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Genre {{ id }}?"
+            },
+            "detail": {
+                "title": "Genre"
+            },
+            "name": "Name",
+            "description": "Description",
+            "movie": "Movie",
+            "series": "Series"
+        }
+    }
+}

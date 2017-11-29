@@ -1,0 +1,44 @@
+
+<div *ngIf="season">
+    <h2><span jhiTranslate="furyViewerApp.season.detail.title">Season</span> {{season.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.season.number">Number</span></dt>
+        <dd>
+            <span>{{season.number}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.season.img">Img</span></dt>
+        <dd>
+            <div *ngIf="season.img">
+                <a (click)="openFile(season.imgContentType, season.img)">
+                    <img [src]="'data:' + season.imgContentType + ';base64,' + season.img" style="max-width: 100%;" alt="season image"/>
+                </a>
+                {{season.imgContentType}}, {{byteSize(season.img)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.season.releaseDate">Release Date</span></dt>
+        <dd>
+            <span>{{season.releaseDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.season.series">Series</span></dt>
+        <dd>
+            <div *ngIf="season.series">
+                <a [routerLink]="['/series', season.series?.id]">{{season.series?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'season/'+ season.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

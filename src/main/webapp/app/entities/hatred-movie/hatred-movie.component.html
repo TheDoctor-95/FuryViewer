@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.hatredMovie.home.title">Hatred Movies</span>
+        <button class="btn btn-primary float-right jh-create-entity create-hatred-movie" [routerLink]="['/', { outlets: { popup: ['hatred-movie-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.hatredMovie.home.createLabel">
+            Create new Hatred Movie
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="hatredMovies">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.hatredMovie.hated">Hated</span></th>
+            <th><span jhiTranslate="furyViewerApp.hatredMovie.date">Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.hatredMovie.movie">Movie</span></th>
+            <th><span jhiTranslate="furyViewerApp.hatredMovie.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let hatredMovie of hatredMovies ;trackBy: trackId">
+                <td><a [routerLink]="['../hatred-movie', hatredMovie.id ]">{{hatredMovie.id}}</a></td>
+                <td>{{hatredMovie.hated}}</td>
+                <td>{{hatredMovie.date | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="hatredMovie.movie">
+                        <a [routerLink]="['../movie', hatredMovie.movie?.id ]" >{{hatredMovie.movie?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{hatredMovie.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../hatred-movie', hatredMovie.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'hatred-movie/'+ hatredMovie.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'hatred-movie/'+ hatredMovie.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

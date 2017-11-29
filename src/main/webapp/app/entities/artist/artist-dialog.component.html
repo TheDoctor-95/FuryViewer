@@ -1,0 +1,95 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myArtistLabel" jhiTranslate="furyViewerApp.artist.home.createOrEditLabel">Create or edit a Artist</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!artist.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="artist.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="artist.name"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.surname" for="field_surname">Surname</label>
+            <input type="text" class="form-control" name="surname" id="field_surname"
+                [(ngModel)]="artist.surname"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.birthdate" for="field_birthdate">Birthdate</label>
+            <div class="input-group">
+                <input id="field_birthdate" type="text" class="form-control" name="birthdate" ngbDatepicker  #birthdateDp="ngbDatepicker" [(ngModel)]="artist.birthdate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="birthdateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.sex" for="field_sex">Sex</label>
+            <input type="text" class="form-control" name="sex" id="field_sex"
+                [(ngModel)]="artist.sex"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.alive" for="field_alive">Alive</label>
+            <input type="checkbox" class="form-control" name="alive" id="field_alive"
+                [(ngModel)]="artist.alive"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.deathdate" for="field_deathdate">Deathdate</label>
+            <div class="input-group">
+                <input id="field_deathdate" type="text" class="form-control" name="deathdate" ngbDatepicker  #deathdateDp="ngbDatepicker" [(ngModel)]="artist.deathdate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="deathdateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.img" for="field_img">Img</label>
+            <div>
+                <img [src]="'data:' + artist.imgContentType + ';base64,' + artist.img" style="max-height: 100px;" *ngIf="artist.img" alt="artist image"/>
+                <div *ngIf="artist.img" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{artist.imgContentType}}, {{byteSize(artist.img)}}</span>
+                    <button type="button" (click)="clearInputImage('img', 'imgContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_img" (change)="setFileData($event, artist, 'img', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+            </div>
+            <input type="hidden" class="form-control" name="img" id="field_img"
+                [(ngModel)]="artist.img"  />
+            <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
+                [(ngModel)]="artist.imgContentType" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.country" for="field_country">Country</label>
+            <select class="form-control" id="field_country" name="country" [(ngModel)]="artist.country" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="countryOption.id === artist.country?.id ? artist.country : countryOption" *ngFor="let countryOption of countries; trackBy: trackCountryById">{{countryOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="furyViewerApp.artist.artistType" for="field_artistType">Artist Type</label>
+            <select class="form-control" id="field_artistType" multiple name="artistType" [(ngModel)]="artist.artistTypes">
+                <option [ngValue]="getSelected(artist.artistTypes, artistTypeOption)" *ngFor="let artistTypeOption of artisttypes; trackBy: trackArtistTypeById">{{artistTypeOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

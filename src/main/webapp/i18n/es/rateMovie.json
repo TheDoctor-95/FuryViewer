@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "rateMovie" : {
+            "home": {
+                "title": "Rate Movies",
+                "createLabel": "Crear nuevo Rate Movie",
+                "createOrEditLabel": "Crear o editar Rate Movie"
+            },
+            "created": "Un nuevo Rate Movie ha sido creado con el identificador {{ param }}",
+            "updated": "Un Rate Movie ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Rate Movie ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Rate Movie {{ id }}?"
+            },
+            "detail": {
+                "title": "Rate Movie"
+            },
+            "rate": "Rate",
+            "date": "Date",
+            "movie": "Movie",
+            "user": "User"
+        }
+    }
+}

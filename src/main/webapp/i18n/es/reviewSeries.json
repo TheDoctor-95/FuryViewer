@@ -1,0 +1,25 @@
+{
+    "furyViewerApp": {
+        "reviewSeries" : {
+            "home": {
+                "title": "Review Series",
+                "createLabel": "Crear nuevo Review Series",
+                "createOrEditLabel": "Crear o editar Review Series"
+            },
+            "created": "Un nuevo Review Series ha sido creado con el identificador {{ param }}",
+            "updated": "Un Review Series ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Review Series ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Review Series {{ id }}?"
+            },
+            "detail": {
+                "title": "Review Series"
+            },
+            "date": "Date",
+            "title": "Title",
+            "review": "Review",
+            "series": "Series",
+            "user": "User"
+        }
+    }
+}

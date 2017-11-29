@@ -1,0 +1,25 @@
+{
+    "furyViewerApp": {
+        "company" : {
+            "home": {
+                "title": "Companies",
+                "createLabel": "Crear nuevo Company",
+                "createOrEditLabel": "Crear o editar Company"
+            },
+            "created": "Un nuevo Company ha sido creado con el identificador {{ param }}",
+            "updated": "Un Company ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Company ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Company {{ id }}?"
+            },
+            "detail": {
+                "title": "Company"
+            },
+            "name": "Name",
+            "img": "Img",
+            "country": "Country",
+            "movie": "Movie",
+            "serie": "Serie"
+        }
+    }
+}

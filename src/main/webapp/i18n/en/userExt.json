@@ -1,0 +1,25 @@
+{
+    "furyViewerApp": {
+        "userExt" : {
+            "home": {
+                "title": "User Exts",
+                "createLabel": "Create a new User Ext",
+                "createOrEditLabel": "Create or edit a User Ext"
+            },
+            "created": "A new User Ext is created with identifier {{ param }}",
+            "updated": "A User Ext is updated with identifier {{ param }}",
+            "deleted": "A User Ext is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete User Ext {{ id }}?"
+            },
+            "detail": {
+                "title": "User Ext"
+            },
+            "image": "Image",
+            "locationGoogleMaps": "Location Google Maps",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "user": "User"
+        }
+    }
+}

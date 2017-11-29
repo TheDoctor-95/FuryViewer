@@ -1,0 +1,37 @@
+{
+    "furyViewerApp": {
+        "artist" : {
+            "home": {
+                "title": "Artists",
+                "createLabel": "Create a new Artist",
+                "createOrEditLabel": "Create or edit a Artist"
+            },
+            "created": "A new Artist is created with identifier {{ param }}",
+            "updated": "A Artist is updated with identifier {{ param }}",
+            "deleted": "A Artist is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Artist {{ id }}?"
+            },
+            "detail": {
+                "title": "Artist"
+            },
+            "name": "Name",
+            "surname": "Surname",
+            "birthdate": "Birthdate",
+            "sex": "Sex",
+            "alive": "Alive",
+            "deathdate": "Deathdate",
+            "img": "Img",
+            "country": "Country",
+            "artistType": "Artist Type",
+            "favoriteArtist": "Favorite Artist",
+            "hatredArtist": "Hatred Artist",
+            "movieDirector": "Movie Director",
+            "seriesDirector": "Series Director",
+            "movieScriptwriter": "Movie Scriptwriter",
+            "seriesScriptwriter": "Series Scriptwriter",
+            "movieActor": "Movie Actor",
+            "seriesActor": "Series Actor"
+        }
+    }
+}

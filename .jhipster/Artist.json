@@ -1,0 +1,106 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "country",
+            "otherEntityName": "country",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "artist",
+            "relationshipName": "artistType",
+            "otherEntityName": "artistType",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "favoriteArtist",
+            "otherEntityName": "favouriteArtist",
+            "otherEntityRelationshipName": "artist"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "hatredArtist",
+            "otherEntityName": "hatredArtist",
+            "otherEntityRelationshipName": "artist"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "movieDirector",
+            "otherEntityName": "movie",
+            "otherEntityRelationshipName": "director"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "seriesDirector",
+            "otherEntityName": "series",
+            "otherEntityRelationshipName": "director"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "movieScriptwriter",
+            "otherEntityName": "movie",
+            "otherEntityRelationshipName": "scriptwriter"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "seriesScriptwriter",
+            "otherEntityName": "series",
+            "otherEntityRelationshipName": "scriptwriter"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "movieActor",
+            "otherEntityName": "movie",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "actor"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "seriesActor",
+            "otherEntityName": "series",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "actor"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "surname",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "birthdate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "sex",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "alive",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "deathdate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "img",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "changelogDate": "20171128114911",
+    "entityTableName": "artist",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

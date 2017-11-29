@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Movie.
+    -->
+    <changeSet id="20171128114906-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="director_id"
+                                 baseTableName="movie"
+                                 constraintName="fk_movie_director_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+
+        <addForeignKeyConstraint baseColumnNames="scriptwriter_id"
+                                 baseTableName="movie"
+                                 constraintName="fk_movie_scriptwriter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="movie"
+                                 constraintName="fk_movie_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
+        <addForeignKeyConstraint baseColumnNames="movies_id"
+                                 baseTableName="movie_actor"
+                                 constraintName="fk_movie_actor_movies_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="movie"/>
+        <addForeignKeyConstraint baseColumnNames="actors_id"
+                                 baseTableName="movie_actor"
+                                 constraintName="fk_movie_actor_actors_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+        
+    </changeSet>
+</databaseChangeLog>

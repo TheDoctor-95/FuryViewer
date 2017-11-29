@@ -1,0 +1,43 @@
+
+<div *ngIf="reviewMovie">
+    <h2><span jhiTranslate="furyViewerApp.reviewMovie.detail.title">Review Movie</span> {{reviewMovie.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.reviewMovie.date">Date</span></dt>
+        <dd>
+            <span>{{reviewMovie.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.reviewMovie.title">Title</span></dt>
+        <dd>
+            <span>{{reviewMovie.title}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.reviewMovie.review">Review</span></dt>
+        <dd>
+            <span>{{reviewMovie.review}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.reviewMovie.movie">Movie</span></dt>
+        <dd>
+            <div *ngIf="reviewMovie.movie">
+                <a [routerLink]="['/movie', reviewMovie.movie?.id]">{{reviewMovie.movie?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.reviewMovie.user">User</span></dt>
+        <dd>
+            {{reviewMovie.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'review-movie/'+ reviewMovie.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

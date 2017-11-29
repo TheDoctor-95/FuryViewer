@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "hatredMovie" : {
+            "home": {
+                "title": "Hatred Movies",
+                "createLabel": "Create a new Hatred Movie",
+                "createOrEditLabel": "Create or edit a Hatred Movie"
+            },
+            "created": "A new Hatred Movie is created with identifier {{ param }}",
+            "updated": "A Hatred Movie is updated with identifier {{ param }}",
+            "deleted": "A Hatred Movie is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Hatred Movie {{ id }}?"
+            },
+            "detail": {
+                "title": "Hatred Movie"
+            },
+            "hated": "Hated",
+            "date": "Date",
+            "movie": "Movie",
+            "user": "User"
+        }
+    }
+}

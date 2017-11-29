@@ -1,0 +1,56 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.artistType.home.title">Artist Types</span>
+        <button class="btn btn-primary float-right jh-create-entity create-artist-type" [routerLink]="['/', { outlets: { popup: ['artist-type-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.artistType.home.createLabel">
+            Create new Artist Type
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="artistTypes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.artistType.name">Name</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let artistType of artistTypes ;trackBy: trackId">
+                <td><a [routerLink]="['../artist-type', artistType.id ]">{{artistType.id}}</a></td>
+                <td jhiTranslate="{{'furyViewerApp.ArtistTypeEnum.' + artistType.name}}">{{artistType.name}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../artist-type', artistType.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'artist-type/'+ artistType.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'artist-type/'+ artistType.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

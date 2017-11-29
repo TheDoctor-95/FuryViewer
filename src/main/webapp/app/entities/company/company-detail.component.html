@@ -1,0 +1,40 @@
+
+<div *ngIf="company">
+    <h2><span jhiTranslate="furyViewerApp.company.detail.title">Company</span> {{company.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.company.name">Name</span></dt>
+        <dd>
+            <span>{{company.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.company.img">Img</span></dt>
+        <dd>
+            <div *ngIf="company.img">
+                <a (click)="openFile(company.imgContentType, company.img)">
+                    <img [src]="'data:' + company.imgContentType + ';base64,' + company.img" style="max-width: 100%;" alt="company image"/>
+                </a>
+                {{company.imgContentType}}, {{byteSize(company.img)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.company.country">Country</span></dt>
+        <dd>
+            <div *ngIf="company.country">
+                <a [routerLink]="['/country', company.country?.id]">{{company.country?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'company/'+ company.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

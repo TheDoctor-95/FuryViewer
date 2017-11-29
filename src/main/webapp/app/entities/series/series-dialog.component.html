@@ -1,0 +1,99 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySeriesLabel" jhiTranslate="furyViewerApp.series.home.createOrEditLabel">Create or edit a Series</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!series.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="series.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.series.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="series.name"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.series.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="series.description"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.series.img" for="field_img">Img</label>
+            <div>
+                <img [src]="'data:' + series.imgContentType + ';base64,' + series.img" style="max-height: 100px;" *ngIf="series.img" alt="series image"/>
+                <div *ngIf="series.img" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{series.imgContentType}}, {{byteSize(series.img)}}</span>
+                    <button type="button" (click)="clearInputImage('img', 'imgContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_img" (change)="setFileData($event, series, 'img', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+            </div>
+            <input type="hidden" class="form-control" name="img" id="field_img"
+                [(ngModel)]="series.img"  />
+            <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
+                [(ngModel)]="series.imgContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.series.state" for="field_state">State</label>
+            <select class="form-control" name="state" [(ngModel)]="series.state" id="field_state" >
+                <option value="CANCELED">{{'furyViewerApp.SeriesEmittingEnum.CANCELED' | translate}}</option>
+                <option value="WAITING_NEW_SEASON">{{'furyViewerApp.SeriesEmittingEnum.WAITING_NEW_SEASON' | translate}}</option>
+                <option value="WAITING_START">{{'furyViewerApp.SeriesEmittingEnum.WAITING_START' | translate}}</option>
+                <option value="ENDED">{{'furyViewerApp.SeriesEmittingEnum.ENDED' | translate}}</option>
+                <option value="EMITTING">{{'furyViewerApp.SeriesEmittingEnum.EMITTING' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.series.releaseDate" for="field_releaseDate">Release Date</label>
+            <div class="input-group">
+                <input id="field_releaseDate" type="text" class="form-control" name="releaseDate" ngbDatepicker  #releaseDateDp="ngbDatepicker" [(ngModel)]="series.releaseDate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="releaseDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.series.director" for="field_director">Director</label>
+            <select class="form-control" id="field_director" name="director" [(ngModel)]="series.director" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="artistOption.id === series.director?.id ? series.director : artistOption" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.series.scriptwriter" for="field_scriptwriter">Scriptwriter</label>
+            <select class="form-control" id="field_scriptwriter" name="scriptwriter" [(ngModel)]="series.scriptwriter" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="artistOption.id === series.scriptwriter?.id ? series.scriptwriter : artistOption" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.series.company" for="field_company">Company</label>
+            <select class="form-control" id="field_company" name="company" [(ngModel)]="series.company" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="companyOption.id === series.company?.id ? series.company : companyOption" *ngFor="let companyOption of companies; trackBy: trackCompanyById">{{companyOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="furyViewerApp.series.actor" for="field_actor">Actor</label>
+            <select class="form-control" id="field_actor" multiple name="actor" [(ngModel)]="series.actors">
+                <option [ngValue]="getSelected(series.actors, artistOption)" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

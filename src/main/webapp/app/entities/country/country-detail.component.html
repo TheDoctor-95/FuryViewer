@@ -1,0 +1,37 @@
+
+<div *ngIf="country">
+    <h2><span jhiTranslate="furyViewerApp.country.detail.title">Country</span> {{country.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.country.name">Name</span></dt>
+        <dd>
+            <span>{{country.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.country.urlGoogleMaps">Url Google Maps</span></dt>
+        <dd>
+            <span>{{country.urlGoogleMaps}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.country.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{country.latitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.country.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{country.longitude}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'country/'+ country.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

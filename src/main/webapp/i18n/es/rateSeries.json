@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "rateSeries" : {
+            "home": {
+                "title": "Rate Series",
+                "createLabel": "Crear nuevo Rate Series",
+                "createOrEditLabel": "Crear o editar Rate Series"
+            },
+            "created": "Un nuevo Rate Series ha sido creado con el identificador {{ param }}",
+            "updated": "Un Rate Series ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Rate Series ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Rate Series {{ id }}?"
+            },
+            "detail": {
+                "title": "Rate Series"
+            },
+            "rate": "Rate",
+            "date": "Date",
+            "series": "Series",
+            "user": "User"
+        }
+    }
+}

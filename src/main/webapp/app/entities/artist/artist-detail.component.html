@@ -1,0 +1,66 @@
+
+<div *ngIf="artist">
+    <h2><span jhiTranslate="furyViewerApp.artist.detail.title">Artist</span> {{artist.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.artist.name">Name</span></dt>
+        <dd>
+            <span>{{artist.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.surname">Surname</span></dt>
+        <dd>
+            <span>{{artist.surname}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.birthdate">Birthdate</span></dt>
+        <dd>
+            <span>{{artist.birthdate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.sex">Sex</span></dt>
+        <dd>
+            <span>{{artist.sex}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.alive">Alive</span></dt>
+        <dd>
+            <span>{{artist.alive}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.deathdate">Deathdate</span></dt>
+        <dd>
+            <span>{{artist.deathdate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.img">Img</span></dt>
+        <dd>
+            <div *ngIf="artist.img">
+                <a (click)="openFile(artist.imgContentType, artist.img)">
+                    <img [src]="'data:' + artist.imgContentType + ';base64,' + artist.img" style="max-width: 100%;" alt="artist image"/>
+                </a>
+                {{artist.imgContentType}}, {{byteSize(artist.img)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.country">Country</span></dt>
+        <dd>
+            <div *ngIf="artist.country">
+                <a [routerLink]="['/country', artist.country?.id]">{{artist.country?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.artistType">Artist Type</span></dt>
+        <dd>
+            <span *ngFor="let artistType of artist.artistTypes; let last = last">
+                <a [routerLink]="['/artist-type', artistType?.id ]">{{artistType.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'artist/'+ artist.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

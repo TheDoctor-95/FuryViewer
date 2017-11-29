@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "favouriteArtist" : {
+            "home": {
+                "title": "Favourite Artists",
+                "createLabel": "Crear nuevo Favourite Artist",
+                "createOrEditLabel": "Crear o editar Favourite Artist"
+            },
+            "created": "Un nuevo Favourite Artist ha sido creado con el identificador {{ param }}",
+            "updated": "Un Favourite Artist ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Favourite Artist ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Favourite Artist {{ id }}?"
+            },
+            "detail": {
+                "title": "Favourite Artist"
+            },
+            "liked": "Liked",
+            "date": "Date",
+            "artist": "Artist",
+            "user": "User"
+        }
+    }
+}

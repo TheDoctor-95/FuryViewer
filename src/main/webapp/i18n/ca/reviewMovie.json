@@ -1,0 +1,25 @@
+{
+    "furyViewerApp": {
+        "reviewMovie" : {
+            "home": {
+                "title": "Review Movies",
+                "createLabel": "Create a new Review Movie",
+                "createOrEditLabel": "Create or edit a Review Movie"
+            },
+            "created": "A new Review Movie is created with identifier {{ param }}",
+            "updated": "A Review Movie is updated with identifier {{ param }}",
+            "deleted": "A Review Movie is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Review Movie {{ id }}?"
+            },
+            "detail": {
+                "title": "Review Movie"
+            },
+            "date": "Date",
+            "title": "Title",
+            "review": "Review",
+            "movie": "Movie",
+            "user": "User"
+        }
+    }
+}

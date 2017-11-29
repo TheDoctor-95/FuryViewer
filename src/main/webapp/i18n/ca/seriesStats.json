@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "seriesStats" : {
+            "home": {
+                "title": "Series Stats",
+                "createLabel": "Create a new Series Stats",
+                "createOrEditLabel": "Create or edit a Series Stats"
+            },
+            "created": "A new Series Stats is created with identifier {{ param }}",
+            "updated": "A Series Stats is updated with identifier {{ param }}",
+            "deleted": "A Series Stats is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Series Stats {{ id }}?"
+            },
+            "detail": {
+                "title": "Series Stats"
+            },
+            "pending": "Pending",
+            "date": "Date",
+            "serie": "Serie",
+            "user": "User"
+        }
+    }
+}

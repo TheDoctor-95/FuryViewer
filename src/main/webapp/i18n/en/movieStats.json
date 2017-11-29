@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "movieStats" : {
+            "home": {
+                "title": "Movie Stats",
+                "createLabel": "Create a new Movie Stats",
+                "createOrEditLabel": "Create or edit a Movie Stats"
+            },
+            "created": "A new Movie Stats is created with identifier {{ param }}",
+            "updated": "A Movie Stats is updated with identifier {{ param }}",
+            "deleted": "A Movie Stats is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Movie Stats {{ id }}?"
+            },
+            "detail": {
+                "title": "Movie Stats"
+            },
+            "state": "State",
+            "date": "Date",
+            "movie": "Movie",
+            "user": "User"
+        }
+    }
+}

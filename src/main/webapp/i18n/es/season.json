@@ -1,0 +1,25 @@
+{
+    "furyViewerApp": {
+        "season" : {
+            "home": {
+                "title": "Seasons",
+                "createLabel": "Crear nuevo Season",
+                "createOrEditLabel": "Crear o editar Season"
+            },
+            "created": "Un nuevo Season ha sido creado con el identificador {{ param }}",
+            "updated": "Un Season ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Season ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Season {{ id }}?"
+            },
+            "detail": {
+                "title": "Season"
+            },
+            "number": "Number",
+            "img": "Img",
+            "releaseDate": "Release Date",
+            "series": "Series",
+            "episode": "Episode"
+        }
+    }
+}

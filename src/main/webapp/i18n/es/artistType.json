@@ -1,0 +1,22 @@
+{
+    "furyViewerApp": {
+        "artistType" : {
+            "home": {
+                "title": "Artist Types",
+                "createLabel": "Crear nuevo Artist Type",
+                "createOrEditLabel": "Crear o editar Artist Type"
+            },
+            "created": "Un nuevo Artist Type ha sido creado con el identificador {{ param }}",
+            "updated": "Un Artist Type ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Artist Type ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Artist Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Artist Type"
+            },
+            "name": "Name",
+            "artist": "Artist"
+        }
+    }
+}

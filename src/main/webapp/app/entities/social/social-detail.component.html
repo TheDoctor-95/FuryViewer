@@ -1,0 +1,37 @@
+
+<div *ngIf="social">
+    <h2><span jhiTranslate="furyViewerApp.social.detail.title">Social</span> {{social.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.social.url">Url</span></dt>
+        <dd>
+            <span>{{social.url}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.social.series">Series</span></dt>
+        <dd>
+            <div *ngIf="social.series">
+                <a [routerLink]="['/series', social.series?.id]">{{social.series?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.social.movie">Movie</span></dt>
+        <dd>
+            <div *ngIf="social.movie">
+                <a [routerLink]="['/movie', social.movie?.id]">{{social.movie?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'social/'+ social.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

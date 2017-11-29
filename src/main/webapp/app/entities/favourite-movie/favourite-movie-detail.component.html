@@ -1,0 +1,39 @@
+
+<div *ngIf="favouriteMovie">
+    <h2><span jhiTranslate="furyViewerApp.favouriteMovie.detail.title">Favourite Movie</span> {{favouriteMovie.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.favouriteMovie.liked">Liked</span></dt>
+        <dd>
+            <span>{{favouriteMovie.liked}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.favouriteMovie.date">Date</span></dt>
+        <dd>
+            <span>{{favouriteMovie.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.favouriteMovie.serie">Serie</span></dt>
+        <dd>
+            <div *ngIf="favouriteMovie.serie">
+                <a [routerLink]="['/movie', favouriteMovie.serie?.id]">{{favouriteMovie.serie?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.favouriteMovie.user">User</span></dt>
+        <dd>
+            {{favouriteMovie.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'favourite-movie/'+ favouriteMovie.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

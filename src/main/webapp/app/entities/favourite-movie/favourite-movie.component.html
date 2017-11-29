@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.favouriteMovie.home.title">Favourite Movies</span>
+        <button class="btn btn-primary float-right jh-create-entity create-favourite-movie" [routerLink]="['/', { outlets: { popup: ['favourite-movie-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.favouriteMovie.home.createLabel">
+            Create new Favourite Movie
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="favouriteMovies">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.favouriteMovie.liked">Liked</span></th>
+            <th><span jhiTranslate="furyViewerApp.favouriteMovie.date">Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.favouriteMovie.serie">Serie</span></th>
+            <th><span jhiTranslate="furyViewerApp.favouriteMovie.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let favouriteMovie of favouriteMovies ;trackBy: trackId">
+                <td><a [routerLink]="['../favourite-movie', favouriteMovie.id ]">{{favouriteMovie.id}}</a></td>
+                <td>{{favouriteMovie.liked}}</td>
+                <td>{{favouriteMovie.date | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="favouriteMovie.serie">
+                        <a [routerLink]="['../movie', favouriteMovie.serie?.id ]" >{{favouriteMovie.serie?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{favouriteMovie.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../favourite-movie', favouriteMovie.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'favourite-movie/'+ favouriteMovie.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'favourite-movie/'+ favouriteMovie.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

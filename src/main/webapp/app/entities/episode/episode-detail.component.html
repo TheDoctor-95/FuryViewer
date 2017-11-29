@@ -1,0 +1,52 @@
+
+<div *ngIf="episode">
+    <h2><span jhiTranslate="furyViewerApp.episode.detail.title">Episode</span> {{episode.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.episode.number">Number</span></dt>
+        <dd>
+            <span>{{episode.number}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.episode.name">Name</span></dt>
+        <dd>
+            <span>{{episode.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.episode.img">Img</span></dt>
+        <dd>
+            <div *ngIf="episode.img">
+                <a (click)="openFile(episode.imgContentType, episode.img)">
+                    <img [src]="'data:' + episode.imgContentType + ';base64,' + episode.img" style="max-width: 100%;" alt="episode image"/>
+                </a>
+                {{episode.imgContentType}}, {{byteSize(episode.img)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.episode.duration">Duration</span></dt>
+        <dd>
+            <span>{{episode.duration}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.episode.releaseDate">Release Date</span></dt>
+        <dd>
+            <span>{{episode.releaseDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.episode.season">Season</span></dt>
+        <dd>
+            <div *ngIf="episode.season">
+                <a [routerLink]="['/season', episode.season?.id]">{{episode.season?.number}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'episode/'+ episode.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

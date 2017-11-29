@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "hatredSeries" : {
+            "home": {
+                "title": "Hatred Series",
+                "createLabel": "Create a new Hatred Series",
+                "createOrEditLabel": "Create or edit a Hatred Series"
+            },
+            "created": "A new Hatred Series is created with identifier {{ param }}",
+            "updated": "A Hatred Series is updated with identifier {{ param }}",
+            "deleted": "A Hatred Series is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Hatred Series {{ id }}?"
+            },
+            "detail": {
+                "title": "Hatred Series"
+            },
+            "hated": "Hated",
+            "date": "Date",
+            "series": "Series",
+            "user": "User"
+        }
+    }
+}

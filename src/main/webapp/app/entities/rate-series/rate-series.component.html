@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.rateSeries.home.title">Rate Series</span>
+        <button class="btn btn-primary float-right jh-create-entity create-rate-series" [routerLink]="['/', { outlets: { popup: ['rate-series-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.rateSeries.home.createLabel">
+            Create new Rate Series
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="rateSeries">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.rateSeries.rate">Rate</span></th>
+            <th><span jhiTranslate="furyViewerApp.rateSeries.date">Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.rateSeries.series">Series</span></th>
+            <th><span jhiTranslate="furyViewerApp.rateSeries.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let rateSeries of rateSeries ;trackBy: trackId">
+                <td><a [routerLink]="['../rate-series', rateSeries.id ]">{{rateSeries.id}}</a></td>
+                <td>{{rateSeries.rate}}</td>
+                <td>{{rateSeries.date | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="rateSeries.series">
+                        <a [routerLink]="['../series', rateSeries.series?.id ]" >{{rateSeries.series?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{rateSeries.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../rate-series', rateSeries.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'rate-series/'+ rateSeries.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'rate-series/'+ rateSeries.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

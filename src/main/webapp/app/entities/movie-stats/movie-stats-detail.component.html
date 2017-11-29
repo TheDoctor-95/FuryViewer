@@ -1,0 +1,39 @@
+
+<div *ngIf="movieStats">
+    <h2><span jhiTranslate="furyViewerApp.movieStats.detail.title">Movie Stats</span> {{movieStats.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.movieStats.state">State</span></dt>
+        <dd>
+            <span jhiTranslate="{{'furyViewerApp.MovieStatsEnum.' + movieStats.state}}">{{movieStats.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movieStats.date">Date</span></dt>
+        <dd>
+            <span>{{movieStats.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movieStats.movie">Movie</span></dt>
+        <dd>
+            <div *ngIf="movieStats.movie">
+                <a [routerLink]="['/movie', movieStats.movie?.id]">{{movieStats.movie?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movieStats.user">User</span></dt>
+        <dd>
+            {{movieStats.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'movie-stats/'+ movieStats.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

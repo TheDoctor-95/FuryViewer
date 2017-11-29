@@ -1,0 +1,70 @@
+
+<div *ngIf="movie">
+    <h2><span jhiTranslate="furyViewerApp.movie.detail.title">Movie</span> {{movie.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.movie.name">Name</span></dt>
+        <dd>
+            <span>{{movie.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.releaseDate">Release Date</span></dt>
+        <dd>
+            <span>{{movie.releaseDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.description">Description</span></dt>
+        <dd>
+            <span>{{movie.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.img">Img</span></dt>
+        <dd>
+            <div *ngIf="movie.img">
+                <a (click)="openFile(movie.imgContentType, movie.img)">
+                    <img [src]="'data:' + movie.imgContentType + ';base64,' + movie.img" style="max-width: 100%;" alt="movie image"/>
+                </a>
+                {{movie.imgContentType}}, {{byteSize(movie.img)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.duration">Duration</span></dt>
+        <dd>
+            <span>{{movie.duration}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.director">Director</span></dt>
+        <dd>
+            <div *ngIf="movie.director">
+                <a [routerLink]="['/artist', movie.director?.id]">{{movie.director?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.scriptwriter">Scriptwriter</span></dt>
+        <dd>
+            <div *ngIf="movie.scriptwriter">
+                <a [routerLink]="['/artist', movie.scriptwriter?.id]">{{movie.scriptwriter?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.company">Company</span></dt>
+        <dd>
+            <div *ngIf="movie.company">
+                <a [routerLink]="['/company', movie.company?.id]">{{movie.company?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.actor">Actor</span></dt>
+        <dd>
+            <span *ngFor="let actor of movie.actors; let last = last">
+                <a [routerLink]="['/artist', actor?.id ]">{{actor.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'movie/'+ movie.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

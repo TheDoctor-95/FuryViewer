@@ -1,0 +1,37 @@
+{
+    "furyViewerApp": {
+        "series" : {
+            "home": {
+                "title": "Series",
+                "createLabel": "Create a new Series",
+                "createOrEditLabel": "Create or edit a Series"
+            },
+            "created": "A new Series is created with identifier {{ param }}",
+            "updated": "A Series is updated with identifier {{ param }}",
+            "deleted": "A Series is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Series {{ id }}?"
+            },
+            "detail": {
+                "title": "Series"
+            },
+            "name": "Name",
+            "description": "Description",
+            "img": "Img",
+            "state": "State",
+            "releaseDate": "Release Date",
+            "director": "Director",
+            "scriptwriter": "Scriptwriter",
+            "company": "Company",
+            "actor": "Actor",
+            "review": "Review",
+            "favoriteSerie": "Favorite Serie",
+            "rateSerie": "Rate Serie",
+            "stat": "Stat",
+            "hatedSerie": "Hated Serie",
+            "season": "Season",
+            "social": "Social",
+            "genre": "Genre"
+        }
+    }
+}

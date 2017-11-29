@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.favouriteArtist.home.title">Favourite Artists</span>
+        <button class="btn btn-primary float-right jh-create-entity create-favourite-artist" [routerLink]="['/', { outlets: { popup: ['favourite-artist-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.favouriteArtist.home.createLabel">
+            Create new Favourite Artist
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="favouriteArtists">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.favouriteArtist.liked">Liked</span></th>
+            <th><span jhiTranslate="furyViewerApp.favouriteArtist.date">Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.favouriteArtist.artist">Artist</span></th>
+            <th><span jhiTranslate="furyViewerApp.favouriteArtist.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let favouriteArtist of favouriteArtists ;trackBy: trackId">
+                <td><a [routerLink]="['../favourite-artist', favouriteArtist.id ]">{{favouriteArtist.id}}</a></td>
+                <td>{{favouriteArtist.liked}}</td>
+                <td>{{favouriteArtist.date | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="favouriteArtist.artist">
+                        <a [routerLink]="['../artist', favouriteArtist.artist?.id ]" >{{favouriteArtist.artist?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{favouriteArtist.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../favourite-artist', favouriteArtist.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'favourite-artist/'+ favouriteArtist.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'favourite-artist/'+ favouriteArtist.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

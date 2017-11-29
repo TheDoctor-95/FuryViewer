@@ -1,0 +1,27 @@
+{
+    "furyViewerApp": {
+        "episode" : {
+            "home": {
+                "title": "Episodes",
+                "createLabel": "Create a new Episode",
+                "createOrEditLabel": "Create or edit a Episode"
+            },
+            "created": "A new Episode is created with identifier {{ param }}",
+            "updated": "A Episode is updated with identifier {{ param }}",
+            "deleted": "A Episode is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Episode {{ id }}?"
+            },
+            "detail": {
+                "title": "Episode"
+            },
+            "number": "Number",
+            "name": "Name",
+            "img": "Img",
+            "duration": "Duration",
+            "releaseDate": "Release Date",
+            "season": "Season",
+            "seen": "Seen"
+        }
+    }
+}

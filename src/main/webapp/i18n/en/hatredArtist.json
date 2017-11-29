@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "hatredArtist" : {
+            "home": {
+                "title": "Hatred Artists",
+                "createLabel": "Create a new Hatred Artist",
+                "createOrEditLabel": "Create or edit a Hatred Artist"
+            },
+            "created": "A new Hatred Artist is created with identifier {{ param }}",
+            "updated": "A Hatred Artist is updated with identifier {{ param }}",
+            "deleted": "A Hatred Artist is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Hatred Artist {{ id }}?"
+            },
+            "detail": {
+                "title": "Hatred Artist"
+            },
+            "hated": "Hated",
+            "date": "Date",
+            "artist": "Artist",
+            "user": "User"
+        }
+    }
+}

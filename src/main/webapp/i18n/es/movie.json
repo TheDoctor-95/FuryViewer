@@ -1,0 +1,36 @@
+{
+    "furyViewerApp": {
+        "movie" : {
+            "home": {
+                "title": "Movies",
+                "createLabel": "Crear nuevo Movie",
+                "createOrEditLabel": "Crear o editar Movie"
+            },
+            "created": "Un nuevo Movie ha sido creado con el identificador {{ param }}",
+            "updated": "Un Movie ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Movie ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Movie {{ id }}?"
+            },
+            "detail": {
+                "title": "Movie"
+            },
+            "name": "Name",
+            "releaseDate": "Release Date",
+            "description": "Description",
+            "img": "Img",
+            "duration": "Duration",
+            "director": "Director",
+            "scriptwriter": "Scriptwriter",
+            "company": "Company",
+            "actor": "Actor",
+            "review": "Review",
+            "favoriteMovie": "Favorite Movie",
+            "rateMovie": "Rate Movie",
+            "stat": "Stat",
+            "hatedMovie": "Hated Movie",
+            "social": "Social",
+            "genre": "Genre"
+        }
+    }
+}

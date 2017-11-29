@@ -1,0 +1,39 @@
+
+<div *ngIf="rateSeries">
+    <h2><span jhiTranslate="furyViewerApp.rateSeries.detail.title">Rate Series</span> {{rateSeries.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.rateSeries.rate">Rate</span></dt>
+        <dd>
+            <span>{{rateSeries.rate}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.rateSeries.date">Date</span></dt>
+        <dd>
+            <span>{{rateSeries.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.rateSeries.series">Series</span></dt>
+        <dd>
+            <div *ngIf="rateSeries.series">
+                <a [routerLink]="['/series', rateSeries.series?.id]">{{rateSeries.series?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.rateSeries.user">User</span></dt>
+        <dd>
+            {{rateSeries.user?.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'rate-series/'+ rateSeries.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,110 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "director",
+            "otherEntityName": "artist",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "scriptwriter",
+            "otherEntityName": "artist",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "company",
+            "otherEntityName": "company",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "seriesActor",
+            "relationshipName": "actor",
+            "otherEntityName": "artist",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "review",
+            "otherEntityName": "reviewSeries",
+            "otherEntityRelationshipName": "series"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "favoriteSerie",
+            "otherEntityName": "favouriteSeries",
+            "otherEntityRelationshipName": "series"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "rateSerie",
+            "otherEntityName": "rateSeries",
+            "otherEntityRelationshipName": "series"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "stat",
+            "otherEntityName": "seriesStats",
+            "otherEntityRelationshipName": "serie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "hatedSerie",
+            "otherEntityName": "hatredSeries",
+            "otherEntityRelationshipName": "series"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "season",
+            "otherEntityName": "season",
+            "otherEntityRelationshipName": "series"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "social",
+            "otherEntityName": "social",
+            "otherEntityRelationshipName": "series"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "genre",
+            "otherEntityName": "genre",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "series"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "img",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "SeriesEmittingEnum",
+            "fieldValues": "CANCELED,WAITING_NEW_SEASON,WAITING_START,ENDED,EMITTING"
+        },
+        {
+            "fieldName": "releaseDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20171128114903",
+    "entityTableName": "series",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

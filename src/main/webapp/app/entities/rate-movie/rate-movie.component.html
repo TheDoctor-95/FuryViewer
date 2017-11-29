@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.rateMovie.home.title">Rate Movies</span>
+        <button class="btn btn-primary float-right jh-create-entity create-rate-movie" [routerLink]="['/', { outlets: { popup: ['rate-movie-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.rateMovie.home.createLabel">
+            Create new Rate Movie
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="rateMovies">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.rateMovie.rate">Rate</span></th>
+            <th><span jhiTranslate="furyViewerApp.rateMovie.date">Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.rateMovie.movie">Movie</span></th>
+            <th><span jhiTranslate="furyViewerApp.rateMovie.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let rateMovie of rateMovies ;trackBy: trackId">
+                <td><a [routerLink]="['../rate-movie', rateMovie.id ]">{{rateMovie.id}}</a></td>
+                <td>{{rateMovie.rate}}</td>
+                <td>{{rateMovie.date | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="rateMovie.movie">
+                        <a [routerLink]="['../movie', rateMovie.movie?.id ]" >{{rateMovie.movie?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{rateMovie.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../rate-movie', rateMovie.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'rate-movie/'+ rateMovie.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'rate-movie/'+ rateMovie.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

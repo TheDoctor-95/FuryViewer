@@ -1,0 +1,70 @@
+
+<div *ngIf="series">
+    <h2><span jhiTranslate="furyViewerApp.series.detail.title">Series</span> {{series.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.series.name">Name</span></dt>
+        <dd>
+            <span>{{series.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.description">Description</span></dt>
+        <dd>
+            <span>{{series.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.img">Img</span></dt>
+        <dd>
+            <div *ngIf="series.img">
+                <a (click)="openFile(series.imgContentType, series.img)">
+                    <img [src]="'data:' + series.imgContentType + ';base64,' + series.img" style="max-width: 100%;" alt="series image"/>
+                </a>
+                {{series.imgContentType}}, {{byteSize(series.img)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.state">State</span></dt>
+        <dd>
+            <span jhiTranslate="{{'furyViewerApp.SeriesEmittingEnum.' + series.state}}">{{series.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.releaseDate">Release Date</span></dt>
+        <dd>
+            <span>{{series.releaseDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.director">Director</span></dt>
+        <dd>
+            <div *ngIf="series.director">
+                <a [routerLink]="['/artist', series.director?.id]">{{series.director?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.scriptwriter">Scriptwriter</span></dt>
+        <dd>
+            <div *ngIf="series.scriptwriter">
+                <a [routerLink]="['/artist', series.scriptwriter?.id]">{{series.scriptwriter?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.company">Company</span></dt>
+        <dd>
+            <div *ngIf="series.company">
+                <a [routerLink]="['/company', series.company?.id]">{{series.company?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.actor">Actor</span></dt>
+        <dd>
+            <span *ngFor="let actor of series.actors; let last = last">
+                <a [routerLink]="['/artist', actor?.id ]">{{actor.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'series/'+ series.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

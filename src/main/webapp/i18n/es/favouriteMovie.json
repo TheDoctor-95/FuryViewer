@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "favouriteMovie" : {
+            "home": {
+                "title": "Favourite Movies",
+                "createLabel": "Crear nuevo Favourite Movie",
+                "createOrEditLabel": "Crear o editar Favourite Movie"
+            },
+            "created": "Un nuevo Favourite Movie ha sido creado con el identificador {{ param }}",
+            "updated": "Un Favourite Movie ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Favourite Movie ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Favourite Movie {{ id }}?"
+            },
+            "detail": {
+                "title": "Favourite Movie"
+            },
+            "liked": "Liked",
+            "date": "Date",
+            "serie": "Serie",
+            "user": "User"
+        }
+    }
+}

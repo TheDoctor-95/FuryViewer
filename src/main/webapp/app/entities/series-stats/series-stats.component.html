@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.seriesStats.home.title">Series Stats</span>
+        <button class="btn btn-primary float-right jh-create-entity create-series-stats" [routerLink]="['/', { outlets: { popup: ['series-stats-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.seriesStats.home.createLabel">
+            Create new Series Stats
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="seriesStats">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesStats.pending">Pending</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesStats.date">Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesStats.serie">Serie</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesStats.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let seriesStats of seriesStats ;trackBy: trackId">
+                <td><a [routerLink]="['../series-stats', seriesStats.id ]">{{seriesStats.id}}</a></td>
+                <td jhiTranslate="{{'furyViewerApp.SeriesStatsEnum.' + seriesStats.pending}}">{{seriesStats.pending}}</td>
+                <td>{{seriesStats.date | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="seriesStats.serie">
+                        <a [routerLink]="['../series', seriesStats.serie?.id ]" >{{seriesStats.serie?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{seriesStats.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../series-stats', seriesStats.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'series-stats/'+ seriesStats.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'series-stats/'+ seriesStats.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

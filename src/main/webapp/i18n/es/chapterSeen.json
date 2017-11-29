@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "chapterSeen" : {
+            "home": {
+                "title": "Chapter Seens",
+                "createLabel": "Crear nuevo Chapter Seen",
+                "createOrEditLabel": "Crear o editar Chapter Seen"
+            },
+            "created": "Un nuevo Chapter Seen ha sido creado con el identificador {{ param }}",
+            "updated": "Un Chapter Seen ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Chapter Seen ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Chapter Seen {{ id }}?"
+            },
+            "detail": {
+                "title": "Chapter Seen"
+            },
+            "seen": "Seen",
+            "date": "Date",
+            "episode": "Episode",
+            "user": "User"
+        }
+    }
+}

@@ -1,0 +1,103 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "director",
+            "otherEntityName": "artist",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "scriptwriter",
+            "otherEntityName": "artist",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "company",
+            "otherEntityName": "company",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "movieActor",
+            "relationshipName": "actor",
+            "otherEntityName": "artist",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "review",
+            "otherEntityName": "reviewMovie",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "favoriteMovie",
+            "otherEntityName": "favouriteMovie",
+            "otherEntityRelationshipName": "serie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "rateMovie",
+            "otherEntityName": "rateMovie",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "stat",
+            "otherEntityName": "movieStats",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "hatedMovie",
+            "otherEntityName": "hatredMovie",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "social",
+            "otherEntityName": "social",
+            "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "genre",
+            "otherEntityName": "genre",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "movie"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "releaseDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "img",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171128114906",
+    "entityTableName": "movie",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

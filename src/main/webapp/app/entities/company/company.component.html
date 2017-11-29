@@ -1,0 +1,69 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.company.home.title">Companies</span>
+        <button class="btn btn-primary float-right jh-create-entity create-company" [routerLink]="['/', { outlets: { popup: ['company-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.company.home.createLabel">
+            Create new Company
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="companies">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.company.name">Name</span></th>
+            <th><span jhiTranslate="furyViewerApp.company.img">Img</span></th>
+            <th><span jhiTranslate="furyViewerApp.company.country">Country</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let company of companies ;trackBy: trackId">
+                <td><a [routerLink]="['../company', company.id ]">{{company.id}}</a></td>
+                <td>{{company.name}}</td>
+                <td>
+                    <a *ngIf="company.img" (click)="openFile(company.imgContentType, company.img)">
+                        <img [src]="'data:' + company.imgContentType + ';base64,' + company.img" style="max-height: 30px;" alt="company image"/>
+                    </a>
+                    <span *ngIf="company.img">{{company.imgContentType}}, {{byteSize(company.img)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="company.country">
+                        <a [routerLink]="['../country', company.country?.id ]" >{{company.country?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../company', company.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'company/'+ company.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'company/'+ company.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
