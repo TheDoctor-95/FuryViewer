@@ -5,7 +5,7 @@ export class FavouriteMovie implements BaseEntity {
         public id?: number,
         public liked?: boolean,
         public date?: any,
-        public serie?: BaseEntity,
+        public movie?: BaseEntity,
         public user?: User,
     ) {
         this.liked = false;

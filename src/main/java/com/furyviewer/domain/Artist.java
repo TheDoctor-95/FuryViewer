@@ -37,9 +37,6 @@ public class Artist implements Serializable {
     @Column(name = "sex")
     private String sex;
 
-    @Column(name = "alive")
-    private Boolean alive;
-
     @Column(name = "deathdate")
     private LocalDate deathdate;
 
@@ -90,15 +87,25 @@ public class Artist implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Series> seriesScriptwriters = new HashSet<>();
 
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany(mappedBy = "actorMains")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Movie> movieActors = new HashSet<>();
+    private Set<Movie> movieMainActors = new HashSet<>();
 
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany(mappedBy = "actorSecondaries")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Series> seriesActors = new HashSet<>();
+    private Set<Movie> movieSecondaryActors = new HashSet<>();
+
+    @ManyToMany(mappedBy = "actorMains")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Series> seriesMainActors = new HashSet<>();
+
+    @ManyToMany(mappedBy = "actorSecondaries")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Series> seriesSecondaryActors = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -159,19 +166,6 @@ public class Artist implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public Boolean isAlive() {
-        return alive;
-    }
-
-    public Artist alive(Boolean alive) {
-        this.alive = alive;
-        return this;
-    }
-
-    public void setAlive(Boolean alive) {
-        this.alive = alive;
     }
 
     public LocalDate getDeathdate() {
@@ -401,54 +395,104 @@ public class Artist implements Serializable {
         this.seriesScriptwriters = series;
     }
 
-    public Set<Movie> getMovieActors() {
-        return movieActors;
+    public Set<Movie> getMovieMainActors() {
+        return movieMainActors;
     }
 
-    public Artist movieActors(Set<Movie> movies) {
-        this.movieActors = movies;
+    public Artist movieMainActors(Set<Movie> movies) {
+        this.movieMainActors = movies;
         return this;
     }
 
-    public Artist addMovieActor(Movie movie) {
-        this.movieActors.add(movie);
-        movie.getActors().add(this);
+    public Artist addMovieMainActor(Movie movie) {
+        this.movieMainActors.add(movie);
+        movie.getActorMains().add(this);
         return this;
     }
 
-    public Artist removeMovieActor(Movie movie) {
-        this.movieActors.remove(movie);
-        movie.getActors().remove(this);
+    public Artist removeMovieMainActor(Movie movie) {
+        this.movieMainActors.remove(movie);
+        movie.getActorMains().remove(this);
         return this;
     }
 
-    public void setMovieActors(Set<Movie> movies) {
-        this.movieActors = movies;
+    public void setMovieMainActors(Set<Movie> movies) {
+        this.movieMainActors = movies;
     }
 
-    public Set<Series> getSeriesActors() {
-        return seriesActors;
+    public Set<Movie> getMovieSecondaryActors() {
+        return movieSecondaryActors;
     }
 
-    public Artist seriesActors(Set<Series> series) {
-        this.seriesActors = series;
+    public Artist movieSecondaryActors(Set<Movie> movies) {
+        this.movieSecondaryActors = movies;
         return this;
     }
 
-    public Artist addSeriesActor(Series series) {
-        this.seriesActors.add(series);
-        series.getActors().add(this);
+    public Artist addMovieSecondaryActor(Movie movie) {
+        this.movieSecondaryActors.add(movie);
+        movie.getActorSecondaries().add(this);
         return this;
     }
 
-    public Artist removeSeriesActor(Series series) {
-        this.seriesActors.remove(series);
-        series.getActors().remove(this);
+    public Artist removeMovieSecondaryActor(Movie movie) {
+        this.movieSecondaryActors.remove(movie);
+        movie.getActorSecondaries().remove(this);
         return this;
     }
 
-    public void setSeriesActors(Set<Series> series) {
-        this.seriesActors = series;
+    public void setMovieSecondaryActors(Set<Movie> movies) {
+        this.movieSecondaryActors = movies;
+    }
+
+    public Set<Series> getSeriesMainActors() {
+        return seriesMainActors;
+    }
+
+    public Artist seriesMainActors(Set<Series> series) {
+        this.seriesMainActors = series;
+        return this;
+    }
+
+    public Artist addSeriesMainActor(Series series) {
+        this.seriesMainActors.add(series);
+        series.getActorMains().add(this);
+        return this;
+    }
+
+    public Artist removeSeriesMainActor(Series series) {
+        this.seriesMainActors.remove(series);
+        series.getActorMains().remove(this);
+        return this;
+    }
+
+    public void setSeriesMainActors(Set<Series> series) {
+        this.seriesMainActors = series;
+    }
+
+    public Set<Series> getSeriesSecondaryActors() {
+        return seriesSecondaryActors;
+    }
+
+    public Artist seriesSecondaryActors(Set<Series> series) {
+        this.seriesSecondaryActors = series;
+        return this;
+    }
+
+    public Artist addSeriesSecondaryActor(Series series) {
+        this.seriesSecondaryActors.add(series);
+        series.getActorSecondaries().add(this);
+        return this;
+    }
+
+    public Artist removeSeriesSecondaryActor(Series series) {
+        this.seriesSecondaryActors.remove(series);
+        series.getActorSecondaries().remove(this);
+        return this;
+    }
+
+    public void setSeriesSecondaryActors(Set<Series> series) {
+        this.seriesSecondaryActors = series;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -480,7 +524,6 @@ public class Artist implements Serializable {
             ", surname='" + getSurname() + "'" +
             ", birthdate='" + getBirthdate() + "'" +
             ", sex='" + getSex() + "'" +
-            ", alive='" + isAlive() + "'" +
             ", deathdate='" + getDeathdate() + "'" +
             ", img='" + getImg() + "'" +
             ", imgContentType='" + imgContentType + "'" +

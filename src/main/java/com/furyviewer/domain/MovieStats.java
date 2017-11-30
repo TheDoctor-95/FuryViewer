@@ -25,8 +25,8 @@ public class MovieStats implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "state")
-    private MovieStatsEnum state;
+    @Column(name = "status")
+    private MovieStatsEnum status;
 
     @Column(name = "jhi_date")
     private ZonedDateTime date;
@@ -46,17 +46,17 @@ public class MovieStats implements Serializable {
         this.id = id;
     }
 
-    public MovieStatsEnum getState() {
-        return state;
+    public MovieStatsEnum getStatus() {
+        return status;
     }
 
-    public MovieStats state(MovieStatsEnum state) {
-        this.state = state;
+    public MovieStats status(MovieStatsEnum status) {
+        this.status = status;
         return this;
     }
 
-    public void setState(MovieStatsEnum state) {
-        this.state = state;
+    public void setStatus(MovieStatsEnum status) {
+        this.status = status;
     }
 
     public ZonedDateTime getDate() {
@@ -123,7 +123,7 @@ public class MovieStats implements Serializable {
     public String toString() {
         return "MovieStats{" +
             "id=" + getId() +
-            ", state='" + getState() + "'" +
+            ", status='" + getStatus() + "'" +
             ", date='" + getDate() + "'" +
             "}";
     }

@@ -29,7 +29,7 @@ public class FavouriteMovie implements Serializable {
     private ZonedDateTime date;
 
     @ManyToOne
-    private Movie serie;
+    private Movie movie;
 
     @ManyToOne
     private User user;
@@ -69,17 +69,17 @@ public class FavouriteMovie implements Serializable {
         this.date = date;
     }
 
-    public Movie getSerie() {
-        return serie;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public FavouriteMovie serie(Movie movie) {
-        this.serie = movie;
+    public FavouriteMovie movie(Movie movie) {
+        this.movie = movie;
         return this;
     }
 
-    public void setSerie(Movie movie) {
-        this.serie = movie;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public User getUser() {

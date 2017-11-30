@@ -77,9 +77,21 @@
             </select>
         </div>
         <div class="form-group">
-            <label jhiTranslate="furyViewerApp.movie.actor" for="field_actor">Actor</label>
-            <select class="form-control" id="field_actor" multiple name="actor" [(ngModel)]="movie.actors">
-                <option [ngValue]="getSelected(movie.actors, artistOption)" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
+            <label jhiTranslate="furyViewerApp.movie.genre" for="field_genre">Genre</label>
+            <select class="form-control" id="field_genre" multiple name="genre" [(ngModel)]="movie.genres">
+                <option [ngValue]="getSelected(movie.genres, genreOption)" *ngFor="let genreOption of genres; trackBy: trackGenreById">{{genreOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="furyViewerApp.movie.actorMain" for="field_actorMain">Actor Main</label>
+            <select class="form-control" id="field_actorMain" multiple name="actorMain" [(ngModel)]="movie.actorMains">
+                <option [ngValue]="getSelected(movie.actorMains, artistOption)" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="furyViewerApp.movie.actorSecondary" for="field_actorSecondary">Actor Secondary</label>
+            <select class="form-control" id="field_actorSecondary" multiple name="actorSecondary" [(ngModel)]="movie.actorSecondaries">
+                <option [ngValue]="getSelected(movie.actorSecondaries, artistOption)" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
             </select>
         </div>
     </div>

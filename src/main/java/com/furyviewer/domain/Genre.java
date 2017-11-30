@@ -1,5 +1,6 @@
 package com.furyviewer.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -29,18 +30,14 @@ public class Genre implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "genres")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "genre_movie",
-               joinColumns = @JoinColumn(name="genres_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="movies_id", referencedColumnName="id"))
     private Set<Movie> movies = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "genres")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "genre_series",
-               joinColumns = @JoinColumn(name="genres_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="series_id", referencedColumnName="id"))
     private Set<Series> series = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

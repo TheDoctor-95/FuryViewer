@@ -23,18 +23,6 @@
                 [(ngModel)]="genre.description"  />
         </div>
 
-        <div class="form-group">
-            <label jhiTranslate="furyViewerApp.genre.movie" for="field_movie">Movie</label>
-            <select class="form-control" id="field_movie" multiple name="movie" [(ngModel)]="genre.movies">
-                <option [ngValue]="getSelected(genre.movies, movieOption)" *ngFor="let movieOption of movies; trackBy: trackMovieById">{{movieOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label jhiTranslate="furyViewerApp.genre.series" for="field_series">Series</label>
-            <select class="form-control" id="field_series" multiple name="series" [(ngModel)]="genre.series">
-                <option [ngValue]="getSelected(genre.series, seriesOption)" *ngFor="let seriesOption of series; trackBy: trackSeriesById">{{seriesOption.name}}</option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

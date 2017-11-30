@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { SERVER_API_URL } from '../../app.constants';
 
+import { JhiDateUtils } from 'ng-jhipster';
+
 import { Company } from './company.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 
@@ -11,7 +13,7 @@ export class CompanyService {
 
     private resourceUrl = SERVER_API_URL + 'api/companies';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
     create(company: Company): Observable<Company> {
         const copy = this.convert(company);
@@ -60,6 +62,10 @@ export class CompanyService {
      */
     private convertItemFromServer(json: any): Company {
         const entity: Company = Object.assign(new Company(), json);
+        entity.fundingDate = this.dateUtils
+            .convertLocalDateFromServer(json.fundingDate);
+        entity.clossingDate = this.dateUtils
+            .convertLocalDateFromServer(json.clossingDate);
         return entity;
     }
 
@@ -68,6 +74,10 @@ export class CompanyService {
      */
     private convert(company: Company): Company {
         const copy: Company = Object.assign({}, company);
+        copy.fundingDate = this.dateUtils
+            .convertLocalDateToServer(company.fundingDate);
+        copy.clossingDate = this.dateUtils
+            .convertLocalDateToServer(company.clossingDate);
         return copy;
     }
 }

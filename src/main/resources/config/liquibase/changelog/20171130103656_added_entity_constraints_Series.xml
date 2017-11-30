@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Series.
+    -->
+    <changeSet id="20171130103656-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="director_id"
+                                 baseTableName="series"
+                                 constraintName="fk_series_director_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+
+        <addForeignKeyConstraint baseColumnNames="scriptwriter_id"
+                                 baseTableName="series"
+                                 constraintName="fk_series_scriptwriter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="series"
+                                 constraintName="fk_series_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
+        <addForeignKeyConstraint baseColumnNames="series_id"
+                                 baseTableName="series_genre"
+                                 constraintName="fk_series_genre_series_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="series"/>
+        <addForeignKeyConstraint baseColumnNames="genres_id"
+                                 baseTableName="series_genre"
+                                 constraintName="fk_series_genre_genres_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="genre"/>
+        
+        <addForeignKeyConstraint baseColumnNames="series_id"
+                                 baseTableName="series_actor_main"
+                                 constraintName="fk_series_actor_main_series_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="series"/>
+        <addForeignKeyConstraint baseColumnNames="actor_mains_id"
+                                 baseTableName="series_actor_main"
+                                 constraintName="fk_series_actor_main_actor_mains_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+        
+        <addForeignKeyConstraint baseColumnNames="series_id"
+                                 baseTableName="series_actor_secondary"
+                                 constraintName="fk_series_actor_secondary_series_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="series"/>
+        <addForeignKeyConstraint baseColumnNames="actor_secondaries_id"
+                                 baseTableName="series_actor_secondary"
+                                 constraintName="fk_series_actor_secondary_actor_secondaries_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+        
+    </changeSet>
+</databaseChangeLog>

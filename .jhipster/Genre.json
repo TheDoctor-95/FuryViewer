@@ -3,19 +3,17 @@
     "relationships": [
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "genre",
             "relationshipName": "movie",
             "otherEntityName": "movie",
-            "otherEntityField": "name",
-            "ownerSide": true
+            "ownerSide": false,
+            "otherEntityRelationshipName": "genre"
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "genre",
             "relationshipName": "series",
             "otherEntityName": "series",
-            "otherEntityField": "name",
-            "ownerSide": true
+            "ownerSide": false,
+            "otherEntityRelationshipName": "genre"
         }
     ],
     "fields": [
@@ -28,7 +26,7 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20171128114902",
+    "changelogDate": "20171130103655",
     "entityTableName": "genre",
     "dto": "no",
     "pagination": "no",

@@ -44,8 +44,8 @@ import com.furyviewer.domain.enumeration.SeriesStatsEnum;
 @SpringBootTest(classes = FuryViewerApp.class)
 public class SeriesStatsResourceIntTest {
 
-    private static final SeriesStatsEnum DEFAULT_PENDING = SeriesStatsEnum.PENDING;
-    private static final SeriesStatsEnum UPDATED_PENDING = SeriesStatsEnum.FOLLOWING;
+    private static final SeriesStatsEnum DEFAULT_STATUS = SeriesStatsEnum.PENDING;
+    private static final SeriesStatsEnum UPDATED_STATUS = SeriesStatsEnum.FOLLOWING;
 
     private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -88,7 +88,7 @@ public class SeriesStatsResourceIntTest {
      */
     public static SeriesStats createEntity(EntityManager em) {
         SeriesStats seriesStats = new SeriesStats()
-            .pending(DEFAULT_PENDING)
+            .status(DEFAULT_STATUS)
             .date(DEFAULT_DATE);
         return seriesStats;
     }
@@ -113,7 +113,7 @@ public class SeriesStatsResourceIntTest {
         List<SeriesStats> seriesStatsList = seriesStatsRepository.findAll();
         assertThat(seriesStatsList).hasSize(databaseSizeBeforeCreate + 1);
         SeriesStats testSeriesStats = seriesStatsList.get(seriesStatsList.size() - 1);
-        assertThat(testSeriesStats.getPending()).isEqualTo(DEFAULT_PENDING);
+        assertThat(testSeriesStats.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testSeriesStats.getDate()).isEqualTo(DEFAULT_DATE);
     }
 
@@ -147,7 +147,7 @@ public class SeriesStatsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(seriesStats.getId().intValue())))
-            .andExpect(jsonPath("$.[*].pending").value(hasItem(DEFAULT_PENDING.toString())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))));
     }
 
@@ -162,7 +162,7 @@ public class SeriesStatsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(seriesStats.getId().intValue()))
-            .andExpect(jsonPath("$.pending").value(DEFAULT_PENDING.toString()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.date").value(sameInstant(DEFAULT_DATE)));
     }
 
@@ -184,7 +184,7 @@ public class SeriesStatsResourceIntTest {
         // Update the seriesStats
         SeriesStats updatedSeriesStats = seriesStatsRepository.findOne(seriesStats.getId());
         updatedSeriesStats
-            .pending(UPDATED_PENDING)
+            .status(UPDATED_STATUS)
             .date(UPDATED_DATE);
 
         restSeriesStatsMockMvc.perform(put("/api/series-stats")
@@ -196,7 +196,7 @@ public class SeriesStatsResourceIntTest {
         List<SeriesStats> seriesStatsList = seriesStatsRepository.findAll();
         assertThat(seriesStatsList).hasSize(databaseSizeBeforeUpdate);
         SeriesStats testSeriesStats = seriesStatsList.get(seriesStatsList.size() - 1);
-        assertThat(testSeriesStats.getPending()).isEqualTo(UPDATED_PENDING);
+        assertThat(testSeriesStats.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testSeriesStats.getDate()).isEqualTo(UPDATED_DATE);
     }
 

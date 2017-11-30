@@ -21,7 +21,6 @@
             <th><span jhiTranslate="furyViewerApp.artist.surname">Surname</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.birthdate">Birthdate</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.sex">Sex</span></th>
-            <th><span jhiTranslate="furyViewerApp.artist.alive">Alive</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.deathdate">Deathdate</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.img">Img</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.country">Country</span></th>
@@ -36,7 +35,6 @@
                 <td>{{artist.surname}}</td>
                 <td>{{artist.birthdate | date:'mediumDate'}}</td>
                 <td>{{artist.sex}}</td>
-                <td>{{artist.alive}}</td>
                 <td>{{artist.deathdate | date:'mediumDate'}}</td>
                 <td>
                     <a *ngIf="artist.img" (click)="openFile(artist.imgContentType, artist.img)">

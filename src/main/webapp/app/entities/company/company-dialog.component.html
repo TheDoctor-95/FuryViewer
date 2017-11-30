@@ -34,6 +34,31 @@
             <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
                 [(ngModel)]="company.imgContentType" />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.company.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="company.description"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.company.fundingDate" for="field_fundingDate">Funding Date</label>
+            <div class="input-group">
+                <input id="field_fundingDate" type="text" class="form-control" name="fundingDate" ngbDatepicker  #fundingDateDp="ngbDatepicker" [(ngModel)]="company.fundingDate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="fundingDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.company.clossingDate" for="field_clossingDate">Clossing Date</label>
+            <div class="input-group">
+                <input id="field_clossingDate" type="text" class="form-control" name="clossingDate" ngbDatepicker  #clossingDateDp="ngbDatepicker" [(ngModel)]="company.clossingDate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="clossingDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.company.country" for="field_country">Country</label>

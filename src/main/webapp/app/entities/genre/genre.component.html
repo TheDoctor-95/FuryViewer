@@ -19,8 +19,6 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="furyViewerApp.genre.name">Name</span></th>
             <th><span jhiTranslate="furyViewerApp.genre.description">Description</span></th>
-            <th><span jhiTranslate="furyViewerApp.genre.movie">Movie</span></th>
-            <th><span jhiTranslate="furyViewerApp.genre.series">Series</span></th>
             <th></th>
             </tr>
             </thead>
@@ -29,16 +27,6 @@
                 <td><a [routerLink]="['../genre', genre.id ]">{{genre.id}}</a></td>
                 <td>{{genre.name}}</td>
                 <td>{{genre.description}}</td>
-                <td>
-                    <span *ngFor="let movie of genre.movies; let last = last">
-                            <a class="form-control-static" [routerLink]="['../movie', movie?.id ]">{{movie.name}}</a>{{last ? '' : ', '}}
-                        </span>
-                </td>
-                <td>
-                    <span *ngFor="let series of genre.series; let last = last">
-                            <a class="form-control-static" [routerLink]="['../series', series?.id ]">{{series.name}}</a>{{last ? '' : ', '}}
-                        </span>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

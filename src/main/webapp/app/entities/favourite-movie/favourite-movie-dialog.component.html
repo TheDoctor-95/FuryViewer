@@ -26,10 +26,10 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.favouriteMovie.serie" for="field_serie">Serie</label>
-            <select class="form-control" id="field_serie" name="serie" [(ngModel)]="favouriteMovie.serie" >
+            <label class="form-control-label" jhiTranslate="furyViewerApp.favouriteMovie.movie" for="field_movie">Movie</label>
+            <select class="form-control" id="field_movie" name="movie" [(ngModel)]="favouriteMovie.movie" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="movieOption.id === favouriteMovie.serie?.id ? favouriteMovie.serie : movieOption" *ngFor="let movieOption of movies; trackBy: trackMovieById">{{movieOption.name}}</option>
+                <option [ngValue]="movieOption.id === favouriteMovie.movie?.id ? favouriteMovie.movie : movieOption" *ngFor="let movieOption of movies; trackBy: trackMovieById">{{movieOption.name}}</option>
             </select>
         </div>
         <div class="form-group">

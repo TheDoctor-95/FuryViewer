@@ -12,18 +12,6 @@
         <dd>
             <span>{{genre.description}}</span>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.genre.movie">Movie</span></dt>
-        <dd>
-            <span *ngFor="let movie of genre.movies; let last = last">
-                <a [routerLink]="['/movie', movie?.id ]">{{movie.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.genre.series">Series</span></dt>
-        <dd>
-            <span *ngFor="let series of genre.series; let last = last">
-                <a [routerLink]="['/series', series?.id ]">{{series.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
     </dl>
 
     <button type="submit"

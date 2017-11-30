@@ -28,7 +28,7 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20171128114908",
+    "changelogDate": "20171130103701",
     "entityTableName": "review_series",
     "dto": "no",
     "pagination": "no",

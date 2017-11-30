@@ -15,7 +15,7 @@
             "detail": {
                 "title": "Series Stats"
             },
-            "pending": "Pending",
+            "status": "Status",
             "date": "Date",
             "serie": "Serie",
             "user": "User"

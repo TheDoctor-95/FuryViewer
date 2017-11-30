@@ -20,7 +20,9 @@ export class Series implements BaseEntity {
         public director?: BaseEntity,
         public scriptwriter?: BaseEntity,
         public company?: BaseEntity,
-        public actors?: BaseEntity[],
+        public genres?: BaseEntity[],
+        public actorMains?: BaseEntity[],
+        public actorSecondaries?: BaseEntity[],
         public reviews?: BaseEntity[],
         public favoriteSeries?: BaseEntity[],
         public rateSeries?: BaseEntity[],
@@ -28,7 +30,6 @@ export class Series implements BaseEntity {
         public hatedSeries?: BaseEntity[],
         public seasons?: BaseEntity[],
         public socials?: BaseEntity[],
-        public genres?: BaseEntity[],
     ) {
     }
 }

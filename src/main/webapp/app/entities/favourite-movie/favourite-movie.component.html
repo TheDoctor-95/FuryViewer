@@ -19,7 +19,7 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="furyViewerApp.favouriteMovie.liked">Liked</span></th>
             <th><span jhiTranslate="furyViewerApp.favouriteMovie.date">Date</span></th>
-            <th><span jhiTranslate="furyViewerApp.favouriteMovie.serie">Serie</span></th>
+            <th><span jhiTranslate="furyViewerApp.favouriteMovie.movie">Movie</span></th>
             <th><span jhiTranslate="furyViewerApp.favouriteMovie.user">User</span></th>
             <th></th>
             </tr>
@@ -30,8 +30,8 @@
                 <td>{{favouriteMovie.liked}}</td>
                 <td>{{favouriteMovie.date | date:'medium'}}</td>
                 <td>
-                    <div *ngIf="favouriteMovie.serie">
-                        <a [routerLink]="['../movie', favouriteMovie.serie?.id ]" >{{favouriteMovie.serie?.name}}</a>
+                    <div *ngIf="favouriteMovie.movie">
+                        <a [routerLink]="['../movie', favouriteMovie.movie?.id ]" >{{favouriteMovie.movie?.name}}</a>
                     </div>
                 </td>
                 <td>

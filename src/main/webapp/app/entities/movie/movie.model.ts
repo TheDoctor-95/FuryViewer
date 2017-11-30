@@ -12,14 +12,15 @@ export class Movie implements BaseEntity {
         public director?: BaseEntity,
         public scriptwriter?: BaseEntity,
         public company?: BaseEntity,
-        public actors?: BaseEntity[],
+        public genres?: BaseEntity[],
+        public actorMains?: BaseEntity[],
+        public actorSecondaries?: BaseEntity[],
         public reviews?: BaseEntity[],
         public favoriteMovies?: BaseEntity[],
         public rateMovies?: BaseEntity[],
         public stats?: BaseEntity[],
         public hatedMovies?: BaseEntity[],
         public socials?: BaseEntity[],
-        public genres?: BaseEntity[],
     ) {
     }
 }

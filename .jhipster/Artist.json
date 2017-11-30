@@ -53,17 +53,31 @@
         },
         {
             "relationshipType": "many-to-many",
-            "relationshipName": "movieActor",
+            "relationshipName": "movieMainActor",
             "otherEntityName": "movie",
             "ownerSide": false,
-            "otherEntityRelationshipName": "actor"
+            "otherEntityRelationshipName": "actorMain"
         },
         {
             "relationshipType": "many-to-many",
-            "relationshipName": "seriesActor",
+            "relationshipName": "movieSecondaryActor",
+            "otherEntityName": "movie",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "actorSecondary"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "seriesMainActor",
             "otherEntityName": "series",
             "ownerSide": false,
-            "otherEntityRelationshipName": "actor"
+            "otherEntityRelationshipName": "actorMain"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "seriesSecondaryActor",
+            "otherEntityName": "series",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "actorSecondary"
         }
     ],
     "fields": [
@@ -84,10 +98,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "alive",
-            "fieldType": "Boolean"
-        },
-        {
             "fieldName": "deathdate",
             "fieldType": "LocalDate"
         },
@@ -97,7 +107,7 @@
             "fieldTypeBlobContent": "image"
         }
     ],
-    "changelogDate": "20171128114911",
+    "changelogDate": "20171130103704",
     "entityTableName": "artist",
     "dto": "no",
     "pagination": "no",

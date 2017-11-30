@@ -13,8 +13,8 @@
                    [(ngModel)]="movieStats.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movieStats.state" for="field_state">State</label>
-            <select class="form-control" name="state" [(ngModel)]="movieStats.state" id="field_state" >
+            <label class="form-control-label" jhiTranslate="furyViewerApp.movieStats.status" for="field_status">Status</label>
+            <select class="form-control" name="status" [(ngModel)]="movieStats.status" id="field_status" >
                 <option value="PENDING">{{'furyViewerApp.MovieStatsEnum.PENDING' | translate}}</option>
                 <option value="SEEN">{{'furyViewerApp.MovieStatsEnum.SEEN' | translate}}</option>
             </select>

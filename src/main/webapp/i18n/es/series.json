@@ -23,15 +23,16 @@
             "director": "Director",
             "scriptwriter": "Scriptwriter",
             "company": "Company",
-            "actor": "Actor",
+            "genre": "Genre",
+            "actorMain": "Actor Main",
+            "actorSecondary": "Actor Secondary",
             "review": "Review",
             "favoriteSerie": "Favorite Serie",
             "rateSerie": "Rate Serie",
             "stat": "Stat",
             "hatedSerie": "Hated Serie",
             "season": "Season",
-            "social": "Social",
-            "genre": "Genre"
+            "social": "Social"
         }
     }
 }

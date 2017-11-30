@@ -13,8 +13,8 @@
                    [(ngModel)]="seriesStats.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesStats.pending" for="field_pending">Pending</label>
-            <select class="form-control" name="pending" [(ngModel)]="seriesStats.pending" id="field_pending" >
+            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesStats.status" for="field_status">Status</label>
+            <select class="form-control" name="status" [(ngModel)]="seriesStats.status" id="field_status" >
                 <option value="PENDING">{{'furyViewerApp.SeriesStatsEnum.PENDING' | translate}}</option>
                 <option value="FOLLOWING">{{'furyViewerApp.SeriesStatsEnum.FOLLOWING' | translate}}</option>
                 <option value="SEEN">{{'furyViewerApp.SeriesStatsEnum.SEEN' | translate}}</option>

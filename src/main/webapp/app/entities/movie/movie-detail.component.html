@@ -47,10 +47,22 @@
                 <a [routerLink]="['/company', movie.company?.id]">{{movie.company?.name}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.actor">Actor</span></dt>
+        <dt><span jhiTranslate="furyViewerApp.movie.genre">Genre</span></dt>
         <dd>
-            <span *ngFor="let actor of movie.actors; let last = last">
-                <a [routerLink]="['/artist', actor?.id ]">{{actor.name}}</a>{{last ? '' : ', '}}
+            <span *ngFor="let genre of movie.genres; let last = last">
+                <a [routerLink]="['/genre', genre?.id ]">{{genre.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.actorMain">Actor Main</span></dt>
+        <dd>
+            <span *ngFor="let actorMain of movie.actorMains; let last = last">
+                <a [routerLink]="['/artist', actorMain?.id ]">{{actorMain.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.actorSecondary">Actor Secondary</span></dt>
+        <dd>
+            <span *ngFor="let actorSecondary of movie.actorSecondaries; let last = last">
+                <a [routerLink]="['/artist', actorSecondary?.id ]">{{actorSecondary.name}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
     </dl>

@@ -9,7 +9,7 @@ export const enum SeriesStatsEnum {
 export class SeriesStats implements BaseEntity {
     constructor(
         public id?: number,
-        public pending?: SeriesStatsEnum,
+        public status?: SeriesStatsEnum,
         public date?: any,
         public serie?: BaseEntity,
         public user?: User,

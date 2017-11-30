@@ -25,8 +25,8 @@ public class SeriesStats implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "pending")
-    private SeriesStatsEnum pending;
+    @Column(name = "status")
+    private SeriesStatsEnum status;
 
     @Column(name = "jhi_date")
     private ZonedDateTime date;
@@ -46,17 +46,17 @@ public class SeriesStats implements Serializable {
         this.id = id;
     }
 
-    public SeriesStatsEnum getPending() {
-        return pending;
+    public SeriesStatsEnum getStatus() {
+        return status;
     }
 
-    public SeriesStats pending(SeriesStatsEnum pending) {
-        this.pending = pending;
+    public SeriesStats status(SeriesStatsEnum status) {
+        this.status = status;
         return this;
     }
 
-    public void setPending(SeriesStatsEnum pending) {
-        this.pending = pending;
+    public void setStatus(SeriesStatsEnum status) {
+        this.status = status;
     }
 
     public ZonedDateTime getDate() {
@@ -123,7 +123,7 @@ public class SeriesStats implements Serializable {
     public String toString() {
         return "SeriesStats{" +
             "id=" + getId() +
-            ", pending='" + getPending() + "'" +
+            ", status='" + getStatus() + "'" +
             ", date='" + getDate() + "'" +
             "}";
     }

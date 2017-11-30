@@ -17,6 +17,9 @@
             },
             "name": "Name",
             "img": "Img",
+            "description": "Description",
+            "fundingDate": "Funding Date",
+            "clossingDate": "Clossing Date",
             "country": "Country",
             "movie": "Movie",
             "serie": "Serie"

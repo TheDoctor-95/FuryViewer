@@ -29,7 +29,7 @@
             "fieldType": "Double"
         }
     ],
-    "changelogDate": "20171128114900",
+    "changelogDate": "20171130103653",
     "entityTableName": "user_ext",
     "dto": "no",
     "pagination": "no",

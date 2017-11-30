@@ -13,10 +13,10 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface SeriesRepository extends JpaRepository<Series, Long> {
-    @Query("select distinct series from Series series left join fetch series.actors")
+    @Query("select distinct series from Series series left join fetch series.genres left join fetch series.actorMains left join fetch series.actorSecondaries")
     List<Series> findAllWithEagerRelationships();
 
-    @Query("select series from Series series left join fetch series.actors where series.id =:id")
+    @Query("select series from Series series left join fetch series.genres left join fetch series.actorMains left join fetch series.actorSecondaries where series.id =:id")
     Series findOneWithEagerRelationships(@Param("id") Long id);
 
 }

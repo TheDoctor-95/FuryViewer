@@ -21,8 +21,24 @@
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "movieActor",
-            "relationshipName": "actor",
+            "otherEntityRelationshipName": "movie",
+            "relationshipName": "genre",
+            "otherEntityName": "genre",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "movieMainActor",
+            "relationshipName": "actorMain",
+            "otherEntityName": "artist",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "movieSecondaryActor",
+            "relationshipName": "actorSecondary",
             "otherEntityName": "artist",
             "otherEntityField": "name",
             "ownerSide": true
@@ -37,7 +53,7 @@
             "relationshipType": "one-to-many",
             "relationshipName": "favoriteMovie",
             "otherEntityName": "favouriteMovie",
-            "otherEntityRelationshipName": "serie"
+            "otherEntityRelationshipName": "movie"
         },
         {
             "relationshipType": "one-to-many",
@@ -61,13 +77,6 @@
             "relationshipType": "one-to-many",
             "relationshipName": "social",
             "otherEntityName": "social",
-            "otherEntityRelationshipName": "movie"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "genre",
-            "otherEntityName": "genre",
-            "ownerSide": false,
             "otherEntityRelationshipName": "movie"
         }
     ],
@@ -94,7 +103,7 @@
             "fieldType": "Double"
         }
     ],
-    "changelogDate": "20171128114906",
+    "changelogDate": "20171130103659",
     "entityTableName": "movie",
     "dto": "no",
     "pagination": "no",

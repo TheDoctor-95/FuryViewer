@@ -17,7 +17,7 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="furyViewerApp.seriesStats.pending">Pending</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesStats.status">Status</span></th>
             <th><span jhiTranslate="furyViewerApp.seriesStats.date">Date</span></th>
             <th><span jhiTranslate="furyViewerApp.seriesStats.serie">Serie</span></th>
             <th><span jhiTranslate="furyViewerApp.seriesStats.user">User</span></th>
@@ -27,7 +27,7 @@
             <tbody>
             <tr *ngFor="let seriesStats of seriesStats ;trackBy: trackId">
                 <td><a [routerLink]="['../series-stats', seriesStats.id ]">{{seriesStats.id}}</a></td>
-                <td jhiTranslate="{{'furyViewerApp.SeriesStatsEnum.' + seriesStats.pending}}">{{seriesStats.pending}}</td>
+                <td jhiTranslate="{{'furyViewerApp.SeriesStatsEnum.' + seriesStats.status}}">{{seriesStats.status}}</td>
                 <td>{{seriesStats.date | date:'medium'}}</td>
                 <td>
                     <div *ngIf="seriesStats.serie">

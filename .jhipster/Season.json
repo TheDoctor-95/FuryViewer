@@ -29,7 +29,7 @@
             "fieldType": "LocalDate"
         }
     ],
-    "changelogDate": "20171128114904",
+    "changelogDate": "20171130103657",
     "entityTableName": "season",
     "dto": "no",
     "pagination": "no",

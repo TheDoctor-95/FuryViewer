@@ -12,10 +12,10 @@
         <dd>
             <span>{{favouriteMovie.date | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.favouriteMovie.serie">Serie</span></dt>
+        <dt><span jhiTranslate="furyViewerApp.favouriteMovie.movie">Movie</span></dt>
         <dd>
-            <div *ngIf="favouriteMovie.serie">
-                <a [routerLink]="['/movie', favouriteMovie.serie?.id]">{{favouriteMovie.serie?.name}}</a>
+            <div *ngIf="favouriteMovie.movie">
+                <a [routerLink]="['/movie', favouriteMovie.movie?.id]">{{favouriteMovie.movie?.name}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="furyViewerApp.favouriteMovie.user">User</span></dt>

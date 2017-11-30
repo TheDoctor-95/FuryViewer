@@ -55,17 +55,31 @@ public class Movie implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "movie_actor",
+    @JoinTable(name = "movie_genre",
                joinColumns = @JoinColumn(name="movies_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="actors_id", referencedColumnName="id"))
-    private Set<Artist> actors = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name="genres_id", referencedColumnName="id"))
+    private Set<Genre> genres = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "movie_actor_main",
+               joinColumns = @JoinColumn(name="movies_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="actor_mains_id", referencedColumnName="id"))
+    private Set<Artist> actorMains = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "movie_actor_secondary",
+               joinColumns = @JoinColumn(name="movies_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="actor_secondaries_id", referencedColumnName="id"))
+    private Set<Artist> actorSecondaries = new HashSet<>();
 
     @OneToMany(mappedBy = "movie")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ReviewMovie> reviews = new HashSet<>();
 
-    @OneToMany(mappedBy = "serie")
+    @OneToMany(mappedBy = "movie")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<FavouriteMovie> favoriteMovies = new HashSet<>();
@@ -89,11 +103,6 @@ public class Movie implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Social> socials = new HashSet<>();
-
-    @ManyToMany(mappedBy = "movies")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Genre> genres = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -221,29 +230,79 @@ public class Movie implements Serializable {
         this.company = company;
     }
 
-    public Set<Artist> getActors() {
-        return actors;
+    public Set<Genre> getGenres() {
+        return genres;
     }
 
-    public Movie actors(Set<Artist> artists) {
-        this.actors = artists;
+    public Movie genres(Set<Genre> genres) {
+        this.genres = genres;
         return this;
     }
 
-    public Movie addActor(Artist artist) {
-        this.actors.add(artist);
-        artist.getMovieActors().add(this);
+    public Movie addGenre(Genre genre) {
+        this.genres.add(genre);
+        genre.getMovies().add(this);
         return this;
     }
 
-    public Movie removeActor(Artist artist) {
-        this.actors.remove(artist);
-        artist.getMovieActors().remove(this);
+    public Movie removeGenre(Genre genre) {
+        this.genres.remove(genre);
+        genre.getMovies().remove(this);
         return this;
     }
 
-    public void setActors(Set<Artist> artists) {
-        this.actors = artists;
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public Set<Artist> getActorMains() {
+        return actorMains;
+    }
+
+    public Movie actorMains(Set<Artist> artists) {
+        this.actorMains = artists;
+        return this;
+    }
+
+    public Movie addActorMain(Artist artist) {
+        this.actorMains.add(artist);
+        artist.getMovieMainActors().add(this);
+        return this;
+    }
+
+    public Movie removeActorMain(Artist artist) {
+        this.actorMains.remove(artist);
+        artist.getMovieMainActors().remove(this);
+        return this;
+    }
+
+    public void setActorMains(Set<Artist> artists) {
+        this.actorMains = artists;
+    }
+
+    public Set<Artist> getActorSecondaries() {
+        return actorSecondaries;
+    }
+
+    public Movie actorSecondaries(Set<Artist> artists) {
+        this.actorSecondaries = artists;
+        return this;
+    }
+
+    public Movie addActorSecondary(Artist artist) {
+        this.actorSecondaries.add(artist);
+        artist.getMovieSecondaryActors().add(this);
+        return this;
+    }
+
+    public Movie removeActorSecondary(Artist artist) {
+        this.actorSecondaries.remove(artist);
+        artist.getMovieSecondaryActors().remove(this);
+        return this;
+    }
+
+    public void setActorSecondaries(Set<Artist> artists) {
+        this.actorSecondaries = artists;
     }
 
     public Set<ReviewMovie> getReviews() {
@@ -282,13 +341,13 @@ public class Movie implements Serializable {
 
     public Movie addFavoriteMovie(FavouriteMovie favouriteMovie) {
         this.favoriteMovies.add(favouriteMovie);
-        favouriteMovie.setSerie(this);
+        favouriteMovie.setMovie(this);
         return this;
     }
 
     public Movie removeFavoriteMovie(FavouriteMovie favouriteMovie) {
         this.favoriteMovies.remove(favouriteMovie);
-        favouriteMovie.setSerie(null);
+        favouriteMovie.setMovie(null);
         return this;
     }
 
@@ -394,31 +453,6 @@ public class Movie implements Serializable {
 
     public void setSocials(Set<Social> socials) {
         this.socials = socials;
-    }
-
-    public Set<Genre> getGenres() {
-        return genres;
-    }
-
-    public Movie genres(Set<Genre> genres) {
-        this.genres = genres;
-        return this;
-    }
-
-    public Movie addGenre(Genre genre) {
-        this.genres.add(genre);
-        genre.getMovies().add(this);
-        return this;
-    }
-
-    public Movie removeGenre(Genre genre) {
-        this.genres.remove(genre);
-        genre.getMovies().remove(this);
-        return this;
-    }
-
-    public void setGenres(Set<Genre> genres) {
-        this.genres = genres;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

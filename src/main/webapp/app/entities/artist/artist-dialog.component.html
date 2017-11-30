@@ -38,11 +38,6 @@
                 [(ngModel)]="artist.sex"  />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.alive" for="field_alive">Alive</label>
-            <input type="checkbox" class="form-control" name="alive" id="field_alive"
-                [(ngModel)]="artist.alive"  />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.artist.deathdate" for="field_deathdate">Deathdate</label>
             <div class="input-group">
                 <input id="field_deathdate" type="text" class="form-control" name="deathdate" ngbDatepicker  #deathdateDp="ngbDatepicker" [(ngModel)]="artist.deathdate"

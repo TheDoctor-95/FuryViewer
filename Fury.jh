@@ -58,7 +58,10 @@ entity Movie{
 
 entity Company{
 	name String,
-    img ImageBlob
+    img ImageBlob,
+    description String,
+    fundingDate LocalDate
+    clossingDate LocalDate
 }
 
 entity ReviewSeries{
@@ -90,7 +93,6 @@ entity Artist{
     surname String,
     birthdate LocalDate,
     sex String,
-    alive Boolean,
     deathdate LocalDate,
     img ImageBlob
     
@@ -143,7 +145,7 @@ enum SeriesStatsEnum{
 }
 
 entity SeriesStats{
-	pending SeriesStatsEnum,
+	status SeriesStatsEnum,
     date ZonedDateTime
 }
 
@@ -154,7 +156,7 @@ enum MovieStatsEnum{
 
 
 entity MovieStats{
-	state MovieStatsEnum,
+	status MovieStatsEnum,
     date ZonedDateTime
 }
 
@@ -185,7 +187,7 @@ relationship ManyToOne{
     //FAVORITOS
     FavouriteSeries{series(name)} to Series{favoriteSerie},
     FavouriteSeries{user(login)} to User,
-    FavouriteMovie{serie(name)} to Movie{favoriteMovie},
+    FavouriteMovie{movie(name)} to Movie{favoriteMovie},
     FavouriteMovie{user(login)} to User,
     FavouriteArtist{artist(name)} to Artist{favoriteArtist},
     FavouriteArtist{user(login)} to User,
@@ -234,11 +236,18 @@ relationship ManyToOne{
 }
 
 relationship ManyToMany{
-	Genre{movie(name)} to Movie{genre},
-    Genre{series(name)} to Series{genre},
-	Movie{actor(name)} to Artist{movieActor},
-    Series{actor(name)} to Artist{seriesActor},
-    Artist{artistType(name)} to ArtistType{artist}
+	Movie{genre(name)} to Genre{movie},
+    Series{genre(name)} to Genre{series},
+	//Artist{movieActor(name)} to Movie{actor},
+    Movie{actorMain(name)} to Artist{movieMainActor},
+    Movie{actorSecondary(name)} to Artist{movieSecondaryActor},
+    
+   // Artist{seriesActor(name)} to Series{actor},
+    Series{actorMain(name)} to Artist{seriesMainActor},
+    Series{actorSecondary(name)} to Artist{seriesSecondaryActor},
+    
+    Artist{artistType(name)} to ArtistType{artist}    
+   
 }
 
  relationship OneToOne{

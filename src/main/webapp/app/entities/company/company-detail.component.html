@@ -17,6 +17,18 @@
                 {{company.imgContentType}}, {{byteSize(company.img)}}
             </div>
         </dd>
+        <dt><span jhiTranslate="furyViewerApp.company.description">Description</span></dt>
+        <dd>
+            <span>{{company.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.company.fundingDate">Funding Date</span></dt>
+        <dd>
+            <span>{{company.fundingDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.company.clossingDate">Clossing Date</span></dt>
+        <dd>
+            <span>{{company.clossingDate | date:'mediumDate'}}</span>
+        </dd>
         <dt><span jhiTranslate="furyViewerApp.company.country">Country</span></dt>
         <dd>
             <div *ngIf="company.country">

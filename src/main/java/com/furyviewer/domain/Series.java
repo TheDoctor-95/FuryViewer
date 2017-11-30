@@ -58,10 +58,24 @@ public class Series implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "series_actor",
+    @JoinTable(name = "series_genre",
                joinColumns = @JoinColumn(name="series_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="actors_id", referencedColumnName="id"))
-    private Set<Artist> actors = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name="genres_id", referencedColumnName="id"))
+    private Set<Genre> genres = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "series_actor_main",
+               joinColumns = @JoinColumn(name="series_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="actor_mains_id", referencedColumnName="id"))
+    private Set<Artist> actorMains = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "series_actor_secondary",
+               joinColumns = @JoinColumn(name="series_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="actor_secondaries_id", referencedColumnName="id"))
+    private Set<Artist> actorSecondaries = new HashSet<>();
 
     @OneToMany(mappedBy = "series")
     @JsonIgnore
@@ -97,11 +111,6 @@ public class Series implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Social> socials = new HashSet<>();
-
-    @ManyToMany(mappedBy = "series")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Genre> genres = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -229,29 +238,79 @@ public class Series implements Serializable {
         this.company = company;
     }
 
-    public Set<Artist> getActors() {
-        return actors;
+    public Set<Genre> getGenres() {
+        return genres;
     }
 
-    public Series actors(Set<Artist> artists) {
-        this.actors = artists;
+    public Series genres(Set<Genre> genres) {
+        this.genres = genres;
         return this;
     }
 
-    public Series addActor(Artist artist) {
-        this.actors.add(artist);
-        artist.getSeriesActors().add(this);
+    public Series addGenre(Genre genre) {
+        this.genres.add(genre);
+        genre.getSeries().add(this);
         return this;
     }
 
-    public Series removeActor(Artist artist) {
-        this.actors.remove(artist);
-        artist.getSeriesActors().remove(this);
+    public Series removeGenre(Genre genre) {
+        this.genres.remove(genre);
+        genre.getSeries().remove(this);
         return this;
     }
 
-    public void setActors(Set<Artist> artists) {
-        this.actors = artists;
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public Set<Artist> getActorMains() {
+        return actorMains;
+    }
+
+    public Series actorMains(Set<Artist> artists) {
+        this.actorMains = artists;
+        return this;
+    }
+
+    public Series addActorMain(Artist artist) {
+        this.actorMains.add(artist);
+        artist.getSeriesMainActors().add(this);
+        return this;
+    }
+
+    public Series removeActorMain(Artist artist) {
+        this.actorMains.remove(artist);
+        artist.getSeriesMainActors().remove(this);
+        return this;
+    }
+
+    public void setActorMains(Set<Artist> artists) {
+        this.actorMains = artists;
+    }
+
+    public Set<Artist> getActorSecondaries() {
+        return actorSecondaries;
+    }
+
+    public Series actorSecondaries(Set<Artist> artists) {
+        this.actorSecondaries = artists;
+        return this;
+    }
+
+    public Series addActorSecondary(Artist artist) {
+        this.actorSecondaries.add(artist);
+        artist.getSeriesSecondaryActors().add(this);
+        return this;
+    }
+
+    public Series removeActorSecondary(Artist artist) {
+        this.actorSecondaries.remove(artist);
+        artist.getSeriesSecondaryActors().remove(this);
+        return this;
+    }
+
+    public void setActorSecondaries(Set<Artist> artists) {
+        this.actorSecondaries = artists;
     }
 
     public Set<ReviewSeries> getReviews() {
@@ -427,31 +486,6 @@ public class Series implements Serializable {
 
     public void setSocials(Set<Social> socials) {
         this.socials = socials;
-    }
-
-    public Set<Genre> getGenres() {
-        return genres;
-    }
-
-    public Series genres(Set<Genre> genres) {
-        this.genres = genres;
-        return this;
-    }
-
-    public Series addGenre(Genre genre) {
-        this.genres.add(genre);
-        genre.getSeries().add(this);
-        return this;
-    }
-
-    public Series removeGenre(Genre genre) {
-        this.genres.remove(genre);
-        genre.getSeries().remove(this);
-        return this;
-    }
-
-    public void setGenres(Set<Genre> genres) {
-        this.genres = genres;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

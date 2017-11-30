@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -33,6 +34,15 @@ public class Company implements Serializable {
 
     @Column(name = "img_content_type")
     private String imgContentType;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "funding_date")
+    private LocalDate fundingDate;
+
+    @Column(name = "clossing_date")
+    private LocalDate clossingDate;
 
     @ManyToOne
     private Country country;
@@ -93,6 +103,45 @@ public class Company implements Serializable {
 
     public void setImgContentType(String imgContentType) {
         this.imgContentType = imgContentType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Company description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getFundingDate() {
+        return fundingDate;
+    }
+
+    public Company fundingDate(LocalDate fundingDate) {
+        this.fundingDate = fundingDate;
+        return this;
+    }
+
+    public void setFundingDate(LocalDate fundingDate) {
+        this.fundingDate = fundingDate;
+    }
+
+    public LocalDate getClossingDate() {
+        return clossingDate;
+    }
+
+    public Company clossingDate(LocalDate clossingDate) {
+        this.clossingDate = clossingDate;
+        return this;
+    }
+
+    public void setClossingDate(LocalDate clossingDate) {
+        this.clossingDate = clossingDate;
     }
 
     public Country getCountry() {
@@ -186,6 +235,9 @@ public class Company implements Serializable {
             ", name='" + getName() + "'" +
             ", img='" + getImg() + "'" +
             ", imgContentType='" + imgContentType + "'" +
+            ", description='" + getDescription() + "'" +
+            ", fundingDate='" + getFundingDate() + "'" +
+            ", clossingDate='" + getClossingDate() + "'" +
             "}";
     }
 }

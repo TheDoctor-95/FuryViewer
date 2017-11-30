@@ -20,7 +20,7 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20171128114922",
+    "changelogDate": "20171130103715",
     "entityTableName": "social",
     "dto": "no",
     "pagination": "no",

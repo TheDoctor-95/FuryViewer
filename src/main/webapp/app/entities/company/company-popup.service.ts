@@ -26,6 +26,20 @@ export class CompanyPopupService {
 
             if (id) {
                 this.companyService.find(id).subscribe((company) => {
+                    if (company.fundingDate) {
+                        company.fundingDate = {
+                            year: company.fundingDate.getFullYear(),
+                            month: company.fundingDate.getMonth() + 1,
+                            day: company.fundingDate.getDate()
+                        };
+                    }
+                    if (company.clossingDate) {
+                        company.clossingDate = {
+                            year: company.clossingDate.getFullYear(),
+                            month: company.clossingDate.getMonth() + 1,
+                            day: company.clossingDate.getDate()
+                        };
+                    }
                     this.ngbModalRef = this.companyModalRef(component, company);
                     resolve(this.ngbModalRef);
                 });

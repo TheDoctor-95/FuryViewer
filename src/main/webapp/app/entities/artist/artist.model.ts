@@ -7,7 +7,6 @@ export class Artist implements BaseEntity {
         public surname?: string,
         public birthdate?: any,
         public sex?: string,
-        public alive?: boolean,
         public deathdate?: any,
         public imgContentType?: string,
         public img?: any,
@@ -19,9 +18,10 @@ export class Artist implements BaseEntity {
         public seriesDirectors?: BaseEntity[],
         public movieScriptwriters?: BaseEntity[],
         public seriesScriptwriters?: BaseEntity[],
-        public movieActors?: BaseEntity[],
-        public seriesActors?: BaseEntity[],
+        public movieMainActors?: BaseEntity[],
+        public movieSecondaryActors?: BaseEntity[],
+        public seriesMainActors?: BaseEntity[],
+        public seriesSecondaryActors?: BaseEntity[],
     ) {
-        this.alive = false;
     }
 }

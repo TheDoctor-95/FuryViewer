@@ -24,7 +24,7 @@
             "fieldType": "ZonedDateTime"
         }
     ],
-    "changelogDate": "20171128114918",
+    "changelogDate": "20171130103711",
     "entityTableName": "hatred_series",
     "dto": "no",
     "pagination": "no",

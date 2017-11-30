@@ -8,7 +8,7 @@ export const enum MovieStatsEnum {
 export class MovieStats implements BaseEntity {
     constructor(
         public id?: number,
-        public state?: MovieStatsEnum,
+        public status?: MovieStatsEnum,
         public date?: any,
         public movie?: BaseEntity,
         public user?: User,

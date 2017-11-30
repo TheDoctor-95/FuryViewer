@@ -44,8 +44,8 @@ import com.furyviewer.domain.enumeration.MovieStatsEnum;
 @SpringBootTest(classes = FuryViewerApp.class)
 public class MovieStatsResourceIntTest {
 
-    private static final MovieStatsEnum DEFAULT_STATE = MovieStatsEnum.PENDING;
-    private static final MovieStatsEnum UPDATED_STATE = MovieStatsEnum.SEEN;
+    private static final MovieStatsEnum DEFAULT_STATUS = MovieStatsEnum.PENDING;
+    private static final MovieStatsEnum UPDATED_STATUS = MovieStatsEnum.SEEN;
 
     private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -88,7 +88,7 @@ public class MovieStatsResourceIntTest {
      */
     public static MovieStats createEntity(EntityManager em) {
         MovieStats movieStats = new MovieStats()
-            .state(DEFAULT_STATE)
+            .status(DEFAULT_STATUS)
             .date(DEFAULT_DATE);
         return movieStats;
     }
@@ -113,7 +113,7 @@ public class MovieStatsResourceIntTest {
         List<MovieStats> movieStatsList = movieStatsRepository.findAll();
         assertThat(movieStatsList).hasSize(databaseSizeBeforeCreate + 1);
         MovieStats testMovieStats = movieStatsList.get(movieStatsList.size() - 1);
-        assertThat(testMovieStats.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testMovieStats.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testMovieStats.getDate()).isEqualTo(DEFAULT_DATE);
     }
 
@@ -147,7 +147,7 @@ public class MovieStatsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(movieStats.getId().intValue())))
-            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))));
     }
 
@@ -162,7 +162,7 @@ public class MovieStatsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(movieStats.getId().intValue()))
-            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.date").value(sameInstant(DEFAULT_DATE)));
     }
 
@@ -184,7 +184,7 @@ public class MovieStatsResourceIntTest {
         // Update the movieStats
         MovieStats updatedMovieStats = movieStatsRepository.findOne(movieStats.getId());
         updatedMovieStats
-            .state(UPDATED_STATE)
+            .status(UPDATED_STATUS)
             .date(UPDATED_DATE);
 
         restMovieStatsMockMvc.perform(put("/api/movie-stats")
@@ -196,7 +196,7 @@ public class MovieStatsResourceIntTest {
         List<MovieStats> movieStatsList = movieStatsRepository.findAll();
         assertThat(movieStatsList).hasSize(databaseSizeBeforeUpdate);
         MovieStats testMovieStats = movieStatsList.get(movieStatsList.size() - 1);
-        assertThat(testMovieStats.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testMovieStats.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testMovieStats.getDate()).isEqualTo(UPDATED_DATE);
     }
 

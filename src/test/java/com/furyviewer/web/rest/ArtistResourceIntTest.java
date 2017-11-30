@@ -53,9 +53,6 @@ public class ArtistResourceIntTest {
     private static final String DEFAULT_SEX = "AAAAAAAAAA";
     private static final String UPDATED_SEX = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_ALIVE = false;
-    private static final Boolean UPDATED_ALIVE = true;
-
     private static final LocalDate DEFAULT_DEATHDATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DEATHDATE = LocalDate.now(ZoneId.systemDefault());
 
@@ -106,7 +103,6 @@ public class ArtistResourceIntTest {
             .surname(DEFAULT_SURNAME)
             .birthdate(DEFAULT_BIRTHDATE)
             .sex(DEFAULT_SEX)
-            .alive(DEFAULT_ALIVE)
             .deathdate(DEFAULT_DEATHDATE)
             .img(DEFAULT_IMG)
             .imgContentType(DEFAULT_IMG_CONTENT_TYPE);
@@ -137,7 +133,6 @@ public class ArtistResourceIntTest {
         assertThat(testArtist.getSurname()).isEqualTo(DEFAULT_SURNAME);
         assertThat(testArtist.getBirthdate()).isEqualTo(DEFAULT_BIRTHDATE);
         assertThat(testArtist.getSex()).isEqualTo(DEFAULT_SEX);
-        assertThat(testArtist.isAlive()).isEqualTo(DEFAULT_ALIVE);
         assertThat(testArtist.getDeathdate()).isEqualTo(DEFAULT_DEATHDATE);
         assertThat(testArtist.getImg()).isEqualTo(DEFAULT_IMG);
         assertThat(testArtist.getImgContentType()).isEqualTo(DEFAULT_IMG_CONTENT_TYPE);
@@ -177,7 +172,6 @@ public class ArtistResourceIntTest {
             .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME.toString())))
             .andExpect(jsonPath("$.[*].birthdate").value(hasItem(DEFAULT_BIRTHDATE.toString())))
             .andExpect(jsonPath("$.[*].sex").value(hasItem(DEFAULT_SEX.toString())))
-            .andExpect(jsonPath("$.[*].alive").value(hasItem(DEFAULT_ALIVE.booleanValue())))
             .andExpect(jsonPath("$.[*].deathdate").value(hasItem(DEFAULT_DEATHDATE.toString())))
             .andExpect(jsonPath("$.[*].imgContentType").value(hasItem(DEFAULT_IMG_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))));
@@ -198,7 +192,6 @@ public class ArtistResourceIntTest {
             .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME.toString()))
             .andExpect(jsonPath("$.birthdate").value(DEFAULT_BIRTHDATE.toString()))
             .andExpect(jsonPath("$.sex").value(DEFAULT_SEX.toString()))
-            .andExpect(jsonPath("$.alive").value(DEFAULT_ALIVE.booleanValue()))
             .andExpect(jsonPath("$.deathdate").value(DEFAULT_DEATHDATE.toString()))
             .andExpect(jsonPath("$.imgContentType").value(DEFAULT_IMG_CONTENT_TYPE))
             .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)));
@@ -226,7 +219,6 @@ public class ArtistResourceIntTest {
             .surname(UPDATED_SURNAME)
             .birthdate(UPDATED_BIRTHDATE)
             .sex(UPDATED_SEX)
-            .alive(UPDATED_ALIVE)
             .deathdate(UPDATED_DEATHDATE)
             .img(UPDATED_IMG)
             .imgContentType(UPDATED_IMG_CONTENT_TYPE);
@@ -244,7 +236,6 @@ public class ArtistResourceIntTest {
         assertThat(testArtist.getSurname()).isEqualTo(UPDATED_SURNAME);
         assertThat(testArtist.getBirthdate()).isEqualTo(UPDATED_BIRTHDATE);
         assertThat(testArtist.getSex()).isEqualTo(UPDATED_SEX);
-        assertThat(testArtist.isAlive()).isEqualTo(UPDATED_ALIVE);
         assertThat(testArtist.getDeathdate()).isEqualTo(UPDATED_DEATHDATE);
         assertThat(testArtist.getImg()).isEqualTo(UPDATED_IMG);
         assertThat(testArtist.getImgContentType()).isEqualTo(UPDATED_IMG_CONTENT_TYPE);

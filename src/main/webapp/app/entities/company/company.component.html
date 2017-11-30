@@ -19,6 +19,9 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="furyViewerApp.company.name">Name</span></th>
             <th><span jhiTranslate="furyViewerApp.company.img">Img</span></th>
+            <th><span jhiTranslate="furyViewerApp.company.description">Description</span></th>
+            <th><span jhiTranslate="furyViewerApp.company.fundingDate">Funding Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.company.clossingDate">Clossing Date</span></th>
             <th><span jhiTranslate="furyViewerApp.company.country">Country</span></th>
             <th></th>
             </tr>
@@ -33,6 +36,9 @@
                     </a>
                     <span *ngIf="company.img">{{company.imgContentType}}, {{byteSize(company.img)}}</span>
                 </td>
+                <td>{{company.description}}</td>
+                <td>{{company.fundingDate | date:'mediumDate'}}</td>
+                <td>{{company.clossingDate | date:'mediumDate'}}</td>
                 <td>
                     <div *ngIf="company.country">
                         <a [routerLink]="['../country', company.country?.id ]" >{{company.country?.name}}</a>

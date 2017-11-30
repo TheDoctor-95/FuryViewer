@@ -22,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import static com.furyviewer.web.rest.TestUtil.createFormattingConversionService;
@@ -46,6 +48,15 @@ public class CompanyResourceIntTest {
     private static final byte[] UPDATED_IMG = TestUtil.createByteArray(2, "1");
     private static final String DEFAULT_IMG_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_IMG_CONTENT_TYPE = "image/png";
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_FUNDING_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_FUNDING_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_CLOSSING_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CLOSSING_DATE = LocalDate.now(ZoneId.systemDefault());
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -87,7 +98,10 @@ public class CompanyResourceIntTest {
         Company company = new Company()
             .name(DEFAULT_NAME)
             .img(DEFAULT_IMG)
-            .imgContentType(DEFAULT_IMG_CONTENT_TYPE);
+            .imgContentType(DEFAULT_IMG_CONTENT_TYPE)
+            .description(DEFAULT_DESCRIPTION)
+            .fundingDate(DEFAULT_FUNDING_DATE)
+            .clossingDate(DEFAULT_CLOSSING_DATE);
         return company;
     }
 
@@ -114,6 +128,9 @@ public class CompanyResourceIntTest {
         assertThat(testCompany.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCompany.getImg()).isEqualTo(DEFAULT_IMG);
         assertThat(testCompany.getImgContentType()).isEqualTo(DEFAULT_IMG_CONTENT_TYPE);
+        assertThat(testCompany.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testCompany.getFundingDate()).isEqualTo(DEFAULT_FUNDING_DATE);
+        assertThat(testCompany.getClossingDate()).isEqualTo(DEFAULT_CLOSSING_DATE);
     }
 
     @Test
@@ -148,7 +165,10 @@ public class CompanyResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(company.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].imgContentType").value(hasItem(DEFAULT_IMG_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))));
+            .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].fundingDate").value(hasItem(DEFAULT_FUNDING_DATE.toString())))
+            .andExpect(jsonPath("$.[*].clossingDate").value(hasItem(DEFAULT_CLOSSING_DATE.toString())));
     }
 
     @Test
@@ -164,7 +184,10 @@ public class CompanyResourceIntTest {
             .andExpect(jsonPath("$.id").value(company.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.imgContentType").value(DEFAULT_IMG_CONTENT_TYPE))
-            .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)));
+            .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.fundingDate").value(DEFAULT_FUNDING_DATE.toString()))
+            .andExpect(jsonPath("$.clossingDate").value(DEFAULT_CLOSSING_DATE.toString()));
     }
 
     @Test
@@ -187,7 +210,10 @@ public class CompanyResourceIntTest {
         updatedCompany
             .name(UPDATED_NAME)
             .img(UPDATED_IMG)
-            .imgContentType(UPDATED_IMG_CONTENT_TYPE);
+            .imgContentType(UPDATED_IMG_CONTENT_TYPE)
+            .description(UPDATED_DESCRIPTION)
+            .fundingDate(UPDATED_FUNDING_DATE)
+            .clossingDate(UPDATED_CLOSSING_DATE);
 
         restCompanyMockMvc.perform(put("/api/companies")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -201,6 +227,9 @@ public class CompanyResourceIntTest {
         assertThat(testCompany.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCompany.getImg()).isEqualTo(UPDATED_IMG);
         assertThat(testCompany.getImgContentType()).isEqualTo(UPDATED_IMG_CONTENT_TYPE);
+        assertThat(testCompany.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testCompany.getFundingDate()).isEqualTo(UPDATED_FUNDING_DATE);
+        assertThat(testCompany.getClossingDate()).isEqualTo(UPDATED_CLOSSING_DATE);
     }
 
     @Test

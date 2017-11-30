@@ -19,7 +19,6 @@
             "surname": "Surname",
             "birthdate": "Birthdate",
             "sex": "Sex",
-            "alive": "Alive",
             "deathdate": "Deathdate",
             "img": "Img",
             "country": "Country",
@@ -30,8 +29,10 @@
             "seriesDirector": "Series Director",
             "movieScriptwriter": "Movie Scriptwriter",
             "seriesScriptwriter": "Series Scriptwriter",
-            "movieActor": "Movie Actor",
-            "seriesActor": "Series Actor"
+            "movieMainActor": "Movie Main Actor",
+            "movieSecondaryActor": "Movie Secondary Actor",
+            "seriesMainActor": "Series Main Actor",
+            "seriesSecondaryActor": "Series Secondary Actor"
         }
     }
 }

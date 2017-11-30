@@ -22,6 +22,8 @@ export class CompanyDialogComponent implements OnInit {
     isSaving: boolean;
 
     countries: Country[];
+    fundingDateDp: any;
+    clossingDateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

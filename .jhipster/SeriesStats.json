@@ -16,7 +16,7 @@
     ],
     "fields": [
         {
-            "fieldName": "pending",
+            "fieldName": "status",
             "fieldType": "SeriesStatsEnum",
             "fieldValues": "PENDING,FOLLOWING,SEEN"
         },
@@ -25,7 +25,7 @@
             "fieldType": "ZonedDateTime"
         }
     ],
-    "changelogDate": "20171128114920",
+    "changelogDate": "20171130103713",
     "entityTableName": "series_stats",
     "dto": "no",
     "pagination": "no",

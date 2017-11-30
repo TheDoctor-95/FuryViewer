@@ -28,7 +28,7 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20171128114909",
+    "changelogDate": "20171130103702",
     "entityTableName": "review_movie",
     "dto": "no",
     "pagination": "no",

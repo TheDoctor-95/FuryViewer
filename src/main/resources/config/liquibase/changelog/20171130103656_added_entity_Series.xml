@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Series.
+    -->
+    <changeSet id="20171130103656-1" author="jhipster">
+        <createTable tableName="series">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="img" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="img_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="state" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="release_date" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="director_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="scriptwriter_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="company_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+        <createTable tableName="series_genre">
+            <column name="genres_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="series_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="series_id, genres_id" tableName="series_genre"/>
+        
+        <createTable tableName="series_actor_main">
+            <column name="actor_mains_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="series_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="series_id, actor_mains_id" tableName="series_actor_main"/>
+        
+        <createTable tableName="series_actor_secondary">
+            <column name="actor_secondaries_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="series_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="series_id, actor_secondaries_id" tableName="series_actor_secondary"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

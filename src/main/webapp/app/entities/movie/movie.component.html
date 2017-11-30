@@ -25,7 +25,9 @@
             <th><span jhiTranslate="furyViewerApp.movie.director">Director</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.scriptwriter">Scriptwriter</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.company">Company</span></th>
-            <th><span jhiTranslate="furyViewerApp.movie.actor">Actor</span></th>
+            <th><span jhiTranslate="furyViewerApp.movie.genre">Genre</span></th>
+            <th><span jhiTranslate="furyViewerApp.movie.actorMain">Actor Main</span></th>
+            <th><span jhiTranslate="furyViewerApp.movie.actorSecondary">Actor Secondary</span></th>
             <th></th>
             </tr>
             </thead>
@@ -58,8 +60,18 @@
                     </div>
                 </td>
                 <td>
-                    <span *ngFor="let actor of movie.actors; let last = last">
-                            <a class="form-control-static" [routerLink]="['../artist', actor?.id ]">{{actor.name}}</a>{{last ? '' : ', '}}
+                    <span *ngFor="let genre of movie.genres; let last = last">
+                            <a class="form-control-static" [routerLink]="['../genre', genre?.id ]">{{genre.name}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let actorMain of movie.actorMains; let last = last">
+                            <a class="form-control-static" [routerLink]="['../artist', actorMain?.id ]">{{actorMain.name}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td>
+                    <span *ngFor="let actorSecondary of movie.actorSecondaries; let last = last">
+                            <a class="form-control-static" [routerLink]="['../artist', actorSecondary?.id ]">{{actorSecondary.name}}</a>{{last ? '' : ', '}}
                         </span>
                 </td>
                 <td class="text-right">
