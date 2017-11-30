@@ -17,12 +17,13 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="furyViewerApp.artist.name">Name</span></th>
+                <th><span jhiTranslate="furyViewerApp.artist.img">Img</span></th>
+                <th><span jhiTranslate="furyViewerApp.artist.name">Name</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.surname">Surname</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.birthdate">Birthdate</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.sex">Sex</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.deathdate">Deathdate</span></th>
-            <th><span jhiTranslate="furyViewerApp.artist.img">Img</span></th>
+
             <th><span jhiTranslate="furyViewerApp.artist.country">Country</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.artistType">Artist Type</span></th>
             <th></th>
@@ -30,18 +31,20 @@
             </thead>
             <tbody>
             <tr *ngFor="let artist of artists ;trackBy: trackId">
+
                 <td><a [routerLink]="['../artist', artist.id ]">{{artist.id}}</a></td>
+                <td>
+                    <a *ngIf="artist.img" (click)="openFile(artist.imgContentType, artist.img)">
+                        <img [src]="'data:' + artist.imgContentType + ';base64,' + artist.img" style="max-height: 30px;" alt="artist image"/>
+                    </a>
+
+                </td>
                 <td>{{artist.name}}</td>
                 <td>{{artist.surname}}</td>
                 <td>{{artist.birthdate | date:'mediumDate'}}</td>
                 <td>{{artist.sex}}</td>
                 <td>{{artist.deathdate | date:'mediumDate'}}</td>
-                <td>
-                    <a *ngIf="artist.img" (click)="openFile(artist.imgContentType, artist.img)">
-                        <img [src]="'data:' + artist.imgContentType + ';base64,' + artist.img" style="max-height: 30px;" alt="artist image"/>
-                    </a>
-                    <span *ngIf="artist.img">{{artist.imgContentType}}, {{byteSize(artist.img)}}</span>
-                </td>
+
                 <td>
                     <div *ngIf="artist.country">
                         <a [routerLink]="['../country', artist.country?.id ]" >{{artist.country?.name}}</a>

@@ -28,7 +28,7 @@
             <tr *ngFor="let country of countries ;trackBy: trackId">
                 <td><a [routerLink]="['../country', country.id ]">{{country.id}}</a></td>
                 <td>{{country.name}}</td>
-                <td>{{country.urlGoogleMaps}}</td>
+                <td><textarea readonly>{{country.urlGoogleMaps}}</textarea></td>
                 <td>{{country.latitude}}</td>
                 <td>{{country.longitude}}</td>
                 <td class="text-right">
