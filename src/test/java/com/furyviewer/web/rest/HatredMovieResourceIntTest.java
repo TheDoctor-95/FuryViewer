@@ -69,7 +69,7 @@ public class HatredMovieResourceIntTest {
     private HatredMovie hatredMovie;
 
     @Before
-    public void setup() {
+   /* public void setup() {
         MockitoAnnotations.initMocks(this);
         final HatredMovieResource hatredMovieResource = new HatredMovieResource(hatredMovieRepository);
         this.restHatredMovieMockMvc = MockMvcBuilders.standaloneSetup(hatredMovieResource)
@@ -77,7 +77,7 @@ public class HatredMovieResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
-    }
+    }*/
 
     /**
      * Create an entity for this test.
