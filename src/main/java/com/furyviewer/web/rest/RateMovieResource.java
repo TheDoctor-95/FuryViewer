@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.RateMovie;
 
 import com.furyviewer.repository.RateMovieRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +34,11 @@ public class RateMovieResource {
 
     private final RateMovieRepository rateMovieRepository;
 
-    public RateMovieResource(RateMovieRepository rateMovieRepository) {
+    private final UserRepository userRepository;
+
+    public RateMovieResource(RateMovieRepository rateMovieRepository, UserRepository userRepository) {
         this.rateMovieRepository = rateMovieRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +55,17 @@ public class RateMovieResource {
         if (rateMovie.getId() != null) {
             throw new BadRequestAlertException("A new rateMovie cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<RateMovie> existingRateMovie = rateMovieRepository.findByMovieAndUserLogin(rateMovie.getMovie(), SecurityUtils.getCurrentUserLogin());
+
+        if(existingRateMovie.isPresent()){
+            throw new BadRequestAlertException("El usuario ya ha valorado esta Movie", ENTITY_NAME, "rateExists");
+        }
+
+
+        rateMovie.setDate(ZonedDateTime.now());
+        rateMovie.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         RateMovie result = rateMovieRepository.save(rateMovie);
         return ResponseEntity.created(new URI("/api/rate-movies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
