@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.RateSeries;
 
 import com.furyviewer.repository.RateSeriesRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +34,11 @@ public class RateSeriesResource {
 
     private final RateSeriesRepository rateSeriesRepository;
 
-    public RateSeriesResource(RateSeriesRepository rateSeriesRepository) {
+    private final UserRepository userRepository;
+
+    public RateSeriesResource(RateSeriesRepository rateSeriesRepository, UserRepository userRepository) {
         this.rateSeriesRepository = rateSeriesRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +55,16 @@ public class RateSeriesResource {
         if (rateSeries.getId() != null) {
             throw new BadRequestAlertException("A new rateSeries cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<RateSeries>  existingRateSeries = rateSeriesRepository.findBySeriesAndUserLogin(rateSeries.getSeries(), SecurityUtils.getCurrentUserLogin());
+
+        if (existingRateSeries.isPresent()){
+            throw new BadRequestAlertException("Serie ya rateada", ENTITY_NAME, "hatredExist");
+        }
+
+        rateSeries.setDate(ZonedDateTime.now());
+        rateSeries.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         RateSeries result = rateSeriesRepository.save(rateSeries);
         return ResponseEntity.created(new URI("/api/rate-series/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

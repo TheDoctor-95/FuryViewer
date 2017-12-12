@@ -1,10 +1,12 @@
 package com.furyviewer.repository;
 
 import com.furyviewer.domain.RateSeries;
+import com.furyviewer.domain.Series;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring Data JPA repository for the RateSeries entity.
@@ -16,4 +18,5 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     @Query("select rate_series from RateSeries rate_series where rate_series.user.login = ?#{principal.username}")
     List<RateSeries> findByUserIsCurrentUser();
 
+    Optional<RateSeries> findBySeriesAndUserLogin(Series series, String login);
 }
