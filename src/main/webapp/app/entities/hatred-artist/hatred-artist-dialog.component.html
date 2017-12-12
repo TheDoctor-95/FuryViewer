@@ -17,26 +17,12 @@
             <input type="checkbox" class="form-control" name="hated" id="field_hated"
                 [(ngModel)]="hatredArtist.hated"  />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.hatredArtist.date" for="field_date">Date</label>
-            <div class="d-flex">
-                <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="hatredArtist.date"
-                  />
-            </div>
-        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.hatredArtist.artist" for="field_artist">Artist</label>
             <select class="form-control" id="field_artist" name="artist" [(ngModel)]="hatredArtist.artist" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="artistOption.id === hatredArtist.artist?.id ? hatredArtist.artist : artistOption" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.hatredArtist.user" for="field_user">User</label>
-            <select class="form-control" id="field_user" name="user" [(ngModel)]="hatredArtist.user" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === hatredArtist.user?.id ? hatredArtist.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
             </select>
         </div>
     </div>
