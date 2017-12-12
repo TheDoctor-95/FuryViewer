@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.HatredArtist;
 
 import com.furyviewer.repository.HatredArtistRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +34,11 @@ public class HatredArtistResource {
 
     private final HatredArtistRepository hatredArtistRepository;
 
-    public HatredArtistResource(HatredArtistRepository hatredArtistRepository) {
+    private final UserRepository userRepository;
+
+    public HatredArtistResource(HatredArtistRepository hatredArtistRepository, UserRepository userRepository) {
         this.hatredArtistRepository = hatredArtistRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +55,16 @@ public class HatredArtistResource {
         if (hatredArtist.getId() != null) {
             throw new BadRequestAlertException("A new hatredArtist cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<HatredArtist> existingHatredArtist = hatredArtistRepository.findByArtistAndUserLogin(hatredArtist.getArtist(), SecurityUtils.getCurrentUserLogin());
+
+        if(existingHatredArtist.isPresent()){
+            throw new BadRequestAlertException("Artista ya añadido en Hatred", ENTITY_NAME, "hatredExist");
+        }
+
+        hatredArtist.setDate(ZonedDateTime.now());
+        hatredArtist.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         HatredArtist result = hatredArtistRepository.save(hatredArtist);
         return ResponseEntity.created(new URI("/api/hatred-artists/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
