@@ -69,15 +69,15 @@ public class HatredSeriesResourceIntTest {
     private HatredSeries hatredSeries;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final HatredSeriesResource hatredSeriesResource = new HatredSeriesResource(hatredSeriesRepository);
-        this.restHatredSeriesMockMvc = MockMvcBuilders.standaloneSetup(hatredSeriesResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final HatredSeriesResource hatredSeriesResource = new HatredSeriesResource(hatredSeriesRepository);
+//        this.restHatredSeriesMockMvc = MockMvcBuilders.standaloneSetup(hatredSeriesResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.
