@@ -69,15 +69,15 @@ public class RateMovieResourceIntTest {
     private RateMovie rateMovie;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final RateMovieResource rateMovieResource = new RateMovieResource(rateMovieRepository);
-        this.restRateMovieMockMvc = MockMvcBuilders.standaloneSetup(rateMovieResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final RateMovieResource rateMovieResource = new RateMovieResource(rateMovieRepository, userRepository);
+//        this.restRateMovieMockMvc = MockMvcBuilders.standaloneSetup(rateMovieResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.
