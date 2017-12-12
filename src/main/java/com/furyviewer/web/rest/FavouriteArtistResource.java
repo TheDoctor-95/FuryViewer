@@ -1,9 +1,12 @@
 package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.FavouriteArtist;
 
 import com.furyviewer.repository.FavouriteArtistRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +35,11 @@ public class FavouriteArtistResource {
 
     private final FavouriteArtistRepository favouriteArtistRepository;
 
-    public FavouriteArtistResource(FavouriteArtistRepository favouriteArtistRepository) {
+    private final UserRepository userRepository;
+
+    public FavouriteArtistResource(FavouriteArtistRepository favouriteArtistRepository, UserRepository userRepository) {
         this.favouriteArtistRepository = favouriteArtistRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +56,17 @@ public class FavouriteArtistResource {
         if (favouriteArtist.getId() != null) {
             throw new BadRequestAlertException("A new favouriteArtist cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<FavouriteArtist> existingFavoriteArtist = favouriteArtistRepository.findByArtistAndUserLogin(favouriteArtist.getArtist(), SecurityUtils.getCurrentUserLogin());
+
+        if(existingFavoriteArtist.isPresent()){
+            throw new BadRequestAlertException("ARTISTA JA AÑADIODP EM FAVPROTOS", ENTITY_NAME, "favoriteExists");
+        }
+
+        favouriteArtist.setDate(ZonedDateTime.now());
+
+        favouriteArtist.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         FavouriteArtist result = favouriteArtistRepository.save(favouriteArtist);
         return ResponseEntity.created(new URI("/api/favourite-artists/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

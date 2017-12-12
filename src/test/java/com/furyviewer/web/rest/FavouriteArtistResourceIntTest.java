@@ -69,15 +69,15 @@ public class FavouriteArtistResourceIntTest {
     private FavouriteArtist favouriteArtist;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final FavouriteArtistResource favouriteArtistResource = new FavouriteArtistResource(favouriteArtistRepository);
-        this.restFavouriteArtistMockMvc = MockMvcBuilders.standaloneSetup(favouriteArtistResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final FavouriteArtistResource favouriteArtistResource = new FavouriteArtistResource(favouriteArtistRepository);
+//        this.restFavouriteArtistMockMvc = MockMvcBuilders.standaloneSetup(favouriteArtistResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.
