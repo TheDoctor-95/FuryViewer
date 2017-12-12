@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.FavouriteSeries;
 
 import com.furyviewer.repository.FavouriteSeriesRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +34,11 @@ public class FavouriteSeriesResource {
 
     private final FavouriteSeriesRepository favouriteSeriesRepository;
 
-    public FavouriteSeriesResource(FavouriteSeriesRepository favouriteSeriesRepository) {
+    private final UserRepository userRepository;
+
+    public FavouriteSeriesResource(FavouriteSeriesRepository favouriteSeriesRepository, UserRepository userRepository) {
         this.favouriteSeriesRepository = favouriteSeriesRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +55,16 @@ public class FavouriteSeriesResource {
         if (favouriteSeries.getId() != null) {
             throw new BadRequestAlertException("A new favouriteSeries cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<FavouriteSeries> existingFavouriteSeries = favouriteSeriesRepository.findBySeriesAndUserLogin(favouriteSeries.getSeries(), SecurityUtils.getCurrentUserLogin());
+
+        if(existingFavouriteSeries.isPresent()){
+            throw new BadRequestAlertException("El serie ya esta añadida a favoritos", ENTITY_NAME, "favoriteExist");
+        }
+
+        favouriteSeries.setDate(ZonedDateTime.now());
+        favouriteSeries.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         FavouriteSeries result = favouriteSeriesRepository.save(favouriteSeries);
         return ResponseEntity.created(new URI("/api/favourite-series/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
