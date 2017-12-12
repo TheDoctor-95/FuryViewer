@@ -69,15 +69,15 @@ public class FavouriteSeriesResourceIntTest {
     private FavouriteSeries favouriteSeries;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final FavouriteSeriesResource favouriteSeriesResource = new FavouriteSeriesResource(favouriteSeriesRepository);
-        this.restFavouriteSeriesMockMvc = MockMvcBuilders.standaloneSetup(favouriteSeriesResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final FavouriteSeriesResource favouriteSeriesResource = new FavouriteSeriesResource(favouriteSeriesRepository, userRepository);
+//        this.restFavouriteSeriesMockMvc = MockMvcBuilders.standaloneSetup(favouriteSeriesResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.
