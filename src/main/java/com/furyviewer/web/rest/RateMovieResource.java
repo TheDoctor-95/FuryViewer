@@ -58,7 +58,7 @@ public class RateMovieResource {
 
         Optional<RateMovie> existingRateMovie = rateMovieRepository.findByMovieAndUserLogin(rateMovie.getMovie(), SecurityUtils.getCurrentUserLogin());
 
-        if(existingRateMovie.isPresent()){
+        if (existingRateMovie.isPresent()) {
             throw new BadRequestAlertException("El usuario ya ha valorado esta Movie", ENTITY_NAME, "rateExists");
         }
 
@@ -104,7 +104,7 @@ public class RateMovieResource {
     public List<RateMovie> getAllRateMovies() {
         log.debug("REST request to get all RateMovies");
         return rateMovieRepository.findAll();
-        }
+    }
 
     /**
      * GET  /rate-movies/:id : get the "id" rateMovie.
@@ -118,6 +118,14 @@ public class RateMovieResource {
         log.debug("REST request to get RateMovie : {}", id);
         RateMovie rateMovie = rateMovieRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateMovie));
+    }
+
+    @GetMapping("/num-rate-movies/{id}")
+    @Timed
+    public Double getRateMovieMedia(@PathVariable Long id) {
+        log.debug("REST request to get RateMovie : {}", id);
+        return rateMovieRepository.RateMovieMedia(id);
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateMovie));
     }
 
     /**

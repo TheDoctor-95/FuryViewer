@@ -2,6 +2,7 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.RateMovie;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -20,5 +21,7 @@ public interface RateMovieRepository extends JpaRepository<RateMovie, Long> {
 
     Optional<RateMovie> findByMovieAndUserLogin(Movie movie, String login);
 
+    @Query("select avg(rateMovie.rate) from RateMovie rateMovie where rateMovie.id=:MovieId")
+    Double RateMovieMedia(@Param("MovieId")Long id);
 
 }

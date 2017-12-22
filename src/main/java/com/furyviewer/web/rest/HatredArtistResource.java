@@ -118,6 +118,13 @@ public class HatredArtistResource {
         HatredArtist hatredArtist = hatredArtistRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredArtist));
     }
+    @GetMapping("/num-hatred-artists/{id}")
+    @Timed
+    public Long getNumHatredArtist(@PathVariable Long id) {
+        log.debug("REST request to get HatredArtist : {}", id);
+        return hatredArtistRepository.NumHatredArtist(id);
+       // return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredArtist));
+    }
 
     /**
      * DELETE  /hatred-artists/:id : delete the "id" hatredArtist.

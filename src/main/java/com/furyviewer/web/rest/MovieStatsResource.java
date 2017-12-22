@@ -103,6 +103,22 @@ public class MovieStatsResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieStats));
     }
 
+    @GetMapping("/movie-stats-pending/{id}")
+    @Timed
+    public Long getPendingMovieStats(@PathVariable Long id) {
+        log.debug("REST request to get MovieStats : {}", id);
+       return movieStatsRepository.PendingMovieStats(id);
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieStats));
+    }
+
+    @GetMapping("/movie-stats-seen/{id}")
+    @Timed
+    public Long getSeenMovieStats(@PathVariable Long id) {
+        log.debug("REST request to get MovieStats : {}", id);
+        return movieStatsRepository.SeenMovieStats(id);
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieStats));
+    }
+
     /**
      * DELETE  /movie-stats/:id : delete the "id" movieStats.
      *

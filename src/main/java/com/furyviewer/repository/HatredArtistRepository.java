@@ -2,9 +2,11 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.HatredArtist;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -19,5 +21,10 @@ public interface HatredArtistRepository extends JpaRepository<HatredArtist, Long
     List<HatredArtist> findByUserIsCurrentUser();
 
     Optional<HatredArtist> findByArtistAndUserLogin(Artist artist, String login);
+
+    @Query("select count(hatredArtist) from HatredArtist hatredArtist where hatredArtist.artist.id =:ArtistId")
+    Long NumHatredArtist(@Param("ArtistId") Long id);
+
+
 
 }

@@ -119,6 +119,16 @@ public class RateSeriesResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateSeries));
     }
 
+    @GetMapping("/rate-series-media/{id}")
+    @Timed
+    public Double getRateSeriesMedia(@PathVariable Long id) {
+        log.debug("REST request to get RateSeries : {}", id);
+        return rateSeriesRepository.RateSeriesMedia(id);
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateSeries));
+    }
+
+
+
     /**
      * DELETE  /rate-series/:id : delete the "id" rateSeries.
      *

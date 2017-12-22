@@ -2,6 +2,7 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.RateSeries;
 import com.furyviewer.domain.Series;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -19,4 +20,8 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     List<RateSeries> findByUserIsCurrentUser();
 
     Optional<RateSeries> findBySeriesAndUserLogin(Series series, String login);
+
+    @Query("select avg(rateSeries) from RateSeries rateSeries where rateSeries.id=:SeriesId")
+    Double RateSeriesMedia(@Param("SeriesId")Long id);
+
 }

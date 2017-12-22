@@ -119,6 +119,13 @@ public class HatredSeriesResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredSeries));
     }
 
+    @GetMapping("/num-hatred-series/{id}")
+    @Timed
+    public Long getNumHatredSeries(@PathVariable Long id) {
+        log.debug("REST request to get HatredSeries : {}", id);
+        return hatredSeriesRepository.NumHatredSeries(id);
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredSeries));
+    }
     /**
      * DELETE  /hatred-series/:id : delete the "id" hatredSeries.
      *

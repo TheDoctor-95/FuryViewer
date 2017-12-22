@@ -121,6 +121,14 @@ public class FavouriteArtistResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(favouriteArtist));
     }
 
+    @GetMapping("/num-favourite-artists/{id}")
+    @Timed
+    public Long getNumFavArtist(@PathVariable Long id) {
+        log.debug("REST request to get FavouriteArtist : {}", id);
+        return favouriteArtistRepository.NumFavArtist(id);
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(favouriteArtist));
+    }
+
     /**
      * DELETE  /favourite-artists/:id : delete the "id" favouriteArtist.
      *

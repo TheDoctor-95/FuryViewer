@@ -87,7 +87,7 @@ public class SeriesStatsResource {
     public List<SeriesStats> getAllSeriesStats() {
         log.debug("REST request to get all SeriesStats");
         return seriesStatsRepository.findAll();
-        }
+    }
 
     /**
      * GET  /series-stats/:id : get the "id" seriesStats.
@@ -101,6 +101,30 @@ public class SeriesStatsResource {
         log.debug("REST request to get SeriesStats : {}", id);
         SeriesStats seriesStats = seriesStatsRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seriesStats));
+    }
+
+    @GetMapping("/series-stats-following/{id}")
+    @Timed
+    public Long getFollowingSeriesStats(@PathVariable Long id) {
+        log.debug("REST request to get SeriesStats : {}", id);
+        return seriesStatsRepository.FollowingSeriesStats(id);
+        //  return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seriesStats));
+    }
+
+    @GetMapping("/series-stats-pending/{id}")
+    @Timed
+    public Long getPendingSeriesStats(@PathVariable Long id) {
+        log.debug("REST request to get SeriesStats : {}", id);
+        return seriesStatsRepository.PendingSeriesStats(id);
+        // return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seriesStats));
+    }
+
+    @GetMapping("/series-stats-seen/{id}")
+    @Timed
+    public Long getSeenSeriesStats(@PathVariable Long id) {
+        log.debug("REST request to get SeriesStats : {}", id);
+        return seriesStatsRepository.SeenSeriesStats(id);
+// return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seriesStats));
     }
 
     /**

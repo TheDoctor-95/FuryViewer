@@ -2,6 +2,7 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.FavouriteSeries;
 import com.furyviewer.domain.Series;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -20,5 +21,10 @@ public interface FavouriteSeriesRepository extends JpaRepository<FavouriteSeries
 
 
     Optional<FavouriteSeries> findBySeriesAndUserLogin(Series series, String login);
+
+    @Query("select count(favouriteSeries) from FavouriteSeries favouriteSeries where favouriteSeries.series.id=:SeriesId")
+    Long NumFavsSerie(@Param("SeriesId") Long id);
+
+
 
 }

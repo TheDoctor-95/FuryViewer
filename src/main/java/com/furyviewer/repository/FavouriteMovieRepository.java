@@ -3,6 +3,7 @@ package com.furyviewer.repository;
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.FavouriteMovie;
 import com.furyviewer.domain.Movie;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -20,5 +21,12 @@ public interface FavouriteMovieRepository extends JpaRepository<FavouriteMovie, 
     List<FavouriteMovie> findByUserIsCurrentUser();
 
     Optional<FavouriteMovie> findByMovieAndUserLogin(Movie movie, String login);
+
+    @Query("select count(favourite_movie) from FavouriteMovie favourite_movie where favourite_movie.movie.id=:MovieId")
+    Long NumFavsMovie(@Param("MovieId") Long id);
+
+
+
+
 
 }

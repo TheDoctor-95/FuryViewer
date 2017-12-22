@@ -33,7 +33,7 @@ public class FavouriteMovieResource {
 
     private static final String ENTITY_NAME = "favouriteMovie";
 
-    private final FavouriteMovieRepository favouriteMovieRepository;
+    private FavouriteMovieRepository favouriteMovieRepository = null;
 
     private final UserRepository userRepository;
 
@@ -118,6 +118,14 @@ public class FavouriteMovieResource {
         log.debug("REST request to get FavouriteMovie : {}", id);
         FavouriteMovie favouriteMovie = favouriteMovieRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(favouriteMovie));
+    }
+
+    @GetMapping("/num-favourite-movies/{id}")
+    @Timed
+    public Long getNumFavsMovie(@PathVariable Long id) {
+        log.debug("REST request to get FavouriteMovie : {}", id);
+        return favouriteMovieRepository.NumFavsMovie(id);
+      //  return ResponseUtil.wrapOrNotFound(Optional.ofNullable(favouriteMovie));
     }
 
     /**

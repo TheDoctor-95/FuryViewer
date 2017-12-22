@@ -119,6 +119,15 @@ public class FavouriteSeriesResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(favouriteSeries));
     }
 
+
+    @GetMapping("/num-favourite-series/{id}")
+    @Timed
+    public Long getNumFavsSerie(@PathVariable Long id) {
+        log.debug("REST request to get FavouriteSeries : {}", id);
+        return favouriteSeriesRepository.NumFavsSerie(id);
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(favouriteSeries));
+    }
+
     /**
      * DELETE  /favourite-series/:id : delete the "id" favouriteSeries.
      *

@@ -58,7 +58,7 @@ public class HatredMovieResource {
 
         Optional<HatredMovie> existingHatredMovie = hatredMovieRepository.findByMovieAndUserLogin(hatredMovie.getMovie(), SecurityUtils.getCurrentUserLogin());
 
-        if(existingHatredMovie.isPresent()){
+        if (existingHatredMovie.isPresent()) {
             throw new BadRequestAlertException("Movie ya añadida en Hatred", ENTITY_NAME, "hatredExist");
         }
 
@@ -103,7 +103,7 @@ public class HatredMovieResource {
     public List<HatredMovie> getAllHatredMovies() {
         log.debug("REST request to get all HatredMovies");
         return hatredMovieRepository.findAll();
-        }
+    }
 
     /**
      * GET  /hatred-movies/:id : get the "id" hatredMovie.
@@ -117,6 +117,14 @@ public class HatredMovieResource {
         log.debug("REST request to get HatredMovie : {}", id);
         HatredMovie hatredMovie = hatredMovieRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredMovie));
+    }
+
+    @GetMapping("/num-hatred-movies/{id}")
+    @Timed
+    public Long getHatredMovieT(@PathVariable Long id) {
+        log.debug("REST request to get HatredMovie : {}", id);
+        return hatredMovieRepository.HatredMovieT(id);
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredMovie));
     }
 
     /**
