@@ -1,6 +1,7 @@
 package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.RateMovie;
 
 import com.furyviewer.repository.RateMovieRepository;
@@ -17,9 +18,16 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.averagingInt;
 
 /**
  * REST controller for managing RateMovie.
@@ -34,11 +42,8 @@ public class RateMovieResource {
 
     private final RateMovieRepository rateMovieRepository;
 
-    private final UserRepository userRepository;
-
-    public RateMovieResource(RateMovieRepository rateMovieRepository, UserRepository userRepository) {
+    public RateMovieResource(RateMovieRepository rateMovieRepository) {
         this.rateMovieRepository = rateMovieRepository;
-        this.userRepository = userRepository;
     }
 
     /**
@@ -55,17 +60,6 @@ public class RateMovieResource {
         if (rateMovie.getId() != null) {
             throw new BadRequestAlertException("A new rateMovie cannot already have an ID", ENTITY_NAME, "idexists");
         }
-
-        Optional<RateMovie> existingRateMovie = rateMovieRepository.findByMovieAndUserLogin(rateMovie.getMovie(), SecurityUtils.getCurrentUserLogin());
-
-        if(existingRateMovie.isPresent()){
-            throw new BadRequestAlertException("El usuario ya ha valorado esta Movie", ENTITY_NAME, "rateExists");
-        }
-
-
-        rateMovie.setDate(ZonedDateTime.now());
-        rateMovie.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
-
         RateMovie result = rateMovieRepository.save(rateMovie);
         return ResponseEntity.created(new URI("/api/rate-movies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
