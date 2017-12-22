@@ -42,8 +42,11 @@ public class RateMovieResource {
 
     private final RateMovieRepository rateMovieRepository;
 
-    public RateMovieResource(RateMovieRepository rateMovieRepository) {
+    private final UserRepository userRepository;
+
+    public RateMovieResource(RateMovieRepository rateMovieRepository, UserRepository userRepository) {
         this.rateMovieRepository = rateMovieRepository;
+        this.userRepository=userRepository;
     }
 
     /**
