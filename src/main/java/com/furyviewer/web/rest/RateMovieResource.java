@@ -1,6 +1,7 @@
 package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.RateMovie;
 
 import com.furyviewer.repository.RateMovieRepository;
@@ -15,8 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.averagingInt;
 
 /**
  * REST controller for managing RateMovie.
@@ -116,4 +124,14 @@ public class RateMovieResource {
         rateMovieRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
+    @GetMapping("/get-avg-movie/{movieName}")
+    public Map<LocalDate, Double> getAvgRateMovie(@PathVariable String movieName) {
+        return rateMovieRepository.getRateMovie(movieName)
+            .parallelStream()
+            .collect(Collectors.groupingBy(rm -> rm.getDate().toLocalDate(), averagingInt(RateMovie::getRate)));
+
+    }
+
 }

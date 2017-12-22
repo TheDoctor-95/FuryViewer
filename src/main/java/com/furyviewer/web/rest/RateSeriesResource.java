@@ -1,12 +1,15 @@
 package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.furyviewer.domain.RateMovie;
 import com.furyviewer.domain.RateSeries;
 
+import com.furyviewer.repository.RateMovieRepository;
 import com.furyviewer.repository.RateSeriesRepository;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +18,12 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.averagingInt;
 
 /**
  * REST controller for managing RateSeries.
@@ -115,5 +122,13 @@ public class RateSeriesResource {
         log.debug("REST request to delete RateSeries : {}", id);
         rateSeriesRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/get-avg-series/{seriesName}")
+    public Map<LocalDate, Double> getAvgRateSeries(@PathVariable String seriesName) {
+        return rateSeriesRepository.getRateSeries(seriesName)
+            .parallelStream()
+            .collect(Collectors.groupingBy(rs -> rs.getDate().toLocalDate(), averagingInt(RateSeries::getRate)));
+
     }
 }

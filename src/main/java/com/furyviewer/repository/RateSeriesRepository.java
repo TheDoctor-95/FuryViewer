@@ -1,9 +1,15 @@
 package com.furyviewer.repository;
 
+import com.furyviewer.domain.RateMovie;
 import com.furyviewer.domain.RateSeries;
+import org.hibernate.NonUniqueResultException;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,4 +22,6 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     @Query("select rate_series from RateSeries rate_series where rate_series.user.login = ?#{principal.username}")
     List<RateSeries> findByUserIsCurrentUser();
 
+    @Query("select rateSeries from RateSeries rateSeries where rateSeries.series.name=:name")
+    List<RateSeries> getRateSeries(@Param("name")String name);
 }
