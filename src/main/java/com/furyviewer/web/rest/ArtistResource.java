@@ -104,6 +104,21 @@ public class ArtistResource {
     }
 
     /**
+     *
+     * Find artists by name (commit obligado.... Pau e Ibra son malos....)
+     *
+     * @param name
+     * @return
+     */
+    @GetMapping("/artistsByName/{name}")
+    @Timed
+    public ResponseEntity<List<Artist>> findArtistByName(@PathVariable String name) {
+        log.debug("REST request to get Artists by name", name);
+        List<Artist> artists =artistRepository.findArtistByName(name);
+           return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
+    }
+
+    /**
      * DELETE  /artists/:id : delete the "id" artist.
      *
      * @param id the id of the artist to delete

@@ -4,24 +4,17 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.MovieRepository;
-import com.furyviewer.service.MovieDatabase.MovieDTOService;
-import com.furyviewer.service.dto.MovieDatabase.MovieDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +30,6 @@ public class MovieResource {
     private static final String ENTITY_NAME = "movie";
 
     private final MovieRepository movieRepository;
-
-    @Inject
-    private MovieDTOService movieDTOService;
 
     public MovieResource(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
@@ -114,6 +104,21 @@ public class MovieResource {
     }
 
     /**
+     *
+     * Find movies by name (commit obligado.... Pau e Ibra son malos....)
+     *
+     * @param name
+     * @return
+     */
+    @GetMapping("/moviesByName/{name}")
+    @Timed
+    public ResponseEntity<List<Movie>> findMovieByName(@PathVariable String name) {
+        log.debug("REST request to get Movies by name", name);
+        List<Movie> movie =movieRepository.findMovieByName(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
+    }
+
+    /**
      * DELETE  /movies/:id : delete the "id" movie.
      *
      * @param id the id of the movie to delete
@@ -126,24 +131,4 @@ public class MovieResource {
         movieRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-
-    @GetMapping("/movie-api/test")
-    @Timed
-    public MovieDTO getTestInicial() {
-        /*
-            El resplandor
-            Titanic
-            Como Dios
-            La Jungla de cristal
-            Matchpoints
-            Ali
-            Club de la lucha
-            avatar
-            salvar soldado ryan
-            grease
-         */
-
-        return MovieDTOService.getMovie(694);
-    }
-
 }

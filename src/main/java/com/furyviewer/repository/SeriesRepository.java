@@ -19,4 +19,6 @@ public interface SeriesRepository extends JpaRepository<Series, Long> {
     @Query("select series from Series series left join fetch series.genres left join fetch series.actorMains left join fetch series.actorSecondaries where series.id =:id")
     Series findOneWithEagerRelationships(@Param("id") Long id);
 
+    List<Series>findSeriesByName(String name);
+
 }

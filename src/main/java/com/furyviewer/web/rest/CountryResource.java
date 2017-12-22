@@ -104,6 +104,21 @@ public class CountryResource {
     }
 
     /**
+     *
+     * Find countries by name (commit obligado.... Pau e Ibra son malos....)
+     *
+     * @param name
+     * @return
+     */
+    @GetMapping("/countriesByName/{name}")
+    @Timed
+    public ResponseEntity<List<Country>> findCountryByName(@PathVariable String name) {
+        log.debug("REST request to get Companies by name", name);
+        List<Country> country =countryRepository.findCountryByName(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(country));
+    }
+
+    /**
      * DELETE  /countries/:id : delete the "id" country.
      *
      * @param id the id of the country to delete

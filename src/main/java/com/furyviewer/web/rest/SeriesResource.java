@@ -104,6 +104,21 @@ public class SeriesResource {
     }
 
     /**
+     *
+     * Find series by name (commit obligado.... Pau e Ibra son malos....)
+     *
+     * @param name
+     * @return
+     */
+    @GetMapping("/seriesByName/{name}")
+    @Timed
+    public ResponseEntity<List<Series>> findSeriesByName(@PathVariable String name) {
+        log.debug("REST request to get Series by name", name);
+        List<Series> series =seriesRepository.findSeriesByName(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(series));
+    }
+
+    /**
      * DELETE  /series/:id : delete the "id" series.
      *
      * @param id the id of the series to delete

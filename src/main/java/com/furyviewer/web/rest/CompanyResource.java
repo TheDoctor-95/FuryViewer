@@ -103,6 +103,23 @@ public class CompanyResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(company));
     }
 
+
+    /**
+     *
+     * Find companies by name (commit obligado.... Pau e Ibra son malos....)
+     *
+     * @param name
+     * @return
+     */
+    @GetMapping("/companiesByName/{name}")
+    @Timed
+    public ResponseEntity<List<Company>> findCompanyByName(@PathVariable String name) {
+        log.debug("REST request to get Companies by name", name);
+        List<Company> company =companyRepository.findCompanyByName(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(company));
+    }
+
+
     /**
      * DELETE  /companies/:id : delete the "id" company.
      *

@@ -101,12 +101,16 @@
         {
             "fieldName": "duration",
             "fieldType": "Double"
+        },
+        {
+            "fieldName": "imdbIdExternalApi",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171130103659",
-    "entityTableName": "movie",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "movie",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }
