@@ -69,7 +69,7 @@ public class HatredArtistResourceIntTest {
     private HatredArtist hatredArtist;
 
     @Before
-    public void setup() {
+   /* public void setup() {
         MockitoAnnotations.initMocks(this);
         final HatredArtistResource hatredArtistResource = new HatredArtistResource(hatredArtistRepository);
         this.restHatredArtistMockMvc = MockMvcBuilders.standaloneSetup(hatredArtistResource)
@@ -77,7 +77,7 @@ public class HatredArtistResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
-    }
+    }*/
 
     /**
      * Create an entity for this test.

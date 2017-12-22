@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.HatredMovie;
 
 import com.furyviewer.repository.HatredMovieRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +34,11 @@ public class HatredMovieResource {
 
     private final HatredMovieRepository hatredMovieRepository;
 
-    public HatredMovieResource(HatredMovieRepository hatredMovieRepository) {
+    private final UserRepository userRepository;
+
+    public HatredMovieResource(HatredMovieRepository hatredMovieRepository, UserRepository userRepository) {
         this.hatredMovieRepository = hatredMovieRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +55,16 @@ public class HatredMovieResource {
         if (hatredMovie.getId() != null) {
             throw new BadRequestAlertException("A new hatredMovie cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<HatredMovie> existingHatredMovie = hatredMovieRepository.findByMovieAndUserLogin(hatredMovie.getMovie(), SecurityUtils.getCurrentUserLogin());
+
+        if(existingHatredMovie.isPresent()){
+            throw new BadRequestAlertException("Movie ya añadida en Hatred", ENTITY_NAME, "hatredExist");
+        }
+
+        hatredMovie.setDate(ZonedDateTime.now());
+        hatredMovie.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         HatredMovie result = hatredMovieRepository.save(hatredMovie);
         return ResponseEntity.created(new URI("/api/hatred-movies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

@@ -14,15 +14,7 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.rateMovie.rate" for="field_rate">Rate</label>
-            <input type="number" class="form-control" name="rate" id="field_rate"
-                [(ngModel)]="rateMovie.rate"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.rateMovie.date" for="field_date">Date</label>
-            <div class="d-flex">
-                <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="rateMovie.date"
-                  />
-            </div>
+            <ngb-rating [(rate)]="rateMovie.rate"></ngb-rating>
         </div>
 
         <div class="form-group">
@@ -32,13 +24,7 @@
                 <option [ngValue]="movieOption.id === rateMovie.movie?.id ? rateMovie.movie : movieOption" *ngFor="let movieOption of movies; trackBy: trackMovieById">{{movieOption.name}}</option>
             </select>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.rateMovie.user" for="field_user">User</label>
-            <select class="form-control" id="field_user" name="user" [(ngModel)]="rateMovie.user" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === rateMovie.user?.id ? rateMovie.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-            </select>
-        </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

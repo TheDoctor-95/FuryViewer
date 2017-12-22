@@ -5,6 +5,8 @@ import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.RateMovie;
 
 import com.furyviewer.repository.RateMovieRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -19,6 +21,7 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -124,14 +127,4 @@ public class RateMovieResource {
         rateMovieRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
-
-
-    @GetMapping("/get-avg-movie/{movieName}")
-    public Map<LocalDate, Double> getAvgRateMovie(@PathVariable String movieName) {
-        return rateMovieRepository.getRateMovie(movieName)
-            .parallelStream()
-            .collect(Collectors.groupingBy(rm -> rm.getDate().toLocalDate(), averagingInt(RateMovie::getRate)));
-
-    }
-
 }

@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.FavouriteMovie;
 
 import com.furyviewer.repository.FavouriteMovieRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -12,9 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +35,11 @@ public class FavouriteMovieResource {
 
     private final FavouriteMovieRepository favouriteMovieRepository;
 
-    public FavouriteMovieResource(FavouriteMovieRepository favouriteMovieRepository) {
+    private final UserRepository userRepository;
+
+    public FavouriteMovieResource(FavouriteMovieRepository favouriteMovieRepository, UserRepository userRepository) {
         this.favouriteMovieRepository = favouriteMovieRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +56,16 @@ public class FavouriteMovieResource {
         if (favouriteMovie.getId() != null) {
             throw new BadRequestAlertException("A new favouriteMovie cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<FavouriteMovie> favoriteMovieExisting = favouriteMovieRepository.findByMovieAndUserLogin(favouriteMovie.getMovie(), SecurityUtils.getCurrentUserLogin());
+
+        if(favoriteMovieExisting.isPresent()){
+            throw new BadRequestAlertException("Movie ja añadida a favoritas", ENTITY_NAME, "favoriteExists");
+        }
+
+        favouriteMovie.setDate(ZonedDateTime.now());
+        favouriteMovie.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         FavouriteMovie result = favouriteMovieRepository.save(favouriteMovie);
         return ResponseEntity.created(new URI("/api/favourite-movies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

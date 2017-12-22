@@ -4,6 +4,7 @@ import com.furyviewer.domain.RateMovie;
 import com.furyviewer.domain.RateSeries;
 import org.hibernate.NonUniqueResultException;
 import org.springframework.data.repository.query.Param;
+import com.furyviewer.domain.Series;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.repository.*;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring Data JPA repository for the RateSeries entity.
@@ -24,4 +26,5 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
 
     @Query("select rateSeries from RateSeries rateSeries where rateSeries.series.name=:name")
     List<RateSeries> getRateSeries(@Param("name")String name);
+    Optional<RateSeries> findBySeriesAndUserLogin(Series series, String login);
 }

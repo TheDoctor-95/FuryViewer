@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.*;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring Data JPA repository for the RateMovie entity.
@@ -23,5 +24,8 @@ public interface RateMovieRepository extends JpaRepository<RateMovie, Long> {
 
     @Query("select rateMovie from RateMovie rateMovie where rateMovie.movie.name=:name")
     List<RateMovie> getRateMovie(@Param("name")String name);
+
+    Optional<RateMovie> findByMovieAndUserLogin(Movie movie, String login);
+
 
 }

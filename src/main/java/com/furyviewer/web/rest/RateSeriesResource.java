@@ -6,6 +6,8 @@ import com.furyviewer.domain.RateSeries;
 
 import com.furyviewer.repository.RateMovieRepository;
 import com.furyviewer.repository.RateSeriesRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -24,6 +26,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.averagingInt;
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing RateSeries.
@@ -122,13 +127,5 @@ public class RateSeriesResource {
         log.debug("REST request to delete RateSeries : {}", id);
         rateSeriesRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
-
-    @GetMapping("/get-avg-series/{seriesName}")
-    public Map<LocalDate, Double> getAvgRateSeries(@PathVariable String seriesName) {
-        return rateSeriesRepository.getRateSeries(seriesName)
-            .parallelStream()
-            .collect(Collectors.groupingBy(rs -> rs.getDate().toLocalDate(), averagingInt(RateSeries::getRate)));
-
     }
 }

@@ -69,15 +69,15 @@ public class FavouriteMovieResourceIntTest {
     private FavouriteMovie favouriteMovie;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final FavouriteMovieResource favouriteMovieResource = new FavouriteMovieResource(favouriteMovieRepository);
-        this.restFavouriteMovieMockMvc = MockMvcBuilders.standaloneSetup(favouriteMovieResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final FavouriteMovieResource favouriteMovieResource = new FavouriteMovieResource(favouriteMovieRepository);
+//        this.restFavouriteMovieMockMvc = MockMvcBuilders.standaloneSetup(favouriteMovieResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.
