@@ -104,6 +104,21 @@ public class GenreResource {
     }
 
     /**
+     *
+     * Find genres by name (commit obligado.... Pau e Ibra son malos....)
+     *
+     * @param name
+     * @return
+     */
+    @GetMapping("/genresByName/{name}")
+    @Timed
+    public ResponseEntity<List<Genre>> findGenreByName(@PathVariable String name) {
+        log.debug("REST request to get Genres by name", name);
+        List<Genre> genre =genreRepository.findGenreByName(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(genre));
+    }
+
+    /**
      * DELETE  /genres/:id : delete the "id" genre.
      *
      * @param id the id of the genre to delete

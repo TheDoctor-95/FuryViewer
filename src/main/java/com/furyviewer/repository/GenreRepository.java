@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.List;
+
 
 /**
  * Spring Data JPA repository for the Genre entity.
@@ -12,5 +14,7 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface GenreRepository extends JpaRepository<Genre, Long> {
+
+    List<Genre> findGenreByName(String name);
 
 }
