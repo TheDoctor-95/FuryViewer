@@ -103,6 +103,22 @@ public class EpisodeResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(episode));
     }
 
+
+    /**
+     *
+     * Find episodes by name (commit obligado.... Pau e Ibra son malos....)
+     *
+     * @param name
+     * @return
+     */
+    @GetMapping("/episodesByName/{name}")
+    @Timed
+    public ResponseEntity<List<Episode>> findEpisodeByName(@PathVariable String name) {
+        log.debug("REST request to get Episodes by name", name);
+        List<Episode> episode =episodeRepository.findEpisodeByName(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(episode));
+    }
+
     /**
      * DELETE  /episodes/:id : delete the "id" episode.
      *
