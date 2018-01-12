@@ -54,6 +54,11 @@
             <input type="number" class="form-control" name="duration" id="field_duration"
                 [(ngModel)]="movie.duration"  />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.imdbIdExternalApi" for="field_imdbIdExternalApi">Imdb Id External Api</label>
+            <input type="text" class="form-control" name="imdbIdExternalApi" id="field_imdbIdExternalApi"
+                [(ngModel)]="movie.imdbIdExternalApi"  />
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.movie.director" for="field_director">Director</label>

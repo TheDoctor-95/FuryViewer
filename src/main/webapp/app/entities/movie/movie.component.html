@@ -22,6 +22,7 @@
             <th><span jhiTranslate="furyViewerApp.movie.description">Description</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.img">Img</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.duration">Duration</span></th>
+            <th><span jhiTranslate="furyViewerApp.movie.imdbIdExternalApi">Imdb Id External Api</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.director">Director</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.scriptwriter">Scriptwriter</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.company">Company</span></th>
@@ -44,6 +45,7 @@
                     <span *ngIf="movie.img">{{movie.imgContentType}}, {{byteSize(movie.img)}}</span>
                 </td>
                 <td>{{movie.duration}}</td>
+                <td>{{movie.imdbIdExternalApi}}</td>
                 <td>
                     <div *ngIf="movie.director">
                         <a [routerLink]="['../artist', movie.director?.id ]" >{{movie.director?.name}}</a>
