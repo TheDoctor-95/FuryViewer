@@ -4,14 +4,18 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.MovieRepository;
+import com.furyviewer.service.MovieDatabase.MovieDTOService;
+import com.furyviewer.service.dto.MovieDatabase.MovieDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -30,6 +34,11 @@ public class MovieResource {
     private static final String ENTITY_NAME = "movie";
 
     private final MovieRepository movieRepository;
+
+    private final OkHttpClient client = new OkHttpClient();
+
+    @Inject
+    private MovieDTOService movieDTOService;
 
     public MovieResource(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
@@ -131,4 +140,30 @@ public class MovieResource {
         movieRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/movie-api/test")
+    @Timed
+    public MovieDTO getTestInicial() throws Exception {
+        /*
+            El resplandor
+            Titanic
+            Como Dios
+            La Jungla de cristal
+            Matchpoints
+            Ali
+            Club de la lucha
+            avatar
+            salvar soldado ryan
+            grease
+         */
+
+
+
+        return MovieDTOService.getMovie(694);
+
+
+    }
+
+
+
 }

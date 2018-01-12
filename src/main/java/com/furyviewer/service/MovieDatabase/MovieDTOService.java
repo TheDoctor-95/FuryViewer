@@ -20,15 +20,18 @@ public class MovieDTOService {
     static MovieDTORepository apiService = MovieDTORepository.retrofit.create(MovieDTORepository.class);
 
     public static MovieDTO getMovie(int id){
-        MovieDTO movie = null;
-        Call<MovieDTO> callMovie = apiService.getMovie(id, apiKey);
-        System.out.println(callMovie);
-        try {
-            movie = callMovie.execute().body();
-            System.out.println(movie);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        MovieDTO movie = new MovieDTO();
+//        Call<MovieDTO> callMovie = apiService.getMovie(id, apiKey);
+//        System.out.println(callMovie);
+//        try {
+//            movie = callMovie.execute().body();
+//            System.out.println(movie);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
+
         return movie;
     }
     /*public static List<Movie> getTopRated(){
@@ -150,10 +153,10 @@ public class MovieDTOService {
         return movie;
     }
 
-    public static Movie getMovieFromDto(MovieDTO d){
+    /*public static Movie getMovieFromDto(MovieDTO d){
         Long id = new Long(d.getId());
         return new Movie(d.getTitle(), id);
-    }
+    }*/
 
     public static Credits getMoviecredits(int id){
         Credits credits = null;
