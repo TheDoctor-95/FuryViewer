@@ -44,6 +44,9 @@ public class Movie implements Serializable {
     @Column(name = "duration")
     private Double duration;
 
+    @Column(name = "imdb_id_external_api")
+    private String imdbIdExternalApi;
+
     @ManyToOne
     private Artist director;
 
@@ -103,16 +106,6 @@ public class Movie implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Social> socials = new HashSet<>();
-
-
-    public Movie() {
-    }
-
-    public Movie(String title, Long id) {
-
-        this.name=title;
-        this.id=id;
-    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -199,6 +192,19 @@ public class Movie implements Serializable {
 
     public void setDuration(Double duration) {
         this.duration = duration;
+    }
+
+    public String getImdbIdExternalApi() {
+        return imdbIdExternalApi;
+    }
+
+    public Movie imdbIdExternalApi(String imdbIdExternalApi) {
+        this.imdbIdExternalApi = imdbIdExternalApi;
+        return this;
+    }
+
+    public void setImdbIdExternalApi(String imdbIdExternalApi) {
+        this.imdbIdExternalApi = imdbIdExternalApi;
     }
 
     public Artist getDirector() {
@@ -496,6 +502,7 @@ public class Movie implements Serializable {
             ", img='" + getImg() + "'" +
             ", imgContentType='" + imgContentType + "'" +
             ", duration='" + getDuration() + "'" +
+            ", imdbIdExternalApi='" + getImdbIdExternalApi() + "'" +
             "}";
     }
 }

@@ -20,6 +20,7 @@
             "description": "Description",
             "img": "Img",
             "duration": "Duration",
+            "imdbIdExternalApi": "Imdb Id External Api",
             "director": "Director",
             "scriptwriter": "Scriptwriter",
             "company": "Company",

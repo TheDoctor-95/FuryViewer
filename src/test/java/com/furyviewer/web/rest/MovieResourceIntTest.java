@@ -58,6 +58,9 @@ public class MovieResourceIntTest {
     private static final Double DEFAULT_DURATION = 1D;
     private static final Double UPDATED_DURATION = 2D;
 
+    private static final String DEFAULT_IMDB_ID_EXTERNAL_API = "AAAAAAAAAA";
+    private static final String UPDATED_IMDB_ID_EXTERNAL_API = "BBBBBBBBBB";
+
     @Autowired
     private MovieRepository movieRepository;
 
@@ -101,7 +104,8 @@ public class MovieResourceIntTest {
             .description(DEFAULT_DESCRIPTION)
             .img(DEFAULT_IMG)
             .imgContentType(DEFAULT_IMG_CONTENT_TYPE)
-            .duration(DEFAULT_DURATION);
+            .duration(DEFAULT_DURATION)
+            .imdbIdExternalApi(DEFAULT_IMDB_ID_EXTERNAL_API);
         return movie;
     }
 
@@ -131,6 +135,7 @@ public class MovieResourceIntTest {
         assertThat(testMovie.getImg()).isEqualTo(DEFAULT_IMG);
         assertThat(testMovie.getImgContentType()).isEqualTo(DEFAULT_IMG_CONTENT_TYPE);
         assertThat(testMovie.getDuration()).isEqualTo(DEFAULT_DURATION);
+        assertThat(testMovie.getImdbIdExternalApi()).isEqualTo(DEFAULT_IMDB_ID_EXTERNAL_API);
     }
 
     @Test
@@ -168,7 +173,8 @@ public class MovieResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].imgContentType").value(hasItem(DEFAULT_IMG_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))))
-            .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION.doubleValue())));
+            .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION.doubleValue())))
+            .andExpect(jsonPath("$.[*].imdbIdExternalApi").value(hasItem(DEFAULT_IMDB_ID_EXTERNAL_API.toString())));
     }
 
     @Test
@@ -187,7 +193,8 @@ public class MovieResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.imgContentType").value(DEFAULT_IMG_CONTENT_TYPE))
             .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)))
-            .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION.doubleValue()));
+            .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION.doubleValue()))
+            .andExpect(jsonPath("$.imdbIdExternalApi").value(DEFAULT_IMDB_ID_EXTERNAL_API.toString()));
     }
 
     @Test
@@ -213,7 +220,8 @@ public class MovieResourceIntTest {
             .description(UPDATED_DESCRIPTION)
             .img(UPDATED_IMG)
             .imgContentType(UPDATED_IMG_CONTENT_TYPE)
-            .duration(UPDATED_DURATION);
+            .duration(UPDATED_DURATION)
+            .imdbIdExternalApi(UPDATED_IMDB_ID_EXTERNAL_API);
 
         restMovieMockMvc.perform(put("/api/movies")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -230,6 +238,7 @@ public class MovieResourceIntTest {
         assertThat(testMovie.getImg()).isEqualTo(UPDATED_IMG);
         assertThat(testMovie.getImgContentType()).isEqualTo(UPDATED_IMG_CONTENT_TYPE);
         assertThat(testMovie.getDuration()).isEqualTo(UPDATED_DURATION);
+        assertThat(testMovie.getImdbIdExternalApi()).isEqualTo(UPDATED_IMDB_ID_EXTERNAL_API);
     }
 
     @Test
