@@ -95,7 +95,7 @@ public class ArtistResource {
     public List<Artist> getAllArtists() {
         log.debug("REST request to get all Artists");
         return artistRepository.findAllWithEagerRelationships();
-        }
+    }
 
     /**
      * GET  /artists/:id : get the "id" artist.
@@ -112,7 +112,6 @@ public class ArtistResource {
     }
 
     /**
-     *
      * Find artists by name (commit obligado.... Pau e Ibra son malos....)
      *
      * @param name
@@ -122,19 +121,25 @@ public class ArtistResource {
     @Timed
     public ResponseEntity<List<Artist>> findArtistByName(@PathVariable String name) {
         log.debug("REST request to get Artists by name", name);
-        List<Artist> artists =artistRepository.findArtistByName(name);
-           return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
+        List<Artist> artists = artistRepository.findArtistByName(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
     }
 
     @GetMapping("/artist-types-name/{artistTypeStr}")
     @Timed
-    public ResponseEntity <List<Artist>>  findArtistByArtistType(@PathVariable String artistTypeStr) {
+    public ResponseEntity<List<Artist>> findArtistByArtistType(@PathVariable String artistTypeStr) {
         log.debug("REST request to get ArtistType : {}", artistTypeStr);
+        try {
+            ArtistTypeEnum ate = ArtistTypeEnum.valueOf(artistTypeStr.toUpperCase());
+            ArtistType artistType = artistTypeRepository.findByName(ate);
 
-        ArtistType artistType = artistTypeRepository.findByName(ArtistTypeEnum.valueOf(artistTypeStr.toUpperCase()));
+            List<Artist> artists = artistRepository.findArtistByArtistType(artistType);
+            return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
+        } catch (IllegalArgumentException e) {
 
-        List<Artist> artists= artistRepository.findArtistByArtistType(artistType);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
+            throw new BadRequestAlertException(e.getMessage(), ENTITY_NAME, e.getLocalizedMessage());
+
+        }
     }
 //    @GetMapping("/artistByType/{name}")
 //    @Timed
@@ -144,17 +149,17 @@ public class ArtistResource {
 //        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artistType));
 //    }
 
-    /**
-     * DELETE  /artists/:id : delete the "id" artist.
-     *
-     * @param id the id of the artist to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
-    @DeleteMapping("/artists/{id}")
-    @Timed
-    public ResponseEntity<Void> deleteArtist(@PathVariable Long id) {
-        log.debug("REST request to delete Artist : {}", id);
-        artistRepository.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        /**
+         * DELETE  /artists/:id : delete the "id" artist.
+         *
+         * @param id the id of the artist to delete
+         * @return the ResponseEntity with status 200 (OK)
+         */
+        @DeleteMapping("/artists/{id}")
+        @Timed
+        public ResponseEntity<Void> deleteArtist (@PathVariable Long id){
+            log.debug("REST request to delete Artist : {}", id);
+            artistRepository.delete(id);
+            return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        }
     }
-}
