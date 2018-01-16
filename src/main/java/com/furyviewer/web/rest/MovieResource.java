@@ -5,7 +5,9 @@ import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.service.MovieDatabase.MovieDTOService;
+import com.furyviewer.service.OpenMovieDatabase.MovieOmdbDTOService;
 import com.furyviewer.service.dto.MovieDatabase.MovieDTO;
+import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -143,25 +145,10 @@ public class MovieResource {
 
     @GetMapping("/movie-api/test")
     @Timed
-    public MovieDTO getTestInicial() throws Exception {
-        /*
-            El resplandor
-            Titanic
-            Como Dios
-            La Jungla de cristal
-            Matchpoints
-            Ali
-            Club de la lucha
-            avatar
-            salvar soldado ryan
-            grease
-         */
+    public MovieOmdbDTO getTestInicial() throws Exception {
 
 
-
-        return MovieDTOService.getMovie(694);
-
-
+        return MovieOmdbDTOService.getMovie("Justice League");
     }
 
 
