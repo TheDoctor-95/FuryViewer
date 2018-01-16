@@ -1,10 +1,13 @@
 package com.furyviewer.repository;
 
 import com.furyviewer.domain.Artist;
+import com.furyviewer.domain.ArtistType;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.List;
 
 /**
@@ -22,4 +25,16 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
     List<Artist>findArtistByName(String name);
 
 
+//    @Query("select artist from Artist artist where artist.artistTypes.name=com.furyviewer.domain.enumeration.ArtistTypeEnum.DIRECTOR")
+//    List<Artist> findArtistDirector();
+
+ //   List<Artist>findArtistByArtistTypes(String name);
+
+    //@Query("select artist from Artist artist left join fetch artist.artistTypes where artist.artistTypes.name =:name")
+  //  Artist findArtistByArtistTypes(@Param("name") String name);
+
+    @Query("select artist from Artist artist where :artistType member of artist.artistTypes")
+    List<Artist> findArtistByArtistType(@Param("artistType") ArtistType artistType);
+
 }
+

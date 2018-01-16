@@ -50,7 +50,7 @@ public class Artist implements Serializable {
     @ManyToOne
     private Country country;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "artist_artist_type",
                joinColumns = @JoinColumn(name="artists_id", referencedColumnName="id"),

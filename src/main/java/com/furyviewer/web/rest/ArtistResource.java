@@ -3,7 +3,10 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Artist;
 
+import com.furyviewer.domain.ArtistType;
+import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
+import com.furyviewer.repository.ArtistTypeRepository;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -12,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -30,6 +34,10 @@ public class ArtistResource {
     private static final String ENTITY_NAME = "artist";
 
     private final ArtistRepository artistRepository;
+
+
+    @Inject
+    private ArtistTypeRepository artistTypeRepository;
 
     public ArtistResource(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
@@ -117,6 +125,24 @@ public class ArtistResource {
         List<Artist> artists =artistRepository.findArtistByName(name);
            return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
     }
+
+    @GetMapping("/artist-types-name/{artistTypeStr}")
+    @Timed
+    public ResponseEntity <List<Artist>>  findArtistByArtistType(@PathVariable String artistTypeStr) {
+        log.debug("REST request to get ArtistType : {}", artistTypeStr);
+
+        ArtistType artistType = artistTypeRepository.findByName(ArtistTypeEnum.valueOf(artistTypeStr.toUpperCase()));
+
+        List<Artist> artists= artistRepository.findArtistByArtistType(artistType);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
+    }
+//    @GetMapping("/artistByType/{name}")
+//    @Timed
+//    public ResponseEntity <List<Artist>> findArtistByArtistTypesEquals(@PathVariable String name) {
+//        log.debug("REST request to get ArtistType : {}", name);
+//        List<Artist> artistType= artistRepository.findArtistByArtistTypesEquals(name);
+//        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artistType));
+//    }
 
     /**
      * DELETE  /artists/:id : delete the "id" artist.

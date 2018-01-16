@@ -1,6 +1,7 @@
 package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.ArtistType;
 
 import com.furyviewer.repository.ArtistTypeRepository;
@@ -103,6 +104,17 @@ public class ArtistTypeResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artistType));
     }
 
+
+
+
+
+//    @GetMapping("/artist-ByType/{name}")
+//    @Timed
+//    public ResponseEntity <List<Artist>> findArtistByType(@PathVariable String name) {
+//        log.debug("REST request to get ArtistType : {}", name);
+//        List<Artist> artistType= artistTypeRepository.findArtistByType(name);
+//        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artistType));
+//    }
     /**
      * DELETE  /artist-types/:id : delete the "id" artistType.
      *
