@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Series;
 
 import com.furyviewer.repository.SeriesRepository;
+import com.furyviewer.service.OpenMovieDatabase.SeriesOmdbDTOService;
+import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -130,5 +132,12 @@ public class SeriesResource {
         log.debug("REST request to delete Series : {}", id);
         seriesRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    @GetMapping("/series-api/test")
+    @Timed
+    public SeriesOmdbDTO getTestInicial() throws Exception {
+
+
+        return SeriesOmdbDTOService.getSeries("American Horror Story");
     }
 }
