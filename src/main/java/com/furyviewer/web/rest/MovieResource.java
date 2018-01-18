@@ -15,6 +15,7 @@ import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -41,6 +42,11 @@ public class MovieResource {
 
     @Inject
     private MovieDTOService movieDTOService;
+
+    @Inject
+    private MovieOmdbDTOService movieOmdbDTOService;
+
+
 
     public MovieResource(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
@@ -117,9 +123,10 @@ public class MovieResource {
 
     @GetMapping("/importByName/{name}")
     @Timed
+    @Transactional
     public ResponseEntity<Movie> importMovieByName(@PathVariable String name) {
         log.debug("REST request to get Movies by name", name);
-        Movie movie = MovieOmdbDTOService.importMovie(name);
+        Movie movie = movieOmdbDTOService.importMovie(name);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
 
@@ -158,7 +165,7 @@ public class MovieResource {
     public MovieOmdbDTO getTestInicial() throws Exception {
 
 
-        return MovieOmdbDTOService.getMovie("Justice League");
+        return movieOmdbDTOService.getMovie("Justice League");
     }
 
 

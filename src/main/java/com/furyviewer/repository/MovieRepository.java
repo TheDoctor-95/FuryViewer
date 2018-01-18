@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring Data JPA repository for the Movie entity.
@@ -20,5 +21,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     Movie findOneWithEagerRelationships(@Param("id") Long id);
 
     List<Movie>findMovieByName(String name);
+
+    Optional<Movie> findByName(String name);
 
 }

@@ -1,5 +1,6 @@
 package com.furyviewer.service.dto.MovieDatabase;
 
+import com.furyviewer.service.ImageService;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.furyviewer.domain.Movie;
@@ -355,7 +356,7 @@ public class MovieDTO {
 
 
         try {
-            movie.setImg(this.toImage());
+            //movie.setImg(ImageService.toImage("AAA"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -364,22 +365,6 @@ public class MovieDTO {
         return movie;
     }
 
-    public byte[] toImage() throws Exception {
-        Request request = new Request.Builder()
-            .url("http://i2.wp.com/3.bp.blogspot.com/-VRlGp1o04OE/TsTesOz4jVI/AAAAAAAAAHU/lPgSMc9tHL0/s1600/patata.jpg?resize=189%2C231")
-            .build();
 
-        try (Response response = client.newCall(request).execute()) {
-
-            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-            Headers responseHeaders = response.headers();
-            for (int i = 0; i < responseHeaders.size(); i++) {
-                System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-            }
-
-            return IOUtils.toByteArray(response.body().byteStream());
-        }
-    }
 
 }

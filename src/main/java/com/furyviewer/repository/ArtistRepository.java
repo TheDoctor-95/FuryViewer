@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring Data JPA repository for the Artist entity.
@@ -24,7 +25,7 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
 
     List<Artist>findArtistByName(String name);
 
-
+    Optional<Artist> findByName(String name);
 //    @Query("select artist from Artist artist where artist.artistTypes.name=com.furyviewer.domain.enumeration.ArtistTypeEnum.DIRECTOR")
 //    List<Artist> findArtistDirector();
 
