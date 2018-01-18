@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Series;
 
 import com.furyviewer.repository.SeriesRepository;
+import com.furyviewer.service.OpenMovieDatabase.SeasonOmdbService;
 import com.furyviewer.service.OpenMovieDatabase.SeriesOmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
@@ -11,6 +12,7 @@ import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +34,9 @@ public class SeriesResource {
     private static final String ENTITY_NAME = "series";
 
     private final SeriesRepository seriesRepository;
+
+    @Autowired
+    SeriesOmdbDTOService seriesOmdbDTOService;
 
     public SeriesResource(SeriesRepository seriesRepository) {
         this.seriesRepository = seriesRepository;
@@ -138,6 +143,6 @@ public class SeriesResource {
     public SeriesOmdbDTO getTestInicial() throws Exception {
 
 
-        return SeriesOmdbDTOService.getSeries("American Horror Story");
+        return seriesOmdbDTOService.getSeries("American Horror Story");
     }
 }

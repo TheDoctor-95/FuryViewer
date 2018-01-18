@@ -4,11 +4,14 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Season;
 
 import com.furyviewer.repository.SeasonRepository;
+import com.furyviewer.service.OpenMovieDatabase.SeasonOmdbService;
+import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +33,9 @@ public class SeasonResource {
     private static final String ENTITY_NAME = "season";
 
     private final SeasonRepository seasonRepository;
+
+    @Autowired
+    SeasonOmdbService seasonOmdbService;
 
     public SeasonResource(SeasonRepository seasonRepository) {
         this.seasonRepository = seasonRepository;
@@ -115,5 +121,13 @@ public class SeasonResource {
         log.debug("REST request to delete Season : {}", id);
         seasonRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/season-api/test")
+    @Timed
+    public SeasonOmdbDTO getTestInicial() throws Exception {
+
+
+        return seasonOmdbService.getSeason("American Horror Story", 1);
     }
 }
