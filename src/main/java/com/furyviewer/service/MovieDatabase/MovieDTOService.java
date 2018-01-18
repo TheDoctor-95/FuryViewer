@@ -21,14 +21,14 @@ public class MovieDTOService {
 
     public static MovieDTO getMovie(int id){
         MovieDTO movie = new MovieDTO();
-//        Call<MovieDTO> callMovie = apiService.getMovie(id, apiKey);
-//        System.out.println(callMovie);
-//        try {
-//            movie = callMovie.execute().body();
-//            System.out.println(movie);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        Call<MovieDTO> callMovie = apiService.getMovie(id, apiKey);
+        System.out.println(callMovie);
+        try {
+            movie = callMovie.execute().body();
+            System.out.println(movie);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
 

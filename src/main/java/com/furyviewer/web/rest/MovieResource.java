@@ -114,6 +114,16 @@ public class MovieResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
 
+
+    @GetMapping("/importByName/{name}")
+    @Timed
+    public ResponseEntity<Movie> importMovieByName(@PathVariable String name) {
+        log.debug("REST request to get Movies by name", name);
+        Movie movie = MovieOmdbDTOService.importMovie(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
+    }
+
+
     /**
      *
      * Find movies by name (commit obligado.... Pau e Ibra son malos....)

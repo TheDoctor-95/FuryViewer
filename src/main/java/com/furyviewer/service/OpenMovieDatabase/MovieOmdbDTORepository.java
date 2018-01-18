@@ -14,7 +14,8 @@ public interface MovieOmdbDTORepository {
 @GET("/?type=movie")
 Call<MovieOmdbDTO> getMovie(@Query("apikey") String apikey, @Query("t") String title);
 
-
+@GET("/?type=movie")
+Call<MovieOmdbDTO> searchMovie(@Query("apikey") String apikey, @Query("s") String title);
 
 
 
