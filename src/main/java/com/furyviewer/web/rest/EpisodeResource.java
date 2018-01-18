@@ -4,11 +4,14 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Episode;
 
 import com.furyviewer.repository.EpisodeRepository;
+import com.furyviewer.service.OpenMovieDatabase.EpisodeOmdbDTOService;
+import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +33,9 @@ public class EpisodeResource {
     private static final String ENTITY_NAME = "episode";
 
     private final EpisodeRepository episodeRepository;
+
+    @Autowired
+    EpisodeOmdbDTOService episodeOmdbDTOService;
 
     public EpisodeResource(EpisodeRepository episodeRepository) {
         this.episodeRepository = episodeRepository;
@@ -131,5 +137,12 @@ public class EpisodeResource {
         log.debug("REST request to delete Episode : {}", id);
         episodeRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    @GetMapping("/episode-api/test")
+    @Timed
+    public EpisodeOmdbDTO getTestInicial() throws Exception {
+
+
+        return episodeOmdbDTOService.getSeason("American Horror Story", 1, 2);
     }
 }
