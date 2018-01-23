@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { Company } from './company.model';
 import { CompanyService } from './company.service';
@@ -19,7 +19,6 @@ companies: Company[];
     constructor(
         private companyService: CompanyService,
         private jhiAlertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
@@ -47,14 +46,6 @@ companies: Company[];
 
     trackId(index: number, item: Company) {
         return item.id;
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInCompanies() {
         this.eventSubscriber = this.eventManager.subscribe('companyListModification', (response) => this.loadAll());

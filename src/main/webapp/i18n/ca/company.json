@@ -16,10 +16,10 @@
                 "title": "Company"
             },
             "name": "Name",
-            "img": "Img",
             "description": "Description",
             "fundingDate": "Funding Date",
             "clossingDate": "Clossing Date",
+            "imgUrl": "Img Url",
             "country": "Country",
             "movie": "Movie",
             "serie": "Serie"

@@ -26,11 +26,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "img",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
-        },
-        {
             "fieldName": "description",
             "fieldType": "String"
         },
@@ -41,12 +36,16 @@
         {
             "fieldName": "clossingDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "imgUrl",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171130103700",
-    "entityTableName": "company",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "company",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

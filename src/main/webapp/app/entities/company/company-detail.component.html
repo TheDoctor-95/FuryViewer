@@ -8,15 +8,6 @@
         <dd>
             <span>{{company.name}}</span>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.company.img">Img</span></dt>
-        <dd>
-            <div *ngIf="company.img">
-                <a (click)="openFile(company.imgContentType, company.img)">
-                    <img [src]="'data:' + company.imgContentType + ';base64,' + company.img" style="max-width: 100%;" alt="company image"/>
-                </a>
-                {{company.imgContentType}}, {{byteSize(company.img)}}
-            </div>
-        </dd>
         <dt><span jhiTranslate="furyViewerApp.company.description">Description</span></dt>
         <dd>
             <span>{{company.description}}</span>
@@ -28,6 +19,10 @@
         <dt><span jhiTranslate="furyViewerApp.company.clossingDate">Clossing Date</span></dt>
         <dd>
             <span>{{company.clossingDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.company.imgUrl">Img Url</span></dt>
+        <dd>
+            <span>{{company.imgUrl}}</span>
         </dd>
         <dt><span jhiTranslate="furyViewerApp.company.country">Country</span></dt>
         <dd>

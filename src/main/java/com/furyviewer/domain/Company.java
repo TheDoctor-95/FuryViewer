@@ -28,13 +28,6 @@ public class Company implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Lob
-    @Column(name = "img")
-    private byte[] img;
-
-    @Column(name = "img_content_type")
-    private String imgContentType;
-
     @Column(name = "description")
     private String description;
 
@@ -43,6 +36,9 @@ public class Company implements Serializable {
 
     @Column(name = "clossing_date")
     private LocalDate clossingDate;
+
+    @Column(name = "img_url")
+    private String imgUrl;
 
     @ManyToOne
     private Country country;
@@ -77,32 +73,6 @@ public class Company implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public byte[] getImg() {
-        return img;
-    }
-
-    public Company img(byte[] img) {
-        this.img = img;
-        return this;
-    }
-
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
-
-    public String getImgContentType() {
-        return imgContentType;
-    }
-
-    public Company imgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
-        return this;
-    }
-
-    public void setImgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
     }
 
     public String getDescription() {
@@ -142,6 +112,19 @@ public class Company implements Serializable {
 
     public void setClossingDate(LocalDate clossingDate) {
         this.clossingDate = clossingDate;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public Company imgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+        return this;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public Country getCountry() {
@@ -233,11 +216,10 @@ public class Company implements Serializable {
         return "Company{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", img='" + getImg() + "'" +
-            ", imgContentType='" + imgContentType + "'" +
             ", description='" + getDescription() + "'" +
             ", fundingDate='" + getFundingDate() + "'" +
             ", clossingDate='" + getClossingDate() + "'" +
+            ", imgUrl='" + getImgUrl() + "'" +
             "}";
     }
 }

@@ -18,23 +18,6 @@
                 [(ngModel)]="company.name"  />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.company.img" for="field_img">Img</label>
-            <div>
-                <img [src]="'data:' + company.imgContentType + ';base64,' + company.img" style="max-height: 100px;" *ngIf="company.img" alt="company image"/>
-                <div *ngIf="company.img" class="form-text text-danger clearfix">
-                    <span class="pull-left">{{company.imgContentType}}, {{byteSize(company.img)}}</span>
-                    <button type="button" (click)="clearInputImage('img', 'imgContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
-                        <span class="fa fa-times"></span>
-                    </button>
-                </div>
-                <input type="file" id="file_img" (change)="setFileData($event, company, 'img', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
-            </div>
-            <input type="hidden" class="form-control" name="img" id="field_img"
-                [(ngModel)]="company.img"  />
-            <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
-                [(ngModel)]="company.imgContentType" />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.company.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
                 [(ngModel)]="company.description"  />
@@ -58,6 +41,11 @@
                     <button type="button" class="btn btn-secondary" (click)="clossingDateDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
             </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.company.imgUrl" for="field_imgUrl">Img Url</label>
+            <input type="text" class="form-control" name="imgUrl" id="field_imgUrl"
+                [(ngModel)]="company.imgUrl"  />
         </div>
 
         <div class="form-group">

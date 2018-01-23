@@ -97,8 +97,6 @@ public class CompanyResourceIntTest {
     public static Company createEntity(EntityManager em) {
         Company company = new Company()
             .name(DEFAULT_NAME)
-            .img(DEFAULT_IMG)
-            .imgContentType(DEFAULT_IMG_CONTENT_TYPE)
             .description(DEFAULT_DESCRIPTION)
             .fundingDate(DEFAULT_FUNDING_DATE)
             .clossingDate(DEFAULT_CLOSSING_DATE);
@@ -126,8 +124,6 @@ public class CompanyResourceIntTest {
         assertThat(companyList).hasSize(databaseSizeBeforeCreate + 1);
         Company testCompany = companyList.get(companyList.size() - 1);
         assertThat(testCompany.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testCompany.getImg()).isEqualTo(DEFAULT_IMG);
-        assertThat(testCompany.getImgContentType()).isEqualTo(DEFAULT_IMG_CONTENT_TYPE);
         assertThat(testCompany.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testCompany.getFundingDate()).isEqualTo(DEFAULT_FUNDING_DATE);
         assertThat(testCompany.getClossingDate()).isEqualTo(DEFAULT_CLOSSING_DATE);
@@ -164,8 +160,6 @@ public class CompanyResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(company.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].imgContentType").value(hasItem(DEFAULT_IMG_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].fundingDate").value(hasItem(DEFAULT_FUNDING_DATE.toString())))
             .andExpect(jsonPath("$.[*].clossingDate").value(hasItem(DEFAULT_CLOSSING_DATE.toString())));
@@ -183,8 +177,6 @@ public class CompanyResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(company.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.imgContentType").value(DEFAULT_IMG_CONTENT_TYPE))
-            .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.fundingDate").value(DEFAULT_FUNDING_DATE.toString()))
             .andExpect(jsonPath("$.clossingDate").value(DEFAULT_CLOSSING_DATE.toString()));
@@ -209,8 +201,6 @@ public class CompanyResourceIntTest {
         Company updatedCompany = companyRepository.findOne(company.getId());
         updatedCompany
             .name(UPDATED_NAME)
-            .img(UPDATED_IMG)
-            .imgContentType(UPDATED_IMG_CONTENT_TYPE)
             .description(UPDATED_DESCRIPTION)
             .fundingDate(UPDATED_FUNDING_DATE)
             .clossingDate(UPDATED_CLOSSING_DATE);
@@ -225,8 +215,6 @@ public class CompanyResourceIntTest {
         assertThat(companyList).hasSize(databaseSizeBeforeUpdate);
         Company testCompany = companyList.get(companyList.size() - 1);
         assertThat(testCompany.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testCompany.getImg()).isEqualTo(UPDATED_IMG);
-        assertThat(testCompany.getImgContentType()).isEqualTo(UPDATED_IMG_CONTENT_TYPE);
         assertThat(testCompany.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testCompany.getFundingDate()).isEqualTo(UPDATED_FUNDING_DATE);
         assertThat(testCompany.getClossingDate()).isEqualTo(UPDATED_CLOSSING_DATE);
