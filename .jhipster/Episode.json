@@ -54,6 +54,10 @@
         {
             "fieldName": "imgUrl",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "imdbId",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171130103658",

@@ -40,6 +40,9 @@ public class Episode implements Serializable {
     @Column(name = "img_url")
     private String imgUrl;
 
+    @Column(name = "imdb_id")
+    private String imdbId;
+
     @ManyToOne
     private Season season;
 
@@ -54,7 +57,7 @@ public class Episode implements Serializable {
     @ManyToOne
     private Artist scriptwriter;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "episode_actors",
                joinColumns = @JoinColumn(name="episodes_id", referencedColumnName="id"),
@@ -133,6 +136,19 @@ public class Episode implements Serializable {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public Episode imdbId(String imdbId) {
+        this.imdbId = imdbId;
+        return this;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
     public Season getSeason() {
@@ -252,6 +268,7 @@ public class Episode implements Serializable {
             ", duration='" + getDuration() + "'" +
             ", releaseDate='" + getReleaseDate() + "'" +
             ", imgUrl='" + getImgUrl() + "'" +
+            ", imdbId='" + getImdbId() + "'" +
             "}";
     }
 }
