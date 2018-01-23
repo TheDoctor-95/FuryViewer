@@ -31,13 +31,6 @@ public class Episode implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Lob
-    @Column(name = "img")
-    private byte[] img;
-
-    @Column(name = "img_content_type")
-    private String imgContentType;
-
     @Column(name = "duration")
     private Double duration;
 
@@ -85,32 +78,6 @@ public class Episode implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public byte[] getImg() {
-        return img;
-    }
-
-    public Episode img(byte[] img) {
-        this.img = img;
-        return this;
-    }
-
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
-
-    public String getImgContentType() {
-        return imgContentType;
-    }
-
-    public Episode imgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
-        return this;
-    }
-
-    public void setImgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
     }
 
     public Double getDuration() {
@@ -204,8 +171,6 @@ public class Episode implements Serializable {
             "id=" + getId() +
             ", number='" + getNumber() + "'" +
             ", name='" + getName() + "'" +
-            ", img='" + getImg() + "'" +
-            ", imgContentType='" + imgContentType + "'" +
             ", duration='" + getDuration() + "'" +
             ", releaseDate='" + getReleaseDate() + "'" +
             "}";

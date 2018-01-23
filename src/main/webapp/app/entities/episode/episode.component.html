@@ -19,7 +19,6 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.number">Number</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.name">Name</span></th>
-            <th><span jhiTranslate="furyViewerApp.episode.img">Img</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.duration">Duration</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.releaseDate">Release Date</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.season">Season</span></th>
@@ -31,12 +30,6 @@
                 <td><a [routerLink]="['../episode', episode.id ]">{{episode.id}}</a></td>
                 <td>{{episode.number}}</td>
                 <td>{{episode.name}}</td>
-                <td>
-                    <a *ngIf="episode.img" (click)="openFile(episode.imgContentType, episode.img)">
-                        <img [src]="'data:' + episode.imgContentType + ';base64,' + episode.img" style="max-height: 30px;" alt="episode image"/>
-                    </a>
-                    <span *ngIf="episode.img">{{episode.imgContentType}}, {{byteSize(episode.img)}}</span>
-                </td>
                 <td>{{episode.duration}}</td>
                 <td>{{episode.releaseDate | date:'mediumDate'}}</td>
                 <td>

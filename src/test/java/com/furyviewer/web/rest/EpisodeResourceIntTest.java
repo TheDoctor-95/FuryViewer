@@ -98,8 +98,6 @@ public class EpisodeResourceIntTest {
         Episode episode = new Episode()
             .number(DEFAULT_NUMBER)
             .name(DEFAULT_NAME)
-            .img(DEFAULT_IMG)
-            .imgContentType(DEFAULT_IMG_CONTENT_TYPE)
             .duration(DEFAULT_DURATION)
             .releaseDate(DEFAULT_RELEASE_DATE);
         return episode;
@@ -127,8 +125,6 @@ public class EpisodeResourceIntTest {
         Episode testEpisode = episodeList.get(episodeList.size() - 1);
         assertThat(testEpisode.getNumber()).isEqualTo(DEFAULT_NUMBER);
         assertThat(testEpisode.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testEpisode.getImg()).isEqualTo(DEFAULT_IMG);
-        assertThat(testEpisode.getImgContentType()).isEqualTo(DEFAULT_IMG_CONTENT_TYPE);
         assertThat(testEpisode.getDuration()).isEqualTo(DEFAULT_DURATION);
         assertThat(testEpisode.getReleaseDate()).isEqualTo(DEFAULT_RELEASE_DATE);
     }
@@ -165,8 +161,6 @@ public class EpisodeResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(episode.getId().intValue())))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].imgContentType").value(hasItem(DEFAULT_IMG_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))))
             .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION.doubleValue())))
             .andExpect(jsonPath("$.[*].releaseDate").value(hasItem(DEFAULT_RELEASE_DATE.toString())));
     }
@@ -184,8 +178,6 @@ public class EpisodeResourceIntTest {
             .andExpect(jsonPath("$.id").value(episode.getId().intValue()))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.imgContentType").value(DEFAULT_IMG_CONTENT_TYPE))
-            .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)))
             .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION.doubleValue()))
             .andExpect(jsonPath("$.releaseDate").value(DEFAULT_RELEASE_DATE.toString()));
     }
@@ -210,8 +202,6 @@ public class EpisodeResourceIntTest {
         updatedEpisode
             .number(UPDATED_NUMBER)
             .name(UPDATED_NAME)
-            .img(UPDATED_IMG)
-            .imgContentType(UPDATED_IMG_CONTENT_TYPE)
             .duration(UPDATED_DURATION)
             .releaseDate(UPDATED_RELEASE_DATE);
 
@@ -226,8 +216,6 @@ public class EpisodeResourceIntTest {
         Episode testEpisode = episodeList.get(episodeList.size() - 1);
         assertThat(testEpisode.getNumber()).isEqualTo(UPDATED_NUMBER);
         assertThat(testEpisode.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testEpisode.getImg()).isEqualTo(UPDATED_IMG);
-        assertThat(testEpisode.getImgContentType()).isEqualTo(UPDATED_IMG_CONTENT_TYPE);
         assertThat(testEpisode.getDuration()).isEqualTo(UPDATED_DURATION);
         assertThat(testEpisode.getReleaseDate()).isEqualTo(UPDATED_RELEASE_DATE);
     }

@@ -12,15 +12,6 @@
         <dd>
             <span>{{episode.name}}</span>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.episode.img">Img</span></dt>
-        <dd>
-            <div *ngIf="episode.img">
-                <a (click)="openFile(episode.imgContentType, episode.img)">
-                    <img [src]="'data:' + episode.imgContentType + ';base64,' + episode.img" style="max-width: 100%;" alt="episode image"/>
-                </a>
-                {{episode.imgContentType}}, {{byteSize(episode.img)}}
-            </div>
-        </dd>
         <dt><span jhiTranslate="furyViewerApp.episode.duration">Duration</span></dt>
         <dd>
             <span>{{episode.duration}}</span>

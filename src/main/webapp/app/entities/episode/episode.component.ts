@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { Episode } from './episode.model';
 import { EpisodeService } from './episode.service';
@@ -19,7 +19,6 @@ episodes: Episode[];
     constructor(
         private episodeService: EpisodeService,
         private jhiAlertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
@@ -47,14 +46,6 @@ episodes: Episode[];
 
     trackId(index: number, item: Episode) {
         return item.id;
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInEpisodes() {
         this.eventSubscriber = this.eventManager.subscribe('episodeListModification', (response) => this.loadAll());
