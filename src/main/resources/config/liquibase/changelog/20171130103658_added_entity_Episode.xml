@@ -38,12 +38,35 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="img_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="season_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="director_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="scriptwriter_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        
+        <createTable tableName="episode_actors">
+            <column name="actors_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="episodes_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="episodes_id, actors_id" tableName="episode_actors"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

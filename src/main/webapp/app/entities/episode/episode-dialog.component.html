@@ -37,12 +37,37 @@
                 </span>
             </div>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.imgUrl" for="field_imgUrl">Img Url</label>
+            <input type="text" class="form-control" name="imgUrl" id="field_imgUrl"
+                [(ngModel)]="episode.imgUrl"  />
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.episode.season" for="field_season">Season</label>
             <select class="form-control" id="field_season" name="season" [(ngModel)]="episode.season" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="seasonOption.id === episode.season?.id ? episode.season : seasonOption" *ngFor="let seasonOption of seasons; trackBy: trackSeasonById">{{seasonOption.number}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.director" for="field_director">Director</label>
+            <select class="form-control" id="field_director" name="director" [(ngModel)]="episode.director" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="artistOption.id === episode.director?.id ? episode.director : artistOption" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.scriptwriter" for="field_scriptwriter">Scriptwriter</label>
+            <select class="form-control" id="field_scriptwriter" name="scriptwriter" [(ngModel)]="episode.scriptwriter" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="artistOption.id === episode.scriptwriter?.id ? episode.scriptwriter : artistOption" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="furyViewerApp.episode.actors" for="field_actors">Actors</label>
+            <select class="form-control" id="field_actors" multiple name="actors" [(ngModel)]="episode.actors">
+                <option [ngValue]="getSelected(episode.actors, artistOption)" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
             </select>
         </div>
     </div>

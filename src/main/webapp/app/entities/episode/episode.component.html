@@ -21,7 +21,11 @@
             <th><span jhiTranslate="furyViewerApp.episode.name">Name</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.duration">Duration</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.releaseDate">Release Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.imgUrl">Img Url</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.season">Season</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.director">Director</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.scriptwriter">Scriptwriter</span></th>
+            <th><span jhiTranslate="furyViewerApp.episode.actors">Actors</span></th>
             <th></th>
             </tr>
             </thead>
@@ -32,10 +36,26 @@
                 <td>{{episode.name}}</td>
                 <td>{{episode.duration}}</td>
                 <td>{{episode.releaseDate | date:'mediumDate'}}</td>
+                <td>{{episode.imgUrl}}</td>
                 <td>
                     <div *ngIf="episode.season">
                         <a [routerLink]="['../season', episode.season?.id ]" >{{episode.season?.number}}</a>
                     </div>
+                </td>
+                <td>
+                    <div *ngIf="episode.director">
+                        <a [routerLink]="['../artist', episode.director?.id ]" >{{episode.director?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="episode.scriptwriter">
+                        <a [routerLink]="['../artist', episode.scriptwriter?.id ]" >{{episode.scriptwriter?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let actors of episode.actors; let last = last">
+                            <a class="form-control-static" [routerLink]="['../artist', actors?.id ]">{{actors.name}}</a>{{last ? '' : ', '}}
+                        </span>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

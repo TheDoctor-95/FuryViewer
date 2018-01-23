@@ -10,6 +10,7 @@ import { Episode } from './episode.model';
 import { EpisodePopupService } from './episode-popup.service';
 import { EpisodeService } from './episode.service';
 import { Season, SeasonService } from '../season';
+import { Artist, ArtistService } from '../artist';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -22,6 +23,8 @@ export class EpisodeDialogComponent implements OnInit {
     isSaving: boolean;
 
     seasons: Season[];
+
+    artists: Artist[];
     releaseDateDp: any;
 
     constructor(
@@ -29,6 +32,7 @@ export class EpisodeDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private episodeService: EpisodeService,
         private seasonService: SeasonService,
+        private artistService: ArtistService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -37,6 +41,8 @@ export class EpisodeDialogComponent implements OnInit {
         this.isSaving = false;
         this.seasonService.query()
             .subscribe((res: ResponseWrapper) => { this.seasons = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.artistService.query()
+            .subscribe((res: ResponseWrapper) => { this.artists = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -75,6 +81,21 @@ export class EpisodeDialogComponent implements OnInit {
 
     trackSeasonById(index: number, item: Season) {
         return item.id;
+    }
+
+    trackArtistById(index: number, item: Artist) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }
 

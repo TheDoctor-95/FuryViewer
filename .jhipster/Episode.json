@@ -12,6 +12,26 @@
             "relationshipName": "seen",
             "otherEntityName": "chapterSeen",
             "otherEntityRelationshipName": "episode"
+        },
+        {
+            "relationshipName": "director",
+            "otherEntityName": "artist",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "scriptwriter",
+            "otherEntityName": "artist",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "actors",
+            "otherEntityName": "artist",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "playsEpisode"
         }
     ],
     "fields": [
@@ -30,6 +50,10 @@
         {
             "fieldName": "releaseDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "imgUrl",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171130103658",

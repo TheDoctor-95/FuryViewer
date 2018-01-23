@@ -14,5 +14,28 @@
                                  referencedColumnNames="id"
                                  referencedTableName="season"/>
 
+        <addForeignKeyConstraint baseColumnNames="director_id"
+                                 baseTableName="episode"
+                                 constraintName="fk_episode_director_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+
+        <addForeignKeyConstraint baseColumnNames="scriptwriter_id"
+                                 baseTableName="episode"
+                                 constraintName="fk_episode_scriptwriter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+
+        <addForeignKeyConstraint baseColumnNames="episodes_id"
+                                 baseTableName="episode_actors"
+                                 constraintName="fk_episode_actors_episodes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="episode"/>
+        <addForeignKeyConstraint baseColumnNames="actors_id"
+                                 baseTableName="episode_actors"
+                                 constraintName="fk_episode_actors_actors_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="artist"/>
+        
     </changeSet>
 </databaseChangeLog>

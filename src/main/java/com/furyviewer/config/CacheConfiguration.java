@@ -105,6 +105,7 @@ public class CacheConfiguration {
             cm.createCache(com.furyviewer.domain.MovieStats.class.getName(), jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Social.class.getName(), jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.ChapterSeen.class.getName(), jcacheConfiguration);
+            cm.createCache(com.furyviewer.domain.Episode.class.getName() + ".actors", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

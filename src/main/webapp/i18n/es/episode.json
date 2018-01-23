@@ -19,8 +19,12 @@
             "name": "Name",
             "duration": "Duration",
             "releaseDate": "Release Date",
+            "imgUrl": "Img Url",
             "season": "Season",
-            "seen": "Seen"
+            "seen": "Seen",
+            "director": "Director",
+            "scriptwriter": "Scriptwriter",
+            "actors": "Actors"
         }
     }
 }

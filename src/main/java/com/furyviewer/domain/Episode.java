@@ -37,6 +37,9 @@ public class Episode implements Serializable {
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @ManyToOne
     private Season season;
 
@@ -44,6 +47,19 @@ public class Episode implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ChapterSeen> seens = new HashSet<>();
+
+    @ManyToOne
+    private Artist director;
+
+    @ManyToOne
+    private Artist scriptwriter;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "episode_actors",
+               joinColumns = @JoinColumn(name="episodes_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="actors_id", referencedColumnName="id"))
+    private Set<Artist> actors = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -106,6 +122,19 @@ public class Episode implements Serializable {
         this.releaseDate = releaseDate;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public Episode imgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+        return this;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     public Season getSeason() {
         return season;
     }
@@ -143,6 +172,55 @@ public class Episode implements Serializable {
     public void setSeens(Set<ChapterSeen> chapterSeens) {
         this.seens = chapterSeens;
     }
+
+    public Artist getDirector() {
+        return director;
+    }
+
+    public Episode director(Artist artist) {
+        this.director = artist;
+        return this;
+    }
+
+    public void setDirector(Artist artist) {
+        this.director = artist;
+    }
+
+    public Artist getScriptwriter() {
+        return scriptwriter;
+    }
+
+    public Episode scriptwriter(Artist artist) {
+        this.scriptwriter = artist;
+        return this;
+    }
+
+    public void setScriptwriter(Artist artist) {
+        this.scriptwriter = artist;
+    }
+
+    public Set<Artist> getActors() {
+        return actors;
+    }
+
+    public Episode actors(Set<Artist> artists) {
+        this.actors = artists;
+        return this;
+    }
+
+    public Episode addActors(Artist artist) {
+        this.actors.add(artist);
+        return this;
+    }
+
+    public Episode removeActors(Artist artist) {
+        this.actors.remove(artist);
+        return this;
+    }
+
+    public void setActors(Set<Artist> artists) {
+        this.actors = artists;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -173,6 +251,7 @@ public class Episode implements Serializable {
             ", name='" + getName() + "'" +
             ", duration='" + getDuration() + "'" +
             ", releaseDate='" + getReleaseDate() + "'" +
+            ", imgUrl='" + getImgUrl() + "'" +
             "}";
     }
 }
