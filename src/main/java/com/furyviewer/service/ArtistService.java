@@ -49,31 +49,22 @@ public class ArtistService {
         }
 
         return artist;
-
     }
 
+    public Artist importScripwriter(String escitor){
+        String[] esctiroresArray = escitor.split(",|\\(");
 
+        Optional<Artist> optionalScripwriter = artistRepository.findByName(esctiroresArray[0]);
+        Artist artist;
 
+        if(optionalScripwriter.isPresent()){
+            artist = optionalScripwriter.get();
+        }else{
+            artist = new Artist();
+            artist.setName(esctiroresArray[0]);
+            artist = artistRepository.save(artist);
+        }
 
-//    public Artist importScripwriter(String escitor){
-//        Character a = '(';
-//        String ab = " "+a;
-//        String[] esctiroresArray = escitor.split(ab);
-//
-//        Optional<Artist> optionalDirector = artistRepository.findByName(esctiroresArray[0]);
-//        Artist artist;
-//        if(optionalDirector.isPresent()){
-//            artist = optionalDirector.get();
-//        }else{
-//            artist = new Artist();
-//            artist.setName(esctiroresArray[1]);
-//            artist = artistRepository.save(artist);
-//        }
-//
-//        return artist;
-//
-//
-//    }
-
-
+        return artist;
+    }
 }
