@@ -6,13 +6,8 @@ import com.furyviewer.domain.Movie;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.GenreRepository;
 import com.furyviewer.repository.MovieRepository;
-import com.furyviewer.service.ImageService;
+import com.furyviewer.service.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
@@ -26,9 +21,6 @@ public class MovieOmdbDTOService {
     public static final String apikey = "66f5a28";
 
     @Autowired
-    private ImageService imageService;
-
-    @Autowired
     private GenreRepository genreRepository;
 
     @Autowired
@@ -36,6 +28,9 @@ public class MovieOmdbDTOService {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private DateConversorService dateConversorService;
 
     static MovieOmdbDTORepository apiService = MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
 
@@ -69,7 +64,9 @@ public class MovieOmdbDTOService {
         m.setDescription(movieOmdbDTO.getPlot());
 
         //DATES
-        m.setReleaseDate(movieOmdbDTO.releseDate());
+
+
+        m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
 
         //Generos
 
@@ -77,13 +74,6 @@ public class MovieOmdbDTOService {
         m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
 
         movieRepository.save(m);
-
-        try {
-            System.out.println(movieOmdbDTO.getPoster());
-            m.setImg(imageService.toImage(movieOmdbDTO.getPoster()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         String[] genres = movieOmdbDTO.getGenre().split(", ");
 

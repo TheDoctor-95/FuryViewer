@@ -2,7 +2,10 @@
 package com.furyviewer.service.dto.OpenMovieDatabase;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -250,61 +253,4 @@ public class MovieOmdbDTO {
     public void setResponse(String response) {
         this.response = response;
     }
-
-
-    public LocalDate releseDate(){
-        String[] dateString = this.getReleased().split(" ");
-        int day = Integer.parseInt(dateString[0]);
-
-        int month;
-
-        switch (dateString[1]){
-            case "Jan":
-                month = 1;
-                break;
-            case "Feb":
-                month = 2;
-                break;
-            case "May":
-                month = 3;
-                break;
-            case "Apr":
-                month = 4;
-                break;
-            case "Mar":
-                month = 5;
-                break;
-            case "Jun":
-                month = 6;
-                break;
-            case "Jul":
-                month = 7;
-                break;
-            case "Aug":
-                month = 8;
-                break;
-            case "Set":
-                month = 9;
-                break;
-            case "Oct":
-                month = 10;
-                break;
-            case "Nov":
-                month = 11;
-                break;
-            case "Dec":
-                month = 12;
-                break;
-            default:
-                month = 1;
-
-
-        }
-
-        int year = Integer.parseInt(dateString[2]);
-
-        return LocalDate.of(year,month,day);
-
-    }
-
 }

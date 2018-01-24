@@ -1,16 +1,10 @@
 package com.furyviewer.service.dto.MovieDatabase;
 
-import com.furyviewer.service.ImageService;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.furyviewer.domain.Movie;
-import okhttp3.Headers;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.util.List;
 
 public class MovieDTO {
@@ -355,12 +349,7 @@ public class MovieDTO {
         }
 
 
-        try {
-            //movie.setImg(ImageService.toImage("AAA"));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         return movie;
     }
