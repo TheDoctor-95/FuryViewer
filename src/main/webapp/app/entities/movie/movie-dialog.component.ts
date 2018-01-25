@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Movie } from './movie.model';
 import { MoviePopupService } from './movie-popup.service';
@@ -12,6 +12,7 @@ import { MovieService } from './movie.service';
 import { Artist, ArtistService } from '../artist';
 import { Company, CompanyService } from '../company';
 import { Genre, GenreService } from '../genre';
+import { Country, CountryService } from '../country';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -28,17 +29,18 @@ export class MovieDialogComponent implements OnInit {
     companies: Company[];
 
     genres: Genre[];
+
+    countries: Country[];
     releaseDateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,
-        private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private movieService: MovieService,
         private artistService: ArtistService,
         private companyService: CompanyService,
         private genreService: GenreService,
-        private elementRef: ElementRef,
+        private countryService: CountryService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -51,22 +53,8 @@ export class MovieDialogComponent implements OnInit {
             .subscribe((res: ResponseWrapper) => { this.companies = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.genreService.query()
             .subscribe((res: ResponseWrapper) => { this.genres = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
-    }
-
-    clearInputImage(field: string, fieldContentType: string, idInput: string) {
-        this.dataUtils.clearInputImage(this.movie, this.elementRef, field, fieldContentType, idInput);
+        this.countryService.query()
+            .subscribe((res: ResponseWrapper) => { this.countries = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -112,6 +100,10 @@ export class MovieDialogComponent implements OnInit {
     }
 
     trackGenreById(index: number, item: Genre) {
+        return item.id;
+    }
+
+    trackCountryById(index: number, item: Country) {
         return item.id;
     }
 

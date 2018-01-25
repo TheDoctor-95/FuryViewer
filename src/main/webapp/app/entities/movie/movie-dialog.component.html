@@ -33,23 +33,6 @@
                 [(ngModel)]="movie.description"  />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.img" for="field_img">Img</label>
-            <div>
-                <img [src]="'data:' + movie.imgContentType + ';base64,' + movie.img" style="max-height: 100px;" *ngIf="movie.img" alt="movie image"/>
-                <div *ngIf="movie.img" class="form-text text-danger clearfix">
-                    <span class="pull-left">{{movie.imgContentType}}, {{byteSize(movie.img)}}</span>
-                    <button type="button" (click)="clearInputImage('img', 'imgContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
-                        <span class="fa fa-times"></span>
-                    </button>
-                </div>
-                <input type="file" id="file_img" (change)="setFileData($event, movie, 'img', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
-            </div>
-            <input type="hidden" class="form-control" name="img" id="field_img"
-                [(ngModel)]="movie.img"  />
-            <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
-                [(ngModel)]="movie.imgContentType" />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.movie.duration" for="field_duration">Duration</label>
             <input type="number" class="form-control" name="duration" id="field_duration"
                 [(ngModel)]="movie.duration"  />
@@ -58,6 +41,21 @@
             <label class="form-control-label" jhiTranslate="furyViewerApp.movie.imdbIdExternalApi" for="field_imdbIdExternalApi">Imdb Id External Api</label>
             <input type="text" class="form-control" name="imdbIdExternalApi" id="field_imdbIdExternalApi"
                 [(ngModel)]="movie.imdbIdExternalApi"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.imgUrl" for="field_imgUrl">Img Url</label>
+            <input type="text" class="form-control" name="imgUrl" id="field_imgUrl"
+                [(ngModel)]="movie.imgUrl"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.dvd_release" for="field_dvd_release">Dvd Release</label>
+            <input type="text" class="form-control" name="dvd_release" id="field_dvd_release"
+                [(ngModel)]="movie.dvd_release"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.awards" for="field_awards">Awards</label>
+            <input type="text" class="form-control" name="awards" id="field_awards"
+                [(ngModel)]="movie.awards"  />
         </div>
 
         <div class="form-group">
@@ -97,6 +95,13 @@
             <label jhiTranslate="furyViewerApp.movie.actorSecondary" for="field_actorSecondary">Actor Secondary</label>
             <select class="form-control" id="field_actorSecondary" multiple name="actorSecondary" [(ngModel)]="movie.actorSecondaries">
                 <option [ngValue]="getSelected(movie.actorSecondaries, artistOption)" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.country" for="field_country">Country</label>
+            <select class="form-control" id="field_country" name="country" [(ngModel)]="movie.country" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="countryOption.id === movie.country?.id ? movie.country : countryOption" *ngFor="let countryOption of countries; trackBy: trackCountryById">{{countryOption.name}}</option>
             </select>
         </div>
     </div>

@@ -6,10 +6,11 @@ export class Movie implements BaseEntity {
         public name?: string,
         public releaseDate?: any,
         public description?: string,
-        public imgContentType?: string,
-        public img?: any,
         public duration?: number,
         public imdbIdExternalApi?: string,
+        public imgUrl?: string,
+        public dvd_release?: string,
+        public awards?: string,
         public director?: BaseEntity,
         public scriptwriter?: BaseEntity,
         public company?: BaseEntity,
@@ -22,6 +23,7 @@ export class Movie implements BaseEntity {
         public stats?: BaseEntity[],
         public hatedMovies?: BaseEntity[],
         public socials?: BaseEntity[],
+        public country?: BaseEntity,
     ) {
     }
 }

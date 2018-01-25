@@ -78,6 +78,12 @@
             "relationshipName": "social",
             "otherEntityName": "social",
             "otherEntityRelationshipName": "movie"
+        },
+        {
+            "relationshipName": "country",
+            "otherEntityName": "country",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [
@@ -94,16 +100,23 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "img",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
-        },
-        {
             "fieldName": "duration",
             "fieldType": "Double"
         },
         {
             "fieldName": "imdbIdExternalApi",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imgUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dvd_release",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "awards",
             "fieldType": "String"
         }
     ],

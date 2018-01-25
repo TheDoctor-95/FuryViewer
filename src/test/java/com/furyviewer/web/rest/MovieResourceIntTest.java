@@ -102,8 +102,6 @@ public class MovieResourceIntTest {
             .name(DEFAULT_NAME)
             .releaseDate(DEFAULT_RELEASE_DATE)
             .description(DEFAULT_DESCRIPTION)
-            .img(DEFAULT_IMG)
-            .imgContentType(DEFAULT_IMG_CONTENT_TYPE)
             .duration(DEFAULT_DURATION)
             .imdbIdExternalApi(DEFAULT_IMDB_ID_EXTERNAL_API);
         return movie;
@@ -132,8 +130,6 @@ public class MovieResourceIntTest {
         assertThat(testMovie.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testMovie.getReleaseDate()).isEqualTo(DEFAULT_RELEASE_DATE);
         assertThat(testMovie.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testMovie.getImg()).isEqualTo(DEFAULT_IMG);
-        assertThat(testMovie.getImgContentType()).isEqualTo(DEFAULT_IMG_CONTENT_TYPE);
         assertThat(testMovie.getDuration()).isEqualTo(DEFAULT_DURATION);
         assertThat(testMovie.getImdbIdExternalApi()).isEqualTo(DEFAULT_IMDB_ID_EXTERNAL_API);
     }
@@ -171,8 +167,6 @@ public class MovieResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].releaseDate").value(hasItem(DEFAULT_RELEASE_DATE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].imgContentType").value(hasItem(DEFAULT_IMG_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))))
             .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION.doubleValue())))
             .andExpect(jsonPath("$.[*].imdbIdExternalApi").value(hasItem(DEFAULT_IMDB_ID_EXTERNAL_API.toString())));
     }
@@ -191,8 +185,6 @@ public class MovieResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.releaseDate").value(DEFAULT_RELEASE_DATE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.imgContentType").value(DEFAULT_IMG_CONTENT_TYPE))
-            .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)))
             .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION.doubleValue()))
             .andExpect(jsonPath("$.imdbIdExternalApi").value(DEFAULT_IMDB_ID_EXTERNAL_API.toString()));
     }
@@ -218,8 +210,6 @@ public class MovieResourceIntTest {
             .name(UPDATED_NAME)
             .releaseDate(UPDATED_RELEASE_DATE)
             .description(UPDATED_DESCRIPTION)
-            .img(UPDATED_IMG)
-            .imgContentType(UPDATED_IMG_CONTENT_TYPE)
             .duration(UPDATED_DURATION)
             .imdbIdExternalApi(UPDATED_IMDB_ID_EXTERNAL_API);
 
@@ -235,8 +225,6 @@ public class MovieResourceIntTest {
         assertThat(testMovie.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testMovie.getReleaseDate()).isEqualTo(UPDATED_RELEASE_DATE);
         assertThat(testMovie.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testMovie.getImg()).isEqualTo(UPDATED_IMG);
-        assertThat(testMovie.getImgContentType()).isEqualTo(UPDATED_IMG_CONTENT_TYPE);
         assertThat(testMovie.getDuration()).isEqualTo(UPDATED_DURATION);
         assertThat(testMovie.getImdbIdExternalApi()).isEqualTo(UPDATED_IMDB_ID_EXTERNAL_API);
     }

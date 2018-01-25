@@ -16,15 +16,6 @@
         <dd>
             <span>{{movie.description}}</span>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.img">Img</span></dt>
-        <dd>
-            <div *ngIf="movie.img">
-                <a (click)="openFile(movie.imgContentType, movie.img)">
-                    <img [src]="'data:' + movie.imgContentType + ';base64,' + movie.img" style="max-width: 100%;" alt="movie image"/>
-                </a>
-                {{movie.imgContentType}}, {{byteSize(movie.img)}}
-            </div>
-        </dd>
         <dt><span jhiTranslate="furyViewerApp.movie.duration">Duration</span></dt>
         <dd>
             <span>{{movie.duration}}</span>
@@ -32,6 +23,18 @@
         <dt><span jhiTranslate="furyViewerApp.movie.imdbIdExternalApi">Imdb Id External Api</span></dt>
         <dd>
             <span>{{movie.imdbIdExternalApi}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.imgUrl">Img Url</span></dt>
+        <dd>
+            <span>{{movie.imgUrl}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.dvd_release">Dvd Release</span></dt>
+        <dd>
+            <span>{{movie.dvd_release}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.awards">Awards</span></dt>
+        <dd>
+            <span>{{movie.awards}}</span>
         </dd>
         <dt><span jhiTranslate="furyViewerApp.movie.director">Director</span></dt>
         <dd>
@@ -68,6 +71,12 @@
             <span *ngFor="let actorSecondary of movie.actorSecondaries; let last = last">
                 <a [routerLink]="['/artist', actorSecondary?.id ]">{{actorSecondary.name}}</a>{{last ? '' : ', '}}
             </span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.movie.country">Country</span></dt>
+        <dd>
+            <div *ngIf="movie.country">
+                <a [routerLink]="['/country', movie.country?.id]">{{movie.country?.name}}</a>
+            </div>
         </dd>
     </dl>
 

@@ -34,18 +34,23 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="img" type="longblob">
-                <constraints nullable="true" />
-            </column>
-            <column name="img_content_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="duration" type="double">
                 <constraints nullable="true" />
             </column>
 
             <column name="imdb_id_external_api" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="img_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dvd_release" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="awards" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -58,6 +63,10 @@
             </column>
 
             <column name="company_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="country_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

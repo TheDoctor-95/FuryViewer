@@ -59,5 +59,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="artist"/>
         
+        <addForeignKeyConstraint baseColumnNames="country_id"
+                                 baseTableName="movie"
+                                 constraintName="fk_movie_country_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="country"/>
+
     </changeSet>
 </databaseChangeLog>

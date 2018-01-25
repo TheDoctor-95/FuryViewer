@@ -34,18 +34,20 @@ public class Movie implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Lob
-    @Column(name = "img")
-    private byte[] img;
-
-    @Column(name = "img_content_type")
-    private String imgContentType;
-
     @Column(name = "duration")
     private Double duration;
 
     @Column(name = "imdb_id_external_api")
     private String imdbIdExternalApi;
+
+    @Column(name = "img_url")
+    private String imgUrl;
+
+    @Column(name = "dvd_release")
+    private String dvd_release;
+
+    @Column(name = "awards")
+    private String awards;
 
     @ManyToOne
     private Artist director;
@@ -107,6 +109,9 @@ public class Movie implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Social> socials = new HashSet<>();
 
+    @ManyToOne
+    private Country country;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -155,32 +160,6 @@ public class Movie implements Serializable {
         this.description = description;
     }
 
-    public byte[] getImg() {
-        return img;
-    }
-
-    public Movie img(byte[] img) {
-        this.img = img;
-        return this;
-    }
-
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
-
-    public String getImgContentType() {
-        return imgContentType;
-    }
-
-    public Movie imgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
-        return this;
-    }
-
-    public void setImgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
-    }
-
     public Double getDuration() {
         return duration;
     }
@@ -205,6 +184,45 @@ public class Movie implements Serializable {
 
     public void setImdbIdExternalApi(String imdbIdExternalApi) {
         this.imdbIdExternalApi = imdbIdExternalApi;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public Movie imgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+        return this;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getDvd_release() {
+        return dvd_release;
+    }
+
+    public Movie dvd_release(String dvd_release) {
+        this.dvd_release = dvd_release;
+        return this;
+    }
+
+    public void setDvd_release(String dvd_release) {
+        this.dvd_release = dvd_release;
+    }
+
+    public String getAwards() {
+        return awards;
+    }
+
+    public Movie awards(String awards) {
+        this.awards = awards;
+        return this;
+    }
+
+    public void setAwards(String awards) {
+        this.awards = awards;
     }
 
     public Artist getDirector() {
@@ -470,6 +488,19 @@ public class Movie implements Serializable {
     public void setSocials(Set<Social> socials) {
         this.socials = socials;
     }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public Movie country(Country country) {
+        this.country = country;
+        return this;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -499,10 +530,11 @@ public class Movie implements Serializable {
             ", name='" + getName() + "'" +
             ", releaseDate='" + getReleaseDate() + "'" +
             ", description='" + getDescription() + "'" +
-            ", img='" + getImg() + "'" +
-            ", imgContentType='" + imgContentType + "'" +
             ", duration='" + getDuration() + "'" +
             ", imdbIdExternalApi='" + getImdbIdExternalApi() + "'" +
+            ", imgUrl='" + getImgUrl() + "'" +
+            ", dvd_release='" + getDvd_release() + "'" +
+            ", awards='" + getAwards() + "'" +
             "}";
     }
 }

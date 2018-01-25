@@ -18,9 +18,11 @@
             "name": "Name",
             "releaseDate": "Release Date",
             "description": "Description",
-            "img": "Img",
             "duration": "Duration",
             "imdbIdExternalApi": "Imdb Id External Api",
+            "imgUrl": "Img Url",
+            "dvd_release": "Dvd Release",
+            "awards": "Awards",
             "director": "Director",
             "scriptwriter": "Scriptwriter",
             "company": "Company",
@@ -32,7 +34,8 @@
             "rateMovie": "Rate Movie",
             "stat": "Stat",
             "hatedMovie": "Hated Movie",
-            "social": "Social"
+            "social": "Social",
+            "country": "Country"
         }
     }
 }

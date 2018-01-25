@@ -20,15 +20,18 @@
             <th><span jhiTranslate="furyViewerApp.movie.name">Name</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.releaseDate">Release Date</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.description">Description</span></th>
-            <th><span jhiTranslate="furyViewerApp.movie.img">Img</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.duration">Duration</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.imdbIdExternalApi">Imdb Id External Api</span></th>
+            <th><span jhiTranslate="furyViewerApp.movie.imgUrl">Img Url</span></th>
+            <th><span jhiTranslate="furyViewerApp.movie.dvd_release">Dvd Release</span></th>
+            <th><span jhiTranslate="furyViewerApp.movie.awards">Awards</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.director">Director</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.scriptwriter">Scriptwriter</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.company">Company</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.genre">Genre</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.actorMain">Actor Main</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.actorSecondary">Actor Secondary</span></th>
+            <th><span jhiTranslate="furyViewerApp.movie.country">Country</span></th>
             <th></th>
             </tr>
             </thead>
@@ -38,14 +41,11 @@
                 <td>{{movie.name}}</td>
                 <td>{{movie.releaseDate | date:'mediumDate'}}</td>
                 <td>{{movie.description}}</td>
-                <td>
-                    <a *ngIf="movie.img" (click)="openFile(movie.imgContentType, movie.img)">
-                        <img [src]="'data:' + movie.imgContentType + ';base64,' + movie.img" style="max-height: 30px;" alt="movie image"/>
-                    </a>
-                    <span *ngIf="movie.img">{{movie.imgContentType}}, {{byteSize(movie.img)}}</span>
-                </td>
                 <td>{{movie.duration}}</td>
                 <td>{{movie.imdbIdExternalApi}}</td>
+                <td>{{movie.imgUrl}}</td>
+                <td>{{movie.dvd_release}}</td>
+                <td>{{movie.awards}}</td>
                 <td>
                     <div *ngIf="movie.director">
                         <a [routerLink]="['../artist', movie.director?.id ]" >{{movie.director?.name}}</a>
@@ -75,6 +75,11 @@
                     <span *ngFor="let actorSecondary of movie.actorSecondaries; let last = last">
                             <a class="form-control-static" [routerLink]="['../artist', actorSecondary?.id ]">{{actorSecondary.name}}</a>{{last ? '' : ', '}}
                         </span>
+                </td>
+                <td>
+                    <div *ngIf="movie.country">
+                        <a [routerLink]="['../country', movie.country?.id ]" >{{movie.country?.name}}</a>
+                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
