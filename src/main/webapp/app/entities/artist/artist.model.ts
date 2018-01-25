@@ -4,7 +4,6 @@ export class Artist implements BaseEntity {
     constructor(
         public id?: number,
         public name?: string,
-        public surname?: string,
         public birthdate?: any,
         public sex?: string,
         public deathdate?: any,

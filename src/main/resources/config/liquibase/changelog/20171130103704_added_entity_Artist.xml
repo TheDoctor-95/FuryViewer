@@ -26,10 +26,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="surname" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="birthdate" type="date">
                 <constraints nullable="true" />
             </column>

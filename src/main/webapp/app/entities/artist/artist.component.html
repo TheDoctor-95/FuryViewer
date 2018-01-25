@@ -18,7 +18,6 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.name">Name</span></th>
-            <th><span jhiTranslate="furyViewerApp.artist.surname">Surname</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.birthdate">Birthdate</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.sex">Sex</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.deathdate">Deathdate</span></th>
@@ -34,7 +33,6 @@
             <tr *ngFor="let artist of artists ;trackBy: trackId">
                 <td><a [routerLink]="['../artist', artist.id ]">{{artist.id}}</a></td>
                 <td>{{artist.name}}</td>
-                <td>{{artist.surname}}</td>
                 <td>{{artist.birthdate | date:'mediumDate'}}</td>
                 <td>{{artist.sex}}</td>
                 <td>{{artist.deathdate | date:'mediumDate'}}</td>

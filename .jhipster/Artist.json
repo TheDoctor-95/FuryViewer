@@ -86,10 +86,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "surname",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "birthdate",
             "fieldType": "LocalDate"
         },

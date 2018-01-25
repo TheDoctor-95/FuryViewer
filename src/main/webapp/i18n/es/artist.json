@@ -16,7 +16,6 @@
                 "title": "Artist"
             },
             "name": "Name",
-            "surname": "Surname",
             "birthdate": "Birthdate",
             "sex": "Sex",
             "deathdate": "Deathdate",

@@ -18,11 +18,6 @@
                 [(ngModel)]="artist.name"  />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.surname" for="field_surname">Surname</label>
-            <input type="text" class="form-control" name="surname" id="field_surname"
-                [(ngModel)]="artist.surname"  />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.artist.birthdate" for="field_birthdate">Birthdate</label>
             <div class="input-group">
                 <input id="field_birthdate" type="text" class="form-control" name="birthdate" ngbDatepicker  #birthdateDp="ngbDatepicker" [(ngModel)]="artist.birthdate"

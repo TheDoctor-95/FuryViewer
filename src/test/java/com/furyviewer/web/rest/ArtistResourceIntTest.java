@@ -100,7 +100,6 @@ public class ArtistResourceIntTest {
     public static Artist createEntity(EntityManager em) {
         Artist artist = new Artist()
             .name(DEFAULT_NAME)
-            .surname(DEFAULT_SURNAME)
             .birthdate(DEFAULT_BIRTHDATE)
             .sex(DEFAULT_SEX)
             .deathdate(DEFAULT_DEATHDATE);
@@ -128,7 +127,6 @@ public class ArtistResourceIntTest {
         assertThat(artistList).hasSize(databaseSizeBeforeCreate + 1);
         Artist testArtist = artistList.get(artistList.size() - 1);
         assertThat(testArtist.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testArtist.getSurname()).isEqualTo(DEFAULT_SURNAME);
         assertThat(testArtist.getBirthdate()).isEqualTo(DEFAULT_BIRTHDATE);
         assertThat(testArtist.getSex()).isEqualTo(DEFAULT_SEX);
         assertThat(testArtist.getDeathdate()).isEqualTo(DEFAULT_DEATHDATE);
@@ -208,7 +206,6 @@ public class ArtistResourceIntTest {
         Artist updatedArtist = artistRepository.findOne(artist.getId());
         updatedArtist
             .name(UPDATED_NAME)
-            .surname(UPDATED_SURNAME)
             .birthdate(UPDATED_BIRTHDATE)
             .sex(UPDATED_SEX)
             .deathdate(UPDATED_DEATHDATE);
@@ -223,7 +220,6 @@ public class ArtistResourceIntTest {
         assertThat(artistList).hasSize(databaseSizeBeforeUpdate);
         Artist testArtist = artistList.get(artistList.size() - 1);
         assertThat(testArtist.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testArtist.getSurname()).isEqualTo(UPDATED_SURNAME);
         assertThat(testArtist.getBirthdate()).isEqualTo(UPDATED_BIRTHDATE);
         assertThat(testArtist.getSex()).isEqualTo(UPDATED_SEX);
         assertThat(testArtist.getDeathdate()).isEqualTo(UPDATED_DEATHDATE);

@@ -28,9 +28,6 @@ public class Artist implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
-    private String surname;
-
     @Column(name = "birthdate")
     private LocalDate birthdate;
 
@@ -129,19 +126,6 @@ public class Artist implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public Artist surname(String surname) {
-        this.surname = surname;
-        return this;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public LocalDate getBirthdate() {
@@ -536,7 +520,6 @@ public class Artist implements Serializable {
         return "Artist{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", surname='" + getSurname() + "'" +
             ", birthdate='" + getBirthdate() + "'" +
             ", sex='" + getSex() + "'" +
             ", deathdate='" + getDeathdate() + "'" +
