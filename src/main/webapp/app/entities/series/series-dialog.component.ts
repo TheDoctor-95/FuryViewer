@@ -9,7 +9,6 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Series } from './series.model';
 import { SeriesPopupService } from './series-popup.service';
 import { SeriesService } from './series.service';
-import { Artist, ArtistService } from '../artist';
 import { Company, CompanyService } from '../company';
 import { Genre, GenreService } from '../genre';
 import { Country, CountryService } from '../country';
@@ -24,8 +23,6 @@ export class SeriesDialogComponent implements OnInit {
     series: Series;
     isSaving: boolean;
 
-    artists: Artist[];
-
     companies: Company[];
 
     genres: Genre[];
@@ -37,7 +34,6 @@ export class SeriesDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private seriesService: SeriesService,
-        private artistService: ArtistService,
         private companyService: CompanyService,
         private genreService: GenreService,
         private countryService: CountryService,
@@ -47,8 +43,6 @@ export class SeriesDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.artistService.query()
-            .subscribe((res: ResponseWrapper) => { this.artists = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.companyService.query()
             .subscribe((res: ResponseWrapper) => { this.companies = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.genreService.query()
@@ -89,10 +83,6 @@ export class SeriesDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackArtistById(index: number, item: Artist) {
-        return item.id;
     }
 
     trackCompanyById(index: number, item: Company) {

@@ -3,18 +3,6 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "director",
-            "otherEntityName": "artist",
-            "otherEntityField": "name"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "scriptwriter",
-            "otherEntityName": "artist",
-            "otherEntityField": "name"
-        },
-        {
-            "relationshipType": "many-to-one",
             "relationshipName": "company",
             "otherEntityName": "company",
             "otherEntityField": "name"
@@ -24,22 +12,6 @@
             "otherEntityRelationshipName": "series",
             "relationshipName": "genre",
             "otherEntityName": "genre",
-            "otherEntityField": "name",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "seriesMainActor",
-            "relationshipName": "actorMain",
-            "otherEntityName": "artist",
-            "otherEntityField": "name",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "seriesSecondaryActor",
-            "relationshipName": "actorSecondary",
-            "otherEntityName": "artist",
             "otherEntityField": "name",
             "ownerSide": true
         },

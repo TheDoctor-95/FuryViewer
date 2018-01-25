@@ -24,12 +24,8 @@
             <th><span jhiTranslate="furyViewerApp.series.imgUrl">Img Url</span></th>
             <th><span jhiTranslate="furyViewerApp.series.imdb_id">Imdb Id</span></th>
             <th><span jhiTranslate="furyViewerApp.series.awards">Awards</span></th>
-            <th><span jhiTranslate="furyViewerApp.series.director">Director</span></th>
-            <th><span jhiTranslate="furyViewerApp.series.scriptwriter">Scriptwriter</span></th>
             <th><span jhiTranslate="furyViewerApp.series.company">Company</span></th>
             <th><span jhiTranslate="furyViewerApp.series.genre">Genre</span></th>
-            <th><span jhiTranslate="furyViewerApp.series.actorMain">Actor Main</span></th>
-            <th><span jhiTranslate="furyViewerApp.series.actorSecondary">Actor Secondary</span></th>
             <th><span jhiTranslate="furyViewerApp.series.country">Country</span></th>
             <th></th>
             </tr>
@@ -45,16 +41,6 @@
                 <td>{{series.imdb_id}}</td>
                 <td>{{series.awards}}</td>
                 <td>
-                    <div *ngIf="series.director">
-                        <a [routerLink]="['../artist', series.director?.id ]" >{{series.director?.name}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="series.scriptwriter">
-                        <a [routerLink]="['../artist', series.scriptwriter?.id ]" >{{series.scriptwriter?.name}}</a>
-                    </div>
-                </td>
-                <td>
                     <div *ngIf="series.company">
                         <a [routerLink]="['../company', series.company?.id ]" >{{series.company?.name}}</a>
                     </div>
@@ -62,16 +48,6 @@
                 <td>
                     <span *ngFor="let genre of series.genres; let last = last">
                             <a class="form-control-static" [routerLink]="['../genre', genre?.id ]">{{genre.name}}</a>{{last ? '' : ', '}}
-                        </span>
-                </td>
-                <td>
-                    <span *ngFor="let actorMain of series.actorMains; let last = last">
-                            <a class="form-control-static" [routerLink]="['../artist', actorMain?.id ]">{{actorMain.name}}</a>{{last ? '' : ', '}}
-                        </span>
-                </td>
-                <td>
-                    <span *ngFor="let actorSecondary of series.actorSecondaries; let last = last">
-                            <a class="form-control-static" [routerLink]="['../artist', actorSecondary?.id ]">{{actorSecondary.name}}</a>{{last ? '' : ', '}}
                         </span>
                 </td>
                 <td>

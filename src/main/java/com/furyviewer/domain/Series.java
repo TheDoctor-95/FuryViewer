@@ -50,12 +50,6 @@ public class Series implements Serializable {
     private String awards;
 
     @ManyToOne
-    private Artist director;
-
-    @ManyToOne
-    private Artist scriptwriter;
-
-    @ManyToOne
     private Company company;
 
     @ManyToMany
@@ -64,20 +58,6 @@ public class Series implements Serializable {
                joinColumns = @JoinColumn(name="series_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="genres_id", referencedColumnName="id"))
     private Set<Genre> genres = new HashSet<>();
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "series_actor_main",
-               joinColumns = @JoinColumn(name="series_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="actor_mains_id", referencedColumnName="id"))
-    private Set<Artist> actorMains = new HashSet<>();
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "series_actor_secondary",
-               joinColumns = @JoinColumn(name="series_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="actor_secondaries_id", referencedColumnName="id"))
-    private Set<Artist> actorSecondaries = new HashSet<>();
 
     @OneToMany(mappedBy = "series")
     @JsonIgnore
@@ -217,32 +197,6 @@ public class Series implements Serializable {
         this.awards = awards;
     }
 
-    public Artist getDirector() {
-        return director;
-    }
-
-    public Series director(Artist artist) {
-        this.director = artist;
-        return this;
-    }
-
-    public void setDirector(Artist artist) {
-        this.director = artist;
-    }
-
-    public Artist getScriptwriter() {
-        return scriptwriter;
-    }
-
-    public Series scriptwriter(Artist artist) {
-        this.scriptwriter = artist;
-        return this;
-    }
-
-    public void setScriptwriter(Artist artist) {
-        this.scriptwriter = artist;
-    }
-
     public Company getCompany() {
         return company;
     }
@@ -279,56 +233,6 @@ public class Series implements Serializable {
 
     public void setGenres(Set<Genre> genres) {
         this.genres = genres;
-    }
-
-    public Set<Artist> getActorMains() {
-        return actorMains;
-    }
-
-    public Series actorMains(Set<Artist> artists) {
-        this.actorMains = artists;
-        return this;
-    }
-
-    public Series addActorMain(Artist artist) {
-        this.actorMains.add(artist);
-        artist.getSeriesMainActors().add(this);
-        return this;
-    }
-
-    public Series removeActorMain(Artist artist) {
-        this.actorMains.remove(artist);
-        artist.getSeriesMainActors().remove(this);
-        return this;
-    }
-
-    public void setActorMains(Set<Artist> artists) {
-        this.actorMains = artists;
-    }
-
-    public Set<Artist> getActorSecondaries() {
-        return actorSecondaries;
-    }
-
-    public Series actorSecondaries(Set<Artist> artists) {
-        this.actorSecondaries = artists;
-        return this;
-    }
-
-    public Series addActorSecondary(Artist artist) {
-        this.actorSecondaries.add(artist);
-        artist.getSeriesSecondaryActors().add(this);
-        return this;
-    }
-
-    public Series removeActorSecondary(Artist artist) {
-        this.actorSecondaries.remove(artist);
-        artist.getSeriesSecondaryActors().remove(this);
-        return this;
-    }
-
-    public void setActorSecondaries(Set<Artist> artists) {
-        this.actorSecondaries = artists;
     }
 
     public Set<ReviewSeries> getReviews() {

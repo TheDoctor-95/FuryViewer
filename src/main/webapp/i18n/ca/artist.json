@@ -27,13 +27,9 @@
             "favoriteArtist": "Favorite Artist",
             "hatredArtist": "Hatred Artist",
             "movieDirector": "Movie Director",
-            "seriesDirector": "Series Director",
             "movieScriptwriter": "Movie Scriptwriter",
-            "seriesScriptwriter": "Series Scriptwriter",
             "movieMainActor": "Movie Main Actor",
-            "movieSecondaryActor": "Movie Secondary Actor",
-            "seriesMainActor": "Series Main Actor",
-            "seriesSecondaryActor": "Series Secondary Actor"
+            "movieSecondaryActor": "Movie Secondary Actor"
         }
     }
 }

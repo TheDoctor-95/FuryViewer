@@ -32,18 +32,6 @@
         <dd>
             <span>{{series.awards}}</span>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.director">Director</span></dt>
-        <dd>
-            <div *ngIf="series.director">
-                <a [routerLink]="['/artist', series.director?.id]">{{series.director?.name}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.scriptwriter">Scriptwriter</span></dt>
-        <dd>
-            <div *ngIf="series.scriptwriter">
-                <a [routerLink]="['/artist', series.scriptwriter?.id]">{{series.scriptwriter?.name}}</a>
-            </div>
-        </dd>
         <dt><span jhiTranslate="furyViewerApp.series.company">Company</span></dt>
         <dd>
             <div *ngIf="series.company">
@@ -54,18 +42,6 @@
         <dd>
             <span *ngFor="let genre of series.genres; let last = last">
                 <a [routerLink]="['/genre', genre?.id ]">{{genre.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.actorMain">Actor Main</span></dt>
-        <dd>
-            <span *ngFor="let actorMain of series.actorMains; let last = last">
-                <a [routerLink]="['/artist', actorMain?.id ]">{{actorMain.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.actorSecondary">Actor Secondary</span></dt>
-        <dd>
-            <span *ngFor="let actorSecondary of series.actorSecondaries; let last = last">
-                <a [routerLink]="['/artist', actorSecondary?.id ]">{{actorSecondary.name}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
         <dt><span jhiTranslate="furyViewerApp.series.country">Country</span></dt>

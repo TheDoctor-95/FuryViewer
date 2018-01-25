@@ -35,20 +35,8 @@
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "seriesDirector",
-            "otherEntityName": "series",
-            "otherEntityRelationshipName": "director"
-        },
-        {
-            "relationshipType": "one-to-many",
             "relationshipName": "movieScriptwriter",
             "otherEntityName": "movie",
-            "otherEntityRelationshipName": "scriptwriter"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "relationshipName": "seriesScriptwriter",
-            "otherEntityName": "series",
             "otherEntityRelationshipName": "scriptwriter"
         },
         {
@@ -62,20 +50,6 @@
             "relationshipType": "many-to-many",
             "relationshipName": "movieSecondaryActor",
             "otherEntityName": "movie",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "actorSecondary"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "seriesMainActor",
-            "otherEntityName": "series",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "actorMain"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "relationshipName": "seriesSecondaryActor",
-            "otherEntityName": "series",
             "ownerSide": false,
             "otherEntityRelationshipName": "actorSecondary"
         }

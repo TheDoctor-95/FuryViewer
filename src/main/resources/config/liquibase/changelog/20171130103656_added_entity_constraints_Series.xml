@@ -8,18 +8,6 @@
     -->
     <changeSet id="20171130103656-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="director_id"
-                                 baseTableName="series"
-                                 constraintName="fk_series_director_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="artist"/>
-
-        <addForeignKeyConstraint baseColumnNames="scriptwriter_id"
-                                 baseTableName="series"
-                                 constraintName="fk_series_scriptwriter_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="artist"/>
-
         <addForeignKeyConstraint baseColumnNames="company_id"
                                  baseTableName="series"
                                  constraintName="fk_series_company_id"
@@ -36,28 +24,6 @@
                                  constraintName="fk_series_genre_genres_id"
                                  referencedColumnNames="id"
                                  referencedTableName="genre"/>
-        
-        <addForeignKeyConstraint baseColumnNames="series_id"
-                                 baseTableName="series_actor_main"
-                                 constraintName="fk_series_actor_main_series_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="series"/>
-        <addForeignKeyConstraint baseColumnNames="actor_mains_id"
-                                 baseTableName="series_actor_main"
-                                 constraintName="fk_series_actor_main_actor_mains_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="artist"/>
-        
-        <addForeignKeyConstraint baseColumnNames="series_id"
-                                 baseTableName="series_actor_secondary"
-                                 constraintName="fk_series_actor_secondary_series_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="series"/>
-        <addForeignKeyConstraint baseColumnNames="actor_secondaries_id"
-                                 baseTableName="series_actor_secondary"
-                                 constraintName="fk_series_actor_secondary_actor_secondaries_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="artist"/>
         
         <addForeignKeyConstraint baseColumnNames="country_id"
                                  baseTableName="series"

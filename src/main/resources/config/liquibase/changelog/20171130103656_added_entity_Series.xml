@@ -50,14 +50,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="director_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="scriptwriter_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="company_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -79,28 +71,6 @@
         </createTable>
 
         <addPrimaryKey columnNames="series_id, genres_id" tableName="series_genre"/>
-        
-        <createTable tableName="series_actor_main">
-            <column name="actor_mains_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="series_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="series_id, actor_mains_id" tableName="series_actor_main"/>
-        
-        <createTable tableName="series_actor_secondary">
-            <column name="actor_secondaries_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="series_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="series_id, actor_secondaries_id" tableName="series_actor_secondary"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

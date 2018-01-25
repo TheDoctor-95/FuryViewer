@@ -71,20 +71,10 @@ public class Artist implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Movie> movieDirectors = new HashSet<>();
 
-    @OneToMany(mappedBy = "director")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Series> seriesDirectors = new HashSet<>();
-
     @OneToMany(mappedBy = "scriptwriter")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Movie> movieScriptwriters = new HashSet<>();
-
-    @OneToMany(mappedBy = "scriptwriter")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Series> seriesScriptwriters = new HashSet<>();
 
     @ManyToMany(mappedBy = "actorMains")
     @JsonIgnore
@@ -95,16 +85,6 @@ public class Artist implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Movie> movieSecondaryActors = new HashSet<>();
-
-    @ManyToMany(mappedBy = "actorMains")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Series> seriesMainActors = new HashSet<>();
-
-    @ManyToMany(mappedBy = "actorSecondaries")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Series> seriesSecondaryActors = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -319,31 +299,6 @@ public class Artist implements Serializable {
         this.movieDirectors = movies;
     }
 
-    public Set<Series> getSeriesDirectors() {
-        return seriesDirectors;
-    }
-
-    public Artist seriesDirectors(Set<Series> series) {
-        this.seriesDirectors = series;
-        return this;
-    }
-
-    public Artist addSeriesDirector(Series series) {
-        this.seriesDirectors.add(series);
-        series.setDirector(this);
-        return this;
-    }
-
-    public Artist removeSeriesDirector(Series series) {
-        this.seriesDirectors.remove(series);
-        series.setDirector(null);
-        return this;
-    }
-
-    public void setSeriesDirectors(Set<Series> series) {
-        this.seriesDirectors = series;
-    }
-
     public Set<Movie> getMovieScriptwriters() {
         return movieScriptwriters;
     }
@@ -367,31 +322,6 @@ public class Artist implements Serializable {
 
     public void setMovieScriptwriters(Set<Movie> movies) {
         this.movieScriptwriters = movies;
-    }
-
-    public Set<Series> getSeriesScriptwriters() {
-        return seriesScriptwriters;
-    }
-
-    public Artist seriesScriptwriters(Set<Series> series) {
-        this.seriesScriptwriters = series;
-        return this;
-    }
-
-    public Artist addSeriesScriptwriter(Series series) {
-        this.seriesScriptwriters.add(series);
-        series.setScriptwriter(this);
-        return this;
-    }
-
-    public Artist removeSeriesScriptwriter(Series series) {
-        this.seriesScriptwriters.remove(series);
-        series.setScriptwriter(null);
-        return this;
-    }
-
-    public void setSeriesScriptwriters(Set<Series> series) {
-        this.seriesScriptwriters = series;
     }
 
     public Set<Movie> getMovieMainActors() {
@@ -442,56 +372,6 @@ public class Artist implements Serializable {
 
     public void setMovieSecondaryActors(Set<Movie> movies) {
         this.movieSecondaryActors = movies;
-    }
-
-    public Set<Series> getSeriesMainActors() {
-        return seriesMainActors;
-    }
-
-    public Artist seriesMainActors(Set<Series> series) {
-        this.seriesMainActors = series;
-        return this;
-    }
-
-    public Artist addSeriesMainActor(Series series) {
-        this.seriesMainActors.add(series);
-        series.getActorMains().add(this);
-        return this;
-    }
-
-    public Artist removeSeriesMainActor(Series series) {
-        this.seriesMainActors.remove(series);
-        series.getActorMains().remove(this);
-        return this;
-    }
-
-    public void setSeriesMainActors(Set<Series> series) {
-        this.seriesMainActors = series;
-    }
-
-    public Set<Series> getSeriesSecondaryActors() {
-        return seriesSecondaryActors;
-    }
-
-    public Artist seriesSecondaryActors(Set<Series> series) {
-        this.seriesSecondaryActors = series;
-        return this;
-    }
-
-    public Artist addSeriesSecondaryActor(Series series) {
-        this.seriesSecondaryActors.add(series);
-        series.getActorSecondaries().add(this);
-        return this;
-    }
-
-    public Artist removeSeriesSecondaryActor(Series series) {
-        this.seriesSecondaryActors.remove(series);
-        series.getActorSecondaries().remove(this);
-        return this;
-    }
-
-    public void setSeriesSecondaryActors(Set<Series> series) {
-        this.seriesSecondaryActors = series;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
