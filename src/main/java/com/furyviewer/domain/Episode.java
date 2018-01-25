@@ -37,9 +37,6 @@ public class Episode implements Serializable {
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
-    @Column(name = "img_url")
-    private String imgUrl;
-
     @Column(name = "imdb_id")
     private String imdbId;
 
@@ -123,19 +120,6 @@ public class Episode implements Serializable {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public Episode imgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-        return this;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
     }
 
     public String getImdbId() {
@@ -267,7 +251,6 @@ public class Episode implements Serializable {
             ", name='" + getName() + "'" +
             ", duration='" + getDuration() + "'" +
             ", releaseDate='" + getReleaseDate() + "'" +
-            ", imgUrl='" + getImgUrl() + "'" +
             ", imdbId='" + getImdbId() + "'" +
             "}";
     }

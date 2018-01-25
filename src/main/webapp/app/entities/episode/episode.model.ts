@@ -7,7 +7,6 @@ export class Episode implements BaseEntity {
         public name?: string,
         public duration?: number,
         public releaseDate?: any,
-        public imgUrl?: string,
         public imdbId?: string,
         public season?: BaseEntity,
         public seens?: BaseEntity[],

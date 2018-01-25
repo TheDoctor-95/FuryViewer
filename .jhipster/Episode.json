@@ -52,10 +52,6 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "imgUrl",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "imdbId",
             "fieldType": "String"
         }

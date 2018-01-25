@@ -38,10 +38,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="img_url" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="imdb_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

@@ -21,7 +21,6 @@
             <th><span jhiTranslate="furyViewerApp.episode.name">Name</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.duration">Duration</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.releaseDate">Release Date</span></th>
-            <th><span jhiTranslate="furyViewerApp.episode.imgUrl">Img Url</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.imdbId">Imdb Id</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.season">Season</span></th>
             <th><span jhiTranslate="furyViewerApp.episode.director">Director</span></th>
@@ -37,7 +36,6 @@
                 <td>{{episode.name}}</td>
                 <td>{{episode.duration}}</td>
                 <td>{{episode.releaseDate | date:'mediumDate'}}</td>
-                <td>{{episode.imgUrl}}</td>
                 <td>{{episode.imdbId}}</td>
                 <td>
                     <div *ngIf="episode.season">
