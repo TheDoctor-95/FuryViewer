@@ -24,14 +24,17 @@
         <dd>
             <span>{{artist.deathdate | date:'mediumDate'}}</span>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.img">Img</span></dt>
+        <dt><span jhiTranslate="furyViewerApp.artist.imgUrl">Img Url</span></dt>
         <dd>
-            <div *ngIf="artist.img">
-                <a (click)="openFile(artist.imgContentType, artist.img)">
-                    <img [src]="'data:' + artist.imgContentType + ';base64,' + artist.img" style="max-width: 100%;" alt="artist image"/>
-                </a>
-                {{artist.imgContentType}}, {{byteSize(artist.img)}}
-            </div>
+            <span>{{artist.imgUrl}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.imdb_id">Imdb Id</span></dt>
+        <dd>
+            <span>{{artist.imdb_id}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.artist.awards">Awards</span></dt>
+        <dd>
+            <span>{{artist.awards}}</span>
         </dd>
         <dt><span jhiTranslate="furyViewerApp.artist.country">Country</span></dt>
         <dd>

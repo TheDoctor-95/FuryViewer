@@ -42,10 +42,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="img" type="longblob">
+            <column name="img_url" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="img_content_type" type="varchar(255)">
+
+            <column name="imdb_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="awards" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

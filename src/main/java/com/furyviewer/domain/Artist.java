@@ -40,17 +40,19 @@ public class Artist implements Serializable {
     @Column(name = "deathdate")
     private LocalDate deathdate;
 
-    @Lob
-    @Column(name = "img")
-    private byte[] img;
+    @Column(name = "img_url")
+    private String imgUrl;
 
-    @Column(name = "img_content_type")
-    private String imgContentType;
+    @Column(name = "imdb_id")
+    private String imdb_id;
+
+    @Column(name = "awards")
+    private String awards;
 
     @ManyToOne
     private Country country;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "artist_artist_type",
                joinColumns = @JoinColumn(name="artists_id", referencedColumnName="id"),
@@ -181,30 +183,43 @@ public class Artist implements Serializable {
         this.deathdate = deathdate;
     }
 
-    public byte[] getImg() {
-        return img;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public Artist img(byte[] img) {
-        this.img = img;
+    public Artist imgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
         return this;
     }
 
-    public void setImg(byte[] img) {
-        this.img = img;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
-    public String getImgContentType() {
-        return imgContentType;
+    public String getImdb_id() {
+        return imdb_id;
     }
 
-    public Artist imgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
+    public Artist imdb_id(String imdb_id) {
+        this.imdb_id = imdb_id;
         return this;
     }
 
-    public void setImgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
+    public void setImdb_id(String imdb_id) {
+        this.imdb_id = imdb_id;
+    }
+
+    public String getAwards() {
+        return awards;
+    }
+
+    public Artist awards(String awards) {
+        this.awards = awards;
+        return this;
+    }
+
+    public void setAwards(String awards) {
+        this.awards = awards;
     }
 
     public Country getCountry() {
@@ -525,8 +540,9 @@ public class Artist implements Serializable {
             ", birthdate='" + getBirthdate() + "'" +
             ", sex='" + getSex() + "'" +
             ", deathdate='" + getDeathdate() + "'" +
-            ", img='" + getImg() + "'" +
-            ", imgContentType='" + imgContentType + "'" +
+            ", imgUrl='" + getImgUrl() + "'" +
+            ", imdb_id='" + getImdb_id() + "'" +
+            ", awards='" + getAwards() + "'" +
             "}";
     }
 }

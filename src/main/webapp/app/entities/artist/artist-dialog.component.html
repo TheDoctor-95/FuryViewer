@@ -48,21 +48,19 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.img" for="field_img">Img</label>
-            <div>
-                <img [src]="'data:' + artist.imgContentType + ';base64,' + artist.img" style="max-height: 100px;" *ngIf="artist.img" alt="artist image"/>
-                <div *ngIf="artist.img" class="form-text text-danger clearfix">
-                    <span class="pull-left">{{artist.imgContentType}}, {{byteSize(artist.img)}}</span>
-                    <button type="button" (click)="clearInputImage('img', 'imgContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
-                        <span class="fa fa-times"></span>
-                    </button>
-                </div>
-                <input type="file" id="file_img" (change)="setFileData($event, artist, 'img', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
-            </div>
-            <input type="hidden" class="form-control" name="img" id="field_img"
-                [(ngModel)]="artist.img"  />
-            <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
-                [(ngModel)]="artist.imgContentType" />
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.imgUrl" for="field_imgUrl">Img Url</label>
+            <input type="text" class="form-control" name="imgUrl" id="field_imgUrl"
+                [(ngModel)]="artist.imgUrl"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.imdb_id" for="field_imdb_id">Imdb Id</label>
+            <input type="text" class="form-control" name="imdb_id" id="field_imdb_id"
+                [(ngModel)]="artist.imdb_id"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artist.awards" for="field_awards">Awards</label>
+            <input type="text" class="form-control" name="awards" id="field_awards"
+                [(ngModel)]="artist.awards"  />
         </div>
 
         <div class="form-group">

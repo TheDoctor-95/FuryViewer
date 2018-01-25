@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { Artist } from './artist.model';
 import { ArtistService } from './artist.service';
@@ -19,7 +19,6 @@ artists: Artist[];
     constructor(
         private artistService: ArtistService,
         private jhiAlertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
@@ -47,14 +46,6 @@ artists: Artist[];
 
     trackId(index: number, item: Artist) {
         return item.id;
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInArtists() {
         this.eventSubscriber = this.eventManager.subscribe('artistListModification', (response) => this.loadAll());
