@@ -40,6 +40,9 @@ public class Episode implements Serializable {
     @Column(name = "imdb_id")
     private String imdbId;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     private Season season;
 
@@ -133,6 +136,19 @@ public class Episode implements Serializable {
 
     public void setImdbId(String imdbId) {
         this.imdbId = imdbId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Episode description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Season getSeason() {
@@ -252,6 +268,7 @@ public class Episode implements Serializable {
             ", duration='" + getDuration() + "'" +
             ", releaseDate='" + getReleaseDate() + "'" +
             ", imdbId='" + getImdbId() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

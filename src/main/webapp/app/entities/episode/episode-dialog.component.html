@@ -42,6 +42,11 @@
             <input type="text" class="form-control" name="imdbId" id="field_imdbId"
                 [(ngModel)]="episode.imdbId"  />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.episode.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="episode.description"  />
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.episode.season" for="field_season">Season</label>

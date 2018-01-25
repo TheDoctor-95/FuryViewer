@@ -20,6 +20,7 @@
             "duration": "Duration",
             "releaseDate": "Release Date",
             "imdbId": "Imdb Id",
+            "description": "Description",
             "season": "Season",
             "seen": "Seen",
             "director": "Director",

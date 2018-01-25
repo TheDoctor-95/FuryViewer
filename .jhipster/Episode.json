@@ -54,6 +54,10 @@
         {
             "fieldName": "imdbId",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171130103658",
