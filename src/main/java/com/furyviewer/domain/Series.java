@@ -33,19 +33,21 @@ public class Series implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Lob
-    @Column(name = "img")
-    private byte[] img;
-
-    @Column(name = "img_content_type")
-    private String imgContentType;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private SeriesEmittingEnum state;
 
     @Column(name = "release_date")
     private LocalDate releaseDate;
+
+    @Column(name = "img_url")
+    private String imgUrl;
+
+    @Column(name = "imdb_id")
+    private String imdb_id;
+
+    @Column(name = "awards")
+    private String awards;
 
     @ManyToOne
     private Artist director;
@@ -147,32 +149,6 @@ public class Series implements Serializable {
         this.description = description;
     }
 
-    public byte[] getImg() {
-        return img;
-    }
-
-    public Series img(byte[] img) {
-        this.img = img;
-        return this;
-    }
-
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
-
-    public String getImgContentType() {
-        return imgContentType;
-    }
-
-    public Series imgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
-        return this;
-    }
-
-    public void setImgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
-    }
-
     public SeriesEmittingEnum getState() {
         return state;
     }
@@ -197,6 +173,45 @@ public class Series implements Serializable {
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public Series imgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+        return this;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public String getImdb_id() {
+        return imdb_id;
+    }
+
+    public Series imdb_id(String imdb_id) {
+        this.imdb_id = imdb_id;
+        return this;
+    }
+
+    public void setImdb_id(String imdb_id) {
+        this.imdb_id = imdb_id;
+    }
+
+    public String getAwards() {
+        return awards;
+    }
+
+    public Series awards(String awards) {
+        this.awards = awards;
+        return this;
+    }
+
+    public void setAwards(String awards) {
+        this.awards = awards;
     }
 
     public Artist getDirector() {
@@ -515,10 +530,11 @@ public class Series implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
-            ", img='" + getImg() + "'" +
-            ", imgContentType='" + imgContentType + "'" +
             ", state='" + getState() + "'" +
             ", releaseDate='" + getReleaseDate() + "'" +
+            ", imgUrl='" + getImgUrl() + "'" +
+            ", imdb_id='" + getImdb_id() + "'" +
+            ", awards='" + getAwards() + "'" +
             "}";
     }
 }

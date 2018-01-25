@@ -12,15 +12,6 @@
         <dd>
             <span>{{series.description}}</span>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.img">Img</span></dt>
-        <dd>
-            <div *ngIf="series.img">
-                <a (click)="openFile(series.imgContentType, series.img)">
-                    <img [src]="'data:' + series.imgContentType + ';base64,' + series.img" style="max-width: 100%;" alt="series image"/>
-                </a>
-                {{series.imgContentType}}, {{byteSize(series.img)}}
-            </div>
-        </dd>
         <dt><span jhiTranslate="furyViewerApp.series.state">State</span></dt>
         <dd>
             <span jhiTranslate="{{'furyViewerApp.SeriesEmittingEnum.' + series.state}}">{{series.state}}</span>
@@ -28,6 +19,18 @@
         <dt><span jhiTranslate="furyViewerApp.series.releaseDate">Release Date</span></dt>
         <dd>
             <span>{{series.releaseDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.imgUrl">Img Url</span></dt>
+        <dd>
+            <span>{{series.imgUrl}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.imdb_id">Imdb Id</span></dt>
+        <dd>
+            <span>{{series.imdb_id}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.awards">Awards</span></dt>
+        <dd>
+            <span>{{series.awards}}</span>
         </dd>
         <dt><span jhiTranslate="furyViewerApp.series.director">Director</span></dt>
         <dd>

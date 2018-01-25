@@ -19,9 +19,11 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="furyViewerApp.series.name">Name</span></th>
             <th><span jhiTranslate="furyViewerApp.series.description">Description</span></th>
-            <th><span jhiTranslate="furyViewerApp.series.img">Img</span></th>
             <th><span jhiTranslate="furyViewerApp.series.state">State</span></th>
             <th><span jhiTranslate="furyViewerApp.series.releaseDate">Release Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.series.imgUrl">Img Url</span></th>
+            <th><span jhiTranslate="furyViewerApp.series.imdb_id">Imdb Id</span></th>
+            <th><span jhiTranslate="furyViewerApp.series.awards">Awards</span></th>
             <th><span jhiTranslate="furyViewerApp.series.director">Director</span></th>
             <th><span jhiTranslate="furyViewerApp.series.scriptwriter">Scriptwriter</span></th>
             <th><span jhiTranslate="furyViewerApp.series.company">Company</span></th>
@@ -36,14 +38,11 @@
                 <td><a [routerLink]="['../series', series.id ]">{{series.id}}</a></td>
                 <td>{{series.name}}</td>
                 <td>{{series.description}}</td>
-                <td>
-                    <a *ngIf="series.img" (click)="openFile(series.imgContentType, series.img)">
-                        <img [src]="'data:' + series.imgContentType + ';base64,' + series.img" style="max-height: 30px;" alt="series image"/>
-                    </a>
-                    <span *ngIf="series.img">{{series.imgContentType}}, {{byteSize(series.img)}}</span>
-                </td>
                 <td jhiTranslate="{{'furyViewerApp.SeriesEmittingEnum.' + series.state}}">{{series.state}}</td>
                 <td>{{series.releaseDate | date:'mediumDate'}}</td>
+                <td>{{series.imgUrl}}</td>
+                <td>{{series.imdb_id}}</td>
+                <td>{{series.awards}}</td>
                 <td>
                     <div *ngIf="series.director">
                         <a [routerLink]="['../artist', series.director?.id ]" >{{series.director?.name}}</a>

@@ -96,11 +96,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "img",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
-        },
-        {
             "fieldName": "state",
             "fieldType": "SeriesEmittingEnum",
             "fieldValues": "CANCELED,WAITING_NEW_SEASON,WAITING_START,ENDED,EMITTING"
@@ -108,12 +103,24 @@
         {
             "fieldName": "releaseDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "imgUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imdb_id",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "awards",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171130103656",
-    "entityTableName": "series",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "series",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

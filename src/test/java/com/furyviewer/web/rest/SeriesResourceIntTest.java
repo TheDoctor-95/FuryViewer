@@ -99,8 +99,6 @@ public class SeriesResourceIntTest {
         Series series = new Series()
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
-            .img(DEFAULT_IMG)
-            .imgContentType(DEFAULT_IMG_CONTENT_TYPE)
             .state(DEFAULT_STATE)
             .releaseDate(DEFAULT_RELEASE_DATE);
         return series;
@@ -128,8 +126,6 @@ public class SeriesResourceIntTest {
         Series testSeries = seriesList.get(seriesList.size() - 1);
         assertThat(testSeries.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSeries.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testSeries.getImg()).isEqualTo(DEFAULT_IMG);
-        assertThat(testSeries.getImgContentType()).isEqualTo(DEFAULT_IMG_CONTENT_TYPE);
         assertThat(testSeries.getState()).isEqualTo(DEFAULT_STATE);
         assertThat(testSeries.getReleaseDate()).isEqualTo(DEFAULT_RELEASE_DATE);
     }
@@ -166,8 +162,6 @@ public class SeriesResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(series.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].imgContentType").value(hasItem(DEFAULT_IMG_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))))
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].releaseDate").value(hasItem(DEFAULT_RELEASE_DATE.toString())));
     }
@@ -185,8 +179,6 @@ public class SeriesResourceIntTest {
             .andExpect(jsonPath("$.id").value(series.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.imgContentType").value(DEFAULT_IMG_CONTENT_TYPE))
-            .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)))
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
             .andExpect(jsonPath("$.releaseDate").value(DEFAULT_RELEASE_DATE.toString()));
     }
@@ -211,8 +203,6 @@ public class SeriesResourceIntTest {
         updatedSeries
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
-            .img(UPDATED_IMG)
-            .imgContentType(UPDATED_IMG_CONTENT_TYPE)
             .state(UPDATED_STATE)
             .releaseDate(UPDATED_RELEASE_DATE);
 
@@ -227,8 +217,6 @@ public class SeriesResourceIntTest {
         Series testSeries = seriesList.get(seriesList.size() - 1);
         assertThat(testSeries.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSeries.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testSeries.getImg()).isEqualTo(UPDATED_IMG);
-        assertThat(testSeries.getImgContentType()).isEqualTo(UPDATED_IMG_CONTENT_TYPE);
         assertThat(testSeries.getState()).isEqualTo(UPDATED_STATE);
         assertThat(testSeries.getReleaseDate()).isEqualTo(UPDATED_RELEASE_DATE);
     }
