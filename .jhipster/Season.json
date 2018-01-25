@@ -20,19 +20,14 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "img",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
-        },
-        {
             "fieldName": "releaseDate",
             "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20171130103657",
-    "entityTableName": "season",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "season",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

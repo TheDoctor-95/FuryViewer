@@ -26,13 +26,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="img" type="longblob">
-                <constraints nullable="true" />
-            </column>
-            <column name="img_content_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="release_date" type="date">
                 <constraints nullable="true" />
             </column>

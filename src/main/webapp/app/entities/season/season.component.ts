@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { Season } from './season.model';
 import { SeasonService } from './season.service';
@@ -19,7 +19,6 @@ seasons: Season[];
     constructor(
         private seasonService: SeasonService,
         private jhiAlertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
@@ -47,14 +46,6 @@ seasons: Season[];
 
     trackId(index: number, item: Season) {
         return item.id;
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInSeasons() {
         this.eventSubscriber = this.eventManager.subscribe('seasonListModification', (response) => this.loadAll());

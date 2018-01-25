@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { Season } from './season.model';
 import { SeasonService } from './season.service';
@@ -18,7 +18,6 @@ export class SeasonDetailComponent implements OnInit, OnDestroy {
 
     constructor(
         private eventManager: JhiEventManager,
-        private dataUtils: JhiDataUtils,
         private seasonService: SeasonService,
         private route: ActivatedRoute
     ) {
@@ -35,13 +34,6 @@ export class SeasonDetailComponent implements OnInit, OnDestroy {
         this.seasonService.find(id).subscribe((season) => {
             this.season = season;
         });
-    }
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
     }
     previousState() {
         window.history.back();

@@ -91,8 +91,6 @@ public class SeasonResourceIntTest {
     public static Season createEntity(EntityManager em) {
         Season season = new Season()
             .number(DEFAULT_NUMBER)
-            .img(DEFAULT_IMG)
-            .imgContentType(DEFAULT_IMG_CONTENT_TYPE)
             .releaseDate(DEFAULT_RELEASE_DATE);
         return season;
     }
@@ -118,8 +116,6 @@ public class SeasonResourceIntTest {
         assertThat(seasonList).hasSize(databaseSizeBeforeCreate + 1);
         Season testSeason = seasonList.get(seasonList.size() - 1);
         assertThat(testSeason.getNumber()).isEqualTo(DEFAULT_NUMBER);
-        assertThat(testSeason.getImg()).isEqualTo(DEFAULT_IMG);
-        assertThat(testSeason.getImgContentType()).isEqualTo(DEFAULT_IMG_CONTENT_TYPE);
         assertThat(testSeason.getReleaseDate()).isEqualTo(DEFAULT_RELEASE_DATE);
     }
 
@@ -154,8 +150,6 @@ public class SeasonResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(season.getId().intValue())))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
-            .andExpect(jsonPath("$.[*].imgContentType").value(hasItem(DEFAULT_IMG_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))))
             .andExpect(jsonPath("$.[*].releaseDate").value(hasItem(DEFAULT_RELEASE_DATE.toString())));
     }
 
@@ -171,8 +165,6 @@ public class SeasonResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(season.getId().intValue()))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
-            .andExpect(jsonPath("$.imgContentType").value(DEFAULT_IMG_CONTENT_TYPE))
-            .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)))
             .andExpect(jsonPath("$.releaseDate").value(DEFAULT_RELEASE_DATE.toString()));
     }
 
@@ -195,8 +187,6 @@ public class SeasonResourceIntTest {
         Season updatedSeason = seasonRepository.findOne(season.getId());
         updatedSeason
             .number(UPDATED_NUMBER)
-            .img(UPDATED_IMG)
-            .imgContentType(UPDATED_IMG_CONTENT_TYPE)
             .releaseDate(UPDATED_RELEASE_DATE);
 
         restSeasonMockMvc.perform(put("/api/seasons")
@@ -209,8 +199,6 @@ public class SeasonResourceIntTest {
         assertThat(seasonList).hasSize(databaseSizeBeforeUpdate);
         Season testSeason = seasonList.get(seasonList.size() - 1);
         assertThat(testSeason.getNumber()).isEqualTo(UPDATED_NUMBER);
-        assertThat(testSeason.getImg()).isEqualTo(UPDATED_IMG);
-        assertThat(testSeason.getImgContentType()).isEqualTo(UPDATED_IMG_CONTENT_TYPE);
         assertThat(testSeason.getReleaseDate()).isEqualTo(UPDATED_RELEASE_DATE);
     }
 

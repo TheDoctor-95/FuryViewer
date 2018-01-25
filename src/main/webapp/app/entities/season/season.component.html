@@ -18,7 +18,6 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="furyViewerApp.season.number">Number</span></th>
-            <th><span jhiTranslate="furyViewerApp.season.img">Img</span></th>
             <th><span jhiTranslate="furyViewerApp.season.releaseDate">Release Date</span></th>
             <th><span jhiTranslate="furyViewerApp.season.series">Series</span></th>
             <th></th>
@@ -28,12 +27,6 @@
             <tr *ngFor="let season of seasons ;trackBy: trackId">
                 <td><a [routerLink]="['../season', season.id ]">{{season.id}}</a></td>
                 <td>{{season.number}}</td>
-                <td>
-                    <a *ngIf="season.img" (click)="openFile(season.imgContentType, season.img)">
-                        <img [src]="'data:' + season.imgContentType + ';base64,' + season.img" style="max-height: 30px;" alt="season image"/>
-                    </a>
-                    <span *ngIf="season.img">{{season.imgContentType}}, {{byteSize(season.img)}}</span>
-                </td>
                 <td>{{season.releaseDate | date:'mediumDate'}}</td>
                 <td>
                     <div *ngIf="season.series">

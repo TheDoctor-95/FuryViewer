@@ -28,13 +28,6 @@ public class Season implements Serializable {
     @Column(name = "jhi_number")
     private Integer number;
 
-    @Lob
-    @Column(name = "img")
-    private byte[] img;
-
-    @Column(name = "img_content_type")
-    private String imgContentType;
-
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
@@ -66,32 +59,6 @@ public class Season implements Serializable {
 
     public void setNumber(Integer number) {
         this.number = number;
-    }
-
-    public byte[] getImg() {
-        return img;
-    }
-
-    public Season img(byte[] img) {
-        this.img = img;
-        return this;
-    }
-
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
-
-    public String getImgContentType() {
-        return imgContentType;
-    }
-
-    public Season imgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
-        return this;
-    }
-
-    public void setImgContentType(String imgContentType) {
-        this.imgContentType = imgContentType;
     }
 
     public LocalDate getReleaseDate() {
@@ -171,8 +138,6 @@ public class Season implements Serializable {
         return "Season{" +
             "id=" + getId() +
             ", number='" + getNumber() + "'" +
-            ", img='" + getImg() + "'" +
-            ", imgContentType='" + imgContentType + "'" +
             ", releaseDate='" + getReleaseDate() + "'" +
             "}";
     }

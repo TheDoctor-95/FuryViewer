@@ -8,15 +8,6 @@
         <dd>
             <span>{{season.number}}</span>
         </dd>
-        <dt><span jhiTranslate="furyViewerApp.season.img">Img</span></dt>
-        <dd>
-            <div *ngIf="season.img">
-                <a (click)="openFile(season.imgContentType, season.img)">
-                    <img [src]="'data:' + season.imgContentType + ';base64,' + season.img" style="max-width: 100%;" alt="season image"/>
-                </a>
-                {{season.imgContentType}}, {{byteSize(season.img)}}
-            </div>
-        </dd>
         <dt><span jhiTranslate="furyViewerApp.season.releaseDate">Release Date</span></dt>
         <dd>
             <span>{{season.releaseDate | date:'mediumDate'}}</span>

@@ -18,23 +18,6 @@
                 [(ngModel)]="season.number"  />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.season.img" for="field_img">Img</label>
-            <div>
-                <img [src]="'data:' + season.imgContentType + ';base64,' + season.img" style="max-height: 100px;" *ngIf="season.img" alt="season image"/>
-                <div *ngIf="season.img" class="form-text text-danger clearfix">
-                    <span class="pull-left">{{season.imgContentType}}, {{byteSize(season.img)}}</span>
-                    <button type="button" (click)="clearInputImage('img', 'imgContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
-                        <span class="fa fa-times"></span>
-                    </button>
-                </div>
-                <input type="file" id="file_img" (change)="setFileData($event, season, 'img', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
-            </div>
-            <input type="hidden" class="form-control" name="img" id="field_img"
-                [(ngModel)]="season.img"  />
-            <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType"
-                [(ngModel)]="season.imgContentType" />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="furyViewerApp.season.releaseDate" for="field_releaseDate">Release Date</label>
             <div class="input-group">
                 <input id="field_releaseDate" type="text" class="form-control" name="releaseDate" ngbDatepicker  #releaseDateDp="ngbDatepicker" [(ngModel)]="season.releaseDate"
