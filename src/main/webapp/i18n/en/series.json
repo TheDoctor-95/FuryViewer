@@ -34,7 +34,8 @@
             "stat": "Stat",
             "hatedSerie": "Hated Serie",
             "season": "Season",
-            "social": "Social"
+            "social": "Social",
+            "country": "Country"
         }
     }
 }

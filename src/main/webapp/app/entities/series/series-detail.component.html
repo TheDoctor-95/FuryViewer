@@ -68,6 +68,12 @@
                 <a [routerLink]="['/artist', actorSecondary?.id ]">{{actorSecondary.name}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
+        <dt><span jhiTranslate="furyViewerApp.series.country">Country</span></dt>
+        <dd>
+            <div *ngIf="series.country">
+                <a [routerLink]="['/country', series.country?.id]">{{series.country?.name}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

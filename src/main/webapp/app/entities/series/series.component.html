@@ -30,6 +30,7 @@
             <th><span jhiTranslate="furyViewerApp.series.genre">Genre</span></th>
             <th><span jhiTranslate="furyViewerApp.series.actorMain">Actor Main</span></th>
             <th><span jhiTranslate="furyViewerApp.series.actorSecondary">Actor Secondary</span></th>
+            <th><span jhiTranslate="furyViewerApp.series.country">Country</span></th>
             <th></th>
             </tr>
             </thead>
@@ -72,6 +73,11 @@
                     <span *ngFor="let actorSecondary of series.actorSecondaries; let last = last">
                             <a class="form-control-static" [routerLink]="['../artist', actorSecondary?.id ]">{{actorSecondary.name}}</a>{{last ? '' : ', '}}
                         </span>
+                </td>
+                <td>
+                    <div *ngIf="series.country">
+                        <a [routerLink]="['../country', series.country?.id ]" >{{series.country?.name}}</a>
+                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

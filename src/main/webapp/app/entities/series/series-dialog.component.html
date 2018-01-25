@@ -97,6 +97,13 @@
                 <option [ngValue]="getSelected(series.actorSecondaries, artistOption)" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
             </select>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.series.country" for="field_country">Country</label>
+            <select class="form-control" id="field_country" name="country" [(ngModel)]="series.country" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="countryOption.id === series.country?.id ? series.country : countryOption" *ngFor="let countryOption of countries; trackBy: trackCountryById">{{countryOption.name}}</option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

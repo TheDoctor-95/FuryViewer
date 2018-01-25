@@ -114,6 +114,9 @@ public class Series implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Social> socials = new HashSet<>();
 
+    @ManyToOne
+    private Country country;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -501,6 +504,19 @@ public class Series implements Serializable {
 
     public void setSocials(Set<Social> socials) {
         this.socials = socials;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public Series country(Country country) {
+        this.country = country;
+        return this;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -84,6 +84,12 @@
             "relationshipName": "social",
             "otherEntityName": "social",
             "otherEntityRelationshipName": "series"
+        },
+        {
+            "relationshipName": "country",
+            "otherEntityName": "country",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [

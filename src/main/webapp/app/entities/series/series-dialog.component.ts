@@ -12,6 +12,7 @@ import { SeriesService } from './series.service';
 import { Artist, ArtistService } from '../artist';
 import { Company, CompanyService } from '../company';
 import { Genre, GenreService } from '../genre';
+import { Country, CountryService } from '../country';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -28,6 +29,8 @@ export class SeriesDialogComponent implements OnInit {
     companies: Company[];
 
     genres: Genre[];
+
+    countries: Country[];
     releaseDateDp: any;
 
     constructor(
@@ -37,6 +40,7 @@ export class SeriesDialogComponent implements OnInit {
         private artistService: ArtistService,
         private companyService: CompanyService,
         private genreService: GenreService,
+        private countryService: CountryService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -49,6 +53,8 @@ export class SeriesDialogComponent implements OnInit {
             .subscribe((res: ResponseWrapper) => { this.companies = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.genreService.query()
             .subscribe((res: ResponseWrapper) => { this.genres = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.countryService.query()
+            .subscribe((res: ResponseWrapper) => { this.countries = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -94,6 +100,10 @@ export class SeriesDialogComponent implements OnInit {
     }
 
     trackGenreById(index: number, item: Genre) {
+        return item.id;
+    }
+
+    trackCountryById(index: number, item: Country) {
         return item.id;
     }
 

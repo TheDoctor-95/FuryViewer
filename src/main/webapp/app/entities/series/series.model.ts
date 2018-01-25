@@ -31,6 +31,7 @@ export class Series implements BaseEntity {
         public hatedSeries?: BaseEntity[],
         public seasons?: BaseEntity[],
         public socials?: BaseEntity[],
+        public country?: BaseEntity,
     ) {
     }
 }
