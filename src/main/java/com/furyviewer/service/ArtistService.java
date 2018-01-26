@@ -1,8 +1,10 @@
 package com.furyviewer.service;
 
 import com.furyviewer.domain.Artist;
+import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
+import com.furyviewer.repository.ArtistTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class ArtistService {
 
     @Autowired
     private ArtistRepository artistRepository;
+
+    @Autowired
+    private ArtistTypeRepository artistTypeRepository;
 
     public Set<Artist> importActors(String actorsListStr){
         String[] actors = actorsListStr.split(", ");
@@ -40,11 +45,19 @@ public class ArtistService {
     public Artist importDirector(String director){
         Optional<Artist> optionalDirector = artistRepository.findByName(director);
         Artist artist;
+        ArtistType atDirector = artistTypeRepository.findByName(ArtistTypeEnum.DIRECTOR);
         if(optionalDirector.isPresent()){
             artist = optionalDirector.get();
+
+            if(!artist.getArtistTypes().contains(atDirector)){
+                artist.addArtistType(atDirector);
+                artistRepository.save(artist);
+            }
+
         }else{
             artist = new Artist();
             artist.setName(director);
+            artist.addArtistType(atDirector);
             artist = artistRepository.save(artist);
         }
 
@@ -52,16 +65,24 @@ public class ArtistService {
     }
 
     public Artist importScripwriter(String escitor){
-        String[] esctiroresArray = escitor.split(",|\\(");
+        String[] scripwriterArray = escitor.split(",|\\(");
 
-        Optional<Artist> optionalScripwriter = artistRepository.findByName(esctiroresArray[0]);
+        Optional<Artist> optionalScripwriter = artistRepository.findByName(scripwriterArray[0]);
         Artist artist;
+        ArtistType atScripwriter = artistTypeRepository.findByName(ArtistTypeEnum.SCRIPTWRITER);
+
 
         if(optionalScripwriter.isPresent()){
             artist = optionalScripwriter.get();
+
+            if(!artist.getArtistTypes().contains(atScripwriter)){
+                artist.addArtistType(atScripwriter);
+                artistRepository.save(artist);
+            }
         }else{
             artist = new Artist();
-            artist.setName(esctiroresArray[0]);
+            artist.setName(scripwriterArray[0]);
+            artist.addArtistType(atScripwriter);
             artist = artistRepository.save(artist);
         }
 

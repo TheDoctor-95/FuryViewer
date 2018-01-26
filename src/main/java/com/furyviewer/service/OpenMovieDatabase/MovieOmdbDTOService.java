@@ -26,7 +26,7 @@ import java.util.Optional;
 @Service
 public class MovieOmdbDTOService {
 
-    public static final String apikey = "66f5a28";
+    public static final String apikey = "eb62550d";
 
     @Autowired
     private GenreService genreService;
@@ -76,11 +76,16 @@ public class MovieOmdbDTOService {
 
         m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
 
-        //Generos
+
 
 
         m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
         m.setImdbIdExternalApi(movieOmdbDTO.getImdbID());
+
+        m.setImgUrl(movieOmdbDTO.getPoster());
+        //m.setCountry();
+
+        m.setAwards(movieOmdbDTO.getAwards());
         movieRepository.save(m);
 
         m.setGenres(genreService.importGenre(movieOmdbDTO.getGenre()));
