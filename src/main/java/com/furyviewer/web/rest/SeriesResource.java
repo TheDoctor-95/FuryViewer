@@ -4,7 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Series;
 
 import com.furyviewer.repository.SeriesRepository;
-import com.furyviewer.service.OpenMovieDatabase.SeasonOmdbService;
 import com.furyviewer.service.OpenMovieDatabase.SeriesOmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -144,5 +144,14 @@ public class SeriesResource {
 
 
         return seriesOmdbDTOService.getSeries("American Horror Story");
+    }
+
+    @GetMapping("/importSeriesByName/{name}")
+    @Timed
+    @Transactional
+    public ResponseEntity<Series> importSeriesByName(@PathVariable String name) {
+        log.debug("REST request to get Series by name", name);
+        Series movie = seriesOmdbDTOService.importSeries(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
 }

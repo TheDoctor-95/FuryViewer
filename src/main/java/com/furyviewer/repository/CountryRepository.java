@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -17,4 +18,5 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
 
     List<Country> findCountryByName(String name);
 
+    Optional<Country> findByName(String name);
 }

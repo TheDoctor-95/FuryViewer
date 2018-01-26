@@ -121,7 +121,7 @@ public class MovieResource {
     }
 
 
-    @GetMapping("/importByName/{name}")
+    @GetMapping("/importMovieByName/{name}")
     @Timed
     @Transactional
     public ResponseEntity<Movie> importMovieByName(@PathVariable String name) {
