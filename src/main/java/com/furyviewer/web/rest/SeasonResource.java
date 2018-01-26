@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Season;
 
 import com.furyviewer.repository.SeasonRepository;
-import com.furyviewer.service.OpenMovieDatabase.SeasonOmdbService;
+import com.furyviewer.service.OpenMovieDatabase.SeasonOmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -35,7 +35,7 @@ public class SeasonResource {
     private final SeasonRepository seasonRepository;
 
     @Autowired
-    SeasonOmdbService seasonOmdbService;
+    SeasonOmdbDTOService seasonOmdbDTOService;
 
     public SeasonResource(SeasonRepository seasonRepository) {
         this.seasonRepository = seasonRepository;
@@ -128,6 +128,6 @@ public class SeasonResource {
     public SeasonOmdbDTO getTestInicial() throws Exception {
 
 
-        return seasonOmdbService.getSeason("American Horror Story", 1);
+        return seasonOmdbDTOService.getSeason("American Horror Story", 1);
     }
 }
