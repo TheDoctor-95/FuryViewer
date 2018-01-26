@@ -7,6 +7,7 @@ import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.GenreRepository;
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.service.ArtistService;
+import com.furyviewer.service.CountryService;
 import com.furyviewer.service.DateConversorService;
 import com.furyviewer.service.GenreService;
 
@@ -39,6 +40,9 @@ public class MovieOmdbDTOService {
 
     @Autowired
     private DateConversorService dateConversorService;
+
+    @Autowired
+    private CountryService countryService;
 
     static MovieOmdbDTORepository apiService = MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
 
@@ -83,7 +87,7 @@ public class MovieOmdbDTOService {
         m.setImdbIdExternalApi(movieOmdbDTO.getImdbID());
 
         m.setImgUrl(movieOmdbDTO.getPoster());
-        //m.setCountry();
+        m.setCountry(countryService.importCountry(movieOmdbDTO.getCountry()));
 
         m.setAwards(movieOmdbDTO.getAwards());
         movieRepository.save(m);
