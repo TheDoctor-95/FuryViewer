@@ -143,6 +143,6 @@ public class EpisodeResource {
     public EpisodeOmdbDTO getTestInicial() throws Exception {
 
 
-        return episodeOmdbDTOService.getSeason("American Horror Story", 1, 2);
+        return episodeOmdbDTOService.getEpisode("American Horror Story", 1, 2);
     }
 }

@@ -57,7 +57,7 @@ public class Episode implements Serializable {
     @ManyToOne
     private Artist scriptwriter;
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "episode_actors",
                joinColumns = @JoinColumn(name="episodes_id", referencedColumnName="id"),
