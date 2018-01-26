@@ -24,15 +24,21 @@ public class ArtistService {
     public Set<Artist> importActors(String actorsListStr){
         String[] actors = actorsListStr.split(", ");
         Set<Artist> artists = new HashSet<>();
+        ArtistType atMainActor = artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR);
         for(String actorStr: actors){
             Optional<Artist> optionalActor = artistRepository.findByName(actorStr);
             Artist artist;
             if(optionalActor.isPresent()){
                 artist = optionalActor.get();
+                if(!artist.getArtistTypes().contains(atMainActor)){
+                    artist.addArtistType(atMainActor);
+                    artist = artistRepository.save(artist);
+                }
+
             }else{
                 artist = new Artist();
                 artist.setName(actorStr);
-
+                artist.addArtistType(atMainActor);
                 artist = artistRepository.save(artist);
             }
 
@@ -65,7 +71,7 @@ public class ArtistService {
     }
 
     public Artist importScripwriter(String escitor){
-        String[] scripwriterArray = escitor.split(",|\\(");
+        String[] scripwriterArray = escitor.split(",| \\(");
 
         Optional<Artist> optionalScripwriter = artistRepository.findByName(scripwriterArray[0]);
         Artist artist;
