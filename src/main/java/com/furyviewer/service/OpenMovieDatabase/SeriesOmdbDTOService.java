@@ -5,6 +5,7 @@ import com.furyviewer.domain.Series;
 import com.furyviewer.domain.enumeration.SeriesEmittingEnum;
 import com.furyviewer.repository.CountryRepository;
 import com.furyviewer.repository.SeriesRepository;
+import com.furyviewer.service.CountryService;
 import com.furyviewer.service.DateConversorService;
 import com.furyviewer.service.GenreService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
@@ -33,6 +34,9 @@ public class SeriesOmdbDTOService {
 
     @Autowired
     private GenreService genreService;
+
+    @Autowired
+    private CountryService countryService;
 
     SeriesOmdbDTORepository apiService = SeriesOmdbDTORepository.retrofit.create(SeriesOmdbDTORepository.class);
 
@@ -79,17 +83,7 @@ public class SeriesOmdbDTOService {
         ss.setImdb_id(seriesOmdbDTO.getImdbID());
         ss.setAwards(seriesOmdbDTO.getAwards());
         ss.setGenres(genreService.importGenre(seriesOmdbDTO.getGenre()));
-
-        Optional<Country> c = countryRepository.findByName(seriesOmdbDTO.getCountry());
-        if(c.isPresent()){
-            ss.setCountry(c.get());
-        }
-        else{
-            Country country = new Country();
-            country.setName(seriesOmdbDTO.getCountry());
-            countryRepository.save(country);
-            ss.setCountry(country);
-        }
+        ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));
 
         seriesRepository.save(ss);
 
