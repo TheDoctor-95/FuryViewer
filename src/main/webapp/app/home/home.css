@@ -10,14 +10,86 @@ Main page styles
     background-size: contain;
 }
 
+.portada {
+    display: inline-block;
+    width: 20%;
+    height: 250px;
+    background-color: #55acee;
+    margin: 1.5%;
+
+}
+
+.card.portades {
+    display: inline-block;
+    width: 17%;
+    height: 20%;
+    margin: 3%;
+}
+
+h2 {
+    text-align: center;
+}
+
+.card {
+    text-align: center;
+}
+
+.card h4 {
+    font-size: 1.3rem;
+}
+
+.card h3 {
+    font-size: 1rem;
+}
+
+.card-body {
+
+    padding: 0.5rem;
+}
+
+.calendario{
+    left:0;
+}
+
+.calendario > .card-title {
+    text-align: left;
+    display: inline-block;
+    padding-top: 5%;
+
+}
+
+#titlecalendar {
+    display: inline-block;
+}
+
+#botoncalendar {
+    display: inline-block;
+
+
+}
+
+
+
+button {
+    border-color: #ef9800 !important;
+    background-color: transparent;
+    border-style: solid;
+    color: #ef9800;
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+button:hover{
+    border-color: #ef9800 !important;
+    background-color: #ef9800;
+    border-style: solid;
+    color: #ffffff;
+
+}
+
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (   min--moz-device-pixel-ratio: 2),
-only screen and (     -o-min-device-pixel-ratio: 2/1),
-only screen and (        min-device-pixel-ratio: 2),
-only screen and (                min-resolution: 192dpi),
-only screen and (                min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (   min--moz-device-pixel-ratio: 2), only screen and (     -o-min-device-pixel-ratio: 2/1), only screen and (        min-device-pixel-ratio: 2), only screen and (                min-resolution: 192dpi), only screen and (                min-resolution: 2dppx) {
     .hipster {
         background: url("../../content/images/hipster2x.png") no-repeat center top;
         background-size: contain;
