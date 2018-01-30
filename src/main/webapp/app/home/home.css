@@ -47,8 +47,8 @@ h2 {
     padding: 0.5rem;
 }
 
-.calendario{
-    left:0;
+.calendario {
+    left: 0;
 }
 
 .calendario > .card-title {
@@ -65,27 +65,50 @@ h2 {
 #botoncalendar {
     display: inline-block;
 
-
 }
-
-
 
 button {
     border-color: #ef9800 !important;
     background-color: transparent;
     border-style: solid;
     color: #ef9800;
-    padding: 0.5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    width: 90px;
+    padding: 0.4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-button:hover{
+button:hover {
     border-color: #ef9800 !important;
     background-color: #ef9800;
     border-style: solid;
     color: #ffffff;
 
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.portades > .card-body {
+    height: 100px;
+}
+
+.pelpendientes {
+    margin-top: 5%;
+}
+
+.fons {
+    background-color: #d2d3d2;
+}
+
+.jh-card {
+    background-color: transparent;
+
+    padding: 0;
+    margin-top: 0;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
