@@ -11,7 +11,8 @@ public class DateConversorService {
     public LocalDate releseDateOMDB(String date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH);
 
-        LocalDate localDate = LocalDate.parse(date, formatter);
+        LocalDate localDate = localDate = LocalDate.parse(date, formatter);
+
 
         return localDate;
     }
@@ -19,8 +20,19 @@ public class DateConversorService {
     public LocalDate releaseDateOMDBSeason(String date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
 
-        LocalDate localDate = LocalDate.parse(date, formatter);
+        LocalDate localDate = localDate = LocalDate.parse(date, formatter);
+
 
         return localDate;
     }
 }
+/*
+    @GetMapping("/importSeriesByName/{name}")
+    @Timed
+    @Transactional
+    public ResponseEntity<Series> importSeriesByName(@PathVariable String name) {
+        log.debug("REST request to get Series by name", name);
+        Series movie = seriesOmdbDTOService.importSeries(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
+    }
+* */

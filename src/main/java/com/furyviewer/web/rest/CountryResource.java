@@ -4,11 +4,14 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Country;
 
 import com.furyviewer.repository.CountryRepository;
+import com.furyviewer.service.GoogleMaps.GoogleMapsDTOService;
+import com.furyviewer.service.dto.GoogleMaps.GoogleMapsDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +33,9 @@ public class CountryResource {
     private static final String ENTITY_NAME = "country";
 
     private final CountryRepository countryRepository;
+
+    @Autowired
+    GoogleMapsDTOService googleMapsDTOService;
 
     public CountryResource(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
@@ -130,5 +136,11 @@ public class CountryResource {
         log.debug("REST request to delete Country : {}", id);
         countryRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/country-api/test")
+    @Timed
+    public GoogleMapsDTO getTestInicial() throws Exception {
+        return  googleMapsDTOService.getCoordinates("usa");
     }
 }

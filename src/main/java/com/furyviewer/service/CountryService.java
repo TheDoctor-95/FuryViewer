@@ -2,6 +2,7 @@ package com.furyviewer.service;
 
 import com.furyviewer.domain.Country;
 import com.furyviewer.repository.CountryRepository;
+import com.furyviewer.service.GoogleMaps.GoogleMapsDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,17 @@ public class CountryService {
     @Autowired
     CountryRepository countryRepository;
 
+    @Autowired
+    GoogleMapsDTOService googleMapsDTOService;
+
     /**
      * Método que se encarga de buscar en la base de datos una Country y en caso de no existir la crea.
-     * @param cy String | Nombre de la country devuelto por la api.
+     * @param countryName String | Nombre de la country devuelto por la api.
      * @return Country | Country creado o encontrado en la base de datos.
      */
-    public Country importCountry(String cy) {
-        //Buscamos country
-        Optional<Country> c = countryRepository.findByName(cy);
+    public Country importCountry(String countryName) {
+        //Buscamos countryName
+        Optional<Country> c = countryRepository.findByName(countryName);
 
         Country country = new Country();
 
@@ -27,7 +31,9 @@ public class CountryService {
             country = c.get();
         }
         else{
-            country.setName(cy);
+            country.setName(countryName);
+            country.setLatitude(googleMapsDTOService.getLatitude(countryName));
+            country.setLongitude(googleMapsDTOService.getLongitude(countryName));
             countryRepository.save(country);
         }
 
