@@ -71,7 +71,8 @@ public class ArtistService {
         Artist artist = null;
 
         if (!director.equalsIgnoreCase("N/A")) {
-            Optional<Artist> optionalDirector = artistRepository.findByName(director);
+            String[] directorArray = director.split(", | \\(");
+            Optional<Artist> optionalDirector = artistRepository.findByName(directorArray[0]);
             ArtistType atDirector = artistTypeRepository.findByName(ArtistTypeEnum.DIRECTOR);
 
             //En caso de que el artista exista se comprueba si ya tiene asignado el tipo main_actor.
@@ -105,7 +106,7 @@ public class ArtistService {
         Artist artist = null;
 
         if (!scripwriter.equalsIgnoreCase("N/A")) {
-            String[] scripwriterArray = scripwriter.split(",| \\(");
+            String[] scripwriterArray = scripwriter.split(", | \\(");
             Optional<Artist> optionalScripwriter = artistRepository.findByName(scripwriterArray[0]);
             ArtistType atScripwriter = artistTypeRepository.findByName(ArtistTypeEnum.SCRIPTWRITER);
 
