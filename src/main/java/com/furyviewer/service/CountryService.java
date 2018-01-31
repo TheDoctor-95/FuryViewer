@@ -22,6 +22,8 @@ public class CountryService {
      * @return Country | Country creado o encontrado en la base de datos.
      */
     public Country importCountry(String countryName) {
+        String[] countryNames = countryName.split(", ");
+        countryName = countryNames[0];
         //Buscamos countryName
         Optional<Country> c = countryRepository.findByName(countryName);
 
