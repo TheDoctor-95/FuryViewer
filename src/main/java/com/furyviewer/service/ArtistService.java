@@ -87,7 +87,7 @@ public class ArtistService {
             }else{
                 //Se crea un artista desde cero.
                 artist = new Artist();
-                artist.setName(director);
+                artist.setName(directorArray[0]);
                 artist.addArtistType(atDirector);
                 artist = artistRepository.save(artist);
             }
