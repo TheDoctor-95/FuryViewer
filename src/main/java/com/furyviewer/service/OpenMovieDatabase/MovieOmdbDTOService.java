@@ -5,10 +5,7 @@ import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.service.*;
 
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
-import com.furyviewer.service.util.CompanyService;
-import com.furyviewer.service.util.CountryService;
-import com.furyviewer.service.util.DateConversorService;
-import com.furyviewer.service.util.GenreService;
+import com.furyviewer.service.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +36,9 @@ public class MovieOmdbDTOService {
 
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+    private NAEraserService naEraserService;
 
     private static MovieOmdbDTORepository apiService = MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
 
@@ -82,11 +82,13 @@ public class MovieOmdbDTOService {
         //Comprobamos que la API nos devuelve información.
         if (movieOmdbDTO.getResponse().equalsIgnoreCase("true")) {
             m.setName(movieOmdbDTO.getTitle());
-            m.setDescription(movieOmdbDTO.getPlot());
+
             m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
-            m.setImdbIdExternalApi(movieOmdbDTO.getImdbID());
-            m.setImgUrl(movieOmdbDTO.getPoster());
-            m.setAwards(movieOmdbDTO.getAwards());
+
+            m.setDescription(naEraserService.eraserNA(movieOmdbDTO.getPlot()));
+            m.setImdbIdExternalApi(naEraserService.eraserNA(movieOmdbDTO.getImdbID()));
+            m.setImgUrl(naEraserService.eraserNA(movieOmdbDTO.getPoster()));
+            m.setAwards(naEraserService.eraserNA(movieOmdbDTO.getAwards()));
 
             m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
             m.setCountry(countryService.importCountry(movieOmdbDTO.getCountry()));

@@ -7,6 +7,7 @@ import com.furyviewer.service.util.CountryService;
 import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.util.GenreService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
+import com.furyviewer.service.util.NAEraserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,9 @@ public class SeriesOmdbDTOService {
 
     @Autowired
     private CountryService countryService;
+
+    @Autowired
+    private NAEraserService naEraserService;
 
     private static SeriesOmdbDTORepository apiService = SeriesOmdbDTORepository.retrofit.create(SeriesOmdbDTORepository.class);
 
@@ -76,7 +80,7 @@ public class SeriesOmdbDTOService {
         //Comprobamos que la API nos devuelve información.
         if (seriesOmdbDTO.getResponse().equalsIgnoreCase("true")) {
             ss.setName(seriesOmdbDTO.getTitle());
-            ss.setDescription(seriesOmdbDTO.getPlot());
+            ss.setDescription(naEraserService.eraserNA(seriesOmdbDTO.getPlot()));
 
             if (seriesOmdbDTO.getYear().length() == 5) {
                 ss.setState(SeriesEmittingEnum.EMITTING);
@@ -86,9 +90,9 @@ public class SeriesOmdbDTOService {
 
             ss.setReleaseDate(dateConversorService.releseDateOMDB(seriesOmdbDTO.getReleased()));
 
-            ss.setImgUrl(seriesOmdbDTO.getPoster());
-            ss.setImdb_id(seriesOmdbDTO.getImdbID());
-            ss.setAwards(seriesOmdbDTO.getAwards());
+            ss.setImgUrl(naEraserService.eraserNA(seriesOmdbDTO.getPoster()));
+            ss.setImdb_id(naEraserService.eraserNA(seriesOmdbDTO.getImdbID()));
+            ss.setAwards(naEraserService.eraserNA(seriesOmdbDTO.getAwards()));
 
             ss.setGenres(genreService.importGenre(seriesOmdbDTO.getGenre()));
             ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));

@@ -18,29 +18,35 @@ public class GenreService {
     private GenreRepository genreRepository;
 
     @Autowired
-    private CompanyRepository companyRepository;
+    private NAEraserService naEraserService;
 
+    /**
+     * Método que se encarga de convertir un String en los objetos de la clase Genre necesarios.
+     * @param genreList String | Contiene el nombre de los genre.
+     * @return Set<Genre> | Set que contiene la información de los genres.
+     */
     public Set<Genre> importGenre(String genreList){
-        String[] genres = genreList.split(", ");
-
         Set<Genre> genreListArray = new HashSet<>();
-        for (String genreStr :
-            genres) {
-            Optional<Genre> genreOptional = genreRepository.findByName(genreStr);
-            Genre genre;
-            if (genreOptional.isPresent()){
-                genre = genreOptional.get();
-            }else{
-                genre = new Genre();
-                genre.setName(genreStr);
 
-                genre = genreRepository.save(genre);
+        if (naEraserService.eraserNA(genreList) != null) {
+            String[] genres = genreList.split(", ");
 
+            for (String genreStr : genres) {
+                Optional<Genre> genreOptional = genreRepository.findByName(genreStr);
+                Genre genre;
+
+                if (genreOptional.isPresent()) {
+                    genre = genreOptional.get();
+                } else {
+                    genre = new Genre();
+                    genre.setName(genreStr);
+
+                    genre = genreRepository.save(genre);
+
+                }
+                genreListArray.add(genre);
             }
-            genreListArray.add(genre);
         }
-
         return genreListArray;
     }
-
 }

@@ -6,9 +6,9 @@ import com.furyviewer.domain.Episode;
 import com.furyviewer.service.ArtistService;
 import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
+import com.furyviewer.service.util.NAEraserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
 
 import java.io.IOException;
@@ -25,6 +25,9 @@ public class EpisodeOmdbDTOService {
 
     @Autowired
     private ArtistService artistService;
+
+    @Autowired
+    private NAEraserService naEraserService;
 
     private final EpisodeOmdbDTORepository apiService = EpisodeOmdbDTORepository.retrofit.create(EpisodeOmdbDTORepository.class);
 
@@ -68,17 +71,14 @@ public class EpisodeOmdbDTOService {
                         ep.setNumber(i);
                         ep.setName(episodeOmdbDTO.getTitle());
 
-                        String[] time = episodeOmdbDTO.getRuntime().split(" ");
-                        ep.setDuration(Double.parseDouble(time[0]));
+                        ep.setDuration(Double.parseDouble(episodeOmdbDTO.getRuntime().split(" ")[0]));
 
                         ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));
 
-                        ep.setImdbId(episodeOmdbDTO.getImdbID());
+                        ep.setImdbId(naEraserService.eraserNA(episodeOmdbDTO.getImdbID()));
                         ep.setSeason(se);
 
-                        if(episodeOmdbDTO.getPlot() == null) {
-                            ep.setDescription(episodeOmdbDTO.getPlot());
-                        }
+                        ep.setDescription(naEraserService.eraserNA(episodeOmdbDTO.getPlot()));
 
                         ep.setActors(artistService.importActors(episodeOmdbDTO.getActors()));
                         ep.setDirector(artistService.importDirector(episodeOmdbDTO.getDirector()));

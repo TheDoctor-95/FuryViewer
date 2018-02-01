@@ -11,10 +11,13 @@ import java.util.Optional;
 @Service
 public class CountryService {
     @Autowired
-    CountryRepository countryRepository;
+    private CountryRepository countryRepository;
 
     @Autowired
-    GoogleMapsDTOService googleMapsDTOService;
+    private GoogleMapsDTOService googleMapsDTOService;
+
+    @Autowired
+    private NAEraserService naEraserService;
 
     /**
      * Método que se encarga de buscar en la base de datos una Country y en caso de no existir la crea.
@@ -22,23 +25,26 @@ public class CountryService {
      * @return Country | Country creado o encontrado en la base de datos.
      */
     public Country importCountry(String countryName) {
-        String[] countryNames = countryName.split(", ");
-        countryName = countryNames[0];
-        //Buscamos countryName
-        Optional<Country> c = countryRepository.findByName(countryName);
+        Country country = null;
 
-        Country country = new Country();
+        if (naEraserService.eraserNA(countryName) != null) {
+            String[] countryNames = countryName.split(", ");
+            countryName = countryNames[0];
 
-        if(c.isPresent()){
-            country = c.get();
+            //Buscamos countryName
+            Optional<Country> c = countryRepository.findByName(countryName);
+
+            country = new Country();
+
+            if (c.isPresent()) {
+                country = c.get();
+            } else {
+                country.setName(countryName);
+                country.setLatitude(googleMapsDTOService.getLatitude(countryName));
+                country.setLongitude(googleMapsDTOService.getLongitude(countryName));
+                countryRepository.save(country);
+            }
         }
-        else{
-            country.setName(countryName);
-            country.setLatitude(googleMapsDTOService.getLatitude(countryName));
-            country.setLongitude(googleMapsDTOService.getLongitude(countryName));
-            countryRepository.save(country);
-        }
-
         return country;
     }
 }

@@ -5,6 +5,7 @@ import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
+import com.furyviewer.service.util.NAEraserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ public class ArtistService {
     @Autowired
     private ArtistTypeRepository artistTypeRepository;
 
+    @Autowired
+    private NAEraserService naEraserService;
+
     /**
      * Método que se encarga de convertir un String en los objetos de la clase Artist necesarios que contiene su nombre
      * y main_actor como tipo de artista.
@@ -30,7 +34,7 @@ public class ArtistService {
     public Set<Artist> importActors(String actorsListStr){
         Set<Artist> artists = new HashSet<>();
 
-        if (!actorsListStr.equalsIgnoreCase("N/A")) {
+        if (naEraserService.eraserNA(actorsListStr) != null) {
             String[] actors = actorsListStr.split(", ");
             ArtistType atMainActor = artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR);
 
@@ -70,7 +74,7 @@ public class ArtistService {
     public Artist importDirector(String director){
         Artist artist = null;
 
-        if (!director.equalsIgnoreCase("N/A")) {
+        if (naEraserService.eraserNA(director) != null) {
             String[] directorArray = director.split(", | \\(");
             Optional<Artist> optionalDirector = artistRepository.findByName(directorArray[0]);
             ArtistType atDirector = artistTypeRepository.findByName(ArtistTypeEnum.DIRECTOR);
@@ -105,7 +109,7 @@ public class ArtistService {
     public Artist importScripwriter(String scripwriter){
         Artist artist = null;
 
-        if (!scripwriter.equalsIgnoreCase("N/A")) {
+        if (naEraserService.eraserNA(scripwriter) != null) {
             String[] scripwriterArray = scripwriter.split(", | \\(");
             Optional<Artist> optionalScripwriter = artistRepository.findByName(scripwriterArray[0]);
             ArtistType atScripwriter = artistTypeRepository.findByName(ArtistTypeEnum.SCRIPTWRITER);

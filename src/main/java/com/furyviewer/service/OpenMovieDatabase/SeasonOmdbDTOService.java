@@ -8,7 +8,6 @@ import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
 
 import java.io.IOException;

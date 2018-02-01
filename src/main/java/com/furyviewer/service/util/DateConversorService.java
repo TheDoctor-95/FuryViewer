@@ -1,5 +1,6 @@
 package com.furyviewer.service.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -8,6 +9,9 @@ import java.util.Locale;
 
 @Service
 public class DateConversorService {
+    @Autowired
+    private NAEraserService naEraserService;
+
     /**
      * Método que se encarga de convertir el String con formato (día-mes-año) al formato adecuado de LocalDate para la
      * base de datos.
@@ -17,7 +21,7 @@ public class DateConversorService {
     public LocalDate releseDateOMDB(String date){
         LocalDate localDate = null;
 
-        if(!date.equalsIgnoreCase("N/A")) {
+        if(naEraserService.eraserNA(date) != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH);
 
             localDate = LocalDate.parse(date, formatter);
@@ -35,7 +39,7 @@ public class DateConversorService {
     public LocalDate releaseDateOMDBSeason(String date){
         LocalDate localDate = null;
 
-        if(!date.equalsIgnoreCase("N/A")) {
+        if(naEraserService.eraserNA(date) != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
 
             localDate = LocalDate.parse(date, formatter);
