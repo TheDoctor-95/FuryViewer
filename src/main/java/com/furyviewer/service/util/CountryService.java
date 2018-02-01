@@ -47,4 +47,8 @@ public class CountryService {
         }
         return country;
     }
+
+    public String countryArtist (String countryName) {
+        return countryName.split(", | - ")[2];
+    }
 }

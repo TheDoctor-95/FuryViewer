@@ -7,11 +7,15 @@ import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
+import com.furyviewer.service.TheMovieDB.ArtistTmdbDTOService;
+import com.furyviewer.service.dto.TheMovieDB.ArtistFinalTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.ArtistTmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +32,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class ArtistResource {
+    @Autowired
+    private ArtistTmdbDTOService artistTmdbDTOService;
 
     private final Logger log = LoggerFactory.getLogger(ArtistResource.class);
 
@@ -162,4 +168,16 @@ public class ArtistResource {
             artistRepository.delete(id);
             return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
         }
+
+    @GetMapping("/artist-api/test-Tmdb")
+    @Timed
+    public ArtistTmdbDTO getTestInicial() throws Exception {
+        return artistTmdbDTOService.getArtist("Norman Reedus");
     }
+
+    @GetMapping("/artist-api/test-TmdbComplete")
+    @Timed
+    public ArtistFinalTmdbDTO getTestInfoCompleta() throws Exception {
+        return artistTmdbDTOService.getArtistComplete("Norman Reedus");
+    }
+}

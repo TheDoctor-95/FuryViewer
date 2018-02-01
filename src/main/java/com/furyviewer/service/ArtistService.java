@@ -5,6 +5,7 @@ import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
+import com.furyviewer.service.TheMovieDB.ArtistTmdbDTOService;
 import com.furyviewer.service.util.NAEraserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public class ArtistService {
 
     @Autowired
     private NAEraserService naEraserService;
+
+    @Autowired
+    private ArtistTmdbDTOService artistTmdbDTOService;
 
     /**
      * Método que se encarga de convertir un String en los objetos de la clase Artist necesarios que contiene su nombre
@@ -53,9 +57,9 @@ public class ArtistService {
 
                 } else {
                     //Se crea un artista desde cero.
-                    artist = new Artist();
-                    artist.setName(actorStr);
-                    artist.addArtistType(atMainActor);
+                    artist = artistTmdbDTOService.importArtist(actorStr);
+                    //artist.setName(actorStr);
+                    //artist.addArtistType(atMainActor);
                     artist = artistRepository.save(artist);
                 }
 
