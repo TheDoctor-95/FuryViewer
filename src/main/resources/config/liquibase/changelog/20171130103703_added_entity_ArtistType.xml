@@ -28,7 +28,12 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/artist_type.csv"
+                  separator=";"
+                  tableName="artist_type">
+        </loadData>
     </changeSet>
+
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>
