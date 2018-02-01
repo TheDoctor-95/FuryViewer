@@ -123,7 +123,7 @@ public class MovieResource {
 
     @GetMapping("/importMovieByName/{name}")
     @Timed
-    @Transactional
+
     public ResponseEntity<Movie> importMovieByName(@PathVariable String name) {
         log.debug("REST request to get Movies by name", name);
         Movie movie = movieOmdbDTOService.importMovie(name);
