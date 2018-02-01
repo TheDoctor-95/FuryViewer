@@ -1,9 +1,7 @@
 package com.furyviewer.service.OpenMovieDatabase;
 
-import com.furyviewer.domain.Country;
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.enumeration.SeriesEmittingEnum;
-import com.furyviewer.repository.CountryRepository;
 import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.service.CountryService;
 import com.furyviewer.service.DateConversorService;
@@ -24,9 +22,6 @@ public class SeriesOmdbDTOService {
     private SeriesRepository seriesRepository;
 
     @Autowired
-    private CountryRepository countryRepository;
-
-    @Autowired
     private DateConversorService dateConversorService;
 
     @Autowired
@@ -40,6 +35,11 @@ public class SeriesOmdbDTOService {
 
     SeriesOmdbDTORepository apiService = SeriesOmdbDTORepository.retrofit.create(SeriesOmdbDTORepository.class);
 
+    /**
+     * Devuelve la información de una serie en el formato proporcionado por OpenMovieDataBase.
+     * @param title String | Título de la serie a buscar.
+     * @return SeriesOmdbDTO | Información con el formato proporcionado por la API.
+     */
     public SeriesOmdbDTO getSeries(String title) {
         SeriesOmdbDTO series = new SeriesOmdbDTO();
         Call<SeriesOmdbDTO> callSeries = apiService.getSeries(apikey, title);
@@ -55,8 +55,14 @@ public class SeriesOmdbDTOService {
         return series;
     }
 
+    /**
+     * Convierte la información de una serie de OMDB al formato de información de Furyviewer.
+     * @param title String | Título de la serie.
+     * @return Series | Contiene la información de una serie en el formato FuryViewer.
+     */
     public Series importSeries(String title){
 
+        //comprobamos si ya está en nuestrabase de datos.
         Optional<Series> s = seriesRepository.findByName(title);
         if(s.isPresent()){
             return s.get();
@@ -66,28 +72,28 @@ public class SeriesOmdbDTOService {
 
         Series ss = new Series();
 
-        ss.setName(seriesOmdbDTO.getTitle());
-        ss.setDescription(seriesOmdbDTO.getPlot());
+        //Comprobamos que la API nos devuelve información.
+        if (seriesOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+            ss.setName(seriesOmdbDTO.getTitle());
+            ss.setDescription(seriesOmdbDTO.getPlot());
 
-        String[] years = seriesOmdbDTO.getYear().split("-");
+            if (seriesOmdbDTO.getYear().length() == 5) {
+                ss.setState(SeriesEmittingEnum.EMITTING);
+            } else {
+                ss.setState(SeriesEmittingEnum.ENDED);
+            }
 
-        if (years.length==1){
-            ss.setState(SeriesEmittingEnum.EMITTING);
+            ss.setReleaseDate(dateConversorService.releseDateOMDB(seriesOmdbDTO.getReleased()));
+            ss.setImgUrl(seriesOmdbDTO.getPoster());
+            ss.setImdb_id(seriesOmdbDTO.getImdbID());
+            ss.setAwards(seriesOmdbDTO.getAwards());
+            ss.setGenres(genreService.importGenre(seriesOmdbDTO.getGenre()));
+            ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));
+
+            seriesRepository.save(ss);
+
+            seasonOmdbDTOService.importSeason(title, Integer.parseInt(seriesOmdbDTO.getTotalSeasons()));
         }
-        else {
-            ss.setState(SeriesEmittingEnum.ENDED);
-        }
-
-        ss.setReleaseDate(dateConversorService.releseDateOMDB(seriesOmdbDTO.getReleased()));
-        ss.setImgUrl(seriesOmdbDTO.getPoster());
-        ss.setImdb_id(seriesOmdbDTO.getImdbID());
-        ss.setAwards(seriesOmdbDTO.getAwards());
-        ss.setGenres(genreService.importGenre(seriesOmdbDTO.getGenre()));
-        ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));
-
-        seriesRepository.save(ss);
-
-        seasonOmdbDTOService.importSeason(title, Integer.parseInt(seriesOmdbDTO.getTotalSeasons()));
 
         return ss;
     }

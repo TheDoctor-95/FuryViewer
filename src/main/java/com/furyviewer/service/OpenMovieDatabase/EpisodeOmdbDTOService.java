@@ -29,43 +29,74 @@ public class EpisodeOmdbDTOService {
 
     EpisodeOmdbDTORepository apiService = EpisodeOmdbDTORepository.retrofit.create(EpisodeOmdbDTORepository.class);
 
-    public EpisodeOmdbDTO getEpisode(String title, int seasonNum, int episodeNum) {
-        EpisodeOmdbDTO episode = new EpisodeOmdbDTO();
+    /**
+     * Devuelve la información de un episode en el formato proporcionado por OpenMovieDataBase.
+     * @param title String | Título de la serie a buscar.
+     * @param seasonNum int | Número de la temporada a buscar.
+     * @param episodeNum int | Número del episode a buscar.
+     * @return EpisodeOmdbDTO | Información con el formato proporcionado por la API.
+     * @throws IOException
+     */
+    public EpisodeOmdbDTO getEpisode(String title, int seasonNum, int episodeNum) throws IOException {
+        EpisodeOmdbDTO episode;
         Call<EpisodeOmdbDTO> callEpisode = apiService.getEpisode(apikey, title, seasonNum, episodeNum);
 
-        try{
-            episode = callEpisode.execute().body();
-            System.out.println(episode);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        episode = callEpisode.execute().body();
+        System.out.println(episode);
 
         return episode;
     }
 
-    public void importEpisode (String title, int totalEpisodes, Season se){
-        for(int i= 1; i<=totalEpisodes; i++) {
-            Episode ep = new Episode();
-            EpisodeOmdbDTO episodeOmdbDTO = getEpisode(title,se.getNumber(),i);
+    /**
+     * Convierte la información de un episode de OMDB al formato de información de Furyviewer.
+     * @param title String | Título de la serie.
+     * @param totalEpisodes int | Número total de episodes de la season.
+     * @param se Season | Season a la que añadir los episodes.
+     */
+    public void importEpisode(String title, int totalEpisodes, Season se) {
+        for (int i = 1; i <= totalEpisodes; i++) {
 
-            ep.setNumber(i);
-            ep.setName(episodeOmdbDTO.getTitle());
+            //Ponemos mote al bucle y lo utilizamos para hacer la petición hasta tres veces para asegurarnos de que
+            // podemos realizar la petición a la api.
+            getEpisode:
+            for (int j = 0; j < 3; j++) {
+                try {
+                    Episode ep = new Episode();
+                    EpisodeOmdbDTO episodeOmdbDTO = getEpisode(title, se.getNumber(), i);
 
-            String[] time = episodeOmdbDTO.getRuntime().split(" ");
-            ep.setDuration(Double.parseDouble(time[0]));
+                    //Comprobamos que la API nos devuelve información.
+                    if (episodeOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+                        ep.setNumber(i);
+                        ep.setName(episodeOmdbDTO.getTitle());
 
-            ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));
+                        String[] time = episodeOmdbDTO.getRuntime().split(" ");
+                        ep.setDuration(Double.parseDouble(time[0]));
 
-            ep.setImdbId(episodeOmdbDTO.getImdbID());
-            ep.setDescription(episodeOmdbDTO.getPlot());
-            ep.setSeason(se);
+                        ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));
 
-            ep.setActors(artistService.importActors(episodeOmdbDTO.getActors()));
-            ep.setDirector(artistService.importDirector(episodeOmdbDTO.getDirector()));
-            ep.setScriptwriter(artistService.importScripwriter(episodeOmdbDTO.getWriter()));
+                        ep.setImdbId(episodeOmdbDTO.getImdbID());
+                        ep.setDescription(episodeOmdbDTO.getPlot());
+                        ep.setSeason(se);
 
-            episodeRepository.save(ep);
+                        ep.setActors(artistService.importActors(episodeOmdbDTO.getActors()));
+                        ep.setDirector(artistService.importDirector(episodeOmdbDTO.getDirector()));
+                        ep.setScriptwriter(artistService.importScripwriter(episodeOmdbDTO.getWriter()));
+
+                        episodeRepository.save(ep);
+                    }
+
+                    //Salimos del bucle
+                    break getEpisode;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    try {
+                        Thread.sleep(3000L);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
         }
     }
 }
