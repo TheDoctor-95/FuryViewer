@@ -1,11 +1,12 @@
 package com.furyviewer.service;
 
 import com.furyviewer.domain.Genre;
+import com.furyviewer.repository.CompanyRepository;
 import com.furyviewer.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -15,6 +16,9 @@ public class GenreService {
 
     @Autowired
     private GenreRepository genreRepository;
+
+    @Autowired
+    private CompanyRepository companyRepository;
 
     public Set<Genre> importGenre(String genreList){
         String[] genres = genreList.split(", ");

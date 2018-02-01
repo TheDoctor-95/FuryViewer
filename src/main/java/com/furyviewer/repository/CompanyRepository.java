@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.*;
 
 import java.util.List;
+import java.util.Optional;
+
 /**
  * Spring Data JPA repository for the Company entity.
  */
@@ -13,6 +15,8 @@ import java.util.List;
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 
-    List<Company>findCompanyByName(String name);
+    Optional<Company> findCompanyByName(String name);
+
+
 
 }

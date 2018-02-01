@@ -1,10 +1,10 @@
 
 package com.furyviewer.service.dto.OpenMovieDatabase;
 
-import java.time.LocalDate;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 
 public class MovieOmdbDTO {
 
@@ -68,9 +68,18 @@ public class MovieOmdbDTO {
     @SerializedName("Type")
     @Expose
     private String type;
-    @SerializedName("totalSeasons")
+    @SerializedName("DVD")
     @Expose
-    private String totalSeasons;
+    private String dVD;
+    @SerializedName("BoxOffice")
+    @Expose
+    private String boxOffice;
+    @SerializedName("Production")
+    @Expose
+    private String production;
+    @SerializedName("Website")
+    @Expose
+    private String website;
     @SerializedName("Response")
     @Expose
     private String response;
@@ -83,12 +92,22 @@ public class MovieOmdbDTO {
         this.title = title;
     }
 
+    public MovieOmdbDTO withTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
     public String getYear() {
         return year;
     }
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public MovieOmdbDTO withYear(String year) {
+        this.year = year;
+        return this;
     }
 
     public String getRated() {
@@ -99,12 +118,22 @@ public class MovieOmdbDTO {
         this.rated = rated;
     }
 
+    public MovieOmdbDTO withRated(String rated) {
+        this.rated = rated;
+        return this;
+    }
+
     public String getReleased() {
         return released;
     }
 
     public void setReleased(String released) {
         this.released = released;
+    }
+
+    public MovieOmdbDTO withReleased(String released) {
+        this.released = released;
+        return this;
     }
 
     public String getRuntime() {
@@ -115,12 +144,22 @@ public class MovieOmdbDTO {
         this.runtime = runtime;
     }
 
+    public MovieOmdbDTO withRuntime(String runtime) {
+        this.runtime = runtime;
+        return this;
+    }
+
     public String getGenre() {
         return genre;
     }
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public MovieOmdbDTO withGenre(String genre) {
+        this.genre = genre;
+        return this;
     }
 
     public String getDirector() {
@@ -131,12 +170,22 @@ public class MovieOmdbDTO {
         this.director = director;
     }
 
+    public MovieOmdbDTO withDirector(String director) {
+        this.director = director;
+        return this;
+    }
+
     public String getWriter() {
         return writer;
     }
 
     public void setWriter(String writer) {
         this.writer = writer;
+    }
+
+    public MovieOmdbDTO withWriter(String writer) {
+        this.writer = writer;
+        return this;
     }
 
     public String getActors() {
@@ -147,12 +196,22 @@ public class MovieOmdbDTO {
         this.actors = actors;
     }
 
+    public MovieOmdbDTO withActors(String actors) {
+        this.actors = actors;
+        return this;
+    }
+
     public String getPlot() {
         return plot;
     }
 
     public void setPlot(String plot) {
         this.plot = plot;
+    }
+
+    public MovieOmdbDTO withPlot(String plot) {
+        this.plot = plot;
+        return this;
     }
 
     public String getLanguage() {
@@ -163,12 +222,22 @@ public class MovieOmdbDTO {
         this.language = language;
     }
 
+    public MovieOmdbDTO withLanguage(String language) {
+        this.language = language;
+        return this;
+    }
+
     public String getCountry() {
         return country;
     }
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public MovieOmdbDTO withCountry(String country) {
+        this.country = country;
+        return this;
     }
 
     public String getAwards() {
@@ -179,12 +248,22 @@ public class MovieOmdbDTO {
         this.awards = awards;
     }
 
+    public MovieOmdbDTO withAwards(String awards) {
+        this.awards = awards;
+        return this;
+    }
+
     public String getPoster() {
         return poster;
     }
 
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+
+    public MovieOmdbDTO withPoster(String poster) {
+        this.poster = poster;
+        return this;
     }
 
     public List<Rating> getRatings() {
@@ -195,12 +274,22 @@ public class MovieOmdbDTO {
         this.ratings = ratings;
     }
 
+    public MovieOmdbDTO withRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+        return this;
+    }
+
     public String getMetascore() {
         return metascore;
     }
 
     public void setMetascore(String metascore) {
         this.metascore = metascore;
+    }
+
+    public MovieOmdbDTO withMetascore(String metascore) {
+        this.metascore = metascore;
+        return this;
     }
 
     public String getImdbRating() {
@@ -211,12 +300,22 @@ public class MovieOmdbDTO {
         this.imdbRating = imdbRating;
     }
 
+    public MovieOmdbDTO withImdbRating(String imdbRating) {
+        this.imdbRating = imdbRating;
+        return this;
+    }
+
     public String getImdbVotes() {
         return imdbVotes;
     }
 
     public void setImdbVotes(String imdbVotes) {
         this.imdbVotes = imdbVotes;
+    }
+
+    public MovieOmdbDTO withImdbVotes(String imdbVotes) {
+        this.imdbVotes = imdbVotes;
+        return this;
     }
 
     public String getImdbID() {
@@ -227,6 +326,11 @@ public class MovieOmdbDTO {
         this.imdbID = imdbID;
     }
 
+    public MovieOmdbDTO withImdbID(String imdbID) {
+        this.imdbID = imdbID;
+        return this;
+    }
+
     public String getType() {
         return type;
     }
@@ -235,12 +339,61 @@ public class MovieOmdbDTO {
         this.type = type;
     }
 
-    public String getTotalSeasons() {
-        return totalSeasons;
+    public MovieOmdbDTO withType(String type) {
+        this.type = type;
+        return this;
     }
 
-    public void setTotalSeasons(String totalSeasons) {
-        this.totalSeasons = totalSeasons;
+    public String getDVD() {
+        return dVD;
+    }
+
+    public void setDVD(String dVD) {
+        this.dVD = dVD;
+    }
+
+    public MovieOmdbDTO withDVD(String dVD) {
+        this.dVD = dVD;
+        return this;
+    }
+
+    public String getBoxOffice() {
+        return boxOffice;
+    }
+
+    public void setBoxOffice(String boxOffice) {
+        this.boxOffice = boxOffice;
+    }
+
+    public MovieOmdbDTO withBoxOffice(String boxOffice) {
+        this.boxOffice = boxOffice;
+        return this;
+    }
+
+    public String getProduction() {
+        return production;
+    }
+
+    public void setProduction(String production) {
+        this.production = production;
+    }
+
+    public MovieOmdbDTO withProduction(String production) {
+        this.production = production;
+        return this;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public MovieOmdbDTO withWebsite(String website) {
+        this.website = website;
+        return this;
     }
 
     public String getResponse() {
@@ -250,4 +403,12 @@ public class MovieOmdbDTO {
     public void setResponse(String response) {
         this.response = response;
     }
+
+    public MovieOmdbDTO withResponse(String response) {
+        this.response = response;
+        return this;
+    }
+
+
+
 }

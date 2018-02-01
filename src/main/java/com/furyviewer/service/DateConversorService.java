@@ -8,18 +8,38 @@ import java.util.Locale;
 
 @Service
 public class DateConversorService {
+    /**
+     * Método que se encarga de convertir el String con formato (día-mes-año) al formato adecuado de LocalDate para la
+     * base de datos.
+     * @param date String | Contiene la fecha que se debe guardar en la base de datos.
+     * @return LocalDate | Devuelve la fecha con el formato adecuado.
+     */
     public LocalDate releseDateOMDB(String date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH);
+        LocalDate localDate = null;
 
-        LocalDate localDate = LocalDate.parse(date, formatter);
+        if(!date.equalsIgnoreCase("N/A")) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH);
+
+            localDate = LocalDate.parse(date, formatter);
+        }
 
         return localDate;
     }
 
+    /**
+     * Método que se encarga de convertir el String con formato (año-mes-día) al formato adecuado de LocalDate para la
+     * base de datos.
+     * @param date String | Contiene la fecha que se debe guardar en la base de datos.
+     * @return LocalDate | Devuelve la fecha con el formato adecuado.
+     */
     public LocalDate releaseDateOMDBSeason(String date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
+        LocalDate localDate = null;
 
-        LocalDate localDate = LocalDate.parse(date, formatter);
+        if(!date.equalsIgnoreCase("N/A")) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
+
+            localDate = LocalDate.parse(date, formatter);
+        }
 
         return localDate;
     }

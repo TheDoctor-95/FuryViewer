@@ -6,10 +6,7 @@ import com.furyviewer.domain.Movie;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.GenreRepository;
 import com.furyviewer.repository.MovieRepository;
-import com.furyviewer.service.ArtistService;
-import com.furyviewer.service.CountryService;
-import com.furyviewer.service.DateConversorService;
-import com.furyviewer.service.GenreService;
+import com.furyviewer.service.*;
 
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import okhttp3.Headers;
@@ -19,6 +16,7 @@ import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
 
 import java.io.IOException;
@@ -44,6 +42,9 @@ public class MovieOmdbDTOService {
     @Autowired
     private CountryService countryService;
 
+    @Autowired
+    private CompanyService companyService;
+
     static MovieOmdbDTORepository apiService = MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
 
 
@@ -61,6 +62,7 @@ public class MovieOmdbDTOService {
         return movie;
     }
 
+    @Transactional
     public Movie importMovie(String title){
 
         Optional<Movie> mdb = movieRepository.findByName(title);
@@ -77,11 +79,7 @@ public class MovieOmdbDTOService {
 
         //DATES
 
-
         m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
-
-
-
 
         m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
         m.setImdbIdExternalApi(movieOmdbDTO.getImdbID());
@@ -91,6 +89,8 @@ public class MovieOmdbDTOService {
 
         m.setAwards(movieOmdbDTO.getAwards());
         movieRepository.save(m);
+
+        m.setCompany(companyService.importCompany(movieOmdbDTO.getProduction()));
 
         m.setGenres(genreService.importGenre(movieOmdbDTO.getGenre()));
 

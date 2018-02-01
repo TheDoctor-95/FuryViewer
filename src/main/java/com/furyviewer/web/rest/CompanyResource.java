@@ -87,7 +87,7 @@ public class CompanyResource {
     public List<Company> getAllCompanies() {
         log.debug("REST request to get all Companies");
         return companyRepository.findAll();
-        }
+    }
 
     /**
      * GET  /companies/:id : get the "id" company.
@@ -105,7 +105,6 @@ public class CompanyResource {
 
 
     /**
-     *
      * Find companies by name (commit obligado.... Pau e Ibra son malos....)
      *
      * @param name
@@ -113,9 +112,9 @@ public class CompanyResource {
      */
     @GetMapping("/companiesByName/{name}")
     @Timed
-    public ResponseEntity<List<Company>> findCompanyByName(@PathVariable String name) {
+    public ResponseEntity<Optional<Company>> findCompanyByName(@PathVariable String name) {
         log.debug("REST request to get Companies by name", name);
-        List<Company> company =companyRepository.findCompanyByName(name);
+        Optional<Company> company = companyRepository.findCompanyByName(name);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(company));
     }
 
