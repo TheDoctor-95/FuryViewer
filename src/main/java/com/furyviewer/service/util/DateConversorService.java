@@ -1,4 +1,4 @@
-package com.furyviewer.service;
+package com.furyviewer.service.util;
 
 import org.springframework.stereotype.Service;
 

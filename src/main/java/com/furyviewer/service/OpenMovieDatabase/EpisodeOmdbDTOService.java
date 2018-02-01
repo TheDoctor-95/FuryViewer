@@ -1,22 +1,21 @@
 package com.furyviewer.service.OpenMovieDatabase;
 
 import com.furyviewer.domain.Season;
-import com.furyviewer.domain.Series;
 import com.furyviewer.repository.EpisodeRepository;
-import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.domain.Episode;
 import com.furyviewer.service.ArtistService;
-import com.furyviewer.service.DateConversorService;
+import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
 
 import java.io.IOException;
 
 @Service
 public class EpisodeOmdbDTOService {
-    public final String apikey = "eb62550d";
+    private final String apikey = "eb62550d";
 
     @Autowired
     private EpisodeRepository episodeRepository;
@@ -27,7 +26,7 @@ public class EpisodeOmdbDTOService {
     @Autowired
     private ArtistService artistService;
 
-    EpisodeOmdbDTORepository apiService = EpisodeOmdbDTORepository.retrofit.create(EpisodeOmdbDTORepository.class);
+    private final EpisodeOmdbDTORepository apiService = EpisodeOmdbDTORepository.retrofit.create(EpisodeOmdbDTORepository.class);
 
     /**
      * Devuelve la información de un episode en el formato proporcionado por OpenMovieDataBase.
@@ -75,8 +74,11 @@ public class EpisodeOmdbDTOService {
                         ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));
 
                         ep.setImdbId(episodeOmdbDTO.getImdbID());
-                        ep.setDescription(episodeOmdbDTO.getPlot());
                         ep.setSeason(se);
+
+                        if(episodeOmdbDTO.getPlot() == null) {
+                            ep.setDescription(episodeOmdbDTO.getPlot());
+                        }
 
                         ep.setActors(artistService.importActors(episodeOmdbDTO.getActors()));
                         ep.setDirector(artistService.importDirector(episodeOmdbDTO.getDirector()));

@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 
 public interface SeriesOmdbDTORepository {
 
-    @GET("/?type=series")
+    @GET("/?type=series&plot=full")
     Call<SeriesOmdbDTO> getSeries(@Query("apikey") String apikey, @Query("t") String title);
 
 

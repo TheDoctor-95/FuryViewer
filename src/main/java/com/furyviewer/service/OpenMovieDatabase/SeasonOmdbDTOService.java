@@ -4,18 +4,18 @@ import com.furyviewer.domain.Season;
 import com.furyviewer.domain.Series;
 import com.furyviewer.repository.SeasonRepository;
 import com.furyviewer.repository.SeriesRepository;
-import com.furyviewer.service.DateConversorService;
+import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Service
 public class SeasonOmdbDTOService {
-    public final String apikey = "eb62550d";
+    private final String apikey = "eb62550d";
 
     @Autowired
     private SeriesRepository seriesRepository;
@@ -29,7 +29,7 @@ public class SeasonOmdbDTOService {
     @Autowired
     private DateConversorService dateConversorService;
 
-    SeasonOmdbDTORepository apiService = SeasonOmdbDTORepository.retrofit.create(SeasonOmdbDTORepository.class);
+    private final SeasonOmdbDTORepository apiService = SeasonOmdbDTORepository.retrofit.create(SeasonOmdbDTORepository.class);
 
     /**
      * Devuelve la información de una season en el formato proporcionado por OpenMovieDataBase.

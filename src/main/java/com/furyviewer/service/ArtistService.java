@@ -75,7 +75,7 @@ public class ArtistService {
             Optional<Artist> optionalDirector = artistRepository.findByName(directorArray[0]);
             ArtistType atDirector = artistTypeRepository.findByName(ArtistTypeEnum.DIRECTOR);
 
-            //En caso de que el artista exista se comprueba si ya tiene asignado el tipo main_actor.
+            //En caso de que el artista exista se comprueba si ya tiene asignado el tipo director.
             if(optionalDirector.isPresent()){
                 artist = optionalDirector.get();
 
@@ -110,7 +110,7 @@ public class ArtistService {
             Optional<Artist> optionalScripwriter = artistRepository.findByName(scripwriterArray[0]);
             ArtistType atScripwriter = artistTypeRepository.findByName(ArtistTypeEnum.SCRIPTWRITER);
 
-            //En caso de que el artista exista se comprueba si ya tiene asignado el tipo main_actor.
+            //En caso de que el artista exista se comprueba si ya tiene asignado el tipo scriptwriter.
             if (optionalScripwriter.isPresent()) {
                 artist = optionalScripwriter.get();
 

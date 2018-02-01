@@ -1,4 +1,4 @@
-package com.furyviewer.service;
+package com.furyviewer.service.util;
 
 import com.furyviewer.domain.Country;
 import com.furyviewer.repository.CountryRepository;
