@@ -1,19 +1,11 @@
 package com.furyviewer.service.OpenMovieDatabase;
 
-import com.furyviewer.domain.Artist;
-import com.furyviewer.domain.Genre;
 import com.furyviewer.domain.Movie;
-import com.furyviewer.repository.ArtistRepository;
-import com.furyviewer.repository.GenreRepository;
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.service.*;
 
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.apache.commons.io.IOUtils;
+import com.furyviewer.service.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +17,7 @@ import java.util.Optional;
 @Service
 public class MovieOmdbDTOService {
 
-    public static final String apikey = "eb62550d";
+    private static final String apikey = "eb62550d";
 
     @Autowired
     private GenreService genreService;
@@ -45,12 +37,20 @@ public class MovieOmdbDTOService {
     @Autowired
     private CompanyService companyService;
 
-    static MovieOmdbDTORepository apiService = MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
+    @Autowired
+    private NAEraserService naEraserService;
 
+    private static MovieOmdbDTORepository apiService = MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
 
+    /**
+     * Devuelve la información de una movie en el formato proporcionado por OpenMovieDataBase.
+     * @param title String | Título de la movie.
+     * @return MovieOmdbDTO | Información con el formato proporcionado por la API.
+     */
     public MovieOmdbDTO getMovie(String title) {
         MovieOmdbDTO movie = new MovieOmdbDTO();
         Call<MovieOmdbDTO> callMovie = apiService.getMovie(apikey, title);
+
         try{
             movie = callMovie.execute().body();
             System.out.println(movie);
@@ -62,6 +62,11 @@ public class MovieOmdbDTOService {
         return movie;
     }
 
+    /**
+     * Convierte la información de una movie de OMDB al formato de información de FuryViewer.
+     * @param title String | Título de la movie.
+     * @return Movie | Contiene la información de una movie en el formato FuryViewer.
+     */
     @Transactional
     public Movie importMovie(String title){
 
@@ -74,39 +79,33 @@ public class MovieOmdbDTOService {
 
         Movie m = new Movie();
 
-        m.setName(movieOmdbDTO.getTitle());
-        m.setDescription(movieOmdbDTO.getPlot());
+        //Comprobamos que la API nos devuelve información.
+        if (movieOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+            m.setName(movieOmdbDTO.getTitle());
 
-        //DATES
+            m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
 
-        m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
+            m.setDescription(naEraserService.eraserNA(movieOmdbDTO.getPlot()));
+            m.setImdbIdExternalApi(naEraserService.eraserNA(movieOmdbDTO.getImdbID()));
+            m.setImgUrl(naEraserService.eraserNA(movieOmdbDTO.getPoster()));
+            m.setAwards(naEraserService.eraserNA(movieOmdbDTO.getAwards()));
 
-        m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
-        m.setImdbIdExternalApi(movieOmdbDTO.getImdbID());
+            m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
+            m.setCountry(countryService.importCountry(movieOmdbDTO.getCountry()));
 
-        m.setImgUrl(movieOmdbDTO.getPoster());
-        m.setCountry(countryService.importCountry(movieOmdbDTO.getCountry()));
+            movieRepository.save(m);
 
-        m.setAwards(movieOmdbDTO.getAwards());
-        movieRepository.save(m);
+            m.setCompany(companyService.importCompany(movieOmdbDTO.getProduction()));
+            m.setGenres(genreService.importGenre(movieOmdbDTO.getGenre()));
 
-        m.setCompany(companyService.importCompany(movieOmdbDTO.getProduction()));
+            movieRepository.save(m);
 
-        m.setGenres(genreService.importGenre(movieOmdbDTO.getGenre()));
+            m.setActorMains(artistService.importActors(movieOmdbDTO.getActors()));
+            m.setDirector(artistService.importDirector(movieOmdbDTO.getDirector()));
+            m.setScriptwriter(artistService.importScripwriter(movieOmdbDTO.getWriter()));
 
-        movieRepository.save(m);
-
-         m.setActorMains(artistService.importActors(movieOmdbDTO.getActors()));
-
-         m.setDirector(artistService.importDirector(movieOmdbDTO.getDirector()));
-
-         m.setScriptwriter(artistService.importScripwriter(movieOmdbDTO.getWriter()));
-
-        movieRepository.save(m);
-
+            movieRepository.save(m);
+        }
         return m;
-
     }
-
-
 }

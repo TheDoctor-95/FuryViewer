@@ -1,13 +1,12 @@
 package com.furyviewer.service.OpenMovieDatabase;
 
 import com.furyviewer.domain.Season;
-import com.furyviewer.domain.Series;
 import com.furyviewer.repository.EpisodeRepository;
-import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.domain.Episode;
 import com.furyviewer.service.ArtistService;
-import com.furyviewer.service.DateConversorService;
+import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
+import com.furyviewer.service.util.NAEraserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
@@ -16,7 +15,7 @@ import java.io.IOException;
 
 @Service
 public class EpisodeOmdbDTOService {
-    public final String apikey = "eb62550d";
+    private final String apikey = "eb62550d";
 
     @Autowired
     private EpisodeRepository episodeRepository;
@@ -27,45 +26,79 @@ public class EpisodeOmdbDTOService {
     @Autowired
     private ArtistService artistService;
 
-    EpisodeOmdbDTORepository apiService = EpisodeOmdbDTORepository.retrofit.create(EpisodeOmdbDTORepository.class);
+    @Autowired
+    private NAEraserService naEraserService;
 
-    public EpisodeOmdbDTO getEpisode(String title, int seasonNum, int episodeNum) {
-        EpisodeOmdbDTO episode = new EpisodeOmdbDTO();
+    private final EpisodeOmdbDTORepository apiService = EpisodeOmdbDTORepository.retrofit.create(EpisodeOmdbDTORepository.class);
+
+    /**
+     * Devuelve la información de un episode en el formato proporcionado por OpenMovieDataBase.
+     * @param title String | Título de la serie a buscar.
+     * @param seasonNum int | Número de la temporada a buscar.
+     * @param episodeNum int | Número del episode a buscar.
+     * @return EpisodeOmdbDTO | Información con el formato proporcionado por la API.
+     * @throws IOException
+     */
+    public EpisodeOmdbDTO getEpisode(String title, int seasonNum, int episodeNum) throws IOException {
+        EpisodeOmdbDTO episode;
         Call<EpisodeOmdbDTO> callEpisode = apiService.getEpisode(apikey, title, seasonNum, episodeNum);
 
-        try{
-            episode = callEpisode.execute().body();
-            System.out.println(episode);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        episode = callEpisode.execute().body();
+        System.out.println(episode);
 
         return episode;
     }
 
-    public void importEpisode (String title, int totalEpisodes, Season se){
-        for(int i= 1; i<=totalEpisodes; i++) {
-            Episode ep = new Episode();
-            EpisodeOmdbDTO episodeOmdbDTO = getEpisode(title,se.getNumber(),i);
+    /**
+     * Convierte la información de un episode de OMDB al formato de información de Furyviewer.
+     * @param title String | Título de la serie.
+     * @param totalEpisodes int | Número total de episodes de la season.
+     * @param se Season | Season a la que añadir los episodes.
+     */
+    public void importEpisode(String title, int totalEpisodes, Season se) {
+        for (int i = 1; i <= totalEpisodes; i++) {
 
-            ep.setNumber(i);
-            ep.setName(episodeOmdbDTO.getTitle());
+            //Ponemos mote al bucle y lo utilizamos para hacer la petición hasta tres veces para asegurarnos de que
+            // podemos realizar la petición a la api.
+            getEpisode:
+            for (int j = 0; j < 3; j++) {
+                try {
+                    Episode ep = new Episode();
+                    EpisodeOmdbDTO episodeOmdbDTO = getEpisode(title, se.getNumber(), i);
 
-            String[] time = episodeOmdbDTO.getRuntime().split(" ");
-            ep.setDuration(Double.parseDouble(time[0]));
+                    //Comprobamos que la API nos devuelve información.
+                    if (episodeOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+                        ep.setNumber(i);
+                        ep.setName(episodeOmdbDTO.getTitle());
 
-            ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));
+                        ep.setDuration(Double.parseDouble(episodeOmdbDTO.getRuntime().split(" ")[0]));
 
-            ep.setImdbId(episodeOmdbDTO.getImdbID());
-            ep.setDescription(episodeOmdbDTO.getPlot());
-            ep.setSeason(se);
+                        ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));
 
-            ep.setActors(artistService.importActors(episodeOmdbDTO.getActors()));
-            ep.setDirector(artistService.importDirector(episodeOmdbDTO.getDirector()));
-            ep.setScriptwriter(artistService.importScripwriter(episodeOmdbDTO.getWriter()));
+                        ep.setImdbId(naEraserService.eraserNA(episodeOmdbDTO.getImdbID()));
+                        ep.setSeason(se);
 
-            episodeRepository.save(ep);
+                        ep.setDescription(naEraserService.eraserNA(episodeOmdbDTO.getPlot()));
+
+                        ep.setActors(artistService.importActors(episodeOmdbDTO.getActors()));
+                        ep.setDirector(artistService.importDirector(episodeOmdbDTO.getDirector()));
+                        ep.setScriptwriter(artistService.importScripwriter(episodeOmdbDTO.getWriter()));
+
+                        episodeRepository.save(ep);
+                    }
+
+                    //Salimos del bucle
+                    break getEpisode;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    try {
+                        Thread.sleep(3000L);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
         }
     }
 }
