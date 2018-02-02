@@ -49,6 +49,10 @@ public class CountryService {
     }
 
     public String countryArtist (String countryName) {
-        return countryName.split(", | - ")[2];
+        String country[] = countryName.split(", | - ");
+
+        countryName = country[country.length - 1];
+
+        return countryName;
     }
 }

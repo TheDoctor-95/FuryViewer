@@ -57,10 +57,7 @@ public class ArtistService {
 
                 } else {
                     //Se crea un artista desde cero.
-                    artist = artistTmdbDTOService.importArtist(actorStr);
-                    //artist.setName(actorStr);
-                    //artist.addArtistType(atMainActor);
-                    artist = artistRepository.save(artist);
+                    artist = artistTmdbDTOService.importArtist(actorStr,atMainActor);
                 }
 
                 artists.add(artist);
@@ -94,10 +91,7 @@ public class ArtistService {
 
             }else{
                 //Se crea un artista desde cero.
-                artist = new Artist();
-                artist.setName(directorArray[0]);
-                artist.addArtistType(atDirector);
-                artist = artistRepository.save(artist);
+                artist = artistTmdbDTOService.importArtist(directorArray[0],atDirector);
             }
         }
 
@@ -129,10 +123,7 @@ public class ArtistService {
 
             } else {
                 //Se crea un artista desde cero.
-                artist = new Artist();
-                artist.setName(scripwriterArray[0]);
-                artist.addArtistType(atScripwriter);
-                artist = artistRepository.save(artist);
+                artist = artistTmdbDTOService.importArtist(scripwriterArray[0],atScripwriter);
             }
         }
 
