@@ -1,95 +1,20 @@
 
 <div *ngIf="movie">
-    <h2><span jhiTranslate="furyViewerApp.movie.detail.title">Movie</span> {{movie.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="furyViewerApp.movie.name">Name</span></dt>
-        <dd>
-            <span>{{movie.name}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.releaseDate">Release Date</span></dt>
-        <dd>
-            <span>{{movie.releaseDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.description">Description</span></dt>
-        <dd>
-            <span>{{movie.description}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.duration">Duration</span></dt>
-        <dd>
-            <span>{{movie.duration}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.imdbIdExternalApi">Imdb Id External Api</span></dt>
-        <dd>
-            <span>{{movie.imdbIdExternalApi}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.imgUrl">Img Url</span></dt>
-        <dd>
-            <span>{{movie.imgUrl}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.dvd_release">Dvd Release</span></dt>
-        <dd>
-            <span>{{movie.dvd_release}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.awards">Awards</span></dt>
-        <dd>
-            <span>{{movie.awards}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.director">Director</span></dt>
-        <dd>
-            <div *ngIf="movie.director">
-                <a [routerLink]="['/artist', movie.director?.id]">{{movie.director?.name}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.scriptwriter">Scriptwriter</span></dt>
-        <dd>
-            <div *ngIf="movie.scriptwriter">
-                <a [routerLink]="['/artist', movie.scriptwriter?.id]">{{movie.scriptwriter?.name}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.company">Company</span></dt>
-        <dd>
-            <div *ngIf="movie.company">
-                <a [routerLink]="['/company', movie.company?.id]">{{movie.company?.name}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.genre">Genre</span></dt>
-        <dd>
-            <span *ngFor="let genre of movie.genres; let last = last">
-                <a [routerLink]="['/genre', genre?.id ]">{{genre.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.actorMain">Actor Main</span></dt>
-        <dd>
-            <span *ngFor="let actorMain of movie.actorMains; let last = last">
-                <a [routerLink]="['/artist', actorMain?.id ]">{{actorMain.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.actorSecondary">Actor Secondary</span></dt>
-        <dd>
-            <span *ngFor="let actorSecondary of movie.actorSecondaries; let last = last">
-                <a [routerLink]="['/artist', actorSecondary?.id ]">{{actorSecondary.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.movie.country">Country</span></dt>
-        <dd>
-            <div *ngIf="movie.country">
-                <a [routerLink]="['/country', movie.country?.id]">{{movie.country?.name}}</a>
-            </div>
-        </dd>
-    </dl>
+    <div class="container-fluid">
+        <div class="row" style="background-color: #d2d3d2; padding-left: 8%; padding-top: 3%;">
+            <div class="col-2" style="width: 100%">
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'movie/'+ movie.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
+                    <img src="{{movie.imgUrl}}" class="img-rounded card-img-top imgFilm">
+            </div>
+            <div class="col-6" style="background-color: white; height: 100%; border-radius: 10px; padding: 12px;">
+                <div style="width: 59%; display: inline-block;">
+                    <h1>{{movie.name}}</h1>
+                </div>
+                <div style="width: 40%; display: inline-block;">
+                    <ngb-rating></ngb-rating>
+                </div>
+            </div>
+            <div class="col-3" style="background-color: purple; height: 200px;"></div>
+        </div>
+    </div>
 </div>

@@ -5,10 +5,27 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { Movie } from './movie.model';
 import { MovieService } from './movie.service';
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'jhi-movie-detail',
-    templateUrl: './movie-detail.component.html'
+    templateUrl: './movie-detail.component.html',
+    providers: [NgbRatingConfig],
+    styles: [`
+    .star {
+      font-size: 1.5rem;
+      color: #b0c4de;
+    }
+    .filled {
+      color: #1e90ff;
+    }
+    .bad {
+      color: #deb0b0;
+    }
+    .filled.bad {
+      color: #ff1e1e;
+    }
+  `]
 })
 export class MovieDetailComponent implements OnInit, OnDestroy {
 
@@ -19,8 +36,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     constructor(
         private eventManager: JhiEventManager,
         private movieService: MovieService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        config: NgbRatingConfig
     ) {
+        config.max = 5;
     }
 
     ngOnInit() {
