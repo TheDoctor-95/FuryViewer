@@ -3,7 +3,7 @@ package com.furyviewer.service.OpenMovieDatabase;
 import com.furyviewer.domain.Season;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.domain.Episode;
-import com.furyviewer.service.ArtistService;
+import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
 import com.furyviewer.service.util.NAEraserService;

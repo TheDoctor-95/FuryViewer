@@ -2,7 +2,6 @@ package com.furyviewer.service.OpenMovieDatabase;
 
 import com.furyviewer.domain.Movie;
 import com.furyviewer.repository.MovieRepository;
-import com.furyviewer.service.*;
 
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import com.furyviewer.service.util.*;

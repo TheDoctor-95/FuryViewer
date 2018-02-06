@@ -81,7 +81,7 @@ public class CompleteSeriesTmdbDTO {
     private String type;
     @SerializedName("vote_average")
     @Expose
-    private Integer voteAverage;
+    private Double voteAverage;
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
@@ -278,11 +278,11 @@ public class CompleteSeriesTmdbDTO {
         this.type = type;
     }
 
-    public Integer getVoteAverage() {
+    public Double getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(Integer voteAverage) {
+    public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
     }
 
