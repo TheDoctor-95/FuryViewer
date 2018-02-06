@@ -15,7 +15,8 @@ import { Account, LoginModalService, Principal } from '../shared';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
-
+    topPelis: String[] = ['Justice League', 'Harry Potter y la camara secreta', 'Distrito 12', 'Fast and Furious 8', 'Coco'];
+    topSeries: String[] = ['Doctor Who', 'The Flash', 'Arrow', 'Supergirl', 'Legends of Tomorrow'];
     constructor(
         private principal: Principal,
         private loginModalService: LoginModalService,
