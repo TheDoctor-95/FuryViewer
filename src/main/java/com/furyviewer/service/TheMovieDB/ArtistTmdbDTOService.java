@@ -1,14 +1,16 @@
 package com.furyviewer.service.TheMovieDB;
 
 import com.furyviewer.domain.Artist;
+import com.furyviewer.domain.ArtistType;
 import com.furyviewer.repository.ArtistRepository;
-import com.furyviewer.service.dto.TheMovieDB.ArtistFinalTmdbDTO;
-import com.furyviewer.service.dto.TheMovieDB.ArtistTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;
 import com.furyviewer.service.util.CountryService;
 import com.furyviewer.service.util.DateConversorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
+import retrofit2.Response;
 
 import java.io.IOException;
 
@@ -28,22 +30,36 @@ public class ArtistTmdbDTOService {
 
     private final ArtistTmdbDTORepository apiTMDB = ArtistTmdbDTORepository.retrofit.create(ArtistTmdbDTORepository.class);
 
-    public ArtistTmdbDTO getArtist (String artistName) {
-        ArtistTmdbDTO artist = new ArtistTmdbDTO();
+    /**
+     * Método que se encarga de pedir a la api de TheMovieDB la información básica de un actor.
+     * @param artistName String | Nombre del actor a buscar.
+     * @return ArtistTmdbDTO | Información en el formato proporcionado por la API.
+     * @throws IOException
+     */
+    public ArtistTmdbDTO getArtist(String artistName) throws IOException {
+        ArtistTmdbDTO artist;
         Call<ArtistTmdbDTO> callArtist = apiTMDB.getArtist(apikey, artistName);
 
-        try{
-            artist = callArtist.execute().body();
+        Response<ArtistTmdbDTO> response = callArtist.execute();
+
+        if(response.isSuccessful()){
+            artist = response.body();
             System.out.println(artist);
         }
-        catch(IOException e) {
-            e.printStackTrace();
+        else {
+            throw new IOException(response.message());
         }
 
         return artist;
     }
 
-    public int getID(String artistName) {
+    /**
+     * Método que se encarga de devolver el id del artista en la API de TMDB.
+     * @param artistName String | Nombre del artista a buscar.
+     * @return int | El id interno de la api de TMDB.
+     * @throws IOException
+     */
+    public int getID(String artistName) throws IOException {
         int id;
 
         ArtistTmdbDTO artistTmdbDTO = getArtist(artistName);
@@ -53,50 +69,95 @@ public class ArtistTmdbDTOService {
         return id;
     }
 
-    public ArtistFinalTmdbDTO getArtistComplete(String artistName) {
-        ArtistFinalTmdbDTO artist = new ArtistFinalTmdbDTO();
+    /**
+     * Método que se encarga de recuperar toda la información del artist de la api de TMDB.
+     * @param artistName String | Nombre del artista a buscar.
+     * @return ArtistFinalTmdbDTO | Información en el formato proporcionado por la API.
+     * @throws IOException
+     */
+    public ArtistFinalTmdbDTO getArtistComplete(String artistName) throws IOException {
+        ArtistFinalTmdbDTO artist;
         int id = getID(artistName);
 
         Call<ArtistFinalTmdbDTO> callArtist = apiTMDB.getFinalArtist(id, apikey);
 
-        try{
-            artist = callArtist.execute().body();
-            System.out.println(artist);
-        }
-        catch(IOException e) {
-            e.printStackTrace();
+        Response<ArtistFinalTmdbDTO> response = callArtist.execute();
+
+        if (response.isSuccessful()) {
+            artist = response.body();
+        } else {
+            throw new IOException(response.message());
         }
 
         return artist;
     }
 
-    public Artist importArtist(String artistName) {
+    /**
+     * Convierte la información de un artist de TMDB al formato de FuryViewer.
+     * @param artistName String | Nombre del artista a buscar.
+     * @param artistType ArtistType | Tipo del artista.
+     * @return Artist | Contiene la información de un artist en el formato FuryViewer.
+     */
+    public Artist importArtist(String artistName, ArtistType artistType) {
         Artist artist = new Artist();
 
-        ArtistFinalTmdbDTO artistFinalTmdbDTO = getArtistComplete(artistName);
-
         artist.setName(artistName);
-        if(artistFinalTmdbDTO.getBirthday() != null) {
-            artist.setBirthdate(dateConversorService.releaseDateOMDBSeason(artistFinalTmdbDTO.getBirthday().toString()));
-        }
-        if(artistFinalTmdbDTO.getDeathday() != null) {
-            artist.setDeathdate(dateConversorService.releaseDateOMDBSeason(artistFinalTmdbDTO.getDeathday().toString()));
+        artist.addArtistType(artistType);
+
+
+        //Ponemos mote al bucle y lo utilizamos para hacer la petición hasta tres veces para asegurarnos de que
+        // podemos realizar la petición a la api.
+        getArtist:
+        for (int i = 0; i < 3; i++) {
+            try {
+                ArtistFinalTmdbDTO artistFinalTmdbDTO = getArtistComplete(artistName);
+
+                if (artistFinalTmdbDTO.getBirthday() != null && artistFinalTmdbDTO.getBirthday().toString().split("-").length == 3) {
+                    artist.setBirthdate(dateConversorService.releaseDateOMDBSeason(artistFinalTmdbDTO.getBirthday().toString()));
+                }
+                if (artistFinalTmdbDTO.getDeathday() != null) {
+                    artist.setDeathdate(dateConversorService.releaseDateOMDBSeason(artistFinalTmdbDTO.getDeathday().toString()));
+                }
+
+                if (artistFinalTmdbDTO.getGender() != null) {
+                    switch (artistFinalTmdbDTO.getGender()) {
+                        case 0:
+                            artist.setSex("Undefined");
+                            break;
+                        case 1:
+                            artist.setSex("Female");
+                            break;
+                        case 2:
+                            artist.setSex("Male");
+                            break;
+                    }
+                }
+
+                if (artistFinalTmdbDTO.getProfilePath() != null) {
+                    artist.setImgUrl(pathImage + artistFinalTmdbDTO.getProfilePath());
+                }
+                if (artistFinalTmdbDTO.getImdbId() != null) {
+                    artist.setImdb_id(artistFinalTmdbDTO.getImdbId());
+                }
+                if (artistFinalTmdbDTO.getPlaceOfBirth() != null) {
+                    artist.setCountry(countryService.importCountry(countryService.countryArtist(artistFinalTmdbDTO.getPlaceOfBirth().toString())));
+                }
+
+                //Salimos del bucle
+                break getArtist;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                try {
+                    System.out.println("Durmiendo el thread 5 segundos");
+                    Thread.sleep(5000L);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
         }
 
-        switch (artistFinalTmdbDTO.getGender()) {
-            case 0:
-                artist.setSex("Undefined");
-            case 1:
-                artist.setSex("Female");
-            case 2:
-                artist.setSex("Male");
-        }
-
-        artist.setImgUrl(pathImage + artistFinalTmdbDTO.getProfilePath());
-        artist.setImdb_id(artistFinalTmdbDTO.getImdbId());
-        //artist.setCountry(countryService.importCountry(countryService.countryArtist(artistFinalTmdbDTO.getPlaceOfBirth().toString())));
-
-        //artist = artistRepository.save(artist);
+        artist = artistRepository.save(artist);
 
         return artist;
     }

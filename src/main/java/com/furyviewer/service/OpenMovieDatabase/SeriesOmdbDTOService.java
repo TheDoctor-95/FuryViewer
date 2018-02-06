@@ -3,11 +3,9 @@ package com.furyviewer.service.OpenMovieDatabase;
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.enumeration.SeriesEmittingEnum;
 import com.furyviewer.repository.SeriesRepository;
-import com.furyviewer.service.util.CountryService;
-import com.furyviewer.service.util.DateConversorService;
-import com.furyviewer.service.util.GenreService;
+import com.furyviewer.service.TheMovieDB.SeriesTmdbDTOService;
+import com.furyviewer.service.util.*;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
-import com.furyviewer.service.util.NAEraserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +35,12 @@ public class SeriesOmdbDTOService {
 
     @Autowired
     private NAEraserService naEraserService;
+
+    @Autowired
+    private CompanyService companyService;
+
+    @Autowired
+    private SeriesTmdbDTOService seriesTmdbDTOService;
 
     private static SeriesOmdbDTORepository apiService = SeriesOmdbDTORepository.retrofit.create(SeriesOmdbDTORepository.class);
 
@@ -96,6 +100,7 @@ public class SeriesOmdbDTOService {
 
             ss.setGenres(genreService.importGenre(seriesOmdbDTO.getGenre()));
             ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));
+            ss.setCompany(companyService.importCompany(seriesTmdbDTOService.getCompanyName(title)));
 
             seriesRepository.save(ss);
 

@@ -1,5 +1,5 @@
 
-package com.furyviewer.service.dto.TheMovieDB;
+package com.furyviewer.service.dto.TheMovieDB.Artist;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
