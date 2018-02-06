@@ -3,11 +3,14 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Artist;
 
+
 import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
+import com.furyviewer.service.ArtistServiceSmart;
 import com.furyviewer.service.TheMovieDB.ArtistTmdbDTOService;
+import com.furyviewer.service.dto.ArtistBCriteria;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
@@ -18,6 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.furyviewer.service.ArtistBQueryService;
+
 
 import javax.inject.Inject;
 import java.net.URI;
@@ -40,6 +45,12 @@ public class ArtistResource {
     private static final String ENTITY_NAME = "artist";
 
     private final ArtistRepository artistRepository;
+
+    @Autowired
+    private ArtistServiceSmart artistService;
+
+    @Autowired
+    private ArtistBQueryService artistBQueryService;
 
 
     @Inject
@@ -117,6 +128,14 @@ public class ArtistResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
     }
 
+    @GetMapping("/artist-bs/{id}")
+    @Timed
+    public ResponseEntity<Artist> getArtistB(@PathVariable Long id) {
+        log.debug("REST request to get ArtistB : {}", id);
+        Artist artist = artistService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
+    }
+
     /**
      * Find artists by name (commit obligado.... Pau e Ibra son malos....)
      *
@@ -179,5 +198,13 @@ public class ArtistResource {
     @Timed
     public ArtistFinalTmdbDTO getTestInfoCompleta() throws Exception {
         return artistTmdbDTOService.getArtistComplete("Norman Reedus");
+    }
+
+    @GetMapping("/artist-s")
+    @Timed
+    public ResponseEntity<List<Artist>> getAllArtistS(ArtistBCriteria criteria) {
+        log.debug("REST request to get ArtistS by criteria: {}", criteria);
+        List<Artist> entityList = artistBQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
     }
 }

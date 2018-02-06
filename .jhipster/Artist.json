@@ -86,8 +86,8 @@
     ],
     "changelogDate": "20171130103704",
     "dto": "no",
-    "service": "no",
+    "service": "ServiceClass",
     "entityTableName": "artist",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "pagination": "no"
 }

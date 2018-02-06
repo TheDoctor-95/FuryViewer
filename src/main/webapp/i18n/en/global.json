@@ -31,6 +31,7 @@
                 "movieStats": "Movie Stats",
                 "social": "Social",
                 "chapterSeen": "Chapter Seen",
+                "artistB": "Artist B",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

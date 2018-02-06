@@ -16,7 +16,7 @@ import java.util.Optional;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ArtistRepository extends JpaRepository<Artist, Long> {
+public interface ArtistRepository extends JpaRepository<Artist, Long>, JpaSpecificationExecutor<Artist> {
     @Query("select distinct artist from Artist artist left join fetch artist.artistTypes")
     List<Artist> findAllWithEagerRelationships();
 

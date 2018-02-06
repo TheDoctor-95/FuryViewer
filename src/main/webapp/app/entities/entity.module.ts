@@ -24,6 +24,7 @@ import { FuryViewerSeriesStatsModule } from './series-stats/series-stats.module'
 import { FuryViewerMovieStatsModule } from './movie-stats/movie-stats.module';
 import { FuryViewerSocialModule } from './social/social.module';
 import { FuryViewerChapterSeenModule } from './chapter-seen/chapter-seen.module';
+import { FuryViewerArtistBModule } from './artist-b/artist-b.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -52,6 +53,7 @@ import { FuryViewerChapterSeenModule } from './chapter-seen/chapter-seen.module'
         FuryViewerMovieStatsModule,
         FuryViewerSocialModule,
         FuryViewerChapterSeenModule,
+        FuryViewerArtistBModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
