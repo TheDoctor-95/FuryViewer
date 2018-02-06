@@ -2,10 +2,9 @@ package com.furyviewer.service.TheMovieDB;
 
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.ArtistType;
-import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
-import com.furyviewer.service.dto.TheMovieDB.ArtistFinalTmdbDTO;
-import com.furyviewer.service.dto.TheMovieDB.ArtistTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;
 import com.furyviewer.service.util.CountryService;
 import com.furyviewer.service.util.DateConversorService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,11 @@
 
-package com.furyviewer.service.dto.TheMovieDB;
+package com.furyviewer.service.dto.TheMovieDB.Series;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class KnownFor {
+public class Result {
 
     @SerializedName("original_name")
     @Expose
@@ -13,9 +13,6 @@ public class KnownFor {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("media_type")
-    @Expose
-    private String mediaType;
     @SerializedName("name")
     @Expose
     private String name;
@@ -49,21 +46,6 @@ public class KnownFor {
     @SerializedName("origin_country")
     @Expose
     private List<String> originCountry = null;
-    @SerializedName("video")
-    @Expose
-    private Boolean video;
-    @SerializedName("title")
-    @Expose
-    private String title;
-    @SerializedName("original_title")
-    @Expose
-    private String originalTitle;
-    @SerializedName("adult")
-    @Expose
-    private Boolean adult;
-    @SerializedName("release_date")
-    @Expose
-    private String releaseDate;
 
     public String getOriginalName() {
         return originalName;
@@ -79,14 +61,6 @@ public class KnownFor {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getMediaType() {
-        return mediaType;
-    }
-
-    public void setMediaType(String mediaType) {
-        this.mediaType = mediaType;
     }
 
     public String getName() {
@@ -175,46 +149,6 @@ public class KnownFor {
 
     public void setOriginCountry(List<String> originCountry) {
         this.originCountry = originCountry;
-    }
-
-    public Boolean getVideo() {
-        return video;
-    }
-
-    public void setVideo(Boolean video) {
-        this.video = video;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getOriginalTitle() {
-        return originalTitle;
-    }
-
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
-
-    public Boolean getAdult() {
-        return adult;
-    }
-
-    public void setAdult(Boolean adult) {
-        this.adult = adult;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
     }
 
 }

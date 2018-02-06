@@ -1,7 +1,7 @@
 package com.furyviewer.service.TheMovieDB;
 
-import com.furyviewer.service.dto.TheMovieDB.ArtistFinalTmdbDTO;
-import com.furyviewer.service.dto.TheMovieDB.ArtistTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;
 
 import retrofit2.Call;
 import retrofit2.GsonConverterFactory;
