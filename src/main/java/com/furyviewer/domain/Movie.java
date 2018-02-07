@@ -43,11 +43,11 @@ public class Movie implements Serializable {
     @Column(name = "img_url")
     private String imgUrl;
 
-    @Column(name = "dvd_release")
-    private String dvd_release;
-
     @Column(name = "awards")
     private String awards;
+
+    @Column(name = "dvd_release")
+    private LocalDate dvd_release;
 
     @ManyToOne
     private Artist director;
@@ -199,19 +199,6 @@ public class Movie implements Serializable {
         this.imgUrl = imgUrl;
     }
 
-    public String getDvd_release() {
-        return dvd_release;
-    }
-
-    public Movie dvd_release(String dvd_release) {
-        this.dvd_release = dvd_release;
-        return this;
-    }
-
-    public void setDvd_release(String dvd_release) {
-        this.dvd_release = dvd_release;
-    }
-
     public String getAwards() {
         return awards;
     }
@@ -223,6 +210,19 @@ public class Movie implements Serializable {
 
     public void setAwards(String awards) {
         this.awards = awards;
+    }
+
+    public LocalDate getDvd_release() {
+        return dvd_release;
+    }
+
+    public Movie dvd_release(LocalDate dvd_release) {
+        this.dvd_release = dvd_release;
+        return this;
+    }
+
+    public void setDvd_release(LocalDate dvd_release) {
+        this.dvd_release = dvd_release;
     }
 
     public Artist getDirector() {
@@ -533,8 +533,8 @@ public class Movie implements Serializable {
             ", duration='" + getDuration() + "'" +
             ", imdbIdExternalApi='" + getImdbIdExternalApi() + "'" +
             ", imgUrl='" + getImgUrl() + "'" +
-            ", dvd_release='" + getDvd_release() + "'" +
             ", awards='" + getAwards() + "'" +
+            ", dvd_release='" + getDvd_release() + "'" +
             "}";
     }
 }

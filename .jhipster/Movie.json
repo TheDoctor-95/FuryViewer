@@ -112,12 +112,12 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "dvd_release",
+            "fieldName": "awards",
             "fieldType": "String"
         },
         {
-            "fieldName": "awards",
-            "fieldType": "String"
+            "fieldName": "dvd_release",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20171130103659",

@@ -46,11 +46,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="dvd_release" type="varchar(255)">
+            <column name="awards" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="awards" type="varchar(255)">
+            <column name="dvd_release" type="date">
                 <constraints nullable="true" />
             </column>
 
