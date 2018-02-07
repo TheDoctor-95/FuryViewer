@@ -47,7 +47,7 @@ public class ArtistResource {
     private final ArtistRepository artistRepository;
 
     @Autowired
-    private ArtistServiceSmart artistService;
+    private ArtistServiceSmart artistServiceSmart;
 
     @Autowired
     private ArtistBQueryService artistBQueryService;
@@ -132,7 +132,7 @@ public class ArtistResource {
     @Timed
     public ResponseEntity<Artist> getArtistB(@PathVariable Long id) {
         log.debug("REST request to get ArtistB : {}", id);
-        Artist artist = artistService.findOne(id);
+        Artist artist = artistServiceSmart.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
     }
 

@@ -29,7 +29,6 @@
     <include file="config/liquibase/changelog/20171130103714_added_entity_MovieStats.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171130103715_added_entity_Social.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171130103716_added_entity_ChapterSeen.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180206111556_added_entity_ArtistB.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20171130103653_added_entity_constraints_UserExt.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171130103656_added_entity_constraints_Series.xml" relativeToChangelogFile="false"/>
