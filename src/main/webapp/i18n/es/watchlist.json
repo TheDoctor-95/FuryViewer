@@ -1,0 +1,10 @@
+{
+    "furyViewerApp": {
+        "watchlist": {
+            "watchlist": {
+                "title": "watchlist",
+                "movies": "movies",
+                "llista": "llista"            }
+        }
+    }
+}

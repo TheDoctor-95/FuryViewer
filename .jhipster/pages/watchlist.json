@@ -1,0 +1,21 @@
+{
+    "pages": [
+        {
+            "pageName": "watchlist",
+            "pageType": "table",
+            "fields": [
+                {
+                    "fieldName": "movies",
+                    "fieldType": "Boolean"
+                },
+                {
+                    "fieldName": "llista",
+                    "fieldType": "Integer"
+                }
+            ],
+            "pagination": "infinite-scroll"
+        }
+    ],
+    "pageSetGlyphIcon": "",
+    "changelogDate": "20180208113255"
+}
