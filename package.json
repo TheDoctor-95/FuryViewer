@@ -20,6 +20,7 @@
     "bootstrap": "4.0.0-beta",
     "core-js": "2.4.1",
     "font-awesome": "4.7.0",
+    "generator-jhipster-pages": "^2.0.2",
     "jquery": "3.2.1",
     "ng-jhipster": "0.2.12",
     "ng2-webstorage": "1.8.0",
@@ -72,15 +73,15 @@
     "tslint": "5.5.0",
     "tslint-loader": "3.5.3",
     "typescript": "2.5.2",
-    "xml2js": "0.4.17",
     "uglifyjs-webpack-plugin": "1.0.0-beta.2",
+    "web-app-manifest-loader": "0.1.1",
     "webpack": "3.6.0",
     "webpack-dev-server": "2.8.2",
     "webpack-merge": "4.1.0",
     "webpack-notifier": "1.5.0",
     "webpack-visualizer-plugin": "0.1.11",
-    "web-app-manifest-loader": "0.1.1",
-    "write-file-webpack-plugin": "4.1.0"
+    "write-file-webpack-plugin": "4.1.0",
+    "xml2js": "0.4.17"
   },
   "engines": {
     "node": ">=6.9.0"

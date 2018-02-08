@@ -8,6 +8,7 @@ import { FuryViewerSharedModule, UserRouteAccessService } from './shared';
 import { FuryViewerHomeModule } from './home/home.module';
 import { FuryViewerAdminModule } from './admin/admin.module';
 import { FuryViewerAccountModule } from './account/account.module';
+import { FuryViewerPageSetsModule } from './pages/page-sets.module';
 import { FuryViewerEntityModule } from './entities/entity.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
@@ -34,6 +35,7 @@ import {
         FuryViewerSharedModule,
         FuryViewerHomeModule,
         FuryViewerAdminModule,
+        FuryViewerPageSetsModule,
         FuryViewerAccountModule,
         FuryViewerEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here

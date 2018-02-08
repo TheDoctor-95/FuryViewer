@@ -34,5 +34,11 @@
     "packageFolder": "com/furyviewer",
     "jwtSecretKey": "63570e494f353c85ff234d1d2b2e1231f5f12754",
     "jhiPrefix": "jhi"
+  },
+  "generator-jhipster-pages": {
+    "promptValues": {
+      "pageSet": "_CreateNew_",
+      "pageType": "table"
+    }
   }
 }
