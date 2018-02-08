@@ -28,31 +28,15 @@ public class CountryService {
         Country country = null;
 
         if (naEraserService.eraserNA(countryName) != null) {
-            String[] countryNames = countryName.split(", ");
-            countryName = countryNames[0];
-
             //Buscamos countryName
-            Optional<Country> c = countryRepository.findByName(countryName);
-
-            country = new Country();
+            Optional<Country> c = countryRepository.findByName(googleMapsDTOService.getName(countryName));
 
             if (c.isPresent()) {
                 country = c.get();
             } else {
-                country.setName(countryName);
-                country.setLatitude(googleMapsDTOService.getLatitude(countryName));
-                country.setLongitude(googleMapsDTOService.getLongitude(countryName));
-                countryRepository.save(country);
+                country = googleMapsDTOService.importCountry(countryName);
             }
         }
         return country;
-    }
-
-    public String countryArtist (String countryName) {
-        String country[] = countryName.split(", | - ");
-
-        countryName = country[country.length - 1];
-
-        return countryName;
     }
 }

@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface GoogleMapsDTORepository {
-    @GET("/maps/api/geocode/json")
+    @GET("/maps/api/geocode/json?language=en")
     Call<GoogleMapsDTO> getCoordinates(@Query("address") String address, @Query("key") String apikey);
 
     public static String url = "https://maps.googleapis.com/";

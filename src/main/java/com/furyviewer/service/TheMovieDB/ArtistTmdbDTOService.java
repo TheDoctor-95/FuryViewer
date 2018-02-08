@@ -140,7 +140,7 @@ public class ArtistTmdbDTOService {
                     artist.setImdb_id(artistFinalTmdbDTO.getImdbId());
                 }
                 if (artistFinalTmdbDTO.getPlaceOfBirth() != null) {
-                    artist.setCountry(countryService.importCountry(countryService.countryArtist(artistFinalTmdbDTO.getPlaceOfBirth().toString())));
+                    artist.setCountry(countryService.importCountry(artistFinalTmdbDTO.getPlaceOfBirth().toString()));
                 }
 
                 //Salimos del bucle
