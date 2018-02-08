@@ -40,11 +40,29 @@ public class DateConversorService {
         LocalDate localDate = null;
 
         if(naEraserService.eraserNA(date) != null) {
+            date = reconstructionDate(date);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
 
             localDate = LocalDate.parse(date, formatter);
         }
 
         return localDate;
+    }
+
+    /**
+     * Añade los números faltantes a una fecha.
+     * @param dateInp String | Fecha entrante que puede estar incompleta.
+     * @return String | Fecha completa.
+     */
+    public String reconstructionDate(String dateInp) {
+        String dateOuT = dateInp;
+
+        if(dateInp.split("-").length == 2) {
+            dateOuT = dateInp + "-7";
+        } else if (dateInp.split("-").length == 1) {
+            dateOuT = dateInp + "-4-2";
+        }
+
+        return dateOuT;
     }
 }
