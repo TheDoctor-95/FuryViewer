@@ -1,0 +1,77 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myArtistBLabel" jhiTranslate="furyViewerApp.artistB.home.createOrEditLabel">Create or edit a Artist B</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!artistB.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="artistB.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artistB.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="artistB.name"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artistB.birthdate" for="field_birthdate">Birthdate</label>
+            <div class="input-group">
+                <input id="field_birthdate" type="text" class="form-control" name="birthdate" ngbDatepicker  #birthdateDp="ngbDatepicker" [(ngModel)]="artistB.birthdate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="birthdateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artistB.sex" for="field_sex">Sex</label>
+            <input type="text" class="form-control" name="sex" id="field_sex"
+                [(ngModel)]="artistB.sex"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artistB.deathdate" for="field_deathdate">Deathdate</label>
+            <div class="input-group">
+                <input id="field_deathdate" type="text" class="form-control" name="deathdate" ngbDatepicker  #deathdateDp="ngbDatepicker" [(ngModel)]="artistB.deathdate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="deathdateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artistB.imgUrl" for="field_imgUrl">Img Url</label>
+            <input type="text" class="form-control" name="imgUrl" id="field_imgUrl"
+                [(ngModel)]="artistB.imgUrl"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artistB.imdbId" for="field_imdbId">Imdb Id</label>
+            <input type="text" class="form-control" name="imdbId" id="field_imdbId"
+                [(ngModel)]="artistB.imdbId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artistB.awards" for="field_awards">Awards</label>
+            <input type="text" class="form-control" name="awards" id="field_awards"
+                [(ngModel)]="artistB.awards"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.artistB.country" for="field_country">Country</label>
+            <select class="form-control" id="field_country" name="country" [(ngModel)]="artistB.country" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="countryOption.id === artistB.country?.id ? artistB.country : countryOption" *ngFor="let countryOption of countries; trackBy: trackCountryById">{{countryOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

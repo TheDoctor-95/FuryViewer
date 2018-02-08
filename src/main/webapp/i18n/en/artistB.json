@@ -1,0 +1,28 @@
+{
+    "furyViewerApp": {
+        "artistB" : {
+            "home": {
+                "title": "Artist BS",
+                "createLabel": "Create a new Artist B",
+                "createOrEditLabel": "Create or edit a Artist B"
+            },
+            "created": "A new Artist B is created with identifier {{ param }}",
+            "updated": "A Artist B is updated with identifier {{ param }}",
+            "deleted": "A Artist B is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Artist B {{ id }}?"
+            },
+            "detail": {
+                "title": "Artist B"
+            },
+            "name": "Name",
+            "birthdate": "Birthdate",
+            "sex": "Sex",
+            "deathdate": "Deathdate",
+            "imgUrl": "Img Url",
+            "imdbId": "Imdb Id",
+            "awards": "Awards",
+            "country": "Country"
+        }
+    }
+}
