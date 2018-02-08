@@ -29,7 +29,8 @@ public class SeasonOmdbDTOService {
     @Autowired
     private DateConversorService dateConversorService;
 
-    private final SeasonOmdbDTORepository apiService = SeasonOmdbDTORepository.retrofit.create(SeasonOmdbDTORepository.class);
+    private final SeasonOmdbDTORepository apiService =
+        SeasonOmdbDTORepository.retrofit.create(SeasonOmdbDTORepository.class);
 
     /**
      * Devuelve la información de una season en el formato proporcionado por OpenMovieDataBase.
@@ -70,12 +71,17 @@ public class SeasonOmdbDTOService {
                     //Comprobamos que la API nos devuelve información.
                     if (seasonOmdbDTO.getResponse().equalsIgnoreCase("true")) {
                         se.setNumber(i);
-                        se.setReleaseDate(dateConversorService.releaseDateOMDBSeason(seasonOmdbDTO.getEpisodes().get(0).getReleased()));
+                        se.setReleaseDate(dateConversorService.
+                            releaseDateOMDBSeason(seasonOmdbDTO.getEpisodes().get(0).getReleased()));
                         se.setSeries(ss);
 
                         seasonRepository.save(se);
 
-                        episodeOmdbDTOService.importEpisode(title, seasonOmdbDTO.getEpisodes().size(), se);
+                        episodeOmdbDTOService.
+                            importEpisode(title,
+                                Integer.parseInt(seasonOmdbDTO.getEpisodes().get(
+                                    seasonOmdbDTO.getEpisodes().size() - 1).getEpisode()),
+                                se);
                     }
 
                     //Salimos del bucle
