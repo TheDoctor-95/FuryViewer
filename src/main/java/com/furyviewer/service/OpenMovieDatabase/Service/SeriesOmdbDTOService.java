@@ -1,8 +1,9 @@
-package com.furyviewer.service.OpenMovieDatabase;
+package com.furyviewer.service.OpenMovieDatabase.Service;
 
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.enumeration.SeriesEmittingEnum;
 import com.furyviewer.repository.SeriesRepository;
+import com.furyviewer.service.OpenMovieDatabase.Repository.SeriesOmdbDTORepository;
 import com.furyviewer.service.TheMovieDB.Service.SeriesTmdbDTOService;
 import com.furyviewer.service.util.*;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;

@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Country;
 
 import com.furyviewer.repository.CountryRepository;
-import com.furyviewer.service.GoogleMaps.GoogleMapsDTOService;
+import com.furyviewer.service.GoogleMaps.Service.GoogleMapsDTOService;
 import com.furyviewer.service.dto.GoogleMaps.GoogleMapsDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;

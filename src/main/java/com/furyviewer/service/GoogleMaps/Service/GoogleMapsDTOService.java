@@ -1,7 +1,8 @@
-package com.furyviewer.service.GoogleMaps;
+package com.furyviewer.service.GoogleMaps.Service;
 
 import com.furyviewer.domain.Country;
 import com.furyviewer.repository.CountryRepository;
+import com.furyviewer.service.GoogleMaps.Repository.GoogleMapsDTORepository;
 import com.furyviewer.service.dto.GoogleMaps.AddressComponent;
 import com.furyviewer.service.dto.GoogleMaps.GoogleMapsDTO;
 import com.furyviewer.service.dto.GoogleMaps.Result;

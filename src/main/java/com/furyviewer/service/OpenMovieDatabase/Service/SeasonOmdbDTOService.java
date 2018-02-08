@@ -1,9 +1,10 @@
-package com.furyviewer.service.OpenMovieDatabase;
+package com.furyviewer.service.OpenMovieDatabase.Service;
 
 import com.furyviewer.domain.Season;
 import com.furyviewer.domain.Series;
 import com.furyviewer.repository.SeasonRepository;
 import com.furyviewer.repository.SeriesRepository;
+import com.furyviewer.service.OpenMovieDatabase.Repository.SeasonOmdbDTORepository;
 import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,9 @@
-package com.furyviewer.service.OpenMovieDatabase;
+package com.furyviewer.service.OpenMovieDatabase.Service;
 
 import com.furyviewer.domain.Season;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.domain.Episode;
+import com.furyviewer.service.OpenMovieDatabase.Repository.EpisodeOmdbDTORepository;
 import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;

@@ -2,7 +2,7 @@ package com.furyviewer.service.util;
 
 import com.furyviewer.domain.Country;
 import com.furyviewer.repository.CountryRepository;
-import com.furyviewer.service.GoogleMaps.GoogleMapsDTOService;
+import com.furyviewer.service.GoogleMaps.Service.GoogleMapsDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

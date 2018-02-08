@@ -5,8 +5,7 @@ import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.service.MovieDatabase.MovieDTOService;
-import com.furyviewer.service.OpenMovieDatabase.MovieOmdbDTOService;
-import com.furyviewer.service.dto.MovieDatabase.MovieDTO;
+import com.furyviewer.service.OpenMovieDatabase.Service.MovieOmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -15,7 +14,6 @@ import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;

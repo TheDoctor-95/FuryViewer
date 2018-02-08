@@ -1,4 +1,4 @@
-package com.furyviewer.service.GoogleMaps;
+package com.furyviewer.service.GoogleMaps.Repository;
 
 import com.furyviewer.service.dto.GoogleMaps.GoogleMapsDTO;
 import retrofit2.Call;

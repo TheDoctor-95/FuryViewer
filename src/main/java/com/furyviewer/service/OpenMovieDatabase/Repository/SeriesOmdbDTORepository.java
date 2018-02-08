@@ -1,4 +1,4 @@
-package com.furyviewer.service.OpenMovieDatabase;
+package com.furyviewer.service.OpenMovieDatabase.Repository;
 
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
 import retrofit2.http.Query;

@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Season;
 
 import com.furyviewer.repository.SeasonRepository;
-import com.furyviewer.service.OpenMovieDatabase.SeasonOmdbDTOService;
+import com.furyviewer.service.OpenMovieDatabase.Service.SeasonOmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;

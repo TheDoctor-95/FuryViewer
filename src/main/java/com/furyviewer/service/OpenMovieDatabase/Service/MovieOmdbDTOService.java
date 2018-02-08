@@ -1,8 +1,10 @@
-package com.furyviewer.service.OpenMovieDatabase;
+package com.furyviewer.service.OpenMovieDatabase.Service;
 
 import com.furyviewer.domain.Movie;
 import com.furyviewer.repository.MovieRepository;
 
+import com.furyviewer.service.OpenMovieDatabase.Repository.MovieOmdbDTORepository;
+import com.furyviewer.service.TheMovieDB.Service.TrailerTmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import com.furyviewer.service.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class MovieOmdbDTOService {
 
     @Autowired
     private NAEraserService naEraserService;
+
+    @Autowired
+    private TrailerTmdbDTOService trailerTmdbDTOService;
 
     private static MovieOmdbDTORepository apiService = MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
 
@@ -103,7 +108,9 @@ public class MovieOmdbDTOService {
             m.setDirector(artistService.importDirector(movieOmdbDTO.getDirector()));
             m.setScriptwriter(artistService.importScripwriter(movieOmdbDTO.getWriter()));
 
-            movieRepository.save(m);
+            m = movieRepository.save(m);
+
+            trailerTmdbDTOService.importMovieTrailer(m);
         }
         return m;
     }
