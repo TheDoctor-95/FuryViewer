@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Company;
 
 import com.furyviewer.repository.CompanyRepository;
-import com.furyviewer.service.TheMovieDB.CompanyTmdbDTOService;
+import com.furyviewer.service.TheMovieDB.Service.CompanyTmdbDTOService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;

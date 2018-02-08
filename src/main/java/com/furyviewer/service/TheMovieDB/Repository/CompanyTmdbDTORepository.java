@@ -1,4 +1,4 @@
-package com.furyviewer.service.TheMovieDB;
+package com.furyviewer.service.TheMovieDB.Repository;
 
 import com.furyviewer.service.dto.TheMovieDB.Company.CompleteCompanyTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Company.SimpleCompanyTmdbDTO;

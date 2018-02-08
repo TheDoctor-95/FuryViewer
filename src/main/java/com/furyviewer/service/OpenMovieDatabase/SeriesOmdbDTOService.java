@@ -3,7 +3,7 @@ package com.furyviewer.service.OpenMovieDatabase;
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.enumeration.SeriesEmittingEnum;
 import com.furyviewer.repository.SeriesRepository;
-import com.furyviewer.service.TheMovieDB.SeriesTmdbDTOService;
+import com.furyviewer.service.TheMovieDB.Service.SeriesTmdbDTOService;
 import com.furyviewer.service.util.*;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
 import org.springframework.beans.factory.annotation.Autowired;

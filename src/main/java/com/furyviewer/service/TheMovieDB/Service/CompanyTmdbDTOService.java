@@ -1,8 +1,8 @@
-package com.furyviewer.service.TheMovieDB;
+package com.furyviewer.service.TheMovieDB.Service;
 
 import com.furyviewer.domain.Company;
-import com.furyviewer.domain.Country;
 import com.furyviewer.repository.CompanyRepository;
+import com.furyviewer.service.TheMovieDB.Repository.CompanyTmdbDTORepository;
 import com.furyviewer.service.dto.TheMovieDB.Company.CompleteCompanyTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Company.SimpleCompanyTmdbDTO;
 import com.furyviewer.service.util.CountryService;

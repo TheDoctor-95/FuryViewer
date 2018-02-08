@@ -5,8 +5,7 @@ import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
-import com.furyviewer.service.TheMovieDB.ArtistTmdbDTOService;
-import com.furyviewer.service.util.NAEraserService;
+import com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

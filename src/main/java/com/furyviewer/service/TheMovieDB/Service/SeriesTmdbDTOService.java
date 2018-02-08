@@ -1,5 +1,6 @@
-package com.furyviewer.service.TheMovieDB;
+package com.furyviewer.service.TheMovieDB.Service;
 
+import com.furyviewer.service.TheMovieDB.Repository.SeriesTmdbDTORepository;
 import com.furyviewer.service.dto.TheMovieDB.Series.CompleteSeriesTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Series.SimpleSeriesTmdbDTO;
 import org.springframework.stereotype.Service;

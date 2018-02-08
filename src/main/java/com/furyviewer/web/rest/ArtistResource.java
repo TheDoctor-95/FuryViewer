@@ -9,7 +9,7 @@ import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
 import com.furyviewer.service.ArtistServiceSmart;
-import com.furyviewer.service.TheMovieDB.ArtistTmdbDTOService;
+import com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService;
 import com.furyviewer.service.dto.ArtistBCriteria;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;

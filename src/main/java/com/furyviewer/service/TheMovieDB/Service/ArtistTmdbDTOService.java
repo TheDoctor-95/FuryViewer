@@ -1,8 +1,9 @@
-package com.furyviewer.service.TheMovieDB;
+package com.furyviewer.service.TheMovieDB.Service;
 
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.ArtistType;
 import com.furyviewer.repository.ArtistRepository;
+import com.furyviewer.service.TheMovieDB.Repository.ArtistTmdbDTORepository;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;
 import com.furyviewer.service.util.CountryService;

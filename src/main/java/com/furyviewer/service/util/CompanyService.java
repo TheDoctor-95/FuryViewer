@@ -2,7 +2,7 @@ package com.furyviewer.service.util;
 
 import com.furyviewer.domain.Company;
 import com.furyviewer.repository.CompanyRepository;
-import com.furyviewer.service.TheMovieDB.CompanyTmdbDTOService;
+import com.furyviewer.service.TheMovieDB.Service.CompanyTmdbDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
