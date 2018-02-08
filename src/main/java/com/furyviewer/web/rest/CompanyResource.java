@@ -4,11 +4,13 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Company;
 
 import com.furyviewer.repository.CompanyRepository;
+import com.furyviewer.service.TheMovieDB.CompanyTmdbDTOService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +32,9 @@ public class CompanyResource {
     private static final String ENTITY_NAME = "company";
 
     private final CompanyRepository companyRepository;
+
+    @Autowired
+    private CompanyTmdbDTOService companyTmdbDTOService;
 
     public CompanyResource(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
@@ -131,5 +136,14 @@ public class CompanyResource {
         log.debug("REST request to delete Company : {}", id);
         companyRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+
+    @GetMapping("/importCompanyByName/{companyName}")
+    @Timed
+    public ResponseEntity<Company> importCompanyByName(@PathVariable String companyName) {
+        log.debug("REST request to get Company by name", companyName);
+        Company company = companyTmdbDTOService.importCompany(companyName);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(company));
     }
 }
