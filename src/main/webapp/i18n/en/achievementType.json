@@ -1,0 +1,11 @@
+{
+    "furyViewerApp": {
+        "AchievementType" : {
+            "null": "",
+            "like": "like",
+            "hate": "hate",
+            "follow": "follow",
+            "finish": "finish"
+        }
+    }
+}

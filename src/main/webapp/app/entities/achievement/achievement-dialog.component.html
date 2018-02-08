@@ -1,0 +1,51 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAchievementLabel" jhiTranslate="furyViewerApp.achievement.home.createOrEditLabel">Create or edit a Achievement</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!achievement.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="achievement.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.achievement.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="achievement.name"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.achievement.amount" for="field_amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="field_amount"
+                [(ngModel)]="achievement.amount"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.achievement.achievementType" for="field_achievementType">Achievement Type</label>
+            <select class="form-control" name="achievementType" [(ngModel)]="achievement.achievementType" id="field_achievementType" >
+                <option value="like">{{'furyViewerApp.AchievementType.like' | translate}}</option>
+                <option value="hate">{{'furyViewerApp.AchievementType.hate' | translate}}</option>
+                <option value="follow">{{'furyViewerApp.AchievementType.follow' | translate}}</option>
+                <option value="finish">{{'furyViewerApp.AchievementType.finish' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.achievement.entity" for="field_entity">Entity</label>
+            <select class="form-control" name="entity" [(ngModel)]="achievement.entity" id="field_entity" >
+                <option value="series">{{'furyViewerApp.EntityType.series' | translate}}</option>
+                <option value="movie">{{'furyViewerApp.EntityType.movie' | translate}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

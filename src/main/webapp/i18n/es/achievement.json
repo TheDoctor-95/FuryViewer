@@ -1,0 +1,24 @@
+{
+    "furyViewerApp": {
+        "achievement" : {
+            "home": {
+                "title": "Achievements",
+                "createLabel": "Crear nuevo Achievement",
+                "createOrEditLabel": "Crear o editar Achievement"
+            },
+            "created": "Un nuevo Achievement ha sido creado con el identificador {{ param }}",
+            "updated": "Un Achievement ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Achievement ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Achievement {{ id }}?"
+            },
+            "detail": {
+                "title": "Achievement"
+            },
+            "name": "Name",
+            "amount": "Amount",
+            "achievementType": "Achievement Type",
+            "entity": "Entity"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "furyViewerApp": {
+        "achievementsAchievs" : {
+            "home": {
+                "title": "Achievements Achievs",
+                "createLabel": "Create a new Achievements Achievs",
+                "createOrEditLabel": "Create or edit a Achievements Achievs"
+            },
+            "created": "A new Achievements Achievs is created with identifier {{ param }}",
+            "updated": "A Achievements Achievs is updated with identifier {{ param }}",
+            "deleted": "A Achievements Achievs is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Achievements Achievs {{ id }}?"
+            },
+            "detail": {
+                "title": "Achievements Achievs"
+            },
+            "date": "Date",
+            "user": "User",
+            "achievement": "Achievement"
+        }
+    }
+}

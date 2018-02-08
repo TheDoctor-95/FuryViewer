@@ -1,0 +1,9 @@
+{
+    "furyViewerApp": {
+        "EntityType" : {
+            "null": "",
+            "series": "series",
+            "movie": "movie"
+        }
+    }
+}

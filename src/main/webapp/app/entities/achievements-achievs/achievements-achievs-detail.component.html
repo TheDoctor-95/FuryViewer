@@ -1,0 +1,35 @@
+
+<div *ngIf="achievementsAchievs">
+    <h2><span jhiTranslate="furyViewerApp.achievementsAchievs.detail.title">Achievements Achievs</span> {{achievementsAchievs.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.achievementsAchievs.date">Date</span></dt>
+        <dd>
+            <span>{{achievementsAchievs.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.achievementsAchievs.user">User</span></dt>
+        <dd>
+            {{achievementsAchievs.user?.login}}
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.achievementsAchievs.achievement">Achievement</span></dt>
+        <dd>
+            <div *ngIf="achievementsAchievs.achievement">
+                <a [routerLink]="['/achievement', achievementsAchievs.achievement?.id]">{{achievementsAchievs.achievement?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'achievements-achievs/'+ achievementsAchievs.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
