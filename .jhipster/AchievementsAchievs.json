@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "achievementsAchievs"
+        },
+        {
+            "relationshipName": "achievement",
+            "otherEntityName": "achievement",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20180208113524",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "achievements_achievs",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
