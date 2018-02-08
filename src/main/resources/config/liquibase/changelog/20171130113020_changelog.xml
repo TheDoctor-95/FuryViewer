@@ -30,4 +30,10 @@
             newDataType="text"
             tableName="review_series"/>
     </changeSet>
+    <changeSet author="DAM (generated)" id="1512041434727-6">
+        <modifyDataType
+            columnName="description"
+            newDataType="text"
+            tableName="episode"/>
+    </changeSet>
 </databaseChangeLog>
