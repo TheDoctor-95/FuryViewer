@@ -24,6 +24,9 @@ public class Social implements Serializable {
     @Column(name = "url")
     private String url;
 
+    @Column(name = "jhi_type")
+    private String type;
+
     @ManyToOne
     private Series series;
 
@@ -50,6 +53,19 @@ public class Social implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Social type(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Series getSeries() {
@@ -104,6 +120,7 @@ public class Social implements Serializable {
         return "Social{" +
             "id=" + getId() +
             ", url='" + getUrl() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }

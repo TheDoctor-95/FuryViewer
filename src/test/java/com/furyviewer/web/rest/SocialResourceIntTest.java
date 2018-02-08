@@ -41,6 +41,9 @@ public class SocialResourceIntTest {
     private static final String DEFAULT_URL = "AAAAAAAAAA";
     private static final String UPDATED_URL = "BBBBBBBBBB";
 
+    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+
     @Autowired
     private SocialRepository socialRepository;
 
@@ -79,7 +82,8 @@ public class SocialResourceIntTest {
      */
     public static Social createEntity(EntityManager em) {
         Social social = new Social()
-            .url(DEFAULT_URL);
+            .url(DEFAULT_URL)
+            .type(DEFAULT_TYPE);
         return social;
     }
 
@@ -104,6 +108,7 @@ public class SocialResourceIntTest {
         assertThat(socialList).hasSize(databaseSizeBeforeCreate + 1);
         Social testSocial = socialList.get(socialList.size() - 1);
         assertThat(testSocial.getUrl()).isEqualTo(DEFAULT_URL);
+        assertThat(testSocial.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -136,7 +141,8 @@ public class SocialResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(social.getId().intValue())))
-            .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())));
+            .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 
     @Test
@@ -150,7 +156,8 @@ public class SocialResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(social.getId().intValue()))
-            .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()));
+            .andExpect(jsonPath("$.url").value(DEFAULT_URL.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -171,7 +178,8 @@ public class SocialResourceIntTest {
         // Update the social
         Social updatedSocial = socialRepository.findOne(social.getId());
         updatedSocial
-            .url(UPDATED_URL);
+            .url(UPDATED_URL)
+            .type(UPDATED_TYPE);
 
         restSocialMockMvc.perform(put("/api/socials")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -183,6 +191,7 @@ public class SocialResourceIntTest {
         assertThat(socialList).hasSize(databaseSizeBeforeUpdate);
         Social testSocial = socialList.get(socialList.size() - 1);
         assertThat(testSocial.getUrl()).isEqualTo(UPDATED_URL);
+        assertThat(testSocial.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test

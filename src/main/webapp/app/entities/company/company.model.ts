@@ -8,6 +8,7 @@ export class Company implements BaseEntity {
         public fundingDate?: any,
         public clossingDate?: any,
         public imgUrl?: string,
+        public urlWeb?: string,
         public country?: BaseEntity,
         public movies?: BaseEntity[],
         public series?: BaseEntity[],

@@ -42,6 +42,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="url_web" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="country_id" type="bigint">
                 <constraints nullable="true" />
             </column>

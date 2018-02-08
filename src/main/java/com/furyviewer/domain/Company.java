@@ -40,6 +40,9 @@ public class Company implements Serializable {
     @Column(name = "img_url")
     private String imgUrl;
 
+    @Column(name = "url_web")
+    private String urlWeb;
+
     @ManyToOne
     private Country country;
 
@@ -125,6 +128,19 @@ public class Company implements Serializable {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getUrlWeb() {
+        return urlWeb;
+    }
+
+    public Company urlWeb(String urlWeb) {
+        this.urlWeb = urlWeb;
+        return this;
+    }
+
+    public void setUrlWeb(String urlWeb) {
+        this.urlWeb = urlWeb;
     }
 
     public Country getCountry() {
@@ -220,6 +236,7 @@ public class Company implements Serializable {
             ", fundingDate='" + getFundingDate() + "'" +
             ", clossingDate='" + getClossingDate() + "'" +
             ", imgUrl='" + getImgUrl() + "'" +
+            ", urlWeb='" + getUrlWeb() + "'" +
             "}";
     }
 }

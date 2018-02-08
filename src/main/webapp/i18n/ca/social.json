@@ -16,6 +16,7 @@
                 "title": "Social"
             },
             "url": "Url",
+            "type": "Type",
             "series": "Series",
             "movie": "Movie"
         }

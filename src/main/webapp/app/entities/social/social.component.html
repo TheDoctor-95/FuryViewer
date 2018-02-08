@@ -18,6 +18,7 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="furyViewerApp.social.url">Url</span></th>
+            <th><span jhiTranslate="furyViewerApp.social.type">Type</span></th>
             <th><span jhiTranslate="furyViewerApp.social.series">Series</span></th>
             <th><span jhiTranslate="furyViewerApp.social.movie">Movie</span></th>
             <th></th>
@@ -27,6 +28,7 @@
             <tr *ngFor="let social of socials ;trackBy: trackId">
                 <td><a [routerLink]="['../social', social.id ]">{{social.id}}</a></td>
                 <td>{{social.url}}</td>
+                <td>{{social.type}}</td>
                 <td>
                     <div *ngIf="social.series">
                         <a [routerLink]="['../series', social.series?.id ]" >{{social.series?.name}}</a>

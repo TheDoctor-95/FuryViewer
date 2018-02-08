@@ -40,6 +40,10 @@
         {
             "fieldName": "imgUrl",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "urlWeb",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171130103700",

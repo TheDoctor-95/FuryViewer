@@ -18,12 +18,16 @@
         {
             "fieldName": "url",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171130103715",
-    "entityTableName": "social",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "social",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }
