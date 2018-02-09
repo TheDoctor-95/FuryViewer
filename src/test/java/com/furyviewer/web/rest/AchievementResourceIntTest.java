@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -51,6 +52,14 @@ public class AchievementResourceIntTest {
 
     private static final EntityType DEFAULT_ENTITY = EntityType.series;
     private static final EntityType UPDATED_ENTITY = EntityType.movie;
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_IMG = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMG = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_IMG_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMG_CONTENT_TYPE = "image/png";
 
     @Autowired
     private AchievementRepository achievementRepository;
@@ -93,7 +102,10 @@ public class AchievementResourceIntTest {
             .name(DEFAULT_NAME)
             .amount(DEFAULT_AMOUNT)
             .achievementType(DEFAULT_ACHIEVEMENT_TYPE)
-            .entity(DEFAULT_ENTITY);
+            .entity(DEFAULT_ENTITY)
+            .description(DEFAULT_DESCRIPTION)
+            .img(DEFAULT_IMG)
+            .imgContentType(DEFAULT_IMG_CONTENT_TYPE);
         return achievement;
     }
 
@@ -121,6 +133,9 @@ public class AchievementResourceIntTest {
         assertThat(testAchievement.getAmount()).isEqualTo(DEFAULT_AMOUNT);
         assertThat(testAchievement.getAchievementType()).isEqualTo(DEFAULT_ACHIEVEMENT_TYPE);
         assertThat(testAchievement.getEntity()).isEqualTo(DEFAULT_ENTITY);
+        assertThat(testAchievement.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testAchievement.getImg()).isEqualTo(DEFAULT_IMG);
+        assertThat(testAchievement.getImgContentType()).isEqualTo(DEFAULT_IMG_CONTENT_TYPE);
     }
 
     @Test
@@ -156,7 +171,10 @@ public class AchievementResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT)))
             .andExpect(jsonPath("$.[*].achievementType").value(hasItem(DEFAULT_ACHIEVEMENT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].entity").value(hasItem(DEFAULT_ENTITY.toString())));
+            .andExpect(jsonPath("$.[*].entity").value(hasItem(DEFAULT_ENTITY.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].imgContentType").value(hasItem(DEFAULT_IMG_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].img").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMG))));
     }
 
     @Test
@@ -173,7 +191,10 @@ public class AchievementResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT))
             .andExpect(jsonPath("$.achievementType").value(DEFAULT_ACHIEVEMENT_TYPE.toString()))
-            .andExpect(jsonPath("$.entity").value(DEFAULT_ENTITY.toString()));
+            .andExpect(jsonPath("$.entity").value(DEFAULT_ENTITY.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.imgContentType").value(DEFAULT_IMG_CONTENT_TYPE))
+            .andExpect(jsonPath("$.img").value(Base64Utils.encodeToString(DEFAULT_IMG)));
     }
 
     @Test
@@ -197,7 +218,10 @@ public class AchievementResourceIntTest {
             .name(UPDATED_NAME)
             .amount(UPDATED_AMOUNT)
             .achievementType(UPDATED_ACHIEVEMENT_TYPE)
-            .entity(UPDATED_ENTITY);
+            .entity(UPDATED_ENTITY)
+            .description(UPDATED_DESCRIPTION)
+            .img(UPDATED_IMG)
+            .imgContentType(UPDATED_IMG_CONTENT_TYPE);
 
         restAchievementMockMvc.perform(put("/api/achievements")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -212,6 +236,9 @@ public class AchievementResourceIntTest {
         assertThat(testAchievement.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testAchievement.getAchievementType()).isEqualTo(UPDATED_ACHIEVEMENT_TYPE);
         assertThat(testAchievement.getEntity()).isEqualTo(UPDATED_ENTITY);
+        assertThat(testAchievement.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testAchievement.getImg()).isEqualTo(UPDATED_IMG);
+        assertThat(testAchievement.getImgContentType()).isEqualTo(UPDATED_IMG_CONTENT_TYPE);
     }
 
     @Test

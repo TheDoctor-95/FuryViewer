@@ -21,6 +21,8 @@
             <th><span jhiTranslate="furyViewerApp.achievement.amount">Amount</span></th>
             <th><span jhiTranslate="furyViewerApp.achievement.achievementType">Achievement Type</span></th>
             <th><span jhiTranslate="furyViewerApp.achievement.entity">Entity</span></th>
+            <th><span jhiTranslate="furyViewerApp.achievement.description">Description</span></th>
+            <th><span jhiTranslate="furyViewerApp.achievement.img">Img</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,6 +33,13 @@
                 <td>{{achievement.amount}}</td>
                 <td jhiTranslate="{{'furyViewerApp.AchievementType.' + achievement.achievementType}}">{{achievement.achievementType}}</td>
                 <td jhiTranslate="{{'furyViewerApp.EntityType.' + achievement.entity}}">{{achievement.entity}}</td>
+                <td>{{achievement.description}}</td>
+                <td>
+                    <a *ngIf="achievement.img" (click)="openFile(achievement.imgContentType, achievement.img)">
+                        <img [src]="'data:' + achievement.imgContentType + ';base64,' + achievement.img" style="max-height: 30px;" alt="achievement image"/>
+                    </a>
+                    <span *ngIf="achievement.img">{{achievement.imgContentType}}, {{byteSize(achievement.img)}}</span>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

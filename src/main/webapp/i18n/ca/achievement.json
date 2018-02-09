@@ -18,7 +18,9 @@
             "name": "Name",
             "amount": "Amount",
             "achievementType": "Achievement Type",
-            "entity": "Entity"
+            "entity": "Entity",
+            "description": "Description",
+            "img": "Img"
         }
     }
 }

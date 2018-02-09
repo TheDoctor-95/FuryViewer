@@ -19,6 +19,15 @@
             "fieldName": "entity",
             "fieldType": "EntityType",
             "fieldValues": "series, movie"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "img",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "changelogDate": "20180208113245",

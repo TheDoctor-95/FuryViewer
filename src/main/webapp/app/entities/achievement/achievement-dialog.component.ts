@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { Achievement } from './achievement.model';
 import { AchievementPopupService } from './achievement-popup.service';
@@ -21,14 +21,32 @@ export class AchievementDialogComponent implements OnInit {
 
     constructor(
         public activeModal: NgbActiveModal,
+        private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private achievementService: AchievementService,
+        private elementRef: ElementRef,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
+    }
+
+    clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.dataUtils.clearInputImage(this.achievement, this.elementRef, field, fieldContentType, idInput);
     }
 
     clear() {

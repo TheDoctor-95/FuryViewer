@@ -20,6 +20,19 @@
         <dd>
             <span jhiTranslate="{{'furyViewerApp.EntityType.' + achievement.entity}}">{{achievement.entity}}</span>
         </dd>
+        <dt><span jhiTranslate="furyViewerApp.achievement.description">Description</span></dt>
+        <dd>
+            <span>{{achievement.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.achievement.img">Img</span></dt>
+        <dd>
+            <div *ngIf="achievement.img">
+                <a (click)="openFile(achievement.imgContentType, achievement.img)">
+                    <img [src]="'data:' + achievement.imgContentType + ';base64,' + achievement.img" style="max-width: 100%;" alt="achievement image"/>
+                </a>
+                {{achievement.imgContentType}}, {{byteSize(achievement.img)}}
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

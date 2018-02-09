@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { Achievement } from './achievement.model';
 import { AchievementService } from './achievement.service';
@@ -19,6 +19,7 @@ achievements: Achievement[];
     constructor(
         private achievementService: AchievementService,
         private jhiAlertService: JhiAlertService,
+        private dataUtils: JhiDataUtils,
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
@@ -46,6 +47,14 @@ achievements: Achievement[];
 
     trackId(index: number, item: Achievement) {
         return item.id;
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
     }
     registerChangeInAchievements() {
         this.eventSubscriber = this.eventManager.subscribe('achievementListModification', (response) => this.loadAll());

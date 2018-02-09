@@ -19,6 +19,9 @@ export class Achievement implements BaseEntity {
         public amount?: number,
         public achievementType?: AchievementType,
         public entity?: EntityType,
+        public description?: string,
+        public imgContentType?: string,
+        public img?: any,
     ) {
     }
 }

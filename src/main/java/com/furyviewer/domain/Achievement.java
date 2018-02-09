@@ -39,6 +39,16 @@ public class Achievement implements Serializable {
     @Column(name = "entity")
     private EntityType entity;
 
+    @Column(name = "description")
+    private String description;
+
+    @Lob
+    @Column(name = "img")
+    private byte[] img;
+
+    @Column(name = "img_content_type")
+    private String imgContentType;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -99,6 +109,45 @@ public class Achievement implements Serializable {
     public void setEntity(EntityType entity) {
         this.entity = entity;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Achievement description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public byte[] getImg() {
+        return img;
+    }
+
+    public Achievement img(byte[] img) {
+        this.img = img;
+        return this;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
+    }
+
+    public String getImgContentType() {
+        return imgContentType;
+    }
+
+    public Achievement imgContentType(String imgContentType) {
+        this.imgContentType = imgContentType;
+        return this;
+    }
+
+    public void setImgContentType(String imgContentType) {
+        this.imgContentType = imgContentType;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -129,6 +178,9 @@ public class Achievement implements Serializable {
             ", amount='" + getAmount() + "'" +
             ", achievementType='" + getAchievementType() + "'" +
             ", entity='" + getEntity() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", img='" + getImg() + "'" +
+            ", imgContentType='" + imgContentType + "'" +
             "}";
     }
 }
