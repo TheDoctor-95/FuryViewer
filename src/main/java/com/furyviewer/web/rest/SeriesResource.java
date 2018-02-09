@@ -158,7 +158,7 @@ public class SeriesResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
 
-    @GetMapping("/series-bs")
+    @GetMapping("/series-s")
     @Timed
     public ResponseEntity<List<Series>> getAllSeriesS(SeriesBCriteria criteria) {
         log.debug("REST request to get SeriesBS by criteria: {}", criteria);
