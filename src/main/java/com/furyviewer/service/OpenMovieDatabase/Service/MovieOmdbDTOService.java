@@ -42,6 +42,9 @@ public class MovieOmdbDTOService {
     private NAEraserService naEraserService;
 
     @Autowired
+    private MarksService marksService;
+
+    @Autowired
     private TrailerTmdbDTOService trailerTmdbDTOService;
 
     private static MovieOmdbDTORepository apiService = MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
@@ -96,7 +99,7 @@ public class MovieOmdbDTOService {
 
             m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
             m.setCountry(countryService.importCountry(movieOmdbDTO.getCountry()));
-
+            m.setDvd_release(dateConversorService.releseDateOMDB(movieOmdbDTO.getDVD()));
             movieRepository.save(m);
 
             m.setCompany(companyService.importCompany(movieOmdbDTO.getProduction()));
@@ -108,6 +111,9 @@ public class MovieOmdbDTOService {
             m.setDirector(artistService.importDirector(movieOmdbDTO.getDirector()));
             m.setScriptwriter(artistService.importScripwriter(movieOmdbDTO.getWriter()));
 
+            m = movieRepository.save(m);
+
+            marksService.markTransformationMovie(movieOmdbDTO.getRatings(), m);
             m = movieRepository.save(m);
 
             trailerTmdbDTOService.importMovieTrailer(m);
