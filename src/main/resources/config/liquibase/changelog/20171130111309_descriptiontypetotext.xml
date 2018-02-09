@@ -4,7 +4,7 @@
 
         <modifyDataType
                         columnName="description"
-                        newDataType="text"
+                        newDataType="longtext"
                         tableName="company"/>
     </changeSet>
 

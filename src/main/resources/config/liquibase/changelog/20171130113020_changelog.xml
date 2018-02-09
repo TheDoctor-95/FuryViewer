@@ -3,37 +3,37 @@
     <changeSet author="DAM (generated)" id="1512041434727-1">
         <modifyDataType
             columnName="description"
-            newDataType="text"
+            newDataType="longtext"
             tableName="genre"/>
     </changeSet>
     <changeSet author="DAM (generated)" id="1512041434727-2">
         <modifyDataType
             columnName="description"
-            newDataType="text"
+            newDataType="longtext"
             tableName="series"/>
     </changeSet>
     <changeSet author="DAM (generated)" id="1512041434727-3">
         <modifyDataType
             columnName="description"
-            newDataType="text"
+            newDataType="longtext"
             tableName="movie"/>
     </changeSet>
     <changeSet author="DAM (generated)" id="1512041434727-4">
         <modifyDataType
             columnName="review"
-            newDataType="text"
+            newDataType="longtext"
             tableName="review_movie"/>
     </changeSet>
     <changeSet author="DAM (generated)" id="1512041434727-5">
         <modifyDataType
             columnName="review"
-            newDataType="text"
+            newDataType="longtext"
             tableName="review_series"/>
     </changeSet>
     <changeSet author="DAM (generated)" id="1512041434727-6">
         <modifyDataType
             columnName="description"
-            newDataType="text"
+            newDataType="longtext"
             tableName="episode"/>
     </changeSet>
 </databaseChangeLog>
