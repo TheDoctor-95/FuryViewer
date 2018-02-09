@@ -122,8 +122,8 @@
     ],
     "changelogDate": "20171130103659",
     "dto": "no",
-    "service": "no",
+    "service": "ServiceClass",
     "entityTableName": "movie",
-    "jpaMetamodelFiltering": false,
+    "jpaMetamodelFiltering": true,
     "pagination": "no"
 }

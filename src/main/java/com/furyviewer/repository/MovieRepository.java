@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, Long> {
+public interface MovieRepository extends JpaRepository<Movie, Long> , JpaSpecificationExecutor<Movie>{
     @Query("select distinct movie from Movie movie left join fetch movie.genres left join fetch movie.actorMains left join fetch movie.actorSecondaries")
     List<Movie> findAllWithEagerRelationships();
 
