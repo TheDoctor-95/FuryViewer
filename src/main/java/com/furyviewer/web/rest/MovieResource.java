@@ -5,7 +5,9 @@ import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.service.MovieDatabase.MovieDTOService;
+import com.furyviewer.service.MovieQueryService;
 import com.furyviewer.service.OpenMovieDatabase.Service.MovieOmdbDTOService;
+import com.furyviewer.service.dto.MovieBCriteria;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -13,6 +15,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +40,9 @@ public class MovieResource {
     private final MovieRepository movieRepository;
 
     private final OkHttpClient client = new OkHttpClient();
+
+    @Autowired
+    private MovieQueryService movieQueryService;
 
     @Inject
     private MovieDTOService movieDTOService;
@@ -158,6 +164,15 @@ public class MovieResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
+
+    @GetMapping("/movie-s")
+    @Timed
+    public ResponseEntity<List<Movie>> getAllMovieS(MovieBCriteria criteria) {
+        log.debug("REST request to get MoviesS by criteria: {}", criteria);
+        List<Movie> entityList = movieQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
     @GetMapping("/movie-api/test")
     @Timed
     public MovieOmdbDTO getTestInicial() throws Exception {
@@ -165,6 +180,8 @@ public class MovieResource {
 
         return movieOmdbDTOService.getMovie("Justice League");
     }
+
+
 
 
 

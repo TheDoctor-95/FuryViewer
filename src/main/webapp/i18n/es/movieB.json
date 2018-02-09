@@ -1,0 +1,30 @@
+{
+    "furyViewerApp": {
+        "movieB" : {
+            "home": {
+                "title": "Movie BS",
+                "createLabel": "Crear nuevo Movie B",
+                "createOrEditLabel": "Crear o editar Movie B"
+            },
+            "created": "Un nuevo Movie B ha sido creado con el identificador {{ param }}",
+            "updated": "Un Movie B ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Movie B ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Movie B {{ id }}?"
+            },
+            "detail": {
+                "title": "Movie B"
+            },
+            "name": "Name",
+            "release_date": "Release Date",
+            "description": "Description",
+            "duration": "Duration",
+            "imdb_id_external_api": "Imdb Id External Api",
+            "img_url": "Img Url",
+            "awards": "Awards",
+            "dvd_release": "Dvd Release",
+            "country": "Country",
+            "company": "Company"
+        }
+    }
+}
