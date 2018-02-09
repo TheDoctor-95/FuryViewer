@@ -5,6 +5,7 @@ import com.furyviewer.domain.enumeration.SeriesEmittingEnum;
 import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.service.OpenMovieDatabase.Repository.SeriesOmdbDTORepository;
 import com.furyviewer.service.TheMovieDB.Service.SeriesTmdbDTOService;
+import com.furyviewer.service.TheMovieDB.Service.TrailerTmdbDTOService;
 import com.furyviewer.service.util.*;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class SeriesOmdbDTOService {
 
     @Autowired
     private SeriesTmdbDTOService seriesTmdbDTOService;
+
+    @Autowired
+    private TrailerTmdbDTOService trailerTmdbDTOService;
 
     private static SeriesOmdbDTORepository apiService = SeriesOmdbDTORepository.retrofit.create(SeriesOmdbDTORepository.class);
 
@@ -104,6 +108,8 @@ public class SeriesOmdbDTOService {
             ss.setCompany(companyService.importCompany(seriesTmdbDTOService.getCompanyName(title)));
 
             seriesRepository.save(ss);
+
+            trailerTmdbDTOService.importSeriesTrailer(ss);
 
             seasonOmdbDTOService.importSeason(title, Integer.parseInt(seriesOmdbDTO.getTotalSeasons()));
         }

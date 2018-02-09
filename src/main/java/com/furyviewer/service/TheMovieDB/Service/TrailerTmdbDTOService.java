@@ -1,6 +1,7 @@
 package com.furyviewer.service.TheMovieDB.Service;
 
 import com.furyviewer.domain.Movie;
+import com.furyviewer.domain.Series;
 import com.furyviewer.domain.Social;
 import com.furyviewer.repository.SocialRepository;
 import com.furyviewer.service.TheMovieDB.Repository.TrailerTmdbDTORepository;
@@ -23,6 +24,9 @@ public class TrailerTmdbDTOService {
 
     @Autowired
     private MovieTmdbDTOService movieTmdbDTOService;
+
+    @Autowired
+    private SeriesTmdbDTOService seriesTmdbDTOService;
 
     @Autowired
     private SocialRepository socialRepository;
@@ -51,6 +55,42 @@ public class TrailerTmdbDTOService {
                         if (size <= trailer.getSize()) {
                             social.setUrl(pathImage + trailer.getKey());
                             social.setMovie(movie);
+                            size = trailer.getSize();
+                        }
+                    }
+
+                    socialRepository.save(social);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Se convierte el trailer de la series del formato de la api TMDB al formato de FuryViewer.
+     * @param ss Series | Series de la que se quiere encontrar el trailer.
+     */
+    public void importSeriesTrailer(Series ss) {
+        Social social = new Social();
+        int id = seriesTmdbDTOService.getIdTmdbSeries(ss.getName());
+
+        if(id != -1) {
+            Call<TrailerTmdbDTO> callTrailer = apiTMDB.getSeriesTrailer(id, apikey);
+
+            try {
+                Response<TrailerTmdbDTO> response = callTrailer.execute();
+
+                if (response.isSuccessful()) {
+                    TrailerTmdbDTO trailerRes = response.body();
+                    int size = trailerRes.getResults().get(0).getSize();
+
+                    List<Result> resultTrailer = trailerRes.getResults();
+
+                    for (Result trailer : resultTrailer) {
+                        if (size <= trailer.getSize()) {
+                            social.setUrl(pathImage + trailer.getKey());
+                            social.setSeries(ss);
                             size = trailer.getSize();
                         }
                     }

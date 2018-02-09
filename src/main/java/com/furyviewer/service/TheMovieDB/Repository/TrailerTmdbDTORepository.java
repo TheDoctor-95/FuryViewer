@@ -18,6 +18,12 @@ public interface TrailerTmdbDTORepository {
     @GET("/3/movie/{id}/videos")
     Call<TrailerTmdbDTO> getMovieTrailer(@Path("id") int id, @Query("api_key") String apikey);
 
+    /**
+     * Petición a la api de TMDB para recibir el trailer de Series.
+     * @param id int | id utilizado para identificar la Series en la api.
+     * @param apikey String | Key requerida por la api para poder hacer la petición.
+     * @return Call<TrailerTmdbDTO> | Contiene toda la información del trailer proporcionada por la api.
+     */
     @GET("/3/tv/{id}/videos")
     Call<TrailerTmdbDTO> getSeriesTrailer(@Path("id") int id, @Query("api_key") String apikey);
 
