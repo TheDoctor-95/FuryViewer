@@ -51,10 +51,13 @@ public class TrailerTmdbDTOService {
 
                     List<Result> resultTrailer = trailerRes.getResults();
 
+                    //Buscamos el trailer con mejor resolución.
                     for (Result trailer : resultTrailer) {
                         if (size <= trailer.getSize()) {
                             social.setUrl(pathImage + trailer.getKey());
+                            social.type("Trailer");
                             social.setMovie(movie);
+
                             size = trailer.getSize();
                         }
                     }
@@ -87,10 +90,13 @@ public class TrailerTmdbDTOService {
 
                     List<Result> resultTrailer = trailerRes.getResults();
 
+                    //Buscamos el trailer con mejor resolución.
                     for (Result trailer : resultTrailer) {
                         if (size <= trailer.getSize()) {
                             social.setUrl(pathImage + trailer.getKey());
+                            social.type("Trailer");
                             social.setSeries(ss);
+
                             size = trailer.getSize();
                         }
                     }

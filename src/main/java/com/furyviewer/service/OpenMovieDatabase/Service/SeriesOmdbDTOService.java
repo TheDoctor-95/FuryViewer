@@ -107,7 +107,7 @@ public class SeriesOmdbDTOService {
             ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));
             ss.setCompany(companyService.importCompany(seriesTmdbDTOService.getCompanyName(title)));
 
-            seriesRepository.save(ss);
+            ss = seriesRepository.save(ss);
 
             trailerTmdbDTOService.importSeriesTrailer(ss);
 
