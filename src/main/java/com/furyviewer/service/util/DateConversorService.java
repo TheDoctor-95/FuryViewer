@@ -58,9 +58,9 @@ public class DateConversorService {
         String dateOuT = dateInp;
 
         if(dateInp.split("-").length == 2) {
-            dateOuT = dateInp + "-7";
+            dateOuT = dateInp + "-07";
         } else if (dateInp.split("-").length == 1) {
-            dateOuT = dateInp + "-4-2";
+            dateOuT = dateInp + "-04-02";
         }
 
         return dateOuT;
