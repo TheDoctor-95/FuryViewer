@@ -45,6 +45,9 @@ public class SeriesOmdbDTOService {
     private SeriesTmdbDTOService seriesTmdbDTOService;
 
     @Autowired
+    private MarksService marksService;
+
+    @Autowired
     private TrailerTmdbDTOService trailerTmdbDTOService;
 
     private static SeriesOmdbDTORepository apiService = SeriesOmdbDTORepository.retrofit.create(SeriesOmdbDTORepository.class);
@@ -110,6 +113,8 @@ public class SeriesOmdbDTOService {
             ss = seriesRepository.save(ss);
 
             trailerTmdbDTOService.importSeriesTrailer(ss);
+
+            marksService.markTransformationSeries(seriesOmdbDTO.getRatings(), ss);
 
             seasonOmdbDTOService.importSeason(title, Integer.parseInt(seriesOmdbDTO.getTotalSeasons()));
         }
