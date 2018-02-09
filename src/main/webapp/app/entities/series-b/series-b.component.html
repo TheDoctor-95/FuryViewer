@@ -1,0 +1,74 @@
+<div>
+    <h2>
+        <span jhiTranslate="furyViewerApp.seriesB.home.title">Series BS</span>
+        <button class="btn btn-primary float-right jh-create-entity create-series-b" [routerLink]="['/', { outlets: { popup: ['series-b-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="furyViewerApp.seriesB.home.createLabel">
+            Create new Series B
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="seriesBS">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesB.name">Name</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesB.description">Description</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesB.state">State</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesB.release_date">Release Date</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesB.img_url">Img Url</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesB.imdb_id">Imdb Id</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesB.awards">Awards</span></th>
+            <th><span jhiTranslate="furyViewerApp.seriesB.country">Country</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let seriesB of seriesBS ;trackBy: trackId">
+                <td><a [routerLink]="['../series-b', seriesB.id ]">{{seriesB.id}}</a></td>
+                <td>{{seriesB.name}}</td>
+                <td>{{seriesB.description}}</td>
+                <td jhiTranslate="{{'furyViewerApp.SeriesEmittingEnum.' + seriesB.state}}">{{seriesB.state}}</td>
+                <td>{{seriesB.release_date | date:'mediumDate'}}</td>
+                <td>{{seriesB.img_url}}</td>
+                <td>{{seriesB.imdb_id}}</td>
+                <td>{{seriesB.awards}}</td>
+                <td>
+                    <div *ngIf="seriesB.country">
+                        <a [routerLink]="['../country', seriesB.country?.id ]" >{{seriesB.country?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../series-b', seriesB.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'series-b/'+ seriesB.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'series-b/'+ seriesB.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

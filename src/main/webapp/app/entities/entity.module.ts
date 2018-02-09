@@ -26,6 +26,7 @@ import { FuryViewerSocialModule } from './social/social.module';
 import { FuryViewerChapterSeenModule } from './chapter-seen/chapter-seen.module';
 import { FuryViewerAchievementModule } from './achievement/achievement.module';
 import { FuryViewerAchievementsAchievsModule } from './achievements-achievs/achievements-achievs.module';
+import { FuryViewerSeriesBModule } from './series-b/series-b.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -56,6 +57,7 @@ import { FuryViewerAchievementsAchievsModule } from './achievements-achievs/achi
         FuryViewerChapterSeenModule,
         FuryViewerAchievementModule,
         FuryViewerAchievementsAchievsModule,
+        FuryViewerSeriesBModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

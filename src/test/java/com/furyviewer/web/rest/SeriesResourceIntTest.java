@@ -53,8 +53,8 @@ public class SeriesResourceIntTest {
     private static final String DEFAULT_IMG_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_IMG_CONTENT_TYPE = "image/png";
 
-    private static final SeriesEmittingEnum DEFAULT_STATE = SeriesEmittingEnum.CANCELED;
-    private static final SeriesEmittingEnum UPDATED_STATE = SeriesEmittingEnum.WAITING_NEW_SEASON;
+    private static final SeriesEmittingEnum DEFAULT_STATE = SeriesEmittingEnum.canceled;
+    private static final SeriesEmittingEnum UPDATED_STATE = SeriesEmittingEnum.waiting_new_season;
 
     private static final LocalDate DEFAULT_RELEASE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_RELEASE_DATE = LocalDate.now(ZoneId.systemDefault());

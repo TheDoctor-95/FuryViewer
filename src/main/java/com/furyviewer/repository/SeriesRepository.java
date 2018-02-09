@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SeriesRepository extends JpaRepository<Series, Long> {
+public interface SeriesRepository extends JpaRepository<Series, Long>, JpaSpecificationExecutor<Series> {
     @Query("select distinct series from Series series left join fetch series.genres")
     List<Series> findAllWithEagerRelationships();
 

@@ -31,6 +31,7 @@
     <include file="config/liquibase/changelog/20171130103716_added_entity_ChapterSeen.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180208113245_added_entity_Achievement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180208113524_added_entity_AchievementsAchievs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180209105013_added_entity_SeriesB.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20171130103653_added_entity_constraints_UserExt.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171130103656_added_entity_constraints_Series.xml" relativeToChangelogFile="false"/>
@@ -54,6 +55,7 @@
     <include file="config/liquibase/changelog/20171130103715_added_entity_constraints_Social.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171130103716_added_entity_constraints_ChapterSeen.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180208113524_added_entity_constraints_AchievementsAchievs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180209105013_added_entity_constraints_SeriesB.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <include file="config/liquibase/changelog/20171130111309_descriptiontypetotext.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171130113020_changelog.xml" relativeToChangelogFile="false"/>

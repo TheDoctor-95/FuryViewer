@@ -2,10 +2,11 @@ package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Series;
-
 import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.SeriesOmdbDTOService;
+import com.furyviewer.service.SeriesQueryService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
+import com.furyviewer.service.dto.SeriesBCriteria;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +37,9 @@ public class SeriesResource {
 
     @Autowired
     SeriesOmdbDTOService seriesOmdbDTOService;
+
+    @Autowired
+    private SeriesQueryService seriesQueryService;
 
     public SeriesResource(SeriesRepository seriesRepository) {
         this.seriesRepository = seriesRepository;
@@ -153,5 +156,13 @@ public class SeriesResource {
         log.debug("REST request to get Series by name", name);
         Series movie = seriesOmdbDTOService.importSeries(name);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
+    }
+
+    @GetMapping("/series-bs")
+    @Timed
+    public ResponseEntity<List<Series>> getAllSeriesS(SeriesBCriteria criteria) {
+        log.debug("REST request to get SeriesBS by criteria: {}", criteria);
+        List<Series> entityList = seriesQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
     }
 }

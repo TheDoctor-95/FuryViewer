@@ -1,0 +1,55 @@
+
+<div *ngIf="seriesB">
+    <h2><span jhiTranslate="furyViewerApp.seriesB.detail.title">Series B</span> {{seriesB.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="furyViewerApp.seriesB.name">Name</span></dt>
+        <dd>
+            <span>{{seriesB.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.seriesB.description">Description</span></dt>
+        <dd>
+            <span>{{seriesB.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.seriesB.state">State</span></dt>
+        <dd>
+            <span jhiTranslate="{{'furyViewerApp.SeriesEmittingEnum.' + seriesB.state}}">{{seriesB.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.seriesB.release_date">Release Date</span></dt>
+        <dd>
+            <span>{{seriesB.release_date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.seriesB.img_url">Img Url</span></dt>
+        <dd>
+            <span>{{seriesB.img_url}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.seriesB.imdb_id">Imdb Id</span></dt>
+        <dd>
+            <span>{{seriesB.imdb_id}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.seriesB.awards">Awards</span></dt>
+        <dd>
+            <span>{{seriesB.awards}}</span>
+        </dd>
+        <dt><span jhiTranslate="furyViewerApp.seriesB.country">Country</span></dt>
+        <dd>
+            <div *ngIf="seriesB.country">
+                <a [routerLink]="['/country', seriesB.country?.id]">{{seriesB.country?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'series-b/'+ seriesB.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -33,8 +33,8 @@ public class MovieQueryService extends QueryService<Movie> {
 
     private final MovieRepository movieRepository;
 
-    public MovieQueryService(MovieRepository movieBRepository) {
-        this.movieRepository = movieBRepository;
+    public MovieQueryService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
     /**

@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "country",
+            "otherEntityName": "country",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "SeriesEmittingEnum",
+            "fieldValues": "canceled, waiting_new_season, waiting_start, ended, emiting"
+        },
+        {
+            "fieldName": "release_date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "img_url",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imdb_id",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "awards",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180209105013",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "seriesb",
+    "jpaMetamodelFiltering": true,
+    "pagination": "no"
+}

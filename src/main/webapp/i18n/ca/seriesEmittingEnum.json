@@ -2,11 +2,11 @@
     "furyViewerApp": {
         "SeriesEmittingEnum" : {
             "null": "",
-            "CANCELED": "CANCELED",
-            "WAITING_NEW_SEASON": "WAITING_NEW_SEASON",
-            "WAITING_START": "WAITING_START",
-            "ENDED": "ENDED",
-            "EMITTING": "EMITTING"
+            "canceled": "canceled",
+            "waiting_new_season": "waiting_new_season",
+            "waiting_start": "waiting_start",
+            "ended": "ended",
+            "emiting": "emiting"
         }
     }
 }

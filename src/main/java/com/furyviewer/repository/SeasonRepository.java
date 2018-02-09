@@ -1,5 +1,6 @@
 package com.furyviewer.repository;
 
+
 import com.furyviewer.domain.Season;
 import org.springframework.stereotype.Repository;
 

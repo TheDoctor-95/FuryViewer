@@ -1,0 +1,28 @@
+{
+    "furyViewerApp": {
+        "seriesB" : {
+            "home": {
+                "title": "Series BS",
+                "createLabel": "Crear nuevo Series B",
+                "createOrEditLabel": "Crear o editar Series B"
+            },
+            "created": "Un nuevo Series B ha sido creado con el identificador {{ param }}",
+            "updated": "Un Series B ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Series B ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Series B {{ id }}?"
+            },
+            "detail": {
+                "title": "Series B"
+            },
+            "name": "Name",
+            "description": "Description",
+            "state": "State",
+            "release_date": "Release Date",
+            "img_url": "Img Url",
+            "imdb_id": "Imdb Id",
+            "awards": "Awards",
+            "country": "Country"
+        }
+    }
+}

@@ -1,0 +1,77 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySeriesBLabel" jhiTranslate="furyViewerApp.seriesB.home.createOrEditLabel">Create or edit a Series B</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!seriesB.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="seriesB.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesB.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="seriesB.name"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesB.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="seriesB.description"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesB.state" for="field_state">State</label>
+            <select class="form-control" name="state" [(ngModel)]="seriesB.state" id="field_state" >
+                <option value="canceled">{{'furyViewerApp.SeriesEmittingEnum.canceled' | translate}}</option>
+                <option value="waiting_new_season">{{'furyViewerApp.SeriesEmittingEnum.waiting_new_season' | translate}}</option>
+                <option value="waiting_start">{{'furyViewerApp.SeriesEmittingEnum.waiting_start' | translate}}</option>
+                <option value="ended">{{'furyViewerApp.SeriesEmittingEnum.ended' | translate}}</option>
+                <option value="emiting">{{'furyViewerApp.SeriesEmittingEnum.emiting' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesB.release_date" for="field_release_date">Release Date</label>
+            <div class="input-group">
+                <input id="field_release_date" type="text" class="form-control" name="release_date" ngbDatepicker  #release_dateDp="ngbDatepicker" [(ngModel)]="seriesB.release_date"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="release_dateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesB.img_url" for="field_img_url">Img Url</label>
+            <input type="text" class="form-control" name="img_url" id="field_img_url"
+                [(ngModel)]="seriesB.img_url"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesB.imdb_id" for="field_imdb_id">Imdb Id</label>
+            <input type="text" class="form-control" name="imdb_id" id="field_imdb_id"
+                [(ngModel)]="seriesB.imdb_id"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesB.awards" for="field_awards">Awards</label>
+            <input type="text" class="form-control" name="awards" id="field_awards"
+                [(ngModel)]="seriesB.awards"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="furyViewerApp.seriesB.country" for="field_country">Country</label>
+            <select class="form-control" id="field_country" name="country" [(ngModel)]="seriesB.country" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="countryOption.id === seriesB.country?.id ? seriesB.country : countryOption" *ngFor="let countryOption of countries; trackBy: trackCountryById">{{countryOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

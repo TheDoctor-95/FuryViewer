@@ -95,9 +95,9 @@ public class SeriesOmdbDTOService {
             ss.setDescription(naEraserService.eraserNA(seriesOmdbDTO.getPlot()));
 
             if (seriesOmdbDTO.getYear().length() == 5) {
-                ss.setState(SeriesEmittingEnum.EMITTING);
+                ss.setState(SeriesEmittingEnum.emiting);
             } else {
-                ss.setState(SeriesEmittingEnum.ENDED);
+                ss.setState(SeriesEmittingEnum.ended);
             }
 
             ss.setReleaseDate(dateConversorService.releseDateOMDB(seriesOmdbDTO.getReleased()));
