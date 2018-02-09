@@ -55,7 +55,7 @@ public class TrailerTmdbDTOService {
                     for (Result trailer : resultTrailer) {
                         if (size <= trailer.getSize()) {
                             social.setUrl(pathImage + trailer.getKey());
-                            social.type("Trailer");
+                            social.setType("Trailer");
                             social.setMovie(movie);
 
                             size = trailer.getSize();
@@ -94,7 +94,7 @@ public class TrailerTmdbDTOService {
                     for (Result trailer : resultTrailer) {
                         if (size <= trailer.getSize()) {
                             social.setUrl(pathImage + trailer.getKey());
-                            social.type("Trailer");
+                            social.setType("Trailer");
                             social.setSeries(ss);
 
                             size = trailer.getSize();
