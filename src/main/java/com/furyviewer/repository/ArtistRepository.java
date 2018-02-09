@@ -37,5 +37,8 @@ public interface ArtistRepository extends JpaRepository<Artist, Long>, JpaSpecif
     @Query("select artist from Artist artist where :artistType member of artist.artistTypes")
     List<Artist> findArtistByArtistType(@Param("artistType") ArtistType artistType);
 
+    @Query("select artist.imgUrl from Artist artist where artist.id =:id")
+    String returnImageArtist(@Param("id") Long id);
+
 }
 
