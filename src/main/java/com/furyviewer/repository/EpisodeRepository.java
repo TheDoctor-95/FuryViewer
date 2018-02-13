@@ -17,4 +17,5 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     List<Episode>findEpisodeByName(String name);
 
+
 }

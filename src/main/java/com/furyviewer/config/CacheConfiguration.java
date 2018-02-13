@@ -108,6 +108,9 @@ public class CacheConfiguration {
             cm.createCache(com.furyviewer.domain.Episode.class.getName() + ".actors", jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Achievement.class.getName(), jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.AchievementsAchievs.class.getName(), jcacheConfiguration);
+            cm.createCache(com.furyviewer.domain.Artist.class.getName()+ ".episodes", jcacheConfiguration);
+
+
             // jhipster-needle-ehcache-add-entry
         };
     }

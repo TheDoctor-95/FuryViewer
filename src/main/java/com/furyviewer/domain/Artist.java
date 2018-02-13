@@ -3,11 +3,13 @@ package com.furyviewer.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 
@@ -18,6 +20,7 @@ import java.util.Objects;
 @Table(name = "artist")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Artist implements Serializable {
+
 
     private static final long serialVersionUID = 1L;
 
@@ -86,6 +89,11 @@ public class Artist implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Movie> movieSecondaryActors = new HashSet<>();
 
+    @ManyToMany(mappedBy = "actors")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Episode> episodes = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -102,6 +110,14 @@ public class Artist implements Serializable {
     public Artist name(String name) {
         this.name = name;
         return this;
+    }
+
+    public Set<Episode> getEpisodes() {
+        return episodes;
+    }
+
+    public void setEpisodes(Set<Episode> episodes) {
+        this.episodes = episodes;
     }
 
     public void setName(String name) {
@@ -369,6 +385,8 @@ public class Artist implements Serializable {
         movie.getActorSecondaries().remove(this);
         return this;
     }
+
+
 
     public void setMovieSecondaryActors(Set<Movie> movies) {
         this.movieSecondaryActors = movies;

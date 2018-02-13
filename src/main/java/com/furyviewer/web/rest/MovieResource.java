@@ -130,7 +130,7 @@ public class MovieResource {
 
     public ResponseEntity<Movie> importMovieByName(@PathVariable String name) {
         log.debug("REST request to get Movies by name", name);
-        Movie movie = movieOmdbDTOService.importMovie(name);
+        Movie movie = movieOmdbDTOService.importMovieByName(name);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
 
@@ -178,7 +178,7 @@ public class MovieResource {
     public MovieOmdbDTO getTestInicial() throws Exception {
 
 
-        return movieOmdbDTOService.getMovie("Justice League");
+        return movieOmdbDTOService.getMovieByName("Justice League");
     }
 
 

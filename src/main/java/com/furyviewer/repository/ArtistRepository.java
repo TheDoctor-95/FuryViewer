@@ -39,6 +39,5 @@ public interface ArtistRepository extends JpaRepository<Artist, Long>, JpaSpecif
 
     @Query("select artist.imgUrl from Artist artist where artist.id =:id")
     String returnImageArtist(@Param("id") Long id);
-
 }
 

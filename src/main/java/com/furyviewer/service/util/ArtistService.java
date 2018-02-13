@@ -8,10 +8,13 @@ import com.furyviewer.repository.ArtistTypeRepository;
 import com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistService {
@@ -63,6 +66,15 @@ public class ArtistService {
             }
         }
         return artists;
+    }
+
+    @Transactional
+    public List<Artist> findBySerieId(Long serieID){
+        return artistRepository.findAll().stream()
+            .filter(artist -> artist.getEpisodes().stream()
+            .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
+            .distinct()
+            .collect(Collectors.toList());
     }
 
     /**

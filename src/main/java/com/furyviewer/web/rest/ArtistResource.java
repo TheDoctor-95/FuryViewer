@@ -13,6 +13,7 @@ import com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService;
 import com.furyviewer.service.dto.ArtistBCriteria;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;
+import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -20,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import com.furyviewer.service.ArtistBQueryService;
 
@@ -30,6 +32,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Artist.
@@ -51,6 +54,9 @@ public class ArtistResource {
 
     @Autowired
     private ArtistBQueryService artistBQueryService;
+
+    @Autowired
+    private ArtistService artistService;
 
 
     @Inject
@@ -122,10 +128,22 @@ public class ArtistResource {
      */
     @GetMapping("/artists/{id}")
     @Timed
+    @Transactional
     public ResponseEntity<Artist> getArtist(@PathVariable Long id) {
+
         log.debug("REST request to get Artist : {}", id);
         Artist artist = artistRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
+    }
+
+    @GetMapping("/artistsBySeriesID/{id}")
+    @Timed
+    @Transactional
+    public ResponseEntity<List<Artist>> getArtistBySeries(@PathVariable Long id) {
+
+        log.debug("REST request to get Artist : {}", id);
+        List<Artist> artists = artistService.findBySerieId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
     }
 
     @GetMapping("/artist-bs/{id}")
@@ -174,19 +192,19 @@ public class ArtistResource {
 //        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artistType));
 //    }
 
-        /**
-         * DELETE  /artists/:id : delete the "id" artist.
-         *
-         * @param id the id of the artist to delete
-         * @return the ResponseEntity with status 200 (OK)
-         */
-        @DeleteMapping("/artists/{id}")
-        @Timed
-        public ResponseEntity<Void> deleteArtist (@PathVariable Long id){
-            log.debug("REST request to delete Artist : {}", id);
-            artistRepository.delete(id);
-            return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-        }
+    /**
+     * DELETE  /artists/:id : delete the "id" artist.
+     *
+     * @param id the id of the artist to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/artists/{id}")
+    @Timed
+    public ResponseEntity<Void> deleteArtist(@PathVariable Long id) {
+        log.debug("REST request to delete Artist : {}", id);
+        artistRepository.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
 
     @GetMapping("/artist-api/test-Tmdb")
     @Timed
