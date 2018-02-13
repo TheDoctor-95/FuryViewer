@@ -15,6 +15,11 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
+/**
+ * Servicio encargado de recuperar información de un Artist desde ArtistTmdbDTORepository y la convierte al
+ * formato FuryViewer.
+ * @author IFriedkin
+ */
 @Service
 public class ArtistTmdbDTOService {
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";

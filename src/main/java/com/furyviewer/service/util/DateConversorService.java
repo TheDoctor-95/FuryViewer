@@ -7,6 +7,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Servicio que se encarga de convertir los strings que contienen fechas en un formato válido para introducirlo en la
+ * base de datos.
+ * @author IFriedkin & TheDoctor-95
+ */
 @Service
 public class DateConversorService {
     @Autowired

@@ -20,6 +20,7 @@ import com.furyviewer.service.dto.Criteria.ArtistBCriteria;
 /**
  * ArtistBQueryService se encarga de crear un constructor dinámico de Artist para poder realizar la búsqueda
  * inteligente.
+ * @author Whoger
  */
 @Service
 @Transactional(readOnly = true)

@@ -13,11 +13,17 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
+/**
+ * Servicio encargado de recuperar información de una Company desde CompanyTmdbDTORepository y la convierte al
+ * formato FuryViewer.
+ * @author IFriedkin
+ */
 @Service
 public class CompanyTmdbDTOService {
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";
     private final String pathImage = "https://image.tmdb.org/t/p/w500";
-    private final CompanyTmdbDTORepository apiTMDB = CompanyTmdbDTORepository.retrofit.create(CompanyTmdbDTORepository.class);
+    private final CompanyTmdbDTORepository apiTMDB =
+        CompanyTmdbDTORepository.retrofit.create(CompanyTmdbDTORepository.class);
 
     @Autowired
     private CountryService countryService;
@@ -59,7 +65,8 @@ public class CompanyTmdbDTOService {
         company.setName(companyName);
 
         if (getIdTmdbCompany(companyName) != -1) {
-            Call<CompleteCompanyTmdbDTO> callCompany = apiTMDB.getCompleteCompany(getIdTmdbCompany(companyName), apikey);
+            Call<CompleteCompanyTmdbDTO> callCompany =
+                apiTMDB.getCompleteCompany(getIdTmdbCompany(companyName), apikey);
 
             try {
                 Response<CompleteCompanyTmdbDTO> response = callCompany.execute();

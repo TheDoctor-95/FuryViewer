@@ -15,6 +15,11 @@ import retrofit2.Call;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Servicio encargado de recuperar información de una Movie desde MovieDTORepository y la convierte al
+ * formato FuryViewer.
+ * @author TheDoctor-95
+ */
 @Service
 public class MovieOmdbDTOService {
 
@@ -47,7 +52,8 @@ public class MovieOmdbDTOService {
     @Autowired
     private TrailerTmdbDTOService trailerTmdbDTOService;
 
-    private static MovieOmdbDTORepository apiService = MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
+    private static MovieOmdbDTORepository apiService =
+        MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
 
     /**
      * Devuelve la información de una movie en el formato proporcionado por OpenMovieDataBase.
@@ -70,7 +76,7 @@ public class MovieOmdbDTOService {
     }
 
     /**
-     * Convierte la información de una movie de OMDB al formato de información de FuryViewer.
+     * Devuelve una Movie existente en la base de datos o en caso de no existir hace una petición a la api.
      * @param title String | Título de la movie.
      * @return Movie | Contiene la información de una movie en el formato FuryViewer.
      */
@@ -93,7 +99,11 @@ public class MovieOmdbDTOService {
         return m;
     }
 
-
+    /**
+     * Convierte la información de una movie de OMDB al formato de información de FuryViewer.
+     * @param movieOmdbDTO MovieOmdbDTO | Información de la Movie propocionada por la api.
+     * @return Movie | Contiene la información de una movie en el formato FuryViewer.
+     */
     public Movie importMovie(MovieOmdbDTO movieOmdbDTO){
         Movie m = new Movie();
         m.setName(movieOmdbDTO.getTitle());

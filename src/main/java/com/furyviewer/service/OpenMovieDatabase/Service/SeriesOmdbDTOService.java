@@ -16,6 +16,11 @@ import retrofit2.Call;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Servicio encargado de recuperar información de una Series desde SeriesDTORepository y la convierte al
+ * formato FuryViewer.
+ * @author IFriedkin
+ */
 @Service
 public class SeriesOmdbDTOService {
     private final String apikey = "eb62550d";

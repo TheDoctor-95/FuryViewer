@@ -8,6 +8,10 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
+/**
+ * Servicio encargado de recuperar información de una Movie desde MovieTmdbDTORepository.
+ * @author IFriedkin
+ */
 @Service
 public class MovieTmdbDTOService {
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";

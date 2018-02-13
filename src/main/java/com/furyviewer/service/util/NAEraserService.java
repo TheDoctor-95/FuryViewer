@@ -2,6 +2,10 @@ package com.furyviewer.service.util;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio que se encarga de eliminar el "N/A" de las respuestas de la api de OpenMovieDataBase.
+ * @author IFriedkin
+ */
 @Service
 public class NAEraserService {
     /**

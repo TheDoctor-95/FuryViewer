@@ -20,6 +20,7 @@ import com.furyviewer.service.dto.Criteria.MovieBCriteria;
 
 /**
  * MovieQueryService se encarga de crear un constructor dinámico de Movie para poder realizar la búsqueda inteligente.
+ * @author Whoger
  */
 @Service
 @Transactional(readOnly = true)

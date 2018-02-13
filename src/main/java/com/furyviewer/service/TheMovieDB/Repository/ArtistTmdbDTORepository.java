@@ -10,10 +10,26 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+/**
+ * Repositorio encargado de conectar con la api de TheMovieDB para recuperar la información de Artist.
+ * @author IFriedkin
+ */
 public interface ArtistTmdbDTORepository {
+    /**
+     * Devuelve la información simple de un Artist proporcionada por la API.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @param artistName String | Nombre del Artist que se quiere buscar.
+     * @return Call<ArtistTmdbDTO> | Contiene toda la información simple del Artist devuelta por la api.
+     */
     @GET("/3/search/person")
     Call<ArtistTmdbDTO> getArtist(@Query("api_key") String apikey, @Query("query") String artistName);
 
+    /**
+     * Devuelve la información completa de un Artist proporcionada por la API.
+     * @param id int | id interno de la API para reconocer al Artist.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @return Call<ArtistFinalTmdbDTO> | Contiene toda la información completa del Artist devuelta por la api.
+     */
     @GET("/3/person/{id}")
     Call<ArtistFinalTmdbDTO> getFinalArtist(@Path("id") int id, @Query("api_key") String apikey);
 

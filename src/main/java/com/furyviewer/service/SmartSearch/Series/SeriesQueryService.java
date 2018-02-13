@@ -22,6 +22,7 @@ import static com.furyviewer.domain.Series_.*;
 /**
  * SeriesQueryService se encarga de crear un constructor dinámico de Series para poder realizar la búsqueda
  * inteligente.
+ * @author Whoger
  */
 @Service
 @Transactional(readOnly = true)

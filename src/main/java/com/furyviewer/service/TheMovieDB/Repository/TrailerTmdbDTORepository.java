@@ -8,6 +8,11 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+/**
+ * Repositorio encargado de conectar con la api de TheMovieDB para recuperar la información del trailer de Movie y
+ * Series.
+ * @author IFriedkin
+ */
 public interface TrailerTmdbDTORepository {
     /**
      * Petición a la api de TMDB para recibir el trailer de una Movie.

@@ -16,6 +16,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio que se encarga de devolver un Artist de la base de datos o en caso de no existir delega en
+ * ArtistTmdbDTOService para crearla.
+ * @author IFriedkin & TheDoctor-95
+ */
 @Service
 public class ArtistService {
 
@@ -66,15 +71,6 @@ public class ArtistService {
             }
         }
         return artists;
-    }
-
-    @Transactional
-    public List<Artist> findBySerieId(Long serieID){
-        return artistRepository.findAll().stream()
-            .filter(artist -> artist.getEpisodes().stream()
-            .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
-            .distinct()
-            .collect(Collectors.toList());
     }
 
     /**
@@ -139,5 +135,19 @@ public class ArtistService {
         }
 
         return artist;
+    }
+
+    /**
+     * Devuelve todos los Artist de una Series a partir del id.
+     * @param serieID Long | id de la Series.
+     * @returnn List<Artist> | List que contiene la información de todos los Artist.
+     */
+    @Transactional
+    public List<Artist> findBySerieId(Long serieID){
+        return artistRepository.findAll().stream()
+            .filter(artist -> artist.getEpisodes().stream()
+                .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
+            .distinct()
+            .collect(Collectors.toList());
     }
 }

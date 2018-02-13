@@ -11,6 +11,10 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Servicio que se encarga de devolver un Genre de la base de datos o en caso de no existir lo crea a partir del nombre.
+ * @author TheDoctor-95
+ */
 @Service
 public class GenreService {
 
@@ -42,7 +46,6 @@ public class GenreService {
                     genre.setName(genreStr);
 
                     genre = genreRepository.save(genre);
-
                 }
                 genreListArray.add(genre);
             }

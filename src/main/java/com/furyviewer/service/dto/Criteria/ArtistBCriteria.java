@@ -14,6 +14,7 @@ import io.github.jhipster.service.filter.LocalDateFilter;
 
 /**
  * ArtistBCriteria recibe todas las opciones de filtrado para realizar la búsqueda inteligente desde ArtistBResource.
+ * @author Whoger
  */
 public class ArtistBCriteria implements Serializable {
     private static final long serialVersionUID = 1L;

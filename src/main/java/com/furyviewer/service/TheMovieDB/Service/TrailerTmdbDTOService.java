@@ -15,6 +15,11 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servicio encargado de recuperar información de un Trailer desde TrailerTmdbDTORepository y la convierte al
+ * formato FuryViewer.
+ * @author IFriedkin
+ */
 @Service
 public class TrailerTmdbDTOService {
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";

@@ -11,6 +11,7 @@ import com.furyviewer.domain.Movie;
 
 /**
  *  MovieServiceSmart crea el resource para poder hacer peticiones desde la api.
+ *  @author Whoger
  */
 @Service
 @Transactional

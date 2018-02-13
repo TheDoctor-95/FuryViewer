@@ -16,6 +16,7 @@ import io.github.jhipster.service.filter.LocalDateFilter;
 
 /**
  * MovieBCriteria recibe todas las opciones de filtrado para realizar la búsqueda inteligente desde MovieResource.
+ * @author Whoger
  */
 public class MovieBCriteria implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -14,6 +14,11 @@ import retrofit2.Call;
 
 import java.io.IOException;
 
+/**
+ * Servicio encargado de recuperar información de un Episode desde EpisodeDTORepository y la convierte al
+ * formato FuryViewer.
+ * @author IFriedkin
+ */
 @Service
 public class EpisodeOmdbDTOService {
     private final String apikey = "eb62550d";
@@ -30,7 +35,8 @@ public class EpisodeOmdbDTOService {
     @Autowired
     private NAEraserService naEraserService;
 
-    private final EpisodeOmdbDTORepository apiService = EpisodeOmdbDTORepository.retrofit.create(EpisodeOmdbDTORepository.class);
+    private final EpisodeOmdbDTORepository apiService =
+        EpisodeOmdbDTORepository.retrofit.create(EpisodeOmdbDTORepository.class);
 
     /**
      * Devuelve la información de un episode en el formato proporcionado por OpenMovieDataBase.

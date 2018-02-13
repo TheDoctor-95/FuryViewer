@@ -13,6 +13,11 @@ import retrofit2.Call;
 
 import java.io.IOException;
 
+/**
+ * Servicio encargado de recuperar información de una Season desde SeasonDTORepository y la convierte al
+ * formato FuryViewer.
+ * @author IFriedkin
+ */
 @Service
 public class SeasonOmdbDTOService {
     private final String apikey = "eb62550d";
