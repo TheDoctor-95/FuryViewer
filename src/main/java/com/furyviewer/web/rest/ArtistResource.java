@@ -8,9 +8,9 @@ import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
-import com.furyviewer.service.ArtistServiceSmart;
+import com.furyviewer.service.SmartSearch.Artist.ArtistServiceSmart;
 import com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService;
-import com.furyviewer.service.dto.ArtistBCriteria;
+import com.furyviewer.service.dto.Criteria.ArtistBCriteria;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;
 import com.furyviewer.service.util.ArtistService;
@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import com.furyviewer.service.ArtistBQueryService;
+import com.furyviewer.service.SmartSearch.Artist.ArtistBQueryService;
 
 
 import javax.inject.Inject;

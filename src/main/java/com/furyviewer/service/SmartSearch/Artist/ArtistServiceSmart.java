@@ -1,4 +1,4 @@
-package com.furyviewer.service;
+package com.furyviewer.service.SmartSearch.Artist;
 
 import com.furyviewer.domain.Artist;
 import com.furyviewer.repository.ArtistRepository;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Service Implementation for managing Artist.
+ *  ArtistServiceSmart crea el resource para poder hacer peticiones desde la api.
  */
 @Service
 @Transactional
@@ -25,10 +25,9 @@ public class ArtistServiceSmart {
     }
 
     /**
-     * Save a artist.
-     *
-     * @param artist the entity to save
-     * @return the persisted entity
+     * Guarda el Artist en la base de datos.
+     * @param artist Artist | Artist que se tiene que guardar.
+     * @return Artist | Artist guardado.
      */
     public Artist save(Artist artist) {
         log.debug("Request to save Artist : {}", artist);
@@ -36,9 +35,8 @@ public class ArtistServiceSmart {
     }
 
     /**
-     *  Get all the artistBS.
-     *
-     *  @return the list of entities
+     * Devuelve todos los Artist de la base de datos.
+     * @return List<Artist> | Lista con todos los Artist.
      */
     @Transactional(readOnly = true)
     public List<Artist> findAll() {
@@ -47,10 +45,9 @@ public class ArtistServiceSmart {
     }
 
     /**
-     *  Get one artistB by id.
-     *
-     *  @param id the id of the entity
-     *  @return the entity
+     * Devuelve la información de un Artist a partir de su id.
+     * @param id Long | id del Artist que se quiere buscar.
+     * @return Artist | Información del Artist buscado.
      */
     @Transactional(readOnly = true)
     public Artist findOne(Long id) {
@@ -59,9 +56,8 @@ public class ArtistServiceSmart {
     }
 
     /**
-     *  Delete the  artistB by id.
-     *
-     *  @param id the id of the entity
+     * Elimina un Artist de la base de datos a partir del id.
+     * @param id Long | id del Artist que se quiere eliminar.
      */
     public void delete(Long id) {
         log.debug("Request to delete Artist : {}", id);

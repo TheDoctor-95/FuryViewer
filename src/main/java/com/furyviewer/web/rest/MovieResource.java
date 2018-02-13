@@ -5,9 +5,9 @@ import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.service.MovieDatabase.MovieDTOService;
-import com.furyviewer.service.MovieQueryService;
+import com.furyviewer.service.SmartSearch.Movie.MovieQueryService;
 import com.furyviewer.service.OpenMovieDatabase.Service.MovieOmdbDTOService;
-import com.furyviewer.service.dto.MovieBCriteria;
+import com.furyviewer.service.dto.Criteria.MovieBCriteria;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;

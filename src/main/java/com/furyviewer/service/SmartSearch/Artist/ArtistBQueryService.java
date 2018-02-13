@@ -1,4 +1,4 @@
-package com.furyviewer.service;
+package com.furyviewer.service.SmartSearch.Artist;
 
 import java.util.List;
 
@@ -15,14 +15,11 @@ import io.github.jhipster.service.QueryService;
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.*; // for static metamodels
 import com.furyviewer.repository.ArtistRepository;
-import com.furyviewer.service.dto.ArtistBCriteria;
-
+import com.furyviewer.service.dto.Criteria.ArtistBCriteria;
 
 /**
- * Service for executing complex queries for ArtistB entities in the database.
- * The main input is a {@link ArtistBCriteria} which get's converted to {@link Specifications},
- * in a way that all the filters must apply.
- * It returns a {@link List} of {%link ArtistB} or a {@link Page} of {%link ArtistB} which fulfills the criterias
+ * ArtistBQueryService se encarga de crear un constructor dinámico de Artist para poder realizar la búsqueda
+ * inteligente.
  */
 @Service
 @Transactional(readOnly = true)
@@ -38,9 +35,9 @@ public class ArtistBQueryService extends QueryService<Artist> {
     }
 
     /**
-     * Return a {@link List} of {%link ArtistB} which matches the criteria from the database
-     * @param criteria The object which holds all the filters, which the entities should match.
-     * @return the matching entities.
+     * Devuelve una lista de Artist con todos los que coinciden con los parametros de búsqueda.
+     * @param criteria ArtistBCriteria | Contiene los filtros por los que se buscará en Artist.
+     * @return List<Artist> | Lista de los Artist encontrados.
      */
     @Transactional(readOnly = true)
     public List<Artist> findByCriteria(ArtistBCriteria criteria) {
@@ -50,10 +47,10 @@ public class ArtistBQueryService extends QueryService<Artist> {
     }
 
     /**
-     * Return a {@link Page} of {%link ArtistB} which matches the criteria from the database
-     * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page The page, which should be returned.
-     * @return the matching entities.
+     * Devuelve una lista paginada de Artist con todos los que coinciden con los parametros de búsqueda.
+     * @param criteria ArtistBCriteria | Contiene los filtros por los que se buscará en Artist.
+     * @param page Pageable | Pagina los datos devueltos.
+     * @return Page<Artist> | Lista paginada de los Artist encontrados.
      */
     @Transactional(readOnly = true)
     public Page<Artist> findByCriteria(ArtistBCriteria criteria, Pageable page) {
@@ -63,7 +60,10 @@ public class ArtistBQueryService extends QueryService<Artist> {
     }
 
     /**
-     * Function to convert ArtistBCriteria to a {@link Specifications}
+     * Convierte ArtistBCriteria a Specifications<Artist> para crear el constructor que servirá para realizar la búsqueda
+     * inteligente.
+     * @param criteria ArtistBCriteria | Contiene los filtros por los que se buscará en Artist.
+     * @return Specifications<Artist> | Contiene los parámetros de búsqueda.
      */
     private Specifications<Artist> createSpecification(ArtistBCriteria criteria) {
         Specifications<Artist> specification = Specifications.where(null);

@@ -1,4 +1,4 @@
-package com.furyviewer.service.dto;
+package com.furyviewer.service.dto.Criteria;
 
 import java.io.Serializable;
 import io.github.jhipster.service.filter.BooleanFilter;
@@ -12,15 +12,8 @@ import io.github.jhipster.service.filter.StringFilter;
 
 import io.github.jhipster.service.filter.LocalDateFilter;
 
-
-
 /**
- * Criteria class for the ArtistB entity. This class is used in ArtistBResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /artist-bs?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
- * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
- * fix type specific filters.
+ * ArtistBCriteria recibe todas las opciones de filtrado para realizar la búsqueda inteligente desde ArtistBResource.
  */
 public class ArtistBCriteria implements Serializable {
     private static final long serialVersionUID = 1L;

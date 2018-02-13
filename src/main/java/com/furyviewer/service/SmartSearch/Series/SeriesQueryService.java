@@ -1,4 +1,4 @@
-package com.furyviewer.service;
+package com.furyviewer.service.SmartSearch.Series;
 
 import java.util.List;
 
@@ -15,15 +15,13 @@ import io.github.jhipster.service.QueryService;
 
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.*; // for static metamodels
-import com.furyviewer.service.dto.SeriesBCriteria;
+import com.furyviewer.service.dto.Criteria.SeriesBCriteria;
 
 import static com.furyviewer.domain.Series_.*;
 
 /**
- * Service for executing complex queries for SeriesB entities in the database.
- * The main input is a {@link SeriesBCriteria} which get's converted to {@link Specifications},
- * in a way that all the filters must apply.
- * It returns a {@link List} of {%link SeriesB} or a {@link Page} of {%link SeriesB} which fulfills the criterias
+ * SeriesQueryService se encarga de crear un constructor dinámico de Series para poder realizar la búsqueda
+ * inteligente.
  */
 @Service
 @Transactional(readOnly = true)
@@ -39,9 +37,9 @@ public class SeriesQueryService extends QueryService<Series> {
     }
 
     /**
-     * Return a {@link List} of {%link SeriesB} which matches the criteria from the database
-     * @param criteria The object which holds all the filters, which the entities should match.
-     * @return the matching entities.
+     * Devuelve una lista de Series con todas las que coinciden con los parametros de búsqueda.
+     * @param criteria SeriesBCriteria | Contiene los filtros por los que se buscará en Series.
+     * @return List<Series> | Lista de las Series encontradas.
      */
     @Transactional(readOnly = true)
     public List<Series> findByCriteria(SeriesBCriteria criteria) {
@@ -51,10 +49,10 @@ public class SeriesQueryService extends QueryService<Series> {
     }
 
     /**
-     * Return a {@link Page} of {%link SeriesB} which matches the criteria from the database
-     * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page The page, which should be returned.
-     * @return the matching entities.
+     * Devuelve una lista paginada de Series con todas las que coinciden con los parametros de búsqueda.
+     * @param criteria SeriesBCriteria | Contiene los filtros por los que se buscará en Series.
+     * @param page Pageable | Pagina los datos devueltos.
+     * @return Page<Series> | Lista paginada de las Series encontradas.
      */
     @Transactional(readOnly = true)
     public Page<Series> findByCriteria(SeriesBCriteria criteria, Pageable page) {
@@ -64,7 +62,10 @@ public class SeriesQueryService extends QueryService<Series> {
     }
 
     /**
-     * Function to convert SeriesBCriteria to a {@link Specifications}
+     * Convierte SeriesBCriteria a Specifications<Series> para crear el constructor que servirá para realizar la
+     * búsqueda inteligente.
+     * @param criteria SeriesBCriteria | Contiene los filtros por los que se buscará en Series.
+     * @return Specifications<Series> | Contiene los parámetros de búsqueda.
      */
     private Specifications<Series> createSpecification(SeriesBCriteria criteria) {
         Specifications<Series> specification = Specifications.where(null);

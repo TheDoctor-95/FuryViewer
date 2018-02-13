@@ -1,4 +1,4 @@
-package com.furyviewer.service;
+package com.furyviewer.service.SmartSearch.Movie;
 
 import java.util.List;
 
@@ -15,14 +15,11 @@ import io.github.jhipster.service.QueryService;
 
 import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.*; // for static metamodels
-import com.furyviewer.service.dto.MovieBCriteria;
+import com.furyviewer.service.dto.Criteria.MovieBCriteria;
 
 
 /**
- * Service for executing complex queries for MovieB entities in the database.
- * The main input is a {@link MovieBCriteria} which get's converted to {@link Specifications},
- * in a way that all the filters must apply.
- * It returns a {@link List} of {%link MovieB} or a {@link Page} of {%link MovieB} which fulfills the criterias
+ * MovieQueryService se encarga de crear un constructor dinámico de Movie para poder realizar la búsqueda inteligente.
  */
 @Service
 @Transactional(readOnly = true)
@@ -38,9 +35,9 @@ public class MovieQueryService extends QueryService<Movie> {
     }
 
     /**
-     * Return a {@link List} of {%link MovieB} which matches the criteria from the database
-     * @param criteria The object which holds all the filters, which the entities should match.
-     * @return the matching entities.
+     * Devuelve una lista de Movie con todas las que coinciden con los parametros de búsqueda.
+     * @param criteria MovieBCriteria | Contiene los filtros por los que se buscará en Movie.
+     * @return List<Movie> | Lista de las Movie encontradas.
      */
     @Transactional(readOnly = true)
     public List<Movie> findByCriteria(MovieBCriteria criteria) {
@@ -50,10 +47,10 @@ public class MovieQueryService extends QueryService<Movie> {
     }
 
     /**
-     * Return a {@link Page} of {%link MovieB} which matches the criteria from the database
-     * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page The page, which should be returned.
-     * @return the matching entities.
+     * Devuelve una lista paginada de Movie con todas las que coinciden con los parametros de búsqueda.
+     * @param criteria MovieBCriteria | Contiene los filtros por los que se buscará en Movie.
+     * @param page Pageable | Pagina los datos devueltos.
+     * @return Page<Movie> | Lista paginada de las Movie encontradas.
      */
     @Transactional(readOnly = true)
     public Page<Movie> findByCriteria(MovieBCriteria criteria, Pageable page) {
@@ -63,7 +60,10 @@ public class MovieQueryService extends QueryService<Movie> {
     }
 
     /**
-     * Function to convert MovieBCriteria to a {@link Specifications}
+     * Convierte MovieBCriteria a Specifications<Movie> para crear el constructor que servirá para realizar la búsqueda
+     * inteligente.
+     * @param criteria MovieBCriteria | Contiene los filtros por los que se buscará en Movie.
+     * @return Specifications<Movie> | Contiene los parámetros de búsqueda.
      */
     private Specifications<Movie> createSpecification(MovieBCriteria criteria) {
         Specifications<Movie> specification = Specifications.where(null);

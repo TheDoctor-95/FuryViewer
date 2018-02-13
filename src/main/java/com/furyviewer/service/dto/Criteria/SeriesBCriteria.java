@@ -1,4 +1,4 @@
-package com.furyviewer.service.dto;
+package com.furyviewer.service.dto.Criteria;
 
 import java.io.Serializable;
 import com.furyviewer.domain.enumeration.SeriesEmittingEnum;
@@ -16,12 +16,7 @@ import io.github.jhipster.service.filter.LocalDateFilter;
 
 
 /**
- * Criteria class for the SeriesB entity. This class is used in SeriesBResource to
- * receive all the possible filtering options from the Http GET request parameters.
- * For example the following could be a valid requests:
- * <code> /series-bs?id.greaterThan=5&amp;attr1.contains=something&amp;attr2.specified=false</code>
- * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
- * fix type specific filters.
+ * SeriesBCriteria recibe todas las opciones de filtrado para realizar la búsqueda inteligente desde SeriesResource.
  */
 public class SeriesBCriteria implements Serializable {
     /**
