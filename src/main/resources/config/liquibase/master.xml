@@ -55,7 +55,6 @@
     <include file="config/liquibase/changelog/20171130103715_added_entity_constraints_Social.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171130103716_added_entity_constraints_ChapterSeen.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180208113524_added_entity_constraints_AchievementsAchievs.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180209105013_added_entity_constraints_SeriesB.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <include file="config/liquibase/changelog/20171130111309_descriptiontypetotext.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171130113020_changelog.xml" relativeToChangelogFile="false"/>
