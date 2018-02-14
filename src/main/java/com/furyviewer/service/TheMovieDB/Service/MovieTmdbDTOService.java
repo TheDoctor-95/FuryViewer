@@ -11,10 +11,18 @@ import java.io.IOException;
 /**
  * Servicio encargado de recuperar información de una Movie desde MovieTmdbDTORepository.
  * @author IFriedkin
+ * @see com.furyviewer.service.TheMovieDB.Repository.MovieTmdbDTORepository
  */
 @Service
 public class MovieTmdbDTOService {
+    /**
+     * Key proporcionada por la api de TheMovieDB para poder hacer peticiones.
+     */
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";
+
+    /**
+     * Se establece conexión para poder hacer peticiones a la api.
+     */
     private final MovieTmdbDTORepository apiTMDB = MovieTmdbDTORepository.retrofit.create(MovieTmdbDTORepository.class);
 
     /**

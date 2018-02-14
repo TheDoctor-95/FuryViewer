@@ -18,7 +18,6 @@ import java.util.Optional;
  */
 @Service
 public class MarksService {
-
     @Autowired
     SocialRepository socialRepository;
 

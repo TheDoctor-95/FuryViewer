@@ -19,11 +19,23 @@ import java.util.List;
  * Servicio encargado de recuperar información de un Trailer desde TrailerTmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
+ * @see com.furyviewer.service.TheMovieDB.Repository.TrailerTmdbDTORepository
  */
 @Service
 public class TrailerTmdbDTOService {
+    /**
+     * Key proporcionada por la api de TheMovieDB para poder hacer peticiones.
+     */
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";
-    private final String pathImage = "https://www.youtube.com/watch?v=";
+
+    /**
+     * Path necesario para poder construir el enlace del trailer.
+     */
+    private final String pathVideo = "https://www.youtube.com/watch?v=";
+
+    /**
+     * Se establece conexión para poder hacer peticiones a la api.
+     */
     private final TrailerTmdbDTORepository apiTMDB =
         TrailerTmdbDTORepository.retrofit.create(TrailerTmdbDTORepository.class);
 
@@ -59,7 +71,7 @@ public class TrailerTmdbDTOService {
                     //Buscamos el trailer con mejor resolución.
                     for (Result trailer : resultTrailer) {
                         if (size <= trailer.getSize()) {
-                            social.setUrl(pathImage + trailer.getKey());
+                            social.setUrl(pathVideo + trailer.getKey());
                             social.setType("Trailer");
                             social.setMovie(movie);
 
@@ -98,7 +110,7 @@ public class TrailerTmdbDTOService {
                     //Buscamos el trailer con mejor resolución.
                     for (Result trailer : resultTrailer) {
                         if (size <= trailer.getSize()) {
-                            social.setUrl(pathImage + trailer.getKey());
+                            social.setUrl(pathVideo + trailer.getKey());
                             social.setType("Trailer");
                             social.setSeries(ss);
 

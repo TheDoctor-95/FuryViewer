@@ -12,11 +12,20 @@ import java.io.IOException;
 /**
  * Servicio encargado de recuperar información de una Series desde SeriesTmdbDTORepository.
  * @author IFriedkin
+ * @see com.furyviewer.service.TheMovieDB.Repository.SeriesTmdbDTORepository
  */
 @Service
 public class SeriesTmdbDTOService {
+    /**
+     * Key proporcionada por la api de TheMovieDB para poder hacer peticiones.
+     */
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";
-    private final SeriesTmdbDTORepository apiTMDB = SeriesTmdbDTORepository.retrofit.create(SeriesTmdbDTORepository.class);
+
+    /**
+     * Se establece conexión para poder hacer peticiones a la api.
+     */
+    private final SeriesTmdbDTORepository apiTMDB =
+        SeriesTmdbDTORepository.retrofit.create(SeriesTmdbDTORepository.class);
 
     /**
      * Método encargado de devolver el id de la series a partir del nombre de la misma.
@@ -30,6 +39,7 @@ public class SeriesTmdbDTOService {
 
         try {
             Response<SimpleSeriesTmdbDTO> response = callSeries.execute();
+
             if (response.isSuccessful()) {
                 series = response.body();
                 System.out.println(series);
@@ -57,6 +67,7 @@ public class SeriesTmdbDTOService {
                 Call<CompleteSeriesTmdbDTO> callSeries = apiTMDB.getCompleteSeries(id,apikey);
 
                 Response<CompleteSeriesTmdbDTO> response = callSeries.execute();
+
                 if (response.isSuccessful()) {
                     series = response.body();
                     companyName = series.getProductionCompanies().get(0).getName();

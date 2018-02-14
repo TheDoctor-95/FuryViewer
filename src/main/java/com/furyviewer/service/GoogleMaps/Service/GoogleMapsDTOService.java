@@ -13,10 +13,24 @@ import retrofit2.Call;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servicio encargado de recuperar información de una Country desde GoogleMapsDTORepository y la convierte al
+ * formato FuryViewer.
+ * @author IFriedkin
+ * @see com.furyviewer.service.GoogleMaps.Repository.GoogleMapsDTORepository
+ */
 @Service
 public class GoogleMapsDTOService {
+    /**
+     * Key proporcionada por la api de GoogleMapsGeocoding para poder hacer peticiones.
+     */
     private final String apikey = "AIzaSyC69nm386VRBeeAsHR9ipzfleLPcrcP6Xk";
-    private final GoogleMapsDTORepository apiGoogleMaps = GoogleMapsDTORepository.retrofit.create(GoogleMapsDTORepository.class);
+
+    /**
+     * Se establece conexión para poder hacer peticiones a la api.
+     */
+    private final GoogleMapsDTORepository apiGoogleMaps =
+        GoogleMapsDTORepository.retrofit.create(GoogleMapsDTORepository.class);
 
     @Autowired
     private CountryRepository countryRepository;

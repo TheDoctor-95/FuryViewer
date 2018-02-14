@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
  * Servicio que se encarga de devolver un Artist de la base de datos o en caso de no existir delega en
  * ArtistTmdbDTOService para crearla.
  * @author IFriedkin & TheDoctor-95
+ * @see com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService
  */
 @Service
 public class ArtistService {
-
     @Autowired
     private ArtistRepository artistRepository;
 

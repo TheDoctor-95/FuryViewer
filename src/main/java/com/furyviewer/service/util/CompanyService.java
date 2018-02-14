@@ -12,10 +12,10 @@ import java.util.Optional;
  * Servicio que se encarga de devolver una Company de la base de datos o en caso de no existir delega en
  * CompanyTmdbDTOService para crearla.
  * @author IFriedkin & TheDoctor-95
+ * @see com.furyviewer.service.TheMovieDB.Service.CompanyTmdbDTOService
  */
 @Service
 public class CompanyService {
-
     @Autowired
     private CompanyRepository companyRepository;
 

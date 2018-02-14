@@ -17,7 +17,6 @@ import java.util.Set;
  */
 @Service
 public class GenreService {
-
     @Autowired
     private GenreRepository genreRepository;
 

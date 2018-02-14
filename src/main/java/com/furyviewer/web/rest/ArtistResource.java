@@ -11,8 +11,8 @@ import com.furyviewer.repository.ArtistTypeRepository;
 import com.furyviewer.service.SmartSearch.Artist.ArtistServiceSmart;
 import com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService;
 import com.furyviewer.service.dto.Criteria.ArtistBCriteria;
-import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
-import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.CompleteArtistTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.SimpleArtistTmdbDTO;
 import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -32,7 +32,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Artist.
@@ -208,13 +207,13 @@ public class ArtistResource {
 
     @GetMapping("/artist-api/test-Tmdb")
     @Timed
-    public ArtistTmdbDTO getTestInicial() throws Exception {
+    public SimpleArtistTmdbDTO getTestInicial() throws Exception {
         return artistTmdbDTOService.getArtist("Norman Reedus");
     }
 
     @GetMapping("/artist-api/test-TmdbComplete")
     @Timed
-    public ArtistFinalTmdbDTO getTestInfoCompleta() throws Exception {
+    public CompleteArtistTmdbDTO getTestInfoCompleta() throws Exception {
         return artistTmdbDTOService.getArtistComplete("Norman Reedus");
     }
 

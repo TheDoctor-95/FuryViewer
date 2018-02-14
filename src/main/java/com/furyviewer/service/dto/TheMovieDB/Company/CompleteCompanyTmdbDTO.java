@@ -8,7 +8,7 @@ public class CompleteCompanyTmdbDTO {
 
     @SerializedName("description")
     @Expose
-    private Object description;
+    private String description;
     @SerializedName("headquarters")
     @Expose
     private String headquarters;
@@ -28,11 +28,11 @@ public class CompleteCompanyTmdbDTO {
     @Expose
     private ParentCompany parentCompany;
 
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Object description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

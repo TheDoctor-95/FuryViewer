@@ -11,6 +11,7 @@ import retrofit2.http.Query;
  * Repositorio encargado de conectar con la api de GoogleMapsGeocoding para recuperar la información de una
  * localización.
  * @author IFriedkin
+ * @see com.furyviewer.service.dto.GoogleMaps.GoogleMapsDTO
  */
 public interface GoogleMapsDTORepository {
     /**

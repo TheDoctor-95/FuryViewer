@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 /**
  * Repositorio encargado de conectar con la api de OpenMovieDataBase para recuperar la información de Series.
  * @author IFriedkin
+ * @see com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO
  */
 public interface SeriesOmdbDTORepository {
     /**

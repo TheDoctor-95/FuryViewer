@@ -14,13 +14,22 @@ import retrofit2.Call;
 import java.io.IOException;
 
 /**
- * Servicio encargado de recuperar información de una Season desde SeasonDTORepository y la convierte al
+ * Servicio encargado de recuperar información de una Season desde SeasonOmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
  */
 @Service
 public class SeasonOmdbDTOService {
+    /**
+     * Key proporcionada por la api de OpenMovieDataBase para poder hacer peticiones.
+     */
     private final String apikey = "eb62550d";
+
+    /**
+     * Se establece conexión para poder hacer peticiones a la api.
+     */
+    private final SeasonOmdbDTORepository apiService =
+        SeasonOmdbDTORepository.retrofit.create(SeasonOmdbDTORepository.class);
 
     @Autowired
     private SeriesRepository seriesRepository;
@@ -33,9 +42,6 @@ public class SeasonOmdbDTOService {
 
     @Autowired
     private DateConversorService dateConversorService;
-
-    private final SeasonOmdbDTORepository apiService =
-        SeasonOmdbDTORepository.retrofit.create(SeasonOmdbDTORepository.class);
 
     /**
      * Devuelve la información de una season en el formato proporcionado por OpenMovieDataBase.

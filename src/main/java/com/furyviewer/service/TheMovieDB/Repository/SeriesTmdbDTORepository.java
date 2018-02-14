@@ -12,6 +12,8 @@ import retrofit2.http.Query;
 /**
  * Repositorio encargado de conectar con la api de TheMovieDB para recuperar la información de Series.
  * @author IFriedkin
+ * @see com.furyviewer.service.dto.TheMovieDB.Series.SimpleSeriesTmdbDTO
+ * @see com.furyviewer.service.dto.TheMovieDB.Series.CompleteSeriesTmdbDTO
  */
 public interface SeriesTmdbDTORepository {
     /**

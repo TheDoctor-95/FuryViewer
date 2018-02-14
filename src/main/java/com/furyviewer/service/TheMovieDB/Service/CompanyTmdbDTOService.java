@@ -17,11 +17,23 @@ import java.io.IOException;
  * Servicio encargado de recuperar información de una Company desde CompanyTmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
+ * @see com.furyviewer.service.TheMovieDB.Repository.CompanyTmdbDTORepository
  */
 @Service
 public class CompanyTmdbDTOService {
+    /**
+     * Key proporcionada por la api de TheMovieDB para poder hacer peticiones.
+     */
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";
+
+    /**
+     * Path necesario para poder construir el enlace de la imagen.
+     */
     private final String pathImage = "https://image.tmdb.org/t/p/w500";
+
+    /**
+     * Se establece conexión para poder hacer peticiones a la api.
+     */
     private final CompanyTmdbDTORepository apiTMDB =
         CompanyTmdbDTORepository.retrofit.create(CompanyTmdbDTORepository.class);
 
@@ -43,6 +55,7 @@ public class CompanyTmdbDTOService {
 
         try {
             Response<SimpleCompanyTmdbDTO> response = callCompany.execute();
+
             if (response.isSuccessful()) {
                 company = response.body();
                 System.out.println(company);
@@ -70,11 +83,12 @@ public class CompanyTmdbDTOService {
 
             try {
                 Response<CompleteCompanyTmdbDTO> response = callCompany.execute();
+
                 if (response.isSuccessful()) {
                     CompleteCompanyTmdbDTO completeCompanyTmdbDTO = response.body();
 
                     if (completeCompanyTmdbDTO.getDescription() != null) {
-                        company.setDescription(completeCompanyTmdbDTO.getDescription().toString());
+                        company.setDescription(completeCompanyTmdbDTO.getDescription());
                     }
 
                     if (completeCompanyTmdbDTO.getLogoPath() != null) {

@@ -4,8 +4,8 @@ import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.ArtistType;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.service.TheMovieDB.Repository.ArtistTmdbDTORepository;
-import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistFinalTmdbDTO;
-import com.furyviewer.service.dto.TheMovieDB.Artist.ArtistTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.CompleteArtistTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Artist.SimpleArtistTmdbDTO;
 import com.furyviewer.service.util.CountryService;
 import com.furyviewer.service.util.DateConversorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,25 @@ import java.io.IOException;
  * Servicio encargado de recuperar información de un Artist desde ArtistTmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
+ * @see com.furyviewer.service.TheMovieDB.Repository.ArtistTmdbDTORepository
  */
 @Service
 public class ArtistTmdbDTOService {
+    /**
+     * Key proporcionada por la api de TheMovieDB para poder hacer peticiones.
+     */
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";
+
+    /**
+     * Path necesario para poder construir el enlace de la imagen.
+     */
     private final String pathImage = "https://image.tmdb.org/t/p/w500";
+
+    /**
+     * Se establece conexión para poder hacer peticiones a la api.
+     */
+    private final ArtistTmdbDTORepository apiTMDB =
+        ArtistTmdbDTORepository.retrofit.create(ArtistTmdbDTORepository.class);
 
     @Autowired
     private ArtistRepository artistRepository;
@@ -34,20 +48,17 @@ public class ArtistTmdbDTOService {
     @Autowired
     private CountryService countryService;
 
-    private final ArtistTmdbDTORepository apiTMDB =
-        ArtistTmdbDTORepository.retrofit.create(ArtistTmdbDTORepository.class);
-
     /**
      * Método que se encarga de pedir a la api de TheMovieDB la información básica de un actor.
      * @param artistName String | Nombre del actor a buscar.
-     * @return ArtistTmdbDTO | Información en el formato proporcionado por la API.
+     * @return SimpleArtistTmdbDTO | Información en el formato proporcionado por la API.
      * @throws IOException En caso de que no se pueda hacer la petición a la api se lanza la excepción.
      */
-    public ArtistTmdbDTO getArtist(String artistName) throws IOException {
-        ArtistTmdbDTO artist;
-        Call<ArtistTmdbDTO> callArtist = apiTMDB.getArtist(apikey, artistName);
+    public SimpleArtistTmdbDTO getArtist(String artistName) throws IOException {
+        SimpleArtistTmdbDTO artist;
+        Call<SimpleArtistTmdbDTO> callArtist = apiTMDB.getArtist(apikey, artistName);
 
-        Response<ArtistTmdbDTO> response = callArtist.execute();
+        Response<SimpleArtistTmdbDTO> response = callArtist.execute();
 
         if(response.isSuccessful()){
             artist = response.body();
@@ -69,9 +80,9 @@ public class ArtistTmdbDTOService {
     public int getID(String artistName) throws IOException {
         int id;
 
-        ArtistTmdbDTO artistTmdbDTO = getArtist(artistName);
+        SimpleArtistTmdbDTO simpleArtistTmdbDTO = getArtist(artistName);
 
-        id = artistTmdbDTO.getResults().get(0).getId();
+        id = simpleArtistTmdbDTO.getResults().get(0).getId();
 
         return id;
     }
@@ -79,16 +90,16 @@ public class ArtistTmdbDTOService {
     /**
      * Método que se encarga de recuperar toda la información del artist de la api de TMDB.
      * @param artistName String | Nombre del artista a buscar.
-     * @return ArtistFinalTmdbDTO | Información en el formato proporcionado por la API.
+     * @return CompleteArtistTmdbDTO | Información en el formato proporcionado por la API.
      * @throws IOException En caso de que no se pueda hacer la petición a la api se lanza la excepción.
      */
-    public ArtistFinalTmdbDTO getArtistComplete(String artistName) throws IOException {
-        ArtistFinalTmdbDTO artist;
+    public CompleteArtistTmdbDTO getArtistComplete(String artistName) throws IOException {
+        CompleteArtistTmdbDTO artist;
         int id = getID(artistName);
 
-        Call<ArtistFinalTmdbDTO> callArtist = apiTMDB.getFinalArtist(id, apikey);
+        Call<CompleteArtistTmdbDTO> callArtist = apiTMDB.getFinalArtist(id, apikey);
 
-        Response<ArtistFinalTmdbDTO> response = callArtist.execute();
+        Response<CompleteArtistTmdbDTO> response = callArtist.execute();
 
         if (response.isSuccessful()) {
             artist = response.body();
@@ -111,28 +122,27 @@ public class ArtistTmdbDTOService {
         artist.setName(artistName);
         artist.addArtistType(artistType);
 
-
         //Ponemos mote al bucle y lo utilizamos para hacer la petición hasta tres veces para asegurarnos de que
         // podemos realizar la petición a la api.
         getArtist:
         for (int i = 0; i < 3; i++) {
             try {
-                ArtistFinalTmdbDTO artistFinalTmdbDTO = getArtistComplete(artistName);
+                CompleteArtistTmdbDTO completeArtistTmdbDTO = getArtistComplete(artistName);
 
-                if (artistFinalTmdbDTO.getBirthday() != null) {
+                if (completeArtistTmdbDTO.getBirthday() != null) {
                     artist.setBirthdate(
-                        dateConversorService.releaseDateOMDBSeason(artistFinalTmdbDTO.getBirthday().toString()));
+                        dateConversorService.releaseDateOMDBSeason(completeArtistTmdbDTO.getBirthday().toString()));
 
                 }
-                if (artistFinalTmdbDTO.getDeathday() != null) {
-                    if(artistFinalTmdbDTO.getDeathday().toString().split("-").length == 3) {
+                if (completeArtistTmdbDTO.getDeathday() != null) {
+                    if(completeArtistTmdbDTO.getDeathday().toString().split("-").length == 3) {
                         artist.setDeathdate(
-                            dateConversorService.releaseDateOMDBSeason(artistFinalTmdbDTO.getDeathday().toString()));
+                            dateConversorService.releaseDateOMDBSeason(completeArtistTmdbDTO.getDeathday().toString()));
                     }
                 }
 
-                if (artistFinalTmdbDTO.getGender() != null) {
-                    switch (artistFinalTmdbDTO.getGender()) {
+                if (completeArtistTmdbDTO.getGender() != null) {
+                    switch (completeArtistTmdbDTO.getGender()) {
                         case 0:
                             artist.setSex("Undefined");
                             break;
@@ -145,14 +155,14 @@ public class ArtistTmdbDTOService {
                     }
                 }
 
-                if (artistFinalTmdbDTO.getProfilePath() != null) {
-                    artist.setImgUrl(pathImage + artistFinalTmdbDTO.getProfilePath());
+                if (completeArtistTmdbDTO.getProfilePath() != null) {
+                    artist.setImgUrl(pathImage + completeArtistTmdbDTO.getProfilePath());
                 }
-                if (artistFinalTmdbDTO.getImdbId() != null) {
-                    artist.setImdb_id(artistFinalTmdbDTO.getImdbId());
+                if (completeArtistTmdbDTO.getImdbId() != null) {
+                    artist.setImdb_id(completeArtistTmdbDTO.getImdbId());
                 }
-                if (artistFinalTmdbDTO.getPlaceOfBirth() != null) {
-                    artist.setCountry(countryService.importCountry(artistFinalTmdbDTO.getPlaceOfBirth().toString()));
+                if (completeArtistTmdbDTO.getPlaceOfBirth() != null) {
+                    artist.setCountry(countryService.importCountry(completeArtistTmdbDTO.getPlaceOfBirth().toString()));
                 }
 
                 //Salimos del bucle

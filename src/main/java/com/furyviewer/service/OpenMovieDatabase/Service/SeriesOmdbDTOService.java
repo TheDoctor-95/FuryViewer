@@ -17,13 +17,23 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Servicio encargado de recuperar información de una Series desde SeriesDTORepository y la convierte al
+ * Servicio encargado de recuperar información de una Series desde SeriesOmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
+ * @see com.furyviewer.service.OpenMovieDatabase.Repository.SeriesOmdbDTORepository
  */
 @Service
 public class SeriesOmdbDTOService {
+    /**
+     * Key proporcionada por la api de OpenMovieDataBase para poder hacer peticiones.
+     */
     private final String apikey = "eb62550d";
+
+    /**
+     * Se establece conexión para poder hacer peticiones a la api.
+     */
+    private static SeriesOmdbDTORepository apiService =
+        SeriesOmdbDTORepository.retrofit.create(SeriesOmdbDTORepository.class);
 
     @Autowired
     private SeriesRepository seriesRepository;
@@ -54,8 +64,6 @@ public class SeriesOmdbDTOService {
 
     @Autowired
     private TrailerTmdbDTOService trailerTmdbDTOService;
-
-    private static SeriesOmdbDTORepository apiService = SeriesOmdbDTORepository.retrofit.create(SeriesOmdbDTORepository.class);
 
     /**
      * Devuelve la información de una serie en el formato proporcionado por OpenMovieDataBase.

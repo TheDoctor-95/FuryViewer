@@ -12,6 +12,7 @@ import retrofit2.http.Query;
  * Repositorio encargado de conectar con la api de TheMovieDB para recuperar la información del trailer de Movie y
  * Series.
  * @author IFriedkin
+ * @see com.furyviewer.service.dto.TheMovieDB.Trailer.TrailerTmdbDTO
  */
 public interface TrailerTmdbDTORepository {
     /**

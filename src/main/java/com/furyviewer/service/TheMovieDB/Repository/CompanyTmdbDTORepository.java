@@ -12,6 +12,8 @@ import retrofit2.http.Query;
 /**
  * Repositorio encargado de conectar con la api de TheMovieDB para recuperar la información de Company.
  * @author IFriedkin
+ * @see com.furyviewer.service.dto.TheMovieDB.Company.SimpleCompanyTmdbDTO
+ * @see com.furyviewer.service.dto.TheMovieDB.Company.CompleteCompanyTmdbDTO
  */
 public interface CompanyTmdbDTORepository {
     /**

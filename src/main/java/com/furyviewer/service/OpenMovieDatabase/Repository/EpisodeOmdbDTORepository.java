@@ -10,6 +10,7 @@ import retrofit2.http.Query;
 /**
  * Repositorio encargado de conectar con la api de OpenMovieDataBase para recuperar la información de Episode.
  * @author IFriedkin
+ * @see com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO
  */
 public interface EpisodeOmdbDTORepository {
     /**
