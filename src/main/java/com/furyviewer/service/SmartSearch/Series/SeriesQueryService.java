@@ -1,8 +1,10 @@
 package com.furyviewer.service.SmartSearch.Series;
 
-import java.util.List;
-
+import com.furyviewer.domain.Country_;
+import com.furyviewer.domain.Series;
 import com.furyviewer.repository.SeriesRepository;
+import com.furyviewer.service.dto.Criteria.SeriesBCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,11 +13,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.furyviewer.domain.Series;
-import com.furyviewer.domain.*; // for static metamodels
-import com.furyviewer.service.dto.Criteria.SeriesBCriteria;
+import java.util.List;
 
 import static com.furyviewer.domain.Series_.*;
 
