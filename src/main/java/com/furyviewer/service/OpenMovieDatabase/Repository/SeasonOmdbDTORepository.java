@@ -8,17 +8,17 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Repositorio encargado de conectar con la api de OpenMovieDataBase para recuperar la información de Season.
+ * Repositorio encargado de conectar con la api de OpenMovieDataBase para recuperar la informacion de Season.
  * @author IFriedkin
  * @see com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO
  */
 public interface SeasonOmdbDTORepository {
     /**
-     * Devuelve toda la información de una Season devuelta por la api de OpenMovieDataBase.
+     * Devuelve toda la informacion de una Season proporcionada por la api de OpenMovieDataBase.
      * @param apikey String | Key requerida por la api para poder hacer peticiones.
-     * @param title String | Título de la Series que se quiere buscar.
-     * @param season int | Número de la Season que se quiere buscar.
-     * @return Call<SeasonOmdbDTO> | Contiene toda la información de Season devuelta por la api.
+     * @param title String | Titulo de la Series que se quiere buscar.
+     * @param season int | Numero de la Season que se quiere buscar.
+     * @return Call | Contiene toda la informacion de Season devuelta por la api.
      */
     @GET("/?type=season")
     Call<SeasonOmdbDTO> getSeason(@Query("apikey") String apikey, @Query("t") String title, @Query("Season") int season);

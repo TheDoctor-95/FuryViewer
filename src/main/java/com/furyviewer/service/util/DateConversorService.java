@@ -8,9 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Servicio que se encarga de convertir los strings que contienen fechas en un formato válido para introducirlo en la
+ * Servicio que se encarga de convertir los strings que contienen fechas en un formato valido para introducirlo en la
  * base de datos.
- * @author IFriedkin & TheDoctor-95
+ * @author IFriedkin
+ * @author TheDoctor-95
  */
 @Service
 public class DateConversorService {
@@ -18,7 +19,7 @@ public class DateConversorService {
     private NAEraserService naEraserService;
 
     /**
-     * Método que se encarga de convertir el String con formato (día-mes-año) al formato adecuado de LocalDate para la
+     * Metodo que se encarga de convertir el String con formato (dia-mes-anyo) al formato adecuado de LocalDate para la
      * base de datos.
      * @param date String | Contiene la fecha que se debe guardar en la base de datos.
      * @return LocalDate | Devuelve la fecha con el formato adecuado.
@@ -36,7 +37,7 @@ public class DateConversorService {
     }
 
     /**
-     * Método que se encarga de convertir el String con formato (año-mes-día) al formato adecuado de LocalDate para la
+     * Metodo que se encarga de convertir el String con formato (anyo-mes-dia) al formato adecuado de LocalDate para la
      * base de datos.
      * @param date String | Contiene la fecha que se debe guardar en la base de datos.
      * @return LocalDate | Devuelve la fecha con el formato adecuado.
@@ -55,7 +56,7 @@ public class DateConversorService {
     }
 
     /**
-     * Añade los números faltantes a una fecha.
+     * Agrega los numeros faltantes a una fecha.
      * @param dateInp String | Fecha entrante que puede estar incompleta.
      * @return String | Fecha completa.
      */

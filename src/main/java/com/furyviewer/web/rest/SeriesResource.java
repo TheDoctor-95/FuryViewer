@@ -114,11 +114,9 @@ public class SeriesResource {
     }
 
     /**
-     *
-     * Find series by name (commit obligado.... Pau e Ibra son malos....)
-     *
-     * @param name
-     * @return
+     * Buscar series por titulo.
+     * @param name String | Titulo de la serie que se busca.
+     * @return ResponseUtil | Series que coinciden con el titulo buscado.
      */
     @GetMapping("/seriesByName/{name}")
     @Timed
@@ -149,15 +147,25 @@ public class SeriesResource {
         return seriesOmdbDTOService.getSeries("American Horror Story");
     }
 
+    /**
+     * Importar series a partir del titulo.
+     * @param name String | Titulo de la serie a buscar.
+     * @return ResponseEntity | Series que coincide con el titulo buscado.
+     */
     @GetMapping("/importSeriesByName/{name}")
     @Timed
     @Transactional
     public ResponseEntity<Series> importSeriesByName(@PathVariable String name) {
         log.debug("REST request to get Series by name", name);
-        Series movie = seriesOmdbDTOService.importSeries(name);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
+        Series series = seriesOmdbDTOService.importSeries(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(series));
     }
 
+    /**
+     * Llama a la busqueda inteligente de Series.
+     * @param criteria SeriesBCriteria | Objeto con los diferentes campos para buscar Series.
+     * @return ResponseEntity | series que coinciden con los parametros buscados.
+     */
     @GetMapping("/series-s")
     @Timed
     public ResponseEntity<List<Series>> getAllSeriesS(SeriesBCriteria criteria) {

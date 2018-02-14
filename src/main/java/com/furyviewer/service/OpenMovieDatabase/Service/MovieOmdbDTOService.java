@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Servicio encargado de recuperar información de una Movie desde MovieOmdbDTORepository y la convierte al
+ * Servicio encargado de recuperar informacion de una Movie desde MovieOmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author TheDoctor-95
  * @see com.furyviewer.service.OpenMovieDatabase.Repository.MovieOmdbDTORepository
@@ -29,7 +29,7 @@ public class MovieOmdbDTOService {
     private static final String apikey = "eb62550d";
 
     /**
-     * Se establece conexión para poder hacer peticiones a la api.
+     * Se establece conexion para poder hacer peticiones a la api.
      */
     private static MovieOmdbDTORepository apiService =
         MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
@@ -62,9 +62,9 @@ public class MovieOmdbDTOService {
     private TrailerTmdbDTOService trailerTmdbDTOService;
 
     /**
-     * Devuelve la información de una movie en el formato proporcionado por OpenMovieDataBase.
-     * @param title String | Título de la movie.
-     * @return MovieOmdbDTO | Información con el formato proporcionado por la API.
+     * Devuelve la informacion de una movie en el formato proporcionado por OpenMovieDataBase.
+     * @param title String | Titulo de la movie.
+     * @return MovieOmdbDTO | Informacion con el formato proporcionado por la API.
      */
     public MovieOmdbDTO getMovieByName(String title) {
         MovieOmdbDTO movie = new MovieOmdbDTO();
@@ -82,9 +82,9 @@ public class MovieOmdbDTOService {
     }
 
     /**
-     * Devuelve una Movie existente en la base de datos o en caso de no existir hace una petición a la api.
-     * @param title String | Título de la movie.
-     * @return Movie | Contiene la información de una movie en el formato FuryViewer.
+     * Devuelve una Movie existente en la base de datos o en caso de no existir hace una peticion a la api.
+     * @param title String | Titulo de la movie.
+     * @return Movie | Contiene la informacion de una movie en el formato FuryViewer.
      */
     @Transactional
     public Movie importMovieByName(String title){
@@ -106,9 +106,9 @@ public class MovieOmdbDTOService {
     }
 
     /**
-     * Convierte la información de una movie de OMDB al formato de información de FuryViewer.
-     * @param movieOmdbDTO MovieOmdbDTO | Información de la Movie propocionada por la api.
-     * @return Movie | Contiene la información de una movie en el formato FuryViewer.
+     * Convierte la informacion de una movie de OMDB al formato de FuryViewer.
+     * @param movieOmdbDTO MovieOmdbDTO | Informacion de la Movie propocionada por la api.
+     * @return Movie | Contiene la informacion de una movie en el formato FuryViewer.
      */
     public Movie importMovie(MovieOmdbDTO movieOmdbDTO){
         Movie m = new Movie();

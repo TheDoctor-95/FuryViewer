@@ -37,7 +37,7 @@ public class MovieServiceSmart {
 
     /**
      * Devuelve todas las Movie de la base de datos.
-     * @return List<Movie> | Lista con todas las Movie.
+     * @return List | Lista con todas las Movie.
      */
     @Transactional(readOnly = true)
     public List<Movie> findAll() {
@@ -46,9 +46,9 @@ public class MovieServiceSmart {
     }
 
     /**
-     * Devuelve la información de una Movie a partir de su id.
+     * Devuelve la informacion de una Movie a partir de su id.
      * @param id Long | id de la Movie que se quiere buscar.
-     * @return Movie | Información de la Movie buscada.
+     * @return Movie | Informacion de la Movie buscada.
      */
     @Transactional(readOnly = true)
     public Movie findOne(Long id) {

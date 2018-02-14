@@ -11,7 +11,8 @@ import java.util.Optional;
 /**
  * Servicio que se encarga de devolver una Company de la base de datos o en caso de no existir delega en
  * CompanyTmdbDTOService para crearla.
- * @author IFriedkin & TheDoctor-95
+ * @author IFriedkin
+ * @author TheDoctor-95
  * @see com.furyviewer.service.TheMovieDB.Service.CompanyTmdbDTOService
  */
 @Service
@@ -26,10 +27,10 @@ public class CompanyService {
     private CompanyTmdbDTOService companyTmdbDTOService;
 
     /**
-     * Método que se encarga de devolver una Company, ya sea encontrando una en la DB o creando una nueva con el
-     * parámetro que le llega.
+     * Devuelve una Company, ya sea encontrando una en la base de datos o creando una nueva con el parametro
+     * que le llega.
      * @param name String | Nombre de la company.
-     * @return Company | Objeto que contiene la información de la company.
+     * @return Company | Objeto que contiene la informacion de la company.
      */
     public Company importCompany(String name) {
         Company c = null;

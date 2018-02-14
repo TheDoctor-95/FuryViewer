@@ -13,7 +13,7 @@ import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.service.filter.LocalDateFilter;
 
 /**
- * ArtistBCriteria recibe todas las opciones de filtrado para realizar la búsqueda inteligente desde ArtistBResource.
+ * ArtistBCriteria recibe todas las opciones de filtrado para realizar la busqueda inteligente desde ArtistBResource.
  * @author Whoger
  */
 public class ArtistBCriteria implements Serializable {
