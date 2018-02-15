@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Gestiona la lista de los resultados entrantes desde TheMovieDataBase.
+ * Gestiona la lista de los resultados entrantes de series desde TheMovieDataBase.
  */
 public class SimpleSeriesTmdbDTO {
     /**
