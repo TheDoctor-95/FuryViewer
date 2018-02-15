@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+
 
 /**
  * Servicio que se encarga de devolver un Artist de la base de datos o en caso de no existir delega en
@@ -148,7 +148,17 @@ public class ArtistService {
         return artistRepository.findAll().stream()
             .filter(artist -> artist.getEpisodes().stream()
                 .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
-            .distinct()
+                .sorted((a1, a2) -> {
+                    long numEpisodes1 = a1.getEpisodes().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
+                    .count();
+                    long numEpisodes2 = a2.getEpisodes().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
+                        .count();
+
+                    if(numEpisodes1>numEpisodes2) return -1;
+                    else if (numEpisodes1<numEpisodes2) return 1;
+                    else return 0;
+
+                } )
             .collect(Collectors.toList());
     }
 }
