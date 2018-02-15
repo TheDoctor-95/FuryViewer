@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Servicio que se encarga de guardar en la base de datos las notas de páginas externas tanto de Movie como de Series
+ * Servicio que se encarga de guardar en la base de datos las notas de paginas externas tanto de Movie como de Series
  * proporcionadas por la api OpenMovieDatabase.
  * @author TheDoctor-95
  */
@@ -22,8 +22,8 @@ public class MarksService {
     SocialRepository socialRepository;
 
     /**
-     * Convierte la información de los votos de páginas externas proporcionados por la api al formato FuryViewer.
-     * @param ratings List<Rating> | Lista con as diferentes votaciones proporcionadas por la api.
+     * Convierte la informacion de los votos de paginas externas proporcionados por la api al formato FuryViewer.
+     * @param ratings List | Lista con as diferentes votaciones proporcionadas por la api.
      * @param ss Series | Series de la cual se quiere guardar las votaciones.
      */
     public void markTransformationSeries(List<Rating> ratings, Series ss) {
@@ -43,10 +43,10 @@ public class MarksService {
     }
 
     /**
-     * Devuelve la puntuación dependiendo de la página externa.
-     * @param source String | Nombre de la página externa a la que pertenece la votación.
-     * @param value String | Votación en el formato de la página externa.
-     * @return String | Votación convertida a una media sobre 10.
+     * Devuelve la puntuacion dependiendo de la pagina externa.
+     * @param source String | Nombre de la pagina externa a la que pertenece la votacion.
+     * @param value String | Votacion en el formato de la pagina externa.
+     * @return String | Votacion convertida a una media sobre 10.
      */
     private String markTranformation(String source, String value) {
         switch (source.toLowerCase()) {
@@ -62,8 +62,8 @@ public class MarksService {
     }
 
     /**
-     * Convierte la información de los votos de páginas externas proporcionados por la api al formato FuryViewer.
-     * @param ratings List<Rating> | Lista con as diferentes votaciones proporcionadas por la api.
+     * Convierte la informacion de los votos de paginas externas proporcionados por la api al formato FuryViewer.
+     * @param ratings List | Lista con as diferentes votaciones proporcionadas por la api.
      * @param m Movie | Movie de la cual se quiere guardar las votaciones.
      */
     public void markTransformationMovie(List<Rating> ratings, Movie m) {
@@ -83,9 +83,9 @@ public class MarksService {
     }
 
     /**
-     * Devuelve la votación sobre 10 de IMDB.
-     * @param mark String | Votación en el formato INMDB.
-     * @return String | Votación sobre 10.
+     * Devuelve la votacion sobre 10 de IMDB.
+     * @param mark String | Votacion en el formato INMDB.
+     * @return String | Votacion sobre 10.
      */
     public String tranformIMDB(String mark) {
         String markTransform = mark.split("/")[0];
@@ -93,9 +93,9 @@ public class MarksService {
     }
 
     /**
-     * Devuelve la votación sobre 10 de Rotten Tomatoes.
-     * @param mark String | Votación en el formato Rotten Tomatoes.
-     * @return String | Votación sobre 10.
+     * Devuelve la votacion sobre 10 de Rotten Tomatoes.
+     * @param mark String | Votacion en el formato Rotten Tomatoes.
+     * @return String | Votacion sobre 10.
      */
     public String tranformRT(String mark) {
         String markTransform = mark.split("%")[0];
@@ -104,9 +104,9 @@ public class MarksService {
     }
 
     /**
-     * Devuelve la votación sobre 10 de MetaCritic.
-     * @param mark String | Votación en el formato Metacritic.
-     * @return String | Votación sobre 10.
+     * Devuelve la votacion sobre 10 de MetaCritic.
+     * @param mark String | Votacion en el formato Metacritic.
+     * @return String | Votacion sobre 10.
      */
     public String tranformMC(String mark) {
         String markTransform = mark.split("/")[0];

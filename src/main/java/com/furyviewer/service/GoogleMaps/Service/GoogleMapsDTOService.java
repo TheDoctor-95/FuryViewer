@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Servicio encargado de recuperar información de una Country desde GoogleMapsDTORepository y la convierte al
+ * Servicio encargado de recuperar informacion de una Country desde GoogleMapsDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
  * @see com.furyviewer.service.GoogleMaps.Repository.GoogleMapsDTORepository
@@ -27,7 +27,7 @@ public class GoogleMapsDTOService {
     private final String apikey = "AIzaSyC69nm386VRBeeAsHR9ipzfleLPcrcP6Xk";
 
     /**
-     * Se establece conexión para poder hacer peticiones a la api.
+     * Se establece conexion para poder hacer peticiones a la api.
      */
     private final GoogleMapsDTORepository apiGoogleMaps =
         GoogleMapsDTORepository.retrofit.create(GoogleMapsDTORepository.class);
@@ -36,9 +36,9 @@ public class GoogleMapsDTOService {
     private CountryRepository countryRepository;
 
     /**
-     * Método encargado de recuperar la información de un Country con el formato de la api de GoogleMaps.
+     * Recupera la informacion de un Country con el formato de la api de GoogleMaps.
      * @param address String | Country a buscar.
-     * @return GoogleMapsDTO | Informafión de country en el formato de GoogleMaps
+     * @return GoogleMapsDTO | Informacion de country en el formato de GoogleMaps
      */
     public GoogleMapsDTO getCoordinates (String address) {
 
@@ -57,9 +57,9 @@ public class GoogleMapsDTOService {
     }
 
     /**
-     * Método encargado de devolver la longitud de una localización.
-     * @param countryName String | Localización a buscar.
-     * @return double | Longitud de la localización.
+     * Devuelve la longitud de una localizacion.
+     * @param countryName String | Localizacion a buscar.
+     * @return double | Longitud de la localizacion.
      */
     public double getLongitude (String countryName){
         GoogleMapsDTO maps = getCoordinates(countryName);
@@ -69,9 +69,9 @@ public class GoogleMapsDTOService {
     }
 
     /**
-     * Método encargado de devolver la latitude de una localización.
-     * @param countryName String | Localización a buscar.
-     * @return double | Latitud de la localización.
+     * Devuelve la latitud de una localizacion.
+     * @param countryName String | Localizacion a buscar.
+     * @return double | Latitud de la localizacion.
      */
     public double getLatitude (String countryName){
         GoogleMapsDTO maps = getCoordinates(countryName);
@@ -81,9 +81,9 @@ public class GoogleMapsDTOService {
     }
 
     /**
-     * Método encargado de devolver el nombre de una Country.
-     * @param countryName String | Localización a buscar.
-     * @return String | Nombre de la Country filtrado a partr de la api de GoogleMaps.
+     * Devuelve el nombre de una Country.
+     * @param countryName String | Localizacion a buscar.
+     * @return String | Nombre de la Country filtrado a partir de la api.
      */
     public String getName (String countryName) {
         GoogleMapsDTO maps = getCoordinates(countryName);
@@ -101,8 +101,8 @@ public class GoogleMapsDTOService {
     }
 
     /**
-     * Se convierte la información de Country proveniente de la api de GoogleMaps al formato de FuryViewer.
-     * @param countryName String | Nombre de la localización.
+     * Se convierte la informacion de Country proveniente de la api de GoogleMaps al formato de FuryViewer.
+     * @param countryName String | Nombre de la localizacion.
      * @return Country | Country en el formato FuryViewer.
      */
     public Country importCountry (String countryName){

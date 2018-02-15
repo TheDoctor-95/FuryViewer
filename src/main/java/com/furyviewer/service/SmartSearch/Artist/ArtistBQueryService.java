@@ -18,7 +18,7 @@ import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.service.dto.Criteria.ArtistBCriteria;
 
 /**
- * ArtistBQueryService se encarga de crear un constructor dinámico de Artist para poder realizar la búsqueda
+ * ArtistBQueryService se encarga de crear un constructor dinamico de Artist para poder realizar la busqueda
  * inteligente.
  * @author Whoger
  */
@@ -36,9 +36,9 @@ public class ArtistBQueryService extends QueryService<Artist> {
     }
 
     /**
-     * Devuelve una lista de Artist con todos los que coinciden con los parametros de búsqueda.
-     * @param criteria ArtistBCriteria | Contiene los filtros por los que se buscará en Artist.
-     * @return List<Artist> | Lista de los Artist encontrados.
+     * Devuelve una lista de Artist con todos los que coinciden con los parametros de busqueda.
+     * @param criteria ArtistBCriteria | Contiene los filtros por los que se buscara en Artist.
+     * @return List | Lista de los Artist encontrados.
      */
     @Transactional(readOnly = true)
     public List<Artist> findByCriteria(ArtistBCriteria criteria) {
@@ -48,10 +48,10 @@ public class ArtistBQueryService extends QueryService<Artist> {
     }
 
     /**
-     * Devuelve una lista paginada de Artist con todos los que coinciden con los parametros de búsqueda.
-     * @param criteria ArtistBCriteria | Contiene los filtros por los que se buscará en Artist.
+     * Devuelve una lista paginada de Artist con todos los que coinciden con los parametros de busqueda.
+     * @param criteria ArtistBCriteria | Contiene los filtros por los que se buscara en Artist.
      * @param page Pageable | Pagina los datos devueltos.
-     * @return Page<Artist> | Lista paginada de los Artist encontrados.
+     * @return Page | Lista paginada de los Artist encontrados.
      */
     @Transactional(readOnly = true)
     public Page<Artist> findByCriteria(ArtistBCriteria criteria, Pageable page) {
@@ -61,10 +61,10 @@ public class ArtistBQueryService extends QueryService<Artist> {
     }
 
     /**
-     * Convierte ArtistBCriteria a Specifications<Artist> para crear el constructor que servirá para realizar la búsqueda
+     * Convierte ArtistBCriteria a Specifications para crear el constructor que servira para realizar la busqueda
      * inteligente.
-     * @param criteria ArtistBCriteria | Contiene los filtros por los que se buscará en Artist.
-     * @return Specifications<Artist> | Contiene los parámetros de búsqueda.
+     * @param criteria ArtistBCriteria | Contiene los filtros por los que se buscara en Artist.
+     * @return Specifications | Contiene los parametros de búsqueda.
      */
     private Specifications<Artist> createSpecification(ArtistBCriteria criteria) {
         Specifications<Artist> specification = Specifications.where(null);

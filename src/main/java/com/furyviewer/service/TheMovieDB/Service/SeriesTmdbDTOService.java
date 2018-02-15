@@ -10,7 +10,7 @@ import retrofit2.Response;
 import java.io.IOException;
 
 /**
- * Servicio encargado de recuperar información de una Series desde SeriesTmdbDTORepository.
+ * Servicio encargado de recuperar informacion de una Series desde SeriesTmdbDTORepository.
  * @author IFriedkin
  * @see com.furyviewer.service.TheMovieDB.Repository.SeriesTmdbDTORepository
  */
@@ -22,13 +22,13 @@ public class SeriesTmdbDTOService {
     private final String apikey = "08526181d206d48ab49b3fa0be7ad1bf";
 
     /**
-     * Se establece conexión para poder hacer peticiones a la api.
+     * Se establece conexion para poder hacer peticiones a la api.
      */
     private final SeriesTmdbDTORepository apiTMDB =
         SeriesTmdbDTORepository.retrofit.create(SeriesTmdbDTORepository.class);
 
     /**
-     * Método encargado de devolver el id de la series a partir del nombre de la misma.
+     * Devuelve el id de la series a partir del titulo.
      * @param seriesName String | Series a buscar.
      * @return int | id de la serie de la api TMDB.
      */
@@ -53,7 +53,7 @@ public class SeriesTmdbDTOService {
     }
 
     /**
-     * Método encargado de devolver el nombre de la company a partir del de la series.
+     * Devuelve el nombre de la company a partir del titulo de la series.
      * @param seriesName String | Series a buscar.
      * @return String | Nombre de la company.
      */

@@ -26,7 +26,7 @@ public class CountryService {
     private NAEraserService naEraserService;
 
     /**
-     * Método que se encarga de buscar en la base de datos una Country y en caso de no existir la crea.
+     * Metodo que se encarga de buscar en la base de datos una Country y en caso de no existir la crea.
      * @param countryName String | Nombre de la country devuelto por la api.
      * @return Country | Country creado o encontrado en la base de datos.
      */

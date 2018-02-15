@@ -14,9 +14,10 @@ import retrofit2.Call;
 import java.io.IOException;
 
 /**
- * Servicio encargado de recuperar información de una Season desde SeasonOmdbDTORepository y la convierte al
+ * Servicio encargado de recuperar informacion de una Season desde SeasonOmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
+ * @see com.furyviewer.service.OpenMovieDatabase.Repository.SeasonOmdbDTORepository
  */
 @Service
 public class SeasonOmdbDTOService {
@@ -26,7 +27,7 @@ public class SeasonOmdbDTOService {
     private final String apikey = "eb62550d";
 
     /**
-     * Se establece conexión para poder hacer peticiones a la api.
+     * Se establece conexion para poder hacer peticiones a la api.
      */
     private final SeasonOmdbDTORepository apiService =
         SeasonOmdbDTORepository.retrofit.create(SeasonOmdbDTORepository.class);
@@ -44,11 +45,11 @@ public class SeasonOmdbDTOService {
     private DateConversorService dateConversorService;
 
     /**
-     * Devuelve la información de una season en el formato proporcionado por OpenMovieDataBase.
-     * @param title String | Título de la serie a buscar.
-     * @param seasonNum int | Número de la season a buscar.
-     * @return SeasonOmdbDTO | Información con el formato proporcionado por la API.
-     * @throws IOException
+     * Devuelve la informacion de una season en el formato proporcionado por OpenMovieDataBase.
+     * @param title String | Titulo de la serie a buscar.
+     * @param seasonNum int | Numero de la season a buscar.
+     * @return SeasonOmdbDTO | Informacion con el formato proporcionado por la API.
+     * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la excepcion.
      */
     public SeasonOmdbDTO getSeason(String title, int seasonNum) throws IOException {
         SeasonOmdbDTO season;
@@ -61,9 +62,9 @@ public class SeasonOmdbDTOService {
     }
 
     /**
-     * Convierte la información de una season de OMDB al formato de información de Furyviewer.
-     * @param title String | Título de la serie.
-     * @param totalSeasons int | Número total de seasons de la serie.
+     * Convierte la informacion de una season de OMDB al formato de Furyviewer.
+     * @param title String | Titulo de la serie.
+     * @param totalSeasons int | Numero total de seasons de la serie.
      */
     public void importSeason(String title, int totalSeasons) {
         Series ss = seriesRepository.findByName(title).get();

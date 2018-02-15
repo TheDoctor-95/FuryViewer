@@ -8,16 +8,16 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Repositorio encargado de conectar con la api de OpenMovieDataBase para recuperar la información de Episode.
+ * Repositorio encargado de conectar con la api de OpenMovieDataBase para recuperar la informacion de Movie.
  * @author TheDoctor-95
  * @see com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO
  */
 public interface MovieOmdbDTORepository {
     /**
-     * Devuelve toda la información de una Movie mdevuelta por la api de OpenMovieDataBase.
+     * Devuelve toda la informacion de una Movie proporcionada por la api de OpenMovieDataBase.
      * @param apikey String | Key requerida por la api para poder hacer peticiones.
-     * @param title String | Título de la Movie que se quiere buscar.
-     * @return Call<MovieOmdbDTO> | Contiene toda la información de Movie devuelta por la api.
+     * @param title String | Titulo de la Movie que se quiere buscar.
+     * @return Call | Contiene toda la informacion de Movie devuelta por la api.
      */
     @GET("/?type=movie&plot=full")
     Call<MovieOmdbDTO> getMovie(@Query("apikey") String apikey, @Query("t") String title);

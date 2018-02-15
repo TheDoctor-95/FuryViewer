@@ -16,7 +16,7 @@ import retrofit2.Response;
 import java.io.IOException;
 
 /**
- * Servicio encargado de recuperar información de un Artist desde ArtistTmdbDTORepository y la convierte al
+ * Servicio encargado de recuperar informacion de un Artist desde ArtistTmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
  * @see com.furyviewer.service.TheMovieDB.Repository.ArtistTmdbDTORepository
@@ -34,7 +34,7 @@ public class ArtistTmdbDTOService {
     private final String pathImage = "https://image.tmdb.org/t/p/w500";
 
     /**
-     * Se establece conexión para poder hacer peticiones a la api.
+     * Se establece conexion para poder hacer peticiones a la api.
      */
     private final ArtistTmdbDTORepository apiTMDB =
         ArtistTmdbDTORepository.retrofit.create(ArtistTmdbDTORepository.class);
@@ -49,10 +49,10 @@ public class ArtistTmdbDTOService {
     private CountryService countryService;
 
     /**
-     * Método que se encarga de pedir a la api de TheMovieDB la información básica de un actor.
-     * @param artistName String | Nombre del actor a buscar.
-     * @return SimpleArtistTmdbDTO | Información en el formato proporcionado por la API.
-     * @throws IOException En caso de que no se pueda hacer la petición a la api se lanza la excepción.
+     * Metodo que se encarga de pedir a la api de TheMovieDB la informacion basica de un Artist.
+     * @param artistName String | Nombre del Artist a buscar.
+     * @return SimpleArtistTmdbDTO | Informacion en el formato proporcionado por la API.
+     * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la excepcion.
      */
     public SimpleArtistTmdbDTO getArtist(String artistName) throws IOException {
         SimpleArtistTmdbDTO artist;
@@ -72,10 +72,10 @@ public class ArtistTmdbDTOService {
     }
 
     /**
-     * Método que se encarga de devolver el id del artista en la API de TMDB.
+     * Metodo que se encarga de devolver el id del artista en la API de TMDB.
      * @param artistName String | Nombre del artista a buscar.
      * @return int | El id interno de la api de TMDB.
-     * @throws IOException En caso de que no se pueda hacer la petición a la api se lanza la excepción.
+     * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la excepcion.
      */
     public int getID(String artistName) throws IOException {
         int id;
@@ -88,10 +88,10 @@ public class ArtistTmdbDTOService {
     }
 
     /**
-     * Método que se encarga de recuperar toda la información del artist de la api de TMDB.
+     * Metodo que se encarga de recuperar toda la informacion del artist de la api de TMDB.
      * @param artistName String | Nombre del artista a buscar.
      * @return CompleteArtistTmdbDTO | Información en el formato proporcionado por la API.
-     * @throws IOException En caso de que no se pueda hacer la petición a la api se lanza la excepción.
+     * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la excepcion.
      */
     public CompleteArtistTmdbDTO getArtistComplete(String artistName) throws IOException {
         CompleteArtistTmdbDTO artist;
@@ -111,10 +111,10 @@ public class ArtistTmdbDTOService {
     }
 
     /**
-     * Convierte la información de un artist de TMDB al formato de FuryViewer.
+     * Convierte la informacion de un Artist de TMDB al formato de FuryViewer.
      * @param artistName String | Nombre del artista a buscar.
      * @param artistType ArtistType | Tipo del artista.
-     * @return Artist | Contiene la información de un artist en el formato FuryViewer.
+     * @return Artist | Contiene la informacion de un artist en el formato FuryViewer.
      */
     public Artist importArtist(String artistName, ArtistType artistType) {
         Artist artist = new Artist();

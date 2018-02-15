@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Servicio encargado de recuperar información de una Series desde SeriesOmdbDTORepository y la convierte al
+ * Servicio encargado de recuperar informacion de una Series desde SeriesOmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
  * @see com.furyviewer.service.OpenMovieDatabase.Repository.SeriesOmdbDTORepository
@@ -30,7 +30,7 @@ public class SeriesOmdbDTOService {
     private final String apikey = "eb62550d";
 
     /**
-     * Se establece conexión para poder hacer peticiones a la api.
+     * Se establece conexion para poder hacer peticiones a la api.
      */
     private static SeriesOmdbDTORepository apiService =
         SeriesOmdbDTORepository.retrofit.create(SeriesOmdbDTORepository.class);
@@ -66,9 +66,9 @@ public class SeriesOmdbDTOService {
     private TrailerTmdbDTOService trailerTmdbDTOService;
 
     /**
-     * Devuelve la información de una serie en el formato proporcionado por OpenMovieDataBase.
-     * @param title String | Título de la serie a buscar.
-     * @return SeriesOmdbDTO | Información con el formato proporcionado por la API.
+     * Devuelve la informacion de una serie en el formato proporcionado por OpenMovieDataBase.
+     * @param title String | Titulo de la serie a buscar.
+     * @return SeriesOmdbDTO | Informacion con el formato proporcionado por la API.
      */
     public SeriesOmdbDTO getSeries(String title) {
         SeriesOmdbDTO series = new SeriesOmdbDTO();
@@ -86,9 +86,9 @@ public class SeriesOmdbDTOService {
     }
 
     /**
-     * Convierte la información de una serie de OMDB al formato de información de FuryViewer.
-     * @param title String | Título de la serie.
-     * @return Series | Contiene la información de una serie en el formato FuryViewer.
+     * Convierte la informacion de una serie de OMDB al formato de FuryViewer.
+     * @param title String | Titulo de la serie.
+     * @return Series | Contiene la informacion de una serie en el formato FuryViewer.
      */
     @Transactional
     public Series importSeries(String title){

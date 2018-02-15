@@ -24,9 +24,9 @@ public class GenreService {
     private NAEraserService naEraserService;
 
     /**
-     * Método que se encarga de convertir un String en los objetos de la clase Genre necesarios.
+     * Metodo que se encarga de convertir un String en los objetos de la clase Genre necesarios.
      * @param genreList String | Contiene el nombre de los genre.
-     * @return Set<Genre> | Set que contiene la información de los genres.
+     * @return Set | Set que contiene la informacion de los genres.
      */
     public Set<Genre> importGenre(String genreList){
         Set<Genre> genreListArray = new HashSet<>();

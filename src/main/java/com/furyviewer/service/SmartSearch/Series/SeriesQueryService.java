@@ -18,7 +18,7 @@ import java.util.List;
 import static com.furyviewer.domain.Series_.*;
 
 /**
- * SeriesQueryService se encarga de crear un constructor dinámico de Series para poder realizar la búsqueda
+ * SeriesQueryService se encarga de crear un constructor dinamico de Series para poder realizar la busqueda
  * inteligente.
  * @author Whoger
  */
@@ -36,9 +36,9 @@ public class SeriesQueryService extends QueryService<Series> {
     }
 
     /**
-     * Devuelve una lista de Series con todas las que coinciden con los parametros de búsqueda.
-     * @param criteria SeriesBCriteria | Contiene los filtros por los que se buscará en Series.
-     * @return List<Series> | Lista de las Series encontradas.
+     * Devuelve una lista de Series con todas las que coinciden con los parametros de busqueda.
+     * @param criteria SeriesBCriteria | Contiene los filtros por los que se buscara en Series.
+     * @return List | Lista de las Series encontradas.
      */
     @Transactional(readOnly = true)
     public List<Series> findByCriteria(SeriesBCriteria criteria) {
@@ -48,10 +48,10 @@ public class SeriesQueryService extends QueryService<Series> {
     }
 
     /**
-     * Devuelve una lista paginada de Series con todas las que coinciden con los parametros de búsqueda.
-     * @param criteria SeriesBCriteria | Contiene los filtros por los que se buscará en Series.
+     * Devuelve una lista paginada de Series con todas las que coinciden con los parametros de busqueda.
+     * @param criteria SeriesBCriteria | Contiene los filtros por los que se buscara en Series.
      * @param page Pageable | Pagina los datos devueltos.
-     * @return Page<Series> | Lista paginada de las Series encontradas.
+     * @return Page | Lista paginada de las Series encontradas.
      */
     @Transactional(readOnly = true)
     public Page<Series> findByCriteria(SeriesBCriteria criteria, Pageable page) {
@@ -61,10 +61,10 @@ public class SeriesQueryService extends QueryService<Series> {
     }
 
     /**
-     * Convierte SeriesBCriteria a Specifications<Series> para crear el constructor que servirá para realizar la
-     * búsqueda inteligente.
-     * @param criteria SeriesBCriteria | Contiene los filtros por los que se buscará en Series.
-     * @return Specifications<Series> | Contiene los parámetros de búsqueda.
+     * Convierte SeriesBCriteria a Specifications para crear el constructor que servira para realizar la
+     * busqueda inteligente.
+     * @param criteria SeriesBCriteria | Contiene los filtros por los que se buscara en Series.
+     * @return Specifications | Contiene los parametros de busqueda.
      */
     private Specifications<Series> createSpecification(SeriesBCriteria criteria) {
         Specifications<Series> specification = Specifications.where(null);

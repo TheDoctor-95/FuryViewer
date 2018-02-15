@@ -37,7 +37,7 @@ public class SeriesServiceSmart {
 
     /**
      * Devuelve todas las Series de la base de datos.
-     * @return List<series> | Lista con todas las Series.
+     * @return List | Lista con todas las Series.
      */
     @Transactional(readOnly = true)
     public List<Series> findAll() {
@@ -46,9 +46,9 @@ public class SeriesServiceSmart {
     }
 
     /**
-     * Devuelve la información de una Series a partir de su id.
+     * Devuelve la informacion de una Series a partir de su id.
      * @param id Long | id de la Series que se quiere buscar.
-     * @return Series | Información de la Series buscada.
+     * @return Series | Informacion de la Series buscada.
      */
     @Transactional(readOnly = true)
     public Series findOne(Long id) {

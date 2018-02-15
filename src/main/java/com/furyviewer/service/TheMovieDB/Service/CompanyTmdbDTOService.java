@@ -14,7 +14,7 @@ import retrofit2.Response;
 import java.io.IOException;
 
 /**
- * Servicio encargado de recuperar información de una Company desde CompanyTmdbDTORepository y la convierte al
+ * Servicio encargado de recuperar informacion de una Company desde CompanyTmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
  * @see com.furyviewer.service.TheMovieDB.Repository.CompanyTmdbDTORepository
@@ -32,7 +32,7 @@ public class CompanyTmdbDTOService {
     private final String pathImage = "https://image.tmdb.org/t/p/w500";
 
     /**
-     * Se establece conexión para poder hacer peticiones a la api.
+     * Se establece conexion para poder hacer peticiones a la api.
      */
     private final CompanyTmdbDTORepository apiTMDB =
         CompanyTmdbDTORepository.retrofit.create(CompanyTmdbDTORepository.class);
@@ -69,9 +69,9 @@ public class CompanyTmdbDTOService {
     }
 
     /**
-     * Método encargado de convertir la company del formato de TMDB al formato FuryViewer.
+     * Metodo encargado de convertir la company del formato de TMDB al formato FuryViewer.
      * @param companyName String | Nombre de la company a buscar.
-     * @return Company | company en el formato FuryViewer.
+     * @return Company | Company en el formato FuryViewer.
      */
     public Company importCompany(String companyName) {
         Company company = new Company();

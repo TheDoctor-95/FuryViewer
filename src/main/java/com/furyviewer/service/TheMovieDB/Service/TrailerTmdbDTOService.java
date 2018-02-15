@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Servicio encargado de recuperar información de un Trailer desde TrailerTmdbDTORepository y la convierte al
+ * Servicio encargado de recuperar informacion de un Trailer desde TrailerTmdbDTORepository y la convierte al
  * formato FuryViewer.
  * @author IFriedkin
  * @see com.furyviewer.service.TheMovieDB.Repository.TrailerTmdbDTORepository
@@ -34,7 +34,7 @@ public class TrailerTmdbDTOService {
     private final String pathVideo = "https://www.youtube.com/watch?v=";
 
     /**
-     * Se establece conexión para poder hacer peticiones a la api.
+     * Se establece conexion para poder hacer peticiones a la api.
      */
     private final TrailerTmdbDTORepository apiTMDB =
         TrailerTmdbDTORepository.retrofit.create(TrailerTmdbDTORepository.class);

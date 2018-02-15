@@ -19,7 +19,7 @@ import com.furyviewer.service.dto.Criteria.MovieBCriteria;
 
 
 /**
- * MovieQueryService se encarga de crear un constructor dinámico de Movie para poder realizar la búsqueda inteligente.
+ * MovieQueryService se encarga de crear un constructor dinamico de Movie para poder realizar la busqueda inteligente.
  * @author Whoger
  */
 @Service
@@ -36,9 +36,9 @@ public class MovieQueryService extends QueryService<Movie> {
     }
 
     /**
-     * Devuelve una lista de Movie con todas las que coinciden con los parametros de búsqueda.
-     * @param criteria MovieBCriteria | Contiene los filtros por los que se buscará en Movie.
-     * @return List<Movie> | Lista de las Movie encontradas.
+     * Devuelve una lista de Movie con todas las que coinciden con los parametros de busqueda.
+     * @param criteria MovieBCriteria | Contiene los filtros por los que se buscara en Movie.
+     * @return List | Lista de las Movie encontradas.
      */
     @Transactional(readOnly = true)
     public List<Movie> findByCriteria(MovieBCriteria criteria) {
@@ -48,10 +48,10 @@ public class MovieQueryService extends QueryService<Movie> {
     }
 
     /**
-     * Devuelve una lista paginada de Movie con todas las que coinciden con los parametros de búsqueda.
-     * @param criteria MovieBCriteria | Contiene los filtros por los que se buscará en Movie.
+     * Devuelve una lista paginada de Movie con todas las que coinciden con los parametros de busqueda.
+     * @param criteria MovieBCriteria | Contiene los filtros por los que se buscara en Movie.
      * @param page Pageable | Pagina los datos devueltos.
-     * @return Page<Movie> | Lista paginada de las Movie encontradas.
+     * @return Page | Lista paginada de las Movie encontradas.
      */
     @Transactional(readOnly = true)
     public Page<Movie> findByCriteria(MovieBCriteria criteria, Pageable page) {
@@ -61,10 +61,10 @@ public class MovieQueryService extends QueryService<Movie> {
     }
 
     /**
-     * Convierte MovieBCriteria a Specifications<Movie> para crear el constructor que servirá para realizar la búsqueda
+     * Convierte MovieBCriteria a Specifications para crear el constructor que servira para realizar la busqueda
      * inteligente.
-     * @param criteria MovieBCriteria | Contiene los filtros por los que se buscará en Movie.
-     * @return Specifications<Movie> | Contiene los parámetros de búsqueda.
+     * @param criteria MovieBCriteria | Contiene los filtros por los que se buscara en Movie.
+     * @return Specifications | Contiene los parametros de busqueda.
      */
     private Specifications<Movie> createSpecification(MovieBCriteria criteria) {
         Specifications<Movie> specification = Specifications.where(null);

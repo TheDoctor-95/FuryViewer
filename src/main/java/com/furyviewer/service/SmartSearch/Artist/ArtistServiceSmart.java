@@ -37,7 +37,7 @@ public class ArtistServiceSmart {
 
     /**
      * Devuelve todos los Artist de la base de datos.
-     * @return List<Artist> | Lista con todos los Artist.
+     * @return List | Lista con todos los Artist.
      */
     @Transactional(readOnly = true)
     public List<Artist> findAll() {
@@ -46,9 +46,9 @@ public class ArtistServiceSmart {
     }
 
     /**
-     * Devuelve la información de un Artist a partir de su id.
+     * Devuelve la informacion de un Artist a partir de su id.
      * @param id Long | id del Artist que se quiere buscar.
-     * @return Artist | Información del Artist buscado.
+     * @return Artist | Informacion del Artist buscado.
      */
     @Transactional(readOnly = true)
     public Artist findOne(Long id) {

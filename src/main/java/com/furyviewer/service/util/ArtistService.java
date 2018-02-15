@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
 /**
  * Servicio que se encarga de devolver un Artist de la base de datos o en caso de no existir delega en
  * ArtistTmdbDTOService para crearla.
- * @author IFriedkin & TheDoctor-95
+ * @author IFriedkin
+ * @author TheDoctor-95
  * @see com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService
  */
 @Service
@@ -37,10 +38,10 @@ public class ArtistService {
     private ArtistTmdbDTOService artistTmdbDTOService;
 
     /**
-     * Método que se encarga de convertir un String en los objetos de la clase Artist necesarios que contiene su nombre
+     * Metodo que se encarga de convertir un String en los objetos de la clase Artist necesarios que contiene su nombre
      * y main_actor como tipo de artista.
      * @param actorsListStr String | Contiene el nombre de los artistas.
-     * @return Set<Artist> | Set que contiene la información de los artistas.
+     * @return Set | Set que contiene la informacion de los artistas.
      */
     public Set<Artist> importActors(String actorsListStr){
         Set<Artist> artists = new HashSet<>();
@@ -74,10 +75,10 @@ public class ArtistService {
     }
 
     /**
-     * Método que se encarga de convertir un String en un objeto de la clase Artist que contiene su nombre y
+     * Metodo que se encarga de convertir un String en un objeto de la clase Artist que contiene su nombre y
      * director como tipo de artista.
      * @param director String | Contiene el nombre del artista.
-     * @return Artist | Objeto que contiene la información del artista.
+     * @return Artist | Objeto que contiene la informacion del artista.
      */
     public Artist importDirector(String director){
         Artist artist = null;
@@ -106,10 +107,10 @@ public class ArtistService {
     }
 
     /**
-     * Método que se encarga de convertir un String en un objeto de la clase Artist que contiene su nombre y
+     * Metodo que se encarga de convertir un String en un objeto de la clase Artist que contiene su nombre y
      * scripwriter como tipo de artista.
      * @param scripwriter String | Contiene el nombre del artista.
-     * @return Artist | Objeto que contiene la información del artista.
+     * @return Artist | Objeto que contiene la informacion del artista.
      */
     public Artist importScripwriter(String scripwriter){
         Artist artist = null;
@@ -140,7 +141,7 @@ public class ArtistService {
     /**
      * Devuelve todos los Artist de una Series a partir del id.
      * @param serieID Long | id de la Series.
-     * @returnn List<Artist> | List que contiene la información de todos los Artist.
+     * @return List | List que contiene la informacion de todos los Artist.
      */
     @Transactional
     public List<Artist> findBySerieId(Long serieID){

@@ -16,7 +16,7 @@ import io.github.jhipster.service.filter.LocalDateFilter;
 
 
 /**
- * SeriesBCriteria recibe todas las opciones de filtrado para realizar la búsqueda inteligente desde SeriesResource.
+ * SeriesBCriteria recibe todas las opciones de filtrado para realizar la busqueda inteligente desde SeriesResource.
  * @author Whoger
  */
 public class SeriesBCriteria implements Serializable {

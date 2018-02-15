@@ -8,17 +8,17 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- * Repositorio encargado de conectar con la api de GoogleMapsGeocoding para recuperar la información de una
- * localización.
+ * Repositorio encargado de conectar con la api de GoogleMapsGeocoding para recuperar la informacion de una
+ * localizacion.
  * @author IFriedkin
  * @see com.furyviewer.service.dto.GoogleMaps.GoogleMapsDTO
  */
 public interface GoogleMapsDTORepository {
     /**
-     * Devuelve las coordenadas e información muy básica en inglés de una localización gracias a GoogleMapsGeocodingAPI.
-     * @param address String | Localización que se quiere buscar.
-     * @param apikey String | Key requerida por la api para ppoder hacer peticiones.
-     * @return Call<GoogleMaps> | Contiene la información de la localización devuelta por la api.
+     * Devuelve las coordenadas e informacion muy basica en ingles de una localizacion gracias a GoogleMapsGeocodingAPI.
+     * @param address String | Localizacion que se quiere buscar.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @return Call | Contiene la información de la localizacion devuelta por la api.
      */
     @GET("/maps/api/geocode/json?language=en")
     Call<GoogleMapsDTO> getCoordinates(@Query("address") String address, @Query("key") String apikey);
