@@ -4,95 +4,127 @@ package com.furyviewer.service.dto.TheMovieDB.Trailer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Gestiona la informacion de cada trailer por separado.
+ */
 public class Result {
-
+    /**
+     * id interno de la api para reconocer el trailer.
+     */
     @SerializedName("id")
     @Expose
     private String id;
+
+    /**
+     * iso para reconocer el idioma en el que esta grabado el trailer.
+     */
     @SerializedName("iso_639_1")
     @Expose
     private String iso6391;
+
+    /**
+     * iso para reconocer la region del idioma en el que esta grabado el trailer.
+     */
     @SerializedName("iso_3166_1")
     @Expose
     private String iso31661;
+
+    /**
+     * Path del trailer.
+     */
     @SerializedName("key")
     @Expose
     private String key;
+
+    /**
+     * Titulo del trailer.
+     */
     @SerializedName("name")
     @Expose
     private String name;
+
+    /**
+     * Nombre de la plataforma en la que esta el trailer.
+     */
     @SerializedName("site")
     @Expose
     private String site;
+
+    /**
+     * Resolucion del trailer.
+     */
     @SerializedName("size")
     @Expose
     private Integer size;
+
+    /**
+     * Tipo del trailer.
+     */
     @SerializedName("type")
     @Expose
     private String type;
 
+    /**
+     * Devuelve el id del trailer.
+     * @return String | id del trailer.
+     */
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    /**
+     * Devuelve el iso de idioma del trailer.
+     * @return String | iso de idioma.
+     */
     public String getIso6391() {
         return iso6391;
     }
 
-    public void setIso6391(String iso6391) {
-        this.iso6391 = iso6391;
-    }
-
+    /**
+     * Devuelve el iso de region del trailer.
+     * @return String | iso de region.
+     */
     public String getIso31661() {
         return iso31661;
     }
 
-    public void setIso31661(String iso31661) {
-        this.iso31661 = iso31661;
-    }
-
+    /**
+     * Devuelve el Path del trailer.
+     * @return String | Path del trailer.
+     */
     public String getKey() {
         return key;
     }
 
-    public void setKey(String key) {
-        this.key = key;
-    }
-
+    /**
+     * Devuelve el titulo del trailer.
+     * @return String | Titulo del trailer.
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    /**
+     * Devuelve el host del trailer.
+     * @return String | Host del trailer.
+     */
     public String getSite() {
         return site;
     }
 
-    public void setSite(String site) {
-        this.site = site;
-    }
-
+    /**
+     * Devuelve la resolucion del trailer.
+     * @return Integer | Resolucion del trailer.
+     */
     public Integer getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
+    /**
+     * Devuelve el tipo del trailer.
+     * @return String | tipo del trailer.
+     */
     public String getType() {
         return type;
     }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
 }
