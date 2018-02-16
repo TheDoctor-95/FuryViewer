@@ -19,12 +19,14 @@ import java.util.stream.Collectors;
 /**
  * Servicio que se encarga de devolver un Artist de la base de datos o en caso de no existir delega en
  * ArtistTmdbDTOService para crearla.
+ *
  * @author IFriedkin
  * @author TheDoctor-95
  * @see com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService
  */
 @Service
 public class ArtistService {
+
     @Autowired
     private ArtistRepository artistRepository;
 
@@ -40,10 +42,11 @@ public class ArtistService {
     /**
      * Metodo que se encarga de convertir un String en los objetos de la clase Artist necesarios que contiene su nombre
      * y main_actor como tipo de artista.
+     *
      * @param actorsListStr String | Contiene el nombre de los artistas.
      * @return Set | Set que contiene la informacion de los artistas.
      */
-    public Set<Artist> importActors(String actorsListStr){
+    public Set<Artist> importActors(String actorsListStr) {
         Set<Artist> artists = new HashSet<>();
 
         if (naEraserService.eraserNA(actorsListStr) != null) {
@@ -65,7 +68,7 @@ public class ArtistService {
 
                 } else {
                     //Se crea un artista desde cero.
-                    artist = artistTmdbDTOService.importArtist(actorStr,atMainActor);
+                    artist = artistTmdbDTOService.importArtist(actorStr, atMainActor);
                 }
 
                 artists.add(artist);
@@ -74,13 +77,15 @@ public class ArtistService {
         return artists;
     }
 
+
     /**
      * Metodo que se encarga de convertir un String en un objeto de la clase Artist que contiene su nombre y
      * director como tipo de artista.
+     *
      * @param director String | Contiene el nombre del artista.
      * @return Artist | Objeto que contiene la informacion del artista.
      */
-    public Artist importDirector(String director){
+    public Artist importDirector(String director) {
         Artist artist = null;
 
         if (naEraserService.eraserNA(director) != null) {
@@ -89,17 +94,17 @@ public class ArtistService {
             ArtistType atDirector = artistTypeRepository.findByName(ArtistTypeEnum.DIRECTOR);
 
             //En caso de que el artista exista se comprueba si ya tiene asignado el tipo director.
-            if(optionalDirector.isPresent()){
+            if (optionalDirector.isPresent()) {
                 artist = optionalDirector.get();
 
-                if(!artist.getArtistTypes().contains(atDirector)){
+                if (!artist.getArtistTypes().contains(atDirector)) {
                     artist.addArtistType(atDirector);
                     artistRepository.save(artist);
                 }
 
-            }else{
+            } else {
                 //Se crea un artista desde cero.
-                artist = artistTmdbDTOService.importArtist(directorArray[0],atDirector);
+                artist = artistTmdbDTOService.importArtist(directorArray[0], atDirector);
             }
         }
 
@@ -109,10 +114,11 @@ public class ArtistService {
     /**
      * Metodo que se encarga de convertir un String en un objeto de la clase Artist que contiene su nombre y
      * scripwriter como tipo de artista.
+     *
      * @param scripwriter String | Contiene el nombre del artista.
      * @return Artist | Objeto que contiene la informacion del artista.
      */
-    public Artist importScripwriter(String scripwriter){
+    public Artist importScripwriter(String scripwriter) {
         Artist artist = null;
 
         if (naEraserService.eraserNA(scripwriter) != null) {
@@ -131,7 +137,7 @@ public class ArtistService {
 
             } else {
                 //Se crea un artista desde cero.
-                artist = artistTmdbDTOService.importArtist(scripwriterArray[0],atScripwriter);
+                artist = artistTmdbDTOService.importArtist(scripwriterArray[0], atScripwriter);
             }
         }
 
@@ -140,25 +146,59 @@ public class ArtistService {
 
     /**
      * Devuelve todos los Artist de una Series a partir del id.
+     *
      * @param serieID Long | id de la Series.
      * @return List | List que contiene la informacion de todos los Artist.
      */
     @Transactional
-    public List<Artist> findBySerieId(Long serieID){
+    public List<Artist> findActorBySerieId(Long serieID) {
         return artistRepository.findAll().stream()
             .filter(artist -> artist.getEpisodes().stream()
                 .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
-                .sorted((a1, a2) -> {
-                    long numEpisodes1 = a1.getEpisodes().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
+            .sorted((a1, a2) -> {
+                long numEpisodes1 = a1.getEpisodes().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
                     .count();
-                    long numEpisodes2 = a2.getEpisodes().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
-                        .count();
-
-                    if(numEpisodes1>numEpisodes2) return -1;
-                    else if (numEpisodes1<numEpisodes2) return 1;
-                    else return 0;
-
-                } )
+                long numEpisodes2 = a2.getEpisodes().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
+                    .count();
+                return compare(numEpisodes1, numEpisodes2);
+            })
             .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Artist findDirectorBySerieId(Long serieID) {
+        return artistRepository.findAll().stream()
+            .filter(artist -> artist.getEpisodeDirectors().stream()
+                .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
+            .sorted((a1, a2) -> {
+                long numEpisodes1 = a1.getEpisodeDirectors().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
+                    .count();
+                long numEpisodes2 = a2.getEpisodeDirectors().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
+                    .count();
+                return compare(numEpisodes1, numEpisodes2);
+
+            })
+            .collect(Collectors.toList()).get(0);
+    }
+
+    @Transactional
+    public Artist findScriprirterBySerieId(Long serieID) {
+        return artistRepository.findAll().stream()
+            .filter(artist -> artist.getEpisodesScriptwriters().stream()
+                .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
+            .sorted((a1, a2) -> {
+                long numEpisodes1 = a1.getEpisodesScriptwriters().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
+                    .count();
+                long numEpisodes2 = a2.getEpisodesScriptwriters().stream().filter(episode -> episode.getSeason().getSeries().getId().equals(serieID))
+                    .count();
+                return compare(numEpisodes1, numEpisodes2);
+            })
+            .collect(Collectors.toList()).get(0);
+    }
+
+    public int compare(long l1, long l2) {
+        if (l1 > l2) return -1;
+        else if (l1 < l2) return 1;
+        else return 0;
     }
 }

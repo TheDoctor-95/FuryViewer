@@ -91,8 +91,8 @@ public class CacheConfiguration {
             cm.createCache(com.furyviewer.domain.Artist.class.getName() + ".seriesScriptwriters", jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Artist.class.getName() + ".movieMainActors", jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.Artist.class.getName() + ".movieSecondaryActors", jcacheConfiguration);
-            cm.createCache(com.furyviewer.domain.Artist.class.getName() + ".seriesMainActors", jcacheConfiguration);
-            cm.createCache(com.furyviewer.domain.Artist.class.getName() + ".seriesSecondaryActors", jcacheConfiguration);
+            cm.createCache(com.furyviewer.domain.Artist.class.getName() + ".episodeDirectors", jcacheConfiguration);
+            cm.createCache(com.furyviewer.domain.Artist.class.getName() + ".episodesScriptwriters", jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.FavouriteMovie.class.getName(), jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.FavouriteSeries.class.getName(), jcacheConfiguration);
             cm.createCache(com.furyviewer.domain.RateSeries.class.getName(), jcacheConfiguration);

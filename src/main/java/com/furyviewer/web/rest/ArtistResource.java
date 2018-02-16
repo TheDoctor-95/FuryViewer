@@ -136,13 +136,33 @@ public class ArtistResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
     }
 
-    @GetMapping("/artistsBySeriesID/{id}")
+    @GetMapping("/ActorBySeriesID/{id}")
     @Timed
     @Transactional
-    public ResponseEntity<List<Artist>> getArtistBySeries(@PathVariable Long id) {
+    public ResponseEntity<List<Artist>> getActorBySeries(@PathVariable Long id) {
 
         log.debug("REST request to get Artist : {}", id);
-        List<Artist> artists = artistService.findBySerieId(id);
+        List<Artist> artists = artistService.findActorBySerieId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
+    }
+
+    @GetMapping("/DirectorBySeriesID/{id}")
+    @Timed
+    @Transactional
+    public ResponseEntity<Artist> getDirectorBySeries(@PathVariable Long id) {
+
+        log.debug("REST request to get Artist : {}", id);
+        Artist artists = artistService.findDirectorBySerieId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
+    }
+
+    @GetMapping("/ScripwiterBySeriesID/{id}")
+    @Timed
+    @Transactional
+    public ResponseEntity<Artist> getScripwiterBySeries(@PathVariable Long id) {
+
+        log.debug("REST request to get Artist : {}", id);
+        Artist artists = artistService.findScriprirterBySerieId(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
     }
 

@@ -74,10 +74,20 @@ public class Artist implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Movie> movieDirectors = new HashSet<>();
 
+    @OneToMany(mappedBy = "director")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Episode> episodeDirectors = new HashSet<>();
+
     @OneToMany(mappedBy = "scriptwriter")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Movie> movieScriptwriters = new HashSet<>();
+
+    @OneToMany(mappedBy = "scriptwriter")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Episode> episodesScriptwriters = new HashSet<>();
 
     @ManyToMany(mappedBy = "actorMains")
     @JsonIgnore
@@ -93,6 +103,22 @@ public class Artist implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Episode> episodes = new HashSet<>();
+
+    public Set<Episode> getEpisodeDirectors() {
+        return episodeDirectors;
+    }
+
+    public void setEpisodeDirectors(Set<Episode> episodeDirectors) {
+        this.episodeDirectors = episodeDirectors;
+    }
+
+    public Set<Episode> getEpisodesScriptwriters() {
+        return episodesScriptwriters;
+    }
+
+    public void setEpisodesScriptwriters(Set<Episode> episodesScriptwriters) {
+        this.episodesScriptwriters = episodesScriptwriters;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
