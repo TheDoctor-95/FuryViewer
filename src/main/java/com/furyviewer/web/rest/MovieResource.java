@@ -4,7 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.MovieRepository;
-import com.furyviewer.service.MovieDatabase.MovieDTOService;
 import com.furyviewer.service.SmartSearch.Movie.MovieQueryService;
 import com.furyviewer.service.OpenMovieDatabase.Service.MovieOmdbDTOService;
 import com.furyviewer.service.dto.Criteria.MovieBCriteria;
@@ -43,9 +42,6 @@ public class MovieResource {
 
     @Autowired
     private MovieQueryService movieQueryService;
-
-    @Inject
-    private MovieDTOService movieDTOService;
 
     @Inject
     private MovieOmdbDTOService movieOmdbDTOService;
