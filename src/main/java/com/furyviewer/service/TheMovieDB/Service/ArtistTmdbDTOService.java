@@ -53,6 +53,7 @@ public class ArtistTmdbDTOService {
      * @param artistName String | Nombre del Artist a buscar.
      * @return SimpleArtistTmdbDTO | Informacion en el formato proporcionado por la API.
      * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la excepcion.
+     * @deprecated
      */
     public SimpleArtistTmdbDTO getArtist(String artistName) throws IOException {
         SimpleArtistTmdbDTO artist;
@@ -76,6 +77,7 @@ public class ArtistTmdbDTOService {
      * @param artistName String | Nombre del artista a buscar.
      * @return int | El id interno de la api de TMDB.
      * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la excepcion.
+     * @deprecated
      */
     public int getID(String artistName) throws IOException {
         int id;
@@ -88,23 +90,52 @@ public class ArtistTmdbDTOService {
     }
 
     /**
+     * Devuelve el id interno de la api del Artist en caso de que lo encuentre en la busqueda.
+     * @param artistName String | Nombre del artist a buscar.
+     * @return int | el id intenro de la api.
+     * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la execpcion.
+     */
+    public int getArtistID(String artistName) throws IOException {
+        int id = -1;
+        SimpleArtistTmdbDTO artist = null;
+        Call<SimpleArtistTmdbDTO> callArtist = apiTMDB.getArtist(apikey, artistName);
+
+        Response<SimpleArtistTmdbDTO> response = callArtist.execute();
+
+        if(response.isSuccessful()){
+            artist = response.body();
+            if(artist.getResults().size() >= 1) {
+                id = artist.getResults().get(0).getId();
+            }
+            System.out.println(id);
+        }
+        else {
+            throw new IOException(response.message());
+        }
+
+        return id;
+    }
+
+    /**
      * Metodo que se encarga de recuperar toda la informacion del artist de la api de TMDB.
      * @param artistName String | Nombre del artista a buscar.
      * @return CompleteArtistTmdbDTO | Información en el formato proporcionado por la API.
      * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la excepcion.
      */
     public CompleteArtistTmdbDTO getArtistComplete(String artistName) throws IOException {
-        CompleteArtistTmdbDTO artist;
-        int id = getID(artistName);
+        CompleteArtistTmdbDTO artist = null;
+        int id = getArtistID(artistName);
 
-        Call<CompleteArtistTmdbDTO> callArtist = apiTMDB.getFinalArtist(id, apikey);
+        if(id != -1) {
+            Call<CompleteArtistTmdbDTO> callArtist = apiTMDB.getFinalArtist(id, apikey);
 
-        Response<CompleteArtistTmdbDTO> response = callArtist.execute();
+            Response<CompleteArtistTmdbDTO> response = callArtist.execute();
 
-        if (response.isSuccessful()) {
-            artist = response.body();
-        } else {
-            throw new IOException(response.message());
+            if (response.isSuccessful()) {
+                artist = response.body();
+            } else {
+                throw new IOException(response.message());
+            }
         }
 
         return artist;
@@ -129,42 +160,43 @@ public class ArtistTmdbDTOService {
             try {
                 CompleteArtistTmdbDTO completeArtistTmdbDTO = getArtistComplete(artistName);
 
-                if (completeArtistTmdbDTO.getBirthday() != null) {
-                    artist.setBirthdate(
-                        dateConversorService.releaseDateOMDBSeason(completeArtistTmdbDTO.getBirthday().toString()));
+                if (completeArtistTmdbDTO != null) {
+                    if (completeArtistTmdbDTO.getBirthday() != null) {
+                        artist.setBirthdate(
+                            dateConversorService.releaseDateOMDBSeason(completeArtistTmdbDTO.getBirthday().toString()));
 
-                }
-                if (completeArtistTmdbDTO.getDeathday() != null) {
-                    if(completeArtistTmdbDTO.getDeathday().toString().split("-").length == 3) {
-                        artist.setDeathdate(
-                            dateConversorService.releaseDateOMDBSeason(completeArtistTmdbDTO.getDeathday().toString()));
+                    }
+                    if (completeArtistTmdbDTO.getDeathday() != null) {
+                        if (completeArtistTmdbDTO.getDeathday().toString().split("-").length == 3) {
+                            artist.setDeathdate(
+                                dateConversorService.releaseDateOMDBSeason(completeArtistTmdbDTO.getDeathday().toString()));
+                        }
+                    }
+
+                    if (completeArtistTmdbDTO.getGender() != null) {
+                        switch (completeArtistTmdbDTO.getGender()) {
+                            case 0:
+                                artist.setSex("Undefined");
+                                break;
+                            case 1:
+                                artist.setSex("Female");
+                                break;
+                            case 2:
+                                artist.setSex("Male");
+                                break;
+                        }
+                    }
+
+                    if (completeArtistTmdbDTO.getProfilePath() != null) {
+                        artist.setImgUrl(pathImage + completeArtistTmdbDTO.getProfilePath());
+                    }
+                    if (completeArtistTmdbDTO.getImdbId() != null) {
+                        artist.setImdb_id(completeArtistTmdbDTO.getImdbId());
+                    }
+                    if (completeArtistTmdbDTO.getPlaceOfBirth() != null) {
+                        artist.setCountry(countryService.importCountry(completeArtistTmdbDTO.getPlaceOfBirth().toString()));
                     }
                 }
-
-                if (completeArtistTmdbDTO.getGender() != null) {
-                    switch (completeArtistTmdbDTO.getGender()) {
-                        case 0:
-                            artist.setSex("Undefined");
-                            break;
-                        case 1:
-                            artist.setSex("Female");
-                            break;
-                        case 2:
-                            artist.setSex("Male");
-                            break;
-                    }
-                }
-
-                if (completeArtistTmdbDTO.getProfilePath() != null) {
-                    artist.setImgUrl(pathImage + completeArtistTmdbDTO.getProfilePath());
-                }
-                if (completeArtistTmdbDTO.getImdbId() != null) {
-                    artist.setImdb_id(completeArtistTmdbDTO.getImdbId());
-                }
-                if (completeArtistTmdbDTO.getPlaceOfBirth() != null) {
-                    artist.setCountry(countryService.importCountry(completeArtistTmdbDTO.getPlaceOfBirth().toString()));
-                }
-
                 //Salimos del bucle
                 break getArtist;
 
