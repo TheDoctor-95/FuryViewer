@@ -145,7 +145,7 @@ public class ArtistService {
     }
 
     /**
-     * Devuelve todos los Artist de una Series a partir del id.
+     * Devuelve todos los Actores de una Series a partir del id.
      *
      * @param serieID Long | id de la Series.
      * @return List | List que contiene la informacion de todos los Artist.
@@ -165,6 +165,11 @@ public class ArtistService {
             .collect(Collectors.toList());
     }
 
+    /**
+     * Devuelve todos los Actores de una Series a partir del id.
+     * @param serieID Long | id de la serie
+     * @return Artist | Director que ha participado en mas capitulos
+     */
     @Transactional
     public Artist findDirectorBySerieId(Long serieID) {
         return artistRepository.findAll().stream()
@@ -181,6 +186,11 @@ public class ArtistService {
             .collect(Collectors.toList()).get(0);
     }
 
+    /**
+     * Devuelve todos los Actores de una Series a partir del id.
+     * @param serieID Long | id de la serie
+     * @return Artist | Escritor que ha participado en mas capitulos
+     */
     @Transactional
     public Artist findScriprirterBySerieId(Long serieID) {
         return artistRepository.findAll().stream()

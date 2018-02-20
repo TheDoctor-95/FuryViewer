@@ -136,6 +136,12 @@ public class ArtistResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
     }
 
+    /**
+     * Encuentra todos los actores de una serie segun su id
+     *
+     * @param id Long | ID de la serie
+     * @return ResponseEntity | Listado de actores
+     */
     @GetMapping("/ActorBySeriesID/{id}")
     @Timed
     @Transactional
@@ -146,6 +152,12 @@ public class ArtistResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
     }
 
+    /**
+     * Encuentra el director de una serie que ha dirigido mas directores
+     *
+     * @param id Long | ID de la serie
+     * @return ResponseEntity | Director
+     */
     @GetMapping("/DirectorBySeriesID/{id}")
     @Timed
     @Transactional
@@ -156,6 +168,12 @@ public class ArtistResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artists));
     }
 
+    /**
+     * Encuentra el esctriror de una serie segun que ha escrito mas episodios
+     *
+     * @param id Long | ID de la serie
+     * @return ResponseEntity | Escritor
+     */
     @GetMapping("/ScripwiterBySeriesID/{id}")
     @Timed
     @Transactional
