@@ -13,6 +13,7 @@ import { FuryViewerEntityModule } from './entities/entity.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import { SidebarModule } from 'ng-sidebar';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
@@ -30,6 +31,7 @@ import {
 @NgModule({
     imports: [
         BrowserModule,
+        SidebarModule.forRoot(),
         LayoutRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
         FuryViewerSharedModule,
