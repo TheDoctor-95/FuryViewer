@@ -1,5 +1,8 @@
 package com.furyviewer.service.TheMovieDB.Repository;
 
+import com.furyviewer.service.dto.TheMovieDB.Episode.EpisodeCastingDTO;
+import com.furyviewer.service.dto.TheMovieDB.Episode.EpisodeExternalIdDTO;
+import com.furyviewer.service.dto.TheMovieDB.Season.SeasonTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Series.CompleteSeriesTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Series.SimpleSeriesTmdbDTO;
 import retrofit2.Call;
@@ -33,6 +36,18 @@ public interface SeriesTmdbDTORepository {
      */
     @GET("/3/tv/{id}")
     Call<CompleteSeriesTmdbDTO> getCompleteSeries(@Path("id") int id, @Query("api_key") String apikey);
+
+    @GET("/3/tv/{id}/season/{seasonNumber}")
+    Call<SeasonTmdbDTO> getSeason(@Path("id") int id, @Path("seasonNumber") int seasonNumber,
+                                  @Query("api_key") String apikey);
+
+    @GET("/3/tv/{id}/season/{seasonNumber}/episode/{episodeNumber}/external_ids")
+    Call<EpisodeExternalIdDTO> getExternalId(@Path("id") int id, @Path("seasonNumber") int seasonNumber,
+                                             @Path("episodeNumber") int episodeNumber, @Query("api_key") String apikey);
+
+    @GET("/3/tv/{id}/season/{seasonNumber}/episode/{episodeNumber}/credits")
+    Call<EpisodeCastingDTO> getCasting(@Path("id") int id, @Path("seasonNumber") int seasonNumber,
+                                       @Path("episodeNumber") int episodeNumber, @Query("api_key") String apikey);
 
     public static String url = " https://api.themoviedb.org/";
     public static final Retrofit retrofit = new Retrofit.Builder()

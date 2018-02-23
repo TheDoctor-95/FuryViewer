@@ -5,6 +5,7 @@ import com.furyviewer.domain.Series;
 import com.furyviewer.repository.SeasonRepository;
 import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.service.OpenMovieDatabase.Repository.SeasonOmdbDTORepository;
+import com.furyviewer.service.TheMovieDB.Service.SeriesTmdbDTOService;
 import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class SeasonOmdbDTOService {
 
     @Autowired
     private DateConversorService dateConversorService;
+
+    @Autowired
+    private SeriesTmdbDTOService seriesTmdbDTOService;
 
     /**
      * Devuelve la informacion de una season en el formato proporcionado por OpenMovieDataBase.
@@ -89,11 +93,16 @@ public class SeasonOmdbDTOService {
 
                         seasonRepository.save(se);
 
+                        int numEpisodes = Integer.parseInt(seasonOmdbDTO.getEpisodes().get(
+                            seasonOmdbDTO.getEpisodes().size() - 1).getEpisode());
+                        int numEpisodeAux = seriesTmdbDTOService.getNumEpisodes(title, i);
+                        if (numEpisodes < numEpisodeAux)
+                        {
+                            numEpisodes = numEpisodeAux;
+                        }
+
                         episodeOmdbDTOService.
-                            importEpisode(title,
-                                Integer.parseInt(seasonOmdbDTO.getEpisodes().get(
-                                    seasonOmdbDTO.getEpisodes().size() - 1).getEpisode()),
-                                se);
+                            importEpisode(title, numEpisodes, se);
                     }
 
                     //Salimos del bucle

@@ -4,6 +4,7 @@ import com.furyviewer.domain.Season;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.domain.Episode;
 import com.furyviewer.service.OpenMovieDatabase.Repository.EpisodeOmdbDTORepository;
+import com.furyviewer.service.TheMovieDB.Service.SeriesTmdbDTOService;
 import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
@@ -45,6 +46,9 @@ public class EpisodeOmdbDTOService {
     @Autowired
     private NAEraserService naEraserService;
 
+    @Autowired
+    private SeriesTmdbDTOService seriesTmdbDTOService;
+
     /**
      * Devuelve la informacion de un episode en el formato proporcionado por OpenMovieDataBase.
      * @param title String | Titulo de la Series a buscar.
@@ -78,6 +82,8 @@ public class EpisodeOmdbDTOService {
             for (int j = 0; j < 3; j++) {
                 try {
                     Episode ep = new Episode();
+
+                    //ep.setName("Episode " + i);
                     EpisodeOmdbDTO episodeOmdbDTO = getEpisode(title, se.getNumber(), i);
 
                     //Comprobamos que la API nos devuelve información.
@@ -98,7 +104,10 @@ public class EpisodeOmdbDTOService {
                         ep.setDirector(artistService.importDirector(episodeOmdbDTO.getDirector()));
                         ep.setScriptwriter(artistService.importScripwriter(episodeOmdbDTO.getWriter()));
 
-                        episodeRepository.save(ep);
+                        ep = episodeRepository.save(ep);
+                    }
+                    else {
+                        seriesTmdbDTOService.importEpisode(title, i, se);
                     }
 
                     //Salimos del bucle
