@@ -1,0 +1,18 @@
+<div>
+    <h2><span data-translate="furyViewerApp.search.search.title">search</span></h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+
+<div class="table-responsive" *ngIf="searches">
+    <table class="table table-striped">
+        <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let search of searches ;trackBy: trackId">
+</tr>
+</tbody>
+</table>
+</div>
+</div>

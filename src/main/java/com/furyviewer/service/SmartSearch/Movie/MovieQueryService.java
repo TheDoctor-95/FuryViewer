@@ -94,7 +94,7 @@ public class MovieQueryService extends QueryService<Movie> {
                 specification = specification.and(buildStringSpecification(criteria.getAwards(), Movie_.awards));
             }
             if (criteria.getDvd_release() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDvd_release(), Movie_.dvd_release));
+                //specification = specification.and(buildRangeSpecification(criteria.getDvd_release(), Movie_.dvd_release));
             }
             if (criteria.getCountryId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCountryId(), Movie_.country, Country_.id));

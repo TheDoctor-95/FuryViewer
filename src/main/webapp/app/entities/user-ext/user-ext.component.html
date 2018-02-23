@@ -1,89 +1,205 @@
-<div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--<h2>
-        <span jhiTranslate="furyViewerApp.userExt.home.title">User Exts</span>
-        <button class="btn btn-primary float-right jh-create-entity create-user-ext" [routerLink]="['/', { outlets: { popup: ['user-ext-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="furyViewerApp.userExt.home.createLabel">
-            Create new User Ext
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
+<div class="fons ">
     <div class="row">
-    </div>
-    <br/>
-    <div class="table-responsive" *ngIf="userExts">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="furyViewerApp.userExt.image">Image</span></th>
-            <th><span jhiTranslate="furyViewerApp.userExt.locationGoogleMaps">Location Google Maps</span></th>
-            <th><span jhiTranslate="furyViewerApp.userExt.latitude">Latitude</span></th>
-            <th><span jhiTranslate="furyViewerApp.userExt.longitude">Longitude</span></th>
-            <th><span jhiTranslate="furyViewerApp.userExt.user">User</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let userExt of userExts ;trackBy: trackId">
-                <td><a [routerLink]="['../user-ext', userExt.id ]">{{userExt.id}}</a></td>
-                <td>
-                    <a *ngIf="userExt.image" (click)="openFile(userExt.imageContentType, userExt.image)">
-                        <img [src]="'data:' + userExt.imageContentType + ';base64,' + userExt.image" style="max-height: 30px;" alt="userExt image"/>
-                    </a>
-                    <span *ngIf="userExt.image">{{userExt.imageContentType}}, {{byteSize(userExt.image)}}</span>
-                </td>
-                <td>{{userExt.locationGoogleMaps}}</td>
-                <td>{{userExt.latitude}}</td>
-                <td>{{userExt.longitude}}</td>
-                <td>
-                    {{userExt.user?.login}}
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../user-ext', userExt.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'user-ext/'+ userExt.id + '/edit'} }]"
-                                replaceUrl="true"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'user-ext/'+ userExt.id + '/delete'} }]"
-                                replaceUrl="true"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+        <div class="hola col-12">
+
+            <div class="info_perfil">
+                <div class="row">
+                    <div class="imgperfil col-3">
+
+                        <img src="gon.jpg" class="imatgeperf" width="105px" height="105px"/></div>
+
+                    <div class="info col-5">
+                        <h2>GONZALO TOSCANO</h2>
+                        <div class="text_info">
+                            <div class="inf"><i class="fa fa-envelope fa-1x"></i> gonzalotoscano@gmail.com</div>
+                            <div class="inf"><i class="fa fa-envelope fa-1x"></i> 29 años</div>
+                            <div class="inf"><i class="fa fa-map-marker fa-1x"></i> Salta, Argentina</div>
+                            <div class="inf"><i class="fa fa-envelope fa-1x"></i> 23</div>
+
+                        </div>
+
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>-->
-</div>
+                    <div class="info2 col-4">
+
+                        <h2>@gongonbombon</h2>
+
+                        <div class="button">
+                            <button>EDITAR PERFIL</button>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="cos_perfil">
+
+
+                <div id="sidebarwatch_perfil">
+                    <div id="botons_sidebar">
+
+                        <div class="icon_text">
+                            <div class="rodona"><i class="fa fa-star fa-3x"></i></div>
+                            VALORACIONES
+                        </div>
+                        <div class="icon_text">
+                            <div class="rodona"><i class="fa fa-edit fa-3x"></i></div>
+                            PELICULAS
+                        </div>
+                        <div class="icon_text">
+                            <div class="rodona"><i class="fa fa-eye-slash fa-3x"></i></div>
+                            SERIES
+                        </div>
+                        <div class="icon_text">
+                            <div class="rodona"><i class="fa fa-thumbs-down fa-3x"></i></div>
+                            LOGROS
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="card pendientes">
+                    <div class="card-body">
+
+                        <div class="serpeli_body2">
+
+
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Whoos</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+                            </div>
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Who</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+
+                            </div>
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Who</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+
+                            </div>
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Who</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+                            </div>
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Who</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="serpeli_body2">
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Who</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+
+                            </div>
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Who</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+
+                            </div>
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Who</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+
+                            </div>
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Who</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+                            </div>
+                            <div class="card portades">
+                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+
+
+                                <div class="card-body">
+                                    <h4 class="card-title">3x04 Blink</h4>
+                                    <h3 class="card-text">Doctor Who</h3>
+                                </div>
+
+                                <div class="valoracio"><h2>9</h2></div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <i class="fa fa-chevron-down fa-3x"></i>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
