@@ -9,218 +9,7 @@ Main page styles
     background: url("../../content/images/hipster.png") no-repeat center top;
     background-size: contain;
 }
-jhi-main{
-    background-color: #d2d3d2;
-}
 
-.portada {
-    display: inline-block;
-    width: 20%;
-    height: 100px;
-    background-color: #55acee;
-    margin: 1.5%;
-
-}
-
-.card.portades {
-    display: inline-block;
-    width: 17%;
-    height: 20%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-
-}
-
-h2 {
-    text-align: center;
-    font-family: "Lemon/Milk light";
-    font-size: 1.9rem;
-}
-#titlecalendar{
-    margin-top: 1.5%;
-}
-
-.card {
-    text-align: center;
-}
-
-.card h4 {
-    font-size: 1.1rem;
-}
-
-.card h3 {
-    font-size: 1rem;
-}
-
-.card-body {
-
-    padding: 0.5rem;
-}
-
-.calendario {
-    left: 0;
-}
-
-#botoncalendar{
-    margin-top: 1%;
-}
-
-
-
-.calendario > .card-title {
-    text-align: left;
-    display: inline-block;
-    padding-top: 5%;
-
-}
-.card-title{
-    margin-bottom: 2%;
-
-}
-#titlecalendar {
-    display: inline-block;
-}
-
-#botoncalendar {
-    display: inline-block;
-
-}
-
-button {
-    border-color: #ef9800 !important;
-    background-color: transparent;
-    border-style: solid;
-    color: #ef9800;
-    width: 33%;
-}
-
-button:hover {
-    border-color: #ef9800 !important;
-    background-color: #ef9800;
-    border-style: solid;
-    color: #ffffff;
-
-}
-
-.card-img-top {
-    width: 84%;
-    height: 11vw;
-    object-fit: cover;
-}
-
-.portades > .card-body {
-  height: 51px;
-}
-
-.pelpendientes {
-    margin-top: 5%;
-}
-
-.fons {
-    background-color: #d2d3d2;
-    padding-top: 2%;
-    padding-left: 2%;
-    padding-right: 2%;
-}
-
-.jh-card {
-    background-color: transparent;
-
-    padding: 0;
-    margin-top: 0;
-}
-
-.portades {
-    vertical-align: top;
-}
-
-.card {
-    border: none;
-}
-
-.top {
-    padding-top: 5%;
-    padding-bottom: 8%;
-
-}
-#block_tops{
-    margin-top: 20%;
-}
-
-.tops>.card{
-    margin: 0 1%;
-  padding-top: 2%;
-}
-
-
-.serpeli_body{
-    margin-top: 1%;
-
-}
-
-.pendientes{
-    height: 48%;
-    margin-bottom: 2%;
-}
-
-.list-group-item{
-    display:inline-block;
-    padding: 0;
-    border-style: none;
-    border: none;
-    text-align: left;
-}
-.list-group{
-    margin:2%;
-}
-
-ol {
-    counter-reset: item;
-    margin-left: 0;
-    padding-left: 0;
-}
-li {
-    display: block;
-    margin-bottom: 3%;
-    margin-left: 2em;
-}
-li::before {
-    display: inline-block;
-    content: counter(item) ;
-    counter-increment: item;
-    background-color: #ef9800;
-    text-align: center;
-    border-radius: 1.5em;
-
-    width: 1.5em;
-    height: 1.5em;
-    color:white;
-       margin-left: -1.6em;
-}
-
-.card.calendario{
-height: 92%;}
-
-.card.col-5{
-    padding-top: 3%;
-    padding-bottom: 3%;
-}
-.card-img-top:hover{
-    -webkit-box-shadow: -1px 0px 75px 14px rgba(239,152,0,1);
-    -moz-box-shadow: -1px 0px 75px 14px rgba(239,152,0,1);
-    box-shadow: -1px 0px 75px 14px rgba(239,152,0,1);
-   /* width: 94%;
-    height: 13vw;
-    object-fit: cover;
-
-    position: absolute;
-    left: 0;
-    top: -2vm;*/
-}
-
-.card.portades{
-    background-color: transparent;
-}
 
 
 
@@ -232,3 +21,64 @@ height: 92%;}
     }
 }
 
+
+/* SWITCH -----------------------------------------------------------------------------------------------------------------------------------------------*/
+.switchinv {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 16px;
+}
+
+/* Hide default HTML checkbox */
+.switchinv input {display:none;}
+
+/* The slider */
+.sliderinv {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.sliderinv:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+input:checked + .sliderinv {
+    background-color: orange;
+}
+
+input:focus + .sliderinv {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .sliderinv:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.sliderinv.roundinv {
+    border-radius: 16px;
+}
+
+.sliderinv.roundinv:before {
+    border-radius: 50%;
+}
+
+/* FI SWITCH--------------------------------------------------------*/

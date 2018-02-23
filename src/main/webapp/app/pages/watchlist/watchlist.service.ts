@@ -5,7 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { Watchlist } from './watchlist.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
-
+2
 @Injectable()
 export class WatchlistService {
 

@@ -1,3 +1,6 @@
+
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -35,19 +38,19 @@ Generic styles
 ========================================================================== */
 
 /* Error highlight on input fields */
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid green;
+.ng-valid[required], .ng-valid.required {
+    border-left: 5px solid green;
 }
 
-.ng-invalid:not(form)  {
-  border-left: 5px solid red;
+.ng-invalid:not(form) {
+    border-left: 5px solid red;
 }
 
 /* other generic styles */
 
 .jh-card {
- /*   padding: 1.5%;
-    margin-top: 20px;*/
+    /*   padding: 1.5%;
+       margin-top: 20px;*/
     border: none;
 }
 
@@ -70,7 +73,7 @@ Generic styles
 
 .break {
     white-space: normal;
-    word-break:break-all;
+    word-break: break-all;
 }
 
 .readonly {
@@ -79,14 +82,14 @@ Generic styles
 }
 
 .footer {
-    border-top: 1px solid rgba(0,0,0,.125);
+    border-top: 1px solid rgba(0, 0, 0, .125);
 }
 
 /* ==========================================================================
 make sure browsers use the pointer cursor for anchors, even with no href
 ========================================================================== */
 a:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .hand, [jhisortby] {
@@ -96,10 +99,11 @@ a:hover {
 /* ==========================================================================
 Custom alerts for notification
 ========================================================================== */
-.alerts .alert{
+.alerts .alert {
     text-overflow: ellipsis;
 }
-.alert pre{
+
+.alert pre {
     background: none;
     border: none;
     font: inherit;
@@ -144,25 +148,41 @@ entity tables helpers
 ========================================================================== */
 /* Remove Bootstrap padding from the element
    http://stackoverflow.com/questions/19562903/remove-padding-from-columns-in-bootstrap-3 */
-.no-padding-left { padding-left: 0 !important; }
-.no-padding-right { padding-right: 0 !important; }
-.no-padding-top { padding-top: 0 !important; }
-.no-padding-bottom { padding-bottom: 0 !important; }
-.no-padding { padding: 0 !important; }
+.no-padding-left {
+    padding-left: 0 !important;
+}
+
+.no-padding-right {
+    padding-right: 0 !important;
+}
+
+.no-padding-top {
+    padding-top: 0 !important;
+}
+
+.no-padding-bottom {
+    padding-bottom: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
 
 /* bootstrap 3 input-group 100% width
    http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
-.width-min { width: 1% !important; }
+.width-min {
+    width: 1% !important;
+}
 
 /* Makes toolbar not wrap on smaller screens
  http://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right */
 .flex-btn-group-container {
-   display: -webkit-flex;
-   display: flex;
-   -webkit-flex-direction: row;
-   flex-direction: row;
-   -webkit-justify-content: flex-end;
-   justify-content: flex-end;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
 }
 
 /* ==========================================================================
@@ -192,12 +212,12 @@ ui bootstrap tweaks
 }
 
 .datetime-picker-dropdown > li.date-picker-menu div > table .btn-secondary,
-.uib-datepicker-popup  > li > div.uib-datepicker > table .btn-secondary {
+.uib-datepicker-popup > li > div.uib-datepicker > table .btn-secondary {
     border: 0;
 }
 
 .datetime-picker-dropdown > li.date-picker-menu div > table:focus,
-.uib-datepicker-popup  > li > div.uib-datepicker > table:focus {
+.uib-datepicker-popup > li > div.uib-datepicker > table:focus {
     outline: none;
 }
 
@@ -206,7 +226,7 @@ ui bootstrap tweaks
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
- }
+}
 
 /* ==========================================================================
 Social Buttons
@@ -251,4 +271,474 @@ Social Buttons
     border-color: rgba(0, 0, 0, 0.2);
     color: #fff;
 }
+
 /* jhipster-needle-css-add-main JHipster will add new css style */
+
+
+
+
+
+/* ==========================================================================
+HOME
+========================================================================== */
+
+
+jhi-main{
+    background-color: #d2d3d2;
+}
+
+.portada {
+    display: inline-block;
+    width: 20%;
+    height: 100px;
+    background-color: #55acee;
+    margin: 1.5%;
+
+}
+
+.card.portades {
+    display: inline-block;
+    width: 17%;
+    height: 20%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+
+h2 {
+    text-align: center;
+    font-family: "Lemon/Milk light";
+    font-size: 1.9rem;
+}
+#titlecalendar{
+    margin-top: 1.5%;
+}
+
+.card {
+    text-align: center;
+}
+
+.card h4 {
+    font-size: 1.1rem;
+}
+
+.card h3 {
+    font-size: 1rem;
+}
+
+.card-body {
+
+    padding: 0.5rem;
+}
+
+.calendario {
+    left: 0;
+}
+
+#botoncalendar{
+    margin-top: 1%;
+}
+
+
+
+.calendario > .card-title {
+    text-align: left;
+    display: inline-block;
+    padding-top: 5%;
+
+}
+.card-title{
+    margin-bottom: 2%;
+
+}
+#titlecalendar {
+    display: inline-block;
+}
+
+#botoncalendar {
+    display: inline-block;
+
+}
+
+button {
+    border-color: #ef9800 !important;
+    background-color: transparent;
+    border-style: solid;
+    color: #ef9800;
+
+}
+
+button:hover {
+    border-color: #ef9800 !important;
+    background-color: #ef9800;
+    border-style: solid;
+    color: #ffffff;
+
+}
+
+.card-img-top {
+    width: 84%;
+    height: 11vw;
+    object-fit: cover;
+}
+
+.portades > .card-body {
+    height: 51px;
+}
+
+.pelpendientes {
+    margin-top: 5%;
+}
+
+.fons {
+    background-color: #d2d3d2;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.jh-card {
+    background-color: transparent;
+
+    padding: 0;
+    margin-top: 0;
+}
+
+.portades {
+    vertical-align: top;
+}
+
+.card {
+    border: none;
+}
+
+.top {
+    padding-top: 5%;
+    padding-bottom: 8%;
+
+}
+#block_tops{
+    margin-top: 20%;
+}
+
+.tops>.card{
+    margin: 0 1%;
+    padding-top: 2%;
+}
+
+
+.serpeli_body{
+    margin-top: 1%;
+
+}
+
+.pendientes{
+    height: 48%;
+    margin-bottom: 2%;
+}
+
+.list-group-item{
+    display:inline-block;
+    padding: 0;
+    border-style: none;
+    border: none;
+    text-align: left;
+}
+.list-group{
+    margin:2%;
+}
+
+ol {
+    counter-reset: item;
+    margin-left: 0;
+    padding-left: 0;
+}
+li {
+    display: block;
+    margin-bottom: 3%;
+    margin-left: 2em;
+}
+.list-group > li::before {
+    display: inline-block;
+    content: counter(item) ;
+    counter-increment: item;
+    background-color: #ef9800;
+    text-align: center;
+    border-radius: 1.5em;
+
+    width: 1.5em;
+    height: 1.5em;
+    color:white;
+    margin-left: -1.6em;
+}
+
+.card.calendario{
+    height: 92%;}
+
+.card.col-5{
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+.card-img-top:hover{
+    -webkit-box-shadow: -1px 0px 75px 14px rgba(239,152,0,1);
+    -moz-box-shadow: -1px 0px 75px 14px rgba(239,152,0,1);
+    box-shadow: -1px 0px 75px 14px rgba(239,152,0,1);
+    /* width: 94%;
+     height: 13vw;
+     object-fit: cover;
+
+     position: absolute;
+     left: 0;
+     top: -2vm;*/
+}
+
+.card.portades{
+    background-color: transparent;
+}
+
+
+
+/* ==========================================================================
+Watchlist
+========================================================================== */
+
+.cos {
+    width: 70%;
+    height: 75%;
+    background-color: white;
+    margin: 12%;
+    margin-top: 2%;
+    margin-left: 15%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.hola {
+    width: 400px;
+    height: 700px;
+    background-color: #d2d3d2;
+
+}
+
+.radiob:hover {
+    background-color: orangered;
+}
+
+#sidebarwatch {
+    background-color: white;
+    width: 12%;
+    height: 66%;
+    margin-top: 7%;
+    float: left;
+    margin-left: -11%;
+    border-radius: 10px;
+}
+
+#botonspelser {
+    padding-top: 3%;
+}
+
+input {
+    margin-left: 3%;
+}
+
+
+#botons_sidebar i{
+    margin:13%;
+
+}
+
+#botons_sidebar{
+    left:0;
+    margin-top: 8%;
+    margin-left: -10%;
+    font-size: 10px;
+    text-align: center;
+
+
+}
+.icon_text{
+    width: 100%;
+    margin-top: 15%;
+}
+.rodona:hover{
+    border-style: solid;
+    border-color: orange;
+    background-color: transparent;
+    border-radius: 50px;
+    width: 47px;
+    height: 47px;
+    color:orange;
+
+
+}
+
+.rodona{
+    border-style: solid;
+    border-color: orange;
+    background-color: orange;
+    border-radius: 50px;
+    width: 47px;
+    height: 47px;
+    margin-top: 16px;
+    color:white;
+    margin: 0 auto;
+    margin-bottom: 5%;
+
+}
+
+
+.card-img-top:hover{
+    -webkit-box-shadow: -1px 0px 75px 14px rgba(239,152,0,1);
+    -moz-box-shadow: -1px 0px 75px 14px rgba(239,152,0,1);
+    box-shadow: -1px 0px 75px 14px rgba(239,152,0,1);
+    /* width: 94%;
+     height: 13vw;
+     object-fit: cover;
+
+     position: absolute;
+     left: 0;
+     top: -2vm;*/
+}
+
+.serpeli_body2{
+    margin-top: 1%;
+    margin-bottom: -4%;
+}
+
+
+/* SWITCH -----------------------------------------------------------------------------------------------------------------------------------------------*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-color: orange;
+    border-style: solid;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: orange;
+
+    border-width: 1.5px;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: transparent;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+.text_switch{
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 1%;
+    margin-left: 1%;
+    font-size: 15px;
+    font-weight: bolder;
+    margin-right: 1%;
+}
+/* FI SWITCH--------------------------------------------------------*/
+
+
+
+/* ==========================================================================
+ PERFIL
+========================================================================== */
+
+
+.cos_perfil{
+    width: 70%;
+    height: 66%;
+    background-color: white;
+    margin: 12%;
+    margin-top: 4%;
+    margin-left: 15%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.info_perfil{
+    width: 70%;
+    height: 30%;
+    background-color: white;
+    margin-top: 2%;
+    margin-left: 15%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#sidebarwatch_perfil {
+    background-color: white;
+    width: 12%;
+    height: 73%;
+    margin-top: 7%;
+    float: left;
+    margin-left: -11%;
+    border-radius: 10px;
+}
+
+.imgperfil{
+    padding-top: 4%;
+    padding-left: 4%;
+}
+
+.imatgeperf{
+    border-radius: 100%;
+
+    -webkit-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    -moz-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    margin-left: 10%;
+}
+
+.info{
+    text-align: left;
+    padding-top: 4%;
+    padding-left:5%;
+}
+.info2{
+    text-align: left;
+    padding-top: 4%;
+}
+

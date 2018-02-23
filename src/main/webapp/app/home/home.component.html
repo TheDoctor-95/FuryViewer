@@ -123,41 +123,46 @@
         </div>
 
 
+        <div class="card col-2">
 
-            <div class="card col-2">
+            <div class="row">
 
+                <h2 class="card-title col-9" style="width: 76%">Top series</h2>
 
-                <h2 class="card-title ">Top series</h2>
+                <label class="switchinv col-3">
+                    <input type="checkbox">
+                    <span class="sliderinv roundinv"></span>
+                </label>
+            </div>
 
+            <div class="card-body" style="text-align: left">
+                <ol class="list-group">
+                    <li *ngFor="let serie of topSeries " class="list-group-item"> {{serie}}</li>
 
-                <div class="card-body" style="text-align: left">
-                    <ol class="list-group">
-                        <li *ngFor="let serie of topSeries " class="list-group-item"> {{serie}}</li>
-
-                    </ol>
-
-                </div>
+                </ol>
 
             </div>
 
-            <div class="card col-2">
+        </div>
 
-                <h2 class="card-title">Top Pelis</h2>
+        <div class="card col-2">
+
+            <h2 class="card-title">Top Pelis</h2>
 
 
-                <div class="card-body" style="text-align: left">
-                    <ol class="list-group">
-                        <li *ngFor="let movie of topPelis" class="list-group-item"> {{movie}}</li>
+            <div class="card-body" style="text-align: left">
+                <ol class="list-group">
+                    <li *ngFor="let movie of topPelis" class="list-group-item"> {{movie}}</li>
 
-                    </ol>
-
-                </div>
+                </ol>
 
             </div>
 
-
-</div>
+        </div>
 
 
     </div>
+
+
+</div>
 
