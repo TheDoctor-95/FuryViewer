@@ -32,57 +32,71 @@
 
     >
         <div style="background-color: black; height: 100%; width: 20vh;">
-            <ul class="list-unstyled components">
-                <li>
+            <ul class="list-unstyled components container-fluid">
+                <li class="row">
                     <a href="#">
-                        <i class="glyphicon glyphicon-home"></i>
-                        <div style="display: inline-block; color: white;">Home</div>
-                    </a>
-                </li>
+                        <div class="col-6" style="display: inline-block; color: white;">Home</div>
+                        <!--<div class="col-2">-->
+                        <i class="glyphicon glyphicon-home col-2 "></i>
+                        <!--</div>-->
+                   </a>
+               </li>
 
-                <li>
-                    <a href="#">
-                        <i class="glyphicon glyphicon-user"></i>
-                        <div style="display: inline-block; color: white;">Perfil</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#peliculasSubmenu" data-toggle="collapse">
-                        <i class="glyphicon glyphicon-film"></i>
-                        <div style="display: inline-block; color: white;">Peliculas</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#seriesSubmenu" data-toggle="collapse">
-                        <i class="glyphicon glyphicon-facetime-video"></i>
-                        <div style="display: inline-block; color: white;">Series</div>
-                    </a>
+               <li class="row">
+                   <a href="#">
+                       <div class="col-6" style="display: inline-block; color: white;">Perfil</div>
 
-                </li>
-                <li>
-                    <a href="#actoresSubmenu" data-toggle="collapse">
-                        <i class="glyphicon glyphicon-star"></i>
-                        <div style="display: inline-block; color: white;">Artistas</div>
-                    </a>
+                       <i class="glyphicon glyphicon-user col-2  "></i>
 
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="glyphicon glyphicon-link"></i>
-                        <div style="display: inline-block; color: white;">About</div>
-                    </a>
-                </li>
+                   </a>
+               </li>
+               <li class="row">
+                   <a href="#peliculasSubmenu" data-toggle="collapse">
+                       <div class="col-6" style="display: inline-block; color: white;">Peliculas</div>
 
-            </ul>
-        </div>
-    </ng-sidebar>
+                           <i class="glyphicon glyphicon-film col-2"></i>
 
-    <div ng-sidebar-content >
-        <div style="left: 7.5vh;" class="card jh-card">
-            <router-outlet></router-outlet>
-            <router-outlet name="popup"></router-outlet>
-        </div>
-        <jhi-footer></jhi-footer>
-    </div>
+
+
+                   </a>
+               </li>
+               <li class="row">
+                   <a href="#seriesSubmenu" data-toggle="collapse">
+                       <div class="col-6" style="display: inline-block; color: white;">Series</div>
+
+                       <i class="glyphicon glyphicon-facetime-video col-2 "></i>
+
+                   </a>
+
+               </li>
+               <li class="row">
+                   <a href="#actoresSubmenu" data-toggle="collapse">
+                       <div class="col-6" style="display: inline-block; color: white;">Artistas</div>
+
+                       <i class="glyphicon glyphicon-star col-2 "></i>
+
+                   </a>
+
+               </li>
+               <li class="row">
+                   <a href="#">
+                       <div class="col-6" style="display: inline-block; color: white;">About</div>
+
+                       <i class="glyphicon glyphicon-link col-2 "></i>
+
+                   </a>
+               </li>
+
+           </ul>
+       </div>
+   </ng-sidebar>
+
+   <div ng-sidebar-content >
+       <div style="left: 7.5vh;" class="card jh-card">
+           <router-outlet></router-outlet>
+           <router-outlet name="popup"></router-outlet>
+       </div>
+       <jhi-footer></jhi-footer>
+   </div>
 
 </ng-sidebar-container>
