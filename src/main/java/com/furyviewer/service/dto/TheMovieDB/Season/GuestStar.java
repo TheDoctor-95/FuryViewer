@@ -4,84 +4,112 @@ package com.furyviewer.service.dto.TheMovieDB.Season;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Gestiona la informacion de los actores secundarios proporcionados por TheMovieDataBase.
+ */
 public class GuestStar {
-
+    /**
+     * Nombre del personaje.
+     */
     @SerializedName("character")
     @Expose
     private String character;
+
+    /**
+     * id secundario de TMDB.
+     */
     @SerializedName("credit_id")
     @Expose
     private String creditId;
+
+    /**
+     * Genero del artist.
+     */
     @SerializedName("gender")
     @Expose
-    private Object gender;
+    private Integer gender;
+
+    /**
+     * id interno de la api.
+     */
     @SerializedName("id")
     @Expose
     private Integer id;
+
+    /**
+     * Nombre del artist.
+     */
     @SerializedName("name")
     @Expose
     private String name;
+
+    /**
+     * Orden de importancia.
+     */
     @SerializedName("order")
     @Expose
     private Integer order;
+
+    /**
+     * Path necesario para poder reconstruir la imagen.
+     */
     @SerializedName("profile_path")
     @Expose
     private String profilePath;
 
+    /**
+     * Devuelve el nombre del personaje.
+     * @return String | Nombre del personaje.
+     */
     public String getCharacter() {
         return character;
     }
 
-    public void setCharacter(String character) {
-        this.character = character;
-    }
-
+    /**
+     * Devuelve el id secundario de TMDB.
+     * @return String | id secundario.
+     */
     public String getCreditId() {
         return creditId;
     }
 
-    public void setCreditId(String creditId) {
-        this.creditId = creditId;
-    }
-
-    public Object getGender() {
+    /**
+     * Devuelve el genero del artist.
+     * @return int | Genero del artist.
+     */
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Object gender) {
-        this.gender = gender;
-    }
-
+    /**
+     * Devuelve el id interno de la api.
+     * @return int | id interno de la api.
+     */
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    /**
+     * Devuelve el nombre del artist.
+     * @return String | Nombre del artist.
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    /**
+     * Devuelve el orden de importancia de los artist.
+     * @return int | Orden de importancia.
+     */
     public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
+    /**
+     * Devuelve el path necesario para reconstruir la imagen.
+     * @return String | Path para la imagen.
+     */
     public String getProfilePath() {
         return profilePath;
     }
-
-    public void setProfilePath(String profilePath) {
-        this.profilePath = profilePath;
-    }
-
 }

@@ -17,6 +17,9 @@ import retrofit2.http.Query;
  * @author IFriedkin
  * @see com.furyviewer.service.dto.TheMovieDB.Series.SimpleSeriesTmdbDTO
  * @see com.furyviewer.service.dto.TheMovieDB.Series.CompleteSeriesTmdbDTO
+ * @see com.furyviewer.service.dto.TheMovieDB.Season.SeasonTmdbDTO
+ * @see com.furyviewer.service.dto.TheMovieDB.Episode.EpisodeExternalIdDTO
+ * @see com.furyviewer.service.dto.TheMovieDB.Episode.EpisodeCastingDTO
  */
 public interface SeriesTmdbDTORepository {
     /**
@@ -37,14 +40,37 @@ public interface SeriesTmdbDTORepository {
     @GET("/3/tv/{id}")
     Call<CompleteSeriesTmdbDTO> getCompleteSeries(@Path("id") int id, @Query("api_key") String apikey);
 
+    /**
+     * Devuelve la informacion completa de una Season proporcionada por la API.
+     * @param id int | id interno de la API para reconocer la Series.
+     * @param seasonNumber int | Numero de la season que se quiere buscar.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @return Call | contiene toda la informacion completa de la Season devuelta por la api.
+     */
     @GET("/3/tv/{id}/season/{seasonNumber}")
     Call<SeasonTmdbDTO> getSeason(@Path("id") int id, @Path("seasonNumber") int seasonNumber,
                                   @Query("api_key") String apikey);
 
+    /**
+     * Devuelve la información de los ids externos para un Episode proporcionada por la API.
+     * @param id int | id interno de la API para reconocer la Series.
+     * @param seasonNumber int | Numero de la season que se quiere buscar.
+     * @param episodeNumber int | Numero del episode que se quiere buscar.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @return Call | contiene toda la informacion completa de la Season devuelta por la api.
+     */
     @GET("/3/tv/{id}/season/{seasonNumber}/episode/{episodeNumber}/external_ids")
     Call<EpisodeExternalIdDTO> getExternalId(@Path("id") int id, @Path("seasonNumber") int seasonNumber,
                                              @Path("episodeNumber") int episodeNumber, @Query("api_key") String apikey);
 
+    /**
+     * Devuelve la información de los artist que han participado en un episode.
+     * @param id int | id interno de la API para reconocer la Series.
+     * @param seasonNumber int | Numero de la season que se quiere buscar.
+     * @param episodeNumber int | Numero del episode que se quiere buscar.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @return Call | contiene toda la informacion completa de la Season devuelta por la api.
+     */
     @GET("/3/tv/{id}/season/{seasonNumber}/episode/{episodeNumber}/credits")
     Call<EpisodeCastingDTO> getCasting(@Path("id") int id, @Path("seasonNumber") int seasonNumber,
                                        @Path("episodeNumber") int episodeNumber, @Query("api_key") String apikey);
