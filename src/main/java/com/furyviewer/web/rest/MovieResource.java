@@ -4,6 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.MovieRepository;
+import com.furyviewer.repository.MovieStatsRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.SmartSearch.Movie.MovieQueryService;
 import com.furyviewer.service.OpenMovieDatabase.Service.MovieOmdbDTOService;
 import com.furyviewer.service.dto.Criteria.MovieBCriteria;
@@ -42,6 +45,12 @@ public class MovieResource {
 
     @Autowired
     private MovieQueryService movieQueryService;
+
+    @Autowired
+    private MovieStatsRepository movieStatsRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Inject
     private MovieOmdbDTOService movieOmdbDTOService;
@@ -105,6 +114,14 @@ public class MovieResource {
         log.debug("REST request to get all Movies");
         return movieRepository.findAllWithEagerRelationships();
         }
+
+
+    @GetMapping("/movies/Pending/")
+    @Timed
+    public List<Movie> getPendingMovies() {
+        log.debug("REST request to get all Movies");
+        return movieStatsRepository.pendingMovies(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+    }
 
     /**
      * GET  /movies/:id : get the "id" movie.

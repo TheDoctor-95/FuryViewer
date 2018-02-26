@@ -1,6 +1,8 @@
 package com.furyviewer.repository;
 
+import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.MovieStats;
+import com.furyviewer.domain.User;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +25,13 @@ public interface MovieStatsRepository extends JpaRepository<MovieStats, Long> {
 
     @Query("select count(movieStats) from MovieStats movieStats where movieStats.status = com.furyviewer.domain.enumeration.MovieStatsEnum.SEEN and movieStats.id=:MovieId")
     Long SeenMovieStats(@Param("MovieId")Long id);
+
+    /**
+     * Devuelve todas peliculas pendientes de un usuario
+     * @param user User | Usuario con pelicula pendiente
+     * @return Listado de peliculas pendientes s
+     */
+    @Query("select movieStats.movie from MovieStats movieStats where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.PENDING and movieStats.user=:User")
+    List<Movie> pendingMovies(@Param("User")User user);
 
 }
