@@ -1,14 +1,14 @@
 .glyphicon {
-    font-size: 25px;
+    font-size: 30px;
     color: orange;
-    /*padding-left: 7%;
-    padding-top: 13%;*/
-
-    /*padding-right: 5%;*/
-    float: right;
-
+    margin: auto;
+    margin-right: 19%;
+    margin-top: 11%;
 }
-
+.titol{
+    margin-top:17%;
+    magin-left:-6%;
+}
 li:hover{
     color:orange;
 }
