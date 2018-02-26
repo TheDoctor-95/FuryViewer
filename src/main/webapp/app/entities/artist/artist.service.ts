@@ -44,6 +44,25 @@ export class ArtistService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    seriesActorsQuery(id: number): Observable<ResponseWrapper> {
+
+        return this.http.get(`${SERVER_API_URL}/api/ActorBySeriesID/${id}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+    seriesDirectorQuery(id: number): Observable<Artist> {
+        return this.http.get(`${SERVER_API_URL}/api/DirectorBySeriesID/${id}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+    seriesScriptWriterQuery(id: number): Observable<Artist> {
+        return this.http.get(`${SERVER_API_URL}/api/ScripwiterBySeriesID/${id}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

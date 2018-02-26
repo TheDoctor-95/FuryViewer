@@ -50,6 +50,26 @@
                 <a [routerLink]="['/country', series.country?.id]">{{series.country?.name}}</a>
             </div>
         </dd>
+        <dd>
+            <div *ngFor="let artist of artists">
+                <img src="{{artist.imgUrl}}"/>
+                {{artist.name}}
+            </div>
+        </dd>
+        <dd>
+            <div >
+                <h3>Director</h3>
+                <img src="{{director.imgUrl}}"/>
+                {{director.name}}
+            </div>
+        </dd>
+        <dd>
+            <div >
+                <h3>Scriptwriter</h3>
+                <img src="{{scripwriter.imgUrl}}"/>
+                {{scripwriter.name}}
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"
