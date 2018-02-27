@@ -5,410 +5,382 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
+/**
+ * Gestiona la informacion de la movie buscada desde OpenMovieDatabase.
+ */
 public class MovieOmdbDTO {
-
+    /**
+     * Titulo de la movie.
+     */
     @SerializedName("Title")
     @Expose
     private String title;
+
+    /**
+     * Anyo en el que se emitio.
+     */
     @SerializedName("Year")
     @Expose
     private String year;
+
+    /**
+     * Clasificacion por edades.
+     */
     @SerializedName("Rated")
     @Expose
     private String rated;
+
+    /**
+     * Fecha de salida.
+     */
     @SerializedName("Released")
     @Expose
     private String released;
+
+    /**
+     * Duracion de la movie.
+     */
     @SerializedName("Runtime")
     @Expose
     private String runtime;
+
+    /**
+     * Lista con los generos a los que pertence la movie.
+     */
     @SerializedName("Genre")
     @Expose
     private String genre;
+
+    /**
+     * Lista con los directores.
+     */
     @SerializedName("Director")
     @Expose
     private String director;
+
+    /**
+     * Lista con los guionistas.
+     */
     @SerializedName("Writer")
     @Expose
     private String writer;
+
+    /**
+     * Lista con los actores.
+     */
     @SerializedName("Actors")
     @Expose
     private String actors;
+
+    /**
+     * Sinopsis de la series.
+     */
     @SerializedName("Plot")
     @Expose
     private String plot;
+
+    /**
+     * Idioma original de la series.
+     */
     @SerializedName("Language")
     @Expose
     private String language;
+
+    /**
+     * Pais de origen.
+     */
     @SerializedName("Country")
     @Expose
     private String country;
+
+    /**
+     * Premios recibidos.
+     */
     @SerializedName("Awards")
     @Expose
     private String awards;
+
+    /**
+     * Url con el poster de la movie.
+     */
     @SerializedName("Poster")
     @Expose
     private String poster;
+
+    /**
+     * Lista con los votos de diferentes webs.
+     */
     @SerializedName("Ratings")
     @Expose
     private List<Rating> ratings = null;
+
+    /**
+     * Nota de metascore.
+     */
     @SerializedName("Metascore")
     @Expose
     private String metascore;
+
+    /**
+     * Nota en IMDB.
+     */
     @SerializedName("imdbRating")
     @Expose
     private String imdbRating;
+
+    /**
+     * Numero de votos en IMDB.
+     */
     @SerializedName("imdbVotes")
     @Expose
     private String imdbVotes;
+
+    /**
+     * id de IMDB.
+     */
     @SerializedName("imdbID")
     @Expose
     private String imdbID;
+
+    /**
+     * Indica que es una movie.
+     */
     @SerializedName("Type")
     @Expose
     private String type;
+
+    /**
+     * Fecha de salida del dvd.
+     */
     @SerializedName("DVD")
     @Expose
     private String dVD;
+
+    /**
+     * Direccion de las oficinas.
+     */
     @SerializedName("BoxOffice")
     @Expose
     private String boxOffice;
+
+    /**
+     * Productoras de la movie.
+     */
     @SerializedName("Production")
     @Expose
     private String production;
+
+    /**
+     * Url de la movie.
+     */
     @SerializedName("Website")
     @Expose
     private String website;
+
+    /**
+     * Comprobacion de si la api ha encontrado datos.
+     */
     @SerializedName("Response")
     @Expose
     private String response;
 
+    /**
+     * Devuelve el titulo de la movie.
+     * @return String | Titulo de la movie.
+     */
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public MovieOmdbDTO withTitle(String title) {
-        this.title = title;
-        return this;
-    }
-
+    /**
+     * Devuelve el anyo de emision de la movie.
+     * @return String | Anyo de emision.
+     */
     public String getYear() {
         return year;
     }
 
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public MovieOmdbDTO withYear(String year) {
-        this.year = year;
-        return this;
-    }
-
+    /**
+     * Devuelve la clasificacion de edades.
+     * @return String | Clasificacion de edades.
+     */
     public String getRated() {
         return rated;
     }
 
-    public void setRated(String rated) {
-        this.rated = rated;
-    }
-
-    public MovieOmdbDTO withRated(String rated) {
-        this.rated = rated;
-        return this;
-    }
-
+    /**
+     * Devuelve la fecha de la primera emision.
+     * @return String | Fecha de primera emision.
+     */
     public String getReleased() {
         return released;
     }
 
-    public void setReleased(String released) {
-        this.released = released;
-    }
-
-    public MovieOmdbDTO withReleased(String released) {
-        this.released = released;
-        return this;
-    }
-
+    /**
+     * Devuelve la durcion de la movie.
+     * @return String | Duracion de la movie.
+     */
     public String getRuntime() {
         return runtime;
     }
 
-    public void setRuntime(String runtime) {
-        this.runtime = runtime;
-    }
-
-    public MovieOmdbDTO withRuntime(String runtime) {
-        this.runtime = runtime;
-        return this;
-    }
-
+    /**
+     * Devuelve una lista con los generos.
+     * @return String | Lista de generos.
+     */
     public String getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public MovieOmdbDTO withGenre(String genre) {
-        this.genre = genre;
-        return this;
-    }
-
+    /**
+     * Devuelve una lista con los directores.
+     * @return String | Lista de dirctores.
+     */
     public String getDirector() {
         return director;
     }
 
-    public void setDirector(String director) {
-        this.director = director;
-    }
-
-    public MovieOmdbDTO withDirector(String director) {
-        this.director = director;
-        return this;
-    }
-
+    /**
+     * Devuelve una lista con los guionistas.
+     * @return String | Lista de guionistas.
+     */
     public String getWriter() {
         return writer;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
-
-    public MovieOmdbDTO withWriter(String writer) {
-        this.writer = writer;
-        return this;
-    }
-
+    /**
+     * Devuelve una lista con los actores.
+     * @return String | Lista de actores.
+     */
     public String getActors() {
         return actors;
     }
 
-    public void setActors(String actors) {
-        this.actors = actors;
-    }
-
-    public MovieOmdbDTO withActors(String actors) {
-        this.actors = actors;
-        return this;
-    }
-
+    /**
+     * Devuelve la sinopsis de la movie.
+     * @return String | Sinopsis de la movie.
+     */
     public String getPlot() {
         return plot;
     }
 
-    public void setPlot(String plot) {
-        this.plot = plot;
-    }
-
-    public MovieOmdbDTO withPlot(String plot) {
-        this.plot = plot;
-        return this;
-    }
-
+    /**
+     * Devuelve el idioma original.
+     * @return String | Idioma original.
+     */
     public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public MovieOmdbDTO withLanguage(String language) {
-        this.language = language;
-        return this;
-    }
-
+    /**
+     * Devuelve el pais de origen de la movie.
+     * @return String | Pais de origen.
+     */
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public MovieOmdbDTO withCountry(String country) {
-        this.country = country;
-        return this;
-    }
-
+    /**
+     * Devuelve los premios que ha recibido la movie.
+     * @return String | Premios recibidos.
+     */
     public String getAwards() {
         return awards;
     }
 
-    public void setAwards(String awards) {
-        this.awards = awards;
-    }
-
-    public MovieOmdbDTO withAwards(String awards) {
-        this.awards = awards;
-        return this;
-    }
-
+    /**
+     * Devuelve la url con el poster de la movie.
+     * @return String | Poster de la movie.
+     */
     public String getPoster() {
         return poster;
     }
 
-    public void setPoster(String poster) {
-        this.poster = poster;
-    }
-
-    public MovieOmdbDTO withPoster(String poster) {
-        this.poster = poster;
-        return this;
-    }
-
+    /**
+     * Devuelve una lista con las votaciones de diferentes webs.
+     * @return List | Lista de notas.
+     */
     public List<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-    public MovieOmdbDTO withRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-        return this;
-    }
-
+    /**
+     * Devuelve la putuacion de metascore.
+     * @return String | Puntuacion metascore.
+     */
     public String getMetascore() {
         return metascore;
     }
 
-    public void setMetascore(String metascore) {
-        this.metascore = metascore;
-    }
-
-    public MovieOmdbDTO withMetascore(String metascore) {
-        this.metascore = metascore;
-        return this;
-    }
-
+    /**
+     * Devuelve la nota de IMDB.
+     * @return String | Nota IMDB.
+     */
     public String getImdbRating() {
         return imdbRating;
     }
 
-    public void setImdbRating(String imdbRating) {
-        this.imdbRating = imdbRating;
-    }
-
-    public MovieOmdbDTO withImdbRating(String imdbRating) {
-        this.imdbRating = imdbRating;
-        return this;
-    }
-
+    /**
+     * Devuelve el numero de votantes de IMDB.
+     * @return String | Numero de votantes.
+     */
     public String getImdbVotes() {
         return imdbVotes;
     }
 
-    public void setImdbVotes(String imdbVotes) {
-        this.imdbVotes = imdbVotes;
-    }
-
-    public MovieOmdbDTO withImdbVotes(String imdbVotes) {
-        this.imdbVotes = imdbVotes;
-        return this;
-    }
-
+    /**
+     * Devuelve el id de IMDB.
+     * @return String | id de IMDB.
+     */
     public String getImdbID() {
         return imdbID;
     }
 
-    public void setImdbID(String imdbID) {
-        this.imdbID = imdbID;
-    }
-
-    public MovieOmdbDTO withImdbID(String imdbID) {
-        this.imdbID = imdbID;
-        return this;
-    }
-
+    /**
+     * Devuelve la comprobacion de que es una movie.
+     * @return String | Tipo de la peticion.
+     */
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public MovieOmdbDTO withType(String type) {
-        this.type = type;
-        return this;
-    }
-
+    /**
+     * Devuelve la fecha de salida en dvd.
+     * @return String | Fecha de salida en dvd.
+     */
     public String getDVD() {
         return dVD;
     }
 
-    public void setDVD(String dVD) {
-        this.dVD = dVD;
-    }
-
-    public MovieOmdbDTO withDVD(String dVD) {
-        this.dVD = dVD;
-        return this;
-    }
-
+    /**
+     * Devuelve la direccion de la productora.
+     * @return String | Direccion de la productora.
+     */
     public String getBoxOffice() {
         return boxOffice;
     }
 
-    public void setBoxOffice(String boxOffice) {
-        this.boxOffice = boxOffice;
-    }
-
-    public MovieOmdbDTO withBoxOffice(String boxOffice) {
-        this.boxOffice = boxOffice;
-        return this;
-    }
-
+    /**
+     * Devuelve la productora de la movie.
+     * @return String | Nombre de la productora.
+     */
     public String getProduction() {
         return production;
     }
 
-    public void setProduction(String production) {
-        this.production = production;
-    }
-
-    public MovieOmdbDTO withProduction(String production) {
-        this.production = production;
-        return this;
-    }
-
+    /**
+     * Devuelve la url de la web de la movie.
+     * @return String | Url de la web.
+     */
     public String getWebsite() {
         return website;
     }
 
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public MovieOmdbDTO withWebsite(String website) {
-        this.website = website;
-        return this;
-    }
-
+    /**
+     * Devuelve la comprobacion de si la peticion ha encontrado resultados.
+     * @return String | Comprobacion de la peticion.
+     */
     public String getResponse() {
         return response;
     }
-
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
-    public MovieOmdbDTO withResponse(String response) {
-        this.response = response;
-        return this;
-    }
-
-
-
 }
