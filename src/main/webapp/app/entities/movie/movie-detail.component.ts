@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager } from 'ng-jhipster';
@@ -28,7 +28,6 @@ import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
   `]
 })
 export class MovieDetailComponent implements OnInit, OnDestroy {
-
     movie: Movie;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
@@ -69,4 +68,5 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             (response) => this.load(this.movie.id)
         );
     }
+
 }

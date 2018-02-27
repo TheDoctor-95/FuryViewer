@@ -14,6 +14,7 @@ import { FuryViewerEntityModule } from './entities/entity.module';
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 import { SidebarModule } from 'ng-sidebar';
+import { ClickOutsideModule } from 'ng4-click-outside'
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
@@ -40,6 +41,7 @@ import {
         FuryViewerPageSetsModule,
         FuryViewerAccountModule,
         FuryViewerEntityModule,
+        ClickOutsideModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

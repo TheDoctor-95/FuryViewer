@@ -1,5 +1,3 @@
-@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
-
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -272,6 +270,170 @@ Social Buttons
 }
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
+
+.middle {
+    background-color: red;
+    height: 200px;
+}
+
+.imgFilm {
+    border-radius: 10px;
+    width: 100%;
+    object-fit: cover;
+    -webkit-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    -moz-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+}
+
+.nameTitle {
+    padding: 5% 8px;
+    font-family: "lemon/milk";
+    text-align: left;
+}
+
+.stars {
+    font-size: 2.1em;
+    color: #ef9800;
+}
+
+.furyColor {
+    color: #ef9800;
+}
+
+.whiteBox {
+    background-color: white;
+    height: 100%;
+    border-radius: 10px;
+    padding: 0px 12px;
+}
+
+.boxList {
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 4px 0px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #ef9800;
+    border: 2px solid #ef9800;
+}
+
+.boxList:hover{
+    background-color: #ef9800;
+    color: white;
+    cursor: pointer;
+}
+
+.faLeft {
+    padding-left: 30%;
+}
+
+.iconoFilm {
+    display: inline-block;
+}
+
+.infoFilm {
+    display: inline-block;
+}
+
+.infoBox {
+    display: block;
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.infoArtist {
+    font-weight: normal;
+    font-size: 15px;
+    color: #3b3b3b;
+    margin-left: 5px;
+}
+
+.infoArtist:hover {
+    color: #f5bb56;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.styleArtist {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-family: Roboto;
+    font-weight: normal;
+}
+
+.imgComent {
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+}
+
+#btnComen {
+    border-color: #ef9800 !important;
+    background-color: transparent;
+    border-style: solid;
+    color: #ef9800;
+    text-align: right;
+}
+
+#btnComen:hover {
+    border-color: #ef9800 !important;
+    background-color: #ef9800;
+    border-style: solid;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#reparto {
+    font-weight: 300;
+    font-family: "lemon/milk";
+    font-size: 20px;
+}
+
+#boxReparto {
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 4px 0px;
+    margin-bottom: 10px;
+}
+
+.infoWebs1{
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.infoWebs2{
+    display: inline-block;
+    float: right;
+    color: #ef9800;
+}
+
+#divShowHide{
+    position: absolute;
+    border: 2px solid #ef9800;
+    background-color: white;
+    right: 30px;
+    margin-top: -15px;
+    padding: 10px;
+
+}
+
+#plus:hover{
+    cursor: pointer;
+}
+
+ngb-popover-window{
+    border: 2px solid #ef9800 !important;
+    font-size: 15px !important;
+}
+
+
 
 /* ====================================================================================================================================================
 HOME

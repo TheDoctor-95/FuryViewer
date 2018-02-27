@@ -1,20 +1,136 @@
 
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+
+
 <div *ngIf="movie">
-    <div class="container-fluid">
+    <div class="container-fluid" style="color: #3b3b3b;">
         <div class="row" style="background-color: #d2d3d2; padding-left: 8%; padding-top: 3%;">
             <div class="col-2" style="width: 100%">
+                    <img src="{{movie.imgUrl}}" class="img-rounded card-img-top imgFilm" style="display: block; height: 18vw; width: 100%;">
+                    <div class="infoBox">
 
-                    <img src="{{movie.imgUrl}}" class="img-rounded card-img-top imgFilm">
+                        <!-- Director -->
+                        <div class="styleArtist" style="margin-top: 10px;">
+                            <div class="iconoFilm">
+                                <img src="img/director-chair.png" height="24px" width="24px"/>
+                            </div>
+                            <div *ngIf="movie.director" class="infoFilm">
+                                <a [routerLink]="['/artist', movie.director?.id]" class="infoArtist">{{movie.director?.name}}</a>
+                            </div>
+                        </div>
+                        <!-- Guionista -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/typewriter.png" height="24px" width="24px"/>
+                            </div>
+                            <div *ngIf="movie.scriptwriter" class="infoFilm">
+                                <a [routerLink]="['/artist', movie.scriptwriter?.id]" class="infoArtist">{{movie.scriptwriter?.name}}</a>
+                            </div>
+                        </div>
+                        <!-- Genero -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/masks.png" height="24px" width="24px"/>
+                            </div>
+                            <span *ngFor="let genre of movie.genres; let last = last" class="infoFilm">
+                                <a [routerLink]="['/genre', genre?.id ]" class="infoArtist">{{genre.name}}</a>{{last ? '' : ', '}}
+                            </span>
+                        </div>
+                        <!-- Duracion -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/time.png" height="24px" width="24px"/>
+                            </div>
+                            <div class="infoFilm">
+                                <span style="margin-left: 5px;">{{movie.duration}}</span>
+                            </div>
+                        </div>
+                        <!-- Pais -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/earth.png" height="24px" width="24px"/>
+                            </div>
+                            <div *ngIf="movie.country" class="infoFilm">
+                                <a [routerLink]="['/country', movie.country?.id]" class="infoArtist">{{movie.country?.name}}</a>
+                            </div>
+                        </div>
+                        <!-- Lanzamiento -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/calendar.png" height="24px" width="24px"/>
+                            </div>
+                            <div class="infoFilm">
+                                <span style="margin-left: 5px;">{{movie.releaseDate | date:'mediumDate'}}</span>
+                            </div>
+                        </div>
+
+                        <!-- DVD -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/dvd.png" height="24px" width="24px"/>
+                            </div>
+                            <div class="infoFilm">
+                                <span style="margin-left: 5px;">{{movie.dvd_release}}</span>
+                            </div>
+                        </div>
+
+                    </div>
             </div>
-            <div class="col-6" style="background-color: white; height: 100%; border-radius: 10px; padding: 12px;">
-                <div style="width: 59%; display: inline-block;">
-                    <h1>{{movie.name}}</h1>
+            <div class="col-6" style="height: 100%; margin-bottom: 25px;">
+                <div class="whiteBox" style="display: table; width: 100%;">
+                    <div style="width: 100%; display: inline-block; vertical-align: top;">
+                        <h1 class="nameTitle">{{movie.name}}</h1>
+                    </div>
+                    <div style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
+                        <ngb-rating class="stars"></ngb-rating>
+                        </br>
+                        <p style="padding-right: 8px;"><div id="plus" class="fa fa-plus-circle furyColor" [ngbPopover]="notas" placement="bottom" triggers="mouseenter:mouseleave"> </div><b class="furyColor"> 3.5</b> de 5 <i class="fa fa-star furyColor"></i></p>
+                    </div>
                 </div>
-                <div style="width: 40%; display: inline-block;">
-                    <ngb-rating></ngb-rating>
+                <ng-template #notas id="divShowHide" >
+                    <p class="infoWebs1">IMDB</p><p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
+                    <p class="infoWebs1">MetaCritic</p><p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
+                    <p class="infoWebs1">Rotten tomatoes</p><p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p>
+                </ng-template>
+                &nbsp;
+                <div class="whiteBox" style="display: block; padding: 18px;">
+                    <span style="font-family: Roboto; font-size: 15px; text-align: left;">{{movie.description}}</span>
                 </div>
+                &nbsp;
+                <div class="whiteBox" style="display: block; padding: 18px;">
+                    <div style="width: 100%">
+                        <div style="display: block;">
+                            <div style="display: inline-block; width: 15%; vertical-align: top;">
+                                <img src="img/foto.JPG" class="imgComent"/>
+                            </div>
+                            <div style="display: inline-block; width: 83%">
+                                <textarea name="comentario" style="width: 100%; font-size: 13px;" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div style="display: block; width: 100%">
+                            <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
+                                <button id="btnComen">COMENTAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-3" style="background-color: purple; height: 200px;"></div>
+
+
+            <div class="col-3" style="text-align: center;">
+                <div class="boxList"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i> Vista</div>
+                <div class="boxList"><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
+                <div class="boxList"><i class="fa fa-heart" style="color: #ef9800;"></i> Favorita</div>
+                <div class="boxList"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
+
+                &nbsp;
+
+                <div id="boxReparto">
+                    <div id="reparto">REPARTO</div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
