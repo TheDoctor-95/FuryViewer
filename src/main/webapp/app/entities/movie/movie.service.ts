@@ -44,9 +44,16 @@ export class MovieService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    pendingMovies(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/Pending/`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
+
+
 
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
