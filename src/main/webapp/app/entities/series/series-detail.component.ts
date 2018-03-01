@@ -8,10 +8,27 @@ import { SeriesService } from './series.service';
 import {Artist} from '../artist/artist.model';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ArtistService} from '../artist/artist.service';
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'jhi-series-detail',
-    templateUrl: './series-detail.component.html'
+    templateUrl: './series-detail.component.html',
+    providers: [NgbRatingConfig],
+    styles: [`
+    .star {
+      font-size: 1.5rem;
+      color: #b0c4de;
+    }
+    .filled {
+      color: #1e90ff;
+    }
+    .bad {
+      color: #deb0b0;
+    }
+    .filled.bad {
+      color: #ff1e1e;
+    }
+  `]
 })
 export class SeriesDetailComponent implements OnInit, OnDestroy {
     artists: Artist[];
@@ -26,9 +43,11 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private seriesService: SeriesService,
         private artistService: ArtistService,
         private route: ActivatedRoute,
-        private jhiAlertService: JhiAlertService
-    ) {
-    }
+        private jhiAlertService: JhiAlertService,
+    config: NgbRatingConfig
+) {
+    config.max = 5;
+}
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {

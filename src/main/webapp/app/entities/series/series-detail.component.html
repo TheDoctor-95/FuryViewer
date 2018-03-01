@@ -1,87 +1,133 @@
-
 <div *ngIf="series">
-    <h2><span jhiTranslate="furyViewerApp.series.detail.title">Series</span> {{series.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="furyViewerApp.series.name">Name</span></dt>
-        <dd>
-            <span>{{series.name}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.description">Description</span></dt>
-        <dd>
-            <span>{{series.description}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.state">State</span></dt>
-        <dd>
-            <span jhiTranslate="{{'furyViewerApp.SeriesEmittingEnum.' + series.state}}">{{series.state}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.releaseDate">Release Date</span></dt>
-        <dd>
-            <span>{{series.releaseDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.imgUrl">Img Url</span></dt>
-        <dd>
-            <span>{{series.imgUrl}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.imdb_id">Imdb Id</span></dt>
-        <dd>
-            <span>{{series.imdb_id}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.awards">Awards</span></dt>
-        <dd>
-            <span>{{series.awards}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.company">Company</span></dt>
-        <dd>
-            <div *ngIf="series.company">
-                <a [routerLink]="['/company', series.company?.id]">{{series.company?.name}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.genre">Genre</span></dt>
-        <dd>
-            <span *ngFor="let genre of series.genres; let last = last">
-                <a [routerLink]="['/genre', genre?.id ]">{{genre.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.series.country">Country</span></dt>
-        <dd>
-            <div *ngIf="series.country">
-                <a [routerLink]="['/country', series.country?.id]">{{series.country?.name}}</a>
-            </div>
-        </dd>
-        <dd>
-            <div *ngFor="let artist of artists">
-                <img src="{{artist.imgUrl}}"/>
-                {{artist.name}}
-            </div>
-        </dd>
-        <dd>
-            <div >
-                <h3>Director</h3>
-                <img src="{{director.imgUrl}}"/>
-                {{director.name}}
-            </div>
-        </dd>
-        <dd>
-            <div >
-                <h3>Scriptwriter</h3>
-                <img src="{{scripwriter.imgUrl}}"/>
-                {{scripwriter.name}}
-            </div>
-        </dd>
-    </dl>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+    <div class="container-fluid" style="color: #3b3b3b;">
+        <div class="row" style="background-color: #d2d3d2; padding-left: 8%; padding-top: 3%;">
+            <div class="col-2" style="width: 100%">
+                <img src="{{series.imgUrl}}" class="img-rounded card-img-top imgFilm" style="display: block; height: 18vw; width: 100%;">
+                <div class="infoBox">
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'series/'+ series.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
+                    <!-- Director -->
+                    <div class="styleArtist" style="margin-top: 10px;">
+                        <div class="iconoFilm">
+                            <img src="img/director-chair.png" height="24px" width="24px"/>
+                        </div>
+                        <div class="infoFilm">
+                            <a class="infoArtist">{{director.name}}</a>
+                        </div>
+                    </div>
+                    <!-- Guionista -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/typewriter.png" height="24px" width="24px"/>
+                        </div>
+                        <div class="infoFilm">
+                            <a class="infoArtist">{{scripwriter.name}}</a>
+                        </div>
+                    </div>
+                    <!-- Genero -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/masks.png" height="24px" width="24px"/>
+                        </div>
+                        <span *ngFor="let genre of series.genres; let last = last" class="infoFilm">
+                                <a [routerLink]="['/genre', genre?.id ]" class="infoArtist" >{{genre.name}}</a>{{last ? '' : ', '}}
+                            </span>
+                    </div>
+                    <!-- Pais -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/earth.png" height="24px" width="24px"/>
+                        </div>
+                        <div *ngIf="series.country" class="infoFilm">
+                            <a [routerLink]="['/country', series.country?.id]" class="infoArtist">{{series.country?.name}}</a>
+                        </div>
+                    </div>
+                    <!-- Lanzamiento -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/calendar.png" height="24px" width="24px"/>
+                        </div>
+                        <div class="infoFilm">
+                            <span style="margin-left: 5px; font-size: 13px;">{{series.releaseDate | date:'mediumDate'}}</span>
+                        </div>
+                    </div>
+
+                    <!-- Ended -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/cerrar.png" height="24px" width="24px"/>
+                        </div>
+                        <div class="infoFilm">
+                            <span style="margin-left: 5px; font-size: 13px;">{{series.state}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-6" style="height: 100%; margin-bottom: 25px;">
+                <div class="whiteBox" style="display: table; width: 100%;">
+                    <div style="width: 100%; display: inline-block; vertical-align: top;">
+                        <h1 class="nameTitle">{{series.name}}</h1>
+                    </div>
+                    <div style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
+                        <ngb-rating class="stars"></ngb-rating>
+                        </br>
+                        <p style="padding-right: 8px;"><div id="plus" class="fa fa-plus-circle furyColor" [ngbPopover]="notas" placement="bottom" triggers="mouseenter:mouseleave"> </div><b class="furyColor"> 3.5</b> de 5 <i class="fa fa-star furyColor"></i></p>
+                    </div>
+                </div>
+                <ng-template #notas id="divShowHide" >
+                    <p class="infoWebs1">IMDB</p><p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
+                </ng-template>
+                &nbsp;
+                <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
+                    <span style="font-size: 15px; text-align: left;">{{series.description}}</span>
+                </div>
+                &nbsp;
+                <div class="whiteBox" style="display: block; padding: 18px;">
+                    <div style="width: 100%">
+                        <div style="display: block;">
+                            <div style="display: inline-block; width: 15%; vertical-align: top;">
+                                <img src="img/foto.JPG" class="imgComent"/>
+                            </div>
+                            <div style="display: inline-block; width: 83%">
+                                <textarea name="comentario" style="width: 100%; font-size: 13px;" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div style="display: block; width: 100%">
+                            <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
+                                <button id="btnComen">COMENTAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-3" style="text-align: center;">
+                <div class="boxList"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i> Vista</div>
+                <div class="boxList"><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
+                <div class="boxList"><i class="fa fa-heart" style="color: #ef9800;"></i> Favorita</div>
+                <div class="boxList"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
+
+                &nbsp;
+
+                <div id="boxReparto">
+                    <div id="reparto">REPARTO</div>
+                    <div class="container-fluid">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <div *ngFor="let artist of artists" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
+                        <img style="width: 70px; display: block;" src="{{artist.imgUrl}}"/>
+                        <div style="width: 70px; display: block;">{{artist.name}}</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
+

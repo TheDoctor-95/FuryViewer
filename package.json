@@ -23,7 +23,6 @@
     "generator-jhipster-pages": "^2.0.2",
     "jquery": "3.2.1",
     "ng-jhipster": "0.2.12",
-    "ng-sidebar": "^7.0.1",
     "ng-sidebar": "^6.0.4",
     "ng2-webstorage": "1.8.0",
     "ng4-click-outside": "^1.0.1",

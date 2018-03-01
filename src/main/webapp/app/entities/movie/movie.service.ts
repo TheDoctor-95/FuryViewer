@@ -53,8 +53,6 @@ export class MovieService {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
 
-
-
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];

@@ -347,14 +347,14 @@ Social Buttons
 
 .infoArtist {
     font-weight: normal;
-    font-size: 15px;
+    font-size: 13px;
     color: #3b3b3b;
     margin-left: 5px;
 }
 
 .infoArtist:hover {
     color: #f5bb56;
-    font-size: 15px;
+    font-size: 13px;
     text-decoration: none;
     font-weight: normal;
 }
@@ -363,7 +363,6 @@ Social Buttons
     display: block;
     margin-bottom: 10px;
     font-size: 15px;
-    font-family: Roboto;
     font-weight: normal;
 }
 
@@ -393,6 +392,8 @@ Social Buttons
     font-weight: 300;
     font-family: "lemon/milk";
     font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #boxReparto {
@@ -400,7 +401,7 @@ Social Buttons
     background-color: white;
     border-radius: 10px;
     padding: 4px 0px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 .infoWebs1{

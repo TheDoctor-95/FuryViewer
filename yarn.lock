@@ -5595,9 +5595,17 @@ ng-jhipster@0.2.12:
     "@ngx-translate/core" "7.0.0"
     "@ngx-translate/http-loader" "0.1.0"
 
+ng-sidebar@^6.0.4:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/ng-sidebar/-/ng-sidebar-6.0.5.tgz#0fe40e1d9fc2e06f7a750a9628d9977a6718baba"
+
 ng2-webstorage@1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/ng2-webstorage/-/ng2-webstorage-1.8.0.tgz#02bac5f29cecc2b7a4dfea17d9cebc720edf6b49"
+
+ng4-click-outside@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ng4-click-outside/-/ng4-click-outside-1.0.1.tgz#3e13604232ee991607b38c3bdcce6e44a9fd4c09"
 
 ngc-webpack@3.2.2:
   version "3.2.2"
