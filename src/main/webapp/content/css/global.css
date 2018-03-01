@@ -11,13 +11,14 @@ body {
 }
 
 a {
-    color: #533f03;
-    font-weight: bold;
+    color: white;
+    /*font-weight: bold;*/
 }
 
 a:hover {
-    color: #533f03;
-    font-weight: bold;
+    color: orange;
+    /*font-weight: bold;*/
+    text-decoration: none;
 }
 
 /* ==========================================================================
@@ -318,7 +319,7 @@ Social Buttons
     border: 2px solid #ef9800;
 }
 
-.boxList:hover{
+.boxList:hover {
     background-color: #ef9800;
     color: white;
     cursor: pointer;
@@ -403,18 +404,18 @@ Social Buttons
     margin-bottom: 10px;
 }
 
-.infoWebs1{
+.infoWebs1 {
     display: inline-block;
     margin-right: 30px;
 }
 
-.infoWebs2{
+.infoWebs2 {
     display: inline-block;
     float: right;
     color: #ef9800;
 }
 
-#divShowHide{
+#divShowHide {
     position: absolute;
     border: 2px solid #ef9800;
     background-color: white;
@@ -424,16 +425,14 @@ Social Buttons
 
 }
 
-#plus:hover{
+#plus:hover {
     cursor: pointer;
 }
 
-ngb-popover-window{
+ngb-popover-window {
     border: 2px solid #ef9800 !important;
     font-size: 15px !important;
 }
-
-
 
 /* ====================================================================================================================================================
 HOME
@@ -489,7 +488,19 @@ h2 {
 }
 
 .calendario {
-    left: 0;
+    /*left: 0;*/
+    height: 48%;
+
+}
+
+.card.calendario {
+    margin-left: -3%;
+    margin-bottom: 4%;
+}
+
+.tops {
+    margin-top: 4%;
+    height: 48%;
 }
 
 #botoncalendar {
@@ -522,7 +533,7 @@ button {
     background-color: transparent;
     border-style: solid;
     color: #ef9800;
-    font-size: 1.2rem;
+    font-size: 1rem;
 
 }
 
@@ -633,16 +644,12 @@ li {
     margin-left: -1.6em;
 }
 
-.card.calendario {
-    height: 92%;
-}
-
 .card.col-5 {
     padding-top: 3%;
     padding-bottom: 3%;
 }
 
-.card-img-top:hover {
+.portades:hover>.card-img-top{
     -webkit-box-shadow: -1px 0px 75px 14px rgba(239, 152, 0, 1);
     -moz-box-shadow: -1px 0px 75px 14px rgba(239, 152, 0, 1);
     box-shadow: -1px 0px 75px 14px rgba(239, 152, 0, 1);
@@ -654,9 +661,22 @@ li {
      left: 0;
      top: -2vm;*/
 }
+.card.portades:hover{
+    font-weight: 600 !important;
+}
 
 .card.portades {
     background-color: transparent;
+}
+
+#topseries {
+    display: inline-block;
+    width: 49%;
+}
+
+#toppelis {
+    display: inline-block;
+
 }
 
 /* ====================================================================================================================================================
@@ -665,7 +685,7 @@ Watchlist
 
 .cos {
     width: 70%;
-    height: 75%;
+    /* height: 75%;*/
     background-color: white;
     margin: 12%;
     margin-top: 2%;
@@ -676,7 +696,7 @@ Watchlist
 
 .hola {
     width: 400px;
-    height: 700px;
+    /* height: 700px;*/
     background-color: #d2d3d2;
 
 }
@@ -712,6 +732,7 @@ input {
 #botons_sidebar {
     left: 0;
     margin-top: 8%;
+    margin-bottom: 8%;
     margin-left: -10%;
     font-size: 10px;
     text-align: center;
@@ -860,7 +881,7 @@ input:checked + .slider:before {
 
 .info_perfil {
     width: 70%;
-    height: 23%;
+    /* height: 23%;*/
     background-color: white;
     margin-top: 2%;
     margin-left: 15%;
@@ -895,7 +916,7 @@ input:checked + .slider:before {
 .info {
     text-align: left;
     padding-top: 3%;
-    padding-left: 8%;
+    padding-left: 6%;
     padding-bottom: 4%;
 }
 
@@ -916,14 +937,14 @@ input:checked + .slider:before {
 
 .text_info i {
     margin-right: 3%;
-    color:orange;
+    color: orange;
 }
 
 .imatgeperf {
     margin-left: 28%;
 }
 
-.valoracio{
+.valoracio {
     position: absolute;
     top: 0;
     right: 0;
@@ -931,12 +952,18 @@ input:checked + .slider:before {
     border-color: orange;
     background-color: white;
     border-radius: 100px;
-    width: 30px;
+    width: 32px;
     margin-top: -9px;
-    height: 30px;
+    height: 32px;
     font-size: 1.7rem;
 }
 
-.valoracio h2{
+.valoracio h2 {
     margin-top: 7%;
+    margin: 6%;
+    font-size: 1.5rem;
+}
+
+.button {
+    margin-top: 46%;
 }

@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
         this.principal.identity().then((account) => {
             this.account = account;
         });
+        this.loadPendingMovies();
         this.registerAuthenticationSuccess();
     }
     loadPendingMovies() {
@@ -63,4 +64,5 @@ export class HomeComponent implements OnInit {
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
+
 }

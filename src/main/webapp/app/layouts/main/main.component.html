@@ -33,70 +33,56 @@
     >
         <div style="background-color: black; height: 100%; width: 20vh;">
             <ul class="list-unstyled components container-fluid">
+
+                <li class="row" routerLink="/">
+
+                    <div class="titol col-5" style="display: inline-block; color: white;" routerLink="/">Home</div>
+                    <i class="glyphicon glyphicon-home col-2 "></i>
+                </li>
+
+
                 <li class="row">
 
-                        <div class="titol col-5" style="display: inline-block; color: white;">Home</div>
-                        <!--<div class="col-2">-->
-                        <i class="glyphicon glyphicon-home col-2 "></i>
-                        <!--</div>-->
+                    <div class="titol col-5" style="display: inline-block; color: white;" routerLink="/user-ext">Perfil</div>
+                    <i class="glyphicon glyphicon-user col-2  "></i>
+                </li>
 
+
+                <li class="row">
+
+                    <div class="titol col-5" style="display: inline-block; color: white;" routerLink="/watchlist">Watchlist</div>
+                    <i class="glyphicon glyphicon-eye-open col-2"></i>
+                </li>
+
+                <li class="row">
+
+                    <div class="titol col-5" style="display: inline-block; color: white;"><a href="">Búsqueda</a></div>
+                    <i class="glyphicon glyphicon-search col-2 "></i>
+                </li>
+
+                <li class="row">
+
+                    <div class="titol col-5" style="display: inline-block; color: white;"><a href="">Calendario</a></div>
+                    <i class="fa fa-calendar fa-2x col-2 "></i>
                </li>
 
-               <li class="row">
 
-                       <div class="titol col-5" style="display: inline-block; color: white;">Perfil</div>
+                <li class="row">
 
-                       <i class="glyphicon glyphicon-user col-2  "></i>
+                    <div class="titol col-5" style="display: inline-block; color: white;"><a href="">About</a></div>
+                    <i class="glyphicon glyphicon-link col-2 "></i>
+                </li>
 
+            </ul>
+        </div>
+    </ng-sidebar>
 
-               </li>
-               <li class="row">
-
-                       <div class="titol col-5" style="display: inline-block; color: white;">Peliculas</div>
-
-                           <i class="glyphicon glyphicon-film col-2"></i>
-
-
-
-
-               </li>
-               <li class="row">
-
-                       <div class="titol col-5" style="display: inline-block; color: white;">Series</div>
-
-                       <i class="glyphicon glyphicon-facetime-video col-2 "></i>
-
-
-
-               </li>
-               <li class="row">
-
-                       <div class="titol col-5" style="display: inline-block; color: white;">Artistas</div>
-
-                       <i class="glyphicon glyphicon-star col-2 "></i>
-
-
-
-               </li>
-               <li class="row">
-
-                       <div class="titol col-5" style="display: inline-block; color: white;">About</div>
-
-                       <i class="glyphicon glyphicon-link col-2 "></i>
-
-
-               </li>
-
-           </ul>
-       </div>
-   </ng-sidebar>
-
-   <div ng-sidebar-content >
-       <div style="left: 7.5vh;" class="card jh-card">
-           <router-outlet></router-outlet>
-           <router-outlet name="popup"></router-outlet>
-       </div>
-       <jhi-footer></jhi-footer>
-   </div>
+    <div ng-sidebar-content>
+        <div style="left: 7.5vh;" class="card jh-card">
+            <router-outlet></router-outlet>
+            <router-outlet name="popup"></router-outlet>
+        </div>
+        <jhi-footer></jhi-footer>
+    </div>
 
 </ng-sidebar-container>
