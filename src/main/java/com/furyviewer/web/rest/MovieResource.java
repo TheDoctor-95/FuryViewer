@@ -5,6 +5,7 @@ import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.repository.MovieStatsRepository;
+import com.furyviewer.repository.RateMovieRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.SmartSearch.Movie.MovieQueryService;
@@ -51,6 +52,9 @@ public class MovieResource {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RateMovieRepository rateMovieRepository;
 
     @Inject
     private MovieOmdbDTOService movieOmdbDTOService;
@@ -160,6 +164,14 @@ public class MovieResource {
     public ResponseEntity<List<Movie>> findMovieByName(@PathVariable String name) {
         log.debug("REST request to get Movies by name", name);
         List<Movie> movie =movieRepository.findMovieByName(name);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
+    }
+
+    @GetMapping("/movies/topPelis/")
+    @Timed
+    public ResponseEntity<List<Movie>> findTopPelis() {
+        log.debug("REST request to get Movies by name");
+        List<Movie> movie = rateMovieRepository.topPelis();
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
 

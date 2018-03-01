@@ -18,7 +18,7 @@ import {ResponseWrapper} from "../shared/model/response-wrapper.model";
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
-    topPelis: String[] = ['Justice League', 'Harry Potter y la camara secreta', 'Distrito 12', 'Fast and Furious 8', 'Coco'];
+    topPelis: Movie
     topSeries: String[] = ['Doctor Who', 'The Flash', 'Arrow', 'Supergirl', 'Legends of Tomorrow'];
     moviesPending: Movie[];
     constructor(
@@ -36,11 +36,21 @@ export class HomeComponent implements OnInit {
         });
         this.loadPendingMovies();
         this.registerAuthenticationSuccess();
+        this.loadTopMovies();
     }
     loadPendingMovies() {
         this.movieService.pendingMovies().subscribe(
             (res: ResponseWrapper) => {
                 this.moviesPending = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
+
+    loadTopMovies() {
+        this.movieService.topMovies().subscribe(
+            (res: ResponseWrapper) => {
+                this.topPelis = res.json;
             },
             (res: ResponseWrapper) => this.onError(res.json)
         );

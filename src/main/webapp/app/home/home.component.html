@@ -128,7 +128,7 @@
 
 
                     <ol class="list-group">
-                        <li *ngFor="let movie of topPelis" class="list-group-item"> {{movie}}</li>
+                        <li *ngFor="let movie of topPelis" class="list-group-item" routerLink="{{movie.id}}">{{movie.name}}</li>
 
                     </ol>
 
