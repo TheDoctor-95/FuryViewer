@@ -3247,9 +3247,9 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-generator-jhipster-pages@^2.0.2:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/generator-jhipster-pages/-/generator-jhipster-pages-2.0.3.tgz#21e57d0143cc284981380557fdd402aeceac84c6"
+generator-jhipster-pages@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/generator-jhipster-pages/-/generator-jhipster-pages-2.0.4.tgz#046a9246616e21c3f837a62eb94bf971030a744e"
   dependencies:
     chalk "1.1.3"
     generator-jhipster ">=4.6.0"

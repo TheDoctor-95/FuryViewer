@@ -13,3 +13,17 @@ li:hover{
     color:orange;
 }
 
+a{
+    font-family: Roboto;
+    color:white;
+    text-decoration: none;
+
+}
+
+.fa{
+    font-size: 25px;
+    color: orange;
+    margin: auto;
+    margin-right: 16%;
+    margin-top: 11%;
+}

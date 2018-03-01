@@ -48,6 +48,11 @@ export class MovieService {
         return this.http.get(`${this.resourceUrl}/Pending/`)
             .map((res: Response) => this.convertResponse(res));
     }
+    topMovies(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/topPelis/`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
