@@ -234,10 +234,9 @@ public class SeriesTmdbDTOService {
                 if(response.isSuccessful()) {
                     List<Cast> casting = response.body().getCast();
 
-                    for (Cast cast : casting) {
-                        ep.setActors(artistService.importActors(cast.getName()));
-                        ep = episodeRepository.save(ep);
-                    }
+                    ep.setActors(artistService.importActorsTMdb(casting));
+
+                    episodeRepository.save(ep);
                 }
 
                 break getActors;
@@ -316,7 +315,7 @@ public class SeriesTmdbDTOService {
 
             ep = episodeRepository.save(ep);
 
-            //importActors(seriesId, ep);
+            importActors(seriesId, ep);
 
             System.out.println(se);
         } else {

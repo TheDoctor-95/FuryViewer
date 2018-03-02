@@ -6,6 +6,7 @@ import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
 import com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService;
+import com.furyviewer.service.dto.TheMovieDB.Episode.Cast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -142,6 +143,41 @@ public class ArtistService {
         }
 
         return artist;
+    }
+
+    /**
+     * Metodo que se encarga de convertir un String en los objetos de la clase Artist necesarios que contiene su nombre
+     * y main_actor como tipo de artista.
+     *
+     * @param casting String | Contiene el nombre de los artistas.
+     * @return Set | Set que contiene la informacion de los artistas.
+     */
+    public Set<Artist> importActorsTMdb(List<Cast> casting) {
+        Set<Artist> artists = new HashSet<>();
+
+        for (Cast cast : casting) {
+            Optional<Artist> optionalActor = artistRepository.findByName(cast.getName());
+            Artist artist;
+
+            //En caso de que el artista exista se comprueba si ya tiene asignado el tipo main_actor.
+            if (optionalActor.isPresent()) {
+                artist = optionalActor.get();
+
+                if (!artist.getArtistTypes().contains(artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR))) {
+                    artist.addArtistType(artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR));
+                    artist = artistRepository.save(artist);
+                }
+
+            } else {
+                //Se crea un artista desde cero.
+                artist = artistTmdbDTOService.importArtist(cast.getName(),
+                    artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR));
+            }
+
+            artists.add(artist);
+        }
+
+        return artists;
     }
 
     /**

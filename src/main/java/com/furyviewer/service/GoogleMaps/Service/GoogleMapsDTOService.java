@@ -41,16 +41,20 @@ public class GoogleMapsDTOService {
      * @return GoogleMapsDTO | Informacion de country en el formato de GoogleMaps
      */
     public GoogleMapsDTO getCoordinates (String address) {
+        GoogleMapsDTO maps = null;
+        try {
 
-        GoogleMapsDTO maps = new GoogleMapsDTO();
-        Call<GoogleMapsDTO> callGoogleMaps = apiGoogleMaps.getCoordinates(address, apikey);
+            Call<GoogleMapsDTO> callGoogleMaps = apiGoogleMaps.getCoordinates(address, apikey);
 
-        try{
-            maps = callGoogleMaps.execute().body();
-            System.out.println(maps);
-        }
-        catch(IOException e) {
-            e.printStackTrace();
+            try {
+                maps = callGoogleMaps.execute().body();
+                System.out.println(maps);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            maps = null;
         }
 
         return maps;
@@ -63,9 +67,15 @@ public class GoogleMapsDTOService {
      */
     public double getLongitude (String countryName){
         GoogleMapsDTO maps = getCoordinates(countryName);
-        List<Result> resultMap = maps.getResults();
+        List<Result> resultMap = null;
+        double longitude = -1;
 
-        return resultMap.get(0).getGeometry().getLocation().getLng();
+        if(maps != null) {
+            resultMap = maps.getResults();
+            longitude = resultMap.get(0).getGeometry().getLocation().getLng();
+        }
+
+        return longitude;
     }
 
     /**
@@ -75,9 +85,15 @@ public class GoogleMapsDTOService {
      */
     public double getLatitude (String countryName){
         GoogleMapsDTO maps = getCoordinates(countryName);
-        List<Result> resultMap = maps.getResults();
+        List<Result> resultMap = null;
+        double latitude = -1;
 
-        return resultMap.get(0).getGeometry().getLocation().getLat();
+        if(maps != null) {
+            resultMap = maps.getResults();
+            latitude = resultMap.get(0).getGeometry().getLocation().getLat();
+        }
+
+        return latitude;
     }
 
     /**
@@ -88,12 +104,13 @@ public class GoogleMapsDTOService {
     public String getName (String countryName) {
         GoogleMapsDTO maps = getCoordinates(countryName);
         String country = null;
+        if(maps != null && !maps.getResults().isEmpty()) {
+            List<AddressComponent> nameMaps = maps.getResults().get(0).getAddressComponents();
 
-        List<AddressComponent> nameMaps = maps.getResults().get(0).getAddressComponents();
-
-        for (AddressComponent name : nameMaps) {
-            if(name.getTypes().get(0).equalsIgnoreCase("country")) {
-                country = name.getLongName();
+            for (AddressComponent name : nameMaps) {
+                if (name.getTypes().get(0).equalsIgnoreCase("country")) {
+                    country = name.getLongName();
+                }
             }
         }
 
@@ -106,13 +123,16 @@ public class GoogleMapsDTOService {
      * @return Country | Country en el formato FuryViewer.
      */
     public Country importCountry (String countryName){
-        Country country = new Country();
+        Country country = null;
 
-        country.setName(getName(countryName));
-        country.setLongitude(getLongitude(getName(countryName)));
-        country.setLatitude(getLatitude(getName(countryName)));
+        if(getCoordinates(countryName) != null) {
+            country = new Country();
+            country.setName(getName(countryName));
+            country.setLongitude(getLongitude(getName(countryName)));
+            country.setLatitude(getLatitude(getName(countryName)));
 
-        country = countryRepository.save(country);
+            country = countryRepository.save(country);
+        }
 
         return country;
     }
