@@ -118,10 +118,11 @@
             </div>
 
 
+
             <div class="col-3" style="text-align: center;">
                 <div class="boxList"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i> Vista</div>
                 <div class="boxList"><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
-                <div class="boxList"><i class="fa fa-heart" style="color: #ef9800;"></i> Favorita</div>
+                <div class="boxList" (click)="like(true)" [ngStyle]="{'background-color':fav.liked ? '#ef9800' : 'white', 'color':fav.liked ? 'white' : '#ef9800'}" ><i class="fa fa-heart" style="color: #ef9800;" [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorita</div>
                 <div class="boxList"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
 
                 &nbsp;

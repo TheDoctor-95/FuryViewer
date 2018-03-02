@@ -3,7 +3,9 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.FavouriteMovie;
 
+import com.furyviewer.domain.Movie;
 import com.furyviewer.repository.FavouriteMovieRepository;
+import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
@@ -14,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -37,9 +38,13 @@ public class FavouriteMovieResource {
 
     private final UserRepository userRepository;
 
-    public FavouriteMovieResource(FavouriteMovieRepository favouriteMovieRepository, UserRepository userRepository) {
+    private final MovieRepository movieRepository;
+
+
+    public FavouriteMovieResource(FavouriteMovieRepository favouriteMovieRepository, UserRepository userRepository, MovieRepository movieRepository) {
         this.favouriteMovieRepository = favouriteMovieRepository;
         this.userRepository = userRepository;
+        this.movieRepository = movieRepository;
     }
 
     /**
@@ -60,7 +65,10 @@ public class FavouriteMovieResource {
         Optional<FavouriteMovie> favoriteMovieExisting = favouriteMovieRepository.findByMovieAndUserLogin(favouriteMovie.getMovie(), SecurityUtils.getCurrentUserLogin());
 
         if(favoriteMovieExisting.isPresent()){
-            throw new BadRequestAlertException("Movie ja añadida a favoritas", ENTITY_NAME, "favoriteExists");
+            favouriteMovie=favoriteMovieExisting.get();
+            favouriteMovie.setLiked(!favouriteMovie.isLiked());
+        }else{
+            favouriteMovie.setLiked(true);
         }
 
         favouriteMovie.setDate(ZonedDateTime.now());
@@ -70,6 +78,20 @@ public class FavouriteMovieResource {
         return ResponseEntity.created(new URI("/api/favourite-movies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/favourite-movies/id/{idMovie}/liked")
+    @Timed
+    public ResponseEntity<FavouriteMovie> favouriteMovie(@PathVariable Long idMovie) throws URISyntaxException {
+        log.debug("REST request to save FavouriteMovie : {}", idMovie);
+
+        Movie m = movieRepository.findOne(idMovie);
+
+        FavouriteMovie fM = new FavouriteMovie();
+        fM.setMovie(m);
+        fM.setLiked(true);
+
+        return createFavouriteMovie(fM);
     }
 
     /**
@@ -126,6 +148,14 @@ public class FavouriteMovieResource {
         log.debug("REST request to get FavouriteMovie : {}", id);
         return favouriteMovieRepository.NumFavsMovie(id);
       //  return ResponseUtil.wrapOrNotFound(Optional.ofNullable(favouriteMovie));
+    }
+
+    @GetMapping("/favourite-movies/movieId/{id}")
+    @Timed
+    public ResponseEntity<FavouriteMovie> getFavUserMovie(@PathVariable Long id) {
+        log.debug("REST request to get FavouriteMovie : {}", id);
+        FavouriteMovie fm = favouriteMovieRepository.findByUserAndMovieId(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get(), id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(fm));
     }
 
     /**

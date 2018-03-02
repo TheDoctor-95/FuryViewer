@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.*;
 import java.util.List;
 import java.util.Optional;
+import com.furyviewer.domain.User;
 
 /**
  * Spring Data JPA repository for the FavouriteMovie entity.
@@ -26,7 +27,5 @@ public interface FavouriteMovieRepository extends JpaRepository<FavouriteMovie, 
     Long NumFavsMovie(@Param("MovieId") Long id);
 
 
-
-
-
+    FavouriteMovie findByUserAndMovieId(User u, Long id);
 }

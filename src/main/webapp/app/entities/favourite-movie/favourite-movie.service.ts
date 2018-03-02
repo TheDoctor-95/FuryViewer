@@ -23,6 +23,14 @@ export class FavouriteMovieService {
         });
     }
 
+    favorite(idMovie: number, like: boolean): Observable<FavouriteMovie> {
+        return this.http.post(`${this.resourceUrl}/id/${idMovie}/liked`,"").map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+
     update(favouriteMovie: FavouriteMovie): Observable<FavouriteMovie> {
         const copy = this.convert(favouriteMovie);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
@@ -33,6 +41,13 @@ export class FavouriteMovieService {
 
     find(id: number): Observable<FavouriteMovie> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    favMovieUser(id: number){
+        return this.http.get(`${this.resourceUrl}/movieId/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
