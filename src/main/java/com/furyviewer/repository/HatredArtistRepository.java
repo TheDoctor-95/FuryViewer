@@ -2,7 +2,6 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.HatredArtist;
-import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.User;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
