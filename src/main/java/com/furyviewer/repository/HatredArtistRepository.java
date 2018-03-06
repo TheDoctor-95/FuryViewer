@@ -27,10 +27,13 @@ public interface HatredArtistRepository extends JpaRepository<HatredArtist, Long
     Long NumHatredArtist(@Param("ArtistId") Long id);
 
 
-    @Query("select h.artist from HatredArtist h group by h.artist order by avg (h.rate) desc ")
+    /*
+
+    @Query("select h.artist from HatredArtist  group by h.artist order by avg (h.rate) desc ")
     List<Artist> topHatredArtist();
 
-    @Query("select h.rate from HatredArtist h where h.user=:User and h.movie.id = :id ")
+    @Query("select h.rate from HatredArtist  where h.user=:User and h.movie.id = :id ")
     Integer markHatredArtist(@Param("User") User u, @Param("id") Long id);
 
+    */
 }

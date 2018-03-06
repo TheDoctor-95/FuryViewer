@@ -25,10 +25,13 @@ public interface HatredSeriesRepository extends JpaRepository<HatredSeries, Long
     @Query("select count(hatredSeries) from HatredSeries hatredSeries where hatredSeries.id=:SeriesId")
     Long NumHatredSeries(@Param("SeriesId")Long id);
 
-    @Query("select h.series from HatredSeries h group by h.series order by avg (h.rate) desc ")
+    /*
+
+    @Query("select h.series from HatredSeries  group by h.series order by avg (h.rate) desc ")
     List<Series> topHatredSeries();
 
-    @Query("select h.rate from HatredSeries h where h.user=:User and h.movie.id = :id ")
+    @Query("select h.rate from HatredSeries  where h.user=:User and h.movie.id = :id ")
     Integer markHatredSeries(@Param("User") User u, @Param("id") Long id);
 
+    */
 }
