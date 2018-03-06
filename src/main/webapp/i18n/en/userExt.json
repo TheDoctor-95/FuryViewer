@@ -19,6 +19,7 @@
             "locationGoogleMaps": "Location Google Maps",
             "latitude": "Latitude",
             "longitude": "Longitude",
+            "background_img": "Background Img",
             "user": "User"
         }
     }

@@ -40,6 +40,13 @@
             <column name="longitude" type="double">
                 <constraints nullable="true" />
             </column>
+
+            <column name="background_img" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="background_img_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="user_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
