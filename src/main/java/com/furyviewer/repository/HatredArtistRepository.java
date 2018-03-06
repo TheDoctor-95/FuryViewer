@@ -2,6 +2,8 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.HatredArtist;
+import com.furyviewer.domain.Movie;
+import com.furyviewer.domain.User;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -26,5 +28,10 @@ public interface HatredArtistRepository extends JpaRepository<HatredArtist, Long
     Long NumHatredArtist(@Param("ArtistId") Long id);
 
 
+    @Query("select h.artist from HatredArtist h group by h.artist order by avg (h.rate) desc ")
+    List<Artist> topHatredArtist();
+
+    @Query("select h.rate from HatredArtist h where h.user=:User and h.movie.id = :id ")
+    Integer markHatredArtist(@Param("User") User u, @Param("id") Long id);
 
 }
