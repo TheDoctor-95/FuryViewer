@@ -82,6 +82,10 @@
         {
             "fieldName": "awards",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "biography",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171130103704",

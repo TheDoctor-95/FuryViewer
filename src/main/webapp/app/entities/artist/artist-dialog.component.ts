@@ -12,7 +12,6 @@ import { ArtistService } from './artist.service';
 import { Country, CountryService } from '../country';
 import { ArtistType, ArtistTypeService } from '../artist-type';
 import { Movie, MovieService } from '../movie';
-import { Series, SeriesService } from '../series';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -29,8 +28,6 @@ export class ArtistDialogComponent implements OnInit {
     artisttypes: ArtistType[];
 
     movies: Movie[];
-
-    series: Series[];
     birthdateDp: any;
     deathdateDp: any;
 
@@ -41,7 +38,6 @@ export class ArtistDialogComponent implements OnInit {
         private countryService: CountryService,
         private artistTypeService: ArtistTypeService,
         private movieService: MovieService,
-        private seriesService: SeriesService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -54,8 +50,6 @@ export class ArtistDialogComponent implements OnInit {
             .subscribe((res: ResponseWrapper) => { this.artisttypes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.movieService.query()
             .subscribe((res: ResponseWrapper) => { this.movies = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.seriesService.query()
-            .subscribe((res: ResponseWrapper) => { this.series = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -101,10 +95,6 @@ export class ArtistDialogComponent implements OnInit {
     }
 
     trackMovieById(index: number, item: Movie) {
-        return item.id;
-    }
-
-    trackSeriesById(index: number, item: Series) {
         return item.id;
     }
 

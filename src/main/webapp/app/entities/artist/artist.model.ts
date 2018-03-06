@@ -10,18 +10,15 @@ export class Artist implements BaseEntity {
         public imgUrl?: string,
         public imdb_id?: string,
         public awards?: string,
+        public biography?: string,
         public country?: BaseEntity,
         public artistTypes?: BaseEntity[],
         public favoriteArtists?: BaseEntity[],
         public hatredArtists?: BaseEntity[],
         public movieDirectors?: BaseEntity[],
-        public seriesDirectors?: BaseEntity[],
         public movieScriptwriters?: BaseEntity[],
-        public seriesScriptwriters?: BaseEntity[],
         public movieMainActors?: BaseEntity[],
         public movieSecondaryActors?: BaseEntity[],
-        public seriesMainActors?: BaseEntity[],
-        public seriesSecondaryActors?: BaseEntity[],
     ) {
     }
 }

@@ -50,6 +50,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="biography" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="country_id" type="bigint">
                 <constraints nullable="true" />
             </column>

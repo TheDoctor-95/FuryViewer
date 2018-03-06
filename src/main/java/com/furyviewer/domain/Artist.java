@@ -3,15 +3,14 @@ package com.furyviewer.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.Objects;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * A Artist.
@@ -20,7 +19,6 @@ import java.util.Objects;
 @Table(name = "artist")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Artist implements Serializable {
-
 
     private static final long serialVersionUID = 1L;
 
@@ -49,6 +47,9 @@ public class Artist implements Serializable {
     @Column(name = "awards")
     private String awards;
 
+    @Column(name = "biography")
+    private String biography;
+
     @ManyToOne
     private Country country;
 
@@ -74,20 +75,10 @@ public class Artist implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Movie> movieDirectors = new HashSet<>();
 
-    @OneToMany(mappedBy = "director")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Episode> episodeDirectors = new HashSet<>();
-
     @OneToMany(mappedBy = "scriptwriter")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Movie> movieScriptwriters = new HashSet<>();
-
-    @OneToMany(mappedBy = "scriptwriter")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Episode> episodesScriptwriters = new HashSet<>();
 
     @ManyToMany(mappedBy = "actorMains")
     @JsonIgnore
@@ -104,21 +95,17 @@ public class Artist implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Episode> episodes = new HashSet<>();
 
-    public Set<Episode> getEpisodeDirectors() {
-        return episodeDirectors;
-    }
+    @OneToMany(mappedBy = "director")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Episode> episodeDirectors = new HashSet<>();
 
-    public void setEpisodeDirectors(Set<Episode> episodeDirectors) {
-        this.episodeDirectors = episodeDirectors;
-    }
+    @OneToMany(mappedBy = "scriptwriter")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Episode> episodesScriptwriters = new HashSet<>();
 
-    public Set<Episode> getEpisodesScriptwriters() {
-        return episodesScriptwriters;
-    }
 
-    public void setEpisodesScriptwriters(Set<Episode> episodesScriptwriters) {
-        this.episodesScriptwriters = episodesScriptwriters;
-    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -136,14 +123,6 @@ public class Artist implements Serializable {
     public Artist name(String name) {
         this.name = name;
         return this;
-    }
-
-    public Set<Episode> getEpisodes() {
-        return episodes;
-    }
-
-    public void setEpisodes(Set<Episode> episodes) {
-        this.episodes = episodes;
     }
 
     public void setName(String name) {
@@ -228,6 +207,19 @@ public class Artist implements Serializable {
         this.awards = awards;
     }
 
+    public String getBiography() {
+        return biography;
+    }
+
+    public Artist biography(String biography) {
+        this.biography = biography;
+        return this;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
     public Country getCountry() {
         return country;
     }
@@ -236,6 +228,30 @@ public class Artist implements Serializable {
         this.country = country;
         return this;
     }
+
+    public Set<Episode> getEpisodes() {
+                return episodes;
+            }
+
+        public void setEpisodes(Set<Episode> episodes) {
+                this.episodes = episodes;
+           }
+
+    public Set<Episode> getEpisodeDirectors() {
+                return episodeDirectors;
+            }
+
+        public void setEpisodeDirectors(Set<Episode> episodeDirectors) {
+               this.episodeDirectors = episodeDirectors;
+            }
+
+       public Set<Episode> getEpisodesScriptwriters() {
+                return episodesScriptwriters;
+           }
+
+        public void setEpisodesScriptwriters(Set<Episode> episodesScriptwriters) {
+                this.episodesScriptwriters = episodesScriptwriters;
+            }
 
     public void setCountry(Country country) {
         this.country = country;
@@ -412,8 +428,6 @@ public class Artist implements Serializable {
         return this;
     }
 
-
-
     public void setMovieSecondaryActors(Set<Movie> movies) {
         this.movieSecondaryActors = movies;
     }
@@ -450,6 +464,8 @@ public class Artist implements Serializable {
             ", imgUrl='" + getImgUrl() + "'" +
             ", imdb_id='" + getImdb_id() + "'" +
             ", awards='" + getAwards() + "'" +
+            ", biography='" + getBiography() + "'" +
             "}";
     }
+
 }
