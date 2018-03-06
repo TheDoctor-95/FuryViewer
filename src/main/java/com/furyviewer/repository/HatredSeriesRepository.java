@@ -2,6 +2,7 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.HatredSeries;
 import com.furyviewer.domain.Series;
+import com.furyviewer.domain.User;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +24,11 @@ public interface HatredSeriesRepository extends JpaRepository<HatredSeries, Long
 
     @Query("select count(hatredSeries) from HatredSeries hatredSeries where hatredSeries.id=:SeriesId")
     Long NumHatredSeries(@Param("SeriesId")Long id);
+
+    @Query("select h.series from HatredSeries h group by h.series order by avg (h.rate) desc ")
+    List<Series> topHatredSeries();
+
+    @Query("select h.rate from HatredSeries h where h.user=:User and h.movie.id = :id ")
+    Integer markHatredSeries(@Param("User") User u, @Param("id") Long id);
 
 }
