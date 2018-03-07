@@ -7,6 +7,7 @@ import com.furyviewer.service.OpenMovieDatabase.Service.SeriesOmdbDTOService;
 import com.furyviewer.service.SmartSearch.Series.SeriesQueryService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
 import com.furyviewer.repository.RateSeriesRepository;
+import com.furyviewer.repository.HatredSeriesRepository;
 import com.furyviewer.service.dto.Criteria.SeriesBCriteria;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -38,6 +39,9 @@ public class SeriesResource {
 
     @Autowired
     private RateSeriesRepository rateSeriesRepository;
+
+    @Autowired
+    private HatredSeriesRepository hatredSeriesRepository;
 
     @Autowired
     SeriesOmdbDTOService seriesOmdbDTOService;
@@ -106,17 +110,36 @@ public class SeriesResource {
     /**
      * @return
      *
-     * Top Series
+     * Top Liked Series
      */
 
 
     @GetMapping("/series/topSeries/")
     @Timed
-    public ResponseEntity<List<Series>> findTopPelis() {
+    public ResponseEntity<List<Series>> findTopSeries() {
         log.debug("REST request to get Movies by name");
         List<Series> series = rateSeriesRepository.topSeries();
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(series));
     }
+
+
+    /**
+     * @return
+     *
+     * Top Liked Series
+     */
+
+
+    @GetMapping("/series/topHatredSeries/")
+    @Timed
+    public ResponseEntity<List<Series>> findTopHatredSeries() {
+        log.debug("REST request to get Movies by name");
+        List<Series> series = hatredSeriesRepository.topHatredSeries();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(series));
+    }
+
+
+
 
     /**
      * GET  /series/:id : get the "id" series.

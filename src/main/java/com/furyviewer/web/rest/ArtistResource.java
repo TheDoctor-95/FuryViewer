@@ -7,6 +7,7 @@ import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
+import com.furyviewer.repository.HatredArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
 import com.furyviewer.service.SmartSearch.Artist.ArtistServiceSmart;
 import com.furyviewer.service.TheMovieDB.Service.ArtistTmdbDTOService;
@@ -48,6 +49,9 @@ public class ArtistResource {
     private static final String ENTITY_NAME = "artist";
 
     private final ArtistRepository artistRepository;
+
+    @Autowired
+    private HatredArtistRepository hatredArtistRepository;
 
     @Autowired
     private ArtistServiceSmart artistServiceSmart;
@@ -262,5 +266,18 @@ public class ArtistResource {
         log.debug("REST request to get ArtistS by criteria: {}", criteria);
         List<Artist> entityList = artistBQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
+    }
+
+
+    /**
+     * Top Hatred Movies
+     *
+     */
+    @GetMapping("/artist/topHatredArtist/")
+    @Timed
+    public ResponseEntity<List<Artist>> findHatredArtist() {
+        log.debug("REST request to get top hatred Movies");
+        List<Artist> artist = hatredArtistRepository.topHatredArtist();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
     }
 }
