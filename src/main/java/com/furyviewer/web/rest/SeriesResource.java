@@ -6,6 +6,7 @@ import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.SeriesOmdbDTOService;
 import com.furyviewer.service.SmartSearch.Series.SeriesQueryService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
+import com.furyviewer.repository.RateSeriesRepository;
 import com.furyviewer.service.dto.Criteria.SeriesBCriteria;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -34,6 +35,9 @@ public class SeriesResource {
     private static final String ENTITY_NAME = "series";
 
     private final SeriesRepository seriesRepository;
+
+    @Autowired
+    private RateSeriesRepository rateSeriesRepository;
 
     @Autowired
     SeriesOmdbDTOService seriesOmdbDTOService;
@@ -98,6 +102,21 @@ public class SeriesResource {
         log.debug("REST request to get all Series");
         return seriesRepository.findAllWithEagerRelationships();
         }
+
+    /**
+     * @return
+     *
+     * Top Series
+     */
+
+
+    @GetMapping("/series/topSeries/")
+    @Timed
+    public ResponseEntity<List<Series>> findTopPelis() {
+        log.debug("REST request to get Movies by name");
+        List<Series> series = rateSeriesRepository.topSeries();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(series));
+    }
 
     /**
      * GET  /series/:id : get the "id" series.

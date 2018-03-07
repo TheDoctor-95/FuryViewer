@@ -28,12 +28,13 @@ public interface HatredMovieRepository extends JpaRepository<HatredMovie, Long> 
     Long HatredMovieT(@Param("MovieId") Long id);
 
    /*
-
     @Query("select h.movie from HatredMovie Movie group by h.movie order by avg (h.rate) desc ")
     List<Movie> topHatredMovies();
 
     @Query("select h.rate from HatredMovie  where h.user=:User and h.movie.id = :id ")
     Integer markHatredMovie(@Param("User") User u, @Param("id") Long id);
+
     */
+
 
 }
