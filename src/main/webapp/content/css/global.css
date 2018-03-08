@@ -320,7 +320,7 @@ Social Buttons
 }
 
 .boxList:hover {
-    background-color: #ef9800;
+    background-color: #ef9800 !important;
     color: white;
     cursor: pointer;
 }

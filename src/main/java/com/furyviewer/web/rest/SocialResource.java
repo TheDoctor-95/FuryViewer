@@ -103,6 +103,14 @@ public class SocialResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(social));
     }
 
+    @GetMapping("/socials/Movie/{id}")
+    @Timed
+    public ResponseEntity<List<Social>> getSocialMovie(@PathVariable Long id) {
+        log.debug("REST request to get Social : {}", id);
+        List<Social> social = socialRepository.findMarksMovie(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(social));
+    }
+
     /**
      * DELETE  /socials/:id : delete the "id" social.
      *
@@ -116,4 +124,6 @@ public class SocialResource {
         socialRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager } from 'ng-jhipster';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
 import { Movie } from './movie.model';
 import { MovieService } from './movie.service';
@@ -10,6 +10,9 @@ import {factoryOrValue} from 'rxjs/operator/multicast';
 import {FavouriteMovieService} from '../favourite-movie/favourite-movie.service';
 import {Observable} from 'rxjs/Observable';
 import {FavouriteMovie} from '../favourite-movie/favourite-movie.model';
+import {Social} from "../social/social.model";
+import {ResponseWrapper} from "../../shared/model/response-wrapper.model";
+import {SocialService} from "../social/social.service";
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -36,13 +39,17 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private eventSubscriber: Subscription;
     fav: FavouriteMovie;
+    marks: Social[];
+
 
     constructor(
         private eventManager: JhiEventManager,
         private movieService: MovieService,
         private route: ActivatedRoute,
         config: NgbRatingConfig,
-        private favouriteMovieService: FavouriteMovieService
+        private favouriteMovieService: FavouriteMovieService,
+        private socialService: SocialService,
+        private jhiAlertService: JhiAlertService
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
@@ -53,6 +60,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
             this.getIfLiked(params['id']);
+            this.loadMarks(params['id'])
         });
         this.registerChangeInMovies();
 
@@ -73,6 +81,15 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         );
         this.fav.liked= !this.fav.liked
 
+    }
+
+    loadMarks(id:number){
+        this.socialService.movieMarks(id).subscribe(
+            (res: ResponseWrapper) => {
+                this.marks = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
     }
 
     getIfLiked(id: number) {
@@ -105,6 +122,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             'movieListModification',
             (response) => this.load(this.movie.id)
         );
+    }
+
+    private onError(error) {
+        this.jhiAlertService.error(error.message, null, null);
     }
 
 }

@@ -51,7 +51,7 @@
                             <img src="img/earth.png" height="24px" width="24px"/>
                         </div>
                         <div *ngIf="movie.country" class="infoFilm">
-                            <a [routerLink]="['/country', movie.country?.id]" class="infoArtist">{{movie.country?.name}}</a>
+                            <a class="infoArtist">{{movie.country?.name}}</a>
                         </div>
                     </div>
                     <!-- Lanzamiento -->
@@ -88,9 +88,7 @@
                     </div>
                 </div>
                 <ng-template #notas id="divShowHide" >
-                    <p class="infoWebs1">IMDB</p><p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
-                    <p class="infoWebs1">MetaCritic</p><p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
-                    <p class="infoWebs1">Rotten tomatoes</p><p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p>
+                    <span *ngFor="let mark of marks"><p class="infoWebs1">{{mark.type}}</p><p class="infoWebs2">{{mark.url}}<i class="fa fa-star furyColor"></i></p></br></span>
                 </ng-template>
                 &nbsp;
                 <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
