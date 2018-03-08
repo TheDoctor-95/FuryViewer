@@ -196,6 +196,9 @@ public class ArtistTmdbDTOService {
                     if (completeArtistTmdbDTO.getPlaceOfBirth() != null) {
                         artist.setCountry(countryService.importCountry(completeArtistTmdbDTO.getPlaceOfBirth().toString()));
                     }
+                    if(completeArtistTmdbDTO.getBiography() != null) {
+                        artist.setBiography(completeArtistTmdbDTO.getBiography());
+                    }
                 }
                 //Salimos del bucle
                 break getArtist;

@@ -36,4 +36,10 @@
             newDataType="longtext"
             tableName="episode"/>
     </changeSet>
+    <changeSet author="DAM (generated)" id="1512041434727-7">
+        <modifyDataType
+            columnName="biography"
+            newDataType="longtext"
+            tableName="artist"/>
+    </changeSet>
 </databaseChangeLog>

@@ -37,6 +37,13 @@ public class UserExt implements Serializable {
     @Column(name = "longitude")
     private Double longitude;
 
+    @Lob
+    @Column(name = "background_img")
+    private byte[] background_img;
+
+    @Column(name = "background_img_content_type")
+    private String background_imgContentType;
+
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
@@ -115,6 +122,32 @@ public class UserExt implements Serializable {
         this.longitude = longitude;
     }
 
+    public byte[] getBackground_img() {
+        return background_img;
+    }
+
+    public UserExt background_img(byte[] background_img) {
+        this.background_img = background_img;
+        return this;
+    }
+
+    public void setBackground_img(byte[] background_img) {
+        this.background_img = background_img;
+    }
+
+    public String getBackground_imgContentType() {
+        return background_imgContentType;
+    }
+
+    public UserExt background_imgContentType(String background_imgContentType) {
+        this.background_imgContentType = background_imgContentType;
+        return this;
+    }
+
+    public void setBackground_imgContentType(String background_imgContentType) {
+        this.background_imgContentType = background_imgContentType;
+    }
+
     public User getUser() {
         return user;
     }
@@ -158,6 +191,8 @@ public class UserExt implements Serializable {
             ", locationGoogleMaps='" + getLocationGoogleMaps() + "'" +
             ", latitude='" + getLatitude() + "'" +
             ", longitude='" + getLongitude() + "'" +
+            ", background_img='" + getBackground_img() + "'" +
+            ", background_imgContentType='" + background_imgContentType + "'" +
             "}";
     }
 }

@@ -24,6 +24,7 @@
             <th><span jhiTranslate="furyViewerApp.artist.imgUrl">Img Url</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.imdb_id">Imdb Id</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.awards">Awards</span></th>
+            <th><span jhiTranslate="furyViewerApp.artist.biography">Biography</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.country">Country</span></th>
             <th><span jhiTranslate="furyViewerApp.artist.artistType">Artist Type</span></th>
             <th></th>
@@ -39,6 +40,7 @@
                 <td>{{artist.imgUrl}}</td>
                 <td>{{artist.imdb_id}}</td>
                 <td>{{artist.awards}}</td>
+                <td>{{artist.biography}}</td>
                 <td>
                     <div *ngIf="artist.country">
                         <a [routerLink]="['../country', artist.country?.id ]" >{{artist.country?.name}}</a>

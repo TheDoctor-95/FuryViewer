@@ -53,6 +53,11 @@ public class UserExtResourceIntTest {
     private static final Double DEFAULT_LONGITUDE = 1D;
     private static final Double UPDATED_LONGITUDE = 2D;
 
+    private static final byte[] DEFAULT_BACKGROUND_IMG = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_BACKGROUND_IMG = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_BACKGROUND_IMG_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_BACKGROUND_IMG_CONTENT_TYPE = "image/png";
+
     @Autowired
     private UserExtRepository userExtRepository;
 
@@ -95,7 +100,9 @@ public class UserExtResourceIntTest {
             .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
             .locationGoogleMaps(DEFAULT_LOCATION_GOOGLE_MAPS)
             .latitude(DEFAULT_LATITUDE)
-            .longitude(DEFAULT_LONGITUDE);
+            .longitude(DEFAULT_LONGITUDE)
+            .background_img(DEFAULT_BACKGROUND_IMG)
+            .background_imgContentType(DEFAULT_BACKGROUND_IMG_CONTENT_TYPE);
         return userExt;
     }
 
@@ -124,6 +131,8 @@ public class UserExtResourceIntTest {
         assertThat(testUserExt.getLocationGoogleMaps()).isEqualTo(DEFAULT_LOCATION_GOOGLE_MAPS);
         assertThat(testUserExt.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
         assertThat(testUserExt.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
+        assertThat(testUserExt.getBackground_img()).isEqualTo(DEFAULT_BACKGROUND_IMG);
+        assertThat(testUserExt.getBackground_imgContentType()).isEqualTo(DEFAULT_BACKGROUND_IMG_CONTENT_TYPE);
     }
 
     @Test
@@ -160,7 +169,9 @@ public class UserExtResourceIntTest {
             .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
             .andExpect(jsonPath("$.[*].locationGoogleMaps").value(hasItem(DEFAULT_LOCATION_GOOGLE_MAPS.toString())))
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
-            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())));
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
+            .andExpect(jsonPath("$.[*].background_imgContentType").value(hasItem(DEFAULT_BACKGROUND_IMG_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].background_img").value(hasItem(Base64Utils.encodeToString(DEFAULT_BACKGROUND_IMG))));
     }
 
     @Test
@@ -178,7 +189,9 @@ public class UserExtResourceIntTest {
             .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.locationGoogleMaps").value(DEFAULT_LOCATION_GOOGLE_MAPS.toString()))
             .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()))
-            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()));
+            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
+            .andExpect(jsonPath("$.background_imgContentType").value(DEFAULT_BACKGROUND_IMG_CONTENT_TYPE))
+            .andExpect(jsonPath("$.background_img").value(Base64Utils.encodeToString(DEFAULT_BACKGROUND_IMG)));
     }
 
     @Test
@@ -203,7 +216,9 @@ public class UserExtResourceIntTest {
             .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
             .locationGoogleMaps(UPDATED_LOCATION_GOOGLE_MAPS)
             .latitude(UPDATED_LATITUDE)
-            .longitude(UPDATED_LONGITUDE);
+            .longitude(UPDATED_LONGITUDE)
+            .background_img(UPDATED_BACKGROUND_IMG)
+            .background_imgContentType(UPDATED_BACKGROUND_IMG_CONTENT_TYPE);
 
         restUserExtMockMvc.perform(put("/api/user-exts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -219,6 +234,8 @@ public class UserExtResourceIntTest {
         assertThat(testUserExt.getLocationGoogleMaps()).isEqualTo(UPDATED_LOCATION_GOOGLE_MAPS);
         assertThat(testUserExt.getLatitude()).isEqualTo(UPDATED_LATITUDE);
         assertThat(testUserExt.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
+        assertThat(testUserExt.getBackground_img()).isEqualTo(UPDATED_BACKGROUND_IMG);
+        assertThat(testUserExt.getBackground_imgContentType()).isEqualTo(UPDATED_BACKGROUND_IMG_CONTENT_TYPE);
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.HatredMovie;
 import com.furyviewer.domain.Movie;
+import com.furyviewer.domain.User;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,16 @@ public interface HatredMovieRepository extends JpaRepository<HatredMovie, Long> 
     Optional<HatredMovie> findByMovieAndUserLogin(Movie movie, String login);
 
 
-   @Query("select count(hatred_movie) from HatredMovie hatred_movie where hatred_movie.id=:MovieId")
+    @Query("select count(hatred_movie) from HatredMovie hatred_movie where hatred_movie.id=:MovieId")
     Long HatredMovieT(@Param("MovieId") Long id);
+
+
+
+    @Query("select h.movie from HatredMovie h group by h.movie order by avg (h.hated) desc ")
+    List<Movie> topHatredMovies();
+
+    @Query("select h.hated from HatredMovie h where h.user=:User and h.movie.id = :id ")
+    Integer markHatredMovie(@Param("User") User u, @Param("id") Long id);
+
+
 }

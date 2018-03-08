@@ -1,6 +1,7 @@
 package com.furyviewer.service.util;
 
 import com.furyviewer.domain.Artist;
+import com.furyviewer.domain.Series;
 import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
@@ -10,6 +11,7 @@ import com.furyviewer.service.dto.TheMovieDB.Episode.Cast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.time.LocalDate;
 import java.util.*;
@@ -200,6 +202,8 @@ public class ArtistService {
             })
             .collect(Collectors.toList());
     }
+
+
 
     /**
      * Devuelve todos los Actores de una Series a partir del id.

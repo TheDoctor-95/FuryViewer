@@ -12,7 +12,7 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
     templateUrl: './artist.component.html'
 })
 export class ArtistComponent implements OnInit, OnDestroy {
-    artists: Artist[];
+artists: Artist[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
@@ -25,7 +25,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.artistService.query(2).subscribe(
+        this.artistService.query().subscribe(
             (res: ResponseWrapper) => {
                 this.artists = res.json;
             },
