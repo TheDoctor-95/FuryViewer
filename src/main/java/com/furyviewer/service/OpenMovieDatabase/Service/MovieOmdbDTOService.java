@@ -8,6 +8,7 @@ import com.furyviewer.service.TheMovieDB.Service.TrailerTmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import com.furyviewer.service.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
@@ -33,6 +34,9 @@ public class MovieOmdbDTOService {
      */
     private static MovieOmdbDTORepository apiService =
         MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
+
+    @Autowired
+    public AsyncImportTasks asyncImportTasks;
 
     @Autowired
     private GenreService genreService;
@@ -102,8 +106,14 @@ public class MovieOmdbDTOService {
         if (movieOmdbDTO.getResponse().equalsIgnoreCase("true")) {
             m = importMovie(movieOmdbDTO);
         }
+
+        asyncImportTasks.importAditionalinBackground(title);
+
         return m;
     }
+
+
+
 
     /**
      * Convierte la informacion de una movie de OMDB al formato de FuryViewer.
