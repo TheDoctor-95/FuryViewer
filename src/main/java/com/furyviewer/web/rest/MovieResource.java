@@ -6,6 +6,7 @@ import com.furyviewer.domain.Movie;
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.repository.MovieStatsRepository;
 import com.furyviewer.repository.RateMovieRepository;
+import com.furyviewer.repository.HatredMovieRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.SmartSearch.Movie.MovieQueryService;
@@ -46,6 +47,9 @@ public class MovieResource {
 
     @Autowired
     private MovieQueryService movieQueryService;
+
+    @Autowired
+    private HatredMovieRepository hatredMovieRepository;
 
     @Autowired
     private MovieStatsRepository movieStatsRepository;
@@ -167,6 +171,11 @@ public class MovieResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
 
+    /**
+    Find movies by Top
+
+     */
+
     @GetMapping("/movies/topPelis/")
     @Timed
     public ResponseEntity<List<Movie>> findTopPelis() {
@@ -174,6 +183,20 @@ public class MovieResource {
         List<Movie> movie = rateMovieRepository.topPelis();
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
+
+    /**
+     * Top Hatred Movies
+     *
+     */
+    @GetMapping("/movies/topHatredPelis/")
+    @Timed
+    public ResponseEntity<List<Movie>> findHatredPelis() {
+        log.debug("REST request to get top hatred Movies");
+        List<Movie> movie = hatredMovieRepository.topHatredMovies();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
+    }
+
+
 
     /**
      * DELETE  /movies/:id : delete the "id" movie.

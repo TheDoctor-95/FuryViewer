@@ -2,6 +2,7 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.RateMovie;
 import com.furyviewer.domain.RateSeries;
+import com.furyviewer.domain.User;
 import org.hibernate.NonUniqueResultException;
 import org.springframework.data.repository.query.Param;
 import com.furyviewer.domain.Series;
@@ -31,5 +32,13 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
 
     @Query("select avg(rateSeries) from RateSeries rateSeries where rateSeries.id=:SeriesId")
     Double RateSeriesMedia(@Param("SeriesId")Long id);
+
+    @Query("select r.series from RateSeries r group by r.series order by avg (r.rate) desc")
+    List<Series> topSeries();
+
+    @Query("select r.rate from RateSeries r where r.user=:User and r.series.id = :id ")
+    Integer markSeries(@Param("User") User u, @Param("id") Long id);
+
+
 
 }
