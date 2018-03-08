@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
+import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -19,6 +20,7 @@ import java.util.Optional;
 /**
  * Servicio encargado de recuperar informacion de una Movie desde MovieOmdbDTORepository y la convierte al
  * formato FuryViewer.
+ *
  * @author TheDoctor-95
  * @see com.furyviewer.service.OpenMovieDatabase.Repository.MovieOmdbDTORepository
  */
@@ -67,6 +69,7 @@ public class MovieOmdbDTOService {
 
     /**
      * Devuelve la informacion de una movie en el formato proporcionado por OpenMovieDataBase.
+     *
      * @param title String | Titulo de la movie.
      * @return MovieOmdbDTO | Informacion con el formato proporcionado por la API.
      */
@@ -74,11 +77,29 @@ public class MovieOmdbDTOService {
         MovieOmdbDTO movie = new MovieOmdbDTO();
         Call<MovieOmdbDTO> callMovie = apiService.getMovie(apikey, title);
 
-        try{
+        try {
             movie = callMovie.execute().body();
             System.out.println(movie);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (IOException e) {
+
+        return movie;
+    }
+
+    public MovieOmdbDTO getMovieByTitleAndYear(String title, String year) {
+        MovieOmdbDTO movie = null;
+        Call<MovieOmdbDTO> callMovie = apiService.getMovieByTitleAndYear(apikey, title, year);
+
+        try {
+            Response<MovieOmdbDTO> response = callMovie.execute();
+
+            if (response.isSuccessful()) {
+                movie = new MovieOmdbDTO();
+                movie = response.body();
+                System.out.println(movie);
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -87,14 +108,15 @@ public class MovieOmdbDTOService {
 
     /**
      * Devuelve una Movie existente en la base de datos o en caso de no existir hace una peticion a la api.
+     *
      * @param title String | Titulo de la movie.
      * @return Movie | Contiene la informacion de una movie en el formato FuryViewer.
      */
     @Transactional
-    public Movie importMovieByName(String title){
+    public Movie importMovieByName(String title) {
 
         Optional<Movie> mdb = movieRepository.findByName(title);
-        if(mdb.isPresent()){
+        if (mdb.isPresent()) {
             return mdb.get();
         }
 
@@ -113,14 +135,13 @@ public class MovieOmdbDTOService {
     }
 
 
-
-
     /**
      * Convierte la informacion de una movie de OMDB al formato de FuryViewer.
+     *
      * @param movieOmdbDTO MovieOmdbDTO | Informacion de la Movie propocionada por la api.
      * @return Movie | Contiene la informacion de una movie en el formato FuryViewer.
      */
-    public Movie importMovie(MovieOmdbDTO movieOmdbDTO){
+    public Movie importMovie(MovieOmdbDTO movieOmdbDTO) {
         Movie m = new Movie();
         m.setName(movieOmdbDTO.getTitle());
 

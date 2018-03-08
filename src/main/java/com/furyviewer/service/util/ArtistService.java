@@ -206,9 +206,9 @@ public class ArtistService {
 
 
     /**
-     * Devuelve todos los Actores de una Series a partir del id.
-     * @param serieID Long | id de la serie
-     * @return Artist | Director que ha participado en mas capitulos
+     * Devuelve el director de una Series a partir del id.
+     * @param serieID Long | id de la series.
+     * @return Artist | Director que ha participado en mas capitulos.
      */
     @Transactional
     public Artist findDirectorBySerieId(Long serieID) {
@@ -227,9 +227,9 @@ public class ArtistService {
     }
 
     /**
-     * Devuelve todos los Actores de una Series a partir del id.
-     * @param serieID Long | id de la serie
-     * @return Artist | Escritor que ha participado en mas capitulos
+     * Devuelve todos el guionista de una Series a partir del id.
+     * @param serieID Long | id de la series.
+     * @return Artist | Guionista que ha participado en mas capitulos.
      */
     @Transactional
     public Artist findScriprirterBySerieId(Long serieID) {
