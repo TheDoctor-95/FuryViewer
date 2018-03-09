@@ -253,6 +253,7 @@ public class Artist implements Serializable {
                 this.episodesScriptwriters = episodesScriptwriters;
             }
 
+
     public void setCountry(Country country) {
         this.country = country;
     }
