@@ -15,6 +15,8 @@ import {ResponseWrapper} from "../../shared/model/response-wrapper.model";
 import {SocialService} from "../social/social.service";
 import {HatredMovieService} from "../hatred-movie/hatred-movie.service";
 import {HatredMovie} from "../hatred-movie/hatred-movie.model";
+import {ArtistService} from "../artist/artist.service";
+import {Artist} from "../artist/artist.model";
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -43,6 +45,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     fav: FavouriteMovie;
     marks: Social[];
     hate: HatredMovie;
+    artistMovie: Artist[];
 
     constructor(
         private eventManager: JhiEventManager,
@@ -52,7 +55,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private favouriteMovieService: FavouriteMovieService,
         private socialService: SocialService,
         private hatredMovieService: HatredMovieService,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        private artistService: ArtistService
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
@@ -67,6 +71,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.getIfLiked(params['id']);
             this.loadMarks(params['id']);
             this.getIfHatred(params['id']);
+            this.loadArtist(params['id']);
         });
         this.registerChangeInMovies();
 
@@ -76,6 +81,14 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.movieService.find(id).subscribe((movie) => {
             this.movie = movie;
         });
+    }
+    loadArtist(id){
+        this.artistService.query().subscribe(
+            (res: ResponseWrapper) => {
+                this.artistMovie = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
     }
     previousState() {
         window.history.back();
