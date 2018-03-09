@@ -23,6 +23,13 @@ export class HatredMovieService {
         });
     }
 
+    hate(idMovie: number): Observable<HatredMovie> {
+        return this.http.post(`${this.resourceUrl}/id/${idMovie}/hate`,"").map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
     update(hatredMovie: HatredMovie): Observable<HatredMovie> {
         const copy = this.convert(hatredMovie);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
@@ -33,6 +40,13 @@ export class HatredMovieService {
 
     find(id: number): Observable<HatredMovie> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    getIfHatred(id: number): Observable<HatredMovie>{
+        return this.http.get(`${this.resourceUrl}/${id}/user`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });

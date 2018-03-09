@@ -13,6 +13,8 @@ import {FavouriteMovie} from '../favourite-movie/favourite-movie.model';
 import {Social} from "../social/social.model";
 import {ResponseWrapper} from "../../shared/model/response-wrapper.model";
 import {SocialService} from "../social/social.service";
+import {HatredMovieService} from "../hatred-movie/hatred-movie.service";
+import {HatredMovie} from "../hatred-movie/hatred-movie.model";
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -40,7 +42,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     private eventSubscriber: Subscription;
     fav: FavouriteMovie;
     marks: Social[];
-
+    hate: HatredMovie;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -49,18 +51,22 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         config: NgbRatingConfig,
         private favouriteMovieService: FavouriteMovieService,
         private socialService: SocialService,
+        private hatredMovieService: HatredMovieService,
         private jhiAlertService: JhiAlertService
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
         this.fav.liked=false;
+        this.hate = new HatredMovie();
+        this.hate.hated=false;
     }
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
             this.getIfLiked(params['id']);
-            this.loadMarks(params['id'])
+            this.loadMarks(params['id']);
+            this.getIfHatred(params['id']);
         });
         this.registerChangeInMovies();
 
@@ -75,11 +81,19 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         window.history.back();
     }
 
-    like(liked: boolean) {
+    like() {
         this.subscribeToLikeResponse(
-            this.favouriteMovieService.favorite(this.movie.id, liked)
+            this.favouriteMovieService.favorite(this.movie.id)
         );
-        this.fav.liked= !this.fav.liked
+
+
+    }
+
+    hated(){
+        this.subscribeToHateResponse(
+            this.hatredMovieService.hate(this.movie.id)
+        );
+
 
     }
 
@@ -99,13 +113,40 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         });
     }
 
+    getIfHatred(id: number){
+        this.hatredMovieService.getIfHatred(id).subscribe((hatredMovie) => {
+            console.log('load');
+            this.hate = hatredMovie;
+        });
+    }
+
     private subscribeToLikeResponse(result: Observable<FavouriteMovie>) {
-        result.subscribe((res: Movie) =>
+        result.subscribe((res: FavouriteMovie) =>
             this.onSaveSuccessLike(res), (res: Response) => this.onSaveErrorLike());
     }
     private onSaveSuccessLike(result: FavouriteMovie) {
         this.eventManager.broadcast({ name: 'favouriteMovieListModification', content: 'OK'});
+        this.fav=result;
+        if(this.hate.hated && this.fav.liked){
+            this.subscribeToHateResponse(
+                this.hatredMovieService.hate(this.movie.id)
+            );
 
+        }
+    }
+
+    private subscribeToHateResponse(result: Observable<HatredMovie>) {
+        result.subscribe((res: HatredMovie) =>
+            this.onSaveSuccessHate(res), (res: Response) => this.onSaveErrorLike());
+    }
+    private onSaveSuccessHate(result: HatredMovie) {
+        this.eventManager.broadcast({ name: 'favouriteMovieListModification', content: 'OK'});
+        this.hate=result;
+        if(this.hate.hated && this.fav.liked){
+            this.subscribeToLikeResponse(
+                this.favouriteMovieService.favorite(this.movie.id)
+            );
+        }
     }
 
     private onSaveErrorLike() {

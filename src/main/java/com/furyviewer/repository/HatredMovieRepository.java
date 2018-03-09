@@ -35,5 +35,7 @@ public interface HatredMovieRepository extends JpaRepository<HatredMovie, Long> 
     @Query("select h.hated from HatredMovie h where h.user=:User and h.movie.id = :id ")
     Integer markHatredMovie(@Param("User") User u, @Param("id") Long id);
 
+
+
     HatredMovie findByUserAndMovieId(User u, Long id);
 }

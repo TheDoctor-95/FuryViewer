@@ -44,6 +44,12 @@ export class ArtistService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    findMovieActors(id: number): Observable<ResponseWrapper> {
+
+        return this.http.get(`${SERVER_API_URL}api/movie`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     seriesActorsQuery(id: number): Observable<ResponseWrapper> {
 
         return this.http.get(`${SERVER_API_URL}/api/ActorBySeriesID/${id}`)
