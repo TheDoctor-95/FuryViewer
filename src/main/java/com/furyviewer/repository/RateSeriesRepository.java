@@ -1,6 +1,5 @@
 package com.furyviewer.repository;
 
-import com.furyviewer.domain.RateMovie;
 import com.furyviewer.domain.RateSeries;
 import com.furyviewer.domain.User;
 import org.hibernate.NonUniqueResultException;
@@ -39,5 +38,5 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     @Query("select r.rate from RateSeries r where r.user=:User and r.series.id = :id ")
     Integer markSeries(@Param("User") User u, @Param("id") Long id);
 
-    RateSeries findByUserAndMovieId(User u, Long id);
+    RateSeries findByUserAndSeriesId(User u, Long id);
 }
