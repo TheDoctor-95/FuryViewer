@@ -83,7 +83,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         });
     }
     loadArtist(id){
-        this.artistService.query().subscribe(
+        this.artistService.findMovieActors(id).subscribe(
             (res: ResponseWrapper) => {
                 this.artistMovie = res.json;
             },
