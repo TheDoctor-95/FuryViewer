@@ -18,8 +18,8 @@ import {ResponseWrapper} from "../shared/model/response-wrapper.model";
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
-    topPelis: Movie
-    topSeries: String[] = ['Doctor Who', 'The Flash', 'Arrow', 'Supergirl', 'Legends of Tomorrow'];
+    topPelis: Movie;
+    topSeries: String[] = ['Doctor Who', 'The Flash', 'Arrow', 'Supergirl'];
     moviesPending: Movie[];
     constructor(
         private principal: Principal,

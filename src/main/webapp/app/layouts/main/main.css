@@ -3,7 +3,7 @@
     color: orange;
     margin: auto;
     margin-right: 16%;
-    margin-top: 11%;
+    margin-top: 16%;
 }
 .titol{
     margin-top:17%;
@@ -25,5 +25,15 @@ a{
     color: orange;
     margin: auto;
     margin-right: 16%;
-    margin-top: 11%;
+    margin-top: 16%;
+}
+
+
+.fa.fa-user{
+    margin-right: 14%;
+}
+
+
+.fa.fa-info-circle{
+    margin-right: 15.5%;
 }

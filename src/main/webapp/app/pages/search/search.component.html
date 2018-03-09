@@ -1,18 +1,140 @@
-<div>
-    <h2><span data-translate="furyViewerApp.search.search.title">search</span></h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
+<div class="fons container-fluid ">
+    <div class="row">
+        <div class="hola col-12">
+            <div class="cos">
 
-<div class="table-responsive" *ngIf="searches">
-    <table class="table table-striped">
-        <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let search of searches ;trackBy: trackId">
-</tr>
-</tbody>
-</table>
+
+                <div class="card pendientes">
+                    <div class="card-body">
+
+                        <div class="formulari">
+                            <div class="container-fluid">
+
+                                <form>
+
+                                    <div class="row">
+
+                                        <div class="col" style="text-align: left">
+
+                                            <div class="form-group row">
+                                                <label for="example-text-input"
+                                                       class="col-4 col-form-label">Nombre</label>
+                                                <div class="col-8">
+                                                    <input class="form-control" type="text" value="Artisanal kale"
+                                                           id="example-text-input">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <label for="exampleSelect1" class="col-4">Género</label>
+                                                <select class="form-control col-8" id="exampleSelect1">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <label for="example-text-input" class="col-4 col-form-label">Año</label>
+                                                <div class="col-8">
+                                                    <input class="form-control" type="text" value="Artisanal kale"
+                                                           id="example-text-input">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="exampleSelect1" class="col-4">País</label>
+                                                <select class="form-control col-8" id="exampleSelect1">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="col" style="text-align: left">
+
+
+                                            <div class="form-group row">
+                                                <label for="example-text-input"
+                                                       class="col-4 col-form-label">Actor</label>
+                                                <div class="col-8">
+                                                    <input class="form-control" type="text" value="Artisanal kale"
+                                                           id="example-text-input">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="example-text-input"
+                                                       class="col-4 col-form-label">Director</label>
+                                                <div class="col-8">
+                                                    <input class="form-control" type="text" value="Artisanal kale"
+                                                           id="example-text-input">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <label for="example-text-input"
+                                                       class="col-2 col-form-label">Valoración</label>
+                                                <div style="display: table-cell; vertical-align: middle; text-align: right;
+                                padding-right: 5px;">
+                                                    <ngb-rating class="stars"></ngb-rating>
+                                                    </br>
+                                                    <p style="padding-right: 8px;">
+                                                    <div id="plus" class="fa fa-plus-circle furyColor"
+                                                         [ngbPopover]="notas"
+                                                         placement="bottom" triggers="mouseenter:mouseleave"></div>
+                                                </div>
+                                            </div>
+
+
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="serpeli_body2">
+
+                            <div class="card portades" *ngFor="let movie of moviesPending"
+                                 routerLink="/movie/{{movie.id}}">
+                                <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
+                                <div class="card-body">
+                                    <h4>{{movie.name}}</h4>
+                                </div>
+
+                                <div class="serpeli_body2">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 </div>
-</div>
+
+

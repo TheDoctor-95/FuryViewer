@@ -7,7 +7,7 @@ import { JhiPaginationUtil } from 'ng-jhipster';
 import { SearchComponent } from './search.component';
 export const SearchRoute: Routes = [
     {
-        path: 'search-search',
+        path: 'search',
         component: SearchComponent,
         data: {
             authorities: ['ROLE_USER'],

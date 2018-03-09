@@ -151,7 +151,7 @@ public class MovieResource {
 
     public ResponseEntity<Movie> importMovieByName(@PathVariable String name) {
         log.debug("REST request to get Movies by name", name);
-        Movie movie = movieOmdbDTOService.importMovieByName(name);
+         Movie movie = movieOmdbDTOService.importMovieByName(name);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
 
