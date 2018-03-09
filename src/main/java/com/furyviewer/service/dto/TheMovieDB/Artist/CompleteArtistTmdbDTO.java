@@ -52,12 +52,12 @@ public class CompleteArtistTmdbDTO {
     @Expose
     private Integer gender;
 
-    /**
-     * Biografia del artist.
-     */
-    @SerializedName("biography")
-    @Expose
-    private String biography;
+    ///**
+     //* Biografia del artist.
+    //*/
+    //@SerializedName("biography")
+    //@Expose
+    //private String biography;
 
     /**
      * Popularidad del artist en TheMovieDataBase.
@@ -153,9 +153,9 @@ public class CompleteArtistTmdbDTO {
      * Devuelve la biografia.
      * @return String | Biografia del artist.
      */
-    public String getBiography() {
-        return biography;
-    }
+    //public String getBiography() {
+    //    return biography;
+    //}
 
     /**
      * Devuelve la popularidad del artist en la api.
