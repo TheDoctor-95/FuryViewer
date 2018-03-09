@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
+import com.furyviewer.domain.User;
 
 /**
  * Spring Data JPA repository for the Series entity.
@@ -24,6 +25,6 @@ public interface SeriesRepository extends JpaRepository<Series, Long>, JpaSpecif
 
     Optional<Series> findByName(String name);
 
-
+    Series findByUserAndSeriesId(User u, Long id);
 
 }

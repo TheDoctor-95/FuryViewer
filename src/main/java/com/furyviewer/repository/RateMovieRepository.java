@@ -37,6 +37,5 @@ public interface RateMovieRepository extends JpaRepository<RateMovie, Long> {
     @Query("select r.rate from RateMovie r where r.user=:User and r.movie.id = :id ")
     Integer markPeli(@Param("User") User u, @Param("id") Long id);
 
-
-
+    RateMovie findByUserAndMovieId(User u, Long id);
 }

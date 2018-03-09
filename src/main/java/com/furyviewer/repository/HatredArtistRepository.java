@@ -29,6 +29,5 @@ public interface HatredArtistRepository extends JpaRepository<HatredArtist, Long
     @Query("select h.artist from HatredArtist h group by h.artist order by avg (h.hated) desc ")
     List<Artist> topHatredArtist();
 
-
-
+    HatredArtist findByUserAndArtistId(User u, Long id);
 }
