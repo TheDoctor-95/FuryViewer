@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <ng-template #notas id="divShowHide" >
-                    <span *ngFor="let mark of marks"><p class="infoWebs1">{{mark.type}}</p><p class="infoWebs2">{{mark.url}}<i class="fa fa-star furyColor"></i></p></br></span>
+                    <span *ngFor="let mark of marks" style="width: 100%;"><p class="infoWebs1">{{mark.type}}</p><p class="infoWebs2">{{mark.url}} <i class="fa fa-star furyColor"></i></p></br></span>
                 </ng-template>
                 &nbsp;
                 <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
@@ -112,6 +112,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
 
@@ -126,7 +127,15 @@
 
                 <div id="boxReparto">
                     <div id="reparto">REPARTO</div>
-                    <p *ngFor="let artist of artistMovie">{{artist.name}}</p>
+                    <div class="container-fluid">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <div *ngFor="let artist of artistMovie" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
+                        <img style="width: 70px; display: block;" src="{{artist.imgUrl}}"/>
+                        <div style="width: 70px; display: block;">{{artist.name}}</div>
+                    </div>
                 </div>
              </div>
         </div>
