@@ -38,4 +38,6 @@ public interface RateMovieRepository extends JpaRepository<RateMovie, Long> {
     Integer markPeli(@Param("User") User u, @Param("id") Long id);
 
     RateMovie findByUserAndMovieId(User u, Long id);
+
+
 }

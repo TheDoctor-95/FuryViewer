@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.RateMovie;
 
+import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.repository.RateMovieRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
@@ -18,16 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.averagingInt;
 
 /**
  * REST controller for managing RateMovie.
@@ -44,9 +38,12 @@ public class RateMovieResource {
 
     private final UserRepository userRepository;
 
-    public RateMovieResource(RateMovieRepository rateMovieRepository, UserRepository userRepository) {
+    private final MovieRepository movieRepository;
+
+    public RateMovieResource(RateMovieRepository rateMovieRepository, UserRepository userRepository, MovieRepository movieRepository) {
         this.rateMovieRepository = rateMovieRepository;
         this.userRepository=userRepository;
+        this.movieRepository = movieRepository;
     }
 
     /**
@@ -67,7 +64,7 @@ public class RateMovieResource {
         Optional<RateMovie> existingRateMovie = rateMovieRepository.findByMovieAndUserLogin(rateMovie.getMovie(), SecurityUtils.getCurrentUserLogin());
 
         if (existingRateMovie.isPresent()) {
-            throw new BadRequestAlertException("El usuario ya ha valorado esta Movie", ENTITY_NAME, "rateExists");
+            rateMovie.setId(existingRateMovie.get().getId());
         }
 
 
@@ -78,6 +75,21 @@ public class RateMovieResource {
         return ResponseEntity.created(new URI("/api/rate-movies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/rate-movies/id/{idMovie}/rate/{rate}")
+    @Timed
+    public ResponseEntity<RateMovie> RateMovie(@PathVariable Long idMovie, @PathVariable int rate) throws URISyntaxException {
+
+        Movie m = movieRepository.findOne(idMovie);
+
+        RateMovie rm = new RateMovie();
+        rm.setMovie(m);
+        rm.setRate(rate);
+
+        return createRateMovie(rm);
+
+
     }
 
     /**
@@ -128,12 +140,20 @@ public class RateMovieResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateMovie));
     }
 
-    @GetMapping("/num-rate-movies/{id}")
+    @GetMapping("/rate-movies/mediaMovie/{id}")
     @Timed
-    public Double getRateMovieMedia(@PathVariable Long id) {
+    public ResponseEntity<Double> getRateMovieMedia(@PathVariable Long id) {
         log.debug("REST request to get RateMovie : {}", id);
-        return rateMovieRepository.RateMovieMedia(id);
-        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateMovie));
+        Double media = rateMovieRepository.RateMovieMedia(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(media));
+    }
+
+    @GetMapping("/rate-movies/MovieRate/{id}")
+    @Timed
+    public ResponseEntity<RateMovie> getRateMovieUSer(@PathVariable Long id) {
+        log.debug("REST request to get RateMovie : {}", id);
+        RateMovie rateMovie = rateMovieRepository.findByUserAndMovieId(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get(), id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateMovie));
     }
 
     /**
