@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class SearchOmdbDTOService {
@@ -25,6 +26,12 @@ public class SearchOmdbDTOService {
 
     @Autowired
     private MovieOmdbDTOService movieOmdbDTOService;
+
+    @Autowired
+    private SeriesOmdbDTOService seriesOmdbDTOService;
+
+    @Autowired
+    AsyncImportTasks asyncImportTasks;
 
     public SearchOmdbDTO getSearchByTitle(String title) {
         SearchOmdbDTO search = null;
@@ -50,11 +57,12 @@ public class SearchOmdbDTOService {
         SearchOmdbDTO searchOmdbDTO = getSearchByTitle(title);
 
         if(searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("movie")) {
-
+            movieOmdbDTOService.importMovieByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
+        } else if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("series")) {
+            seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
         }
-        for (Search search : searchOmdbDTO.getSearch()) {
+        List<Search> searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size() - 1);
 
-        }
     }
 
 }

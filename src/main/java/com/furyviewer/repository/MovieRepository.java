@@ -24,6 +24,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> , JpaSpecifi
 
     Optional<Movie> findByName(String name);
 
+    Optional<Movie> findMovieByImdbIdExternalApi(String ImdbId);
 
 
 

@@ -23,8 +23,7 @@ public interface MovieOmdbDTORepository {
     Call<MovieOmdbDTO> getMovie(@Query("apikey") String apikey, @Query("t") String title);
 
     @GET("/?type=movie&plot=full")
-    Call<MovieOmdbDTO> getMovieByTitleAndYear(@Query("apikey") String apikey, @Query("t") String title,
-                                              @Query("y") String year);
+    Call<MovieOmdbDTO> getMovieByImdbId(@Query("apikey") String apikey, @Query("i") String ImdbId);
 
 
     public static String url = "http://www.omdbapi.com/";

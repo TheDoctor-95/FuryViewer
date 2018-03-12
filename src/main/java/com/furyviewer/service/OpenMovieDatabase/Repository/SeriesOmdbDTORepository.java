@@ -23,8 +23,7 @@ public interface SeriesOmdbDTORepository {
     Call<SeriesOmdbDTO> getSeries(@Query("apikey") String apikey, @Query("t") String title);
 
     @GET("/?type=series&plot=full")
-    Call<SeriesOmdbDTO> getSeriesByTitleAndYear(@Query("apikey") String apikey, @Query("t") String title,
-                                                @Query("y") String year);
+    Call<SeriesOmdbDTO> getSeriesByImdbId(@Query("apikey") String apikey, @Query("i") String ImdbId);
 
     public static String url = "http://www.omdbapi.com/";
     public static final Retrofit retrofit = new Retrofit.Builder()

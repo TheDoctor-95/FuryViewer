@@ -85,13 +85,28 @@ public class SeriesOmdbDTOService {
         return series;
     }
 
+    public SeriesOmdbDTO getSeriesByImdbId(String ImdbId) {
+        SeriesOmdbDTO series = new SeriesOmdbDTO();
+        Call<SeriesOmdbDTO> callSeries = apiService.getSeriesByImdbId(apikey, ImdbId);
+
+        try{
+            series = callSeries.execute().body();
+            System.out.println(series);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return series;
+    }
+
     /**
      * Convierte la informacion de una serie de OMDB al formato de FuryViewer.
      * @param title String | Titulo de la serie.
      * @return Series | Contiene la informacion de una serie en el formato FuryViewer.
      */
     @Transactional
-    public Series importSeries(String title){
+    public Series importSeriesByTitle(String title){
         //Comprobamos si ya está en nuestra base de datos.
         Optional<Series> s = seriesRepository.findByName(title);
         if(s.isPresent()){
@@ -104,33 +119,61 @@ public class SeriesOmdbDTOService {
 
         //Comprobamos que la API nos devuelve información.
         if (seriesOmdbDTO.getResponse().equalsIgnoreCase("true")) {
-            ss.setName(seriesOmdbDTO.getTitle());
-            ss.setDescription(naEraserService.eraserNA(seriesOmdbDTO.getPlot()));
-
-            if (seriesOmdbDTO.getYear().length() == 5) {
-                ss.setState(SeriesEmittingEnum.emiting);
-            } else {
-                ss.setState(SeriesEmittingEnum.ended);
-            }
-
-            ss.setReleaseDate(dateConversorService.releseDateOMDB(seriesOmdbDTO.getReleased()));
-
-            ss.setImgUrl(naEraserService.eraserNA(seriesOmdbDTO.getPoster()));
-            ss.setImdb_id(naEraserService.eraserNA(seriesOmdbDTO.getImdbID()));
-            ss.setAwards(naEraserService.eraserNA(seriesOmdbDTO.getAwards()));
-
-            ss.setGenres(genreService.importGenre(seriesOmdbDTO.getGenre()));
-            ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));
-            ss.setCompany(companyService.importCompany(seriesTmdbDTOService.getCompanyName(title)));
-
-            ss = seriesRepository.save(ss);
-
-            trailerTmdbDTOService.importSeriesTrailer(ss);
-
-            marksService.markTransformationSeries(seriesOmdbDTO.getRatings(), ss);
-
-            seasonOmdbDTOService.importSeason(title, Integer.parseInt(seriesOmdbDTO.getTotalSeasons()));
+            ss = importSeries(seriesOmdbDTO);
         }
+
+        return ss;
+    }
+
+    @Transactional
+    public Series importSeriesByImdbId(String ImdbId){
+        //Comprobamos si ya está en nuestra base de datos.
+        Optional<Series> s = seriesRepository.findByName(ImdbId);
+        if(s.isPresent()){
+            return s.get();
+        }
+
+        SeriesOmdbDTO seriesOmdbDTO = getSeriesByImdbId(ImdbId);
+
+        Series ss = new Series();
+
+        //Comprobamos que la API nos devuelve información.
+        if (seriesOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+            ss = importSeries(seriesOmdbDTO);
+        }
+
+        return ss;
+    }
+
+    public Series importSeries (SeriesOmdbDTO seriesOmdbDTO) {
+        Series ss = new Series();
+
+        ss.setName(seriesOmdbDTO.getTitle());
+        ss.setDescription(naEraserService.eraserNA(seriesOmdbDTO.getPlot()));
+
+        if (seriesOmdbDTO.getYear().length() == 5) {
+            ss.setState(SeriesEmittingEnum.emiting);
+        } else {
+            ss.setState(SeriesEmittingEnum.ended);
+        }
+
+        ss.setReleaseDate(dateConversorService.releseDateOMDB(seriesOmdbDTO.getReleased()));
+
+        ss.setImgUrl(naEraserService.eraserNA(seriesOmdbDTO.getPoster()));
+        ss.setImdb_id(naEraserService.eraserNA(seriesOmdbDTO.getImdbID()));
+        ss.setAwards(naEraserService.eraserNA(seriesOmdbDTO.getAwards()));
+
+        ss.setGenres(genreService.importGenre(seriesOmdbDTO.getGenre()));
+        ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));
+        ss.setCompany(companyService.importCompany(seriesTmdbDTOService.getCompanyName(seriesOmdbDTO.getTitle())));
+
+        ss = seriesRepository.save(ss);
+
+        trailerTmdbDTOService.importSeriesTrailer(ss);
+
+        marksService.markTransformationSeries(seriesOmdbDTO.getRatings(), ss);
+
+        seasonOmdbDTOService.importSeason(seriesOmdbDTO.getTitle(), Integer.parseInt(seriesOmdbDTO.getTotalSeasons()));
 
         return ss;
     }

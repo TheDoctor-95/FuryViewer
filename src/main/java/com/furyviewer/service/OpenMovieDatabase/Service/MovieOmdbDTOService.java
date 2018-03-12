@@ -87,9 +87,9 @@ public class MovieOmdbDTOService {
         return movie;
     }
 
-    public MovieOmdbDTO getMovieByTitleAndYear(String title, String year) {
+    public MovieOmdbDTO getMovieByImdbId(String ImdbId) {
         MovieOmdbDTO movie = null;
-        Call<MovieOmdbDTO> callMovie = apiService.getMovieByTitleAndYear(apikey, title, year);
+        Call<MovieOmdbDTO> callMovie = apiService.getMovieByImdbId(apikey, ImdbId);
 
         try {
             Response<MovieOmdbDTO> response = callMovie.execute();
@@ -114,13 +114,12 @@ public class MovieOmdbDTOService {
      */
     @Transactional
     public Movie importMovieByName(String title) {
+        MovieOmdbDTO movieOmdbDTO = getMovieByName(title);
 
-        Optional<Movie> mdb = movieRepository.findByName(title);
+        Optional<Movie> mdb = movieRepository.findMovieByImdbIdExternalApi(movieOmdbDTO.getImdbID());
         if (mdb.isPresent()) {
             return mdb.get();
         }
-
-        MovieOmdbDTO movieOmdbDTO = getMovieByName(title);
 
         Movie m = new Movie();
 
@@ -129,11 +128,31 @@ public class MovieOmdbDTOService {
             m = importMovie(movieOmdbDTO);
         }
 
-        asyncImportTasks.importAditionalinBackground(title);
+        //asyncImportTasks.importAditionalinBackground(title);
 
         return m;
     }
 
+    @Transactional
+    public Movie importMovieByImdbId(String ImdbId) {
+        MovieOmdbDTO movieOmdbDTO = getMovieByImdbId(ImdbId);
+
+        Optional<Movie> mdb = movieRepository.findMovieByImdbIdExternalApi(movieOmdbDTO.getImdbID());
+        if (mdb.isPresent()) {
+            return mdb.get();
+        }
+
+        Movie m = new Movie();
+
+        //Comprobamos que la API nos devuelve información.
+        if (movieOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+            m = importMovie(movieOmdbDTO);
+        }
+
+        //asyncImportTasks.importAditionalinBackground(ImdbId);
+
+        return m;
+    }
 
     /**
      * Convierte la informacion de una movie de OMDB al formato de FuryViewer.
