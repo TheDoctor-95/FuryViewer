@@ -316,7 +316,7 @@ Social Buttons
     margin-bottom: 10px;
     cursor: pointer;
     color: #ef9800;
-    border: 2px solid #ef9800;
+
 }
 
 .boxList:hover {
@@ -423,7 +423,7 @@ Social Buttons
     right: 30px;
     margin-top: -15px;
     padding: 10px;
-
+    width: 100%;
 }
 
 #plus:hover {
