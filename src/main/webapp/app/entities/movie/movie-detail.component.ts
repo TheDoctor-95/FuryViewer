@@ -68,6 +68,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.fav.liked=false;
         this.hate = new HatredMovie();
         this.hate.hated=false;
+        this.rateUser = new RateMovie()
+        this.rateUser.rate = 0;
+        this.media = "0";
     }
 
     ngOnInit() {
