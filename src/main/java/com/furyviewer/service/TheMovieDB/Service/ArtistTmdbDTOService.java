@@ -14,6 +14,9 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Servicio encargado de recuperar informacion de un Artist desde ArtistTmdbDTORepository y la convierte al
@@ -153,6 +156,8 @@ public class ArtistTmdbDTOService {
         artist.setName(artistName);
         artist.addArtistType(artistType);
 
+        System.out.println("Importanto artista " + artistName);
+
         //Ponemos mote al bucle y lo utilizamos para hacer la petición hasta tres veces para asegurarnos de que
         // podemos realizar la petición a la api.
         getArtist:
@@ -197,7 +202,36 @@ public class ArtistTmdbDTOService {
                         artist.setCountry(countryService.importCountry(completeArtistTmdbDTO.getPlaceOfBirth().toString()));
                     }
                     if(completeArtistTmdbDTO.getBiography() != null) {
-                        artist.setBiography(completeArtistTmdbDTO.getBiography());
+
+
+
+                        /////
+
+                        String utf8tweet = "";
+                        try {
+                            byte[] utf8Bytes = completeArtistTmdbDTO.getBiography().getBytes("UTF-8");
+
+                            utf8tweet = new String(utf8Bytes, "UTF-8");
+
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        Pattern unicodeOutliers = Pattern.compile("[^\\x00-\\x7F]",
+                            Pattern.UNICODE_CASE | Pattern.CANON_EQ
+                                | Pattern.CASE_INSENSITIVE);
+                        Matcher unicodeOutlierMatcher = unicodeOutliers.matcher(utf8tweet);
+
+                        System.out.println("Before: " + utf8tweet);
+                        utf8tweet = unicodeOutlierMatcher.replaceAll(" ");
+                        System.out.println("After: " + utf8tweet);
+
+
+                        /////
+
+
+
+
+                        artist.setBiography(utf8tweet);
                     }
                 }
                 //Salimos del bucle
