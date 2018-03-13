@@ -38,9 +38,6 @@ public class MovieOmdbDTOService {
         MovieOmdbDTORepository.retrofit.create(MovieOmdbDTORepository.class);
 
     @Autowired
-    public AsyncImportTasks asyncImportTasks;
-
-    @Autowired
     private GenreService genreService;
 
     @Autowired

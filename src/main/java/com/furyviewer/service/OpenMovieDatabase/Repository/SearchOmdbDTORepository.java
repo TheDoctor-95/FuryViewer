@@ -9,7 +9,7 @@ import retrofit2.http.Query;
 
 public interface SearchOmdbDTORepository {
 
-    @GET("")
+    @GET("/")
     Call<SearchOmdbDTO> getSearch(@Query("apikey") String apikey, @Query("s") String title);
 
     public static String url = "http://www.omdbapi.com/";

@@ -1,5 +1,6 @@
 package com.furyviewer.service.OpenMovieDatabase.Service;
 
+import com.furyviewer.domain.Multimedia;
 import com.furyviewer.service.OpenMovieDatabase.Repository.SearchOmdbDTORepository;
 import com.furyviewer.service.dto.OpenMovieDatabase.Search.Search;
 import com.furyviewer.service.dto.OpenMovieDatabase.Search.SearchOmdbDTO;
@@ -53,16 +54,21 @@ public class SearchOmdbDTOService {
         return search;
     }
 
-    public void multiImport (String title) {
+    public Multimedia multiImport (String title) {
         SearchOmdbDTO searchOmdbDTO = getSearchByTitle(title);
 
+        Multimedia multimedia = null;
+
         if(searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("movie")) {
-            movieOmdbDTOService.importMovieByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
+            multimedia = movieOmdbDTOService.importMovieByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
         } else if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("series")) {
-            seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
+            multimedia = seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
         }
         List<Search> searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size() - 1);
 
+        asyncImportTasks.importAditionalinBackground(searches);
+
+        return multimedia;
     }
 
 }
