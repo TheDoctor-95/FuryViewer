@@ -4,6 +4,7 @@ import com.furyviewer.domain.Multimedia;
 import com.furyviewer.service.OpenMovieDatabase.Repository.SearchOmdbDTORepository;
 import com.furyviewer.service.dto.OpenMovieDatabase.Search.Search;
 import com.furyviewer.service.dto.OpenMovieDatabase.Search.SearchOmdbDTO;
+import com.furyviewer.service.util.AsyncImportTasksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
@@ -12,6 +13,12 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Servicio encargado de gestionar la lista de movies y series que posteriormente se tendrán que importar de forma
+ * asincrona.
+ * @author IFriedkin
+ * @see com.furyviewer.service.OpenMovieDatabase.Repository.SearchOmdbDTORepository
+ */
 @Service
 public class SearchOmdbDTOService {
     /**
@@ -32,8 +39,13 @@ public class SearchOmdbDTOService {
     private SeriesOmdbDTOService seriesOmdbDTOService;
 
     @Autowired
-    AsyncImportTasks asyncImportTasks;
+    AsyncImportTasksService asyncImportTasksService;
 
+    /**
+     * Devuelve una lista de resultados que coinciden con un titulo.
+     * @param title String | Titulo de las mopvies o series que se quieren buscar.
+     * @return SearchOmdbDTO | Informacion con el formato proporcionado por la API.
+     */
     public SearchOmdbDTO getSearchByTitle(String title) {
         SearchOmdbDTO search = null;
         Call<SearchOmdbDTO> callSearch = apiOmdb.getSearch(apikey, title);
@@ -54,21 +66,30 @@ public class SearchOmdbDTOService {
         return search;
     }
 
+    /**
+     * Importa hasta 10 movies y series que coinciden con el titulo buscado.
+     * @param title String | Titulo de las mopvies o series que se quieren buscar.
+     * @return Multimedia | Devuelve la primera movie o series encontrada.
+     */
     public Multimedia multiImport (String title) {
         SearchOmdbDTO searchOmdbDTO = getSearchByTitle(title);
 
         Multimedia multimedia = null;
 
-        if(searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("movie")) {
-            multimedia = movieOmdbDTOService.importMovieByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
-        } else if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("series")) {
-            multimedia = seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
-        }
-        List<Search> searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size() - 1);
+        if(searchOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+            if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("movie")) {
+                multimedia = movieOmdbDTOService.importMovieByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
+            } else if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("series")) {
+                multimedia = seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
+            }
+            List<Search> searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size() - 1);
 
-        asyncImportTasks.importAditionalinBackground(searches);
+            //Se envian el resto de resultados para que se importen de forma asincrona.
+            asyncImportTasksService.importAditionalinBackground(searches);
+        } else {
+            System.out.println("==================\nBúsqueda sin resultados\n==================");
+        }
 
         return multimedia;
     }
-
 }

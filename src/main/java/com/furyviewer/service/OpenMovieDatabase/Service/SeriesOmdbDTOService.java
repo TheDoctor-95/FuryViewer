@@ -66,7 +66,7 @@ public class SeriesOmdbDTOService {
     private TrailerTmdbDTOService trailerTmdbDTOService;
 
     /**
-     * Devuelve la informacion de una serie en el formato proporcionado por OpenMovieDataBase.
+     * Devuelve la informacion a partir del titulo de una serie en el formato proporcionado por OpenMovieDataBase.
      * @param title String | Titulo de la serie a buscar.
      * @return SeriesOmdbDTO | Informacion con el formato proporcionado por la API.
      */
@@ -85,6 +85,11 @@ public class SeriesOmdbDTOService {
         return series;
     }
 
+    /**
+     * Devuelve la informacion a partir del id de IMDB de una serie en el formato proporcionado por OpenMovieDataBase.
+     * @param ImdbId String | id de IMDB.
+     * @return SeriesOmdbDTO | Informacion con el formato proporcionado por la API.
+     */
     public SeriesOmdbDTO getSeriesByImdbId(String ImdbId) {
         SeriesOmdbDTO series = new SeriesOmdbDTO();
         Call<SeriesOmdbDTO> callSeries = apiService.getSeriesByImdbId(apikey, ImdbId);
@@ -101,50 +106,68 @@ public class SeriesOmdbDTOService {
     }
 
     /**
-     * Convierte la informacion de una serie de OMDB al formato de FuryViewer.
-     * @param title String | Titulo de la serie.
+     * Devuelve una Series a partir del titulo existente en la base de datos o en caso de no existir hace una peticion a
+     * la api.
+     * @param title String | Titulo de la series.
      * @return Series | Contiene la informacion de una serie en el formato FuryViewer.
      */
     @Transactional
     public Series importSeriesByTitle(String title){
         //Comprobamos si ya está en nuestra base de datos.
-        Optional<Series> s = seriesRepository.findByName(title);
-        if(s.isPresent()){
-            return s.get();
-        }
-
         SeriesOmdbDTO seriesOmdbDTO = getSeries(title);
 
-        Series ss = new Series();
+        Optional<Series> s = seriesRepository.findSeriesByImdbId(seriesOmdbDTO.getImdbID());
 
-        //Comprobamos que la API nos devuelve información.
-        if (seriesOmdbDTO.getResponse().equalsIgnoreCase("true")) {
-            ss = importSeries(seriesOmdbDTO);
-        }
-
-        return ss;
-    }
-
-    @Transactional
-    public Series importSeriesByImdbId(String ImdbId){
-        //Comprobamos si ya está en nuestra base de datos.
-        Optional<Series> s = seriesRepository.findByName(ImdbId);
         if(s.isPresent()){
             return s.get();
         }
 
-        SeriesOmdbDTO seriesOmdbDTO = getSeriesByImdbId(ImdbId);
+        Series ss = new Series();
+
+        //Comprobamos que la API nos devuelve información.
+        if (seriesOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+            ss = importSeries(seriesOmdbDTO);
+        } else {
+            System.out.println("==================\nBúsqueda sin resultados\n==================");
+        }
+
+        return ss;
+    }
+
+    /**
+     * Devuelve una Series a partir del ide de IMDB existente en la base de datos o en caso de no existir hace una
+     * peticion a la api.
+     * @param imdbId String | Titulo de la series.
+     * @return Series | Contiene la informacion de una serie en el formato FuryViewer.
+     */
+    @Transactional
+    public Series importSeriesByImdbId(String imdbId){
+        //Comprobamos si ya está en nuestra base de datos.
+        SeriesOmdbDTO seriesOmdbDTO = getSeriesByImdbId(imdbId);
+
+        Optional<Series> s = seriesRepository.findSeriesByImdbId(seriesOmdbDTO.getImdbID());
+
+        if(s.isPresent()){
+            return s.get();
+        }
 
         Series ss = new Series();
 
         //Comprobamos que la API nos devuelve información.
         if (seriesOmdbDTO.getResponse().equalsIgnoreCase("true")) {
             ss = importSeries(seriesOmdbDTO);
+        } else {
+            System.out.println("==================\nBúsqueda sin resultados\n==================");
         }
 
         return ss;
     }
 
+    /**
+     * Convierte la informacion de una series de OMDB al formato de FuryViewer.
+     * @param seriesOmdbDTO SeriesOmdbDTO | Informacion de la Series propocionada por la api.
+     * @return Series | Contiene la informacion de una series en el formato FuryViewer.
+     */
     public Series importSeries (SeriesOmdbDTO seriesOmdbDTO) {
         Series ss = new Series();
 

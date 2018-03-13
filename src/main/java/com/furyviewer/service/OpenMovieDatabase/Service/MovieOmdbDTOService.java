@@ -120,6 +120,7 @@ public class MovieOmdbDTOService {
         MovieOmdbDTO movieOmdbDTO = getMovieByName(title);
 
         Optional<Movie> mdb = movieRepository.findMovieByImdbIdExternalApi(movieOmdbDTO.getImdbID());
+
         if (mdb.isPresent()) {
             return mdb.get();
         }
@@ -129,6 +130,8 @@ public class MovieOmdbDTOService {
         //Comprobamos que la API nos devuelve información.
         if (movieOmdbDTO.getResponse().equalsIgnoreCase("true")) {
             m = importMovie(movieOmdbDTO);
+        } else {
+            System.out.println("==================\nBúsqueda sin resultados\n==================");
         }
 
         return m;
@@ -138,14 +141,15 @@ public class MovieOmdbDTOService {
      * Devuelve una Movie a partir del id de IMDB existente en la base de datos o en caso de no existir hace una
      * peticion a la api.
      *
-     * @param ImdbId String | Titulo de la movie.
+     * @param imdbId String | Titulo de la movie.
      * @return Movie | Contiene la informacion de una movie en el formato FuryViewer.
      */
     @Transactional
-    public Movie importMovieByImdbId(String ImdbId) {
-        MovieOmdbDTO movieOmdbDTO = getMovieByImdbId(ImdbId);
+    public Movie importMovieByImdbId(String imdbId) {
+        MovieOmdbDTO movieOmdbDTO = getMovieByImdbId(imdbId);
 
         Optional<Movie> mdb = movieRepository.findMovieByImdbIdExternalApi(movieOmdbDTO.getImdbID());
+
         if (mdb.isPresent()) {
             return mdb.get();
         }
@@ -155,6 +159,8 @@ public class MovieOmdbDTOService {
         //Comprobamos que la API nos devuelve información.
         if (movieOmdbDTO.getResponse().equalsIgnoreCase("true")) {
             m = importMovie(movieOmdbDTO);
+        } else {
+            System.out.println("==================\nBúsqueda sin resultados\n==================");
         }
 
         return m;

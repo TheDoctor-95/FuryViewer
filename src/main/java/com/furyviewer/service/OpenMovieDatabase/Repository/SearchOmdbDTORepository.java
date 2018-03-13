@@ -7,8 +7,19 @@ import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+/**
+ * Repositorio encargado de conectar con la api de OpenMovieDataBase para recuperar la informacion de Search.
+ * @author IFriedkin
+ * @see com.furyviewer.service.dto.OpenMovieDatabase.Search.SearchOmdbDTO
+ */
 public interface SearchOmdbDTORepository {
 
+    /**
+     * Devuelve una lista con todas las movies y series que coinciden con el titulo.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @param title String | Titulo a buscart en movies y series.
+     * @return Call | Contiene toda la informacion de Season devuelta por la api.
+     */
     @GET("/")
     Call<SearchOmdbDTO> getSearch(@Query("apikey") String apikey, @Query("s") String title);
 

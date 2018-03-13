@@ -24,6 +24,8 @@ public interface SeriesRepository extends JpaRepository<Series, Long>, JpaSpecif
 
     Optional<Series> findByName(String name);
 
+    Optional<Series> findSeriesByImdbId(String imdbId);
+
 
 
 }

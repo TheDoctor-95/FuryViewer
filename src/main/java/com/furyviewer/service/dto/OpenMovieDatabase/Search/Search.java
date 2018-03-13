@@ -3,63 +3,82 @@ package com.furyviewer.service.dto.OpenMovieDatabase.Search;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+/**
+ * Gestiona la informacion de un Search devuelto por OpenMovieDatabase.
+ */
 public class Search {
-
+    /**
+     * Titulo de la movie o series.
+     */
     @SerializedName("Title")
     @Expose
     private String title;
+
+    /**
+     * Anyo en el que se estreno la movie o series.
+     */
     @SerializedName("Year")
     @Expose
     private String year;
+
+    /**
+     * id de IMDB.
+     */
     @SerializedName("imdbID")
     @Expose
     private String imdbID;
+
+    /**
+     * Type del Search ya sea movie o series.
+     */
     @SerializedName("Type")
     @Expose
     private String type;
+
+    /**
+     * Url con la imagen de la movie o series.
+     */
     @SerializedName("Poster")
     @Expose
     private String poster;
 
+    /**
+     * Devuelve el titulo de la movie o series.
+     * @return String | Titulo.
+     */
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
+    /**
+     * Devuelve el anyo en el que se estreno.
+     * @return String | Anyo de estreno.
+     */
     public String getYear() {
         return year;
     }
 
-    public void setYear(String year) {
-        this.year = year;
-    }
-
+    /**
+     * Devuelve el id de IMDB.
+     * @return String | id de IMDB.
+     */
     public String getImdbID() {
         return imdbID;
     }
 
-    public void setImdbID(String imdbID) {
-        this.imdbID = imdbID;
-    }
-
+    /**
+     * Devuelve el tipo mopvie o series.
+     * @return String | Tipo del Search.
+     */
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
+    /**
+     * Devuelve una url con el poster de la movie o series.
+     * @return String | Poster de la movie o series.
+     */
     public String getPoster() {
         return poster;
     }
-
-    public void setPoster(String poster) {
-        this.poster = poster;
-    }
-
 }
