@@ -13,6 +13,7 @@ import com.furyviewer.service.dto.TheMovieDB.Series.Season;
 import com.furyviewer.service.dto.TheMovieDB.Series.SimpleSeriesTmdbDTO;
 import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.service.util.DateConversorService;
+import com.furyviewer.service.util.StringApiCorrector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
@@ -45,6 +46,9 @@ public class SeriesTmdbDTOService {
 
     @Autowired
     private ArtistService artistService;
+
+    @Autowired
+    private StringApiCorrector stringApiCorrector;
 
     @Autowired
     private EpisodeRepository episodeRepository;
@@ -300,7 +304,7 @@ public class SeriesTmdbDTOService {
             ep.setSeason(season);
 
             if (se.getEpisodes().get(episodeNum).getOverview() != null) {
-                ep.setDescription(se.getEpisodes().get(episodeNum).getOverview());
+                ep.setDescription(stringApiCorrector.eraserEvilBytes(se.getEpisodes().get(episodeNum).getOverview()));
             }
 
             if (se.getEpisodes().get(episodeNum).getCrew() != null) {

@@ -160,7 +160,7 @@ public class ArtistTmdbDTOService {
         artist.setName(artistName);
         artist.addArtistType(artistType);
 
-        System.out.println("Importanto artista " + artistName);
+        System.out.println("==================\nImportanto artista " + artistName + "\n==================");
 
         //Ponemos mote al bucle y lo utilizamos para hacer la petición hasta tres veces para asegurarnos de que
         // podemos realizar la petición a la api.
@@ -224,6 +224,8 @@ public class ArtistTmdbDTOService {
         }
 
         artist = artistRepository.save(artist);
+
+        System.out.println("==================\nArtista guardado " + artistName + "\n==================");
 
         return artist;
     }
