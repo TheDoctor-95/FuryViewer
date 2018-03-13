@@ -17,6 +17,8 @@ import {HatredMovieService} from "../hatred-movie/hatred-movie.service";
 import {HatredMovie} from "../hatred-movie/hatred-movie.model";
 import {ArtistService} from "../artist/artist.service";
 import {Artist} from "../artist/artist.model";
+import {RateMovie} from "../rate-movie/rate-movie.model";
+import {RateMovieService} from "../rate-movie/rate-movie.service";
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -46,6 +48,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     marks: Social[];
     hate: HatredMovie;
     artistMovie: Artist[];
+    rateUser: RateMovie;
+    media: string;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -56,7 +60,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private socialService: SocialService,
         private hatredMovieService: HatredMovieService,
         private jhiAlertService: JhiAlertService,
-        private artistService: ArtistService
+        private artistService: ArtistService,
+        private rateMovieServie: RateMovieService
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
@@ -72,6 +77,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadMarks(params['id']);
             this.getIfHatred(params['id']);
             this.loadArtist(params['id']);
+            this.loadRateUser(params['id']);
+            this.loadMediumMark(params['id']);
         });
         this.registerChangeInMovies();
 
@@ -90,6 +97,22 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
+
+    loadRateUser(id: number){
+        this.rateMovieServie.markMovieUser(id).subscribe((rateMovie) => {
+            this.rateUser = rateMovie;
+        });
+    }
+
+    loadMediumMark(id: number){
+        this.rateMovieServie.mediaMovie(id).subscribe((rateMovie) => {
+            let ourMark = rateMovie.toPrecision(2);
+            this.media = ourMark;
+
+
+
+        });
+    }
     previousState() {
         window.history.back();
     }
@@ -106,8 +129,12 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.subscribeToHateResponse(
             this.hatredMovieService.hate(this.movie.id)
         );
+    }
 
-
+    rate(){
+        this.subscribeToSaveResponseRate(
+            this.rateMovieServie.Rate(this.movie.id, this.rateUser.rate)
+        );
     }
 
     loadMarks(id:number){
@@ -161,6 +188,19 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             );
         }
     }
+
+    private subscribeToSaveResponseRate(result: Observable<RateMovie>) {
+        result.subscribe((res: RateMovie) =>
+            this.onSaveSuccessRate(res), (res: Response) => this.onSaveErrorLike());
+    }
+
+    private onSaveSuccessRate(result: RateMovie) {
+        this.eventManager.broadcast({ name: 'rateMovieListModification', content: 'OK'});
+        this.rateUser=result;
+        this.loadMediumMark(this.movie.id);
+    }
+
+
 
     private onSaveErrorLike() {
 

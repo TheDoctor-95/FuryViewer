@@ -82,9 +82,9 @@
                         <h1 class="nameTitle">{{movie.name}}</h1>
                     </div>
                     <div style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
-                        <ngb-rating class="stars"></ngb-rating>
+                        <ngb-rating class="stars" [(ngModel)]="rateUser.rate" (click)="rate()" ></ngb-rating>
                         </br>
-                        <p style="padding-right: 8px;"><div id="plus" class="fa fa-plus-circle furyColor" [ngbPopover]="notas" placement="bottom" triggers="mouseenter:mouseleave"> </div><b class="furyColor"> 3.5</b> de 5 <i class="fa fa-star furyColor"></i></p>
+                        <p style="padding-right: 8px;"><div id="plus" class="fa fa-plus-circle furyColor" [ngbPopover]="notas" placement="bottom" triggers="mouseenter:mouseleave"> </div><b class="furyColor"> {{media}}</b> de 5 <i class="fa fa-star furyColor"></i></p>
                     </div>
                 </div>
                 <ng-template #notas id="divShowHide" >
