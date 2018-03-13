@@ -199,7 +199,7 @@ public class SeriesResource {
     @Transactional
     public ResponseEntity<Series> importSeriesByName(@PathVariable String name) {
         log.debug("REST request to get Series by name", name);
-        Series series = seriesOmdbDTOService.importSeries(name);
+        Series series = seriesOmdbDTOService.importSeriesByTitle(name);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(series));
     }
 
