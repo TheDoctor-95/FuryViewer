@@ -40,7 +40,9 @@ public class MovieTmdbDTOService {
             if (response.isSuccessful()) {
                 movie = response.body();
                 System.out.println(movie);
-                id = movie.getResults().get(0).getId();
+                if(movie.getTotalResults() != 0) {
+                    id = movie.getResults().get(0).getId();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
