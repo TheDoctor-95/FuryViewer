@@ -8,16 +8,13 @@ import com.furyviewer.service.dto.TheMovieDB.Artist.CompleteArtistTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.SimpleArtistTmdbDTO;
 import com.furyviewer.service.util.CountryService;
 import com.furyviewer.service.util.DateConversorService;
-import com.furyviewer.service.util.StringApiCorrector;
+import com.furyviewer.service.util.StringApiCorrectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Servicio encargado de recuperar informacion de un Artist desde ArtistTmdbDTORepository y la convierte al
@@ -53,7 +50,7 @@ public class ArtistTmdbDTOService {
     private CountryService countryService;
 
     @Autowired
-    private StringApiCorrector stringApiCorrector;
+    private StringApiCorrectorService stringApiCorrectorService;
 
     /**
      * Metodo que se encarga de pedir a la api de TheMovieDB la informacion basica de un Artist.
@@ -206,7 +203,7 @@ public class ArtistTmdbDTOService {
                         artist.setCountry(countryService.importCountry(completeArtistTmdbDTO.getPlaceOfBirth().toString()));
                     }
                     if(completeArtistTmdbDTO.getBiography() != null) {
-                        artist.setBiography(stringApiCorrector.eraserEvilBytes(completeArtistTmdbDTO.getBiography()));
+                        artist.setBiography(stringApiCorrectorService.eraserEvilBytes(completeArtistTmdbDTO.getBiography()));
                     }
                 }
                 //Salimos del bucle

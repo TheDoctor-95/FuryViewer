@@ -34,7 +34,7 @@ public class ArtistService {
     private ArtistTypeRepository artistTypeRepository;
 
     @Autowired
-    private StringApiCorrector stringApiCorrector;
+    private StringApiCorrectorService stringApiCorrectorService;
 
     @Autowired
     private ArtistTmdbDTOService artistTmdbDTOService;
@@ -49,7 +49,7 @@ public class ArtistService {
     public Set<Artist> importActors(String actorsListStr) {
         Set<Artist> artists = new HashSet<>();
 
-        if (stringApiCorrector.eraserNA(actorsListStr) != null) {
+        if (stringApiCorrectorService.eraserNA(actorsListStr) != null) {
             String[] actors = actorsListStr.split(", ");
             ArtistType atMainActor = artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR);
 
@@ -88,7 +88,7 @@ public class ArtistService {
     public Artist importDirector(String director) {
         Artist artist = null;
 
-        if (stringApiCorrector.eraserNA(director) != null) {
+        if (stringApiCorrectorService.eraserNA(director) != null) {
             String[] directorArray = director.split(", | \\(");
             Optional<Artist> optionalDirector = artistRepository.findByName(directorArray[0]);
             ArtistType atDirector = artistTypeRepository.findByName(ArtistTypeEnum.DIRECTOR);
@@ -121,7 +121,7 @@ public class ArtistService {
     public Artist importScripwriter(String scripwriter) {
         Artist artist = null;
 
-        if (stringApiCorrector.eraserNA(scripwriter) != null) {
+        if (stringApiCorrectorService.eraserNA(scripwriter) != null) {
             String[] scripwriterArray = scripwriter.split(", | \\(");
             Optional<Artist> optionalScripwriter = artistRepository.findByName(scripwriterArray[0]);
             ArtistType atScripwriter = artistTypeRepository.findByName(ArtistTypeEnum.SCRIPTWRITER);

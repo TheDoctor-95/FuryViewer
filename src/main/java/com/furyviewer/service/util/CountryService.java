@@ -23,7 +23,7 @@ public class CountryService {
     private GoogleMapsDTOService googleMapsDTOService;
 
     @Autowired
-    private StringApiCorrector stringApiCorrector;
+    private StringApiCorrectorService stringApiCorrectorService;
 
     /**
      * Metodo que se encarga de buscar en la base de datos una Country y en caso de no existir la crea.
@@ -33,7 +33,7 @@ public class CountryService {
     public Country importCountry(String countryName) {
         Country country = null;
 
-        if (stringApiCorrector.eraserNA(countryName) != null) {
+        if (stringApiCorrectorService.eraserNA(countryName) != null) {
             //Buscamos countryName
             Optional<Country> c = countryRepository.findByName(googleMapsDTOService.getName(countryName));
 

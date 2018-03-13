@@ -55,7 +55,7 @@ public class MovieOmdbDTOService {
     private CompanyService companyService;
 
     @Autowired
-    private StringApiCorrector stringApiCorrector;
+    private StringApiCorrectorService stringApiCorrectorService;
 
     @Autowired
     private MarksService marksService;
@@ -178,10 +178,10 @@ public class MovieOmdbDTOService {
 
         m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
 
-        m.setDescription(stringApiCorrector.eraserNA(movieOmdbDTO.getPlot()));
-        m.setImdbIdExternalApi(stringApiCorrector.eraserNA(movieOmdbDTO.getImdbID()));
-        m.setImgUrl(stringApiCorrector.eraserNA(movieOmdbDTO.getPoster()));
-        m.setAwards(stringApiCorrector.eraserNA(movieOmdbDTO.getAwards()));
+        m.setDescription(stringApiCorrectorService.eraserNA(movieOmdbDTO.getPlot()));
+        m.setImdbIdExternalApi(stringApiCorrectorService.eraserNA(movieOmdbDTO.getImdbID()));
+        m.setImgUrl(stringApiCorrectorService.eraserNA(movieOmdbDTO.getPoster()));
+        m.setAwards(stringApiCorrectorService.eraserNA(movieOmdbDTO.getAwards()));
 
         m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
         m.setCountry(countryService.importCountry(movieOmdbDTO.getCountry()));

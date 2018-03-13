@@ -7,14 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Servicio que se encarga de eliminar el "N/A" de las respuestas de la api de OpenMovieDataBase.
+ * Servicio que se encarga de controlar que los Stings devueltos por las apis son correctos.
  * @author IFriedkin
  */
 @Service
-public class StringApiCorrector {
+public class StringApiCorrectorService {
     /**
      * Metodo que se encarga de devolver un string en null en caso de que la api de OMDB incluya N/A como informacion.
-     * @param dataI String | String el cual se debe comprobar su contenido
+     * @param dataI String | String el cual se debe comprobar su contenido.
      * @return String | El valor entrante o null.
      */
     public String eraserNA (String dataI) {
@@ -27,6 +27,11 @@ public class StringApiCorrector {
         return dataO;
     }
 
+    /**
+     * Devuelve un String sin los caracteres que no sean UTF8.
+     * @param dataI String | String el cual se debe comprobar su contenido.
+     * @return String | String sin caracteres fuera de UTF8.
+     */
     public String eraserEvilBytes (String dataI) {
         String dataO = null;
 

@@ -20,7 +20,7 @@ public class GenreService {
     private GenreRepository genreRepository;
 
     @Autowired
-    private StringApiCorrector stringApiCorrector;
+    private StringApiCorrectorService stringApiCorrectorService;
 
     /**
      * Metodo que se encarga de convertir un String en los objetos de la clase Genre necesarios.
@@ -30,7 +30,7 @@ public class GenreService {
     public Set<Genre> importGenre(String genreList){
         Set<Genre> genreListArray = new HashSet<>();
 
-        if (stringApiCorrector.eraserNA(genreList) != null) {
+        if (stringApiCorrectorService.eraserNA(genreList) != null) {
             String[] genres = genreList.split(", ");
 
             for (String genreStr : genres) {

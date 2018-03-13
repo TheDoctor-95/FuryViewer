@@ -16,7 +16,7 @@ import java.util.Locale;
 @Service
 public class DateConversorService {
     @Autowired
-    private StringApiCorrector stringApiCorrector;
+    private StringApiCorrectorService stringApiCorrectorService;
 
     /**
      * Metodo que se encarga de convertir el String con formato (dia-mes-anyo) al formato adecuado de LocalDate para la
@@ -27,7 +27,7 @@ public class DateConversorService {
     public LocalDate releseDateOMDB(String date){
         LocalDate localDate = null;
 
-        if(stringApiCorrector.eraserNA(date) != null) {
+        if(stringApiCorrectorService.eraserNA(date) != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH);
 
             localDate = LocalDate.parse(date, formatter);
@@ -45,7 +45,7 @@ public class DateConversorService {
     public LocalDate releaseDateOMDBSeason(String date){
         LocalDate localDate = null;
 
-        if(stringApiCorrector.eraserNA(date) != null) {
+        if(stringApiCorrectorService.eraserNA(date) != null) {
             date = reconstructionDate(date);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
 
