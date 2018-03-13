@@ -34,6 +34,9 @@ public class MarksService {
                 Social s = new Social();
 
                 s.setType(r.getSource());
+                if(s.getType().equalsIgnoreCase("internet movie database")) {
+                    s.setType("IMDB");
+                }
                 s.setSeries(ss);
                 s.setUrl(markTranformation(r.getSource(), r.getValue()));
 

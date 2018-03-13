@@ -103,6 +103,14 @@ public class ReviewMovieResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(reviewMovie));
     }
 
+    @GetMapping("/review-movies/movie/{id}")
+    @Timed
+    public ResponseEntity<List<ReviewMovie>> getReviewsOfAMovie(@PathVariable Long id) {
+        log.debug("REST request to get ReviewMovie : {}", id);
+        List<ReviewMovie> reviewMovie = reviewMovieRepository.findByMovieId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(reviewMovie));
+    }
+
     /**
      * DELETE  /review-movies/:id : delete the "id" reviewMovie.
      *
