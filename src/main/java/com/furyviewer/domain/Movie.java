@@ -17,7 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "movie")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Movie implements Serializable {
+public class Movie extends Multimedia implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

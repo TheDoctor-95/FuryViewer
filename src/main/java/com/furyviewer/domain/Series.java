@@ -19,7 +19,7 @@ import com.furyviewer.domain.enumeration.SeriesEmittingEnum;
 @Entity
 @Table(name = "series")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Series implements Serializable {
+public class Series extends Multimedia implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
