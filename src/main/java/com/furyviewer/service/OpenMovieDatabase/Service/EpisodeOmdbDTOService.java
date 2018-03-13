@@ -8,7 +8,7 @@ import com.furyviewer.service.TheMovieDB.Service.SeriesTmdbDTOService;
 import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.service.util.DateConversorService;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
-import com.furyviewer.service.util.NAEraserService;
+import com.furyviewer.service.util.StringApiCorrector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
@@ -44,7 +44,7 @@ public class EpisodeOmdbDTOService {
     private ArtistService artistService;
 
     @Autowired
-    private NAEraserService naEraserService;
+    private StringApiCorrector stringApiCorrector;
 
     @Autowired
     private SeriesTmdbDTOService seriesTmdbDTOService;
@@ -95,10 +95,10 @@ public class EpisodeOmdbDTOService {
 
                         ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));
 
-                        ep.setImdbId(naEraserService.eraserNA(episodeOmdbDTO.getImdbID()));
+                        ep.setImdbId(stringApiCorrector.eraserNA(episodeOmdbDTO.getImdbID()));
                         ep.setSeason(se);
 
-                        ep.setDescription(naEraserService.eraserNA(episodeOmdbDTO.getPlot()));
+                        ep.setDescription(stringApiCorrector.eraserNA(episodeOmdbDTO.getPlot()));
 
                         ep.setActors(artistService.importActors(episodeOmdbDTO.getActors()));
                         ep.setDirector(artistService.importDirector(episodeOmdbDTO.getDirector()));

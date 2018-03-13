@@ -8,7 +8,6 @@ import com.furyviewer.service.TheMovieDB.Service.TrailerTmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import com.furyviewer.service.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
@@ -56,7 +55,7 @@ public class MovieOmdbDTOService {
     private CompanyService companyService;
 
     @Autowired
-    private NAEraserService naEraserService;
+    private StringApiCorrector stringApiCorrector;
 
     @Autowired
     private MarksService marksService;
@@ -65,7 +64,7 @@ public class MovieOmdbDTOService {
     private TrailerTmdbDTOService trailerTmdbDTOService;
 
     /**
-     * Devuelve la informacion de una movie en el formato proporcionado por OpenMovieDataBase.
+     * Devuelve la informacion de una movie a partir del titulo en el formato proporcionado por OpenMovieDataBase.
      *
      * @param title String | Titulo de la movie.
      * @return MovieOmdbDTO | Informacion con el formato proporcionado por la API.
@@ -84,6 +83,12 @@ public class MovieOmdbDTOService {
         return movie;
     }
 
+    /**
+     * Devuelve la informacion de una movie a partir del id de IMDB en el formato proporcionado por OpenMovieDataBase.
+     *
+     * @param ImdbId String | id de IMDB.
+     * @return MovieOmdbDTO | Informacion con el formato proporcionado por la API.
+     */
     public MovieOmdbDTO getMovieByImdbId(String ImdbId) {
         MovieOmdbDTO movie = null;
         Call<MovieOmdbDTO> callMovie = apiService.getMovieByImdbId(apikey, ImdbId);
@@ -104,7 +109,8 @@ public class MovieOmdbDTOService {
     }
 
     /**
-     * Devuelve una Movie existente en la base de datos o en caso de no existir hace una peticion a la api.
+     * Devuelve una Movie a partir del titulo existente en la base de datos o en caso de no existir hace una peticion a
+     * la api.
      *
      * @param title String | Titulo de la movie.
      * @return Movie | Contiene la informacion de una movie en el formato FuryViewer.
@@ -125,11 +131,16 @@ public class MovieOmdbDTOService {
             m = importMovie(movieOmdbDTO);
         }
 
-        //asyncImportTasks.importAditionalinBackground(title);
-
         return m;
     }
 
+    /**
+     * Devuelve una Movie a partir del id de IMDB existente en la base de datos o en caso de no existir hace una
+     * peticion a la api.
+     *
+     * @param ImdbId String | Titulo de la movie.
+     * @return Movie | Contiene la informacion de una movie en el formato FuryViewer.
+     */
     @Transactional
     public Movie importMovieByImdbId(String ImdbId) {
         MovieOmdbDTO movieOmdbDTO = getMovieByImdbId(ImdbId);
@@ -146,8 +157,6 @@ public class MovieOmdbDTOService {
             m = importMovie(movieOmdbDTO);
         }
 
-        //asyncImportTasks.importAditionalinBackground(ImdbId);
-
         return m;
     }
 
@@ -163,14 +172,15 @@ public class MovieOmdbDTOService {
 
         m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
 
-        m.setDescription(naEraserService.eraserNA(movieOmdbDTO.getPlot()));
-        m.setImdbIdExternalApi(naEraserService.eraserNA(movieOmdbDTO.getImdbID()));
-        m.setImgUrl(naEraserService.eraserNA(movieOmdbDTO.getPoster()));
-        m.setAwards(naEraserService.eraserNA(movieOmdbDTO.getAwards()));
+        m.setDescription(stringApiCorrector.eraserNA(movieOmdbDTO.getPlot()));
+        m.setImdbIdExternalApi(stringApiCorrector.eraserNA(movieOmdbDTO.getImdbID()));
+        m.setImgUrl(stringApiCorrector.eraserNA(movieOmdbDTO.getPoster()));
+        m.setAwards(stringApiCorrector.eraserNA(movieOmdbDTO.getAwards()));
 
         m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
         m.setCountry(countryService.importCountry(movieOmdbDTO.getCountry()));
         m.setDvd_release(dateConversorService.releseDateOMDB(movieOmdbDTO.getDVD()));
+
         movieRepository.save(m);
 
         m.setCompany(companyService.importCompany(movieOmdbDTO.getProduction()));
@@ -185,9 +195,11 @@ public class MovieOmdbDTOService {
         m = movieRepository.save(m);
 
         marksService.markTransformationMovie(movieOmdbDTO.getRatings(), m);
+
         m = movieRepository.save(m);
 
         trailerTmdbDTOService.importMovieTrailer(m);
+
         return m;
     }
 }

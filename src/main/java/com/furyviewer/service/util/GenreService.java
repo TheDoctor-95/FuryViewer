@@ -1,7 +1,6 @@
 package com.furyviewer.service.util;
 
 import com.furyviewer.domain.Genre;
-import com.furyviewer.repository.CompanyRepository;
 import com.furyviewer.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class GenreService {
     private GenreRepository genreRepository;
 
     @Autowired
-    private NAEraserService naEraserService;
+    private StringApiCorrector stringApiCorrector;
 
     /**
      * Metodo que se encarga de convertir un String en los objetos de la clase Genre necesarios.
@@ -31,7 +30,7 @@ public class GenreService {
     public Set<Genre> importGenre(String genreList){
         Set<Genre> genreListArray = new HashSet<>();
 
-        if (naEraserService.eraserNA(genreList) != null) {
+        if (stringApiCorrector.eraserNA(genreList) != null) {
             String[] genres = genreList.split(", ");
 
             for (String genreStr : genres) {

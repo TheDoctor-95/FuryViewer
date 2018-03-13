@@ -8,6 +8,7 @@ import com.furyviewer.service.dto.TheMovieDB.Artist.CompleteArtistTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.SimpleArtistTmdbDTO;
 import com.furyviewer.service.util.CountryService;
 import com.furyviewer.service.util.DateConversorService;
+import com.furyviewer.service.util.StringApiCorrector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
@@ -50,6 +51,9 @@ public class ArtistTmdbDTOService {
 
     @Autowired
     private CountryService countryService;
+
+    @Autowired
+    private StringApiCorrector stringApiCorrector;
 
     /**
      * Metodo que se encarga de pedir a la api de TheMovieDB la informacion basica de un Artist.
@@ -202,36 +206,7 @@ public class ArtistTmdbDTOService {
                         artist.setCountry(countryService.importCountry(completeArtistTmdbDTO.getPlaceOfBirth().toString()));
                     }
                     if(completeArtistTmdbDTO.getBiography() != null) {
-
-
-
-                        /////
-
-                        String utf8tweet = "";
-                        try {
-                            byte[] utf8Bytes = completeArtistTmdbDTO.getBiography().getBytes("UTF-8");
-
-                            utf8tweet = new String(utf8Bytes, "UTF-8");
-
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-                        Pattern unicodeOutliers = Pattern.compile("[^\\x00-\\x7F]",
-                            Pattern.UNICODE_CASE | Pattern.CANON_EQ
-                                | Pattern.CASE_INSENSITIVE);
-                        Matcher unicodeOutlierMatcher = unicodeOutliers.matcher(utf8tweet);
-
-                        System.out.println("Before: " + utf8tweet);
-                        utf8tweet = unicodeOutlierMatcher.replaceAll(" ");
-                        System.out.println("After: " + utf8tweet);
-
-
-                        /////
-
-
-
-
-                        artist.setBiography(utf8tweet);
+                        artist.setBiography(stringApiCorrector.eraserEvilBytes(completeArtistTmdbDTO.getBiography()));
                     }
                 }
                 //Salimos del bucle

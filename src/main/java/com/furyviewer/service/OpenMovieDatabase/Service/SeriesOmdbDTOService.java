@@ -51,7 +51,7 @@ public class SeriesOmdbDTOService {
     private CountryService countryService;
 
     @Autowired
-    private NAEraserService naEraserService;
+    private StringApiCorrector stringApiCorrector;
 
     @Autowired
     private CompanyService companyService;
@@ -149,7 +149,7 @@ public class SeriesOmdbDTOService {
         Series ss = new Series();
 
         ss.setName(seriesOmdbDTO.getTitle());
-        ss.setDescription(naEraserService.eraserNA(seriesOmdbDTO.getPlot()));
+        ss.setDescription(stringApiCorrector.eraserNA(seriesOmdbDTO.getPlot()));
 
         if (seriesOmdbDTO.getYear().length() == 5) {
             ss.setState(SeriesEmittingEnum.emiting);
@@ -159,9 +159,9 @@ public class SeriesOmdbDTOService {
 
         ss.setReleaseDate(dateConversorService.releseDateOMDB(seriesOmdbDTO.getReleased()));
 
-        ss.setImgUrl(naEraserService.eraserNA(seriesOmdbDTO.getPoster()));
-        ss.setImdb_id(naEraserService.eraserNA(seriesOmdbDTO.getImdbID()));
-        ss.setAwards(naEraserService.eraserNA(seriesOmdbDTO.getAwards()));
+        ss.setImgUrl(stringApiCorrector.eraserNA(seriesOmdbDTO.getPoster()));
+        ss.setImdb_id(stringApiCorrector.eraserNA(seriesOmdbDTO.getImdbID()));
+        ss.setAwards(stringApiCorrector.eraserNA(seriesOmdbDTO.getAwards()));
 
         ss.setGenres(genreService.importGenre(seriesOmdbDTO.getGenre()));
         ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));
