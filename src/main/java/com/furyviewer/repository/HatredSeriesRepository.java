@@ -28,4 +28,6 @@ public interface HatredSeriesRepository extends JpaRepository<HatredSeries, Long
     @Query("select h.series from HatredSeries h group by h.series order by avg (h.hated) desc ")
     List<Series> topHatredSeries();
 
+    HatredSeries findByUserAndSeriesId(User u, Long id);
+
 }

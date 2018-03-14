@@ -1,42 +1,42 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="DAM (generated)" id="1512041434727-1">
+    <changeSet author="DAM (generated)" id="1512041434727-10">
         <modifyDataType
             columnName="description"
             newDataType="longtext"
             tableName="genre"/>
     </changeSet>
-    <changeSet author="DAM (generated)" id="1512041434727-2">
+    <changeSet author="DAM (generated)" id="1512041434727-12">
         <modifyDataType
             columnName="description"
             newDataType="longtext"
             tableName="series"/>
     </changeSet>
-    <changeSet author="DAM (generated)" id="1512041434727-3">
+    <changeSet author="DAM (generated)" id="1512041434727-13">
         <modifyDataType
             columnName="description"
             newDataType="longtext"
             tableName="movie"/>
     </changeSet>
-    <changeSet author="DAM (generated)" id="1512041434727-4">
+    <changeSet author="DAM (generated)" id="1512041434727-14">
         <modifyDataType
             columnName="review"
             newDataType="longtext"
             tableName="review_movie"/>
     </changeSet>
-    <changeSet author="DAM (generated)" id="1512041434727-5">
+    <changeSet author="DAM (generated)" id="1512041434727-15">
         <modifyDataType
             columnName="review"
             newDataType="longtext"
             tableName="review_series"/>
     </changeSet>
-    <changeSet author="DAM (generated)" id="1512041434727-6">
+    <changeSet author="DAM (generated)" id="1512041434727-16">
         <modifyDataType
             columnName="description"
             newDataType="longtext"
             tableName="episode"/>
     </changeSet>
-    <changeSet author="DAM (generated)" id="1512041434727-7">
+    <changeSet author="DAM (generated)" id="1512041434727-17">
         <modifyDataType
             columnName="biography"
             newDataType="longtext"

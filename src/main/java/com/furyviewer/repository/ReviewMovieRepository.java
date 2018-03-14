@@ -16,4 +16,6 @@ public interface ReviewMovieRepository extends JpaRepository<ReviewMovie, Long> 
     @Query("select review_movie from ReviewMovie review_movie where review_movie.user.login = ?#{principal.username}")
     List<ReviewMovie> findByUserIsCurrentUser();
 
+    List<ReviewMovie> findByMovieIdOrderByDateDesc(Long id);
+
 }

@@ -42,6 +42,11 @@ export class SocialService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    movieMarks(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/Movie/${id}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

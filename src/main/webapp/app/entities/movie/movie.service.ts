@@ -75,7 +75,9 @@ export class MovieService {
     private convertItemFromServer(json: any): Movie {
         const entity: Movie = Object.assign(new Movie(), json);
         entity.releaseDate = this.dateUtils
-            .convertLocalDateFromServer(json.releaseDate);
+             .convertLocalDateFromServer(json.releaseDate);
+        entity.dvd_release = this.dateUtils
+            .convertLocalDateFromServer(json.dvd_release);
         return entity;
     }
 

@@ -36,4 +36,6 @@ public interface HatredMovieRepository extends JpaRepository<HatredMovie, Long> 
     Integer markHatredMovie(@Param("User") User u, @Param("id") Long id);
 
 
+
+    HatredMovie findByUserAndMovieId(User u, Long id);
 }

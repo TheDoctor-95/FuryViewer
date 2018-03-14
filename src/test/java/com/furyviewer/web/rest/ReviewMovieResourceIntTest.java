@@ -72,15 +72,15 @@ public class ReviewMovieResourceIntTest {
     private ReviewMovie reviewMovie;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final ReviewMovieResource reviewMovieResource = new ReviewMovieResource(reviewMovieRepository);
-        this.restReviewMovieMockMvc = MockMvcBuilders.standaloneSetup(reviewMovieResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final ReviewMovieResource reviewMovieResource = new ReviewMovieResource(reviewMovieRepository, userRepository);
+//        this.restReviewMovieMockMvc = MockMvcBuilders.standaloneSetup(reviewMovieResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.

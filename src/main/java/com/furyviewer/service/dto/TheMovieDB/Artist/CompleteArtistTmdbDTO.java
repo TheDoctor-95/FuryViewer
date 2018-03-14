@@ -53,8 +53,8 @@ public class CompleteArtistTmdbDTO {
     private Integer gender;
 
     /**
-     * Biografia del artist.
-     */
+     //* Biografia del artist.
+    //*/
     @SerializedName("biography")
     @Expose
     private String biography;

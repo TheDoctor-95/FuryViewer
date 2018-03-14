@@ -6,10 +6,28 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Series } from './series.model';
 import { SeriesService } from './series.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
     selector: 'jhi-series',
-    templateUrl: './series.component.html'
+    templateUrl: './series.component.html',
+    providers: [NgbRatingConfig],
+    styles: [`
+    .star {
+      font-size: 1.5rem;
+      color: #b0c4de;
+    }
+    .filled {
+      color: #1e90ff;
+    }
+    .bad {
+      color: #deb0b0;
+    }
+    .filled.bad {
+      color: #ff1e1e;
+    }
+  `]
 })
 export class SeriesComponent implements OnInit, OnDestroy {
 series: Series[];

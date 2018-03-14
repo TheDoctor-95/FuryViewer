@@ -23,7 +23,7 @@ export class FavouriteMovieService {
         });
     }
 
-    favorite(idMovie: number, like: boolean): Observable<FavouriteMovie> {
+    favorite(idMovie: number): Observable<FavouriteMovie> {
         return this.http.post(`${this.resourceUrl}/id/${idMovie}/liked`,"").map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);

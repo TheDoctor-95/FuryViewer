@@ -4,6 +4,7 @@ import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.FavouriteArtist;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import com.furyviewer.domain.User;
 
 import org.springframework.data.jpa.repository.*;
 import java.util.List;
@@ -27,5 +28,7 @@ public interface FavouriteArtistRepository extends JpaRepository<FavouriteArtist
 
 //   @Query("select sum(favourite_artist) from FavouriteArtist favourite_artist left join fetch artist.name where artist.id=:id")
 //    List<FavouriteArtist> NumFavArtist();
+
+    FavouriteArtist findByUserAndArtistId(User u, Long id);
 
 }

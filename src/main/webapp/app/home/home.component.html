@@ -80,230 +80,122 @@
         </div>
 
 
-        <div class="col-4">
+        <div class="col-4" id="lateralDret">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card calendario">
 
-            <div class="card calendario">
+                        <div class="card-body">
+                            <div class="card-title row ">
+                                <div class=" col-md-6" id="titlecalendar">
+                                    <h2 id="calendario">Calendario</h2>
+                                </div>
+                                <div class="col-md-6" id="botoncalendar">
+                                    <button> SERIES</button>
+                                    <button> PELIS</button>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
 
-                <div class="card-body">
-                    <div class="card-title row ">
-                        <div class=" col-md-6" id="titlecalendar">
-                            <h2 id="calendario">Calendario</h2>
+
+                            </div>
                         </div>
-                        <div class="col-md-6" id="botoncalendar">
-                            <button> SERIES</button>
-                            <button> PELIS</button>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-
-
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col" style="padding-right: 9px;">
+                    <div class="card topSeries">
 
+                        <div class="card-body">
+                            <div id="topseries">
+                                <div class="row">
+                                    <h2 class="col-9" >Top series</h2>
 
-            <div class="card calendario">
+                                    <label class="switchinv col-3">
+                                        <input type="checkbox">
+                                        <span class="sliderinv roundinv"></span>
+                                    </label>
 
-                <div id="topseries">
+                                </div>
+                                <ol class="list-group">
+                                    <li *ngFor="let serie of topSeries " class="list-group-item"> {{serie}}</li>
+                                </ol>
+                            </div>
+                        </div>
 
-                    <h2>Top series</h2>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card topPelis">
 
-                    <!--    <label class="switchinv col-3">
-                            <input type="checkbox">
-                            <span class="sliderinv roundinv"></span>
-                        </label>-->
+                        <div class="card-body">
+                            <div id="toppelis">
+                                <div class="row">
+                                    <h2 class="col-9">Top pelis</h2>
 
+                                    <label class="switchinv col-3">
+                                        <input type="checkbox">
+                                        <span class="sliderinv roundinv"></span>
+                                    </label>
 
-                    <ol class="list-group">
-                        <li *ngFor="let serie of topSeries " class="list-group-item"> {{serie}}</li>
+                                </div>
+                                <ol class="list-group">
+                                    <li *ngFor="let movie of topPelis" class="list-group-item"> {{movie.name}}</li>
 
-                    </ol>
+                                </ol>
+
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
-                <div id="toppelis">
+            </div>
+
+            <div class="row">
+                <div class="col" style="padding-right: 9px;">
+                    <div class="card topSeries">
+
+                        <div class="card-body">
+                            <div id="topseries" >
+
+                                    <h2 >Top Artist</h2>
+
+                                <ol class="list-group">
+                                    <li *ngFor="let serie of topSeries " class="list-group-item"> {{serie}}</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card topPelis">
+
+                        <div class="card-body">
+                            <div id="toppelis">
+
+                                    <h2 >Top Hatred artist</h2>
 
 
-                    <h2 class="">Top Pelis</h2>
 
 
-                    <ol class="list-group">
-                        <li *ngFor="let movie of topPelis" class="list-group-item" routerLink="{{movie.id}}">{{movie.name}}</li>
+                                <ol class="list-group" >
+                                    <li *ngFor="let movie of topPelis" class="list-group-item"> {{movie.name}}</li>
 
-                    </ol>
+                                </ol>
+
+
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
-
-
             </div>
 
 
         </div>
     </div>
 </div>
-
-<!-- <div class="row">
-
-     <div class="card pendientes col-7">
-         <div class="card-body">
-             <div class="serpeli_body">
-                 <h2 class="card-title">SERIES PENDIENTES</h2>
-
-                 <div class="card portades">
-                     <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
-
-                     <div class="card-body">
-                         <h4 class="card-title">3x04 Blink</h4>
-                         <h3 class="card-text">Doctor Who</h3>
-
-                     </div>
-
-                 </div>
-                 <div class="card portades">
-                     <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
-
-                     <div class="card-body">
-                         <h4 class="card-title">3x04 Blink</h4>
-                         <h3 class="card-text">Doctor Who</h3>
-
-                     </div>
-
-
-                 </div>
-                 <div class="card portades">
-                     <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
-
-                     <div class="card-body">
-                         <h4 class="card-title">3x04 Blink</h4>
-                         <h3 class="card-text">Doctor Who</h3>
-
-                     </div>
-
-
-                 </div>
-                 <div class="card portades">
-                     <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
-
-                     <div class="card-body">
-                         <h4 class="card-title">3x04 Blink</h4>
-                         <h3 class="card-text">Doctor Who</h3>
-
-                     </div>
-
-
-                 </div>
-             </div>
-         </div>
-     </div>
-
-
-     <div class="col-5">
-
-
-         <div class="card calendario">
-
-             <div class="card-body">
-                 <div class="card-title row ">
-                     <div class=" col-md-6" id="titlecalendar">
-                         <h2 id="calendario">Calendario</h2>
-                     </div>
-                     <div class="col-md-6" id="botoncalendar">
-                         <button> SERIES</button>
-                         <button> PELIS</button>
-                     </div>
-                 </div>
-                 <div class="panel panel-default">
-
-
-                     <img src="../../content/images/foto_calendari.png" height="180" width="280"/></div>
-             </div>
-         </div>
-     </div>
- </div>
-
-
- <div class="row align-top">
-
-     <div class="card pendientes col-7">
-
-         <div class="card-body">
-             <div class="serpeli_body">
-
-                 <h2 class="card-title">PELICULAS PENDIENTES</h2>
-                 <div class="card portades">
-                     <img class="card-img-top" src="../../content/images/piratas.jpg" alt="Card image">
-                     <div class="card-body">
-                         <h4>Los Piratas del Caribe</h4>
-
-                     </div>
-                 </div>
-                 <div class="card portades">
-                     <img class="card-img-top" src="../../content/images/liga.jpg" alt="Card image">
-                     <div class="card-body">
-                         <h4>La Liga de la Justicia</h4>
-
-                     </div>
-                 </div>
-                 <div class="card portades">
-                     <img class="card-img-top" src="../../content/images/titanic.jpg" alt="Card image">
-                     <div class="card-body">
-                         <h4>Titanic</h4>
-
-                     </div>
-                 </div>
-                 <div class="card portades">
-                     <img class="card-img-top" src="../../content/images/gru.jpg" alt="Card image">
-                     <div class="card-body">
-                         <h4>Gru Mi Villano Favorito</h4>
-
-                     </div>
-                 </div>
-             </div>
-
-         </div>
-     </div>
-
-
-     <div class="card col-2">
-
-         <div class="row">
-
-             <h2 class="card-title col-9" style="width: 76%">Top series</h2>
-
-             <label class="switchinv col-3">
-                 <input type="checkbox">
-                 <span class="sliderinv roundinv"></span>
-             </label>
-         </div>
-
-         <div class="card-body" style="text-align: left">
-             <ol class="list-group">
-                 <li *ngFor="let serie of topSeries " class="list-group-item"> {{serie}}</li>
-
-             </ol>
-
-         </div>
-
-     </div>
-
-     <div class="card col-2">
-
-         <h2 class="card-title">Top Pelis</h2>
-
-
-         <div class="card-body" style="text-align: left">
-             <ol class="list-group">
-                <li *ngFor="let movie of topPelis" class="list-group-item"> {{movie}}</li>
-
-             </ol>
-
-         </div>
-
-     </div>
-
-
- </div>
-
--->
-

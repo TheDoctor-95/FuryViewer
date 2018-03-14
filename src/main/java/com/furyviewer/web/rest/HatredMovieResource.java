@@ -3,7 +3,9 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.HatredMovie;
 
+import com.furyviewer.domain.Movie;
 import com.furyviewer.repository.HatredMovieRepository;
+import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
@@ -36,9 +38,12 @@ public class HatredMovieResource {
 
     private final UserRepository userRepository;
 
-    public HatredMovieResource(HatredMovieRepository hatredMovieRepository, UserRepository userRepository) {
+    private final MovieRepository movieRepository;
+
+    public HatredMovieResource(HatredMovieRepository hatredMovieRepository, UserRepository userRepository, MovieRepository movieRepository) {
         this.hatredMovieRepository = hatredMovieRepository;
         this.userRepository = userRepository;
+        this.movieRepository = movieRepository;
     }
 
     /**
@@ -59,7 +64,8 @@ public class HatredMovieResource {
         Optional<HatredMovie> existingHatredMovie = hatredMovieRepository.findByMovieAndUserLogin(hatredMovie.getMovie(), SecurityUtils.getCurrentUserLogin());
 
         if (existingHatredMovie.isPresent()) {
-            throw new BadRequestAlertException("Movie ya añadida en Hatred", ENTITY_NAME, "hatredExist");
+            hatredMovie.setId(existingHatredMovie.get().getId());
+            hatredMovie.setHated(!existingHatredMovie.get().isHated());
         }
 
         hatredMovie.setDate(ZonedDateTime.now());
@@ -70,6 +76,27 @@ public class HatredMovieResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+
+    @PostMapping("/hatred-movies/id/{idMovie}/hate")
+    @Timed
+    public ResponseEntity<HatredMovie> hateMovie(@PathVariable Long idMovie) throws URISyntaxException {
+
+        log.debug("REST request to save FavouriteMovie : {}", idMovie);
+
+        Movie m = movieRepository.findOne(idMovie);
+
+        HatredMovie hm = new HatredMovie();
+        hm.setMovie(m);
+        hm.setHated(true);
+
+        return createHatredMovie(hm);
+
+    }
+
+
+
+
 
     /**
      * PUT  /hatred-movies : Updates an existing hatredMovie.
@@ -118,6 +145,16 @@ public class HatredMovieResource {
         HatredMovie hatredMovie = hatredMovieRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredMovie));
     }
+
+    @GetMapping("/hatred-movies/{id}/user")
+    @Timed
+    public ResponseEntity<HatredMovie> getHatredMovieUse(@PathVariable Long id) {
+        log.debug("REST request to get HatredMovie : {}", id);
+        HatredMovie hatredMovie = hatredMovieRepository.findByUserAndMovieId(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get(), id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredMovie));
+    }
+
+
 
     @GetMapping("/num-hatred-movies/{id}")
     @Timed

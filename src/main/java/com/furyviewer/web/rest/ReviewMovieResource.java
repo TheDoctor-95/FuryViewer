@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.ReviewMovie;
 
 import com.furyviewer.repository.ReviewMovieRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +34,11 @@ public class ReviewMovieResource {
 
     private final ReviewMovieRepository reviewMovieRepository;
 
-    public ReviewMovieResource(ReviewMovieRepository reviewMovieRepository) {
+    private final UserRepository userRepository;
+
+    public ReviewMovieResource(ReviewMovieRepository reviewMovieRepository, UserRepository userRepository) {
         this.reviewMovieRepository = reviewMovieRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +55,10 @@ public class ReviewMovieResource {
         if (reviewMovie.getId() != null) {
             throw new BadRequestAlertException("A new reviewMovie cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        reviewMovie.setDate(ZonedDateTime.now());
+        reviewMovie.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         ReviewMovie result = reviewMovieRepository.save(reviewMovie);
         return ResponseEntity.created(new URI("/api/review-movies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -100,6 +110,14 @@ public class ReviewMovieResource {
     public ResponseEntity<ReviewMovie> getReviewMovie(@PathVariable Long id) {
         log.debug("REST request to get ReviewMovie : {}", id);
         ReviewMovie reviewMovie = reviewMovieRepository.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(reviewMovie));
+    }
+
+    @GetMapping("/review-movies/movie/{id}")
+    @Timed
+    public ResponseEntity<List<ReviewMovie>> getReviewsOfAMovie(@PathVariable Long id) {
+        log.debug("REST request to get ReviewMovie : {}", id);
+        List<ReviewMovie> reviewMovie = reviewMovieRepository.findByMovieIdOrderByDateDesc(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(reviewMovie));
     }
 
