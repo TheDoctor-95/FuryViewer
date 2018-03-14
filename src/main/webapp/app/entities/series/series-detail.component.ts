@@ -52,6 +52,10 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
     config: NgbRatingConfig
 ) {
+    this.director = new Artist();
+    this.director.name="";
+    this.scripwriter = new Artist();
+    this.scripwriter.name="";
     config.max = 5;
         this.fav = new FavouriteSeries();
         this.fav.liked=false;

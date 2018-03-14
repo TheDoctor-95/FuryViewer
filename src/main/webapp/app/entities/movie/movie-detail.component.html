@@ -43,7 +43,7 @@
                             <img src="img/time.png" height="24px" width="24px"/>
                         </div>
                         <div class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;">{{movie.duration}}</span>
+                            <span style="margin-left: 5px; font-size: 13px;">{{movie.duration}} min</span>
                         </div>
                     </div>
                     <!-- Pais -->
@@ -108,15 +108,17 @@
                                 <img src="img/foto.JPG" class="imgComent"/>
                             </div>
                             <div style="display: inline-block; width: 83%">
-                                <textarea name="comentario" style="width: 100%; font-size: 13px;" rows="5"></textarea>
+                                <input type="text" [(ngModel)]="newComent.title" />
+                                <textarea name="comentario" style="width: 100%; font-size: 13px;" rows="5" [(ngModel)]="newComent.review"></textarea>
                             </div>
                         </div>
                         <div style="display: block; width: 100%">
                             <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
-                                <button id="btnComen">COMENTAR</button>
+                                <button id="btnComen" (click)="comentar()" >COMENTAR</button>
                             </div>
                         </div>
                     </div>
+                    <p *ngFor="let coment of reviewMovies"><b>{{coment.title}}</b> {{coment.review}} </p>
                 </div>
 
             </div>
