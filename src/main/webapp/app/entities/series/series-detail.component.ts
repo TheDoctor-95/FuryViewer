@@ -9,6 +9,10 @@ import {Artist} from '../artist/artist.model';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ArtistService} from '../artist/artist.service';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import {FavouriteMovie} from '../favourite-movie/favourite-movie.model';
+import {HatredMovie} from '../hatred-movie/hatred-movie.model';
+import {FavouriteSeries} from '../favourite-series/favourite-series.model';
+import {HatredSeries} from '../hatred-series/hatred-series.model';
 
 @Component({
     selector: 'jhi-series-detail',
@@ -35,6 +39,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     director: Artist;
     scripwriter: Artist;
     series: Series;
+    fav: FavouriteMovie;
+    hate: HatredMovie;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
@@ -47,6 +53,10 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     config: NgbRatingConfig
 ) {
     config.max = 5;
+        this.fav = new FavouriteSeries();
+        this.fav.liked=false;
+        this.hate = new HatredSeries();
+        this.hate.hated=false;
 }
 
     ngOnInit() {

@@ -309,7 +309,7 @@ Social Buttons
 }
 
 .boxList {
-    width: 80%;
+
     background-color: white;
     border-radius: 10px;
     padding: 4px 0px;
@@ -321,7 +321,13 @@ Social Buttons
 
 .boxList:hover {
     background-color: #ef9800 !important;
-    color: white;
+    color: white !important;
+    cursor: pointer;
+}
+
+.boxList:hover i{
+
+    color: white !important;
     cursor: pointer;
 }
 
