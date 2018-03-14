@@ -116,7 +116,7 @@ public class SeriesOmdbDTOService {
         //Comprobamos si ya está en nuestra base de datos.
         SeriesOmdbDTO seriesOmdbDTO = getSeries(title);
 
-        Optional<Series> s = seriesRepository.findSeriesByImdbId(seriesOmdbDTO.getImdbID());
+        Optional<Series> s = seriesRepository.findByImdb_id(seriesOmdbDTO.getImdbID());
 
         if(s.isPresent()){
             return s.get();
@@ -145,7 +145,7 @@ public class SeriesOmdbDTOService {
         //Comprobamos si ya está en nuestra base de datos.
         SeriesOmdbDTO seriesOmdbDTO = getSeriesByImdbId(imdbId);
 
-        Optional<Series> s = seriesRepository.findSeriesByImdbId(seriesOmdbDTO.getImdbID());
+        Optional<Series> s = seriesRepository.findByImdb_id(seriesOmdbDTO.getImdbID());
 
         if(s.isPresent()){
             return s.get();
