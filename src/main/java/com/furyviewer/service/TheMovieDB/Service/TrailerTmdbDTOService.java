@@ -106,22 +106,25 @@ public class TrailerTmdbDTOService {
 
                 if (response.isSuccessful()) {
                     TrailerTmdbDTO trailerRes = response.body();
-                    int size = trailerRes.getResults().get(0).getSize();
 
-                    List<Result> resultTrailer = trailerRes.getResults();
+                    if (!trailerRes.getResults().isEmpty()) {
+                        int size = trailerRes.getResults().get(0).getSize();
 
-                    //Buscamos el trailer con mejor resolución.
-                    for (Result trailer : resultTrailer) {
-                        if (size <= trailer.getSize()) {
-                            social.setUrl(pathVideo + trailer.getKey());
-                            social.setType("Trailer");
-                            social.setSeries(ss);
+                        List<Result> resultTrailer = trailerRes.getResults();
 
-                            size = trailer.getSize();
+                        //Buscamos el trailer con mejor resolución.
+                        for (Result trailer : resultTrailer) {
+                            if (size <= trailer.getSize()) {
+                                social.setUrl(pathVideo + trailer.getKey());
+                                social.setType("Trailer");
+                                social.setSeries(ss);
+
+                                size = trailer.getSize();
+                            }
                         }
-                    }
 
-                    socialRepository.save(social);
+                        socialRepository.save(social);
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
