@@ -9,7 +9,7 @@ export class Movie implements BaseEntity {
         public duration?: number,
         public imdbIdExternalApi?: string,
         public imgUrl?: string,
-        public dvd_release?: string,
+        public dvd_release?: any,
         public awards?: string,
         public director?: BaseEntity,
         public scriptwriter?: BaseEntity,

@@ -39,4 +39,5 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     Integer markSeries(@Param("User") User u, @Param("id") Long id);
 
     RateSeries findByUserAndSeriesId(User u, Long id);
+
 }

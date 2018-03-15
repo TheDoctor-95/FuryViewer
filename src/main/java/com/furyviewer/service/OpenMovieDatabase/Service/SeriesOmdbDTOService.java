@@ -188,11 +188,7 @@ public class SeriesOmdbDTOService {
 
         ss.setGenres(genreService.importGenre(seriesOmdbDTO.getGenre()));
         ss.setCountry(countryService.importCountry(seriesOmdbDTO.getCountry()));
-
-        String companyName = seriesTmdbDTOService.getCompanyName(seriesOmdbDTO.getTitle());
-        if (companyName != null) {
-            ss.setCompany(companyService.importCompany(companyName));
-        }
+        ss.setCompany(companyService.importCompany(seriesTmdbDTOService.getCompanyName(seriesOmdbDTO.getTitle())));
 
         ss = seriesRepository.save(ss);
 

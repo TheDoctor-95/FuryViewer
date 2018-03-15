@@ -1,7 +1,6 @@
 package com.furyviewer.service.util;
 
 import com.furyviewer.domain.Artist;
-import com.furyviewer.domain.Series;
 import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
@@ -13,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.time.LocalDate;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -37,7 +34,7 @@ public class ArtistService {
     private ArtistTypeRepository artistTypeRepository;
 
     @Autowired
-    private NAEraserService naEraserService;
+    private StringApiCorrectorService stringApiCorrectorService;
 
     @Autowired
     private ArtistTmdbDTOService artistTmdbDTOService;
@@ -52,7 +49,7 @@ public class ArtistService {
     public Set<Artist> importActors(String actorsListStr) {
         Set<Artist> artists = new HashSet<>();
 
-        if (naEraserService.eraserNA(actorsListStr) != null) {
+        if (stringApiCorrectorService.eraserNA(actorsListStr) != null) {
             String[] actors = actorsListStr.split(", ");
             ArtistType atMainActor = artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR);
 
@@ -91,7 +88,7 @@ public class ArtistService {
     public Artist importDirector(String director) {
         Artist artist = null;
 
-        if (naEraserService.eraserNA(director) != null) {
+        if (stringApiCorrectorService.eraserNA(director) != null) {
             String[] directorArray = director.split(", | \\(");
             Optional<Artist> optionalDirector = artistRepository.findByName(directorArray[0]);
             ArtistType atDirector = artistTypeRepository.findByName(ArtistTypeEnum.DIRECTOR);
@@ -124,7 +121,7 @@ public class ArtistService {
     public Artist importScripwriter(String scripwriter) {
         Artist artist = null;
 
-        if (naEraserService.eraserNA(scripwriter) != null) {
+        if (stringApiCorrectorService.eraserNA(scripwriter) != null) {
             String[] scripwriterArray = scripwriter.split(", | \\(");
             Optional<Artist> optionalScripwriter = artistRepository.findByName(scripwriterArray[0]);
             ArtistType atScripwriter = artistTypeRepository.findByName(ArtistTypeEnum.SCRIPTWRITER);
@@ -206,9 +203,9 @@ public class ArtistService {
 
 
     /**
-     * Devuelve todos los Actores de una Series a partir del id.
-     * @param serieID Long | id de la serie
-     * @return Artist | Director que ha participado en mas capitulos
+     * Devuelve el director de una Series a partir del id.
+     * @param serieID Long | id de la series.
+     * @return Artist | Director que ha participado en mas capitulos.
      */
     @Transactional
     public Artist findDirectorBySerieId(Long serieID) {
@@ -227,9 +224,9 @@ public class ArtistService {
     }
 
     /**
-     * Devuelve todos los Actores de una Series a partir del id.
-     * @param serieID Long | id de la serie
-     * @return Artist | Escritor que ha participado en mas capitulos
+     * Devuelve todos el guionista de una Series a partir del id.
+     * @param serieID Long | id de la series.
+     * @return Artist | Guionista que ha participado en mas capitulos.
      */
     @Transactional
     public Artist findScriprirterBySerieId(Long serieID) {

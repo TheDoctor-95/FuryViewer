@@ -22,7 +22,7 @@ public interface MovieTmdbDTORepository {
     @GET("/3/search/movie")
     Call<SimpleMovieTmdbDTO> getSimpleMovie(@Query("api_key") String apikey, @Query("query") String movieName);
 
-    public static String url = " https://api.themoviedb.org/";
+    public static String url = "https://api.themoviedb.org/";
     public static final Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(url)
         .addConverterFactory(GsonConverterFactory.create())

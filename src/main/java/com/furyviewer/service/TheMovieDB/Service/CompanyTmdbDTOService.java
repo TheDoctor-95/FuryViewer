@@ -6,6 +6,7 @@ import com.furyviewer.service.TheMovieDB.Repository.CompanyTmdbDTORepository;
 import com.furyviewer.service.dto.TheMovieDB.Company.CompleteCompanyTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Company.SimpleCompanyTmdbDTO;
 import com.furyviewer.service.util.CountryService;
+import com.furyviewer.service.util.StringApiCorrectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
@@ -42,6 +43,9 @@ public class CompanyTmdbDTOService {
 
     @Autowired
     private CompanyRepository companyRepository;
+
+    @Autowired
+    private StringApiCorrectorService stringApiCorrectorService;
 
     /**
      * Devuelve el id de la api de TMDB a partir del nombre de la company.
@@ -88,7 +92,8 @@ public class CompanyTmdbDTOService {
                     CompleteCompanyTmdbDTO completeCompanyTmdbDTO = response.body();
 
                     if (completeCompanyTmdbDTO.getDescription() != null) {
-                        company.setDescription(completeCompanyTmdbDTO.getDescription());
+                        company.setDescription(stringApiCorrectorService.eraserEvilBytes(
+                            completeCompanyTmdbDTO.getDescription()));
                     }
 
                     if (completeCompanyTmdbDTO.getLogoPath() != null) {

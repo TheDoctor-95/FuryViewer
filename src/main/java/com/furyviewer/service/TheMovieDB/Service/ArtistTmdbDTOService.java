@@ -8,6 +8,7 @@ import com.furyviewer.service.dto.TheMovieDB.Artist.CompleteArtistTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.SimpleArtistTmdbDTO;
 import com.furyviewer.service.util.CountryService;
 import com.furyviewer.service.util.DateConversorService;
+import com.furyviewer.service.util.StringApiCorrectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
@@ -47,6 +48,9 @@ public class ArtistTmdbDTOService {
 
     @Autowired
     private CountryService countryService;
+
+    @Autowired
+    private StringApiCorrectorService stringApiCorrectorService;
 
     /**
      * Metodo que se encarga de pedir a la api de TheMovieDB la informacion basica de un Artist.
@@ -153,6 +157,8 @@ public class ArtistTmdbDTOService {
         artist.setName(artistName);
         artist.addArtistType(artistType);
 
+        System.out.println("==================\nImportanto artista " + artistName + "\n==================");
+
         //Ponemos mote al bucle y lo utilizamos para hacer la petición hasta tres veces para asegurarnos de que
         // podemos realizar la petición a la api.
         getArtist:
@@ -196,9 +202,9 @@ public class ArtistTmdbDTOService {
                     if (completeArtistTmdbDTO.getPlaceOfBirth() != null) {
                         artist.setCountry(countryService.importCountry(completeArtistTmdbDTO.getPlaceOfBirth().toString()));
                     }
-                    //if(completeArtistTmdbDTO.getBiography() != null) {
-                    //    artist.setBiography(completeArtistTmdbDTO.getBiography());
-                    //}
+                    if(completeArtistTmdbDTO.getBiography() != null) {
+                        artist.setBiography(stringApiCorrectorService.eraserEvilBytes(completeArtistTmdbDTO.getBiography()));
+                    }
                 }
                 //Salimos del bucle
                 break getArtist;
@@ -215,6 +221,8 @@ public class ArtistTmdbDTOService {
         }
 
         artist = artistRepository.save(artist);
+
+        System.out.println("==================\nArtista guardado " + artistName + "\n==================");
 
         return artist;
     }

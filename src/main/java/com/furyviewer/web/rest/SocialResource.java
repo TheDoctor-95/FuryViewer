@@ -103,6 +103,8 @@ public class SocialResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(social));
     }
 
+    // Pau comenta el maldito codigo^^
+
     @GetMapping("/socials/Movie/{id}")
     @Timed
     public ResponseEntity<List<Social>> getSocialMovie(@PathVariable Long id) {
@@ -110,6 +112,8 @@ public class SocialResource {
         List<Social> social = socialRepository.findMarksMovie(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(social));
     }
+
+
 
     /**
      * DELETE  /socials/:id : delete the "id" social.

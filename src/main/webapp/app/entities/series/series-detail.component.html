@@ -95,7 +95,7 @@
                         </div>
                         <div style="display: block; width: 100%">
                             <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
-                                <button id="btnComen">COMENTAR</button>
+                                <button id="btnComen">COMENTA</button>
                             </div>
                         </div>
                     </div>
@@ -103,29 +103,52 @@
 
             </div>
 
-
             <div class="col-3" style="text-align: center;">
-                <div class="boxList"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i> Vista</div>
-                <div class="boxList"><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
-                <div class="boxList"><i class="fa fa-heart" style="color: #ef9800;"></i> Favorita</div>
-                <div class="boxList"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
-
-                &nbsp;
-
-                <div id="boxReparto">
-                    <div id="reparto">REPARTO</div>
-                    <div class="container-fluid">
-                        <div class="row">
-
-                        </div>
-                    </div>
-                    <div *ngFor="let artist of artists" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
-                        <img style="width: 70px; display: block;" src="{{artist.imgUrl}}"/>
-                        <div style="width: 70px; display: block;">{{artist.name}}</div>
+                <div class="row" style="padding-left: 5%; padding-right: 7%;">
+                    <div class="boxList col-10"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i> Vista
                     </div>
                 </div>
 
+                <div class="row" style="padding-left: 5%; padding-right: 7%;">
+
+                    <div class="boxList col-10" ><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
+                </div>
+                <div class="row" style="padding-left: 5%; padding-right: 7%;">
+                    <div class="col-10" style="padding-left: 0px; padding-right: 0px;">
+                        <div class="boxList" style="display: inline-block; width: 49%;" (click)="like()"
+                             [ngStyle]="{'background-color':fav.liked ? '#ef9800' : 'white', 'color':fav.liked ? 'white' : '#ef9800'}">
+                            <i class="fa fa-heart" style="color: #ef9800;"
+                               [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorita
+                        </div>
+                        <div class="boxList" style="display: inline-block; width: 49%;" (click)="hated()"
+                             [ngStyle]="{'background-color':hate.hated ? '#ef9800' : 'white', 'color':hate.hated ? 'white' : '#ef9800'}">
+                            <i class="fa fa-thumbs-down" style="color: #ef9800;"
+                               [ngStyle]="{'color':hate.hated ? 'white' : '#ef9800'}"></i> Hatred
+                        </div>
+                    </div>
+                </div>
+
+                &nbsp;
+                <div class="row">
+                    <div class="col-10">
+                        <div id="boxReparto" style="width: 100% !important;">
+                            <div id="reparto">REPARTO</div>
+                            <div class="container-fluid">
+                                <div class="row">
+
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left: 30px; padding-right: 30px;">
+                                <div *ngFor="let artist of artists" class="col-6" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
+                                    <img style="width: 80px;" src="{{artist.imgUrl}}"/>
+                                    <div>{{artist.name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 

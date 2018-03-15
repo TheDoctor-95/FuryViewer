@@ -21,7 +21,7 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
     @Autowired
-    private NAEraserService naEraserService;
+    private StringApiCorrectorService stringApiCorrectorService;
 
     @Autowired
     private CompanyTmdbDTOService companyTmdbDTOService;
@@ -35,7 +35,7 @@ public class CompanyService {
     public Company importCompany(String name) {
         Company c = null;
 
-        if (naEraserService.eraserNA(name) != null) {
+        if (stringApiCorrectorService.eraserNA(name) != null) {
             Optional<Company> optionalCompany = companyRepository.findCompanyByName(name);
 
             if (optionalCompany.isPresent()) {

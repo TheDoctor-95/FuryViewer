@@ -19,6 +19,9 @@ import {ArtistService} from "../artist/artist.service";
 import {Artist} from "../artist/artist.model";
 import {RateMovie} from "../rate-movie/rate-movie.model";
 import {RateMovieService} from "../rate-movie/rate-movie.service";
+import {ReviewMovie} from "../review-movie/review-movie.model";
+import {ReviewMovieService} from "../review-movie/review-movie.service";
+import {BaseEntity} from "../../shared/model/base-entity";
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -50,6 +53,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     artistMovie: Artist[];
     rateUser: RateMovie;
     media: string;
+    reviewMovies: ReviewMovie[];
+    newComent: ReviewMovie;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -61,7 +66,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private hatredMovieService: HatredMovieService,
         private jhiAlertService: JhiAlertService,
         private artistService: ArtistService,
-        private rateMovieServie: RateMovieService
+        private rateMovieServie: RateMovieService,
+        private reviewMovieService: ReviewMovieService
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
@@ -71,6 +77,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.rateUser = new RateMovie()
         this.rateUser.rate = 0;
         this.media = "0";
+        this.newComent= new ReviewMovie();
+        this.newComent.title="";
+        this.newComent.review="";
     }
 
     ngOnInit() {
@@ -82,6 +91,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadArtist(params['id']);
             this.loadRateUser(params['id']);
             this.loadMediumMark(params['id']);
+            this.loadReviews(params['id']);
+            this.newComent.movie.id= params['id'];
         });
         this.registerChangeInMovies();
 
@@ -105,6 +116,15 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.rateMovieServie.markMovieUser(id).subscribe((rateMovie) => {
             this.rateUser = rateMovie;
         });
+    }
+
+    loadReviews(id: number) {
+        this.reviewMovieService.findMovieReviews(id).subscribe(
+            (res: ResponseWrapper) => {
+                this.reviewMovies = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
     }
 
     loadMediumMark(id: number){
@@ -132,6 +152,16 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.subscribeToHateResponse(
             this.hatredMovieService.hate(this.movie.id)
         );
+    }
+
+    comentar(){
+        console.log("aaa");
+        this.newComent.movie=this.movie;
+        console.log(this.newComent);
+
+        this.subscribeToSaveResponseReview(
+            this.reviewMovieService.create(this.newComent));
+
     }
 
     rate(){
@@ -223,6 +253,19 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
+    }
+
+    private subscribeToSaveResponseReview(result: Observable<ReviewMovie>) {
+        result.subscribe((res: ReviewMovie) =>
+            this.onSaveSuccessReview(res), (res: Response) => this.onSaveErrorLike());
+
+    }
+
+    private onSaveSuccessReview(result: ReviewMovie) {
+        this.eventManager.broadcast({ name: 'reviewMovieListModification', content: 'OK'});
+        this.newComent.title="";
+        this.newComent.review="";
+        this.loadReviews(this.movie.id);
     }
 
 }

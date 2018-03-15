@@ -44,6 +44,11 @@ export class ReviewMovieService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    findMovieReviews(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/movie/${id}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
