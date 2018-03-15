@@ -77,15 +77,19 @@ public class SearchOmdbDTOService {
         Multimedia multimedia = null;
 
         if(searchOmdbDTO.getResponse().equalsIgnoreCase("true")) {
-            if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("movie")) {
-                multimedia = movieOmdbDTOService.importMovieByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
-            } else if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("series")) {
-                multimedia = seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
-            }
-            List<Search> searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size() - 1);
+            if(!searchOmdbDTO.getSearch().isEmpty()) {
+                if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("movie")) {
+                    multimedia = movieOmdbDTOService.importMovieByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
+                } else if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("series")) {
+                    multimedia = seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
+                }
+                List<Search> searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size() - 1);
 
-            //Se envian el resto de resultados para que se importen de forma asincrona.
-            asyncImportTasksService.importAditionalinBackground(searches);
+                if (!searches.isEmpty()) {
+                    //Se envian el resto de resultados para que se importen de forma asincrona.
+                    asyncImportTasksService.importAditionalinBackground(searches);
+                }
+            }
         } else {
             System.out.println("==================\nBúsqueda sin resultados\n==================");
         }
