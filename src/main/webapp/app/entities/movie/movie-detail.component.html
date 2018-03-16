@@ -52,7 +52,7 @@
                             <img src="img/earth.png" height="24px" width="24px"/>
                         </div>
                         <div *ngIf="movie.country" class="infoFilm">
-                            <a class="infoArtist">{{movie.country?.name}}</a>
+                            <span style="margin-left: 5px; font-size: 13px;">{{movie.country?.name}}</span>
                         </div>
                     </div>
                     <!-- Lanzamiento -->
@@ -185,8 +185,10 @@
                             </div>
                             <div class="row" style="padding-left: 30px; padding-right: 30px;">
                             <div *ngFor="let artist of artistMovie" class="col-6" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
-                                <img style="width: 80px;" src="{{artist.imgUrl}}"/>
-                                <div>{{artist.name}}</div>
+                                <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
+                                    <img style="width: 80px;" src="{{artist.imgUrl}}"/>
+                                    <div style="font-size: 15px;">{{artist.name}}</div>
+                                </a>
                             </div>
                             </div>
                         </div>
