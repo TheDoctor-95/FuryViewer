@@ -31,7 +31,7 @@ public class TrailerTmdbDTOService {
     /**
      * Path necesario para poder construir el enlace del trailer.
      */
-    private final String pathVideo = "https://www.youtube.com/watch?v=";
+    private final String pathVideo = "https://www.youtube.com/embed/";
 
     /**
      * Se establece conexion para poder hacer peticiones a la api.
