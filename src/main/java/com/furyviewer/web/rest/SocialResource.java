@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -136,12 +138,14 @@ public class SocialResource {
      *
      *
      */
-    @GetMapping("/socials/movie-trailer{id}")
+    @GetMapping("/socials/movie-trailer/{id}")
     @Timed
-    public ResponseEntity<String> selectMovieIdForTrailer(@PathVariable Long id) {
+    public ResponseEntity<Map<String, String>> selectMovieIdForTrailer(@PathVariable Long id) {
         log.debug("REST request to get Movie trailer : {}", id);
         String url = socialRepository.selectMoviesIdForTrailer(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(url));
+        Map<String, String> urlMap = new HashMap<>();
+        urlMap.put("url", url);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(urlMap));
     }
 
     /**
@@ -150,7 +154,7 @@ public class SocialResource {
      * @param id the id of the social to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the social, or with status 404 (Not Found)
      */
-    @GetMapping("/socials/series-trailer{id}")
+    @GetMapping("/socials/series-trailer/{id}")
     @Timed
     public ResponseEntity<String> selectSeriesIdForTrailer(@PathVariable Long id) {
         log.debug("REST request to get Series trailer : {}", id);

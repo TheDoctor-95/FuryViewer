@@ -55,7 +55,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     media: string;
     reviewMovies: ReviewMovie[];
     newComent: ReviewMovie;
-
+    trailer: string;
     constructor(
         private eventManager: JhiEventManager,
         private movieService: MovieService,
@@ -92,7 +92,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadRateUser(params['id']);
             this.loadMediumMark(params['id']);
             this.loadReviews(params['id']);
-            this.newComent.movie.id= params['id'];
+            this.loadTrailer(params['id']);
+            console.log(this.trailer);
+
         });
         this.registerChangeInMovies();
 
@@ -136,6 +138,14 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
         });
     }
+
+    loadTrailer(id: number){
+        this.socialService.movieTrailer(id).subscribe( (trailerLink) => {
+           this.trailer = trailerLink.url;
+           console.log(this.trailer);
+        });
+    }
+
     previousState() {
         window.history.back();
     }

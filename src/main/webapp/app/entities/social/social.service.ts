@@ -5,6 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { Social } from './social.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {UrlModel} from "../../shared/model/url.model";
 
 @Injectable()
 export class SocialService {
@@ -33,6 +34,12 @@ export class SocialService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    movieTrailer(id: number): Observable<UrlModel> {
+        return this.http.get(`${this.resourceUrl}/movie-trailer/${id}`).map((res: Response) => {
+           return res.json();
         });
     }
 
