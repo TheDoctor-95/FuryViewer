@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
+
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser'
+
 import { Movie } from './movie.model';
 import { MovieService } from './movie.service';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -55,7 +58,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     media: string;
     reviewMovies: ReviewMovie[];
     newComent: ReviewMovie;
-    trailer: string;
+    trailer: SafeResourceUrl;
     constructor(
         private eventManager: JhiEventManager,
         private movieService: MovieService,
@@ -67,7 +70,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private artistService: ArtistService,
         private rateMovieServie: RateMovieService,
-        private reviewMovieService: ReviewMovieService
+        private reviewMovieService: ReviewMovieService,
+        private sanitizer: DomSanitizer
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
@@ -141,7 +145,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
     loadTrailer(id: number){
         this.socialService.movieTrailer(id).subscribe( (trailerLink) => {
-           this.trailer = trailerLink.url;
+           this.trailer = this.sanitizer.bypassSecurityTrustResourceUrl(trailerLink.url);
            console.log(this.trailer);
         });
     }
