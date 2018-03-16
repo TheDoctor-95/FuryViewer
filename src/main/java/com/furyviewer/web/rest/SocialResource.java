@@ -130,4 +130,33 @@ public class SocialResource {
     }
 
 
+    /**
+     * GET  /socials/movie-trailer-by-id : get the trailer of a movie from its id
+     *
+     *
+     *
+     */
+    @GetMapping("/socials/movie-trailer{id}")
+    @Timed
+    public ResponseEntity<String> selectMovieIdForTrailer(@PathVariable Long id) {
+        log.debug("REST request to get Movie trailer : {}", id);
+        String url = socialRepository.selectMoviesIdForTrailer(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(url));
+    }
+
+    /**
+     * GET  /socials/series-trailer:id : get the "id" social.
+     *
+     * @param id the id of the social to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the social, or with status 404 (Not Found)
+     */
+    @GetMapping("/socials/series-trailer{id}")
+    @Timed
+    public ResponseEntity<String> selectSeriesIdForTrailer(@PathVariable Long id) {
+        log.debug("REST request to get Series trailer : {}", id);
+        String url = socialRepository.selectSeriesIdForTrailer(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(url));
+    }
+
+
 }
