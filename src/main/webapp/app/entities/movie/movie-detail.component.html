@@ -103,22 +103,43 @@
                 &nbsp;
                 <div class="whiteBox" style="display: block; padding: 18px;">
                     <div style="width: 100%">
-                        <div style="display: block;">
-                            <div style="display: inline-block; width: 15%; vertical-align: top;">
+
+                        <div>
+
+                        <div class="row">
+
+                            <div class="col-3" style="vertical-align: top;">
                                 <img src="img/foto.JPG" class="imgComent"/>
                             </div>
-                            <div style="display: inline-block; width: 83%">
-                                <input type="text" [(ngModel)]="newComent.title" />
-                                <textarea name="comentario" style="width: 100%; font-size: 13px;" rows="5" [(ngModel)]="newComent.review"></textarea>
-                            </div>
-                        </div>
-                        <div style="display: block; width: 100%">
-                            <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
-                                <button id="btnComen" (click)="comentar()" >COMENTAR</button>
+                            <div class="col-8">
+                                <input type="text" [(ngModel)]="newComent.title" placeholder="title" style="font-size: 14px; width: 100%; margin-bottom: 10px; margin-left: 0px !important;"/>
+                                </br>
+                                <textarea class="txtarea" name="comentario" placeholder="write here the commentary" style="width: 100%; font-size: 13px;" rows="4" [(ngModel)]="newComent.review"></textarea>
+                                <div style="display: block; width: 100%">
+                                    <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
+                                        <button id="btnComen" (click)="comentar()" >COMENTAR</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <p *ngFor="let coment of reviewMovies"><b>{{coment.title}}</b> {{coment.review}} </p>
+
+                    </div>
+                    <p *ngFor="let coment of reviewMovies" class="row" style="margin-top: 35px;">
+                        <b class="col-3">
+                            <img src="img/foto.JPG" class="imgComent"/>
+                            <p style="margin-top: 3px; font-size: 12px;">{{coment.user.login}}</p>
+                        </b>
+                        <b class="col-8" >
+                            <b style="display: block; font-weight: normal; text-align: left;">
+                                <p style="text-align: left; display: inline-block;">{{coment.title}}</p>
+                                <span style="float: right;"><p style="display: inline-block; font-size: 9px;"> {{coment.date}} </p></span>
+                            </b>
+                            <b style="display: block; font-weight: normal; text-align: left; font-size: 14px;">
+                                <p style="text-align: left;">{{coment.review}}</p>
+                            </b>
+                        </b>
+                    </p>
                 </div>
 
             </div>

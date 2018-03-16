@@ -377,6 +377,7 @@ Social Buttons
     border-radius: 50%;
     width: 64px;
     height: 64px;
+    margin-top: 10px;
 }
 
 #btnComen {
@@ -1052,4 +1053,9 @@ input:checked + .slider:before {
     text-align: right;
     margin-right: 2%;
 }
+
+.txtarea:focus {
+    border: 1px solid #ef9800;
+}
+
 
