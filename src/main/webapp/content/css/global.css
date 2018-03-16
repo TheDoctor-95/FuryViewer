@@ -558,18 +558,18 @@ h2 {
 
 button {
     border-color: #ef9800 !important;
-    background-color: transparent;
-    border-style: solid;
-    color: #ef9800;
-    font-size: 1rem;
+    background-color: transparent !important;
+    border-style: solid !important;
+    color: #ef9800 !important;
+    font-size: 1rem !important;
 
 }
 
 button:hover {
     border-color: #ef9800 !important;
-    background-color: #ef9800;
-    border-style: solid;
-    color: #ffffff;
+    background-color: #ef9800 !important;
+    border-style: solid !important;
+    color: #ffffff !important;
 
 }
 
@@ -720,6 +720,26 @@ li {
 .calendario h2{
     font-size: 23px;
 }
+
+@media (max-width: 991.98px) {
+
+    .card.calendario{
+        margin-left: 0px;
+        margin-top: 2%;
+    }
+
+    .card.topSeries{
+        margin-left: 0px;
+    }
+    .card.topPelis{
+        margin-left: 0px;
+    }
+}
+
+
+
+
+
 /* ====================================================================================================================================================
 Watchlist
 ==================================================================================================================================================== */
@@ -749,7 +769,7 @@ Watchlist
 #sidebarwatch {
     background-color: white;
     width: 9%;
-    height: 49%;
+
     margin-top: 3%;
     float: left;
     margin-left: -8%;
@@ -1004,6 +1024,18 @@ input:checked + .slider:before {
     border-radius: 10px;
     background-image: url('peli1.jpg');
     background-position-x: center;
+    /*    text-align: left;
+    margin-left: 23%;
+    width: 45.6%;
+    height: 22.5%;
+    padding-top: 3%;
+    padding-bottom: 4%;
+    background-color: white;
+    border-radius: 10px;
+    background-image: url(content/114bef8….jpg);
+    background-position-x: center;
+    position: absolute;
+    background-repeat: no-repeat;*/
 
 }
 
@@ -1053,3 +1085,48 @@ input:checked + .slider:before {
     margin-right: 2%;
 }
 
+
+
+
+
+
+/* ====================================================================================================================================================
+ SEARCH
+==================================================================================================================================================== */
+.form-control{
+    padding: 0.2rem .75rem;
+    border-radius: 100px;
+}
+
+.form-group{
+    padding: 0.2rem .75rem;
+    border-radius: 100px;
+    margin-bottom: 3%;
+}
+
+
+.body-form{
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 3%;
+    padding-bottom: 5%;
+}
+select.form-control:not([size]):not([multiple]){
+    height: auto;
+}
+
+.formulari{
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-width: 1px;
+    padding-bottom: 2%;
+    margin-bottom: 4%;
+}
+
+.selector-movieserie{
+    width: 21%;
+    background-color: white;
+    margin-left: 34%;
+    padding-top: 1%;
+    border-radius: 12px 12px 0 0;
+}

@@ -55,6 +55,7 @@ public class CompanyTmdbDTOService {
     public int getIdTmdbCompany(String companyName) {
         int id = -1;
         SimpleCompanyTmdbDTO company;
+        companyName = companyName.split("/")[0];
         Call<SimpleCompanyTmdbDTO> callCompany = apiTMDB.getSimpleCompany(apikey, companyName);
 
         try {
