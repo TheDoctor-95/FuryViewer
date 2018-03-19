@@ -2,7 +2,8 @@ package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Episode;
-
+import com.furyviewer.domain.Artist;
+import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.EpisodeOmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
@@ -12,6 +13,8 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +39,9 @@ public class EpisodeResource {
 
     @Autowired
     EpisodeOmdbDTOService episodeOmdbDTOService;
+
+    @Autowired
+    private ArtistRepository artistRepository;
 
     public EpisodeResource(EpisodeRepository episodeRepository) {
         this.episodeRepository = episodeRepository;
@@ -124,6 +130,8 @@ public class EpisodeResource {
         List<Episode> episode =episodeRepository.findEpisodeByName(name);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(episode));
     }
+
+
 
     /**
      * DELETE  /episodes/:id : delete the "id" episode.

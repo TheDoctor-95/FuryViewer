@@ -164,6 +164,8 @@ public class HatredMovieResource {
         //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredMovie));
     }
 
+
+
     /**
      * DELETE  /hatred-movies/:id : delete the "id" hatredMovie.
      *

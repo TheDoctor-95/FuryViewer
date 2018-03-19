@@ -26,6 +26,8 @@ public interface ArtistRepository extends JpaRepository<Artist, Long>, JpaSpecif
     List<Artist>findArtistByName(String name);
 
     Optional<Artist> findByName(String name);
+
+
 //    @Query("select artist from Artist artist where artist.artistTypes.name=com.furyviewer.domain.enumeration.ArtistTypeEnum.DIRECTOR")
 //    List<Artist> findArtistDirector();
 
@@ -39,6 +41,11 @@ public interface ArtistRepository extends JpaRepository<Artist, Long>, JpaSpecif
 
     @Query("select artist.imgUrl from Artist artist where artist.id =:id")
     String returnImageArtist(@Param("id") Long id);
+
+
+
+
+
 
 
 }

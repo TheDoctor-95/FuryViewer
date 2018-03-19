@@ -26,4 +26,7 @@ public interface SeriesRepository extends JpaRepository<Series, Long>, JpaSpecif
 
     @Query("select series from Series series where series.imdb_id =:imdb")
     Optional<Series> findByImdb_id(@Param("imdb") String id);
+
+
+
 }

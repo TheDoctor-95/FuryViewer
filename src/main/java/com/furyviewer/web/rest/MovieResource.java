@@ -4,11 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.Movie;
 
-import com.furyviewer.repository.MovieRepository;
-import com.furyviewer.repository.MovieStatsRepository;
-import com.furyviewer.repository.RateMovieRepository;
-import com.furyviewer.repository.HatredMovieRepository;
-import com.furyviewer.repository.UserRepository;
+import com.furyviewer.repository.*;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.SmartSearch.Movie.MovieQueryService;
 import com.furyviewer.service.OpenMovieDatabase.Service.MovieOmdbDTOService;
@@ -62,6 +58,9 @@ public class MovieResource {
 
     @Autowired
     private RateMovieRepository rateMovieRepository;
+
+    @Autowired
+    private ArtistRepository artistRepository;
 
     @Inject
     private MovieOmdbDTOService movieOmdbDTOService;
@@ -241,6 +240,13 @@ public class MovieResource {
         return movieOmdbDTOService.getMovieByName("Justice League");
     }
 
+
+    @GetMapping("/movies/by-artist/{id}")
+    @Timed
+    public List<Movie> getAllMoviesFromArtist(@PathVariable Long id){
+        log.debug("Get to request movies from artist order by date desc");
+        return movieRepository.getByArtistOrderbyDate(artistRepository.findOne(id));
+    }
 
 
 
