@@ -61,6 +61,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     reviewMovies: ReviewMovie[];
     newComent: ReviewMovie;
     trailer: SafeResourceUrl;
+    stats: string;
     constructor(
         private eventManager: JhiEventManager,
         private movieService: MovieService,
@@ -100,6 +101,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadMediumMark(params['id']);
             this.loadReviews(params['id']);
             this.loadTrailer(params['id']);
+            this.loadState(params['id']);
             console.log(this.trailer);
 
         });
@@ -150,6 +152,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
     private onSaveSuccessStat(result: MovieStats) {
         this.eventManager.broadcast({ name: 'movieStatsListModification', content: 'OK'});
+        this.loadState(this.movie.id);
 
     }
 
@@ -167,6 +170,12 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.socialService.movieTrailer(id).subscribe( (trailerLink) => {
            this.trailer = this.sanitizer.bypassSecurityTrustResourceUrl(trailerLink.url);
            console.log(this.trailer);
+        });
+    }
+
+    loadState(id: number){
+        this.movieStatService.getState(id).subscribe((stat) => {
+           this.stats = stat.url;
         });
     }
 

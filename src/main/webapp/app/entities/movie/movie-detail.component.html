@@ -147,14 +147,17 @@
 
 
             <div class="col-3" style="text-align: center;">
+
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
-                    <div  (click)="stat('seen')" class="boxList col-10"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i> Vista
+                    <div  (click)="stat('seen')" class="boxList col-10"
+                          [ngStyle]="{'background-color':stats=='SEEN' ? '#ef9800' : 'white', 'color':stats=='SEEN' ? 'white' : '#ef9800'}">
+                        <i id="icona" class="fa fa-eye-slash" style="color: #ef9800;" [ngStyle]="{'color':stats=='SEEN' ? 'white' : '#ef9800'}"></i> Vista
                     </div>
                 </div>
 
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
 
-                    <div (click)="stat('pending')" class="boxList col-10" ><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
+                    <div (click)="stat('pending')" class="boxList col-10" [ngStyle]="{'background-color':stats=='PENDING' ? '#ef9800' : 'white', 'color':stats=='PENDING' ? 'white' : '#ef9800'}" ><i class="fa fa-edit" style="color: #ef9800;" [ngStyle]="{'color':stats=='PENDING' ? 'white' : '#ef9800'}"></i> Pendiente</div>
                 </div>
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
                     <div class="col-10" style="padding-left: 0px; padding-right: 0px;">

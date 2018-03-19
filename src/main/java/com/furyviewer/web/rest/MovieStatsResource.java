@@ -135,7 +135,7 @@ public class MovieStatsResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieStats));
     }
 
-    @GetMapping("/movie-stats-pending/{id}")
+    @GetMapping("/movie-stats/pending/{id}")
     @Timed
     public Long getPendingMovieStats(@PathVariable Long id) {
         log.debug("REST request to get MovieStats : {}", id);
@@ -143,7 +143,7 @@ public class MovieStatsResource {
         //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieStats));
     }
 
-    @GetMapping("/movie-stats-seen/{id}")
+    @GetMapping("/movie-stats/seen/{id}")
     @Timed
     public Long getSeenMovieStats(@PathVariable Long id) {
         log.debug("REST request to get MovieStats : {}", id);
@@ -151,7 +151,7 @@ public class MovieStatsResource {
         //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieStats));
     }
 
-    @GetMapping("/movie-stats-status/{id}")
+    @GetMapping("/movie-stats/status/{id}")
     @Timed
     public ResponseEntity<Map<String, String>> selectMovieStatus(@PathVariable Long id) {
         log.debug("REST request to get SeriesStatus : {}", id);
