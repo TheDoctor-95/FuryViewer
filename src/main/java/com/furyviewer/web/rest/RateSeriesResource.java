@@ -1,17 +1,12 @@
 package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.furyviewer.domain.RateMovie;
 import com.furyviewer.domain.RateSeries;
 
-import com.furyviewer.repository.RateMovieRepository;
 import com.furyviewer.repository.RateSeriesRepository;
-import com.furyviewer.repository.UserRepository;
-import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.averagingInt;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -117,12 +105,12 @@ public class RateSeriesResource {
 
     @GetMapping("/rate-series-media/{id}")
     @Timed
-    public Double getRateSeriesMedia(@PathVariable Long id) {
+    public ResponseEntity<Double> getRateSeriesMedia(@PathVariable Long id) {
         log.debug("REST request to get RateSeries : {}", id);
-        return rateSeriesRepository.RateSeriesMedia(id);
         //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateSeries));
+        Double rate = rateSeriesRepository.RateSeriesMedia(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rate));
     }
-
 
 
     /**

@@ -28,4 +28,6 @@ public interface SeriesStatsRepository extends JpaRepository<SeriesStats, Long> 
     @Query("select count(seriesStats) from SeriesStats seriesStats  where seriesStats.status= com.furyviewer.domain.enumeration.SeriesStatsEnum.SEEN and seriesStats.id=:SeriesId")
     Long SeenSeriesStats(@Param("SeriesId")Long id);
 
+    @Query("select s.status from SeriesStats s where s.serie.id=:id")
+    String selectSeriesStatus(@Param("id") Long id);
 }

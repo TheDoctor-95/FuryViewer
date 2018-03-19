@@ -37,4 +37,8 @@ public interface MovieStatsRepository extends JpaRepository<MovieStats, Long> {
 
     Optional<MovieStats> findByUserAndMovieId(User user, Long id);
 
+    @Query("select m.status from MovieStats m where m.movie.id=:id")
+    String selectMovieStatus(@Param("id") Long id);
+
+
 }

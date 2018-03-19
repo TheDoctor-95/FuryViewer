@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -125,6 +127,17 @@ public class SeriesStatsResource {
         log.debug("REST request to get SeriesStats : {}", id);
         return seriesStatsRepository.SeenSeriesStats(id);
 // return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seriesStats));
+    }
+
+    @GetMapping("/series-stats-status/{id}")
+    @Timed
+    public ResponseEntity<Map<String, String>> selectSeriesStatus(@PathVariable Long id) {
+        log.debug("REST request to get SeriesStatus : {}", id);
+        String status = seriesStatsRepository.selectSeriesStatus(id);
+        Map<String, String> statusMap = new HashMap<>();
+        statusMap.put("url", status);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(statusMap));
+
     }
 
     /**
