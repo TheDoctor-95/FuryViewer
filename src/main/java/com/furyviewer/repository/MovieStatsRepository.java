@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring Data JPA repository for the MovieStats entity.
@@ -33,5 +34,7 @@ public interface MovieStatsRepository extends JpaRepository<MovieStats, Long> {
      */
     @Query("select movieStats.movie from MovieStats movieStats where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.PENDING and movieStats.user=:User")
     List<Movie> pendingMovies(@Param("User")User user);
+
+    Optional<MovieStats> findByUserAndMovieId(User user, Long id);
 
 }

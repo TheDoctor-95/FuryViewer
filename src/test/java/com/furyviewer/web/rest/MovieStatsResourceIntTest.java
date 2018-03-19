@@ -70,15 +70,15 @@ public class MovieStatsResourceIntTest {
     private MovieStats movieStats;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final MovieStatsResource movieStatsResource = new MovieStatsResource(movieStatsRepository);
-        this.restMovieStatsMockMvc = MockMvcBuilders.standaloneSetup(movieStatsResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final MovieStatsResource movieStatsResource = new MovieStatsResource(movieStatsRepository, userRepository, movieRepository);
+//        this.restMovieStatsMockMvc = MockMvcBuilders.standaloneSetup(movieStatsResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.

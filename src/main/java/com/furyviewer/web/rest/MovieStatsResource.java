@@ -3,7 +3,11 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.MovieStats;
 
+import com.furyviewer.domain.enumeration.MovieStatsEnum;
+import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.repository.MovieStatsRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +36,14 @@ public class MovieStatsResource {
 
     private final MovieStatsRepository movieStatsRepository;
 
-    public MovieStatsResource(MovieStatsRepository movieStatsRepository) {
+    private final UserRepository userRepository;
+
+    private final MovieRepository movieRepository;
+
+    public MovieStatsResource(MovieStatsRepository movieStatsRepository, UserRepository userRepository, MovieRepository movieRepository) {
         this.movieStatsRepository = movieStatsRepository;
+        this.userRepository = userRepository;
+        this.movieRepository = movieRepository;
     }
 
     /**
@@ -49,10 +60,29 @@ public class MovieStatsResource {
         if (movieStats.getId() != null) {
             throw new BadRequestAlertException("A new movieStats cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<MovieStats> aux = movieStatsRepository.findByUserAndMovieId(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get(), movieStats.getMovie().getId());
+
+        if (aux.isPresent()) movieStats.setId(aux.get().getId());
+
+        movieStats.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+        movieStats.setDate(ZonedDateTime.now());
+
         MovieStats result = movieStatsRepository.save(movieStats);
         return ResponseEntity.created(new URI("/api/movie-stats/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/movie-stats/idMovie/{id}/state/{state}")
+    @Timed
+    public ResponseEntity<MovieStats> MovieState(@PathVariable Long id, @PathVariable String state) throws URISyntaxException {
+
+        MovieStats ms = new MovieStats();
+        ms.setMovie(movieRepository.findOne(id));
+        if (state.equalsIgnoreCase("seen")) ms.setStatus(MovieStatsEnum.SEEN);
+        else ms.setStatus(MovieStatsEnum.PENDING);
+        return createMovieStats(ms);
     }
 
     /**
