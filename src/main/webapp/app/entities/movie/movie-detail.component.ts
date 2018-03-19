@@ -25,6 +25,8 @@ import {RateMovieService} from "../rate-movie/rate-movie.service";
 import {ReviewMovie} from "../review-movie/review-movie.model";
 import {ReviewMovieService} from "../review-movie/review-movie.service";
 import {BaseEntity} from "../../shared/model/base-entity";
+import  {MovieStatsService} from '../movie-stats/movie-stats.service';
+import {MovieStats} from "../movie-stats/movie-stats.model";
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -71,6 +73,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private artistService: ArtistService,
         private rateMovieServie: RateMovieService,
         private reviewMovieService: ReviewMovieService,
+        private movieStatService: MovieStatsService,
         private sanitizer: DomSanitizer
     ) {
         config.max = 5;
@@ -131,6 +134,23 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             },
             (res: ResponseWrapper) => this.onError(res.json)
         );
+    }
+
+    stat(stat: string){
+        this.subscribeToSaveResponseStat(
+            this.movieStatService.stat(this.movie.id, stat)
+    );
+    }
+
+
+    private subscribeToSaveResponseStat(result: Observable<MovieStats>) {
+        result.subscribe((res: MovieStats) =>
+            this.onSaveSuccessStat(res), (res: Response) => this.onSaveErrorLike());
+    }
+
+    private onSaveSuccessStat(result: MovieStats) {
+        this.eventManager.broadcast({ name: 'movieStatsListModification', content: 'OK'});
+
     }
 
     loadMediumMark(id: number){

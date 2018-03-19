@@ -23,6 +23,13 @@ export class MovieStatsService {
         });
     }
 
+    stat(id: number, stat: string): Observable<MovieStats> {
+        return this.http.post(`${this.resourceUrl}/idMovie/${id}/state/${stat}`, "").map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
     update(movieStats: MovieStats): Observable<MovieStats> {
         const copy = this.convert(movieStats);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
