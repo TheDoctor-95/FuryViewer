@@ -20,7 +20,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -147,6 +149,17 @@ public class MovieStatsResource {
         log.debug("REST request to get MovieStats : {}", id);
         return movieStatsRepository.SeenMovieStats(id);
         //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movieStats));
+    }
+
+    @GetMapping("/movie-stats-status/{id}")
+    @Timed
+    public ResponseEntity<Map<String, String>> selectMovieStatus(@PathVariable Long id) {
+        log.debug("REST request to get SeriesStatus : {}", id);
+        String status = movieStatsRepository.selectMovieStatus(id);
+        Map<String, String> statusMap = new HashMap<>();
+        statusMap.put("url", status);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(statusMap));
+
     }
 
     /**

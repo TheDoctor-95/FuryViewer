@@ -10,5 +10,5 @@ ${AnsiColor.BRIGHT_RED}                                                         
 
 
 
-${AnsiColor.BRIGHT_BLUE}:: Fury Viewer Running Spring Boot ::
+${AnsiColor.BRIGHT_BLUE}:: Fury Viewer -- Running Spring Boot ::
 :: http://www.jhipster.tech ::${AnsiColor.DEFAULT}
