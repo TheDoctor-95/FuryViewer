@@ -111,6 +111,12 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="googleMapsUrl" jhiTranslate="global.form.urlMaps">Url Maps</label>
+                    <input type="url" class="form-control" id="googleMapsUrl" name="googleMapsUrl"  placeholder="{{'global.form.urlMaps.placeholder' | translate}}"
+                           [(ngModel)]="urlMaps" required>
+
+                </div>
 
                 <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary" jhiTranslate="register.form.button">Register</button>
             </form>
