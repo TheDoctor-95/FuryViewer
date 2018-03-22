@@ -16,6 +16,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th></th>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.name">Name</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.releaseDate">Release Date</span></th>
@@ -32,11 +33,35 @@
             <th><span jhiTranslate="furyViewerApp.movie.actorMain">Actor Main</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.actorSecondary">Actor Secondary</span></th>
             <th><span jhiTranslate="furyViewerApp.movie.country">Country</span></th>
-            <th></th>
+
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let movie of movies ;trackBy: trackId">
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../movie', movie.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'movie/'+ movie.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'movie/'+ movie.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
                 <td><a [routerLink]="['../movie', movie.id ]">{{movie.id}}</a></td>
                 <td>{{movie.name}}</td>
                 <td>{{movie.releaseDate | date:'mediumDate'}}</td>
@@ -81,30 +106,7 @@
                         <a [routerLink]="['../country', movie.country?.id ]" >{{movie.country?.name}}</a>
                     </div>
                 </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../movie', movie.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'movie/'+ movie.id + '/edit'} }]"
-                                replaceUrl="true"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'movie/'+ movie.id + '/delete'} }]"
-                                replaceUrl="true"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
+
             </tr>
             </tbody>
         </table>

@@ -16,4 +16,12 @@ public interface ChapterSeenRepository extends JpaRepository<ChapterSeen, Long> 
     @Query("select chapter_seen from ChapterSeen chapter_seen where chapter_seen.user.login = ?#{principal.username}")
     List<ChapterSeen> findByUserIsCurrentUser();
 
+    List<ChapterSeen> findBySeenAndEpisodeIdAndUserLogin(boolean seen, Long episodeId, String userLogin);
+
+    List<ChapterSeen> findBySeenAndEpisodeSeasonSeriesIdAndUserLogin(boolean seen, Long seriesId, String userLogin);
+
+    List<ChapterSeen> findBySeenAndUserLogin(boolean seen, String userLogin);
+
+
+
 }
