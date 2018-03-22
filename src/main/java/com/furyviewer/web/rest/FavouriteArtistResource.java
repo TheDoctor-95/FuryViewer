@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.FavouriteArtist;
 
+import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.FavouriteArtistRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
@@ -19,8 +20,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * REST controller for managing FavouriteArtist.
@@ -37,9 +37,12 @@ public class FavouriteArtistResource {
 
     private final UserRepository userRepository;
 
-    public FavouriteArtistResource(FavouriteArtistRepository favouriteArtistRepository, UserRepository userRepository) {
+    private final ArtistRepository artistRepository;
+
+    public FavouriteArtistResource(FavouriteArtistRepository favouriteArtistRepository, UserRepository userRepository, ArtistRepository artistRepository) {
         this.favouriteArtistRepository = favouriteArtistRepository;
         this.userRepository = userRepository;
+        this.artistRepository = artistRepository;
     }
 
     /**
@@ -121,7 +124,7 @@ public class FavouriteArtistResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(favouriteArtist));
     }
 
-    @GetMapping("/num-favourite-artists/{id}")
+    @GetMapping("/favourite-artists/num{id}")
     @Timed
     public Long getNumFavArtist(@PathVariable Long id) {
         log.debug("REST request to get FavouriteArtist : {}", id);
@@ -142,4 +145,31 @@ public class FavouriteArtistResource {
         favouriteArtistRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/favourite-artists/check-favorite-artist{id}")
+    @Timed
+    public ResponseEntity<Map<String, Boolean>> selectFavouriteArtist(@PathVariable Long id){
+        log.debug("REST request to get Artist if favourite: {}", id );
+        Boolean check = favouriteArtistRepository.selectFavouriteArtist(id);
+        Map<String, Boolean> checkMap = new HashMap<>();
+        checkMap.put("status", check);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(checkMap));
+    }
+
+    @PostMapping("/favourite-artists/id/{idArtist}/liked")
+    @Timed
+    public ResponseEntity<FavouriteArtist> favouriteSeries(@PathVariable Long idArtist) throws URISyntaxException {
+        log.debug("REST request to save FavouriteArtist : {}", idArtist);
+
+        Artist a = artistRepository.findOne(idArtist);
+
+        FavouriteArtist fA = new FavouriteArtist();
+        fA.setArtist(a);
+        fA.setLiked(true);
+
+        return createFavouriteArtist(fA);
+    }
+
+
+
 }
