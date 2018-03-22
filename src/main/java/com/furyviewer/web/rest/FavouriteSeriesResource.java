@@ -3,7 +3,9 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.FavouriteSeries;
 
+import com.furyviewer.domain.Series;
 import com.furyviewer.repository.FavouriteSeriesRepository;
+import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
@@ -36,9 +38,12 @@ public class FavouriteSeriesResource {
 
     private final UserRepository userRepository;
 
-    public FavouriteSeriesResource(FavouriteSeriesRepository favouriteSeriesRepository, UserRepository userRepository) {
+    private final SeriesRepository seriesRepository;
+
+    public FavouriteSeriesResource(FavouriteSeriesRepository favouriteSeriesRepository, UserRepository userRepository, SeriesRepository seriesRepository) {
         this.favouriteSeriesRepository = favouriteSeriesRepository;
         this.userRepository = userRepository;
+        this.seriesRepository = seriesRepository;
     }
 
     /**
@@ -141,4 +146,21 @@ public class FavouriteSeriesResource {
         favouriteSeriesRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
+    @PostMapping("/favourite-series/id/{idSeries}/liked")
+    @Timed
+    public ResponseEntity<FavouriteSeries> favouriteSeries(@PathVariable Long idSeries) throws URISyntaxException {
+        log.debug("REST request to save FavouriteSeries : {}", idSeries);
+
+        Series s = seriesRepository.findOne(idSeries);
+
+        FavouriteSeries fS = new FavouriteSeries();
+        fS.setSeries(s);
+        fS.setLiked(true);
+
+        return createFavouriteSeries(fS);
+    }
+
+
 }
