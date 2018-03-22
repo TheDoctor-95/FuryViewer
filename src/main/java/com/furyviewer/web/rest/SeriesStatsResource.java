@@ -105,7 +105,7 @@ public class SeriesStatsResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seriesStats));
     }
 
-    @GetMapping("/series-stats-following/{id}")
+    @GetMapping("/series-stats/following/{id}")
     @Timed
     public Long getFollowingSeriesStats(@PathVariable Long id) {
         log.debug("REST request to get SeriesStats : {}", id);
@@ -113,7 +113,7 @@ public class SeriesStatsResource {
         //  return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seriesStats));
     }
 
-    @GetMapping("/series-stats-pending/{id}")
+    @GetMapping("/series-stats/pending/{id}")
     @Timed
     public Long getPendingSeriesStats(@PathVariable Long id) {
         log.debug("REST request to get SeriesStats : {}", id);
@@ -121,7 +121,7 @@ public class SeriesStatsResource {
         // return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seriesStats));
     }
 
-    @GetMapping("/series-stats-seen/{id}")
+    @GetMapping("/series-stats/seen/{id}")
     @Timed
     public Long getSeenSeriesStats(@PathVariable Long id) {
         log.debug("REST request to get SeriesStats : {}", id);
@@ -129,7 +129,7 @@ public class SeriesStatsResource {
 // return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seriesStats));
     }
 
-    @GetMapping("/series-stats-status/{id}")
+    @GetMapping("/series-stats/status/{id}")
     @Timed
     public ResponseEntity<Map<String, String>> selectSeriesStatus(@PathVariable Long id) {
         log.debug("REST request to get SeriesStatus : {}", id);

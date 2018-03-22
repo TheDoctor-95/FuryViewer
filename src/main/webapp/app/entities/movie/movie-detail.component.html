@@ -62,7 +62,7 @@
                         </div>
                         <div class="infoFilm">
                             <span
-                                style="margin-left: 5px; font-size: 13px;">{{movie.releaseDate | date:'mediumDate'}}</span>
+                                style="margin-left: 5px; font-size: 13px;">{{movie.releaseDate | date:'shortDate'}}</span>
                         </div>
                     </div>
 
@@ -72,7 +72,7 @@
                             <img src="img/dvd.png" height="24px" width="24px"/>
                         </div>
                         <div class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;">{{movie.dvd_release | date:'mediumDate'}}</span>
+                            <span style="margin-left: 5px; font-size: 13px;">{{movie.dvd_release | date:'shortDate'}}</span>
                         </div>
                     </div>
 
@@ -133,7 +133,7 @@
                         <b class="col-8" >
                             <b style="display: block; font-weight: normal; text-align: left;">
                                 <p style="text-align: left; display: inline-block;">{{coment.title}}</p>
-                                <span style="float: right;"><p style="display: inline-block; font-size: 9px;"> {{coment.date}} </p></span>
+                                <span style="float: right;"><p style="display: inline-block; font-size: 9px;"> {{coment.date | date:'short'}} </p></span>
                             </b>
                             <b style="display: block; font-weight: normal; text-align: left; font-size: 14px;">
                                 <p style="text-align: left;">{{coment.review}}</p>
@@ -175,7 +175,21 @@
                 </div>
 
                 &nbsp;
-                <iframe [src]="trailer" frameborder="0" allowfullscreen></iframe>
+
+                <div class="row">
+                    <div class="col-10">
+                        <div class="embed-responsive embed-responsive-16by9">
+
+                            <iframe [src]="trailer" frameborder="0" allowfullscreen></iframe>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                &nbsp;
+
                 <div class="row">
                     <div class="col-10">
                         <div id="boxReparto" style="width: 100% !important;">

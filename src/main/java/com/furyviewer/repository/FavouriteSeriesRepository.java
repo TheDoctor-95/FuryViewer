@@ -3,6 +3,7 @@ package com.furyviewer.repository;
 import com.furyviewer.domain.FavouriteSeries;
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.User;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -28,4 +29,8 @@ public interface FavouriteSeriesRepository extends JpaRepository<FavouriteSeries
     Long NumFavsSerie(@Param("SeriesId") Long id);
 
     FavouriteSeries findByUserAndSeriesId(User u, Long id);
+
+    @Query("select s.liked from FavouriteSeries s where s.series.id=:id")
+    Boolean selectFavouriteSeries(@Param("id") Long id);
+
 }
