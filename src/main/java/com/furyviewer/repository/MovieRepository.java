@@ -31,6 +31,4 @@ public interface MovieRepository extends JpaRepository<Movie, Long> , JpaSpecifi
     List<Movie> getByArtistOrderbyDate(@Param("artist") Artist artist);
 
 
-
-
 }

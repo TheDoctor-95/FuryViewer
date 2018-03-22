@@ -19,6 +19,7 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     List<Episode>findEpisodeByName(String name);
 
-
+    @Query("select e from Episode e where season.id=:id")
+    List<Episode>getEpisodeBySeason(@Param("id") Long id);
 
 }

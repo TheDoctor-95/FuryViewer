@@ -132,6 +132,19 @@ public class EpisodeResource {
     }
 
 
+    /**
+     * @param id
+     * @return
+     */
+    @GetMapping("/episodes/all-episodes-from-season/{id}")
+    @Timed
+    public ResponseEntity<List<Episode>> getEpisodeBySeason(@PathVariable Long id) {
+        log.debug("REST request to get Episodes by season", id);
+        List<Episode> episode =episodeRepository.getEpisodeBySeason(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(episode));
+    }
+
+
 
     /**
      * DELETE  /episodes/:id : delete the "id" episode.
