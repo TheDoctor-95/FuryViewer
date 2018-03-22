@@ -19,7 +19,6 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     List<Episode>findEpisodeByName(String name);
 
-    //@Query("select actors from Series s where :actors order by s.releaseDate desc ")
-    //List<Episode> getByActorsOrderByDate(@Param("artist") Artist artist);
+
 
 }
