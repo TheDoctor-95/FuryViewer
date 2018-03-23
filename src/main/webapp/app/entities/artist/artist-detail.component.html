@@ -1,65 +1,88 @@
 
 <div *ngIf="artist">
-    <h2><span jhiTranslate="furyViewerApp.artist.detail.title">Artist</span> {{artist.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="furyViewerApp.artist.name">Name</span></dt>
-        <dd>
-            <span>{{artist.name}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.birthdate">Birthdate</span></dt>
-        <dd>
-            <span>{{artist.birthdate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.sex">Sex</span></dt>
-        <dd>
-            <span>{{artist.sex}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.deathdate">Deathdate</span></dt>
-        <dd>
-            <span>{{artist.deathdate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.imgUrl">Img Url</span></dt>
-        <dd>
-            <span>{{artist.imgUrl}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.imdb_id">Imdb Id</span></dt>
-        <dd>
-            <span>{{artist.imdb_id}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.awards">Awards</span></dt>
-        <dd>
-            <span>{{artist.awards}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.biography">Biography</span></dt>
-        <dd>
-            <span>{{artist.biography}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.country">Country</span></dt>
-        <dd>
-            <div *ngIf="artist.country">
-                <a [routerLink]="['/country', artist.country?.id]">{{artist.country?.name}}</a>
+
+
+
+    <div class="container-fluid" style="color: #3b3b3b;">
+        <div class="row" style="background-color: #d2d3d2; padding-left: 8%; padding-top: 3%;">
+            <div class="col-2" style="width: 100%">
+                <img src="{{artist.imgUrl}}" class="img-rounded card-img-top imgFilm"
+                     style="display: block; height: 18vw; width: 100%;">
+                <div class="infoBox">
+
+                    <!-- Fecha nacimiento -->
+                    <div class="styleArtist" style="margin-top: 10px;">
+                        <div class="iconoFilm">
+                            <img src="img/cake.png" height="24px" width="24px"/>
+                        </div>
+                        <div class="infoFilm">
+                            <p class="infoArtist">{{artist.birthdate | date:'mediumDate'}}</p>
+                        </div>
+                    </div>
+                    <!-- Fecha defuncion -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/death.png" height="24px" width="24px"/>
+                        </div>
+                        <div class="infoFilm">
+                            <p class="infoArtist">{{artist.deathdate | date:'mediumDate'}}</p>
+                        </div>
+                    </div>
+                    <!-- Pais -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/earth.png" height="24px" width="24px"/>
+                        </div>
+                        <div *ngIf="artist.country" class="infoFilm">
+                            <span style="margin-left: 5px; font-size: 13px;" [routerLink]="['/country', artist.country?.id]">{{artist.country?.name}}</span>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.artist.artistType">Artist Type</span></dt>
-        <dd>
-            <span *ngFor="let artistType of artist.artistTypes; let last = last">
-                <a [routerLink]="['/artist-type', artistType?.id ]">{{artistType.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
-    </dl>
+            &nbsp;
+            <div class="col-6" style="height: 100%; margin-bottom: 25px;">
+                <div class="whiteBox" style="display: table; width: 100%;">
+                    <div style="width: 100%; display: inline-block; vertical-align: top;">
+                        <h1 class="nameTitle">{{artist.name}}</h1>
+                    </div>
+                    <div style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
+                        <ngb-rating class="stars" ></ngb-rating>
+                        </br>
+                        <p style="padding-right: 8px;">
+                            <b class="furyColor"> __</b> de 5 <i class="fa fa-star furyColor"></i></p>
+                    </div>
+                </div>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+                &nbsp;
+                <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
+                    <span style="font-family: Roboto; font-size: 15px; text-align: left;">{{artist.biography}}</span>
+                </div>
+                &nbsp;
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'artist/'+ artist.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
+
+            </div>
+
+
+
+            <div class="col-3" style="text-align: center;">
+
+                <div class="row" style="padding-left: 5%; padding-right: 7%;">
+                    <div class="boxList col-10">
+                        <i id="icona" class="fa fa-heart" style="color: #ef9800;"></i> Favorita
+                    </div>
+                </div>
+
+                <div class="row" style="padding-left: 5%; padding-right: 7%;">
+
+                    <div class="boxList col-10"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
+                </div>
+
+                &nbsp;
+
+            </div>
+        </div>
+    </div>
+
 </div>
