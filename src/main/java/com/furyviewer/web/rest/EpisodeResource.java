@@ -2,20 +2,20 @@ package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Episode;
-import com.furyviewer.domain.Artist;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.EpisodeOmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
+import com.furyviewer.service.dto.util.EpisodesHomeDTO;
+import com.furyviewer.service.util.EpisodeService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -43,8 +43,11 @@ public class EpisodeResource {
     @Autowired
     private ArtistRepository artistRepository;
 
-    public EpisodeResource(EpisodeRepository episodeRepository) {
+    private final EpisodeService episodeService;
+
+    public EpisodeResource(EpisodeRepository episodeRepository, EpisodeService episodeService) {
         this.episodeRepository = episodeRepository;
+        this.episodeService = episodeService;
     }
 
     /**
@@ -131,6 +134,28 @@ public class EpisodeResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(episode));
     }
 
+
+    /**
+     * @param id
+     * @return
+     */
+    @GetMapping("/episodes/all-episodes-from-season/{id}")
+    @Timed
+    public ResponseEntity<List<Episode>> getEpisodeBySeason(@PathVariable Long id) {
+        log.debug("REST request to get Episodes by season", id);
+        List<Episode> episode =episodeRepository.getEpisodeBySeason(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(episode));
+    }
+
+
+    @GetMapping("/episodes/next")
+    @Timed
+    @Transactional
+    public List<EpisodesHomeDTO> getNextChapters() {
+        log.debug("REST request to get all ChapterSeens");
+        return episodeService.getNextEpisodes();
+
+    }
 
 
     /**

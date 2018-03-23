@@ -10,48 +10,17 @@
                     <div class="serpeli_body">
                         <h2 class="card-title">SERIES PENDIENTES</h2>
 
-                        <div class="card portades">
-                            <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
+                        <div class="card portades" *ngFor="let episode of episodePending" [routerLink]="['/series', episode?.id]">
+                            <img class="card-img-top" src="{{episode.urlCartel}}" alt="Card image">
 
                             <div class="card-body">
-                                <h4 class="card-title">3x04 Blink</h4>
-                                <h3 class="card-text">Doctor Who</h3>
+                                <h4 class="card-title">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
+                                <h3 class="card-text"> -- -- -- </h3>
 
                             </div>
 
                         </div>
-                        <div class="card portades">
-                            <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
 
-                            <div class="card-body">
-                                <h4 class="card-title">3x04 Blink</h4>
-                                <h3 class="card-text">Doctor Who</h3>
-                            </div>
-
-
-                        </div>
-                        <div class="card portades">
-                            <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
-
-                            <div class="card-body">
-                                <h4 class="card-title">3x04 Blink</h4>
-                                <h3 class="card-text">Doctor Who</h3>
-
-                            </div>
-
-
-                        </div>
-                        <div class="card portades">
-                            <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
-
-                            <div class="card-body">
-                                <h4 class="card-title">3x04 Blink</h4>
-                                <h3 class="card-text">Doctor Who</h3>
-
-                            </div>
-
-
-                        </div>
                     </div>
                 </div>
             </div>

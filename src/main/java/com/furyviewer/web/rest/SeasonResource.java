@@ -101,6 +101,21 @@ public class SeasonResource {
      * @param id the id of the season to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the season, or with status 404 (Not Found)
      */
+    @GetMapping("/seasons/Seasons-by-Series/{id}")
+    @Timed
+    public ResponseEntity <List<Season>> findSeasonsBySeriesId(@PathVariable Long id) {
+        log.debug("REST request to get Season : {}", id);
+        List<Season> seasons = seasonRepository.findSeasonsBySeriesId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seasons));
+    }
+
+
+    /**
+     * GET
+     *
+     * @param id the id of the series to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the season, or with status 404 (Not Found)
+     */
     @GetMapping("/seasons/{id}")
     @Timed
     public ResponseEntity<Season> getSeason(@PathVariable Long id) {
@@ -130,4 +145,6 @@ public class SeasonResource {
 
         return seasonOmdbDTOService.getSeason("American Horror Story", 1);
     }
+
+
 }
