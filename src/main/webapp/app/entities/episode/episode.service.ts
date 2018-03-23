@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Episode } from './episode.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {EpisodeNextSeen} from "../../shared/model/EpisodeNextSeen.model";
 
 @Injectable()
 export class EpisodeService {
@@ -38,6 +39,11 @@ export class EpisodeService {
         });
     }
 
+    nextEpisodes(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/next`)
+            .map((res: Response) => this.convertNextEpisodeResponse(res));
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
@@ -57,6 +63,15 @@ export class EpisodeService {
         return new ResponseWrapper(res.headers, result, res.status);
     }
 
+    private convertNextEpisodeResponse(res: Response): ResponseWrapper{
+        const jsonResponse = res.json();
+        const result = [];
+        for (let i = 0; i < jsonResponse.length; i++) {
+            result.push(this.convertNextEpisodeFromServer(jsonResponse[i]));
+        }
+        return new ResponseWrapper(res.headers, result, res.status);
+    }
+
     /**
      * Convert a returned JSON object to Episode.
      */
@@ -64,6 +79,11 @@ export class EpisodeService {
         const entity: Episode = Object.assign(new Episode(), json);
         entity.releaseDate = this.dateUtils
             .convertLocalDateFromServer(json.releaseDate);
+        return entity;
+    }
+
+    private convertNextEpisodeFromServer(json: any): EpisodeNextSeen {
+        const entity: EpisodeNextSeen = Object.assign(new EpisodeNextSeen(), json);
         return entity;
     }
 

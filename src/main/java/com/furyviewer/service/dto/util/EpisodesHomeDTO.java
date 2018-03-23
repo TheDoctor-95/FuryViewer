@@ -4,7 +4,7 @@ public class EpisodesHomeDTO {
 
     private Long id;
     private String titleEpisode;
-    private String serieTitle;
+    private String titleSeries;
     private int seasonNumber;
     private int episodeNumber;
     private String urlCartel;
@@ -13,10 +13,10 @@ public class EpisodesHomeDTO {
     public EpisodesHomeDTO() {
     }
 
-    public EpisodesHomeDTO(Long id, String titleEpisode, String serieTitle, int seasonNumber, int episodeNumber, String urlCartel) {
+    public EpisodesHomeDTO(Long id, String titleEpisode, String titleSeries, int seasonNumber, int episodeNumber, String urlCartel) {
         this.id = id;
         this.titleEpisode = titleEpisode;
-        this.serieTitle = serieTitle;
+        this.titleSeries = titleSeries;
         this.seasonNumber = seasonNumber;
         this.episodeNumber = episodeNumber;
         this.urlCartel = urlCartel;
@@ -39,11 +39,11 @@ public class EpisodesHomeDTO {
     }
 
     public String getSerieTitle() {
-        return serieTitle;
+        return titleSeries;
     }
 
-    public void setSerieTitle(String serieTitle) {
-        this.serieTitle = serieTitle;
+    public void setTitleSeries(String titleSeries) {
+        this.titleSeries = titleSeries;
     }
 
     public int getSeasonNumber() {

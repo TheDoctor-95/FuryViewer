@@ -3,13 +3,11 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.ChapterSeen;
 
-import com.furyviewer.domain.Episode;
 import com.furyviewer.repository.ChapterSeenRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.repository.SeriesStatsRepository;
-import com.furyviewer.security.SecurityUtils;
-import com.furyviewer.domain.Season;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
+import com.furyviewer.service.util.EpisodeService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -22,8 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,14 +36,10 @@ public class ChapterSeenResource {
 
     private final ChapterSeenRepository chapterSeenRepository;
 
-    private final SeriesStatsRepository seriesStatsRepository;
 
-    private final EpisodeRepository episodeRepository;
 
-    public ChapterSeenResource(ChapterSeenRepository chapterSeenRepository, SeriesStatsRepository seriesStatsRepository, EpisodeRepository episodeRepository) {
+    public ChapterSeenResource(ChapterSeenRepository chapterSeenRepository) {
         this.chapterSeenRepository = chapterSeenRepository;
-        this.seriesStatsRepository = seriesStatsRepository;
-        this.episodeRepository = episodeRepository;
     }
 
     /**
@@ -104,82 +96,7 @@ public class ChapterSeenResource {
         return chapterSeenRepository.findAll();
     }
 
-    @GetMapping("/chapter-seens/next")
-    @Timed
-    @Transactional
-    public List<EpisodesHomeDTO> getNextChapters() {
-        log.debug("REST request to get all ChapterSeens");
-        List<EpisodesHomeDTO> episodes = new ArrayList<>();
 
-        seriesStatsRepository.followingSeriesUser(SecurityUtils.getCurrentUserLogin()).forEach(
-            series -> {
-                Optional<Season> maxSeasonSeenOptional = chapterSeenRepository.findBySeenAndEpisodeSeasonSeriesIdAndUserLogin(true, series.getId(), SecurityUtils.getCurrentUserLogin()).stream()
-                    .map(chapterSeen ->  chapterSeen.getEpisode().getSeason())
-                    .max(Comparator.comparing(com.furyviewer.domain.Season::getNumber));
-                EpisodesHomeDTO episodesHomeDTO = new EpisodesHomeDTO();
-                Episode nextEpisode;
-
-                if (maxSeasonSeenOptional.isPresent()){
-                    Season maxSeasonSeen = maxSeasonSeenOptional.get();
-                    Episode maxEpisodeSeen = chapterSeenRepository.findBySeenAndEpisodeSeasonSeriesIdAndUserLogin(true, series.getId(), SecurityUtils.getCurrentUserLogin()).stream()
-                        .map(chapterSeen -> chapterSeen.getEpisode())
-                        .filter(episode -> episode.getSeason().equals(maxSeasonSeen))
-                        .max(Comparator.comparing(com.furyviewer.domain.Episode::getNumber)).get();
-                        if (maxEpisodeSeen.getNumber()<maxSeasonSeen.getEpisodes().size()){
-                            nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(maxEpisodeSeen.getNumber()+1,maxSeasonSeen.getNumber(),series.getId());
-                        }else{
-                            nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(maxEpisodeSeen.getNumber(),maxSeasonSeen.getNumber()+1,series.getId());
-                        }
-                }else{
-                     nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(1,1,series.getId());
-
-
-                }
-                episodesHomeDTO.setEpisodeNumber(nextEpisode.getNumber());
-                episodesHomeDTO.setId(nextEpisode.getSeason().getSeries().getId());
-                episodesHomeDTO.setSeasonNumber(nextEpisode.getSeason().getNumber());
-                episodesHomeDTO.setTitleEpisode(nextEpisode.getName());
-                episodesHomeDTO.setSerieTitle(nextEpisode.getSeason().getSeries().getName());
-                episodesHomeDTO.setUrlCartel(nextEpisode.getSeason().getSeries().getImgUrl());
-
-                episodes.add(episodesHomeDTO);
-            }
-        );
-
-
-        return episodes;
-
-
-//
-//        chapterSeenRepository.findBySeenAndUserLogin(true, SecurityUtils.getCurrentUserLogin()).stream()
-//
-//
-//
-//
-//
-//
-//        chapterSeenRepository.findBySeenAndUserLogin(true, SecurityUtils.getCurrentUserLogin()).stream()
-//            .map(chapterSeen -> {
-//
-//
-//
-//
-//
-//                int totalEpisodes = chapterSeen.getEpisode().getSeason().getEpisodes().size();
-//                int numEpisode = chapterSeen.getEpisode().getNumber();
-//
-//                if (numEpisode<totalEpisodes){
-//                     Episode nextEpisode = chapterSeen.getEpisode().getSeason().getEpisodes().stream()
-//                        .filter(episode -> episode.getNumber().equals(numEpisode+1))
-//                         .findFirst().get();
-//
-//                     episodes.add(nextEpisode);
-//
-//                }
-//
-//            })
-
-    }
 
 
     /**
