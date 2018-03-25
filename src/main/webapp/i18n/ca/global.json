@@ -71,7 +71,9 @@
             "confirmpassword": "Confirmació de la nova contrasenya",
             "confirmpassword.placeholder": "Confirmació de la nova contrasenya",
             "email": "Correu electrònic",
-            "email.placeholder": "Correu electrònic"
+            "email.placeholder": "Correu electrònic",
+            "urlMaps": "Url de Maps",
+            "urlMaps.placeholder": "Url de maps"
         },
         "messages": {
             "info": {

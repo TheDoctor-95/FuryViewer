@@ -4,55 +4,23 @@
     <div class="row ">
 
 
-        <div class="col-8">
+        <div class="col-lg-8 col-md-12">
             <div class="card pendientes">
                 <div class="card-body">
                     <div class="serpeli_body">
                         <h2 class="card-title">SERIES PENDIENTES</h2>
 
-                        <div class="card portades">
-                            <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
+                        <div class="card portades" *ngFor="let episode of episodePending" [routerLink]="['/series', episode?.id]">
+                            <img class="card-img-top" src="{{episode.urlCartel}}" alt="Card image">
 
                             <div class="card-body">
-                                <h4 class="card-title">3x04 Blink</h4>
-                                <h3 class="card-text">Doctor Who</h3>
+                                <h4 class="card-title">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
+                                <h3 class="card-text"> -- -- -- </h3>
 
                             </div>
 
                         </div>
-                        <div class="card portades">
-                            <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
 
-                            <div class="card-body">
-                                <h4 class="card-title">3x04 Blink</h4>
-                                <h3 class="card-text">Doctor Who</h3>
-
-                            </div>
-
-
-                        </div>
-                        <div class="card portades">
-                            <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
-
-                            <div class="card-body">
-                                <h4 class="card-title">3x04 Blink</h4>
-                                <h3 class="card-text">Doctor Who</h3>
-
-                            </div>
-
-
-                        </div>
-                        <div class="card portades">
-                            <img class="card-img-top" src="../../content/images/doctorwho.jpg" alt="Card image">
-
-                            <div class="card-body">
-                                <h4 class="card-title">3x04 Blink</h4>
-                                <h3 class="card-text">Doctor Who</h3>
-
-                            </div>
-
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -63,13 +31,18 @@
                 <div class="card-body">
                     <div class="serpeli_body">
 
-                        <h2 class="card-title">PELICULAS PENDIENTES</h2>
-                        <div class="card portades" *ngFor="let movie of moviesPending" routerLink="/movie/{{movie.id}}">
-                            <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
-                            <div class="card-body">
-                                <h4>{{movie.name}}</h4>
+                        <h2 class="card-title container">PELICULAS PENDIENTES</h2>
 
+                        <div class="row">
+
+                            <div class="card portades col-2" *ngFor="let movie of moviesPending"
+                                 routerLink="/movie/{{movie.id}}">
+                                <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
+                                <div class="card-body">
+                                    <h4>{{movie.name}}</h4>
+                                </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -80,9 +53,9 @@
         </div>
 
 
-        <div class="col-4" id="lateralDret">
+        <div class="col-lg-4 col-md-12" id="lateralDret">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 ">
                     <div class="card calendario">
 
                         <div class="card-body">
@@ -94,6 +67,13 @@
                                     <button> SERIES</button>
                                     <button> PELIS</button>
                                 </div>
+
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+
+
                             </div>
                             <div class="panel panel-default">
 
@@ -104,13 +84,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col" style="padding-right: 9px;">
+                <div class="col-md col-xs-12" style="padding-right: 9px;">
                     <div class="card topSeries">
 
                         <div class="card-body">
                             <div id="topseries">
                                 <div class="row">
-                                    <h2 class="col-9" >Top series</h2>
+                                    <h2 class="col-9">Top series</h2>
 
                                     <label class="switchinv col-3">
                                         <input type="checkbox">
@@ -126,11 +106,12 @@
 
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card topPelis">
+
+                <div class="col-md col-xs-12" style="padding-right: 9px;">
+                    <div class="card topSeries">
 
                         <div class="card-body">
-                            <div id="toppelis">
+                            <div id="topseries">
                                 <div class="row">
                                     <h2 class="col-9">Top pelis</h2>
 
@@ -154,13 +135,13 @@
             </div>
 
             <div class="row">
-                <div class="col" style="padding-right: 9px;">
+                <div class="col-md col-xs-12" style="padding-right: 9px;">
                     <div class="card topSeries">
 
                         <div class="card-body">
-                            <div id="topseries" >
+                            <div id="topseries">
 
-                                    <h2 >Top Artist</h2>
+                                <h2>Top Artist</h2>
 
                                 <ol class="list-group">
                                     <li *ngFor="let serie of topSeries " class="list-group-item"> {{serie}}</li>
@@ -170,18 +151,16 @@
 
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md col-xs-12">
                     <div class="card topPelis">
 
                         <div class="card-body">
                             <div id="toppelis">
 
-                                    <h2 >Top Hatred artist</h2>
+                                <h2>Top Hatred artist</h2>
 
 
-
-
-                                <ol class="list-group" >
+                                <ol class="list-group">
                                     <li *ngFor="let movie of topPelis" class="list-group-item"> {{movie.name}}</li>
 
                                 </ol>
@@ -199,3 +178,4 @@
         </div>
     </div>
 </div>
+

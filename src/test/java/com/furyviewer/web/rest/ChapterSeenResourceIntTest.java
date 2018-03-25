@@ -69,15 +69,15 @@ public class ChapterSeenResourceIntTest {
     private ChapterSeen chapterSeen;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final ChapterSeenResource chapterSeenResource = new ChapterSeenResource(chapterSeenRepository);
-        this.restChapterSeenMockMvc = MockMvcBuilders.standaloneSetup(chapterSeenResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final ChapterSeenResource chapterSeenResource = new ChapterSeenResource(chapterSeenRepository, seriesStatsRepository, episodeRepository);
+//        this.restChapterSeenMockMvc = MockMvcBuilders.standaloneSetup(chapterSeenResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.

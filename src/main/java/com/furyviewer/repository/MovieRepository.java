@@ -1,5 +1,6 @@
 package com.furyviewer.repository;
 
+import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.Movie;
 import org.springframework.stereotype.Repository;
 
@@ -20,15 +21,14 @@ public interface MovieRepository extends JpaRepository<Movie, Long> , JpaSpecifi
     @Query("select movie from Movie movie left join fetch movie.genres left join fetch movie.actorMains left join fetch movie.actorSecondaries where movie.id =:id")
     Movie findOneWithEagerRelationships(@Param("id") Long id);
 
-
-
     List<Movie>findMovieByName(String name);
 
     Optional<Movie> findByName(String name);
 
     Optional<Movie> findMovieByImdbIdExternalApi(String ImdbId);
 
-
+    @Query("select m from Movie m where :artist member of m.actorMains order by m.releaseDate desc")
+    List<Movie> getByArtistOrderbyDate(@Param("artist") Artist artist);
 
 
 }

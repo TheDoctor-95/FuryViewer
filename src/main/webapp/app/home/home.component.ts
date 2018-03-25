@@ -6,6 +6,8 @@ import { Account, LoginModalService, Principal } from '../shared';
 import {Movie} from "../entities/movie/movie.model";
 import {MovieService} from "../entities/movie/movie.service";
 import {ResponseWrapper} from "../shared/model/response-wrapper.model";
+import {EpisodeService} from "../entities/episode/episode.service";
+import {EpisodeNextSeen} from "../shared/model/EpisodeNextSeen.model";
 
 @Component({
     selector: 'jhi-home',
@@ -21,12 +23,15 @@ export class HomeComponent implements OnInit {
     topPelis: Movie;
     topSeries: String[] = ['Doctor Who', 'The Flash', 'Arrow', 'Supergirl'];
     moviesPending: Movie[];
+    episodePending: EpisodeNextSeen[];
+
     constructor(
         private principal: Principal,
         private loginModalService: LoginModalService,
         private eventManager: JhiEventManager,
         private movieService: MovieService,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        private episodeService: EpisodeService
     ) {
     }
 
@@ -37,6 +42,7 @@ export class HomeComponent implements OnInit {
         this.loadPendingMovies();
         this.registerAuthenticationSuccess();
         this.loadTopMovies();
+        this.loadNextEpisodes();
     }
     loadPendingMovies() {
         this.movieService.pendingMovies().subscribe(
@@ -55,6 +61,16 @@ export class HomeComponent implements OnInit {
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
+    loadNextEpisodes(){
+        this.episodeService.nextEpisodes().subscribe(
+            (res: ResponseWrapper) => {
+                this.episodePending = res.json;
+                console.log(this.episodePending);
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        )
+    }
+
 
     registerAuthenticationSuccess() {
         this.eventManager.subscribe('authenticationSuccess', (message) => {

@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { MovieStats } from './movie-stats.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {UrlModel} from "../../shared/model/url.model";
 
 @Injectable()
 export class MovieStatsService {
@@ -18,6 +19,13 @@ export class MovieStatsService {
     create(movieStats: MovieStats): Observable<MovieStats> {
         const copy = this.convert(movieStats);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    stat(id: number, stat: string): Observable<MovieStats> {
+        return this.http.post(`${this.resourceUrl}/idMovie/${id}/state/${stat}`, "").map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
@@ -35,6 +43,12 @@ export class MovieStatsService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    getState(id: number): Observable<UrlModel>{
+        return this.http.get(`${this.resourceUrl}/status/${id}`).map((res: Response) => {
+            return res.json();
         });
     }
 

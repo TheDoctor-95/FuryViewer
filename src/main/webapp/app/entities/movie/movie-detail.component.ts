@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
+
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser'
+
 import { Movie } from './movie.model';
 import { MovieService } from './movie.service';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +25,8 @@ import {RateMovieService} from "../rate-movie/rate-movie.service";
 import {ReviewMovie} from "../review-movie/review-movie.model";
 import {ReviewMovieService} from "../review-movie/review-movie.service";
 import {BaseEntity} from "../../shared/model/base-entity";
+import  {MovieStatsService} from '../movie-stats/movie-stats.service';
+import {MovieStats} from "../movie-stats/movie-stats.model";
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -55,7 +60,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     media: string;
     reviewMovies: ReviewMovie[];
     newComent: ReviewMovie;
-
+    trailer: SafeResourceUrl;
+    stats: string;
     constructor(
         private eventManager: JhiEventManager,
         private movieService: MovieService,
@@ -67,7 +73,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private artistService: ArtistService,
         private rateMovieServie: RateMovieService,
-        private reviewMovieService: ReviewMovieService
+        private reviewMovieService: ReviewMovieService,
+        private movieStatService: MovieStatsService,
+        private sanitizer: DomSanitizer
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
@@ -92,7 +100,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadRateUser(params['id']);
             this.loadMediumMark(params['id']);
             this.loadReviews(params['id']);
-            this.newComent.movie.id= params['id'];
+            this.loadTrailer(params['id']);
+            this.loadState(params['id']);
+            console.log(this.trailer);
+
         });
         this.registerChangeInMovies();
 
@@ -127,6 +138,24 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         );
     }
 
+    stat(stat: string){
+        this.subscribeToSaveResponseStat(
+            this.movieStatService.stat(this.movie.id, stat)
+    );
+    }
+
+
+    private subscribeToSaveResponseStat(result: Observable<MovieStats>) {
+        result.subscribe((res: MovieStats) =>
+            this.onSaveSuccessStat(res), (res: Response) => this.onSaveErrorLike());
+    }
+
+    private onSaveSuccessStat(result: MovieStats) {
+        this.eventManager.broadcast({ name: 'movieStatsListModification', content: 'OK'});
+        this.loadState(this.movie.id);
+
+    }
+
     loadMediumMark(id: number){
         this.rateMovieServie.mediaMovie(id).subscribe((rateMovie) => {
             let ourMark = rateMovie.toPrecision(2);
@@ -136,6 +165,20 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
         });
     }
+
+    loadTrailer(id: number){
+        this.socialService.movieTrailer(id).subscribe( (trailerLink) => {
+           this.trailer = this.sanitizer.bypassSecurityTrustResourceUrl(trailerLink.url);
+           console.log(this.trailer);
+        });
+    }
+
+    loadState(id: number){
+        this.movieStatService.getState(id).subscribe((stat) => {
+           this.stats = stat.url;
+        });
+    }
+
     previousState() {
         window.history.back();
     }

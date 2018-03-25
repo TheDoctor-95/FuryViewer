@@ -4,12 +4,17 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.ChapterSeen;
 
 import com.furyviewer.repository.ChapterSeenRepository;
+import com.furyviewer.repository.EpisodeRepository;
+import com.furyviewer.repository.SeriesStatsRepository;
+import com.furyviewer.service.dto.util.EpisodesHomeDTO;
+import com.furyviewer.service.util.EpisodeService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -30,6 +35,8 @@ public class ChapterSeenResource {
     private static final String ENTITY_NAME = "chapterSeen";
 
     private final ChapterSeenRepository chapterSeenRepository;
+
+
 
     public ChapterSeenResource(ChapterSeenRepository chapterSeenRepository) {
         this.chapterSeenRepository = chapterSeenRepository;
@@ -82,12 +89,15 @@ public class ChapterSeenResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of chapterSeens in body
      */
-    @GetMapping("/chapter-seens")
+   @GetMapping("/chapter-seens")
     @Timed
     public List<ChapterSeen> getAllChapterSeens() {
         log.debug("REST request to get all ChapterSeens");
         return chapterSeenRepository.findAll();
-        }
+    }
+
+
+
 
     /**
      * GET  /chapter-seens/:id : get the "id" chapterSeen.

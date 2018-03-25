@@ -2,8 +2,10 @@ package com.furyviewer.service;
 
 import com.furyviewer.domain.Authority;
 import com.furyviewer.domain.User;
+import com.furyviewer.domain.UserExt;
 import com.furyviewer.repository.AuthorityRepository;
 import com.furyviewer.config.Constants;
+import com.furyviewer.repository.UserExtRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.AuthoritiesConstants;
 import com.furyviewer.security.SecurityUtils;
@@ -47,12 +49,15 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final UserExtRepository userExtRepository;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, AuthorityRepository authorityRepository, CacheManager cacheManager, UserExtRepository userExtRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.socialService = socialService;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.userExtRepository = userExtRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -115,6 +120,14 @@ public class UserService {
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
+
+        UserExt newUserExt = new UserExt();
+        newUserExt.setLocationGoogleMaps(userDTO.getUrlMaps());
+        newUserExt.setUser(newUser);
+
+        userExtRepository.save(newUserExt);
+
+
         return newUser;
     }
 

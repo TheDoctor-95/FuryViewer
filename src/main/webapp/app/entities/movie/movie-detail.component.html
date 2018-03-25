@@ -52,7 +52,7 @@
                             <img src="img/earth.png" height="24px" width="24px"/>
                         </div>
                         <div *ngIf="movie.country" class="infoFilm">
-                            <a class="infoArtist">{{movie.country?.name}}</a>
+                            <span style="margin-left: 5px; font-size: 13px;">{{movie.country?.name}}</span>
                         </div>
                     </div>
                     <!-- Lanzamiento -->
@@ -62,17 +62,17 @@
                         </div>
                         <div class="infoFilm">
                             <span
-                                style="margin-left: 5px; font-size: 13px;">{{movie.releaseDate | date:'mediumDate'}}</span>
+                                style="margin-left: 5px; font-size: 13px;">{{movie.releaseDate | date:'shortDate'}}</span>
                         </div>
                     </div>
 
                     <!-- DVD -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="movie.dvd_release != null" >
                         <div class="iconoFilm">
                             <img src="img/dvd.png" height="24px" width="24px"/>
                         </div>
                         <div class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;">{{movie.dvd_release | date:'mediumDate'}}</span>
+                            <span style="margin-left: 5px; font-size: 13px;">{{movie.dvd_release | date:'shortDate'}}</span>
                         </div>
                     </div>
 
@@ -103,22 +103,43 @@
                 &nbsp;
                 <div class="whiteBox" style="display: block; padding: 18px;">
                     <div style="width: 100%">
-                        <div style="display: block;">
-                            <div style="display: inline-block; width: 15%; vertical-align: top;">
+
+                        <div>
+
+                        <div class="row">
+
+                            <div class="col-3" style="vertical-align: top;">
                                 <img src="img/foto.JPG" class="imgComent"/>
                             </div>
-                            <div style="display: inline-block; width: 83%">
-                                <input type="text" [(ngModel)]="newComent.title" />
-                                <textarea name="comentario" style="width: 100%; font-size: 13px;" rows="5" [(ngModel)]="newComent.review"></textarea>
-                            </div>
-                        </div>
-                        <div style="display: block; width: 100%">
-                            <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
-                                <button id="btnComen" (click)="comentar()" >COMENTAR</button>
+                            <div class="col-8">
+                                <input type="text" [(ngModel)]="newComent.title" placeholder="title" style="font-size: 14px; width: 100%; margin-bottom: 10px; margin-left: 0px !important;"/>
+                                </br>
+                                <textarea class="txtarea" name="comentario" placeholder="write here the commentary" style="width: 100%; font-size: 13px;" rows="4" [(ngModel)]="newComent.review"></textarea>
+                                <div style="display: block; width: 100%">
+                                    <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
+                                        <button id="btnComen" (click)="comentar()" >COMENTAR</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <p *ngFor="let coment of reviewMovies"><b>{{coment.title}}</b> {{coment.review}} </p>
+
+                    </div>
+                    <p *ngFor="let coment of reviewMovies" class="row" style="margin-top: 35px;">
+                        <b class="col-3">
+                            <img src="img/foto.JPG" class="imgComent"/>
+                            <p style="margin-top: 3px; font-size: 12px;">{{coment.user.login}}</p>
+                        </b>
+                        <b class="col-8" >
+                            <b style="display: block; font-weight: normal; text-align: left;">
+                                <p style="text-align: left; display: inline-block;">{{coment.title}}</p>
+                                <span style="float: right;"><p style="display: inline-block; font-size: 9px;"> {{coment.date | date:'short'}} </p></span>
+                            </b>
+                            <b style="display: block; font-weight: normal; text-align: left; font-size: 14px;">
+                                <p style="text-align: left;">{{coment.review}}</p>
+                            </b>
+                        </b>
+                    </p>
                 </div>
 
             </div>
@@ -126,14 +147,17 @@
 
 
             <div class="col-3" style="text-align: center;">
+
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
-                    <div class="boxList col-10"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i> Vista
+                    <div  (click)="stat('seen')" class="boxList col-10"
+                          [ngStyle]="{'background-color':stats=='SEEN' ? '#ef9800' : 'white', 'color':stats=='SEEN' ? 'white' : '#ef9800'}">
+                        <i id="icona" class="fa fa-eye-slash" style="color: #ef9800;" [ngStyle]="{'color':stats=='SEEN' ? 'white' : '#ef9800'}"></i> Vista
                     </div>
                 </div>
 
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
 
-                    <div class="boxList col-10" ><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
+                    <div (click)="stat('pending')" class="boxList col-10" [ngStyle]="{'background-color':stats=='PENDING' ? '#ef9800' : 'white', 'color':stats=='PENDING' ? 'white' : '#ef9800'}" ><i class="fa fa-edit" style="color: #ef9800;" [ngStyle]="{'color':stats=='PENDING' ? 'white' : '#ef9800'}"></i> Pendiente</div>
                 </div>
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
                     <div class="col-10" style="padding-left: 0px; padding-right: 0px;">
@@ -151,6 +175,21 @@
                 </div>
 
                 &nbsp;
+
+                <div class="row">
+                    <div class="col-10">
+                        <div class="embed-responsive embed-responsive-16by9">
+
+                            <iframe [src]="trailer" frameborder="0" allowfullscreen></iframe>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                &nbsp;
+
                 <div class="row">
                     <div class="col-10">
                         <div id="boxReparto" style="width: 100% !important;">
@@ -162,8 +201,10 @@
                             </div>
                             <div class="row" style="padding-left: 30px; padding-right: 30px;">
                             <div *ngFor="let artist of artistMovie" class="col-6" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
-                                <img style="width: 80px;" src="{{artist.imgUrl}}"/>
-                                <div>{{artist.name}}</div>
+                                <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
+                                    <img style="width: 80px;" src="{{artist.imgUrl}}"/>
+                                    <div style="font-size: 15px;">{{artist.name}}</div>
+                                </a>
                             </div>
                             </div>
                         </div>

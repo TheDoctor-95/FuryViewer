@@ -19,7 +19,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -78,15 +77,15 @@ public class EpisodeResourceIntTest {
     private Episode episode;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final EpisodeResource episodeResource = new EpisodeResource(episodeRepository);
-        this.restEpisodeMockMvc = MockMvcBuilders.standaloneSetup(episodeResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final EpisodeResource episodeResource = new EpisodeResource(episodeRepository, episodeService);
+//        this.restEpisodeMockMvc = MockMvcBuilders.standaloneSetup(episodeResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.

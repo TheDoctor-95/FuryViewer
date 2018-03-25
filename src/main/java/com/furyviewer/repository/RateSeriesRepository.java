@@ -29,7 +29,7 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     List<RateSeries> getRateSeries(@Param("name")String name);
     Optional<RateSeries> findBySeriesAndUserLogin(Series series, String login);
 
-    @Query("select avg(rateSeries) from RateSeries rateSeries where rateSeries.id=:SeriesId")
+    @Query("select avg(rate) from RateSeries rateSeries where rateSeries.id=:SeriesId")
     Double RateSeriesMedia(@Param("SeriesId")Long id);
 
     @Query("select r.series from RateSeries r group by r.series order by avg (r.rate) desc")
@@ -39,5 +39,7 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     Integer markSeries(@Param("User") User u, @Param("id") Long id);
 
     RateSeries findByUserAndSeriesId(User u, Long id);
+
+
 
 }
