@@ -38,7 +38,7 @@ public class EpisodesHomeDTO {
         this.titleEpisode = titleEpisode;
     }
 
-    public String getSerieTitle() {
+    public String getTitleSeries() {
         return titleSeries;
     }
 
