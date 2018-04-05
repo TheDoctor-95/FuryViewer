@@ -44,6 +44,11 @@ export class EpisodeService {
             .map((res: Response) => this.convertNextEpisodeResponse(res));
     }
 
+    nextEpisodes5(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/next/5`)
+            .map((res: Response) => this.convertNextEpisodeResponse(res));
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
