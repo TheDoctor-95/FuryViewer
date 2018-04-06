@@ -193,4 +193,13 @@ public class EpisodeResource {
 
         return episodeOmdbDTOService.getEpisode("American Horror Story", 1, 2);
     }
+
+    @GetMapping("/episodes/by-artist/{id}")
+    @Timed
+    public List<Episode> getAllSeriesFromArtist(@PathVariable Long id){
+        log.debug("Get to request episodes from artist order by date desc");
+        return  episodeRepository.getEpisodeByActorsOrderByReleaseDate(artistRepository.findOne(id));
+    }
+
+
 }

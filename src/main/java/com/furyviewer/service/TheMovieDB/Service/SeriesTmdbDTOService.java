@@ -98,7 +98,9 @@ public class SeriesTmdbDTOService {
 
                 if (response.isSuccessful()) {
                     series = response.body();
-                    companyName = series.getProductionCompanies().get(0).getName();
+                    if (!series.getProductionCompanies().isEmpty()) {
+                        companyName = series.getProductionCompanies().get(0).getName();
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
