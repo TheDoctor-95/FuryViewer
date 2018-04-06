@@ -13,6 +13,9 @@ import {FavouriteMovie} from '../favourite-movie/favourite-movie.model';
 import {HatredMovie} from '../hatred-movie/hatred-movie.model';
 import {FavouriteSeries} from '../favourite-series/favourite-series.model';
 import {HatredSeries} from '../hatred-series/hatred-series.model';
+import {SeasonService} from "../season/season.service";
+import {EpisodeService} from "../episode/episode.service";
+import {EpisodeSeasonModel} from "../../shared/model/EpisodeSeason.model";
 
 @Component({
     selector: 'jhi-series-detail',
@@ -43,6 +46,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     hate: HatredMovie;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
+    seasons: number[] = [1,2,3,4,5];
+    chapters: EpisodeSeasonModel;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -50,7 +55,9 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private artistService: ArtistService,
         private route: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
-    config: NgbRatingConfig
+        private seasonService: SeasonService,
+        private episodeService: EpisodeService,
+        config: NgbRatingConfig
 ) {
     this.director = new Artist();
     this.director.name="";
@@ -69,6 +76,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadArtist(params['id']);
             this.loadDirector(params['id']);
             this.loadScriptwriter(params['id']);
+            this.loadSeasons(params['id']);
+            this.loadEpisodes(2);
         });
         this.registerChangeInSeries();
 
@@ -87,6 +96,27 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
+
+    loadSeasons(id: number){
+        this.seasonService.findSeasons(id).subscribe(
+            (res: ResponseWrapper) => {
+                this.seasons = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+
+        )
+    }
+
+    loadEpisodes(id: number){
+        this.episodeService.findEpisodeBySeasonId(id).subscribe(
+            (res: ResponseWrapper) => {
+                this.chapters = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+
+        )
+    }
+
     loadDirector(id: number){
         this.artistService.seriesDirectorQuery(id).subscribe((artist) => {
             this.director = artist;
