@@ -133,6 +133,20 @@ public class MovieResource {
         return movieStatsRepository.pendingMovies(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
     }
 
+    @GetMapping("/movies/Pending/5")
+    @Timed
+    public List<Movie> getPendingMovies5() {
+        log.debug("REST request to get all Movies");
+        List<Movie> movieList = movieStatsRepository.pendingMovies(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+        if(movieList.size()<5){
+            return movieList;
+        }else{
+            return movieList.subList(0, 5);
+        }
+
+    }
+
+
     /**
      * GET  /movies/:id : get the "id" movie.
      *

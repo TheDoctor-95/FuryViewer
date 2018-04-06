@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
@@ -12,6 +12,7 @@ import { EpisodeService } from './episode.service';
 import { Season, SeasonService } from '../season';
 import { Artist, ArtistService } from '../artist';
 import { ResponseWrapper } from '../../shared';
+import {EpisodeNextSeen} from "../../shared/model/EpisodeNextSeen.model";
 
 @Component({
     selector: 'jhi-episode-dialog',
@@ -19,13 +20,10 @@ import { ResponseWrapper } from '../../shared';
 })
 export class EpisodeDialogComponent implements OnInit {
 
-    episode: Episode;
     isSaving: boolean;
-
     seasons: Season[];
-
     artists: Artist[];
-    releaseDateDp: any;
+    episodePending: EpisodeNextSeen[];
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -33,9 +31,12 @@ export class EpisodeDialogComponent implements OnInit {
         private episodeService: EpisodeService,
         private seasonService: SeasonService,
         private artistService: ArtistService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        public router: Router
     ) {
     }
+
+
 
     ngOnInit() {
         this.isSaving = false;
@@ -43,36 +44,25 @@ export class EpisodeDialogComponent implements OnInit {
             .subscribe((res: ResponseWrapper) => { this.seasons = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.artistService.query()
             .subscribe((res: ResponseWrapper) => { this.artists = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.loadNextEpisodes();
     }
 
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
-    save() {
-        this.isSaving = true;
-        if (this.episode.id !== undefined) {
-            this.subscribeToSaveResponse(
-                this.episodeService.update(this.episode));
-        } else {
-            this.subscribeToSaveResponse(
-                this.episodeService.create(this.episode));
-        }
+    goTo(id: number){
+        this.router.navigate(['/series',id]);
     }
 
-    private subscribeToSaveResponse(result: Observable<Episode>) {
-        result.subscribe((res: Episode) =>
-            this.onSaveSuccess(res), (res: Response) => this.onSaveError());
-    }
-
-    private onSaveSuccess(result: Episode) {
-        this.eventManager.broadcast({ name: 'episodeListModification', content: 'OK'});
-        this.isSaving = false;
-        this.activeModal.dismiss(result);
-    }
-
-    private onSaveError() {
-        this.isSaving = false;
+    loadNextEpisodes(){
+        this.episodeService.nextEpisodes().subscribe(
+            (res: ResponseWrapper) => {
+                this.episodePending = res.json;
+                console.log(this.episodePending);
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        )
     }
 
     private onError(error: any) {

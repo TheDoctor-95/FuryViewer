@@ -31,7 +31,7 @@ export const movieRoute: Routes = [
 
 export const moviePopupRoute: Routes = [
     {
-        path: 'movie-new',
+        path: 'movie-pending',
         component: MoviePopupComponent,
         data: {
             authorities: ['ROLE_USER'],

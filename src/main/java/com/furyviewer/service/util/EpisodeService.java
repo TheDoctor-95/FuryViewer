@@ -11,6 +11,7 @@ import com.furyviewer.service.dto.util.EpisodesHomeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -47,7 +48,7 @@ public class EpisodeService {
                     if (maxEpisodeSeen.getNumber()<maxSeasonSeen.getEpisodes().size()){
                         nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(maxEpisodeSeen.getNumber()+1,maxSeasonSeen.getNumber(),series.getId());
                     }else{
-                        nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(maxEpisodeSeen.getNumber(),maxSeasonSeen.getNumber()+1,series.getId());
+                        nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(1,maxSeasonSeen.getNumber()+1,series.getId());
                     }
                 }else{
                     nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(1,1,series.getId());
@@ -55,7 +56,8 @@ public class EpisodeService {
 
                 }
 
-                if(nextEpisode!=null) {
+                if(nextEpisode!=null &&
+                    (nextEpisode.getReleaseDate().isBefore(LocalDate.now()) || nextEpisode.getReleaseDate().isEqual(LocalDate.now()))) {
                     episodesHomeDTO.setEpisodeNumber(nextEpisode.getNumber());
                     episodesHomeDTO.setId(nextEpisode.getSeason().getSeries().getId());
                     episodesHomeDTO.setSeasonNumber(nextEpisode.getSeason().getNumber());

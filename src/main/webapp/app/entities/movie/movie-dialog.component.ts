@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
@@ -21,7 +21,7 @@ import { ResponseWrapper } from '../../shared';
 })
 export class MovieDialogComponent implements OnInit {
 
-    movie: Movie;
+    moviesPending: Movie[];
     isSaving: boolean;
 
     artists: Artist[];
@@ -41,52 +41,32 @@ export class MovieDialogComponent implements OnInit {
         private companyService: CompanyService,
         private genreService: GenreService,
         private countryService: CountryService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private route: Router
     ) {
     }
 
     ngOnInit() {
-        this.isSaving = false;
-        this.artistService.query()
-            .subscribe((res: ResponseWrapper) => { this.artists = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.companyService.query()
-            .subscribe((res: ResponseWrapper) => { this.companies = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.genreService.query()
-            .subscribe((res: ResponseWrapper) => { this.genres = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.countryService.query()
-            .subscribe((res: ResponseWrapper) => { this.countries = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+
+        this.loadPendingMovies();
     }
 
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
-    save() {
-        this.isSaving = true;
-        if (this.movie.id !== undefined) {
-            this.subscribeToSaveResponse(
-                this.movieService.update(this.movie));
-        } else {
-            this.subscribeToSaveResponse(
-                this.movieService.create(this.movie));
-        }
+    goTo(id: number){
+        this.route.navigate(['movie', id])
     }
 
-    private subscribeToSaveResponse(result: Observable<Movie>) {
-        result.subscribe((res: Movie) =>
-            this.onSaveSuccess(res), (res: Response) => this.onSaveError());
+    loadPendingMovies() {
+        this.movieService.pendingMovies().subscribe(
+            (res: ResponseWrapper) => {
+                this.moviesPending = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
     }
-
-    private onSaveSuccess(result: Movie) {
-        this.eventManager.broadcast({ name: 'movieListModification', content: 'OK'});
-        this.isSaving = false;
-        this.activeModal.dismiss(result);
-    }
-
-    private onSaveError() {
-        this.isSaving = false;
-    }
-
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
     }

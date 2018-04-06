@@ -157,6 +157,20 @@ public class EpisodeResource {
 
     }
 
+    @GetMapping("/episodes/next/5")
+    @Timed
+    @Transactional
+    public List<EpisodesHomeDTO> getNextChapters5() {
+        log.debug("REST request to get all ChapterSeens");
+        List<EpisodesHomeDTO> episodesHomeDTOList = episodeService.getNextEpisodes();
+        if(episodesHomeDTOList.size()<5){
+            return episodesHomeDTOList;
+        }else{
+            return episodesHomeDTOList.subList(0,5);
+        }
+
+    }
+
 
     /**
      * DELETE  /episodes/:id : delete the "id" episode.
