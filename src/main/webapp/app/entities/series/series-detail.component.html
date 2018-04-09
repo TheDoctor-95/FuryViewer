@@ -33,6 +33,15 @@
                                 <a [routerLink]="['/genre', genre?.id ]" class="infoArtist" >{{genre.name}}</a>{{last ? '' : ', '}}
                             </span>
                     </div>
+                    <!-- Company -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/clapper.png" height="24px" width="24px"/>
+                        </div>
+                        <div *ngIf="series.company" class="infoFilm">
+                            <span style="margin-left: 5px; font-size: 13px;">{{series.company?.name}}</span>
+                        </div>
+                    </div>
                     <!-- Pais -->
                     <div class="styleArtist">
                         <div class="iconoFilm">

@@ -435,6 +435,14 @@ Social Buttons
 
 #plus:hover {
     cursor: pointer;
+    background-color: #ef9800;
+    color: white;
+}
+
+#plus2:hover {
+    cursor: pointer;
+    background-color: #ef9800;
+    color: white;
 }
 
 ngb-popover-window {
@@ -605,6 +613,7 @@ button:hover {
 
 .portades {
     vertical-align: top;
+    display: inline-block;
 }
 
 .card {

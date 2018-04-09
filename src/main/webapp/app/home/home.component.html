@@ -13,13 +13,16 @@
                             <img class="card-img-top" src="{{episode.urlCartel}}" alt="Card image">
 
                             <div class="card-body">
-                                <h4 class="card-title">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
-                                <h3 class="card-text"> {{episode.titleSeries}} </h3>
+                                <h4 class="card-title seriesChapter">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
+                                <h3 class="card-text seriesTitle"> {{episode.titleSeries}} </h3>
 
                             </div>
 
                         </div>
-                        <button [routerLink]="['/', { outlets: { popup: ['episode-next'] } }]" >+</button>
+                        <div style="display: inline-block; height: 11vw;">
+                            <div id="plus" [routerLink]="['/', { outlets: { popup: ['episode-next'] } }]" >+</div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -34,16 +37,16 @@
 
 
 
-                            <div class="card portades col-2" *ngFor="let movie of moviesPending"
+                            <div class="card portades" *ngFor="let movie of moviesPending"
                                  routerLink="/movie/{{movie.id}}">
                                 <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
                                 <div class="card-body">
-                                    <h4>{{movie.name}}</h4>
+                                    <h4 style="font-size: 15px; font-weight: 600;">{{movie.name}}</h4>
                                 </div>
                             </div>
-                            <button [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]" >+</button>
-
-
+                            <div style="display: inline-block; height: 11vw;">
+                                <div id="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]" >+</div>
+                            </div>
 
                     </div>
 

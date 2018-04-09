@@ -82,3 +82,54 @@ input:checked + .sliderinv:before {
 }
 
 /* FI SWITCH--------------------------------------------------------*/
+
+#plus{
+    display: inline-block;
+    margin-top: 6vw;
+    border: 2px solid #ef9800;
+    color: #ef9800;
+    border-radius: 30px;
+    padding: 2px 11px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+#plus2{
+    display: inline-block;
+    margin-top: 6vw;
+    border: 2px solid #ef9800;
+    color: #ef9800;
+    border-radius: 30px;
+    padding: 2px 11px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+#plus:hover{
+     cursor: pointer;
+     background-color: #ef9800;
+     color: white;
+
+}
+
+#plus2:hover{
+    cursor: pointer;
+    background-color: #ef9800;
+    color: white;
+
+}
+
+.seriesChapter{
+    font-size: 13px;
+    color: #ef9800;
+    font-weight: 600;
+}
+
+.seriesTitle{
+    font-size: 12px;
+    margin-top: 6px;
+}
