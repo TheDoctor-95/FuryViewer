@@ -46,9 +46,9 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     hate: HatredMovie;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
-    seasons: number[] = [1,2,3,4,5];
+    seasons: number[];
     chapters: EpisodeSeasonModel;
-
+    actualSeason: number;
     constructor(
         private eventManager: JhiEventManager,
         private seriesService: SeriesService,
@@ -77,7 +77,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadDirector(params['id']);
             this.loadScriptwriter(params['id']);
             this.loadSeasons(params['id']);
-            this.loadEpisodes(2);
+            this.loadActualSeason(params['id']);
         });
         this.registerChangeInSeries();
 
@@ -108,6 +108,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     }
 
     loadEpisodes(id: number){
+        this.seasonNumberFind(id);
         this.episodeService.findEpisodeBySeasonId(id).subscribe(
             (res: ResponseWrapper) => {
                 this.chapters = res.json;
@@ -115,6 +116,27 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onError(res.json)
 
         )
+    }
+
+    loadActualSeason(id:number){
+        this.seasonService.actualSeason(id).subscribe(
+            (res: number) => {
+                this.loadEpisodes(res);
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        )
+    }
+
+    seasonNumberFind(id: number){
+        let i=1;
+        for (let id2 of this.seasons) {
+            if(id==id2){
+                this.actualSeason=i;
+                return null;
+            }
+            i++;
+        }
+
     }
 
     loadDirector(id: number){

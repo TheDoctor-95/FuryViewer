@@ -49,6 +49,11 @@ export class SeasonService {
             .map((res:Response) => this.convertResponseId(res));
     }
 
+    actualSeason(id: number): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/ActualSeason/${id}`).
+            map((res: Response) => res.json());
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
