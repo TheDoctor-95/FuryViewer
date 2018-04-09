@@ -133,3 +133,44 @@ input:checked + .sliderinv:before {
     font-size: 12px;
     margin-top: 6px;
 }
+
+
+.list-group-item {
+    display: inline-block;
+    padding: 0;
+    border-style: none;
+    border: none;
+    text-align: left;
+}
+
+.list-group {
+    margin: 2%;
+}
+
+ol {
+    counter-reset: item;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+li {
+    display: block;
+    margin-bottom: 3%;
+    margin-left: 2em;
+}
+
+.list-group > li::before {
+    display: inline-block;
+    content: counter(item);
+    counter-increment: item;
+    background-color: #ef9800;
+    text-align: center;
+    border-radius: 1.5em;
+
+    width: 1.5em;
+    height: 1.5em;
+    color: white;
+    margin-left: -1.6em;
+}
+
+

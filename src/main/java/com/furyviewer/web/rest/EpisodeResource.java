@@ -5,6 +5,7 @@ import com.furyviewer.domain.Episode;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.EpisodeOmdbDTOService;
+import com.furyviewer.service.dto.EpisodeSerieDTO;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
 import com.furyviewer.service.util.EpisodeService;
@@ -141,9 +142,9 @@ public class EpisodeResource {
      */
     @GetMapping("/episodes/all-episodes-from-season/{id}")
     @Timed
-    public ResponseEntity<List<Episode>> getEpisodeBySeason(@PathVariable Long id) {
+    public ResponseEntity<List<EpisodeSerieDTO>> getEpisodeBySeason(@PathVariable Long id) {
         log.debug("REST request to get Episodes by season", id);
-        List<Episode> episode =episodeRepository.getEpisodeBySeason(id);
+        List<EpisodeSerieDTO> episode =episodeService.chaptersSeriesBySeasonId(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(episode));
     }
 
@@ -192,4 +193,13 @@ public class EpisodeResource {
 
         return episodeOmdbDTOService.getEpisode("American Horror Story", 1, 2);
     }
+
+    @GetMapping("/episodes/by-artist/{id}")
+    @Timed
+    public List<Episode> getAllSeriesFromArtist(@PathVariable Long id){
+        log.debug("Get to request episodes from artist order by date desc");
+        return  episodeRepository.getEpisodeByActorsOrderByReleaseDate(artistRepository.findOne(id));
+    }
+
+
 }

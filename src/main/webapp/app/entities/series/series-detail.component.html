@@ -92,6 +92,14 @@
                     <span style="font-size: 15px; text-align: left;">{{series.description}}</span>
                 </div>
                 &nbsp;
+                <select (change)="loadEpisodes($event.target.value)">
+                    <option *ngFor="let season of seasons; index as i;" value="{{season}}">Season {{i+1}}</option>
+
+                </select>
+                <ul class="list-group">
+                    <li *ngFor="let chapter of chapters" class="list-group-item">{{chapter.number}} {{chapter.title}} {{chapter.releaseDate | date: "mediumDate"}} {{chapter.seen}}</li>
+                </ul>
+
                 <div class="whiteBox" style="display: block; padding: 18px;">
                     <div style="width: 100%">
                         <div style="display: block;">

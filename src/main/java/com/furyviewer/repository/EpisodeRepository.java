@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -22,6 +23,11 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
     @Query("select e from Episode e where season.id=:id")
     List<Episode>getEpisodeBySeason(@Param("id") Long id);
 
+    List<Episode> findBySeasonIdOrderByReleaseDate(Long id);
+
     Episode findByNumberAndSeasonNumberAndSeasonSeriesId(int numberEpisode, int numberSeason, Long idSeries);
 
+
+    @Query("select e from Episode e where :artist member of e.actors order by e.releaseDate desc")
+    List<Episode> getEpisodeByActorsOrderByReleaseDate(@Param("artist") Artist artist);
 }

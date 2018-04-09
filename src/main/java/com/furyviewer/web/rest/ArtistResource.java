@@ -15,12 +15,15 @@ import com.furyviewer.service.dto.Criteria.ArtistBCriteria;
 import com.furyviewer.service.dto.TheMovieDB.Artist.CompleteArtistTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.SimpleArtistTmdbDTO;
 import com.furyviewer.service.util.ArtistService;
+import com.furyviewer.service.util.EpisodeActorsService;
+import com.furyviewer.service.util.MultimediaActorsDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +64,9 @@ public class ArtistResource {
 
     @Autowired
     private ArtistService artistService;
+
+    @Autowired
+    private EpisodeActorsService episodeActorsService;
 
 
     @Inject
@@ -280,4 +286,21 @@ public class ArtistResource {
         List<Artist> artist = hatredArtistRepository.topHatredArtist();
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
     }
+
+    @GetMapping("/artist/{id}/moviesAndSeriesOrderedByDate/")
+    @Timed
+    public ResponseEntity<List<MultimediaActorsDTO>>f(@PathVariable Long id){
+        log.debug("REST request to get Artist : {}", id);
+        Artist artist = artistRepository.findOneWithEagerRelationships(id);
+
+        if(artist==null){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(episodeActorsService.getSeriesAndMoviesFromActor(artist)
+            , HttpStatus.OK);
+
+    }
+
+
 }

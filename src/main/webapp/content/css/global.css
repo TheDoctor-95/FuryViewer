@@ -453,6 +453,56 @@ ngb-popover-window {
 /* ====================================================================================================================================================
 HOME
 ==================================================================================================================================================== */
+
+.portades:hover>.card-img-top{
+    -webkit-box-shadow: -1px 0px 75px 14px rgba(239, 152, 0, 1);
+    -moz-box-shadow: -1px 0px 75px 14px rgba(239, 152, 0, 1);
+    box-shadow: -1px 0px 75px 14px rgba(239, 152, 0, 1);
+    /* width: 94%;
+     height: 13vw;
+     object-fit: cover;
+
+     position: absolute;
+     left: 0;
+     top: -2vm;*/
+}
+.card.portades:hover{
+    font-weight: 600 !important;
+}
+
+.card.portades {
+    background-color: transparent;
+}
+
+.card-img-top {
+    width: 84%;
+    height: 11vw;
+    object-fit: cover;
+}
+
+.portades > .card-body {
+    height: 51px;
+}
+
+.portades {
+    vertical-align: top;
+}
+
+.card.portades {
+    display: inline-block;
+    width: 17%;
+    height: 20%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+
+
+.card {
+    border: none;
+}
+
+
 #lateralDret>.row{
     height: 32%;
 }
@@ -582,15 +632,7 @@ button:hover {
 
 }
 
-.card-img-top {
-    width: 84%;
-    height: 11vw;
-        object-fit: cover;
-}
 
-.portades > .card-body {
-    height: 51px;
-}
 
 .pelpendientes {
     margin-top: 5%;
@@ -616,9 +658,7 @@ button:hover {
     display: inline-block;
 }
 
-.card {
-    border: none;
-}
+
 
 .top {
     padding-top: 5%;

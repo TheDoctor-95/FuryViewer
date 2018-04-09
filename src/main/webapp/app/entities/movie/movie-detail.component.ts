@@ -13,20 +13,20 @@ import {factoryOrValue} from 'rxjs/operator/multicast';
 import {FavouriteMovieService} from '../favourite-movie/favourite-movie.service';
 import {Observable} from 'rxjs/Observable';
 import {FavouriteMovie} from '../favourite-movie/favourite-movie.model';
-import {Social} from "../social/social.model";
-import {ResponseWrapper} from "../../shared/model/response-wrapper.model";
-import {SocialService} from "../social/social.service";
-import {HatredMovieService} from "../hatred-movie/hatred-movie.service";
-import {HatredMovie} from "../hatred-movie/hatred-movie.model";
-import {ArtistService} from "../artist/artist.service";
-import {Artist} from "../artist/artist.model";
-import {RateMovie} from "../rate-movie/rate-movie.model";
-import {RateMovieService} from "../rate-movie/rate-movie.service";
-import {ReviewMovie} from "../review-movie/review-movie.model";
-import {ReviewMovieService} from "../review-movie/review-movie.service";
-import {BaseEntity} from "../../shared/model/base-entity";
+import {Social} from '../social/social.model';
+import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
+import {SocialService} from '../social/social.service';
+import {HatredMovieService} from '../hatred-movie/hatred-movie.service';
+import {HatredMovie} from '../hatred-movie/hatred-movie.model';
+import {ArtistService} from '../artist/artist.service';
+import {Artist} from '../artist/artist.model';
+import {RateMovie} from '../rate-movie/rate-movie.model';
+import {RateMovieService} from '../rate-movie/rate-movie.service';
+import {ReviewMovie} from '../review-movie/review-movie.model';
+import {ReviewMovieService} from '../review-movie/review-movie.service';
+import {BaseEntity} from '../../shared/model/base-entity';
 import  {MovieStatsService} from '../movie-stats/movie-stats.service';
-import {MovieStats} from "../movie-stats/movie-stats.model";
+import {MovieStats} from '../movie-stats/movie-stats.model';
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -84,10 +84,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.hate.hated=false;
         this.rateUser = new RateMovie()
         this.rateUser.rate = 0;
-        this.media = "0";
+        this.media = '0';
         this.newComent= new ReviewMovie();
-        this.newComent.title="";
-        this.newComent.review="";
+        this.newComent.title='';
+        this.newComent.review='';
     }
 
     ngOnInit() {
@@ -198,7 +198,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     }
 
     comentar(){
-        console.log("aaa");
+        console.log('aaa');
         this.newComent.movie=this.movie;
         console.log(this.newComent);
 
@@ -306,8 +306,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
     private onSaveSuccessReview(result: ReviewMovie) {
         this.eventManager.broadcast({ name: 'reviewMovieListModification', content: 'OK'});
-        this.newComent.title="";
-        this.newComent.review="";
+        this.newComent.title='';
+        this.newComent.review='';
         this.loadReviews(this.movie.id);
     }
 

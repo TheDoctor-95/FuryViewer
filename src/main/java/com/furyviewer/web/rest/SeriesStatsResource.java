@@ -3,6 +3,7 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.SeriesStats;
 
+import com.furyviewer.domain.enumeration.MovieStatsEnum;
 import com.furyviewer.repository.SeriesStatsRepository;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -33,8 +34,10 @@ public class SeriesStatsResource {
 
     private final SeriesStatsRepository seriesStatsRepository;
 
+
     public SeriesStatsResource(SeriesStatsRepository seriesStatsRepository) {
         this.seriesStatsRepository = seriesStatsRepository;
+
     }
 
     /**
@@ -139,6 +142,8 @@ public class SeriesStatsResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(statusMap));
 
     }
+
+
 
     /**
      * DELETE  /series-stats/:id : delete the "id" seriesStats.

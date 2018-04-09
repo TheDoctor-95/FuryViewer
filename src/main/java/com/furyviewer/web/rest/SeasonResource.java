@@ -19,6 +19,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -103,9 +104,9 @@ public class SeasonResource {
      */
     @GetMapping("/seasons/Seasons-by-Series/{id}")
     @Timed
-    public ResponseEntity <List<Season>> findSeasonsBySeriesId(@PathVariable Long id) {
+    public ResponseEntity <List<Long>> findSeasonsBySeriesId(@PathVariable Long id) {
         log.debug("REST request to get Season : {}", id);
-        List<Season> seasons = seasonRepository.findSeasonsBySeriesId(id);
+        List<Long> seasons = seasonRepository.findSeasons(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seasons));
     }
 
