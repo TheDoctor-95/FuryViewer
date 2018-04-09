@@ -2,6 +2,7 @@ package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Artist;
+import com.furyviewer.domain.Genre;
 import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.*;
@@ -261,6 +262,7 @@ public class MovieResource {
         log.debug("Get to request movies from artist order by date desc");
         return movieRepository.getByArtistOrderbyDate(artistRepository.findOne(id));
     }
+
 
 
 

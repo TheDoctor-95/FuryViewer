@@ -116,4 +116,13 @@ public class ReviewSeriesResource {
         reviewSeriesRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
+    @GetMapping("/review-series/series/{id}")
+    @Timed
+    public ResponseEntity<List<ReviewSeries>> getReviewsOfAMovie(@PathVariable Long id) {
+        log.debug("REST request to get ReviewMovie : {}", id);
+        List<ReviewSeries> reviewMovie = reviewSeriesRepository.findBySeriesIdOrderByDateDesc(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(reviewMovie));
+    }
 }

@@ -1,5 +1,6 @@
 package com.furyviewer.repository;
 
+import com.furyviewer.domain.Genre;
 import com.furyviewer.domain.Series;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,7 @@ public interface SeriesRepository extends JpaRepository<Series, Long>, JpaSpecif
     @Query("select series from Series series where series.imdb_id =:imdb")
     Optional<Series> findByImdb_id(@Param("imdb") String id);
 
-
+    //@Query("select s from Series s where :genre member of m.genres order by avg(m.rateSeries.rate)")
+    //List<Series> seriesByGenre(@Param("genre") Genre genre);
 
 }

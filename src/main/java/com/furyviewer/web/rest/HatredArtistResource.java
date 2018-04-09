@@ -139,4 +139,14 @@ public class HatredArtistResource {
         hatredArtistRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    //@GetMapping("/count-hatred-artists/{id}")
+    //@Timed
+    //public HatredArtist countHatredArtist(@PathVariable Long id) {
+    //    log.debug("REST request to get HatredArtist : {}", id);
+    //    return hatredArtistRepository.countHatredArtistByArtistAndHated (id);
+        // return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredArtist));
+    //}
+
+
 }
