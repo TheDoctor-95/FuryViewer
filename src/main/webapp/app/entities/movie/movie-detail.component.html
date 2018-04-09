@@ -46,6 +46,15 @@
                             <span style="margin-left: 5px; font-size: 13px;">{{movie.duration}} min</span>
                         </div>
                     </div>
+                    <!-- Company -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/clapper.png" height="24px" width="24px"/>
+                        </div>
+                        <div *ngIf="movie.company" class="infoFilm">
+                            <span style="margin-left: 5px; font-size: 13px;">{{movie.company?.name}}</span>
+                        </div>
+                    </div>
                     <!-- Pais -->
                     <div class="styleArtist">
                         <div class="iconoFilm">
@@ -78,7 +87,7 @@
 
                 </div>
             </div>
-            <div class="col-6" style="height: 100%; margin-bottom: 25px;">
+            <div class="col-7" style="height: 100%; margin-bottom: 25px;">
                 <div class="whiteBox" style="display: table; width: 100%;">
                     <div style="width: 100%; display: inline-block; vertical-align: top;">
                         <h1 class="nameTitle">{{movie.name}}</h1>

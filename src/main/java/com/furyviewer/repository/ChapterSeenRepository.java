@@ -1,10 +1,12 @@
 package com.furyviewer.repository;
 
 import com.furyviewer.domain.ChapterSeen;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Spring Data JPA repository for the ChapterSeen entity.
@@ -22,6 +24,7 @@ public interface ChapterSeenRepository extends JpaRepository<ChapterSeen, Long> 
 
     List<ChapterSeen> findBySeenAndUserLogin(boolean seen, String userLogin);
 
-
+    @Query("SELECT cs.seen FROM ChapterSeen cs WHERE cs.user.login=:login AND cs.episode.id= :id ")
+    boolean isSeen(@Param("login") String login, @Param("id") Long id);
 
 }

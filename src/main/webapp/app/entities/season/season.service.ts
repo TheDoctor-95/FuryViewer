@@ -44,6 +44,11 @@ export class SeasonService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    findSeasons(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/Seasons-by-Series/${id}`)
+            .map((res:Response) => this.convertResponseId(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
@@ -53,6 +58,15 @@ export class SeasonService {
         const result = [];
         for (let i = 0; i < jsonResponse.length; i++) {
             result.push(this.convertItemFromServer(jsonResponse[i]));
+        }
+        return new ResponseWrapper(res.headers, result, res.status);
+    }
+
+    private convertResponseId(res: Response): ResponseWrapper{
+        const jsonResponse = res.json();
+        const result = [];
+        for (let i = 0; i < jsonResponse.length; i++) {
+            result.push(jsonResponse[i]);
         }
         return new ResponseWrapper(res.headers, result, res.status);
     }

@@ -17,6 +17,7 @@ import java.util.List;
 @Repository
 public interface SeasonRepository extends JpaRepository<Season, Long> {
 
-    List<Season> findSeasonsBySeriesId(@Param("id") Long id);
+    @Query("SELECT s.id FROM Season s WHERE s.series.id = :id ORDER BY s.number")
+    List<Long> findSeasons(@Param("id") Long id);
 
 }
