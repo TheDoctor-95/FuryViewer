@@ -92,13 +92,21 @@
                     <span style="font-size: 15px; text-align: left;">{{series.description}}</span>
                 </div>
                 &nbsp;
-                <select (change)="loadEpisodes($event.target.value)">
-                    <option *ngFor="let season of seasons; index as i;" value="{{season}}">Season {{i+1}}</option>
 
-                </select>
-                <ul class="list-group">
-                    <li *ngFor="let chapter of chapters" class="list-group-item">{{chapter.number}} {{chapter.title}} {{chapter.releaseDate | date: "mediumDate"}} {{chapter.seen}}</li>
-                </ul>
+                <div class="col">
+                    <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-block" id="dropdownBasic1" ngbDropdownToggle>Season {{actualSeason}}</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button class="dropdown-item" *ngFor="let season of seasons; index as i;" (click)="loadEpisodes(season)">Season {{i+1}}</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+                <table style="background-color: white;" class="table table-striped">
+                    <tr *ngFor="let chapter of chapters" class="row"><td class="col-1">{{chapter.number}}</td><td class="col-8" style="text-align: left;"> {{chapter.title}} </td><td class="col-2">{{chapter.releaseDate | date: "mediumDate"}} </td><td class="col-1"><i class="fa fa-eye" [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"></i></td></tr>
+                </table>
 
                 <div class="whiteBox" style="display: block; padding: 18px;">
                     <div style="width: 100%">

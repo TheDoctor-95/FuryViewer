@@ -19,7 +19,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -72,15 +71,15 @@ public class SeasonResourceIntTest {
     private Season season;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final SeasonResource seasonResource = new SeasonResource(seasonRepository);
-        this.restSeasonMockMvc = MockMvcBuilders.standaloneSetup(seasonResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final SeasonResource seasonResource = new SeasonResource(seasonRepository, episodeService);
+//        this.restSeasonMockMvc = MockMvcBuilders.standaloneSetup(seasonResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.

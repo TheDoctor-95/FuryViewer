@@ -4,10 +4,8 @@ package com.furyviewer.service.util;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Episode;
 import com.furyviewer.domain.Season;
-import com.furyviewer.repository.ChapterSeenRepository;
-import com.furyviewer.repository.EpisodeRepository;
-import com.furyviewer.repository.SeasonRepository;
-import com.furyviewer.repository.SeriesStatsRepository;
+import com.furyviewer.domain.Series;
+import com.furyviewer.repository.*;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.dto.EpisodeSerieDTO;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
@@ -38,6 +36,9 @@ public class EpisodeService {
     @Autowired
     private SeasonRepository seasonRepository;
 
+    @Autowired
+    private SeriesRepository seriesRepository;
+
     private final Logger log = LoggerFactory.getLogger(EpisodeResource.class);
 
     @Timed
@@ -50,34 +51,9 @@ public class EpisodeService {
         seriesStatsRepository.followingSeriesUser(SecurityUtils.getCurrentUserLogin()).forEach(
             series -> {
                 log.debug("getNextEpisodes current time: 2 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
-
-                Optional<Season> maxSeasonSeenOptional = chapterSeenRepository.findBySeenAndEpisodeSeasonSeriesIdAndUserLogin(true, series.getId(), SecurityUtils.getCurrentUserLogin()).stream()
-                    .map(chapterSeen ->  chapterSeen.getEpisode().getSeason())
-                    .max(Comparator.comparing(com.furyviewer.domain.Season::getNumber));
+                Episode nextEpisode = nextEpisode(series);
                 EpisodesHomeDTO episodesHomeDTO = new EpisodesHomeDTO();
-                Episode nextEpisode;
-                log.debug("getNextEpisodes current time: 3 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
-                if (maxSeasonSeenOptional.isPresent()){
-                    Season maxSeasonSeen = maxSeasonSeenOptional.get();
-                    log.debug("getNextEpisodes current time: 4 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
-                    Episode maxEpisodeSeen = chapterSeenRepository.findBySeenAndEpisodeSeasonSeriesIdAndUserLogin(true, series.getId(), SecurityUtils.getCurrentUserLogin()).stream()
-                        .map(chapterSeen -> chapterSeen.getEpisode())
-                        .filter(episode -> episode.getSeason().equals(maxSeasonSeen))
-                        .max(Comparator.comparing(com.furyviewer.domain.Episode::getNumber)).get();
 
-                    if (maxEpisodeSeen.getNumber()<maxSeasonSeen.getEpisodes().size()){
-                        log.debug("getNextEpisodes current time: 5 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
-                        nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(maxEpisodeSeen.getNumber()+1,maxSeasonSeen.getNumber(),series.getId());
-                    }else{
-                        log.debug("getNextEpisodes current time: 6 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
-                        nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(1,maxSeasonSeen.getNumber()+1,series.getId());
-                    }
-                }else{
-                    log.debug("getNextEpisodes current time: 7 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
-                    nextEpisode = episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(1,1,series.getId());
-
-
-                }
                 log.debug("getNextEpisodes current time: 8 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
                 if(nextEpisode!=null &&
                     (nextEpisode.getReleaseDate().isBefore(LocalDate.now()) || nextEpisode.getReleaseDate().isEqual(LocalDate.now()))) {
@@ -97,6 +73,42 @@ public class EpisodeService {
 
     }
 
+    public Long actualSeason(Long id){
+        Series series = seriesRepository.findOne(id);
+        return nextEpisode(series).getSeason().getId();
+    }
+
+    public Episode nextEpisode(Series series){
+
+
+        Optional<Season> maxSeasonSeenOptional = chapterSeenRepository.findBySeenAndEpisodeSeasonSeriesIdAndUserLogin(true, series.getId(), SecurityUtils.getCurrentUserLogin()).stream()
+            .map(chapterSeen ->  chapterSeen.getEpisode().getSeason())
+            .max(Comparator.comparing(com.furyviewer.domain.Season::getNumber));
+
+
+        log.debug("getNextEpisodes current time: 3 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
+        if (maxSeasonSeenOptional.isPresent()){
+            Season maxSeasonSeen = maxSeasonSeenOptional.get();
+            log.debug("getNextEpisodes current time: 4 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
+            Episode maxEpisodeSeen = chapterSeenRepository.findBySeenAndEpisodeSeasonSeriesIdAndUserLogin(true, series.getId(), SecurityUtils.getCurrentUserLogin()).stream()
+                .map(chapterSeen -> chapterSeen.getEpisode())
+                .filter(episode -> episode.getSeason().equals(maxSeasonSeen))
+                .max(Comparator.comparing(com.furyviewer.domain.Episode::getNumber)).get();
+
+            if (maxEpisodeSeen.getNumber()<maxSeasonSeen.getEpisodes().size()){
+                log.debug("getNextEpisodes current time: 5 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
+                return episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(maxEpisodeSeen.getNumber()+1,maxSeasonSeen.getNumber(),series.getId());
+            }else{
+                log.debug("getNextEpisodes current time: 6 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
+                return episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(1,maxSeasonSeen.getNumber()+1,series.getId());
+            }
+        }else{
+            log.debug("getNextEpisodes current time: 7 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
+            return episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(1,1,series.getId());
+
+        }
+    }
+
     public List<EpisodeSerieDTO> chaptersSeriesBySeasonId(Long id){
         List<EpisodeSerieDTO> episodeSerieDTO = new ArrayList<EpisodeSerieDTO>();
         episodeRepository.findBySeasonIdOrderByReleaseDate(id).forEach(
@@ -108,6 +120,12 @@ public class EpisodeService {
                 esdto.setTitle(episode.getName());
                 esdto.setReleaseDate(episode.getReleaseDate());
                 esdto.setPlot(episode.getDescription());
+                try{
+                    esdto.setSeen(chapterSeenRepository.isSeen(SecurityUtils.getCurrentUserLogin(),esdto.getId()));
+                }catch (Exception ex){
+                    esdto.setSeen(false);
+                }
+
 
                 episodeSerieDTO.add(esdto);
             }
