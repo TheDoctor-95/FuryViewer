@@ -30,4 +30,7 @@ public interface HatredSeriesRepository extends JpaRepository<HatredSeries, Long
 
     HatredSeries findByUserAndSeriesId(User u, Long id);
 
+    @Query("select count(h.hated) from HatredSeries h group by h.series")
+    Integer countHatredSeries();
+
 }
