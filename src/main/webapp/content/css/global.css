@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500i,700|Roboto');
+
+
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -8,6 +12,9 @@ body, h1, h2, h3, h4 {
 
 body {
     background: #e4e5e6;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+
 }
 
 a {
@@ -351,6 +358,17 @@ Social Buttons
     padding: 10px 12px;
     text-align: left;
 }
+.infoBar {
+    display: block;
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 10px 12px;
+    text-align: left;
+}
+.progress{
+    background-color: #ff1d1db5;
+}
 
 .infoArtist {
     font-weight: normal;
@@ -650,7 +668,15 @@ button:hover {
 
 }
 
+.card-img-top {
+    width: 84%;
+    height: 11vw;
+    object-fit: cover;
+}
 
+.portades > .card-body {
+    height: 51px;
+}
 
 .pelpendientes {
     margin-top: 5%;
@@ -676,7 +702,9 @@ button:hover {
     display: inline-block;
 }
 
-
+.card {
+    border: none;
+}
 
 .top {
     padding-top: 5%;
@@ -1157,12 +1185,6 @@ input:checked + .slider:before {
     border: 1px solid #ef9800;
 }
 
-
-
-
-
-
-
 /* ====================================================================================================================================================
  SEARCH
 ==================================================================================================================================================== */
@@ -1202,4 +1224,23 @@ select.form-control:not([size]):not([multiple]){
     margin-left: 34%;
     padding-top: 1%;
     border-radius: 12px 12px 0 0;
+}
+
+.modal-header{
+    border-bottom: 4px solid orange;
+    background-color: #02020294;
+    color:white;
+}
+
+.modal-footer{
+    border-top: none;
+}
+
+.modal-title > button:hover{
+    background-color: transparent !important;
+}
+
+#actualSeason{
+    background-color: orange !important;
+    color:white !important;
 }

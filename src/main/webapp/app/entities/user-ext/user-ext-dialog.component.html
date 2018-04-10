@@ -1,7 +1,7 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
 
     <div class="modal-header">
-        <h4 class="modal-title" id="myUserExtLabel" jhiTranslate="furyViewerApp.userExt.home.createOrEditLabel">Create or edit a User Ext</h4>
+        <h2 class="modal-title" id="myUserExtLabel" jhiTranslate="furyViewerApp.userExt.home.createOrEditLabel">Editar perfil</h2>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
@@ -29,29 +29,37 @@
             <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
                 [(ngModel)]="userExt.imageContentType" />
         </div>
+
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.userExt.locationGoogleMaps" for="field_locationGoogleMaps">Location Google Maps</label>
-            <input type="text" class="form-control" name="locationGoogleMaps" id="field_locationGoogleMaps"
-                [(ngModel)]="userExt.locationGoogleMaps"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.userExt.latitude" for="field_latitude">Latitude</label>
-            <input type="number" class="form-control" name="latitude" id="field_latitude"
-                [(ngModel)]="userExt.latitude"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.userExt.longitude" for="field_longitude">Longitude</label>
-            <input type="number" class="form-control" name="longitude" id="field_longitude"
-                [(ngModel)]="userExt.longitude"  />
+            <label class="form-control-label" for="field_nombre">Nombre completo</label>
+            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                   [(ngModel)]="userExt.nombre"  />
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.userExt.user" for="field_user">User</label>
-            <select class="form-control" id="field_user" name="user" [(ngModel)]="userExt.user" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === userExt.user?.id ? userExt.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-            </select>
+            <label class="form-control-label" for="field_usuario">Nombre de usuario</label>
+            <input type="text" class="form-control" name="usuario" id="field_usuario"
+                   [(ngModel)]="userExt.usuario"  />
         </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_email">Email</label>
+            <input type="email" class="form-control" name="email" id="field_email"
+                   [(ngModel)]="userExt.email"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_nacimiento">Año de nacimiento</label>
+            <input type="date" class="form-control" name="nacimiento" id="field_nacimiento"
+                   [(ngModel)]="userExt.nacimiento"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_email">Lugar de nacimiento</label>
+            <input type="text" class="form-control" name="locationGoogleMaps" id="field_locationGoogleMaps"
+                [(ngModel)]="userExt.locationGoogleMaps"  />
+        </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
