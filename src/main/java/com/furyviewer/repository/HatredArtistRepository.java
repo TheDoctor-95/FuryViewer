@@ -31,8 +31,7 @@ public interface HatredArtistRepository extends JpaRepository<HatredArtist, Long
 
     HatredArtist findByUserAndArtistId(User u, Long id);
 
-    //@Query("select count(h.hated) from HatredArtist h group by h.artist")
-    //Long countHatredArtist(@Param("id") Long id);
+    @Query("select count(h.hated) from HatredArtist h group by h.artist")
+    Integer countHatredArtist();
 
-    //HatredArtist countHatredArtistByArtistAndHated(Long id);
 }

@@ -140,13 +140,14 @@ public class HatredArtistResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    //@GetMapping("/count-hatred-artists/{id}")
-    //@Timed
-    //public HatredArtist countHatredArtist(@PathVariable Long id) {
-    //    log.debug("REST request to get HatredArtist : {}", id);
-    //    return hatredArtistRepository.countHatredArtistByArtistAndHated (id);
-        // return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredArtist));
-    //}
+    @GetMapping("/hatred-artist/count-hatred-artist/{id}")
+    @Timed
+    public ResponseEntity<Integer> hatredArtisr(@PathVariable Long id) {
+        log.debug("REST request to get number of hates of artist");
+        Integer num = hatredArtistRepository.countHatredArtist();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
 
 
 }
