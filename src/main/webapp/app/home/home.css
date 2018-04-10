@@ -82,3 +82,95 @@ input:checked + .sliderinv:before {
 }
 
 /* FI SWITCH--------------------------------------------------------*/
+
+#plus{
+    display: inline-block;
+    margin-top: 6vw;
+    border: 2px solid #ef9800;
+    color: #ef9800;
+    border-radius: 30px;
+    padding: 2px 11px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+#plus2{
+    display: inline-block;
+    margin-top: 6vw;
+    border: 2px solid #ef9800;
+    color: #ef9800;
+    border-radius: 30px;
+    padding: 2px 11px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+#plus:hover{
+     cursor: pointer;
+     background-color: #ef9800;
+     color: white;
+
+}
+
+#plus2:hover{
+    cursor: pointer;
+    background-color: #ef9800;
+    color: white;
+
+}
+
+.seriesChapter{
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.seriesTitle{
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+
+.list-group-item {
+    display: inline-block;
+    padding: 0;
+    border-style: none;
+    border: none;
+    text-align: left;
+}
+
+.list-group {
+    margin: 2%;
+}
+
+ol {
+    counter-reset: item;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+li {
+    display: block;
+    margin-bottom: 3%;
+    margin-left: 2em;
+}
+
+.list-group > li::before {
+    display: inline-block;
+    content: counter(item);
+    counter-increment: item;
+    background-color: #ef9800;
+    text-align: center;
+    border-radius: 1.5em;
+
+    width: 1.5em;
+    height: 1.5em;
+    color: white;
+    margin-left: -1.6em;
+}
+
+

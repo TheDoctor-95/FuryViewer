@@ -6,4 +6,5 @@ package com.furyviewer.domain;
  * @see com.furyviewer.service.OpenMovieDatabase.Service.SearchOmdbDTOService#multiImport(String)
  */
 public class Multimedia {
+// Solo para justificar el espacio en blanco... ^ - ^
 }

@@ -31,7 +31,7 @@ public interface RateMovieRepository extends JpaRepository<RateMovie, Long> {
     @Query("select avg(rateMovie.rate) from RateMovie rateMovie where rateMovie.movie.id=:MovieId")
     Double RateMovieMedia(@Param("MovieId")Long id);
 
-    @Query("select r.movie from RateMovie r group by r.movie order by avg (r.rate) desc ")
+    @Query("select r.movie from RateMovie r group by r.movie order by avg (r.rate) desc")
     List<Movie> topPelis();
 
     @Query("select r.rate from RateMovie r where r.user=:User and r.movie.id = :id ")

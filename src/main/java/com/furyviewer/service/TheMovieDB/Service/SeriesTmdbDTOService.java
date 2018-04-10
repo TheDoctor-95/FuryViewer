@@ -98,7 +98,7 @@ public class SeriesTmdbDTOService {
 
                 if (response.isSuccessful()) {
                     series = response.body();
-                    if (series.getProductionCompanies().size() != 0) {
+                    if (!series.getProductionCompanies().isEmpty()) {
                         companyName = series.getProductionCompanies().get(0).getName();
                     }
                 }

@@ -31,7 +31,7 @@ export const episodeRoute: Routes = [
 
 export const episodePopupRoute: Routes = [
     {
-        path: 'episode-new',
+        path: 'episode-next',
         component: EpisodePopupComponent,
         data: {
             authorities: ['ROLE_USER'],

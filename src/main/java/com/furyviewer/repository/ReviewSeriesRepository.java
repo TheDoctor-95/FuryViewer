@@ -16,4 +16,6 @@ public interface ReviewSeriesRepository extends JpaRepository<ReviewSeries, Long
     @Query("select review_series from ReviewSeries review_series where review_series.user.login = ?#{principal.username}")
     List<ReviewSeries> findByUserIsCurrentUser();
 
+    List<ReviewSeries> findBySeriesIdOrderByDateDesc(Long id);
+
 }

@@ -6,6 +6,7 @@ import com.furyviewer.domain.Season;
 import com.furyviewer.repository.SeasonRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.SeasonOmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
+import com.furyviewer.service.util.EpisodeService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -34,11 +36,14 @@ public class SeasonResource {
 
     private final SeasonRepository seasonRepository;
 
+    private final EpisodeService episodeService;
+
     @Autowired
     SeasonOmdbDTOService seasonOmdbDTOService;
 
-    public SeasonResource(SeasonRepository seasonRepository) {
+    public SeasonResource(SeasonRepository seasonRepository, EpisodeService episodeService) {
         this.seasonRepository = seasonRepository;
+        this.episodeService = episodeService;
     }
 
     /**
@@ -103,9 +108,18 @@ public class SeasonResource {
      */
     @GetMapping("/seasons/Seasons-by-Series/{id}")
     @Timed
-    public ResponseEntity <List<Season>> findSeasonsBySeriesId(@PathVariable Long id) {
+    public ResponseEntity <List<Long>> findSeasonsBySeriesId(@PathVariable Long id) {
         log.debug("REST request to get Season : {}", id);
-        List<Season> seasons = seasonRepository.findSeasonsBySeriesId(id);
+        List<Long> seasons = seasonRepository.findSeasons(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seasons));
+    }
+
+    @GetMapping("/seasons/ActualSeason/{id}")
+    @Timed
+    @Transactional
+    public ResponseEntity <Long> findActualSeason(@PathVariable Long id) {
+        log.debug("REST request to get Season : {}", id);
+        Long seasons = episodeService.actualSeason(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(seasons));
     }
 

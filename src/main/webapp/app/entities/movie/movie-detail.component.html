@@ -46,6 +46,15 @@
                             <span style="margin-left: 5px; font-size: 13px;">{{movie.duration}} min</span>
                         </div>
                     </div>
+                    <!-- Company -->
+                    <div class="styleArtist">
+                        <div class="iconoFilm">
+                            <img src="img/clapper.png" height="24px" width="24px"/>
+                        </div>
+                        <div *ngIf="movie.company" class="infoFilm">
+                            <span style="margin-left: 5px; font-size: 13px;">{{movie.company?.name}}</span>
+                        </div>
+                    </div>
                     <!-- Pais -->
                     <div class="styleArtist">
                         <div class="iconoFilm">
@@ -78,7 +87,7 @@
 
                 </div>
             </div>
-            <div class="col-6" style="height: 100%; margin-bottom: 25px;">
+            <div class="col-7" style="height: 100%; margin-bottom: 25px;">
                 <div class="whiteBox" style="display: table; width: 100%;">
                     <div style="width: 100%; display: inline-block; vertical-align: top;">
                         <h1 class="nameTitle">{{movie.name}}</h1>
@@ -199,13 +208,16 @@
 
                                 </div>
                             </div>
-                            <div class="row" style="padding-left: 30px; padding-right: 30px;">
-                            <div *ngFor="let artist of artistMovie" class="col-6" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
-                                <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
-                                    <img style="width: 80px;" src="{{artist.imgUrl}}"/>
-                                    <div style="font-size: 15px;">{{artist.name}}</div>
-                                </a>
-                            </div>
+                            <div class="row" style="padding-left: 20px; padding-right: 30px;">
+                                <div *ngFor="let artist of artistMovie" class="col-6" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
+                                    <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
+                                        <img style="width: 80px; border: 1px solid #ef9800;" src="{{artist.imgUrl}}"/>
+                                        <div style="font-size: 13px; font-family: Roboto;">{{artist.name}}</div>
+                                    </a>
+                                </div>
+                                <div style="display: inline-block; width: 100%; text-align: center; margin-bottom: 20px;">
+                                    <div class="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]" >+</div>
+                                </div>
                             </div>
                         </div>
                     </div>

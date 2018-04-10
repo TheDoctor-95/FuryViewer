@@ -1,116 +1,17 @@
-<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+<div>
 
     <div class="modal-header">
-        <h4 class="modal-title" id="myMovieLabel" jhiTranslate="furyViewerApp.movie.home.createOrEditLabel">Create or edit a Movie</h4>
+        <h4 class="modal-title" id="myMovieLabel" >Peliculas Pendientes</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" [hidden]="!movie.id">
-            <label for="id" jhiTranslate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   [(ngModel)]="movie.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                [(ngModel)]="movie.name"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.releaseDate" for="field_releaseDate">Release Date</label>
-            <div class="input-group">
-                <input id="field_releaseDate" type="text" class="form-control" name="releaseDate" ngbDatepicker  #releaseDateDp="ngbDatepicker" [(ngModel)]="movie.releaseDate"
-                />
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-secondary" (click)="releaseDateDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
+        <div class="card portades col-2" *ngFor="let movie of moviesPending"
+             (click)="goTo(movie.id)">
+            <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
+            <div class="card-body">
+                <h4>{{movie.name}}</h4>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.description" for="field_description">Description</label>
-            <input type="text" class="form-control" name="description" id="field_description"
-                [(ngModel)]="movie.description"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.duration" for="field_duration">Duration</label>
-            <input type="number" class="form-control" name="duration" id="field_duration"
-                [(ngModel)]="movie.duration"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.imdbIdExternalApi" for="field_imdbIdExternalApi">Imdb Id External Api</label>
-            <input type="text" class="form-control" name="imdbIdExternalApi" id="field_imdbIdExternalApi"
-                [(ngModel)]="movie.imdbIdExternalApi"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.imgUrl" for="field_imgUrl">Img Url</label>
-            <input type="text" class="form-control" name="imgUrl" id="field_imgUrl"
-                [(ngModel)]="movie.imgUrl"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.dvd_release" for="field_dvd_release">Dvd Release</label>
-            <input type="text" class="form-control" name="dvd_release" id="field_dvd_release"
-                [(ngModel)]="movie.dvd_release"  />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.awards" for="field_awards">Awards</label>
-            <input type="text" class="form-control" name="awards" id="field_awards"
-                [(ngModel)]="movie.awards"  />
-        </div>
-
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.director" for="field_director">Director</label>
-            <select class="form-control" id="field_director" name="director" [(ngModel)]="movie.director" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="artistOption.id === movie.director?.id ? movie.director : artistOption" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.scriptwriter" for="field_scriptwriter">Scriptwriter</label>
-            <select class="form-control" id="field_scriptwriter" name="scriptwriter" [(ngModel)]="movie.scriptwriter" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="artistOption.id === movie.scriptwriter?.id ? movie.scriptwriter : artistOption" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.company" for="field_company">Company</label>
-            <select class="form-control" id="field_company" name="company" [(ngModel)]="movie.company" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="companyOption.id === movie.company?.id ? movie.company : companyOption" *ngFor="let companyOption of companies; trackBy: trackCompanyById">{{companyOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label jhiTranslate="furyViewerApp.movie.genre" for="field_genre">Genre</label>
-            <select class="form-control" id="field_genre" multiple name="genre" [(ngModel)]="movie.genres">
-                <option [ngValue]="getSelected(movie.genres, genreOption)" *ngFor="let genreOption of genres; trackBy: trackGenreById">{{genreOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label jhiTranslate="furyViewerApp.movie.actorMain" for="field_actorMain">Actor Main</label>
-            <select class="form-control" id="field_actorMain" multiple name="actorMain" [(ngModel)]="movie.actorMains">
-                <option [ngValue]="getSelected(movie.actorMains, artistOption)" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label jhiTranslate="furyViewerApp.movie.actorSecondary" for="field_actorSecondary">Actor Secondary</label>
-            <select class="form-control" id="field_actorSecondary" multiple name="actorSecondary" [(ngModel)]="movie.actorSecondaries">
-                <option [ngValue]="getSelected(movie.actorSecondaries, artistOption)" *ngFor="let artistOption of artists; trackBy: trackArtistById">{{artistOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="furyViewerApp.movie.country" for="field_country">Country</label>
-            <select class="form-control" id="field_country" name="country" [(ngModel)]="movie.country" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="countryOption.id === movie.country?.id ? movie.country : countryOption" *ngFor="let countryOption of countries; trackBy: trackCountryById">{{countryOption.name}}</option>
-            </select>
-        </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
-            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-    </div>
-</form>
+</div>

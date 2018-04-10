@@ -50,6 +50,11 @@ export class MovieService {
         return this.http.get(`${this.resourceUrl}/Pending/`)
             .map((res: Response) => this.convertResponse(res));
     }
+
+    pendingMovies5(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/Pending/5`)
+            .map((res: Response) => this.convertResponse(res));
+    }
     topMovies(): Observable<ResponseWrapper> {
         return this.http.get(`${this.resourceUrl}/topPelis/`)
             .map((res: Response) => this.convertResponse(res));

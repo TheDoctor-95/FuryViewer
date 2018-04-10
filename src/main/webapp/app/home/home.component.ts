@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
     topSeries: String[] = ['Doctor Who', 'The Flash', 'Arrow', 'Supergirl'];
     moviesPending: Movie[];
     episodePending: EpisodeNextSeen[];
+    $: any;
 
     constructor(
         private principal: Principal,
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit {
         this.loadNextEpisodes();
     }
     loadPendingMovies() {
-        this.movieService.pendingMovies().subscribe(
+        this.movieService.pendingMovies5().subscribe(
             (res: ResponseWrapper) => {
                 this.moviesPending = res.json;
             },
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
         );
     }
     loadNextEpisodes(){
-        this.episodeService.nextEpisodes().subscribe(
+        this.episodeService.nextEpisodes5().subscribe(
             (res: ResponseWrapper) => {
                 this.episodePending = res.json;
                 console.log(this.episodePending);

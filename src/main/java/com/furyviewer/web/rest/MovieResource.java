@@ -2,6 +2,7 @@ package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Artist;
+import com.furyviewer.domain.Genre;
 import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.*;
@@ -133,6 +134,20 @@ public class MovieResource {
         return movieStatsRepository.pendingMovies(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
     }
 
+    @GetMapping("/movies/Pending/5")
+    @Timed
+    public List<Movie> getPendingMovies5() {
+        log.debug("REST request to get all Movies");
+        List<Movie> movieList = movieStatsRepository.pendingMovies(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+        if(movieList.size()<5){
+            return movieList;
+        }else{
+            return movieList.subList(0, 5);
+        }
+
+    }
+
+
     /**
      * GET  /movies/:id : get the "id" movie.
      *
@@ -247,6 +262,7 @@ public class MovieResource {
         log.debug("Get to request movies from artist order by date desc");
         return movieRepository.getByArtistOrderbyDate(artistRepository.findOne(id));
     }
+
 
 
 

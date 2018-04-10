@@ -9,16 +9,18 @@
                 <div class="card-body">
                     <div class="serpeli_body">
                         <h2 class="card-title">SERIES PENDIENTES</h2>
-
                         <div class="card portades" *ngFor="let episode of episodePending" [routerLink]="['/series', episode?.id]">
                             <img class="card-img-top" src="{{episode.urlCartel}}" alt="Card image">
 
                             <div class="card-body">
-                                <h4 class="card-title">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
-                                <h3 class="card-text"> -- -- -- </h3>
+                                <h4 class="card-title seriesChapter">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
+                                <h3 class="card-text seriesTitle"> {{episode.titleSeries}} </h3>
 
                             </div>
 
+                        </div>
+                        <div style="display: inline-block; height: 11vw;">
+                            <div id="plus" [routerLink]="['/', { outlets: { popup: ['episode-next'] } }]" >+</div>
                         </div>
 
                     </div>
@@ -33,17 +35,19 @@
 
                         <h2 class="card-title container">PELICULAS PENDIENTES</h2>
 
-                        <div class="row">
 
-                            <div class="card portades col-2" *ngFor="let movie of moviesPending"
+
+                            <div class="card portades" *ngFor="let movie of moviesPending"
                                  routerLink="/movie/{{movie.id}}">
                                 <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
                                 <div class="card-body">
-                                    <h4>{{movie.name}}</h4>
+                                    <h4 style="font-size: 15px; font-weight: 600;">{{movie.name}}</h4>
                                 </div>
                             </div>
+                            <div style="display: inline-block; height: 11vw;">
+                                <div id="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]" >+</div>
+                            </div>
 
-                        </div>
                     </div>
 
                 </div>
@@ -111,7 +115,7 @@
                     <div class="card topSeries">
 
                         <div class="card-body">
-                            <div id="topseries">
+                            <div id="toppelis">
                                 <div class="row">
                                     <h2 class="col-9">Top pelis</h2>
 
@@ -139,7 +143,7 @@
                     <div class="card topSeries">
 
                         <div class="card-body">
-                            <div id="topseries">
+                            <div id="topArtist">
 
                                 <h2>Top Artist</h2>
 
@@ -155,7 +159,7 @@
                     <div class="card topPelis">
 
                         <div class="card-body">
-                            <div id="toppelis">
+                            <div id="topHatredArtist">
 
                                 <h2>Top Hatred artist</h2>
 

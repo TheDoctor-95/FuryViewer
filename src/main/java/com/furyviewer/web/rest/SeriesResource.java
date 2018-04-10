@@ -215,4 +215,7 @@ public class SeriesResource {
         List<Series> entityList = seriesQueryService.findByCriteria(criteria);
         return ResponseEntity.ok().body(entityList);
     }
+
+
+
 }

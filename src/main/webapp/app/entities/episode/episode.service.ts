@@ -8,6 +8,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 import { Episode } from './episode.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 import {EpisodeNextSeen} from "../../shared/model/EpisodeNextSeen.model";
+import {EpisodeSeasonModel} from "../../shared/model/EpisodeSeason.model";
 
 @Injectable()
 export class EpisodeService {
@@ -44,6 +45,16 @@ export class EpisodeService {
             .map((res: Response) => this.convertNextEpisodeResponse(res));
     }
 
+    nextEpisodes5(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/next/5`)
+            .map((res: Response) => this.convertNextEpisodeResponse(res));
+    }
+
+    findEpisodeBySeasonId(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/all-episodes-from-season/${id}`)
+            .map((res: Response) => this.convertSeasonEpisodeResponse(res));
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
@@ -72,6 +83,15 @@ export class EpisodeService {
         return new ResponseWrapper(res.headers, result, res.status);
     }
 
+    private convertSeasonEpisodeResponse(res: Response): ResponseWrapper{
+        const jsonResponse = res.json();
+        const result = [];
+        for (let i = 0; i < jsonResponse.length; i++) {
+            result.push(this.convertSeasonEpisodeFromServer(jsonResponse[i]));
+        }
+        return new ResponseWrapper(res.headers, result, res.status);
+    }
+
     /**
      * Convert a returned JSON object to Episode.
      */
@@ -84,6 +104,13 @@ export class EpisodeService {
 
     private convertNextEpisodeFromServer(json: any): EpisodeNextSeen {
         const entity: EpisodeNextSeen = Object.assign(new EpisodeNextSeen(), json);
+        return entity;
+    }
+
+    private convertSeasonEpisodeFromServer(json: any): EpisodeSeasonModel {
+        const entity: EpisodeSeasonModel = Object.assign(new EpisodeSeasonModel(), json);
+        entity.releaseDate = this.dateUtils
+            .convertDateTimeFromServer(json.releaseDate);
         return entity;
     }
 
