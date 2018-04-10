@@ -439,7 +439,21 @@ Social Buttons
     color: white;
 }
 
-#plus2:hover {
+.plus2{
+    display: inline-block;
+    border: 2px solid #ef9800;
+    color: #ef9800;
+    border-radius: 30px;
+    padding: 2px 11px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+
+
+.plus2:hover {
     cursor: pointer;
     background-color: #ef9800;
     color: white;
@@ -468,6 +482,10 @@ HOME
 }
 .card.portades:hover{
     font-weight: 600 !important;
+}
+
+.portades:hover{
+    cursor: pointer;
 }
 
 .card.portades {
