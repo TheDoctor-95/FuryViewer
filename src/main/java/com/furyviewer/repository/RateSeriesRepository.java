@@ -1,8 +1,11 @@
 package com.furyviewer.repository;
 
+import com.furyviewer.domain.Genre;
 import com.furyviewer.domain.RateSeries;
 import com.furyviewer.domain.User;
+import com.furyviewer.service.dto.RateSeriesStats;
 import org.hibernate.NonUniqueResultException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import com.furyviewer.domain.Series;
 import org.springframework.data.repository.query.Param;
@@ -39,6 +42,11 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     Integer markSeries(@Param("User") User u, @Param("id") Long id);
 
     RateSeries findByUserAndSeriesId(User u, Long id);
+
+    @Query("select new com.furyviewer.service.dto.RateSeriesStats (r.series, avg(r.rate)) " +
+        " from RateSeries r where :genre member of r.series.genres group by r.series " +
+        " order by avg(r.rate) desc")
+    List<RateSeriesStats> getSeriesStats(@Param("genre")Genre genre, Pageable pageable);
 
 
 

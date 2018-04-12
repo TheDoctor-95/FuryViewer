@@ -162,5 +162,13 @@ public class FavouriteSeriesResource {
         return createFavouriteSeries(fS);
     }
 
+    @GetMapping("/favourite-series/count-favourite-series/{id}")
+    @Timed
+    public ResponseEntity<Integer> LikedSeries(@PathVariable Long id) {
+        log.debug("REST request to get number of likes of series");
+        Integer num = Math.toIntExact(favouriteSeriesRepository.countLikedSeries(id));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
 
 }

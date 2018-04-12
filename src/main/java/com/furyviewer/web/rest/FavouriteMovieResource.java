@@ -171,4 +171,13 @@ public class FavouriteMovieResource {
         favouriteMovieRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/favourite-movies/count-favourite-artist/{id}")
+    @Timed
+    public ResponseEntity<Integer> LikedMovie(@PathVariable Long id) {
+        log.debug("REST request to get number of likes of movie");
+        Integer num = Math.toIntExact(favouriteMovieRepository.countLikedMovie(id));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
 }

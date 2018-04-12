@@ -143,8 +143,8 @@ public class HatredSeriesResource {
     @GetMapping("/hatred-series/count-hatred-series/{id}")
     @Timed
     public ResponseEntity<Integer> hatredSeries(@PathVariable Long id) {
-        log.debug("REST request to get number of hates of artist");
-        Integer num = hatredSeriesRepository.countHatredSeries();
+        log.debug("REST request to get number of hates of series");
+        Integer num = Math.toIntExact(hatredSeriesRepository.countHatredSeries(id));
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
     }
 }
