@@ -144,7 +144,7 @@ public class HatredArtistResource {
     @Timed
     public ResponseEntity<Integer> hatredArtist(@PathVariable Long id) {
         log.debug("REST request to get number of hates of artist");
-        Integer num = hatredArtistRepository.countHatredArtist();
+        Integer num = Math.toIntExact(hatredArtistRepository.countHatredArtist(id));
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
     }
 

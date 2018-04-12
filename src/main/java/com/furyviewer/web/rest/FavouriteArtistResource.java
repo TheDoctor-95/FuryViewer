@@ -170,6 +170,15 @@ public class FavouriteArtistResource {
         return createFavouriteArtist(fA);
     }
 
+    @GetMapping("/favourite-artists/count-favourite-artist/{id}")
+    @Timed
+    public ResponseEntity<Integer> LikedArtist(@PathVariable Long id) {
+        log.debug("REST request to get number of likes of artist");
+        Integer num = Math.toIntExact(favouriteArtistRepository.countLikedArtist(id));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
+
 
 
 }

@@ -183,8 +183,8 @@ public class HatredMovieResource {
 
     @GetMapping("/hatred-movies/count-hatred-movie/{id}")
     @Timed
-    public ResponseEntity<Integer> hatredArtist(@PathVariable Long id) {
-        log.debug("REST request to get number of hates of artist");
+    public ResponseEntity<Integer> hatredMovie(@PathVariable Long id) {
+        log.debug("REST request to get number of hates of movie");
         Integer num = Math.toIntExact(hatredMovieRepository.countHatredMovie(id));
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
     }
