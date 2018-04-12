@@ -1242,6 +1242,9 @@ select.form-control:not([size]):not([multiple]){
 .modal-footer{
     border-top: none;
 }
+.modal-body{
+    padding-bottom: 4.5%;
+}
 
 .modal-title > button:hover{
     background-color: transparent !important;
