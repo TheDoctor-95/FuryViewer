@@ -1,6 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500i,700|Roboto');
-
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800|Roboto:300,400,500,700');
 
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 
@@ -12,6 +11,11 @@ body, h1, h2, h3, h4 {
     font-weight: 300;
 }
 
+h1, h2{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase   ;
+}
 body {
     background: #e4e5e6;
     font-family: 'Roboto', sans-serif;
@@ -297,7 +301,6 @@ Social Buttons
 
 .nameTitle {
     padding: 5% 8px;
-    font-family: "lemon/milk";
     text-align: left;
 }
 
@@ -418,7 +421,6 @@ Social Buttons
 
 #reparto {
     font-weight: 300;
-    font-family: "lemon/milk";
     font-size: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -577,8 +579,7 @@ jhi-main {
 
 h2 {
     text-align: center;
-    font-family: "Lemon/Milk light";
-    font-size: 1.9rem;
+    font-size: 1.3rem;
 }
 
 #titlecalendar {
@@ -808,10 +809,10 @@ li {
 }
 
 #toppelis h2{
-    font-size: 23px;
+    font-size: 20px;
 }
 #topseries h2{
-    font-size: 23px;
+    font-size: 20px;
 }
 .calendario h2{
     font-size: 23px;

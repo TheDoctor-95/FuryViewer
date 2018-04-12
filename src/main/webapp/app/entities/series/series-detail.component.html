@@ -3,95 +3,127 @@
     <div class="container-fluid" style="color: #3b3b3b;">
         <div class="row" style="background-color: #d2d3d2; padding-left: 8%; padding-top: 3%;">
             <div class="col-2" style="width: 100%">
-                <img src="{{series.imgUrl}}" class="img-rounded card-img-top imgFilm" style="display: block; height: 18vw; width: 100%;">
-                <div class="infoBox">
+                <img src="{{series.imgUrl}}" class="img-rounded card-img-top imgFilm"
+                     style="display: block; height: 18vw; width: 100%;">
 
-                    <!-- Director -->
-                    <div class="styleArtist" style="margin-top: 10px;">
-                        <div class="iconoFilm">
-                            <img src="img/director-chair.png" height="24px" width="24px"/>
+                <div class="infoBar">
+
+                    <div class="row">
+
+                        <div class="col">
+                            <i class="fa fa-smile-o fa-2x" style="font-size:1.4em;"></i>
+
                         </div>
-                        <div class="infoFilm">
-                            <a [routerLink]="['/artist', director?.id ]" class="infoArtist" >{{director.name}}</a>
+                        <div class="col text-right">
+                            <i class="fa fa-frown-o fa-2x" style="font-size:1.4em;"></i>
                         </div>
+
+
                     </div>
-                    <!-- Guionista -->
-                    <div class="styleArtist">
-                        <div class="iconoFilm">
-                            <img src="img/typewriter.png" height="24px" width="24px"/>
+                    <div class="progress">
+
+
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%"
+                                 aria-valuenow="75"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <div class="infoFilm">
-                            <a [routerLink]="['/artist', scripwriter?.id ]" class="infoArtist" >{{scripwriter.name}}</a>
-                        </div>
+
                     </div>
-                    <!-- Genero -->
-                    <div class="styleArtist">
-                        <div class="iconoFilm">
-                            <img src="img/masks.png" height="24px" width="24px"/>
+                    <div class="infoBox">
+
+                        <!-- Director -->
+                        <div class="styleArtist" style="margin-top: 10px;">
+                            <div class="iconoFilm">
+                                <img src="img/director-chair.png" height="24px" width="24px"/>
+                            </div>
+                            <div class="infoFilm">
+                                <a [routerLink]="['/artist', director?.id ]" class="infoArtist">{{director.name}}</a>
+                            </div>
                         </div>
-                        <span *ngFor="let genre of series.genres; let last = last" class="infoFilm">
-                                <a [routerLink]="['/genre', genre?.id ]" class="infoArtist" >{{genre.name}}</a>{{last ? '' : ', '}}
+                        <!-- Guionista -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/typewriter.png" height="24px" width="24px"/>
+                            </div>
+                            <div class="infoFilm">
+                                <a [routerLink]="['/artist', scripwriter?.id ]"
+                                   class="infoArtist">{{scripwriter.name}}</a>
+                            </div>
+                        </div>
+                        <!-- Genero -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/masks.png" height="24px" width="24px"/>
+                            </div>
+                            <span *ngFor="let genre of series.genres; let last = last" class="infoFilm">
+                                <a [routerLink]="['/genre', genre?.id ]" class="infoArtist">{{genre.name}}</a>{{last ? '' : ', '}}
                             </span>
-                    </div>
-                    <!-- Company -->
-                    <div class="styleArtist">
-                        <div class="iconoFilm">
-                            <img src="img/clapper.png" height="24px" width="24px"/>
                         </div>
-                        <div *ngIf="series.company" class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;">{{series.company?.name}}</span>
+                        <!-- Company -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/clapper.png" height="24px" width="24px"/>
+                            </div>
+                            <div *ngIf="series.company" class="infoFilm">
+                                <span style="margin-left: 5px; font-size: 13px;">{{series.company?.name}}</span>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Pais -->
-                    <div class="styleArtist">
-                        <div class="iconoFilm">
-                            <img src="img/earth.png" height="24px" width="24px"/>
+                        <!-- Pais -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/earth.png" height="24px" width="24px"/>
+                            </div>
+                            <div *ngIf="series.country" class="infoFilm">
+                                <span style="margin-left: 5px; font-size: 13px;">{{series.country?.name}}</span>
+                            </div>
                         </div>
-                        <div *ngIf="series.country" class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;">{{series.country?.name}}</span>
+                        <!-- Lanzamiento -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/calendar.png" height="24px" width="24px"/>
+                            </div>
+                            <div class="infoFilm">
+                            <span
+                                style="margin-left: 5px; font-size: 13px;">{{series.releaseDate | date:'mediumDate'}}</span>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Lanzamiento -->
-                    <div class="styleArtist">
-                        <div class="iconoFilm">
-                            <img src="img/calendar.png" height="24px" width="24px"/>
-                        </div>
-                        <div class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;">{{series.releaseDate | date:'mediumDate'}}</span>
-                        </div>
-                    </div>
 
-                    <!-- Ended -->
-                    <div class="styleArtist">
-                        <div class="iconoFilm">
-                            <img src="img/cerrar.png" height="24px" width="24px"/>
+                        <!-- Ended -->
+                        <div class="styleArtist">
+                            <div class="iconoFilm">
+                                <img src="img/cerrar.png" height="24px" width="24px"/>
+                            </div>
+                            <div class="infoFilm">
+                                <span style="margin-left: 5px; font-size: 13px;">{{series.state}}</span>
+                            </div>
                         </div>
-                        <div class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;">{{series.state}}</span>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-            <div class="col-7" style="height: 100%; margin-bottom: 25px;">
-                <div class="whiteBox" style="display: table; width: 100%;">
-                    <div style="width: 100%; display: inline-block; vertical-align: top;">
-                        <h1 class="nameTitle">{{series.name}}</h1>
-                    </div>
-                    <div style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
-                        <ngb-rating class="stars"></ngb-rating>
-                        </br>
-                        <p style="padding-right: 8px;"><div id="plus" class="fa fa-plus-circle furyColor" [ngbPopover]="notas" placement="bottom" triggers="mouseenter:mouseleave"> </div><b class="furyColor"> 3.5</b> de 5 <i class="fa fa-star furyColor"></i></p>
                     </div>
                 </div>
-                <ng-template #notas id="divShowHide" >
-                    <p class="infoWebs1">IMDB</p><p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
-                </ng-template>
-                &nbsp;
-                <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
-                    <span style="font-size: 15px; text-align: left;">{{series.description}}</span>
-                </div>
-                &nbsp;
+                <div class="col-6" style="height: 100%; margin-bottom: 25px;">
+                    <div class="whiteBox" style="display: table; width: 100%;">
+                        <div style="width: 100%; display: inline-block; vertical-align: top;">
+                            <h1 class="nameTitle">{{series.name}}</h1>
+                        </div>
+                        <div
+                            style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
+                            <ngb-rating class="stars"></ngb-rating>
+                            </br>
+                            <p style="padding-right: 8px;">
+                            <div id="plus" class="fa fa-plus-circle furyColor" [ngbPopover]="notas" placement="bottom"
+                                 triggers="mouseenter:mouseleave"></div>
+                            <b class="furyColor"> 3.5</b> de 5 <i class="fa fa-star furyColor"></i></p>
+                        </div>
+                    </div>
+                    <ng-template #notas id="divShowHide">
+                        <p class="infoWebs1">IMDB</p>
+                        <p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
+                    </ng-template>
+                    &nbsp;
+                    <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
+                        <span style="font-size: 15px; text-align: left;">{{series.description}}</span>
+                    </div>
+                    &nbsp;
 
                     <div class="row">
                         <div class="col">
@@ -109,63 +141,71 @@
                     </div>
 
 
-                <br />
-                <table style="background-color: white;" class="table table-striped">
-                    <tr *ngFor="let chapter of chapters" class="row"><td class="col-1">{{chapter.number}}</td><td class="col-8" style="text-align: left;"> {{chapter.title}} </td><td class="col-2">{{chapter.releaseDate | date: "mediumDate"}} </td><td class="col-1"><i class="fa fa-eye" [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"></i></td></tr>
-                </table>
+                    <br/>
+                    <table style="background-color: white;" class="table table-striped">
+                        <tr *ngFor="let chapter of chapters" class="row">
+                            <td class="col-1">{{chapter.number}}</td>
+                            <td class="col-8" style="text-align: left;"> {{chapter.title}}</td>
+                            <td class="col-2">{{chapter.releaseDate | date: "mediumDate"}}</td>
+                            <td class="col-1"><i class="fa fa-eye"
+                                                 [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"></i></td>
+                        </tr>
+                    </table>
 
-                <div class="whiteBox" style="display: block; padding: 18px;">
-                    <div style="width: 100%">
-                        <div style="display: block;">
-                            <div style="display: inline-block; width: 15%; vertical-align: top;">
-                                <img src="img/foto.JPG" class="imgComent"/>
+                    <div class="whiteBox" style="display: block; padding: 18px;">
+                        <div style="width: 100%">
+                            <div style="display: block;">
+                                <div style="display: inline-block; width: 15%; vertical-align: top;">
+                                    <img src="img/foto.JPG" class="imgComent"/>
+                                </div>
+                                <div style="display: inline-block; width: 83%">
+                                    <textarea name="comentario" style="width: 100%; font-size: 13px;"
+                                              rows="5"></textarea>
+                                </div>
                             </div>
-                            <div style="display: inline-block; width: 83%">
-                                <textarea name="comentario" style="width: 100%; font-size: 13px;" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div style="display: block; width: 100%">
-                            <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
-                                <button id="btnComen">COMENTA</button>
+                            <div style="display: block; width: 100%">
+                                <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
+                                    <button id="btnComen">COMENTA</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-            </div>
-
-            <div class="col-3" style="text-align: center;">
-                <div class="row" style="padding-left: 5%; padding-right: 7%;">
-                    <div class="boxList col-10"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i> Vista
-                    </div>
-                </div>
-
-                <div class="row" style="padding-left: 5%; padding-right: 7%;">
-
-                    <div class="boxList col-10" ><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
-                </div>
-                <div class="row" style="padding-left: 5%; padding-right: 7%;">
-                    <div class="col-10" style="padding-left: 0px; padding-right: 0px;">
-                        <div class="boxList" style="display: inline-block; width: 49%;" (click)="like()"
-                             [ngStyle]="{'background-color':fav.liked ? '#ef9800' : 'white', 'color':fav.liked ? 'white' : '#ef9800'}">
-                            <i class="fa fa-heart" style="color: #ef9800;"
-                               [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorita
-                        </div>
-                        <div class="boxList" style="display: inline-block; width: 49%;" (click)="hated()"
-                             [ngStyle]="{'background-color':hate.hated ? '#ef9800' : 'white', 'color':hate.hated ? 'white' : '#ef9800'}">
-                            <i class="fa fa-thumbs-down" style="color: #ef9800;"
-                               [ngStyle]="{'color':hate.hated ? 'white' : '#ef9800'}"></i> Hatred
+                <div class="col-3" style="text-align: center;">
+                    <div class="row" style="padding-left: 5%; padding-right: 7%;">
+                        <div class="boxList col-10"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i>
+                            Vista
                         </div>
                     </div>
-                </div>
 
-                &nbsp;
-                <div class="row">
-                    <div class="col-10">
-                        <div id="boxReparto" style="width: 100% !important;">
-                            <div id="reparto">REPARTO</div>
-                            <div class="container-fluid">
-                                <div class="row">
+                    <div class="row" style="padding-left: 5%; padding-right: 7%;">
+
+                        <div class="boxList col-10"><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
+                    </div>
+                    <div class="row" style="padding-left: 5%; padding-right: 7%;">
+                        <div class="col-10" style="padding-left: 0px; padding-right: 0px;">
+                            <div class="boxList" style="display: inline-block; width: 49%;" (click)="like()"
+                                 [ngStyle]="{'background-color':fav.liked ? '#ef9800' : 'white', 'color':fav.liked ? 'white' : '#ef9800'}">
+                                <i class="fa fa-heart" style="color: #ef9800;"
+                                   [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorita
+                            </div>
+                            <div class="boxList" style="display: inline-block; width: 49%;" (click)="hated()"
+                                 [ngStyle]="{'background-color':hate.hated ? '#ef9800' : 'white', 'color':hate.hated ? 'white' : '#ef9800'}">
+                                <i class="fa fa-thumbs-down" style="color: #ef9800;"
+                                   [ngStyle]="{'color':hate.hated ? 'white' : '#ef9800'}"></i> Hatred
+                            </div>
+                        </div>
+                    </div>
+
+                    &nbsp;
+                    <div class="row">
+                        <div class="col-10">
+                            <div id="boxReparto" style="width: 100% !important;">
+                                <div id="reparto">REPARTO</div>
+                                <div class="container-fluid">
+                                    <div class="row">
 
                                 </div>
                             </div>
@@ -195,8 +235,8 @@
                 </div>
             </div>
 
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
