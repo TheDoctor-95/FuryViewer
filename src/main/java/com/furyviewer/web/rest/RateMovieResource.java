@@ -4,15 +4,19 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.RateMovie;
 
+import com.furyviewer.repository.GenreRepository;
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.repository.RateMovieRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
+import com.furyviewer.service.dto.RateMovieStats;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,10 +44,14 @@ public class RateMovieResource {
 
     private final MovieRepository movieRepository;
 
-    public RateMovieResource(RateMovieRepository rateMovieRepository, UserRepository userRepository, MovieRepository movieRepository) {
+    private final GenreRepository genreRepository;
+
+    public RateMovieResource(RateMovieRepository rateMovieRepository, UserRepository userRepository, MovieRepository movieRepository, GenreRepository genreRepository) {
         this.rateMovieRepository = rateMovieRepository;
         this.userRepository=userRepository;
         this.movieRepository = movieRepository;
+
+        this.genreRepository = genreRepository;
     }
 
     /**
@@ -169,4 +177,15 @@ public class RateMovieResource {
         rateMovieRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
+    @GetMapping("/rate-movies/get-top-movies-by-genre/{idGenre}")
+    @Timed
+    public List<RateMovieStats> getMoviesByIdGenre(@PathVariable Long idGenre) {
+
+        Pageable topTen = new PageRequest(0, 10);
+        return rateMovieRepository.getMovieStats(genreRepository.findOne(idGenre), topTen);
+
+    }
+
 }
