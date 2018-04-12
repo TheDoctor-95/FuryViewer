@@ -1,3 +1,8 @@
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800|Roboto:300,400,500,700');
+
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -6,8 +11,16 @@ body, h1, h2, h3, h4 {
     font-weight: 300;
 }
 
+h1, h2{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase   ;
+}
 body {
     background: #e4e5e6;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+
 }
 
 a {
@@ -288,7 +301,6 @@ Social Buttons
 
 .nameTitle {
     padding: 5% 8px;
-    font-family: "lemon/milk";
     text-align: left;
 }
 
@@ -351,6 +363,17 @@ Social Buttons
     padding: 10px 12px;
     text-align: left;
 }
+.infoBar {
+    display: block;
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 10px 12px;
+    text-align: left;
+}
+.progress{
+    background-color: #ff1d1db5;
+}
 
 .infoArtist {
     font-weight: normal;
@@ -398,7 +421,6 @@ Social Buttons
 
 #reparto {
     font-weight: 300;
-    font-family: "lemon/milk";
     font-size: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -557,8 +579,7 @@ jhi-main {
 
 h2 {
     text-align: center;
-    font-family: "Lemon/Milk light";
-    font-size: 1.9rem;
+    font-size: 1.3rem;
 }
 
 #titlecalendar {
@@ -650,7 +671,15 @@ button:hover {
 
 }
 
+.card-img-top {
+    width: 84%;
+    height: 11vw;
+    object-fit: cover;
+}
 
+.portades > .card-body {
+    height: 51px;
+}
 
 .pelpendientes {
     margin-top: 5%;
@@ -780,10 +809,10 @@ li {
 }
 
 #toppelis h2{
-    font-size: 23px;
+    font-size: 20px;
 }
 #topseries h2{
-    font-size: 23px;
+    font-size: 20px;
 }
 .calendario h2{
     font-size: 23px;
@@ -1202,4 +1231,32 @@ select.form-control:not([size]):not([multiple]){
     margin-left: 34%;
     padding-top: 1%;
     border-radius: 12px 12px 0 0;
+}
+
+.modal-header{
+    border-bottom: 4px solid orange;
+    background-color: #02020294;
+    color:white;
+}
+
+.modal-footer{
+    border-top: none;
+}
+.modal-body{
+    padding-bottom: 4.5%;
+}
+
+.modal-title > button:hover{
+    background-color: transparent !important;
+}
+
+#actualSeason{
+    background-color: orange !important;
+    color:white !important;
+}
+
+.imgReparto:hover{
+    -webkit-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    -moz-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
 }

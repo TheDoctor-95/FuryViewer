@@ -195,6 +195,8 @@ public class ArtistTmdbDTOService {
 
                     if (completeArtistTmdbDTO.getProfilePath() != null) {
                         artist.setImgUrl(pathImage + completeArtistTmdbDTO.getProfilePath());
+                    } else {
+                        artist.setImgUrl("https://image.ibb.co/cdz3Rc/noartist.jpg");
                     }
                     if (completeArtistTmdbDTO.getImdbId() != null) {
                         artist.setImdb_id(completeArtistTmdbDTO.getImdbId());

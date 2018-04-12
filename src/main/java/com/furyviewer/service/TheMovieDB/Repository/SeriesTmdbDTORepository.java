@@ -75,7 +75,7 @@ public interface SeriesTmdbDTORepository {
     Call<EpisodeCastingDTO> getCasting(@Path("id") int id, @Path("seasonNumber") int seasonNumber,
                                        @Path("episodeNumber") int episodeNumber, @Query("api_key") String apikey);
 
-    public static String url = " https://api.themoviedb.org/";
+    public static String url = "https://api.themoviedb.org/";
     public static final Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(url)
         .addConverterFactory(GsonConverterFactory.create())

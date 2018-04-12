@@ -1,8 +1,11 @@
 package com.furyviewer.repository;
 
+import com.furyviewer.domain.Genre;
 import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.RateMovie;
 import com.furyviewer.domain.User;
+import com.furyviewer.service.dto.RateMovieStats;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -39,5 +42,9 @@ public interface RateMovieRepository extends JpaRepository<RateMovie, Long> {
 
     RateMovie findByUserAndMovieId(User u, Long id);
 
+    @Query("select new com.furyviewer.service.dto.RateMovieStats (r.movie, avg(r.rate)) " +
+        " from RateMovie r where :genre member of r.movie.genres group by r.movie " +
+        " order by avg(r.rate) desc")
+    List<RateMovieStats> getMovieStats(@Param("genre")Genre genre, Pageable pageable);
 
 }

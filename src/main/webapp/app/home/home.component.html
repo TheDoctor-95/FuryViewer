@@ -1,67 +1,48 @@
 <div class="fons container-fluid ">
-
-
     <div class="row ">
-
-
         <div class="col-lg-8 col-md-12">
             <div class="card pendientes">
                 <div class="card-body">
                     <div class="serpeli_body">
-                        <h2 class="card-title">SERIES PENDIENTES</h2>
-                        <div class="card portades" *ngFor="let episode of episodePending" [routerLink]="['/series', episode?.id]">
+                        <h2 class="card-title" style="font-size: 30px;">CAPÍTULOS PENDIENTES</h2>
+                        <div class="card portades" *ngFor="let episode of episodePending"
+                             [routerLink]="['/series', episode?.id]">
                             <img class="card-img-top" src="{{episode.urlCartel}}" alt="Card image">
-
                             <div class="card-body">
-                                <h4 class="card-title seriesChapter">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
-                                <h3 class="card-text seriesTitle"> {{episode.titleSeries}} </h3>
-
+                                <h4 class="card-title seriesChapter" style="font-size: 15px; font-weight: 400;">{{episode.seasonNumber}}x{{episode.episodeNumber}}
+                                    {{episode.titleEpisode}}</h4>
+                                <h3 class="card-text seriesTitle" style="letter-spacing: 0.7px"> {{episode.titleSeries}} </h3>
                             </div>
-
                         </div>
                         <div style="display: inline-block; height: 11vw;">
-                            <div id="plus" [routerLink]="['/', { outlets: { popup: ['episode-next'] } }]" >+</div>
+                            <div id="plus" [routerLink]="['/', { outlets: { popup: ['episode-next'] } }]">+</div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
-
             <div class="card pendientes align-top">
-
                 <div class="card-body">
                     <div class="serpeli_body">
-
-                        <h2 class="card-title container">PELICULAS PENDIENTES</h2>
-
-
-
-                            <div class="card portades" *ngFor="let movie of moviesPending"
-                                 routerLink="/movie/{{movie.id}}">
-                                <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
-                                <div class="card-body">
-                                    <h4 style="font-size: 15px; font-weight: 600;">{{movie.name}}</h4>
-                                </div>
+                        <h2 class="card-title container" style="font-size: 30px;">PELICULAS PENDIENTES</h2>
+                        <div class="card portades" *ngFor="let movie of moviesPending"
+                             routerLink="/movie/{{movie.id}}">
+                            <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
+                            <div class="card-body">
+                                <h4 style="font-size: 15px; font-weight: 400; text-transform: uppercase;">{{movie.name}}</h4>
                             </div>
-                            <div style="display: inline-block; height: 11vw;">
-                                <div id="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]" >+</div>
-                            </div>
-
+                        </div>
+                        <div style="display: inline-block; height: 11vw;">
+                            <div id="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]">+</div>
+                        </div>
                     </div>
-
                 </div>
             </div>
-
-
         </div>
-
 
         <div class="col-lg-4 col-md-12" id="lateralDret">
             <div class="row">
                 <div class="col-12 ">
                     <div class="card calendario">
-
                         <div class="card-body">
                             <div class="card-title row ">
                                 <div class=" col-md-6" id="titlecalendar">
@@ -71,17 +52,12 @@
                                     <button> SERIES</button>
                                     <button> PELIS</button>
                                 </div>
-
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
                                          aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-
-
                             </div>
                             <div class="panel panel-default">
-
-
                             </div>
                         </div>
                     </div>
@@ -90,12 +66,10 @@
             <div class="row">
                 <div class="col-md col-xs-12" style="padding-right: 9px;">
                     <div class="card topSeries">
-
                         <div class="card-body">
                             <div id="topseries">
                                 <div class="row">
                                     <h2 class="col-9">Top series</h2>
-
                                     <label class="switchinv col-3">
                                         <input type="checkbox">
                                         <span class="sliderinv roundinv"></span>

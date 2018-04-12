@@ -64,7 +64,9 @@ public class CompanyTmdbDTOService {
             if (response.isSuccessful()) {
                 company = response.body();
                 System.out.println(company);
-                id = company.getResults().get(0).getId();
+                if (!company.getResults().isEmpty()) {
+                    id = company.getResults().get(0).getId();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

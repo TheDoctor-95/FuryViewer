@@ -31,7 +31,7 @@ export const userExtRoute: Routes = [
 
 export const userExtPopupRoute: Routes = [
     {
-        path: 'user-ext-new',
+        path: 'user-edit',
         component: UserExtPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
