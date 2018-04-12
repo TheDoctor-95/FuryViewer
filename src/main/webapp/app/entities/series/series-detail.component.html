@@ -93,7 +93,7 @@
                 </div>
                 &nbsp;
 
-                <div class="col">
+                <div class="row">
                     <div ngbDropdown class="d-inline-block">
                         <button class="btn btn-block" id="dropdownBasic1" ngbDropdownToggle>Season {{actualSeason}}</button>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -166,8 +166,8 @@
                             <div class="row" style="padding-left: 30px; padding-right: 30px;">
                                 <div *ngFor="let artist of artists" class="col-6" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
                                     <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
-                                        <img style="width: 80px; border: 1px solid #ef9800;" src="{{artist.imgUrl}}"/>
-                                        <div style="font-size: 15px;">{{artist.name}}</div>
+                                        <img class="imgReparto" style="width: 80px; border: 1px solid #ef9800; border-radius: 5px;" src="{{artist.imgUrl}}"/>
+                                        <div style="font-size: 15px;  margin-top: 6px;">{{artist.name}}</div>
                                     </a>
                                 </div>
                                 <div style="display: inline-block; width: 100%; text-align: center; margin-bottom: 20px;">
