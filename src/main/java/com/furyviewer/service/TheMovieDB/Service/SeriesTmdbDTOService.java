@@ -9,6 +9,7 @@ import com.furyviewer.service.dto.TheMovieDB.Season.Crew;
 import com.furyviewer.service.dto.TheMovieDB.Episode.EpisodeExternalIdDTO;
 import com.furyviewer.service.dto.TheMovieDB.Season.SeasonTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Series.CompleteSeriesTmdbDTO;
+import com.furyviewer.service.dto.TheMovieDB.Series.Result;
 import com.furyviewer.service.dto.TheMovieDB.Series.Season;
 import com.furyviewer.service.dto.TheMovieDB.Series.SimpleSeriesTmdbDTO;
 import com.furyviewer.service.util.ArtistService;
@@ -70,7 +71,13 @@ public class SeriesTmdbDTOService {
             if (response.isSuccessful()) {
                 series = response.body();
                 System.out.println(series);
-                id = series.getResults().get(0).getId();
+
+                for (Result result : series.getResults()) {
+                    if (result.getName().equalsIgnoreCase(seriesName)) {
+                        return result.getId();
+                    }
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -165,7 +172,9 @@ public class SeriesTmdbDTOService {
                     series = response.body();
 
                     if (series.getEpisodeRunTime() != null) {
-                        duration = series.getEpisodeRunTime().get(0);
+                        if (!series.getEpisodeRunTime().isEmpty()) {
+                            duration = series.getEpisodeRunTime().get(0);
+                        }
                     }
                 }
 
