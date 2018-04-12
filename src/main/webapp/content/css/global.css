@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500i,700|Roboto');
 
 
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -702,9 +704,7 @@ button:hover {
     display: inline-block;
 }
 
-.card {
-    border: none;
-}
+
 
 .top {
     padding-top: 5%;
@@ -1185,6 +1185,12 @@ input:checked + .slider:before {
     border: 1px solid #ef9800;
 }
 
+
+
+
+
+
+
 /* ====================================================================================================================================================
  SEARCH
 ==================================================================================================================================================== */
@@ -1243,4 +1249,10 @@ select.form-control:not([size]):not([multiple]){
 #actualSeason{
     background-color: orange !important;
     color:white !important;
+}
+
+.imgReparto:hover{
+    -webkit-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    -moz-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
 }
