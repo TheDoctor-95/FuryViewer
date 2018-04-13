@@ -20,7 +20,7 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     List<Episode>findEpisodeByName(String name);
 
-    @Query("select e from Episode e where season.id=:id")
+    @Query("select e from Episode e where season.id=:id order by e.number asc")
     List<Episode>getEpisodeBySeason(@Param("id") Long id);
 
     List<Episode> findBySeasonIdOrderByReleaseDate(Long id);
@@ -30,4 +30,5 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     @Query("select e from Episode e where :artist member of e.actors order by e.releaseDate desc")
     List<Episode> getEpisodeByActorsOrderByReleaseDate(@Param("artist") Artist artist);
+
 }
