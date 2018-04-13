@@ -1268,3 +1268,9 @@ select.form-control:not([size]):not([multiple]){
     -moz-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
     box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
 }
+
+.closed:hover{
+    cursor: pointer;
+    color: white;
+    background-color: transparent;
+}
