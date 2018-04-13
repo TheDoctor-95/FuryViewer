@@ -16,6 +16,8 @@ import {HatredSeries} from '../hatred-series/hatred-series.model';
 import {SeasonService} from "../season/season.service";
 import {EpisodeService} from "../episode/episode.service";
 import {EpisodeSeasonModel} from "../../shared/model/EpisodeSeason.model";
+import {FavouriteSeriesService} from "../favourite-series/favourite-series.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
     selector: 'jhi-series-detail',
@@ -57,7 +59,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private seasonService: SeasonService,
         private episodeService: EpisodeService,
-        config: NgbRatingConfig
+        config: NgbRatingConfig,
+        private favouriteSeriesService: FavouriteSeriesService
 ) {
     this.director = new Artist();
     this.director.name="";
@@ -106,6 +109,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
 
         )
     }
+
+
 
     loadEpisodes(id: number){
         this.seasonNumberFind(id);
@@ -167,4 +172,23 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
+
+    like(){
+    this.subscribeToSaveResponseLike(
+        this.favouriteSeriesService.favourite(this.series.id)
+    );
+}
+
+    private subscribeToSaveResponseLike(result: Observable<FavouriteSeries>) {
+        result.subscribe((res: FavouriteSeries) =>
+            this.onSaveSuccessLike(res), (res: Response) => this.onSaveErrorLike());
+    }
+
+    private onSaveSuccessLike(result: FavouriteSeries) {
+        this.eventManager.broadcast({ name: 'favouriteSeriesListModification', content: 'OK'});
+    }
+
+    private onSaveErrorLike() {
+    }
+
 }

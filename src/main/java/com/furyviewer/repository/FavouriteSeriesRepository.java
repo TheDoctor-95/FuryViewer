@@ -36,4 +36,10 @@ public interface FavouriteSeriesRepository extends JpaRepository<FavouriteSeries
     @Query("select count(f.liked) from FavouriteSeries f where f.series.id=:id")
     Long countLikedSeries(@Param("id") Long id);
 
+
+    @Query("select s.liked from FavouriteSeries s where s.series.id=:id and s.user.login = ?#{principal.username}")
+    Boolean selectFavouriteSeriesAndUser(@Param("id") Long id);
+
+
+
 }
