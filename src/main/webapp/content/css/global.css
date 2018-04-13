@@ -436,13 +436,21 @@ Social Buttons
 
 .infoWebs1 {
     display: inline-block;
-    margin-right: 30px;
+    margin-right: 15px;
+    width: 140px;
+    float:left;
 }
 
 .infoWebs2 {
     display: inline-block;
-    float: right;
+    float: left;
     color: #ef9800;
+}
+
+.infoWebs3 {
+    width:200px;
+    margin-bottom: -10px;
+    display: inline-block;
 }
 
 #divShowHide {
@@ -452,7 +460,7 @@ Social Buttons
     right: 30px;
     margin-top: -15px;
     padding: 10px;
-    width: 100%;
+    max-width: 100%;
 }
 
 #plus:hover {
