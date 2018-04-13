@@ -126,7 +126,7 @@
                                 <textarea class="txtarea" name="comentario" placeholder="write here the commentary" style="width: 100%; font-size: 13px;" rows="4" [(ngModel)]="newComent.review"></textarea>
                                 <div style="display: block; width: 100%">
                                     <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
-                                        <button id="btnComen" (click)="comentar()" >COMENTAR</button>
+                                        <button id="btnComen" (click)="comentar()" >COMMENT</button>
                                     </div>
                                 </div>
                             </div>
@@ -160,20 +160,20 @@
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
                     <div  (click)="stat('seen')" class="boxList col-10"
                           [ngStyle]="{'background-color':stats=='SEEN' ? '#ef9800' : 'white', 'color':stats=='SEEN' ? 'white' : '#ef9800'}">
-                        <i id="icona" class="fa fa-eye-slash" style="color: #ef9800;" [ngStyle]="{'color':stats=='SEEN' ? 'white' : '#ef9800'}"></i> Vista
+                        <i id="icona" class="fa fa-eye-slash" style="color: #ef9800;" [ngStyle]="{'color':stats=='SEEN' ? 'white' : '#ef9800'}"></i> Viewed
                     </div>
                 </div>
 
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
 
-                    <div (click)="stat('pending')" class="boxList col-10" [ngStyle]="{'background-color':stats=='PENDING' ? '#ef9800' : 'white', 'color':stats=='PENDING' ? 'white' : '#ef9800'}" ><i class="fa fa-edit" style="color: #ef9800;" [ngStyle]="{'color':stats=='PENDING' ? 'white' : '#ef9800'}"></i> Pendiente</div>
+                    <div (click)="stat('pending')" class="boxList col-10" [ngStyle]="{'background-color':stats=='PENDING' ? '#ef9800' : 'white', 'color':stats=='PENDING' ? 'white' : '#ef9800'}" ><i class="fa fa-edit" style="color: #ef9800;" [ngStyle]="{'color':stats=='PENDING' ? 'white' : '#ef9800'}"></i> Pending</div>
                 </div>
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
                     <div class="col-10" style="padding-left: 0px; padding-right: 0px;">
                         <div class="boxList" style="display: inline-block; width: 49%;" (click)="like()"
                              [ngStyle]="{'background-color':fav.liked ? '#ef9800' : 'white', 'color':fav.liked ? 'white' : '#ef9800'}">
                             <i class="fa fa-heart" style="color: #ef9800;"
-                               [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorita
+                               [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorite
                         </div>
                         <div class="boxList" style="display: inline-block; width: 49%;" (click)="hated()"
                              [ngStyle]="{'background-color':hate.hated ? '#ef9800' : 'white', 'color':hate.hated ? 'white' : '#ef9800'}">
@@ -202,7 +202,7 @@
                 <div class="row">
                     <div class="col-10">
                         <div id="boxReparto" style="width: 100% !important;">
-                            <div id="reparto">REPARTO</div>
+                            <div id="reparto">CAST</div>
                             <div class="container-fluid">
                                 <div class="row">
 
