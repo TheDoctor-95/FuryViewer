@@ -146,8 +146,8 @@
                     <table class="table table-striped">
                         <tr *ngFor="let chapter of chapters" class="row">
                             <td class="col-1">{{chapter.number}}</td>
-                            <td class="col-8" style="text-align: left;"> {{chapter.title}}</td>
-                            <td class="col-2">{{chapter.releaseDate | date: "mediumDate"}}</td>
+                            <td class="col-7" style="text-align: left;"> {{chapter.title}}</td>
+                            <td class="col-3">{{chapter.releaseDate | date: "mediumDate"}}</td>
                             <td class="col-1"><i class="fa fa-eye"
                                                  [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"></i></td>
                         </tr>
