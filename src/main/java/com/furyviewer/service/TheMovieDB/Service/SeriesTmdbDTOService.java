@@ -299,7 +299,7 @@ public class SeriesTmdbDTOService {
             episodeNum = episodeNum - 1;
 
             if (se.getEpisodes().get(episodeNum).getName() != null) {
-                ep.setName(se.getEpisodes().get(episodeNum).getName());
+                ep.setName(stringApiCorrectorService.eraserEvilBytes(se.getEpisodes().get(episodeNum).getName()));
             }
 
             double duration = getDurationEpisode(seriesId);

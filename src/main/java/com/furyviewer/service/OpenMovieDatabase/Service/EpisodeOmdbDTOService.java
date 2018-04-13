@@ -93,6 +93,8 @@ public class EpisodeOmdbDTOService {
 
                         if (!episodeOmdbDTO.getRuntime().equalsIgnoreCase("N/A")) {
                             ep.setDuration(Double.parseDouble(episodeOmdbDTO.getRuntime().split(" ")[0]));
+                        } else {
+                            ep.setDuration(-1.0);
                         }
 
                         ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));

@@ -23,6 +23,13 @@ export class FavouriteSeriesService {
         });
     }
 
+    favourite(id: number): Observable<FavouriteSeries> {
+        return this.http.post(`${this.resourceUrl}/id/${id}`, "").map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
     update(favouriteSeries: FavouriteSeries): Observable<FavouriteSeries> {
         const copy = this.convert(favouriteSeries);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {

@@ -1,20 +1,22 @@
 <div>
 
     <div class="modal-header">
-        <h4 class="modal-title" id="myEpisodeLabel">Listado Episodios Pendientes</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+        <h4 class="modal-title" id="myEpisodeLabel" style="margin-left: 15px;">Pending Chapters List</h4>
+        <button type="button" class="close closed" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
-        <div class="card portades" *ngFor="let episode of episodePending" (click)="goTo(episode.id)">
-            <img class="card-img-top" src="{{episode.urlCartel}}" alt="Card image">
+        <div class="row">
+            <div class="card portades col-2" *ngFor="let episode of episodePending" (click)="goTo(episode.id)">
+                <img class="card-img-top" style="width: 100%; height: 18.5vw;" src="{{episode.urlCartel}}" alt="Card image">
 
-            <div class="card-body">
-                <h4 class="card-title">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
-                <h3 class="card-text"> {{episode.titleSeries}} </h3>
+                <div class="card-body">
+                    <h4 class="card-title" style="font-weight: bold;">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
+                    <h3 class="card-text" style="text-transform: uppercase; font-size: 12px; margin-top: 10px;"> {{episode.titleSeries}} </h3>
+
+                </div>
 
             </div>
-
         </div>
     </div>
 </div>

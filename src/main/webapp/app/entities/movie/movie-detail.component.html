@@ -11,7 +11,7 @@
                 <div class="infoBox">
 
                     <!-- Director -->
-                    <div class="styleArtist" style="margin-top: 10px;">
+                    <div class="styleArtist" style="margin-top: 10px;" *ngIf="movie.director != null">
                         <div class="iconoFilm">
                             <img src="img/director-chair.png" height="24px" width="24px"/>
                         </div>
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <!-- Guionista -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="movie.scriptwriter != null">
                         <div class="iconoFilm">
                             <img src="img/typewriter.png" height="24px" width="24px"/>
                         </div>
@@ -38,7 +38,7 @@
                             </span>
                     </div>
                     <!-- Duracion -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="movie.duration != null">
                         <div class="iconoFilm">
                             <img src="img/time.png" height="24px" width="24px"/>
                         </div>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <!-- Company -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="movie.company != null">
                         <div class="iconoFilm">
                             <img src="img/clapper.png" height="24px" width="24px"/>
                         </div>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <!-- Pais -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="movie.country?.name != null">
                         <div class="iconoFilm">
                             <img src="img/earth.png" height="24px" width="24px"/>
                         </div>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <!-- Lanzamiento -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="movie.releaseDate != null">
                         <div class="iconoFilm">
                             <img src="img/calendar.png" height="24px" width="24px"/>
                         </div>
@@ -76,7 +76,7 @@
                     </div>
 
                     <!-- DVD -->
-                    <div class="styleArtist" *ngIf="movie.dvd_release != null" >
+                    <div class="styleArtist"  *ngIf="movie.dvd_release != null">
                         <div class="iconoFilm">
                             <img src="img/dvd.png" height="24px" width="24px"/>
                         </div>
@@ -102,8 +102,13 @@
                     </div>
                 </div>
                 <ng-template #notas id="divShowHide">
-                    <span *ngFor="let mark of marks" style="width: 100%;"><p class="infoWebs1">{{mark.type}}</p><p
-                        class="infoWebs2">{{mark.url}} <i class="fa fa-star furyColor"></i></p></br></span>
+                    <span *ngFor="let mark of marks, let i = index" style="max-width: 100%!important;">
+                        <span class="infoWebs3">
+                            <p class="infoWebs1">{{mark.type}}</p>
+                            <p class="infoWebs2">{{mark.url}} <i class="fa fa-star furyColor"></i></p>
+                        </span>
+
+                    </span>
                 </ng-template>
                 &nbsp;
                 <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">

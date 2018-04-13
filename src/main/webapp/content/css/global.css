@@ -437,13 +437,21 @@ Social Buttons
 
 .infoWebs1 {
     display: inline-block;
-    margin-right: 30px;
+    margin-right: 15px;
+    width: 140px;
+    float:left;
 }
 
 .infoWebs2 {
     display: inline-block;
     float: right;
     color: #ef9800;
+}
+
+.infoWebs3 {
+    width:200px;
+    margin-bottom: -10px;
+    display: inline-block;
 }
 
 #divShowHide {
@@ -453,7 +461,7 @@ Social Buttons
     right: 30px;
     margin-top: -15px;
     padding: 10px;
-    width: 100%;
+    max-width: 100%;
 }
 
 #plus:hover {
@@ -1260,4 +1268,10 @@ select.form-control:not([size]):not([multiple]){
     -webkit-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
     -moz-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
     box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+}
+
+.closed:hover{
+    cursor: pointer;
+    color: white;
+    background-color: transparent;
 }
