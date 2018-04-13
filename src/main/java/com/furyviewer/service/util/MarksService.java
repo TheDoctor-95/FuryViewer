@@ -33,10 +33,12 @@ public class MarksService {
             if (!seriesOptional.isPresent()) {
                 Social s = new Social();
 
-                s.setType(r.getSource());
-                if(s.getType().equalsIgnoreCase("internet movie database")) {
+                if(r.getSource().equalsIgnoreCase("Internet Movie Database")) {
                     s.setType("IMDB");
+                } else {
+                    s.setType(r.getSource());
                 }
+
                 s.setSeries(ss);
                 s.setUrl(markTranformation(r.getSource(), r.getValue()));
 
@@ -76,8 +78,13 @@ public class MarksService {
             if (!movieOptional.isPresent()) {
                 Social s = new Social();
 
+                if(r.getSource().equalsIgnoreCase("Internet Movie Database")) {
+                    s.setType("IMDB");
+                } else {
+                    s.setType(r.getSource());
+                }
+
                 s.setMovie(m);
-                s.setType(r.getSource());
                 s.setUrl(markTranformation(r.getSource(), r.getValue()));
 
                 socialRepository.save(s);
