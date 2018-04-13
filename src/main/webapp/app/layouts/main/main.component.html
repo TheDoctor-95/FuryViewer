@@ -31,45 +31,45 @@
                 (mouseout)="_toggleSidebar()"
 
     >
-        <div style="background-color: black; height: 100%; width: 20vh;">
+        <div style="background-color: black; height: 100%; width: 100%;">
             <ul class="list-unstyled components container-fluid">
 
-                <li class="row" routerLink="/">
+                <li class="row" routerLink="/" id="homeMenu">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;" routerLink="">Home</div>
+                    <div id="textHome" class="titol col-5" style="display: inline-block; color: white;" routerLink="">Home</div>
                     <i class="fa fa-home fa-2x col-2 "></i>
                 </li>
 
 
-                <li class="row">
+                <li class="row" id="perfilMenu">
 
                     <div class="titol col-5" id="perfillink" style="display: inline-block; color: white;" routerLink="/user-ext">Perfil</div>
                     <i class="fa fa-user fa-2x col-2  "></i>
                 </li>
 
 
-                <li class="row">
+                <li class="row" id="watchlistMenu">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;" routerLink="/watchlist">Watchlist</div>
+                    <div class="titol col-5" id="watchlistText" style="display: inline-block; color: white;" routerLink="/watchlist">Watchlist</div>
                     <i class="fa fa-eye fa-2x col-2"></i>
                 </li>
 
-                <li class="row">
+                <li class="row" id="searchMenu">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;" routerLink="/search">Búsqueda</div>
+                    <div class="titol col-5" id="searchText" style="display: inline-block; color: white;" routerLink="/search">Search</div>
                     <i class="fa fa-search fa-2x col-2 "></i>
                 </li>
 
-                <li class="row">
+                <li class="row" id="calendarMenu">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;"><a href="">Calendario</a></div>
+                    <div class="titol col-5" id="calendarText" style="display: inline-block; color: white;"><a href="">Calendar</a></div>
                     <i class="fa fa-calendar fa-2x col-2 "></i>
                </li>
 
 
-                <li class="row">
+                <li class="row" id="aboutMenu">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;"><a href="">About</a></div>
+                    <div class="titol col-5" id="aboutText" style="display: inline-block; color: white;"><a href="">About</a></div>
                     <i class="fa fa-info-circle fa-2x col-2 "></i>
                 </li>
 
