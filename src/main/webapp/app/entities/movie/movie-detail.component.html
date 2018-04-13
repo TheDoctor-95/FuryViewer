@@ -211,7 +211,7 @@
                             <div class="row" style="padding-left: 20px; padding-right: 30px;">
                                 <div *ngFor="let artist of artistMovie" class="col-6" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
                                     <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
-                                        <img class="imgReparto" style="width: 80px; border: 1px solid #ef9800; border-radius: 5px;" src="{{artist.imgUrl}}"/>
+                                        <img class="imgReparto" style="width: 80px; border-radius: 5px;" src="{{artist.imgUrl}}"/>
                                         <div style="font-size: 13px; font-family: Roboto; margin-top: 6px;">{{artist.name}}</div>
                                     </a>
                                 </div>

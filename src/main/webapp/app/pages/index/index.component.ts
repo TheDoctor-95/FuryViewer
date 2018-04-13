@@ -3,21 +3,23 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { Observable } from 'rxjs/Rx';
 
-import { Main } from './main.model';
-import { MainService } from './main.service';
+import { Index } from './index.model';
+import { IndexService } from './index.service';
 import { Principal } from '../../shared';
 
 @Component({
-    selector: 'jhi-main',
-    templateUrl: './main.component.html'
+    selector: 'jhi-index',
+    templateUrl: './index.component.html'
 })
-export class MainComponent implements OnInit, OnDestroy {
+export class IndexComponent implements OnInit, OnDestroy {
 
-    main: Main = new Main();
+    index: Index = new Index();
 
     currentAccount: any;
     eventSubscriber: Subscription;
+    isSaving: Boolean;
     routeData: any;
     links: any;
     totalItems: any;
@@ -29,7 +31,7 @@ export class MainComponent implements OnInit, OnDestroy {
     reverse: any;
 
     constructor(
-        private mainService: MainService,
+        private indexService: IndexService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
@@ -47,15 +49,15 @@ export class MainComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
 
-        this.registerChangeInMains();
+        this.registerChangeInIndices();
     }
 
     ngOnDestroy() {
 
         this.eventManager.destroy(this.eventSubscriber);
     }
-    registerChangeInMains() {
-        this.eventSubscriber = this.eventManager.subscribe('mainListModification', (response) => this.loadAll());
+    registerChangeInIndices() {
+        this.eventSubscriber = this.eventManager.subscribe('indexListModification', (response) => this.loadAll());
     }
 
     sort() {

@@ -3,13 +3,13 @@ import { RouterModule } from '@angular/router';
 
 import { FuryViewerSharedModule } from '../../shared';
 import {
-    MainService,
-    MainComponent,
-    MainRoute,
+    IndexService,
+    IndexComponent,
+    IndexRoute,
 } from './';
 
 const PAGE_SET_STATES = [
-    ...MainRoute,
+    ...IndexRoute,
 ];
 
 @NgModule({
@@ -18,15 +18,15 @@ const PAGE_SET_STATES = [
         RouterModule.forRoot(PAGE_SET_STATES, { useHash: true })
     ],
     declarations: [
-    MainComponent,
+    IndexComponent,
 ],
     entryComponents: [
-    MainComponent,
+    IndexComponent,
 ],
     providers: [
-    MainService,
+    IndexService,
 ],
 schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
-export class FuryViewerMainModule {}
+export class FuryViewerIndexModule {}

@@ -1,16 +1,16 @@
 <div>
-    <h2><span data-translate="furyViewerApp.main.main.title">main</span></h2>
+    <h2><span data-translate="furyViewerApp.index.index.title">index</span></h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
 
-<div class="table-responsive" *ngIf="mains">
+<div class="table-responsive" *ngIf="indices">
     <table class="table table-striped">
         <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let main of mains ;trackBy: trackId">
+        <tr *ngFor="let index of indices ;trackBy: trackId">
 </tr>
 </tbody>
 </table>

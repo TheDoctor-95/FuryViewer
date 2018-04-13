@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiLanguageService } from 'ng-jhipster';
 
@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
-
+    lloc: string;
     constructor(
         private loginService: LoginService,
         private languageService: JhiLanguageService,
@@ -30,7 +30,8 @@ export class NavbarComponent implements OnInit {
         private principal: Principal,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router
+        public router: Router,
+
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -45,6 +46,45 @@ export class NavbarComponent implements OnInit {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+        console.log(this.router.url);
+        this.filtro();
+    }
+
+    filtro() {
+        switch (this.router.url) {
+            case '/user-ext': {
+                this.lloc = 'Profile';
+                break;
+            }
+            case '/': {
+                this.lloc = 'Home';
+                break;
+            }
+            case '/search': {
+                this.lloc = 'Search';
+                break;
+            }
+            case '/search': {
+                this.lloc = 'Search';
+                break;
+            }
+            case '/calendar': {
+                this.lloc = 'Calendar';
+                break;
+            }
+            case '/watchlist': {
+                this.lloc = 'Watchlist';
+                break;
+            }
+            case '/about-us': {
+                this.lloc = 'About Us';
+                break;
+            }
+            default: {
+                this.lloc = '';
+                break;
+            }
+        }
     }
 
     changeLanguage(languageKey: string) {

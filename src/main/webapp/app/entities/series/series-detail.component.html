@@ -30,7 +30,6 @@
 
                 </div>
                 <div class="infoBox">
-
                     <!-- Director -->
                     <div class="styleArtist" style="margin-top: 10px;">
                         <div class="iconoFilm">
@@ -127,7 +126,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <div ngbDropdown class="d-inline-block align-left">
+                        <div ngbDropdown class="d-inline-block align-left" style="width: 100%;">
                             <button class="btn btn-block" id="actualSeason" ngbDropdownToggle>Season
                                 {{actualSeason}}
                             </button>
@@ -145,7 +144,7 @@
                 <div class="container" style="background-color: white;">
                     <table class="table table-striped">
                         <tr *ngFor="let chapter of chapters" class="row">
-                            <td class="col-1">{{chapter.number}}</td>
+                            <td class="col-1"><strong>{{chapter.number}}</strong></td>
                             <td class="col-7" style="text-align: left;"> {{chapter.title}}</td>
                             <td class="col-3">{{chapter.releaseDate | date: "mediumDate"}}</td>
                             <td class="col-1"><i class="fa fa-eye"

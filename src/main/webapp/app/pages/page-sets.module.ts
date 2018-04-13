@@ -1,14 +1,14 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FuryViewerMainModule } from './main/main.module';
 import { FuryViewerSearchModule } from './search/search.module';
 import { FuryViewerWatchlistModule } from './watchlist/watchlist.module';
+import { FuryViewerIndexModule } from './index/index.module';
 /* jhipster-needle-add-pageset-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
     imports: [
-        FuryViewerMainModule,
         FuryViewerSearchModule,
-        FuryViewerWatchlistModule
+        FuryViewerWatchlistModule,
+        FuryViewerIndexModule,
         /* jhipster-needle-add-pageset-module - JHipster will add entity modules here */
     ],
     declarations: [],
