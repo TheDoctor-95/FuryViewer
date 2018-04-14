@@ -4,7 +4,7 @@
             <div class="card pendientes">
                 <div class="card-body">
                     <div class="serpeli_body">
-                        <h2 class="card-title" style="font-size: 30px;">CAPÍTULOS PENDIENTES</h2>
+                        <h2 class="card-title" style="font-size: 30px;">PENDING CHAPTERS</h2>
                         <div class="card portades" *ngFor="let episode of episodePending"
                              [routerLink]="['/series', episode?.id]">
                             <img class="card-img-top" src="{{episode.urlCartel}}" alt="Card image">
@@ -23,7 +23,7 @@
             <div class="card pendientes align-top">
                 <div class="card-body">
                     <div class="serpeli_body">
-                        <h2 class="card-title container" style="font-size: 30px;">PELICULAS PENDIENTES</h2>
+                        <h2 class="card-title container" style="font-size: 30px;">PENDING FILMS</h2>
                         <div class="card portades" *ngFor="let movie of moviesPending"
                              routerLink="/movie/{{movie.id}}">
                             <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
@@ -46,11 +46,11 @@
                         <div class="card-body">
                             <div class="card-title row ">
                                 <div class=" col-md-6" id="titlecalendar">
-                                    <h2 id="calendario">Calendario</h2>
+                                    <h2 id="calendario">Calendar</h2>
                                 </div>
                                 <div class="col-md-6" id="botoncalendar">
                                     <button> SERIES</button>
-                                    <button> PELIS</button>
+                                    <button> FILMS</button>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
@@ -91,7 +91,7 @@
                         <div class="card-body">
                             <div id="toppelis">
                                 <div class="row">
-                                    <h2 class="col-9">Top pelis</h2>
+                                    <h2 class="col-9">Top films</h2>
 
                                     <label class="switchinv col-3">
                                         <input type="checkbox">

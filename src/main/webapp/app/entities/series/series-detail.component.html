@@ -32,7 +32,7 @@
                 <div class="infoBox">
 
                     <!-- Director -->
-                    <div class="styleArtist" style="margin-top: 10px;">
+                    <div class="styleArtist" style="margin-top: 10px;" *ngIf="director.name != null">
                         <div class="iconoFilm">
                             <img src="img/director-chair.png" height="24px" width="24px"/>
                         </div>
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <!-- Guionista -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="scripwriter.name != null">
                         <div class="iconoFilm">
                             <img src="img/typewriter.png" height="24px" width="24px"/>
                         </div>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <!-- Genero -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" >
                         <div class="iconoFilm">
                             <img src="img/masks.png" height="24px" width="24px"/>
                         </div>
@@ -60,7 +60,7 @@
                             </span>
                     </div>
                     <!-- Company -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="series.company?.name != null">
                         <div class="iconoFilm">
                             <img src="img/clapper.png" height="24px" width="24px"/>
                         </div>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <!-- Pais -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="series.country?.name != null">
                         <div class="iconoFilm">
                             <img src="img/earth.png" height="24px" width="24px"/>
                         </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <!-- Lanzamiento -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="series.releaseDate != null">
                         <div class="iconoFilm">
                             <img src="img/calendar.png" height="24px" width="24px"/>
                         </div>
@@ -89,7 +89,7 @@
                     </div>
 
                     <!-- Ended -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="series.stats != null">
                         <div class="iconoFilm">
                             <img src="img/cerrar.png" height="24px" width="24px"/>
                         </div>
@@ -100,7 +100,7 @@
 
                 </div>
             </div>
-            <div class="col-6" style="height: 100%; margin-bottom: 25px;">
+            <div class="col-7" style="height: 100%; margin-bottom: 25px;">
                 <div class="whiteBox" style="display: table; width: 100%;">
                     <div style="width: 100%; display: inline-block; vertical-align: top;">
                         <h1 class="nameTitle">{{series.name}}</h1>
@@ -146,8 +146,8 @@
                     <table class="table table-striped">
                         <tr *ngFor="let chapter of chapters" class="row">
                             <td class="col-1">{{chapter.number}}</td>
-                            <td class="col-8" style="text-align: left;"> {{chapter.title}}</td>
-                            <td class="col-2">{{chapter.releaseDate | date: "mediumDate"}}</td>
+                            <td class="col-7" style="text-align: left;"> {{chapter.title}}</td>
+                            <td class="col-3">{{chapter.releaseDate | date: "mediumDate"}}</td>
                             <td class="col-1"><i class="fa fa-eye"
                                                  [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"></i></td>
                         </tr>
@@ -167,7 +167,7 @@
                         </div>
                         <div style="display: block; width: 100%">
                             <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
-                                <button id="btnComen">COMENTA</button>
+                                <button id="btnComen">COMMENT</button>
                             </div>
                         </div>
                     </div>
@@ -178,20 +178,20 @@
             <div class="col-3" style="text-align: center;">
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
                     <div class="boxList col-10"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i>
-                        Vista
+                        Viewed
                     </div>
                 </div>
 
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
 
-                    <div class="boxList col-10"><i class="fa fa-edit" style="color: #ef9800;"></i> Pendiente</div>
+                    <div class="boxList col-10"><i class="fa fa-edit" style="color: #ef9800;"></i> Pending</div>
                 </div>
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
                     <div class="col-10" style="padding-left: 0px; padding-right: 0px;">
                         <div class="boxList" style="display: inline-block; width: 49%;" (click)="like()"
                              [ngStyle]="{'background-color':fav.liked ? '#ef9800' : 'white', 'color':fav.liked ? 'white' : '#ef9800'}">
                             <i class="fa fa-heart" style="color: #ef9800;"
-                               [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorita
+                               [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorite
                         </div>
                         <div class="boxList" style="display: inline-block; width: 49%;" (click)="hated()"
                              [ngStyle]="{'background-color':hate.hated ? '#ef9800' : 'white', 'color':hate.hated ? 'white' : '#ef9800'}">
@@ -205,7 +205,7 @@
                 <div class="row">
                     <div class="col-10">
                         <div id="boxReparto" style="width: 100% !important;">
-                            <div id="reparto">REPARTO</div>
+                            <div id="reparto">CAST</div>
                             <div class="container-fluid">
                                 <div class="row">
 

@@ -209,7 +209,7 @@ public class ArtistService {
      */
     @Transactional
     public Artist findDirectorBySerieId(Long serieID) {
-        return artistRepository.findAll().stream()
+        List<Artist> artistR = artistRepository.findAll().stream()
             .filter(artist -> artist.getEpisodeDirectors().stream()
                 .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
             .sorted((a1, a2) -> {
@@ -220,7 +220,13 @@ public class ArtistService {
                 return compare(numEpisodes1, numEpisodes2);
 
             })
-            .collect(Collectors.toList()).get(0);
+            .collect(Collectors.toList());
+
+        if (!artistR.isEmpty()) {
+            return artistR.get(0);
+        }
+
+        return null;
     }
 
     /**
@@ -230,7 +236,7 @@ public class ArtistService {
      */
     @Transactional
     public Artist findScriprirterBySerieId(Long serieID) {
-        return artistRepository.findAll().stream()
+        List<Artist> artistR = artistRepository.findAll().stream()
             .filter(artist -> artist.getEpisodesScriptwriters().stream()
                 .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
             .sorted((a1, a2) -> {
@@ -240,7 +246,13 @@ public class ArtistService {
                     .count();
                 return compare(numEpisodes1, numEpisodes2);
             })
-            .collect(Collectors.toList()).get(0);
+            .collect(Collectors.toList());
+
+        if(!artistR.isEmpty()) {
+            return artistR.get(0);
+        }
+
+        return null;
     }
 
     public int compare(long l1, long l2) {

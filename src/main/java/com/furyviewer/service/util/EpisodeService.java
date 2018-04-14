@@ -111,7 +111,7 @@ public class EpisodeService {
 
     public List<EpisodeSerieDTO> chaptersSeriesBySeasonId(Long id){
         List<EpisodeSerieDTO> episodeSerieDTO = new ArrayList<EpisodeSerieDTO>();
-        episodeRepository.findBySeasonIdOrderByReleaseDate(id).forEach(
+        episodeRepository.getEpisodeBySeason(id).forEach(
             episode -> {
                 EpisodeSerieDTO esdto = new EpisodeSerieDTO();
                 esdto.setId(episode.getId());

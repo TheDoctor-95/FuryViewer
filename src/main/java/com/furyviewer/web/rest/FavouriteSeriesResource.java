@@ -13,6 +13,7 @@ import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,9 +65,11 @@ public class FavouriteSeriesResource {
         Optional<FavouriteSeries> existingFavouriteSeries = favouriteSeriesRepository.findBySeriesAndUserLogin(favouriteSeries.getSeries(), SecurityUtils.getCurrentUserLogin());
 
         if(existingFavouriteSeries.isPresent()){
-            throw new BadRequestAlertException("El serie ya esta añadida a favoritos", ENTITY_NAME, "favoriteExist");
+            favouriteSeries = existingFavouriteSeries.get();
+            favouriteSeries.setLiked(!favouriteSeries.isLiked());
+        } else {
+            favouriteSeries.setLiked(true);
         }
-
         favouriteSeries.setDate(ZonedDateTime.now());
         favouriteSeries.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
 
@@ -74,6 +77,15 @@ public class FavouriteSeriesResource {
         return ResponseEntity.created(new URI("/api/favourite-series/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/favourite-series/id/{id}")
+    @Timed
+    public ResponseEntity<FavouriteSeries> createFavouriteSeries(@PathVariable Long id) throws URISyntaxException {
+        Series ss = seriesRepository.findOne(id);
+        FavouriteSeries fs = new FavouriteSeries();
+        fs.setSeries(ss);
+        return createFavouriteSeries(fs);
     }
 
     /**
@@ -168,6 +180,14 @@ public class FavouriteSeriesResource {
         log.debug("REST request to get number of likes of series");
         Integer num = Math.toIntExact(favouriteSeriesRepository.countLikedSeries(id));
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
+    @GetMapping("/favourite-series/seriesId/{id}")
+    @Timed
+    public ResponseEntity<FavouriteSeries> getFavUserSeries(@PathVariable Long id) {
+        log.debug("REST request to get FavouriteSeries : {}", id);
+        FavouriteSeries fs = favouriteSeriesRepository.findByUserAndSeriesId(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get(), id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(fs));
     }
 
 
