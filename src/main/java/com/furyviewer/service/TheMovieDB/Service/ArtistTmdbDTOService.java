@@ -156,6 +156,7 @@ public class ArtistTmdbDTOService {
 
         artist.setName(artistName);
         artist.addArtistType(artistType);
+        artist.setImgUrl("https://image.ibb.co/cdz3Rc/noartist.jpg");
 
         System.out.println("==================\nImportanto artista " + artistName + "\n==================");
 
@@ -170,8 +171,8 @@ public class ArtistTmdbDTOService {
                     if (completeArtistTmdbDTO.getBirthday() != null) {
                         artist.setBirthdate(
                             dateConversorService.releaseDateOMDBSeason(completeArtistTmdbDTO.getBirthday().toString()));
-
                     }
+
                     if (completeArtistTmdbDTO.getDeathday() != null) {
                         if (completeArtistTmdbDTO.getDeathday().toString().split("-").length == 3) {
                             artist.setDeathdate(
@@ -195,8 +196,6 @@ public class ArtistTmdbDTOService {
 
                     if (completeArtistTmdbDTO.getProfilePath() != null) {
                         artist.setImgUrl(pathImage + completeArtistTmdbDTO.getProfilePath());
-                    } else {
-                        artist.setImgUrl("https://image.ibb.co/cdz3Rc/noartist.jpg");
                     }
                     if (completeArtistTmdbDTO.getImdbId() != null) {
                         artist.setImdb_id(completeArtistTmdbDTO.getImdbId());

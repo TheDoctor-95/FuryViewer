@@ -176,7 +176,11 @@ public class MovieOmdbDTOService {
         Movie m = new Movie();
         m.setName(movieOmdbDTO.getTitle());
 
-        m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
+        if(!movieOmdbDTO.getRuntime().equalsIgnoreCase("N/A")) {
+            m.setDuration(Double.parseDouble(movieOmdbDTO.getRuntime().split(" ")[0]));
+        } else {
+            m.setDuration(-1.0);
+        }
 
         m.setDescription(stringApiCorrectorService.eraserNA(movieOmdbDTO.getPlot()));
         m.setImdbIdExternalApi(stringApiCorrectorService.eraserNA(movieOmdbDTO.getImdbID()));

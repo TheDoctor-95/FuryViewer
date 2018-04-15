@@ -302,10 +302,7 @@ public class SeriesTmdbDTOService {
                 ep.setName(stringApiCorrectorService.eraserEvilBytes(se.getEpisodes().get(episodeNum).getName()));
             }
 
-            double duration = getDurationEpisode(seriesId);
-            if (duration != -1) {
-                ep.setDuration(duration);
-            }
+            ep.setDuration(getDurationEpisode(seriesId));
 
             if (se.getEpisodes().get(episodeNum).getAirDate() != null) {
                 ep.setReleaseDate(dateConversorService.releaseDateOMDBSeason(
