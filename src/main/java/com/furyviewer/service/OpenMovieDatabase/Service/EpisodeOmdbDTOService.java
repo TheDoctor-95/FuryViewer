@@ -111,7 +111,7 @@ public class EpisodeOmdbDTOService {
                         ep = episodeRepository.save(ep);
 
                         System.out.println("==================\nImportado..." + title + " " + se.getNumber() + "x" +
-                            i + "\n==================");
+                            i+1 + "\n==================");
                     }
                     else {
                         seriesTmdbDTOService.importEpisode(title, i, se);
