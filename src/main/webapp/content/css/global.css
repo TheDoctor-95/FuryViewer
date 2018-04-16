@@ -1274,3 +1274,7 @@ select.form-control:not([size]):not([multiple]){
     color: white;
     background-color: transparent;
 }
+
+.modal-dialog {
+    max-width: 90%!important;
+}
