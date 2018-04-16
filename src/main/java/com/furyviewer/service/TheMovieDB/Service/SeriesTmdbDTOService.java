@@ -278,11 +278,12 @@ public class SeriesTmdbDTOService {
      * @param seriesName String | Titulo de la series a buscar.
      * @param episodeNum int | Numero del episode a buscar.
      * @param season Season | Season a la que pertenece el episode.
+     * @param seriesId int | id interno de la api.
      * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la execpcion.
      */
     public void importEpisode(String seriesName, int episodeNum,
-                              com.furyviewer.domain.Season season) throws IOException {
-        int seriesId = getIdTmdbSeries(seriesName);
+                              com.furyviewer.domain.Season season, int seriesId) throws IOException {
+        //int seriesId = getIdTmdbSeries(seriesName);
         SeasonTmdbDTO se;
 
         Call<SeasonTmdbDTO> callSeason = apiTMDB.getSeason(seriesId, season.getNumber(), apikey);

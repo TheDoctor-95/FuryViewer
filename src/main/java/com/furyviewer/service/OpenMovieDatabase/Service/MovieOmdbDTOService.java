@@ -148,7 +148,7 @@ public class MovieOmdbDTOService {
     public Movie importMovieByImdbId(String imdbId) {
         MovieOmdbDTO movieOmdbDTO = getMovieByImdbId(imdbId);
 
-        Optional<Movie> mdb = movieRepository.findMovieByImdbIdExternalApi(movieOmdbDTO.getImdbID());
+        Optional<Movie> mdb = movieRepository.findMovieByImdbIdExternalApi(imdbId);
 
         if (mdb.isPresent()) {
             return mdb.get();
@@ -184,7 +184,14 @@ public class MovieOmdbDTOService {
 
         m.setDescription(stringApiCorrectorService.eraserNA(movieOmdbDTO.getPlot()));
         m.setImdbIdExternalApi(stringApiCorrectorService.eraserNA(movieOmdbDTO.getImdbID()));
-        m.setImgUrl(stringApiCorrectorService.eraserNA(movieOmdbDTO.getPoster()));
+
+        String imgURL = stringApiCorrectorService.eraserNA(movieOmdbDTO.getPoster());
+        if (!movieOmdbDTO.getPoster().equalsIgnoreCase("N/A")) {
+            m.setImgUrl(imgURL);
+        } else {
+            m.setImgUrl("https://image.ibb.co/czS1CH/noimage.jpg");
+        }
+
         m.setAwards(stringApiCorrectorService.eraserNA(movieOmdbDTO.getAwards()));
 
         m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));

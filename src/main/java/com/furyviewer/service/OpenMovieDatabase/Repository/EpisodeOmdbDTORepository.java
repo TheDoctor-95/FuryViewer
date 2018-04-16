@@ -25,6 +25,10 @@ public interface EpisodeOmdbDTORepository {
     Call<EpisodeOmdbDTO> getEpisode(@Query("apikey") String apikey, @Query("t") String title,
                                    @Query("Season") int season, @Query("Episode") int episode);
 
+    @GET("/?type=episode")
+    Call<EpisodeOmdbDTO> getEpisodebyImdbId(@Query("apikey") String apikey, @Query("i") String imdbId,
+                                    @Query("Season") int season, @Query("Episode") int episode);
+
     public static String url = "http://www.omdbapi.com/";
     public static final Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(url)

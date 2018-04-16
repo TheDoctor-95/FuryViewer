@@ -202,7 +202,8 @@ public class SeriesOmdbDTOService {
         marksService.markTransformationSeries(seriesOmdbDTO.getRatings(), ss);
 
         if(!seriesOmdbDTO.getTotalSeasons().equalsIgnoreCase("N/A")) {
-            seasonOmdbDTOService.importSeason(seriesOmdbDTO.getTitle(), Integer.parseInt(seriesOmdbDTO.getTotalSeasons()));
+            seasonOmdbDTOService.importSeason(seriesOmdbDTO.getTitle(),
+                Integer.parseInt(seriesOmdbDTO.getTotalSeasons()), seriesOmdbDTO.getImdbID());
         }
 
         return ss;
