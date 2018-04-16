@@ -3,7 +3,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 
-
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -1276,7 +1275,6 @@ select.form-control:not([size]):not([multiple]){
     background-color: transparent;
 }
 
-
-.modal-dialog{
-    max-width: 90% !important;
+.modal-dialog {
+    max-width: 90%!important;
 }
