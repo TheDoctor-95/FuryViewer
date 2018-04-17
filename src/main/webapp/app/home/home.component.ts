@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
-    loadNextEpisodes() {
+    loadNextEpisodes(){
         this.episodeService.nextEpisodes5().subscribe(
             (res: ResponseWrapper) => {
                 this.episodePending = res.json;
