@@ -11,6 +11,7 @@ import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
+import retrofit2.Response;
 
 import java.io.IOException;
 
@@ -65,13 +66,28 @@ public class SeasonOmdbDTOService {
         return season;
     }
 
+    public SeasonOmdbDTO getSeasonByImdbId(String imdbId, int seasonNum) throws IOException {
+        SeasonOmdbDTO season;
+        Call<SeasonOmdbDTO> callSeason = apiService.getSeasonByImdbId(apikey, imdbId, seasonNum);
+
+        Response<SeasonOmdbDTO> response = callSeason.execute();
+
+        if (response.isSuccessful()) {
+            season = response.body();
+        } else {
+            throw new IOException(response.message());
+        }
+
+        return season;
+    }
+
     /**
      * Convierte la informacion de una season de OMDB al formato de Furyviewer.
      * @param title String | Titulo de la serie.
      * @param totalSeasons int | Numero total de seasons de la serie.
      */
-    public void importSeason(String title, int totalSeasons) {
-        Series ss = seriesRepository.findByName(title).get();
+    public void importSeason(String title, int totalSeasons, String imdbId) {
+        Series ss = seriesRepository.findByImdb_id(imdbId).get();
 
         for (int i = 1; i <= totalSeasons; i++) {
 
@@ -82,7 +98,7 @@ public class SeasonOmdbDTOService {
                 try {
                     Season se = new Season();
 
-                    SeasonOmdbDTO seasonOmdbDTO = getSeason(title, i);
+                    SeasonOmdbDTO seasonOmdbDTO = getSeasonByImdbId(imdbId, i);
 
                     //Comprobamos que la API nos devuelve información.
                     if (seasonOmdbDTO.getResponse().equalsIgnoreCase("true")) {
@@ -102,7 +118,7 @@ public class SeasonOmdbDTOService {
                         }
 
                         episodeOmdbDTOService.
-                            importEpisode(title, numEpisodes, se);
+                            importEpisode(title, numEpisodes, se, imdbId);
                     }
 
                     //Salimos del bucle

@@ -4,6 +4,7 @@ import com.furyviewer.domain.Season;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.domain.Episode;
 import com.furyviewer.service.OpenMovieDatabase.Repository.EpisodeOmdbDTORepository;
+import com.furyviewer.service.TheMovieDB.Service.FindTmdbDTOService;
 import com.furyviewer.service.TheMovieDB.Service.SeriesTmdbDTOService;
 import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.service.util.DateConversorService;
@@ -12,6 +13,7 @@ import com.furyviewer.service.util.StringApiCorrectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
+import retrofit2.Response;
 
 import java.io.IOException;
 
@@ -49,6 +51,9 @@ public class EpisodeOmdbDTOService {
     @Autowired
     private SeriesTmdbDTOService seriesTmdbDTOService;
 
+    @Autowired
+    private FindTmdbDTOService findTmdbDTOService;
+
     /**
      * Devuelve la informacion de un episode en el formato proporcionado por OpenMovieDataBase.
      * @param title String | Titulo de la Series a buscar.
@@ -67,13 +72,28 @@ public class EpisodeOmdbDTOService {
         return episode;
     }
 
+    public EpisodeOmdbDTO getEpisodeByImdbId(String imdbId, int seasonNum, int episodeNum) throws IOException {
+        EpisodeOmdbDTO episode;
+        Call<EpisodeOmdbDTO> callEpisode = apiService.getEpisode(apikey, imdbId, seasonNum, episodeNum);
+
+        Response<EpisodeOmdbDTO> response = callEpisode.execute();
+
+        if (response.isSuccessful()) {
+            episode = response.body();
+        } else {
+            throw new IOException(response.message());
+        }
+
+        return episode;
+    }
+
     /**
      * Convierte la informacion de un episode de OMDB al formato de Furyviewer.
      * @param title String | Titulo de la serie.
      * @param totalEpisodes int | Numero total de episodes de la season.
      * @param se Season | Season a la que agregar los episodes.
      */
-    public void importEpisode(String title, int totalEpisodes, Season se) {
+    public void importEpisode(String title, int totalEpisodes, Season se, String imdbId) {
         for (int i = 1; i <= totalEpisodes; i++) {
 
             //Ponemos mote al bucle y lo utilizamos para hacer la petición hasta tres veces para asegurarnos de que
@@ -84,7 +104,7 @@ public class EpisodeOmdbDTOService {
                     Episode ep = new Episode();
 
                     //ep.setName("Episode " + i);
-                    EpisodeOmdbDTO episodeOmdbDTO = getEpisode(title, se.getNumber(), i);
+                    EpisodeOmdbDTO episodeOmdbDTO = getEpisodeByImdbId(imdbId, se.getNumber(), i);
 
                     //Comprobamos que la API nos devuelve información.
                     if (episodeOmdbDTO.getResponse().equalsIgnoreCase("true")) {
@@ -111,10 +131,10 @@ public class EpisodeOmdbDTOService {
                         ep = episodeRepository.save(ep);
 
                         System.out.println("==================\nImportado..." + title + " " + se.getNumber() + "x" +
-                            i+1 + "\n==================");
+                            i + "\n==================");
                     }
                     else {
-                        seriesTmdbDTOService.importEpisode(title, i, se);
+                        seriesTmdbDTOService.importEpisode(title, i, se, findTmdbDTOService.getIdTmdbSeriesByImdbId(imdbId));
                     }
 
                     //Salimos del bucle
