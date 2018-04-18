@@ -104,8 +104,7 @@
                     <div style="width: 100%; display: inline-block; vertical-align: top;">
                         <h1 class="nameTitle">{{series.name}}</h1>
                     </div>
-                    <div
-                        style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
+                    <div style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
                         <ngb-rating class="stars"></ngb-rating>
                         </br>
                         <p style="padding-right: 8px;">
@@ -127,11 +126,11 @@
                 <div class="row">
                     <div class="col">
                         <div ngbDropdown class="d-inline-block align-left" style="width: 100%;">
-                            <button class="btn btn-block" id="actualSeason" ngbDropdownToggle>Season
+                            <button class="btn btn-block seasonBtn" id="actualSeason" ngbDropdownToggle>Season
                                 {{actualSeason}}
                             </button>
                             <div ngbDropdownMenu aria-labelledby="actualSeason">
-                                <button class="dropdown-item" *ngFor="let season of seasons; index as i;"
+                                <button class="dropdown-item seasonBtn" *ngFor="let season of seasons; index as i;"
                                         (click)="loadEpisodes(season)">Season {{i+1}}
                                 </button>
                             </div>

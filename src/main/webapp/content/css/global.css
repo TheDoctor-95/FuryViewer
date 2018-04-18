@@ -1278,3 +1278,11 @@ select.form-control:not([size]):not([multiple]){
 .modal-dialog {
     max-width: 90%!important;
 }
+
+.seasonBtn:hover{
+    cursor: pointer;
+}
+
+.noLink:hover{
+    color: #3b3b3b;
+}
