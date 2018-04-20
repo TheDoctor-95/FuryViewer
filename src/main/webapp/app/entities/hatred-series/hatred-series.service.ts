@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { HatredSeries } from './hatred-series.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {BooleanModel} from "../../shared/model/boolean.model";
 
 @Injectable()
 export class HatredSeriesService {
@@ -37,6 +38,15 @@ export class HatredSeriesService {
             return this.convertItemFromServer(jsonResponse);
         });
     }
+
+    getIfHated(id: number): Observable<BooleanModel> {
+        console.log(`${this.resourceUrl}/SeriesId/${id}`);
+        return this.http.get(`${this.resourceUrl}/SeriesId/${id}`).map((res: Response) => {
+            console.log(res.json());
+            return res.json();
+        });
+    }
+
 
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);

@@ -21,7 +21,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -184,10 +186,12 @@ public class FavouriteSeriesResource {
 
     @GetMapping("/favourite-series/seriesId/{id}")
     @Timed
-    public ResponseEntity<FavouriteSeries> getFavUserSeries(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Boolean>> getFavUserSeries(@PathVariable Long id) {
         log.debug("REST request to get FavouriteSeries : {}", id);
-        FavouriteSeries fs = favouriteSeriesRepository.findByUserAndSeriesId(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get(), id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(fs));
+        Boolean like = favouriteSeriesRepository.selectFavouriteSeriesAndUser(id, SecurityUtils.getCurrentUserLogin());
+        Map<String, Boolean> likeMap = new HashMap<>();
+        likeMap.put("like", like);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(likeMap));
     }
 
 

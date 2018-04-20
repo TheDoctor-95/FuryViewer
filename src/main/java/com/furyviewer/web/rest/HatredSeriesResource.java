@@ -3,7 +3,9 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.HatredSeries;
 
+import com.furyviewer.domain.Series;
 import com.furyviewer.repository.HatredSeriesRepository;
+import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
@@ -18,7 +20,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -36,9 +40,12 @@ public class HatredSeriesResource {
 
     private final UserRepository userRepository;
 
-    public HatredSeriesResource(HatredSeriesRepository hatredSeriesRepository, UserRepository userRepository) {
+    private final SeriesRepository seriesRepository;
+
+    public HatredSeriesResource(HatredSeriesRepository hatredSeriesRepository, UserRepository userRepository, SeriesRepository seriesRepository) {
         this.hatredSeriesRepository = hatredSeriesRepository;
         this.userRepository = userRepository;
+        this.seriesRepository = seriesRepository;
     }
 
     /**
@@ -59,7 +66,8 @@ public class HatredSeriesResource {
         Optional<HatredSeries> existingHatredSeries = hatredSeriesRepository.findBySeriesAndUserLogin(hatredSeries.getSeries(), SecurityUtils.getCurrentUserLogin());
 
         if (existingHatredSeries.isPresent()){
-            throw new BadRequestAlertException("Serie ya añadida en Hatred", ENTITY_NAME, "hatredExist");
+            hatredSeries.setId(existingHatredSeries.get().getId());
+            hatredSeries.setHated(!existingHatredSeries.get().isHated());
         }
 
         hatredSeries.setDate(ZonedDateTime.now());
@@ -69,6 +77,20 @@ public class HatredSeriesResource {
         return ResponseEntity.created(new URI("/api/hatred-series/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/hatred-series/Series/{id}")
+    @Timed
+    public ResponseEntity<HatredSeries> createHatredSeries(@PathVariable Long id) throws URISyntaxException {
+        log.debug("REST request to save HatredSeries : {}", id);
+
+        Series ss = seriesRepository.findOne(id);
+
+        HatredSeries hs = new HatredSeries();
+        hs.setSeries(ss);
+        hs.setHated(true);
+
+        return createHatredSeries(hs);
     }
 
     /**
@@ -103,6 +125,15 @@ public class HatredSeriesResource {
     public List<HatredSeries> getAllHatredSeries() {
         log.debug("REST request to get all HatredSeries");
         return hatredSeriesRepository.findAll();
+        }
+
+        @GetMapping("/hatred-series/SeriesId/{id}")
+        @Timed
+        public ResponseEntity<Map<String, Boolean>> getIfHatred(@PathVariable Long id) {
+            log.debug("REST request to get all HatredSeries");
+            Map<String, Boolean> hateMap = new HashMap();
+            hateMap.put("like" , hatredSeriesRepository.hateSeriesIdAndUserLogin(id, SecurityUtils.getCurrentUserLogin()));
+            return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hateMap));
         }
 
     /**

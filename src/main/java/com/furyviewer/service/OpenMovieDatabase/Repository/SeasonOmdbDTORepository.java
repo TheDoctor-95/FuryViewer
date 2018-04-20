@@ -23,6 +23,9 @@ public interface SeasonOmdbDTORepository {
     @GET("/?type=season")
     Call<SeasonOmdbDTO> getSeason(@Query("apikey") String apikey, @Query("t") String title, @Query("Season") int season);
 
+    @GET("/?type=season")
+    Call<SeasonOmdbDTO> getSeasonByImdbId(@Query("apikey") String apikey, @Query("i") String imdbId, @Query("Season") int season);
+
     public static String url = "http://www.omdbapi.com/";
     public static final Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(url)

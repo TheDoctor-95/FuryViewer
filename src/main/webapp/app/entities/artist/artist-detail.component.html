@@ -1,88 +1,151 @@
 
 <div *ngIf="artist">
 
-
-
     <div class="container-fluid" style="color: #3b3b3b;">
         <div class="row" style="background-color: #d2d3d2; padding-left: 8%; padding-top: 3%;">
             <div class="col-2" style="width: 100%">
                 <img src="{{artist.imgUrl}}" class="img-rounded card-img-top imgFilm"
                      style="display: block; height: 18vw; width: 100%;">
-                <div class="infoBox">
 
-                    <!-- Fecha nacimiento -->
-                    <div class="styleArtist" style="margin-top: 10px;">
+                <div class="infoBar">
+
+                    <div class="row">
+
+                        <div class="col">
+                            <i class="fa fa-smile-o fa-2x" style="font-size:1.4em;"></i>
+
+                        </div>
+                        <div class="col text-right">
+                            <i class="fa fa-frown-o fa-2x" style="font-size:1.4em;"></i>
+                        </div>
+
+
+                    </div>
+                    <div class="progress">
+
+
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%"
+                             aria-valuenow="75"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                </div>
+                <div class="infoBox" *ngIf="!(artist.birthdate == null && artist.deathdate == null && artist.country == null)">
+
+                    <!-- Birthdate -->
+                    <div class="styleArtist" *ngIf="artist.birthdate != null">
                         <div class="iconoFilm">
                             <img src="img/cake.png" height="24px" width="24px"/>
                         </div>
                         <div class="infoFilm">
-                            <p class="infoArtist">{{artist.birthdate | date:'mediumDate'}}</p>
+                            <span style="margin-left: 5px; font-size: 13px;">{{artist.birthdate | date:'mediumDate'}}</span>
                         </div>
                     </div>
-                    <!-- Fecha defuncion -->
-                    <div class="styleArtist">
+                    <!-- Deathdate -->
+                    <div class="styleArtist" *ngIf="artist.deathdate != null">
                         <div class="iconoFilm">
-                            <img src="img/death.png" height="24px" width="24px"/>
+                            <img src="img/icon.png" height="24px" width="24px"/>
                         </div>
                         <div class="infoFilm">
-                            <p class="infoArtist">{{artist.deathdate | date:'mediumDate'}}</p>
+                            <span
+                                style="margin-left: 5px; font-size: 13px;">{{artist.deathdate | date:'mediumDate'}}</span>
                         </div>
                     </div>
-                    <!-- Pais -->
-                    <div class="styleArtist">
+
+                    <!-- Ended -->
+                    <div class="styleArtist" *ngIf="artist.country?.id != null">
                         <div class="iconoFilm">
                             <img src="img/earth.png" height="24px" width="24px"/>
                         </div>
-                        <div *ngIf="artist.country" class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;" [routerLink]="['/country', artist.country?.id]">{{artist.country?.name}}</span>
+                        <div class="infoFilm">
+                            <span style="margin-left: 5px; font-size: 13px;">{{artist.country?.name}}</span>
                         </div>
                     </div>
 
-
                 </div>
             </div>
-            &nbsp;
-            <div class="col-6" style="height: 100%; margin-bottom: 25px;">
+            
+            <div class="col-7" style="height: 100%; margin-bottom: 25px;">
                 <div class="whiteBox" style="display: table; width: 100%;">
                     <div style="width: 100%; display: inline-block; vertical-align: top;">
-                        <h1 class="nameTitle">{{artist.name}}</h1>
-                    </div>
-                    <div style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
-                        <ngb-rating class="stars" ></ngb-rating>
-                        </br>
-                        <p style="padding-right: 8px;">
-                            <b class="furyColor"> __</b> de 5 <i class="fa fa-star furyColor"></i></p>
+                        <h1 class="nameTitle" style="padding: 2.5% 8px">{{artist.name}}</h1>
                     </div>
                 </div>
-
+                <ng-template #notas id="divShowHide">
+                    <p class="infoWebs1">IMDB</p>
+                    <p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
+                </ng-template>
                 &nbsp;
-                <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
-                    <span style="font-family: Roboto; font-size: 15px; text-align: left;">{{artist.biography}}</span>
+                <div *ngIf="artist.biography != null  && artist.biography != ''" class="whiteBox" style="display: block; padding: 18px; text-align: left;">
+                    <span style="font-size: 15px; text-align: left;">{{artist.biography}}</span>
                 </div>
-                &nbsp;
 
+
+                <br *ngIf="artist.biography != null" />
+
+
+                <div class="whiteBox" style="display: block; padding: 18px;">
+
+                </div>
 
             </div>
-
-
 
             <div class="col-3" style="text-align: center;">
-
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
-                    <div class="boxList col-10">
-                        <i id="icona" class="fa fa-heart" style="color: #ef9800;"></i> Favorita
+                    <div class="boxList col-10" style="padding: 10px 0px"><i id="icona" class="fa fa-heart" style="color: #ef9800;"></i>
+                        Favorite
                     </div>
                 </div>
 
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
 
-                    <div class="boxList col-10"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
+                    <div class="boxList col-10" style="padding: 10px 0px"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
                 </div>
 
                 &nbsp;
+                <div class="row">
+                    <div class="col-10">
+                        <div id="boxReparto" style="width: 100% !important;">
+                            <div id="reparto">OTHER ARTISTS</div>
+                            <div class="container-fluid">
+                                <div class="row">
 
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left: 30px; padding-right: 30px;">
+                                <div *ngFor="let artist of artists" class="col-6"
+                                     style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
+                                    <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
+                                        <img class="imgReparto"
+                                             style="width: 80px; border-radius: 5px;"
+                                             src="{{artist.imgUrl}}"/>
+                                        <div style="font-size: 15px;  margin-top: 6px;">{{artist.name}}</div>
+                                    </a>
+                                </div>
+                                <div
+                                    style="display: inline-block; width: 100%; text-align: center; margin-bottom: 20px;">
+                                    <div class="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]">
+                                        +
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left: 30px; padding-right: 30px;">
+                                <div *ngFor="let artist of artists" class="col-6"
+                                     style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
+                                    <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
+                                        <img style="width: 80px;" src="{{artist.imgUrl}}"/>
+                                        <div style="font-size: 15px;">{{artist.name}}</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
+</div>
 
 </div>
+

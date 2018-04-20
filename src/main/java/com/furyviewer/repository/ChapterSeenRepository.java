@@ -24,7 +24,9 @@ public interface ChapterSeenRepository extends JpaRepository<ChapterSeen, Long> 
 
     List<ChapterSeen> findBySeenAndUserLogin(boolean seen, String userLogin);
 
-    @Query("SELECT cs.seen FROM ChapterSeen cs WHERE cs.user.login=:login AND cs.episode.id= :id ")
+    @Query("SELECT cs.seen FROM ChapterSeen cs WHERE cs.user.login= :login AND cs.episode.id= :id ")
     boolean isSeen(@Param("login") String login, @Param("id") Long id);
+
+    Optional<ChapterSeen> findByUserLoginAndEpisodeId(String login, Long id );
 
 }

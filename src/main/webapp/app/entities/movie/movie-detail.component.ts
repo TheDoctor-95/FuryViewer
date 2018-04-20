@@ -168,8 +168,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
     loadTrailer(id: number){
         this.socialService.movieTrailer(id).subscribe( (trailerLink) => {
-           this.trailer = this.sanitizer.bypassSecurityTrustResourceUrl(trailerLink.url);
-           console.log(this.trailer);
+            if(trailerLink.url!=null) {
+                this.trailer = this.sanitizer.bypassSecurityTrustResourceUrl(trailerLink.url);
+                console.log(this.trailer);
+            }
         });
     }
 

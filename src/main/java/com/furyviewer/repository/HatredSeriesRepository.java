@@ -33,4 +33,7 @@ public interface HatredSeriesRepository extends JpaRepository<HatredSeries, Long
     @Query("select count(h.hated) from HatredSeries h where h.series.id=:id")
     Long countHatredSeries(@Param("id") Long id);
 
+    @Query("select h.hated from HatredSeries h where h.series.id = :id AND h.user.login = :login")
+    Boolean hateSeriesIdAndUserLogin(@Param("id") Long id, @Param("login") String login);
+
 }

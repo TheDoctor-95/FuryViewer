@@ -15,7 +15,7 @@
                         <div class="iconoFilm">
                             <img src="img/director-chair.png" height="24px" width="24px"/>
                         </div>
-                        <div *ngIf="movie.director" class="infoFilm">
+                        <div class="infoFilm">
                             <a [routerLink]="['/artist', movie.director?.id]" class="infoArtist">{{movie.director?.name}}</a>
                         </div>
                     </div>
@@ -24,12 +24,12 @@
                         <div class="iconoFilm">
                             <img src="img/typewriter.png" height="24px" width="24px"/>
                         </div>
-                        <div *ngIf="movie.scriptwriter" class="infoFilm">
+                        <div class="infoFilm">
                             <a [routerLink]="['/artist', movie.scriptwriter?.id]" class="infoArtist">{{movie.scriptwriter?.name}}</a>
                         </div>
                     </div>
                     <!-- Genero -->
-                    <div class="styleArtist">
+                    <div class="styleArtist" *ngIf="movie.genres.length!= 0">
                         <div class="iconoFilm">
                             <img src="img/masks.png" height="24px" width="24px"/>
                         </div>
@@ -38,7 +38,7 @@
                             </span>
                     </div>
                     <!-- Duracion -->
-                    <div class="styleArtist" *ngIf="movie.duration != null">
+                    <div class="styleArtist" *ngIf="movie.duration != null && movie.duration != -1">
                         <div class="iconoFilm">
                             <img src="img/time.png" height="24px" width="24px"/>
                         </div>
@@ -111,10 +111,10 @@
                     </span>
                 </ng-template>
                 &nbsp;
-                <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
+                <div *ngIf="movie.description != null" class="whiteBox" style="display: block; padding: 18px; text-align: left;">
                     <span style="font-family: Roboto; font-size: 15px; text-align: left;">{{movie.description}}</span>
                 </div>
-                &nbsp;
+                <br *ngIf="movie.description != null" />
                 <div class="whiteBox" style="display: block; padding: 18px;">
                     <div style="width: 100%">
 
@@ -158,8 +158,6 @@
 
             </div>
 
-
-
             <div class="col-3" style="text-align: center;">
 
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
@@ -190,38 +188,28 @@
 
                 &nbsp;
 
-                <div class="row">
+                <div *ngIf="trailer" class="row">
                     <div class="col-10">
-                        <div class="embed-responsive embed-responsive-16by9">
+                        <div  class="embed-responsive embed-responsive-16by9">
 
                             <iframe [src]="trailer" frameborder="0" allowfullscreen></iframe>
 
                         </div>
                     </div>
-
                 </div>
 
+                <br *ngIf="trailer" />
 
-                &nbsp;
-
-                <div class="row">
+                <div *ngIf="artistMovie.length!= 0" class="row">
                     <div class="col-10">
                         <div id="boxReparto" style="width: 100% !important;">
                             <div id="reparto">CAST</div>
-                            <div class="container-fluid">
-                                <div class="row">
-
-                                </div>
-                            </div>
                             <div class="row" style="padding-left: 20px; padding-right: 30px;">
                                 <div *ngFor="let artist of artistMovie" class="col-6" style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
-                                    <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
+                                    <span [routerLink]="['/artist', artist?.id]">
                                         <img class="imgReparto" style="width: 80px; border-radius: 5px;" src="{{artist.imgUrl}}"/>
                                         <div style="font-size: 13px; font-family: Roboto; margin-top: 6px;">{{artist.name}}</div>
-                                    </a>
-                                </div>
-                                <div style="display: inline-block; width: 100%; text-align: center; margin-bottom: 20px;">
-                                    <div class="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]" >+</div>
+                                    </span>
                                 </div>
                             </div>
                         </div>

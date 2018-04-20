@@ -104,8 +104,7 @@
                     <div style="width: 100%; display: inline-block; vertical-align: top;">
                         <h1 class="nameTitle">{{series.name}}</h1>
                     </div>
-                    <div
-                        style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
+                    <div style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
                         <ngb-rating class="stars"></ngb-rating>
                         </br>
                         <p style="padding-right: 8px;">
@@ -127,11 +126,11 @@
                 <div class="row">
                     <div class="col">
                         <div ngbDropdown class="d-inline-block align-left" style="width: 100%;">
-                            <button class="btn btn-block" id="actualSeason" ngbDropdownToggle>Season
+                            <button class="btn btn-block seasonBtn" id="actualSeason" ngbDropdownToggle>Season
                                 {{actualSeason}}
                             </button>
                             <div ngbDropdownMenu aria-labelledby="actualSeason">
-                                <button class="dropdown-item" *ngFor="let season of seasons; index as i;"
+                                <button class="dropdown-item seasonBtn" *ngFor="let season of seasons; index as i;"
                                         (click)="loadEpisodes(season)">Season {{i+1}}
                                 </button>
                             </div>
@@ -147,7 +146,7 @@
                             <td class="col-1"><strong>{{chapter.number}}</strong></td>
                             <td class="col-7" style="text-align: left;"> {{chapter.title}}</td>
                             <td class="col-3">{{chapter.releaseDate | date: "mediumDate"}}</td>
-                            <td class="col-1"><i class="fa fa-eye"
+                            <td class="col-1" *ngIf="chapter" (click)="markChapter(chapter.id)"><i  style="font-size: 18pt;" class="fa fa-eye"
                                                  [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"></i></td>
                         </tr>
                     </table>
@@ -188,14 +187,14 @@
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
                     <div class="col-10" style="padding-left: 0px; padding-right: 0px;">
                         <div class="boxList" style="display: inline-block; width: 49%;" (click)="like()"
-                             [ngStyle]="{'background-color':fav.liked ? '#ef9800' : 'white', 'color':fav.liked ? 'white' : '#ef9800'}">
+                             [ngStyle]="{'background-color':fav ? '#ef9800' : 'white', 'color':fav ? 'white' : '#ef9800'}">
                             <i class="fa fa-heart" style="color: #ef9800;"
-                               [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorite
+                               [ngStyle]="{'color':fav ? 'white' : '#ef9800'}"></i> Favorite
                         </div>
                         <div class="boxList" style="display: inline-block; width: 49%;" (click)="hated()"
-                             [ngStyle]="{'background-color':hate.hated ? '#ef9800' : 'white', 'color':hate.hated ? 'white' : '#ef9800'}">
+                             [ngStyle]="{'background-color':hate ? '#ef9800' : 'white', 'color':hate ? 'white' : '#ef9800'}">
                             <i class="fa fa-thumbs-down" style="color: #ef9800;"
-                               [ngStyle]="{'color':hate.hated ? 'white' : '#ef9800'}"></i> Hatred
+                               [ngStyle]="{'color':hate ? 'white' : '#ef9800'}"></i> Hatred
                         </div>
                     </div>
                 </div>
