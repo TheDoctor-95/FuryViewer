@@ -1,0 +1,171 @@
+
+#banner {
+    background-attachment: scroll, scroll, scroll, fixed;
+    background-color: #645862;
+    background-image: url(../../../content/images/inicio.jpg);
+    background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+    color: #fff;
+    cursor: default;
+    text-align: center;
+
+}
+
+.inner {
+    letter-spacing: 0.1em;
+    font-size: 1.3em;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 300;
+    padding-bottom: 3%;
+    padding-top: 6%;
+}
+
+.inner p {
+    margin-top: 5%;
+}
+
+#section2 {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+#section2 img{
+    background-color: black;
+    border-radius: 58px;
+    padding: 4px;
+}
+
+.video-section2 {
+    width: 74%;
+    height: 339px;
+    background-color: black;
+    margin-left: 13%;
+    margin-right: 7%;
+}
+
+.video-section2 i {
+    color: white;
+    margin-top: 22%;
+    font-size: 5em;
+}
+.fondo{
+    background-color: #F3F6FA;
+}
+
+.text-section2 {
+   /* letter-spacing: 0.2em;
+    font-size: 1.3em;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 300;*/
+    font-size: 1.5em;
+    letter-spacing: 0.1em;
+    color: #7C8081;
+    font-weight: 300;
+    line-height: 1.75em;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+
+    padding-left: 19%;
+    padding-right: 19%;
+    margin-top: 4%;
+    margin-bottom: 5%;
+
+}
+
+#section3 {
+    padding-bottom: 5%;
+}
+
+.all-element {
+    margin-top: 30%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.count {
+    font-size: 2.3em;
+}
+
+.titol-count {
+    font-size: 1em;
+    text-transform: uppercase;
+    color:grey;
+}
+
+.icona {
+    margin-bottom: 6%;
+}
+
+.fila2 {
+    margin-bottom: 12%;
+}
+
+.count-all {
+    background-color: white;
+}
+
+.section4-all {
+    padding: 5em;
+    background-attachment: scroll, scroll, scroll, fixed;
+    background-color: #645862;
+    background-image: url(../../../content/images/inicio.jpg);
+}
+
+.button {
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 2px;
+    min-width: 18em;
+    padding: 1rem;
+    /* line-height: 3.75em; */
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid white;
+    color: white;
+}
+.xarxes, .copyright{
+    color:white;
+
+}
+.xarxes{
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+}
+
+.button1:hover{
+    opacity: 0.8;
+}
+.button2:hover{
+    background-color: #ffffff57;
+}
+
+.xarxes i{
+    padding: 1rem;
+    border-radius: 100px;
+    min-width: 4rem;
+}
+.xarxes i:hover{
+    opacity: 0.8;
+}
+.xarxes:first-child{
+    background-color: #db6b67;
+}
+
+.barra{
+    background-color: #ffffff57;
+    position: absolute;
+}
+
+
+
+#section2 > .hej:before{
+    border-bottom: solid 1.5px;
+    border-top: solid 1.5px;
+    content: '';
+    height: 7px;
+    opacity: 0.1;
+    position: absolute;
+    top: 1.75em;
+    width: 43%;
+}

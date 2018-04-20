@@ -1,72 +1,212 @@
-<div>
-    <h2>
-        <span jhiTranslate="furyViewerApp.company.home.title">Companies</span>
-        <button class="btn btn-primary float-right jh-create-entity create-company" [routerLink]="['/', { outlets: { popup: ['company-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="furyViewerApp.company.home.createLabel">
-            Create new Company
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-    </div>
-    <br/>
-    <div class="table-responsive" *ngIf="companies">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="furyViewerApp.company.name">Name</span></th>
-            <th><span jhiTranslate="furyViewerApp.company.description">Description</span></th>
-            <th><span jhiTranslate="furyViewerApp.company.fundingDate">Funding Date</span></th>
-            <th><span jhiTranslate="furyViewerApp.company.clossingDate">Clossing Date</span></th>
-            <th><span jhiTranslate="furyViewerApp.company.imgUrl">Img Url</span></th>
-            <th><span jhiTranslate="furyViewerApp.company.urlWeb">Url Web</span></th>
-            <th><span jhiTranslate="furyViewerApp.company.country">Country</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let company of companies ;trackBy: trackId">
-                <td><a [routerLink]="['../company', company.id ]">{{company.id}}</a></td>
-                <td>{{company.name}}</td>
-                <td>{{company.description}}</td>
-                <td>{{company.fundingDate | date:'mediumDate'}}</td>
-                <td>{{company.clossingDate | date:'mediumDate'}}</td>
-                <td>{{company.imgUrl}}</td>
-                <td>{{company.urlWeb}}</td>
-                <td>
-                    <div *ngIf="company.country">
-                        <a [routerLink]="['../country', company.country?.id ]" >{{company.country?.name}}</a>
+<div class="barra text-right">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 ">
+                <div class="row">
+                    <div class="col">
+                        bla ba
                     </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../company', company.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'company/'+ company.id + '/edit'} }]"
-                                replaceUrl="true"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'company/'+ company.id + '/delete'} }]"
-                                replaceUrl="true"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
+                    <div class="col">
+                        lolo
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <section id="banner">
+
+            <div class="inner">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2><img src="../../../content/images/Logo.png" width="350"/></h2>
+                        <p> ¿Eres un fanático de las series y las peliculas? <br/>
+                            <strong>Fury Viewer</strong> es para ti </p>
+                        <!--<footer>
+                            <ul class="buttons vertical">
+                                <li><a href="#main" class="button fit scrolly" style="border:none; background: none;"><span class="icon fa-angle-down fa-5x"></span></a></li>
+                            </ul>
+                        </footer>-->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <i class="fa fa-arrow-down fa-2x" style="color:white; margin-top: 4%;"></i>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+<section id="section2" class="fondo">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-5" style="border-top: 3px solid #a2a2a259;margin-top: 4%;">
+            </div>
+            <div class="col-2">
+                <h2><img src="../../../content/images/Logo.png" width="100"/></h2>
+
+            </div>
+            <div class="col-5" style="border-top: 3px solid #a2a2a259; margin-top: 4%;">
+            </div>
+        </div>
+        <div class="all-section2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-section2">
+                        EN <strong> FURY VIEWER </strong> PODRAS GESTIONAR TODAS TUS
+                        SERIES Y PELICULAS, Y VER TODA
+                        LA INFORAMCIÓN SOBRE ELLAS.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="video-section2">
+                        <i class="fa fa-video-camera fa-4px" style="color:white;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="section3" class="fondo">
+    <div class="container">
+        <div class="count-all">
+            <div class="row">
+                <div class="col-12">
+                    <div class="fila1">
+
+                        <div class="row">
+
+                            <div class="col">
+                                <div class="all-element">
+                                    <div class="icona">
+                                        <i class="fa fa-video-camera fa-4x"></i>
+                                    </div>
+                                    <div class="count">
+                                        1500
+                                    </div>
+                                    <div class="titol-count">
+                                        Peliculas
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="all-element">
+                                    <div class="icona">
+                                        <i class="fa fa-heart fa-4x"></i>
+                                    </div>
+                                    <div class="count">
+                                        900
+                                    </div>
+                                    <div class="titol-count">
+                                        Series
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="all-element">
+                                    <div class="icona">
+                                        <i class="fa fa-comments fa-4x"></i>
+                                    </div>
+                                    <div class="count">
+                                        200
+                                    </div>
+                                    <div class="titol-count">
+                                        Comentarios
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fila2">
+                        <div class="row">
+                            <div class="col">
+                                <div class="all-element">
+                                    <div class="icona">
+                                        <i class="fa fa-thumbs-up fa-4x"></i>
+                                    </div>
+                                    <div class="count">
+                                        120
+                                    </div>
+                                    <div class="titol-count">
+                                        Me Gustas
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="all-element">
+                                    <div class="icona">
+                                        <i class="fa fa-database fa-4x"></i>
+                                    </div>
+                                    <div class="count">
+                                        1500
+                                    </div>
+                                    <div class="titol-count">
+                                        en BBDD
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="all-element">
+                                    <div class="icona">
+                                        <i class="fa fa-video-camera fa-4x"></i>
+                                    </div>
+                                    <div class="count">
+                                        1500
+                                    </div>
+                                    <div class="titol-count">
+                                        Peliculas
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="section4" class="fondo">
+    <div class="container-fluid">
+        <div class="section4-all">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-section4">
+                        LISTO PARA EMPEZAR?
+                    </div>
+                    <div class="buttons">
+                        <a class="button button1" style="color:white; background-color: orange; border-color:orange">Registrate</a>
+                        <a class="button button2" style="color:white; margin-left: 2%">Entra</a>
+                    </div>
+
+                    <div class="xarxes">
+                        <div class="row">
+                            <div class="col-12">
+                                <i class="fa fa-instagram fa-2x" style="background-color: #db6b67;"></i>
+                                <i class="fa fa-facebook fa-2x" style="background-color: #7490c3;"></i>
+                                <i class="fa fa-twitter fa-2x" style="background-color: #70aecd;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="copyright">
+                        &copy; FuryViewer
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

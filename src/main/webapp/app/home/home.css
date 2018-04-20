@@ -92,7 +92,6 @@ input:checked + .sliderinv:before {
     padding: 5px 14px;
     padding-bottom: 5px;
     font-size: 20px;
-    font-weight: bold;
 
 }
 
@@ -105,7 +104,6 @@ input:checked + .sliderinv:before {
     padding: 5px 14px;
     padding-bottom: 5px;
     font-size: 20px;
-    font-weight: bold;
 
 }
 
@@ -130,7 +128,7 @@ input:checked + .sliderinv:before {
 }
 
 .seriesTitle{
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 6px;
 }
 

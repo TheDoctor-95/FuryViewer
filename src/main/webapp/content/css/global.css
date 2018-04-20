@@ -3,7 +3,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 
-
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -1255,13 +1254,24 @@ select.form-control:not([size]):not([multiple]){
     padding-bottom: 4.5%;
 }
 
+.modal-title{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .modal-title > button:hover{
     background-color: transparent !important;
 }
 
+.modal-content > .modal-body > .card-body  h4 {
+    font-weight: unset !important;
+}
+
+
 #actualSeason{
     background-color: orange !important;
     color:white !important;
+
 }
 
 .imgReparto:hover{
@@ -1278,6 +1288,25 @@ select.form-control:not([size]):not([multiple]){
 
 .modal-dialog {
     max-width: 90%!important;
+}
+
+    #plus_watchlist{
+    display: inline-block;
+    margin-top: 2vw;
+    border: 2px solid #ef9800;
+    color: #ef9800;
+    border-radius: 30px;
+    padding: 5px 14px;
+    padding-bottom: 5px;
+    font-size: 20px;
+
+}
+
+#plus_watchlist:hover{
+    cursor: pointer;
+    background-color: #ef9800;
+    color: white;
+
 }
 
 .seasonBtn:hover{
