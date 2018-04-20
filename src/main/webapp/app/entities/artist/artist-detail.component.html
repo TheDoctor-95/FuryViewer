@@ -30,7 +30,7 @@
                     </div>
 
                 </div>
-                <div class="infoBox">
+                <div class="infoBox" *ngIf="!(artist.birthdate == null && artist.deathdate == null && artist.country == null)">
 
                     <!-- Birthdate -->
                     <div class="styleArtist" *ngIf="artist.birthdate != null">
@@ -58,24 +58,17 @@
                             <img src="img/earth.png" height="24px" width="24px"/>
                         </div>
                         <div class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;" [routerLink]="['/country', artist.country?.id]">{{artist.country?.name}}</span>
+                            <span style="margin-left: 5px; font-size: 13px;">{{artist.country?.name}}</span>
                         </div>
                     </div>
 
                 </div>
             </div>
+            
             <div class="col-7" style="height: 100%; margin-bottom: 25px;">
                 <div class="whiteBox" style="display: table; width: 100%;">
                     <div style="width: 100%; display: inline-block; vertical-align: top;">
-                        <h1 class="nameTitle">{{artist.name}}</h1>
-                    </div>
-                    <div style="display: table-cell; vertical-align: middle; text-align: right; padding-right: 5px;">
-                        <ngb-rating class="stars"></ngb-rating>
-                        </br>
-                        <p style="padding-right: 8px;">
-                        <div id="plus" class="fa fa-plus-circle furyColor" [ngbPopover]="notas" placement="bottom"
-                             triggers="mouseenter:mouseleave"></div>
-                        <b class="furyColor"> 3.5</b> de 5 <i class="fa fa-star furyColor"></i></p>
+                        <h1 class="nameTitle" style="padding: 2.5% 8px">{{artist.name}}</h1>
                     </div>
                 </div>
                 <ng-template #notas id="divShowHide">
@@ -83,46 +76,30 @@
                     <p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
                 </ng-template>
                 &nbsp;
-                <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
+                <div *ngIf="artist.biography != null  && artist.biography != ''" class="whiteBox" style="display: block; padding: 18px; text-align: left;">
                     <span style="font-size: 15px; text-align: left;">{{artist.biography}}</span>
                 </div>
-                &nbsp;
 
 
-
-                <br/>
+                <br *ngIf="artist.biography != null" />
 
 
                 <div class="whiteBox" style="display: block; padding: 18px;">
-                    <div style="width: 100%">
-                        <div style="display: block;">
-                            <div style="display: inline-block; width: 15%; vertical-align: top;">
-                                <img src="img/foto.JPG" class="imgComent"/>
-                            </div>
-                            <div style="display: inline-block; width: 83%">
-                                    <textarea name="comentario" style="width: 100%; font-size: 13px;" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div style="display: block; width: 100%">
-                            <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
-                                <button id="btnComen">COMMENT</button>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
 
             <div class="col-3" style="text-align: center;">
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
-                    <div class="boxList col-10"><i id="icona" class="fa fa-heart" style="color: #ef9800;"></i>
+                    <div class="boxList col-10" style="padding: 10px 0px"><i id="icona" class="fa fa-heart" style="color: #ef9800;"></i>
                         Favorite
                     </div>
                 </div>
 
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
 
-                    <div class="boxList col-10"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
+                    <div class="boxList col-10" style="padding: 10px 0px"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
                 </div>
 
                 &nbsp;
