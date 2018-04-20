@@ -7,7 +7,7 @@ import com.furyviewer.domain.Season;
 import com.furyviewer.domain.Series;
 import com.furyviewer.repository.*;
 import com.furyviewer.security.SecurityUtils;
-import com.furyviewer.service.dto.EpisodeSerieDTO;
+import com.furyviewer.service.dto.util.EpisodeSerieDTO;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
 import com.furyviewer.web.rest.EpisodeResource;
 import org.slf4j.Logger;

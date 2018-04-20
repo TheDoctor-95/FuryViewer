@@ -65,7 +65,15 @@ public class MovieStatsResource {
 
         Optional<MovieStats> aux = movieStatsRepository.findByUserAndMovieId(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get(), movieStats.getMovie().getId());
 
-        if (aux.isPresent()) movieStats.setId(aux.get().getId());
+        if (aux.isPresent()) {
+            if(aux.get().getStatus()!=null){
+                if (movieStats.getStatus().toString().equalsIgnoreCase(aux.get().getStatus().toString())) {
+                    movieStats.setStatus(null);
+                }
+            }
+
+            movieStats.setId(aux.get().getId());
+        }
 
         movieStats.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
         movieStats.setDate(ZonedDateTime.now());

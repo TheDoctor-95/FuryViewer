@@ -1,4 +1,4 @@
-package com.furyviewer.service.dto;
+package com.furyviewer.service.dto.util;
 
 import java.time.LocalDate;
 

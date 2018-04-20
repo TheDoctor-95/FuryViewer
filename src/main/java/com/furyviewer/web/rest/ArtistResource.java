@@ -16,7 +16,7 @@ import com.furyviewer.service.dto.TheMovieDB.Artist.CompleteArtistTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.SimpleArtistTmdbDTO;
 import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.service.util.EpisodeActorsService;
-import com.furyviewer.service.util.MultimediaActorsDTO;
+import com.furyviewer.service.dto.util.MultimediaActorsDTO;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -35,7 +35,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**

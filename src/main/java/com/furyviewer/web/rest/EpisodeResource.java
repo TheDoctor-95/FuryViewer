@@ -5,7 +5,7 @@ import com.furyviewer.domain.Episode;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.EpisodeOmdbDTOService;
-import com.furyviewer.service.dto.EpisodeSerieDTO;
+import com.furyviewer.service.dto.util.EpisodeSerieDTO;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
 import com.furyviewer.service.util.EpisodeService;

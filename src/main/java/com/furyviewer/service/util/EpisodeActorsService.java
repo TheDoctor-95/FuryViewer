@@ -1,12 +1,10 @@
 package com.furyviewer.service.util;
 
 import com.furyviewer.domain.Artist;
-import com.furyviewer.domain.Movie;
-import com.furyviewer.domain.Multimedia;
-import com.furyviewer.domain.Series;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.repository.MovieRepository;
+import com.furyviewer.service.dto.util.MultimediaActorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
