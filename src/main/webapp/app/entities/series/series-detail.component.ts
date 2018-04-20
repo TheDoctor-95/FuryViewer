@@ -81,6 +81,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadScriptwriter(params['id']);
             this.loadSeasons(params['id']);
             this.loadActualSeason(params['id']);
+
+
         });
         this.registerChangeInSeries();
 
