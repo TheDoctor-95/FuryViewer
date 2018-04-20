@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { FavouriteSeries } from './favourite-series.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {BooleanModel} from "../../shared/model/boolean.model";
 
 @Injectable()
 export class FavouriteSeriesService {
@@ -42,6 +43,11 @@ export class FavouriteSeriesService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
+        });
+    }
+    getIfLiked(id: number): Observable<BooleanModel> {
+        return this.http.get(`${this.resourceUrl}/seriesId/${id}`).map((res: Response) => {
+            return res.json();
         });
     }
 

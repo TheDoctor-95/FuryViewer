@@ -44,7 +44,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     director: Artist;
     scripwriter: Artist;
     series: Series;
-    fav: FavouriteMovie;
+    fav: boolean;
     hate: HatredMovie;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
@@ -60,15 +60,14 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private seasonService: SeasonService,
         private episodeService: EpisodeService,
         config: NgbRatingConfig,
-        private favouriteSeriesService: FavouriteSeriesService
+        private favouriteSeriesService: FavouriteSeriesService,
 ) {
     this.director = new Artist();
     this.director.name="";
     this.scripwriter = new Artist();
     this.scripwriter.name="";
     config.max = 5;
-        this.fav = new FavouriteSeries();
-        this.fav.liked=false;
+        this.fav=false;
         this.hate = new HatredSeries();
         this.hate.hated=false;
 }
@@ -81,7 +80,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadScriptwriter(params['id']);
             this.loadSeasons(params['id']);
             this.loadActualSeason(params['id']);
-
+            this.loadFav(params['id']);
 
         });
         this.registerChangeInSeries();
@@ -160,6 +159,12 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         window.history.back();
     }
 
+    loadFav(id: number){
+        this.favouriteSeriesService.getIfLiked(id).subscribe((fav) => {
+            this.fav=fav.like;
+        })
+    }
+
     ngOnDestroy() {
         this.subscription.unsubscribe();
         this.eventManager.destroy(this.eventSubscriber);
@@ -184,10 +189,12 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     private subscribeToSaveResponseLike(result: Observable<FavouriteSeries>) {
         result.subscribe((res: FavouriteSeries) =>
             this.onSaveSuccessLike(res), (res: Response) => this.onSaveErrorLike());
+
     }
 
     private onSaveSuccessLike(result: FavouriteSeries) {
         this.eventManager.broadcast({ name: 'favouriteSeriesListModification', content: 'OK'});
+        this.loadFav(this.series.id);
     }
 
     private onSaveErrorLike() {

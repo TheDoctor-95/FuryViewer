@@ -187,9 +187,9 @@
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
                     <div class="col-10" style="padding-left: 0px; padding-right: 0px;">
                         <div class="boxList" style="display: inline-block; width: 49%;" (click)="like()"
-                             [ngStyle]="{'background-color':fav.liked ? '#ef9800' : 'white', 'color':fav.liked ? 'white' : '#ef9800'}">
+                             [ngStyle]="{'background-color':fav ? '#ef9800' : 'white', 'color':fav ? 'white' : '#ef9800'}">
                             <i class="fa fa-heart" style="color: #ef9800;"
-                               [ngStyle]="{'color':fav.liked ? 'white' : '#ef9800'}"></i> Favorite
+                               [ngStyle]="{'color':fav ? 'white' : '#ef9800'}"></i> Favorite
                         </div>
                         <div class="boxList" style="display: inline-block; width: 49%;" (click)="hated()"
                              [ngStyle]="{'background-color':hate.hated ? '#ef9800' : 'white', 'color':hate.hated ? 'white' : '#ef9800'}">
