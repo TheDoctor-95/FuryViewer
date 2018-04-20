@@ -23,6 +23,14 @@ export class ChapterSeenService {
         });
     }
 
+    createId(id: number): Observable<ChapterSeen> {
+
+        return this.http.post(`${this.resourceUrl}/chapterId/${id}`, "").map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
     update(chapterSeen: ChapterSeen): Observable<ChapterSeen> {
         const copy = this.convert(chapterSeen);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {

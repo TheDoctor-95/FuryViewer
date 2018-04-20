@@ -18,6 +18,9 @@ import {EpisodeService} from "../episode/episode.service";
 import {EpisodeSeasonModel} from "../../shared/model/EpisodeSeason.model";
 import {FavouriteSeriesService} from "../favourite-series/favourite-series.service";
 import {Observable} from "rxjs/Observable";
+import {HatredSeriesService} from "../hatred-series/hatred-series.service";
+import {ChapterSeen} from "../chapter-seen/chapter-seen.model";
+import {ChapterSeenService} from "../chapter-seen/chapter-seen.service";
 
 @Component({
     selector: 'jhi-series-detail',
@@ -45,12 +48,13 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     scripwriter: Artist;
     series: Series;
     fav: boolean;
-    hate: HatredMovie;
+    hate: boolean;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
     seasons: number[];
     chapters: EpisodeSeasonModel;
     actualSeason: number;
+    idSeasonActual: number;
     constructor(
         private eventManager: JhiEventManager,
         private seriesService: SeriesService,
@@ -61,6 +65,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private episodeService: EpisodeService,
         config: NgbRatingConfig,
         private favouriteSeriesService: FavouriteSeriesService,
+        private hatredSeriesService: HatredSeriesService,
+        private chapterSeenService: ChapterSeenService
 ) {
     this.director = new Artist();
     this.director.name="";
@@ -68,8 +74,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     this.scripwriter.name="";
     config.max = 5;
         this.fav=false;
-        this.hate = new HatredSeries();
-        this.hate.hated=false;
+
+        this.hate=false;
 }
 
     ngOnInit() {
@@ -80,6 +86,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadScriptwriter(params['id']);
             this.loadSeasons(params['id']);
             this.loadActualSeason(params['id']);
+
+            this.loadHate(params['id']);
             this.loadFav(params['id']);
 
         });
@@ -111,9 +119,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         )
     }
 
-
-
     loadEpisodes(id: number){
+        this.idSeasonActual=id;
         this.seasonNumberFind(id);
         this.episodeService.findEpisodeBySeasonId(id).subscribe(
             (res: ResponseWrapper) => {
@@ -133,6 +140,25 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         )
     }
 
+    markChapter(id: number){
+        this.subscribeToSaveResponseSeen(
+            this.chapterSeenService.createId(id));
+    }
+
+    private subscribeToSaveResponseSeen(result: Observable<ChapterSeen>) {
+        result.subscribe((res: ChapterSeen) =>
+            this.onSaveSuccessSeen(res), (res: Response) => this.onSaveErrorSeen());
+            this.loadEpisodes(this.idSeasonActual);
+    }
+
+    private onSaveSuccessSeen(result: ChapterSeen) {
+        this.eventManager.broadcast({ name: 'chapterSeenListModification', content: 'OK'});
+
+    }
+
+    private onSaveErrorSeen() {
+
+    }
     seasonNumberFind(id: number){
         let i=1;
         for (let id2 of this.seasons) {
@@ -164,6 +190,12 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.fav=fav.like;
         })
     }
+    loadHate(id:number) {
+        this.hatredSeriesService.getIfHated(id).subscribe((hate) => {
+            this.hate = hate.like;
+        });
+    }
+
 
     ngOnDestroy() {
         this.subscription.unsubscribe();

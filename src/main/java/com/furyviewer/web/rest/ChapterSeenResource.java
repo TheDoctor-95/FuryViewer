@@ -5,21 +5,20 @@ import com.furyviewer.domain.ChapterSeen;
 
 import com.furyviewer.repository.ChapterSeenRepository;
 import com.furyviewer.repository.EpisodeRepository;
-import com.furyviewer.repository.SeriesStatsRepository;
-import com.furyviewer.service.dto.util.EpisodesHomeDTO;
-import com.furyviewer.service.util.EpisodeService;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,10 +35,14 @@ public class ChapterSeenResource {
 
     private final ChapterSeenRepository chapterSeenRepository;
 
+    private final EpisodeRepository episodeRepository;
 
+    private final UserRepository userRepository;
 
-    public ChapterSeenResource(ChapterSeenRepository chapterSeenRepository) {
+    public ChapterSeenResource(ChapterSeenRepository chapterSeenRepository, EpisodeRepository episodeRepository, UserRepository userRepository) {
         this.chapterSeenRepository = chapterSeenRepository;
+        this.episodeRepository = episodeRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -53,13 +56,34 @@ public class ChapterSeenResource {
     @Timed
     public ResponseEntity<ChapterSeen> createChapterSeen(@RequestBody ChapterSeen chapterSeen) throws URISyntaxException {
         log.debug("REST request to save ChapterSeen : {}", chapterSeen);
-        if (chapterSeen.getId() != null) {
-            throw new BadRequestAlertException("A new chapterSeen cannot already have an ID", ENTITY_NAME, "idexists");
+
+        Optional<ChapterSeen> chapterSeenOptional = chapterSeenRepository.findByUserLoginAndEpisodeId(SecurityUtils.getCurrentUserLogin(), chapterSeen.getEpisode().getId());
+
+        if(chapterSeenOptional.isPresent()){
+            chapterSeen.setId(chapterSeenOptional.get().getId());
+            chapterSeen.setSeen(!chapterSeenOptional.get().isSeen());
+
         }
+
+        chapterSeen.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+        chapterSeen.setDate(ZonedDateTime.now());
+
         ChapterSeen result = chapterSeenRepository.save(chapterSeen);
         return ResponseEntity.created(new URI("/api/chapter-seens/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/chapter-seens/chapterId/{id}")
+    @Timed
+    public ResponseEntity<ChapterSeen> createChapterSeenId(@PathVariable Long id) throws URISyntaxException {
+
+        ChapterSeen chapterSeen = new ChapterSeen();
+        chapterSeen.setEpisode(episodeRepository.findOne(id));
+        chapterSeen.setSeen(true);
+
+        return createChapterSeen(chapterSeen);
+
     }
 
     /**
