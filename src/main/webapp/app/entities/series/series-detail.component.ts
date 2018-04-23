@@ -148,7 +148,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     private subscribeToSaveResponseSeen(result: Observable<ChapterSeen>) {
         result.subscribe((res: ChapterSeen) =>
             this.onSaveSuccessSeen(res), (res: Response) => this.onSaveErrorSeen());
-            this.loadEpisodes(this.idSeasonActual);
+
+        this.loadEpisodes(this.idSeasonActual);
     }
 
     private onSaveSuccessSeen(result: ChapterSeen) {
