@@ -30,20 +30,20 @@
                 (mouseover)="_toggleSidebar()"
                 (mouseout)="_toggleSidebar()"
 
-    >
-        <div style="background-color: black; height: 100%; width: 100%;">
+        >
+            <div style="background-color: black; height: 100%; width: 100%;">
             <ul class="list-unstyled components container-fluid">
 
-                <li class="row" routerLink="/">
+                <li class="row" routerLink="/" id="homeMenu">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;" routerLink="">Home</div>
+                    <div id="textHome" class="titol col-5" style="display: inline-block; color: white;" routerLink="">Home</div>
                     <i class="fa fa-home fa-2x col-2 "></i>
                 </li>
 
 
-                <li class="row">
+                <li class="row" id="perfilMenu">
 
-                    <div class="titol col-5" id="perfillink" style="display: inline-block; color: white;" routerLink="/user-ext">Perfil</div>
+                    <div id="perfillink" class="titol col-5" id="perfillink" style="display: inline-block; color: white;" routerLink="/user-ext">Perfil</div>
                     <i class="fa fa-user fa-2x col-2  "></i>
                 </li>
 

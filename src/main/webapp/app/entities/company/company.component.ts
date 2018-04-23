@@ -9,6 +9,7 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-company',
+    styleUrls: ['./index.css'],
     templateUrl: './company.component.html'
 })
 export class CompanyComponent implements OnInit, OnDestroy {
