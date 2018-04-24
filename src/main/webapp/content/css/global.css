@@ -1316,3 +1316,83 @@ select.form-control:not([size]):not([multiple]){
 .noLink:hover{
     color: #3b3b3b;
 }
+
+
+
+.boxAbout{
+    background-color: white;
+    height: 100%;
+    border-radius: 10px;
+    padding: 0px 40px;
+}
+
+.imgAbout{
+    border-radius: 50%;
+    border: 10px solid #e5e5e5;
+    width: 300px;
+    height: 300px;
+    margin-top: 25px;
+    position: relative;
+    -webkit-transition: border-width 1s, opacity 1s,transform 1s,-webkit-transform 1s;
+    -webkit-transform: scale(1);
+    -ms-transition: border-width 1s, opacity 1s,transform 1s,-webkit-transform 1s;
+    -ms-transform: scale(1);
+    -moz-transition: border-width 1s, opacity 1s,transform 1s,-webkit-transform 1s;
+    -moz-transform: scale(1);
+    transform: scale(1);
+    transition: border-width 0.5s, opacity 0.5s,transform 0.5s,-webkit-transform 0.5s;
+
+}
+
+#pau.imgAbout:hover{
+    transform: scale(1.05);
+    border-width: 0px;
+    z-index: 2;
+}
+#gonzalo.imgAbout:hover{
+    transform: scale(1.05);
+    border-width: 0px;
+    z-index: 2;
+}
+#ibra.imgAbout:hover{
+    transform: scale(1.05);
+    border-width: 0px;
+    z-index: 2;
+}
+#clara.imgAbout:hover{
+    transform: scale(1.05);
+    border-width: 0px;
+    z-index: 2;
+}
+#marc.imgAbout:hover{
+    transform: scale(1.05);
+    border-width: 0px;
+    z-index: 2;
+}
+
+.hoverIcon{
+    color: #b5b6b7 !important;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.hoverIcon:hover{
+    color: #ef9800 !important;
+    cursor: pointer;
+}
+
+.nameTeam{
+    margin-top: 25px;
+    font-size: 1.5em;
+    color: #ef9800;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+}
+
+.jobTeam{
+    text-transform: uppercase;
+    margin-top: -12px;
+    font-size: 12px;
+    margin-bottom: 35px;
+}
