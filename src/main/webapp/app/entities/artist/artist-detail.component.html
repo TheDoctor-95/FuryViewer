@@ -64,7 +64,7 @@
 
                 </div>
             </div>
-            
+
             <div class="col-7" style="height: 100%; margin-bottom: 25px;">
                 <div class="whiteBox" style="display: table; width: 100%;">
                     <div style="width: 100%; display: inline-block; vertical-align: top;">
@@ -85,7 +85,9 @@
 
 
                 <div class="whiteBox" style="display: block; padding: 18px;">
-
+                    <div *ngFor="let film of filmography">
+                        {{film.title}}
+                    </div>
                 </div>
 
             </div>
