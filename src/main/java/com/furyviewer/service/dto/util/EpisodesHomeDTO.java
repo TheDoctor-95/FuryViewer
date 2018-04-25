@@ -1,5 +1,7 @@
 package com.furyviewer.service.dto.util;
 
+import java.time.LocalDate;
+
 public class EpisodesHomeDTO {
 
     private Long id;
@@ -8,6 +10,7 @@ public class EpisodesHomeDTO {
     private int seasonNumber;
     private int episodeNumber;
     private String urlCartel;
+    private LocalDate releaseDate;
 
 
     public EpisodesHomeDTO() {
@@ -20,6 +23,24 @@ public class EpisodesHomeDTO {
         this.seasonNumber = seasonNumber;
         this.episodeNumber = episodeNumber;
         this.urlCartel = urlCartel;
+    }
+
+    public EpisodesHomeDTO(Long id, String titleEpisode, String titleSeries, int seasonNumber, int episodeNumber, String urlCartel, LocalDate releaseDate) {
+        this.id = id;
+        this.titleEpisode = titleEpisode;
+        this.titleSeries = titleSeries;
+        this.seasonNumber = seasonNumber;
+        this.episodeNumber = episodeNumber;
+        this.urlCartel = urlCartel;
+        this.releaseDate = releaseDate;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public Long getId() {

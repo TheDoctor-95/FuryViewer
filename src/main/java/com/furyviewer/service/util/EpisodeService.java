@@ -16,10 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EpisodeService {
@@ -63,6 +61,7 @@ public class EpisodeService {
                     episodesHomeDTO.setTitleEpisode(nextEpisode.getName());
                     episodesHomeDTO.setTitleSeries(nextEpisode.getSeason().getSeries().getName());
                     episodesHomeDTO.setUrlCartel(nextEpisode.getSeason().getSeries().getImgUrl());
+                    episodesHomeDTO.setReleaseDate(nextEpisode.getReleaseDate());
 
                     episodes.add(episodesHomeDTO);
                 }
@@ -70,6 +69,13 @@ public class EpisodeService {
             }
         );
         return episodes;
+
+    }
+
+    @Timed
+    public Map<LocalDate, List<EpisodesHomeDTO>> getNextEpisodesGroupedByDate(){
+        return getNextEpisodes().stream()
+            .collect(Collectors.groupingBy(EpisodesHomeDTO::getReleaseDate));
 
     }
 
@@ -126,13 +132,13 @@ public class EpisodeService {
                     esdto.setSeen(false);
                 }
 
-
                 episodeSerieDTO.add(esdto);
+
+
             }
         );
-
+    episodeSerieDTO.stream().sorted();
     return episodeSerieDTO;
 
     }
-
 }
