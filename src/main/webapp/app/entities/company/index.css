@@ -158,7 +158,6 @@
 }
 
 
-
 #section2 > .hej:before{
     border-bottom: solid 1.5px;
     border-top: solid 1.5px;
@@ -169,3 +168,73 @@
     top: 1.75em;
     width: 43%;
 }
+
+.element{
+    /*background-color: blue;*/
+    margin-bottom: 9%;
+    /*background-image: url("../../../content/images/home.png");*/
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    width: 18rem;
+    height: 18rem;
+    margin-bottom: 6rem;
+
+    background-size: 32rem;
+}
+
+
+#element1{
+    background-image: url("../../../content/images/home.png");
+    position: relative;
+}
+
+.element{
+    color:transparent;
+    font-size: 3em;
+    padding-top: 31%;
+    font-weight: 600;
+
+}
+
+.element:hover{
+    /*box-shadow: 0px 0px 0px 3px rgba(255,165,0,1);*/
+
+    -webkit-box-shadow: inset 0px 0px 0px 200px rgba(255,165,0,0.63);
+    -moz-box-shadow: inset 0px 0px 0px 200px rgba(255,165,0,0.63);
+    box-shadow: inset 0px 0px 0px 200px rgba(255,165,0,0.63);
+    cursor: pointer;
+    color:black;
+
+}
+
+#element2{
+    background-image: url("../../../content/images/profile.png");
+}
+
+#element3{
+    background-image: url("../../../content/images/home.png");
+}
+
+#element4{
+    background-image: url("../../../content/images/profile.png");
+}
+
+#element5{
+    background-image: url("../../../content/images/home.png");
+}
+
+#element6{
+    background-image: url("../../../content/images/profile.png");
+}
+
+.titol-section4{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    letter-spacing: 0.3em;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-family: Roboto;
+}
+

@@ -2,10 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
 import { Artist } from './artist.model';
 import { ArtistService } from './artist.service';
+import {ResponseWrapper} from "../../shared";
+import {FilmographyArtistModel} from "../../shared/model/filmographyArtist.model";
 
 @Component({
     selector: 'jhi-artist-detail',
@@ -32,12 +34,14 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
     artist: Artist;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
+    public filmography: FilmographyArtistModel;
 
     constructor(
         private eventManager: JhiEventManager,
         private artistService: ArtistService,
         config: NgbRatingConfig,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private jhiAlertService: JhiAlertService
     ) {
         config.max = 5;
     }
@@ -45,6 +49,8 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
+            this.loadFilmography(params['id']);
+            console.log(this.filmography)
         });
         this.registerChangeInArtists();
     }
@@ -54,6 +60,21 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
             this.artist = artist;
         });
     }
+
+    loadFilmography(id: number){
+        this.artistService.filmography(id).subscribe(
+            (res: ResponseWrapper) => {
+                this.filmography = res.json;
+                console.log(this.filmography);
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
+
+    private onError(error) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
     previousState() {
         window.history.back();
     }

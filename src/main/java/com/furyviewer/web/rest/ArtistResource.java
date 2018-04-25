@@ -286,7 +286,7 @@ public class ArtistResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
     }
 
-    @GetMapping("/artist/{id}/moviesAndSeriesOrderedByDate/")
+    @GetMapping("/artists/{id}/moviesAndSeriesOrderedByDate/")
     @Timed
     public ResponseEntity<List<MultimediaActorsDTO>>f(@PathVariable Long id){
         log.debug("REST request to get Artist : {}", id);
@@ -298,8 +298,5 @@ public class ArtistResource {
 
         return new ResponseEntity<>(episodeActorsService.getSeriesAndMoviesFromActor(artist)
             , HttpStatus.OK);
-
     }
-
-
 }

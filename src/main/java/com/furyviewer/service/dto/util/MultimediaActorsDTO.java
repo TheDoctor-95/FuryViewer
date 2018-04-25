@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class MultimediaActorsDTO {
 
     private Long id;
-    private String name;
+    private String title;
     private LocalDate releaseDate;
     private String type;
     private String urlCartel;
@@ -13,9 +13,9 @@ public class MultimediaActorsDTO {
     public MultimediaActorsDTO() {
     }
 
-    public MultimediaActorsDTO(Long id, String name, LocalDate releaseDate, String type, String urlCartel) {
+    public MultimediaActorsDTO(Long id, String title, LocalDate releaseDate, String type, String urlCartel) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.releaseDate = releaseDate;
         this.type = type;
         this.urlCartel = urlCartel;
@@ -29,12 +29,12 @@ public class MultimediaActorsDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDate getReleaseDate() {
