@@ -1317,6 +1317,16 @@ select.form-control:not([size]):not([multiple]){
     color: #3b3b3b;
 }
 
+*::selection {
+    background: orange;
+    color: white;
+}
+
+img::selection {
+    background: transparent;
+}
+
+
 
 
 .boxAbout{

@@ -14,7 +14,7 @@ export const companyRoute: Routes = [
         path: 'company',
         component: CompanyComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'furyViewerApp.company.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -22,7 +22,7 @@ export const companyRoute: Routes = [
         path: 'company/:id',
         component: CompanyDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'furyViewerApp.company.home.title'
         },
         canActivate: [UserRouteAccessService]
