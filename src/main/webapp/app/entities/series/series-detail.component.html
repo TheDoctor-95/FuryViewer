@@ -149,8 +149,9 @@
                         <tr *ngFor="let chapter of chapters" class="row">
                             <td class="col-1"><strong>{{chapter.number}}</strong></td>
                             <td class="col-7" style="text-align: left;"> {{chapter.title}}</td>
-                            <td class="col-3">{{chapter.releaseDate | date: "mediumDate"}}</td>
-                            <td class="col-1" (click)="markChapter(chapter.id)"><i class="fa fa-eye"
+                            <td class="col-2">{{chapter.releaseDate | date: "mediumDate"}}</td>
+                            <td class="col-1">{{chapter.duration}} min</td>
+                            <td class="col-1" (click)="markChapter(chapter.id)"><i style="font-size: 17pt" class="fa fa-eye"
                                                  [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"></i></td>
                         </tr>
                     </table>
