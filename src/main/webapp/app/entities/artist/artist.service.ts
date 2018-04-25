@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Artist } from './artist.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import { FilmographyArtistModel } from "../../shared/model/filmographyArtist.model";
 
 @Injectable()
 export class ArtistService {
@@ -36,6 +37,11 @@ export class ArtistService {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
+    }
+
+    filmography(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/${id}/moviesAndSeriesOrderedByDate/`)
+            .map((res: Response) => this.convertFilmographyResponse(res));
     }
 
     query(req?: any): Observable<ResponseWrapper> {
@@ -82,6 +88,15 @@ export class ArtistService {
         return new ResponseWrapper(res.headers, result, res.status);
     }
 
+    private convertFilmographyResponse(res: Response): ResponseWrapper {
+        const jsonResponse = res.json();
+        const result = [];
+        for (let i = 0; i < jsonResponse.length; i++) {
+            result.push(this.convertFilmographyFromServer(jsonResponse[i]));
+        }
+        return new ResponseWrapper(res.headers, result, res.status);
+    }
+
     /**
      * Convert a returned JSON object to Artist.
      */
@@ -91,6 +106,11 @@ export class ArtistService {
             .convertLocalDateFromServer(json.birthdate);
         entity.deathdate = this.dateUtils
             .convertLocalDateFromServer(json.deathdate);
+        return entity;
+    }
+
+    private convertFilmographyFromServer(json: any): FilmographyArtistModel {
+        const entity: FilmographyArtistModel = Object.assign(new FilmographyArtistModel(), json);
         return entity;
     }
 
@@ -105,4 +125,6 @@ export class ArtistService {
             .convertLocalDateToServer(artist.deathdate);
         return copy;
     }
+
+
 }

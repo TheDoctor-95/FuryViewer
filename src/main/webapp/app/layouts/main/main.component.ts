@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 
-import { JhiLanguageHelper } from '../../shared';
+import {JhiLanguageHelper, Principal} from '../../shared';
 
 @Component({
     selector: 'jhi-main',
@@ -18,7 +18,8 @@ export class JhiMainComponent implements OnInit {
     }
     constructor(
         private jhiLanguageHelper: JhiLanguageHelper,
-        private router: Router
+        private router: Router,
+        private principal: Principal
     ) {}
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
@@ -35,5 +36,8 @@ export class JhiMainComponent implements OnInit {
                 this.jhiLanguageHelper.updateTitle(this.getPageTitle(this.router.routerState.snapshot.root));
             }
         });
+    }
+    isAuthenticated() {
+        return this.principal.isAuthenticated();
     }
 }

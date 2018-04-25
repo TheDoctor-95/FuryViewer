@@ -21,8 +21,7 @@
 -->
 
 <ng-sidebar-container style="height: 100vh;">
-
-    <ng-sidebar [(opened)]="_opened"
+    <ng-sidebar *ngIf="isAuthenticated()" [(opened)]="_opened"
                 [mode]="'over'"
                 [dock]="dock"
                 [dockedSize]="'7.5vh'"

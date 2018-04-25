@@ -142,13 +142,14 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
 
     markChapter(id: number){
         this.subscribeToSaveResponseSeen(
-            this.chapterSeenService.createId(id));
+            this.chapterSeenService.createId(id)
+
+    );
     }
 
     private subscribeToSaveResponseSeen(result: Observable<ChapterSeen>) {
         result.subscribe((res: ChapterSeen) =>
             this.onSaveSuccessSeen(res), (res: Response) => this.onSaveErrorSeen());
-
         this.loadEpisodes(this.idSeasonActual);
     }
 
