@@ -1441,3 +1441,15 @@ img::selection {
     border-width: 0px;
     z-index: 2;
 }
+
+
+
+.titol-section4 {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    letter-spacing: 0.3em;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-family: Roboto;
+}

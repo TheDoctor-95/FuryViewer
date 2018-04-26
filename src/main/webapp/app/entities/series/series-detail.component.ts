@@ -228,10 +228,38 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
 
     private onSaveSuccessLike(result: FavouriteSeries) {
         this.eventManager.broadcast({ name: 'favouriteSeriesListModification', content: 'OK'});
-        this.loadFav(this.series.id);
+        this.fav = result.liked;
+        if(this.hate && this.fav){
+            this.subscribeToSaveResponseHate(
+                this.hatredSeriesService.hatred(this.series.id)
+            );
+        }
     }
 
     private onSaveErrorLike() {
     }
 
+    hated(){
+        this.subscribeToSaveResponseHate(
+            this.hatredSeriesService.hatred(this.series.id)
+        );
+    }
+
+    private subscribeToSaveResponseHate(result: Observable<HatredSeries>) {
+        result.subscribe((res: HatredSeries) =>
+            this.onSaveSuccessHatred(res), (res: Response) => this.onSaveErrorHatred());
+    }
+
+    private onSaveSuccessHatred(result: HatredSeries) {
+        this.eventManager.broadcast({ name: 'hatredSeriesListModification', content: 'OK'});
+        this.hate= result.hated;
+        if(this.hate && this.fav) {
+            this.subscribeToSaveResponseLike(
+                this.favouriteSeriesService.favourite(this.series.id)
+            );
+        }
+    }
+
+    private onSaveErrorHatred() {
+    }
 }

@@ -8,6 +8,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 import { HatredSeries } from './hatred-series.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 import {BooleanModel} from "../../shared/model/boolean.model";
+import {FavouriteSeries} from "../favourite-series/favourite-series.model";
 
 @Injectable()
 export class HatredSeriesService {
@@ -19,6 +20,13 @@ export class HatredSeriesService {
     create(hatredSeries: HatredSeries): Observable<HatredSeries> {
         const copy = this.convert(hatredSeries);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    hatred(id: number): Observable<HatredSeries> {
+        return this.http.post(`${this.resourceUrl}/Series/${id}`, "").map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
@@ -46,7 +54,6 @@ export class HatredSeriesService {
             return res.json();
         });
     }
-
 
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
