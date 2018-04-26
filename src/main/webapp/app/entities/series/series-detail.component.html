@@ -130,14 +130,13 @@
                             <button class="btn btn-block" id="actualSeason" ngbDropdownToggle>Season
                                 {{actualSeason}}
                             </button>
-                            <div ngbDropdownMenu aria-labelledby="actualSeason" style=" top: 38px;
-    left: 14px;
-    text-align: center;
-    width: 96%;">
-                                <button class="dropdown-item" *ngFor="let season of seasons; index as i;"
+                            <div ngbDropdownMenu aria-labelledby="actualSeason" style=" top: 38px; left: 14px; text-align: center; width: 62%;">
+                                <button class="dropdown-item" id="btnSeason" *ngFor="let season of seasons; index as i;"
                                         (click)="loadEpisodes(season)">Season {{i+1}}
                                 </button>
                             </div>
+                            <button class="btn" id="allSeason">Mark All Season
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -1271,7 +1271,31 @@ select.form-control:not([size]):not([multiple]){
 #actualSeason{
     background-color: orange !important;
     color:white !important;
+    width: 65% !important;
+    display: inline-block !important;
+    float: left;
+}
 
+#actualSeason:hover{
+    cursor: pointer;
+}
+
+#allSeason{
+    width: 30%;
+    display: inline-block;
+    background-color: orange !important;
+    float: right;
+    color: white !important;
+}
+
+#allSeason:hover{
+    cursor: pointer;
+    background-color: white !important;
+    color: #ef9800 !important;
+}
+
+#btnSeason:hover{
+    cursor: pointer;
 }
 
 .imgReparto:hover{
