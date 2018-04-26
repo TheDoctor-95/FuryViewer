@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <!-- Ended -->
+                    <!-- Country -->
                     <div class="styleArtist" *ngIf="artist.country?.id != null">
                         <div class="iconoFilm">
                             <img src="img/earth.png" height="24px" width="24px"/>
@@ -86,6 +86,8 @@
 
                 <div class="whiteBox" style="display: block; padding: 18px;">
                     <div *ngFor="let film of filmography">
+                        <!--<img src="{{film.movie.imgUrl}}" class="img-rounded card-img-top imgFilm">-->
+                        {{film.title}}
                         {{film.title}}
                     </div>
                 </div>

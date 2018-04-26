@@ -1406,3 +1406,14 @@ img::selection {
     font-size: 12px;
     margin-bottom: 35px;
 }
+
+#logoIndex{
+    transform: scale(1);
+    transition: border-width 0.5s, opacity 0.5s,transform 0.5s,-webkit-transform 0.5s;
+}
+
+#logoIndex:hover{
+    transform: scale(1.10);
+    border-width: 0px;
+    z-index: 2;
+}
