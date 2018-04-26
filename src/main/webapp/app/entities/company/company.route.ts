@@ -11,7 +11,7 @@ import { CompanyDeletePopupComponent } from './company-delete-dialog.component';
 
 export const companyRoute: Routes = [
     {
-        path: 'company',
+        path: 'home',
         component: CompanyComponent,
         data: {
             authorities: [],

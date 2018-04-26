@@ -81,7 +81,12 @@ public class EpisodeService {
 
     public Long actualSeason(Long id){
         Series series = seriesRepository.findOne(id);
-        return nextEpisode(series).getSeason().getId();
+        if(nextEpisode(series).getSeason().getId()== null){
+            //series.getSeasons().;
+            return null;
+        }else{
+            return nextEpisode(series).getSeason().getId();
+        }
     }
 
     public Episode nextEpisode(Series series){

@@ -198,6 +198,11 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         });
     }
 
+    loadOneChapterIfSeen(id: number) {
+        for (let chapter in this.chapters) {
+            console.log(chapter);
+        }
+    }
 
     ngOnDestroy() {
         this.subscription.unsubscribe();

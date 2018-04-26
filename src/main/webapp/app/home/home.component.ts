@@ -8,6 +8,9 @@ import {MovieService} from "../entities/movie/movie.service";
 import {ResponseWrapper} from "../shared/model/response-wrapper.model";
 import {EpisodeService} from "../entities/episode/episode.service";
 import {EpisodeNextSeen} from "../shared/model/EpisodeNextSeen.model";
+import {Company} from "../entities/company/company.model";
+import {CompanyService} from "../entities/company/company.service";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
     selector: 'jhi-home',
@@ -18,78 +21,49 @@ import {EpisodeNextSeen} from "../shared/model/EpisodeNextSeen.model";
 
 })
 export class HomeComponent implements OnInit {
-    account: Account;
-    modalRef: NgbModalRef;
-    topPelis: Movie;
-    topSeries: String[] = ['Doctor Who', 'The Flash', 'Arrow', 'Supergirl'];
-    moviesPending: Movie[];
-    episodePending: EpisodeNextSeen[];
-    $: any;
+    companies: Company[];
+    currentAccount: any;
+    eventSubscriber: Subscription;
 
     constructor(
-        private principal: Principal,
-        private loginModalService: LoginModalService,
-        private eventManager: JhiEventManager,
-        private movieService: MovieService,
+        private companyService: CompanyService,
         private jhiAlertService: JhiAlertService,
-        private episodeService: EpisodeService
+        private eventManager: JhiEventManager,
+        private principal: Principal
     ) {
     }
 
+    loadAll() {
+        this.companyService.query().subscribe(
+            (res: ResponseWrapper) => {
+                this.companies = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
     ngOnInit() {
+        this.loadAll();
         this.principal.identity().then((account) => {
-            this.account = account;
+            this.currentAccount = account;
         });
-        this.loadPendingMovies();
-        this.registerAuthenticationSuccess();
-        this.loadTopMovies();
-        this.loadNextEpisodes();
-    }
-    loadPendingMovies() {
-        this.movieService.pendingMovies5().subscribe(
-            (res: ResponseWrapper) => {
-                this.moviesPending = res.json;
-            },
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
+        this.registerChangeInCompanies();
     }
 
-    loadTopMovies() {
-        this.movieService.topMovies().subscribe(
-            (res: ResponseWrapper) => {
-                this.topPelis = res.json;
-            },
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
-    }
-    loadNextEpisodes(){
-        this.episodeService.nextEpisodes5().subscribe(
-            (res: ResponseWrapper) => {
-                this.episodePending = res.json;
-                console.log(this.episodePending);
-            },
-            (res: ResponseWrapper) => this.onError(res.json)
-        )
+    ngOnDestroy() {
+        this.eventManager.destroy(this.eventSubscriber);
     }
 
-
-    registerAuthenticationSuccess() {
-        this.eventManager.subscribe('authenticationSuccess', (message) => {
-            this.principal.identity().then((account) => {
-                this.account = account;
-            });
-        });
+    trackId(index: number, item: Company) {
+        return item.id;
+    }
+    registerChangeInCompanies() {
+        this.eventSubscriber = this.eventManager.subscribe('companyListModification', (response) => this.loadAll());
     }
 
-    isAuthenticated() {
-        return this.principal.isAuthenticated();
-    }
-
-    login() {
-        this.modalRef = this.loginModalService.open();
-    }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
+
+
 
 }
