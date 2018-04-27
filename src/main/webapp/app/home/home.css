@@ -17,7 +17,7 @@
     text-transform: uppercase;
     font-weight: 300;
     padding-bottom: 3%;
-    padding-top: 6%;
+    padding-top: 2%;
 }
 
 .inner p {
@@ -96,13 +96,31 @@
 
 .count-all {
     background-color: white;
+    padding-bottom: 7%;
 }
 
 .section4-all {
-    padding: 5em;
+    padding: 4em;
     background-attachment: scroll, scroll, scroll, fixed;
     background-color: #645862;
     background-image: url(../../content/images/inicio.jpg);
+}
+
+
+.nav-button{
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: 500;
+    letter-spacing: 2px;
+    min-width: 10em;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid white;
 }
 
 .button {
@@ -188,26 +206,27 @@
 
 .element {
     color: transparent;
-    font-size: 1.9em;
-    padding-top: 15.2rem;
-    font-weight: 300;
-    bottom: 0;
+    font-size: 2.9em;
+    padding-top: 7.2rem;
+    font-weight: 400;
 
 }
 
-.element:hover .text-element {
+/*.element:hover .text-element {
     background-color: white;
 
-}
+}*/
 
 .element:hover {
     /*box-shadow: 0px 0px 0px 3px rgba(255,165,0,1);*/
 
-    -webkit-box-shadow: inset 0px 0px 0px 200px rgba(255, 165, 0, 0.63);
-    -moz-box-shadow: inset 0px 0px 0px 200px rgba(255, 165, 0, 0.63);
-    box-shadow: inset 0px 0px 0px 200px rgba(255, 165, 0, 0.63);
+    -webkit-box-shadow: inset 10px 10px 71px 200px rgba(255,165,0,0.85);
+    -moz-box-shadow: inset 10px 10px 71px 200px rgba(255,165,0,0.85);
+    box-shadow: inset 10px 10px 71px 200px rgba(255,165,0,0.85);
+
     cursor: pointer;
-    color: black;
+    color: white;
+    text-transform: uppercase;
 
 }
 
@@ -235,7 +254,7 @@
     margin-top: 2%;
     margin-bottom: 2%;
     letter-spacing: 0.3em;
-    font-size: 1.3em;
+    font-size: 1.5em;
     text-transform: uppercase;
     font-weight: 300;
     font-family: Roboto;
@@ -251,3 +270,20 @@
     color: #676464f7;
 }
 
+.text-section4{
+
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
+    letter-spacing: 0.3em;
+    font-size: 1.7em;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-family: Roboto;
+
+
+}
+
+.section5-all{
+    padding-top:1rem;
+}
