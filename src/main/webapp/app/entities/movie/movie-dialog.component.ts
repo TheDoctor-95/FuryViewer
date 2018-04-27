@@ -56,7 +56,11 @@ export class MovieDialogComponent implements OnInit {
     }
 
     goTo(id: number){
-        this.route.navigate(['movie', id])
+        this.route.navigate(['movie', id]).then(
+            () => {
+                this.clear();
+            }
+        )
     }
 
     loadPendingMovies() {

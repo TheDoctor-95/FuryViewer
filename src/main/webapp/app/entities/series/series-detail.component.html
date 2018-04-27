@@ -151,7 +151,7 @@
                             <td style="color: #bdb9b7" class="col-2">{{chapter.releaseDate | date: "shortDate"}}</td>
                             <td style="color: #bdb9b7" class="col-1">{{chapter.duration}} min</td>
                             <td class="col-1" (click)="markChapter(chapter.id)"><i style="font-size: 17pt" class="fa fa-eye"
-                                                 [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"></i></td>
+                                                 [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"  placement="top" ngbTooltip="Viewed"></i></td>
                         </tr>
                     </table>
                 </div>

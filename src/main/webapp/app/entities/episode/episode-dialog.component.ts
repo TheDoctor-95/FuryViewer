@@ -50,7 +50,12 @@ export class EpisodeDialogComponent implements OnInit {
     }
 
     goTo(id: number) {
-        this.router.navigate(['/series', id]);
+        this.router.navigate(['/series', id]).then(
+            () => {
+                this.activeModal.dismiss()
+            }
+        );
+
     }
 
     loadNextEpisodes() {
