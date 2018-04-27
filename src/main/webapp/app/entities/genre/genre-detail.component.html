@@ -1,29 +1,33 @@
 
 <div *ngIf="genre">
-    <h2><span jhiTranslate="furyViewerApp.genre.detail.title">Genre</span> {{genre.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="furyViewerApp.genre.name">Name</span></dt>
-        <dd>
-            <span>{{genre.name}}</span>
-        </dd>
-        <dt><span jhiTranslate="furyViewerApp.genre.description">Description</span></dt>
-        <dd>
-            <span>{{genre.description}}</span>
-        </dd>
-    </dl>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
+    <div class="container-fluid" style="color: #3b3b3b;">
+        <div class="row" style="background-color: #d2d3d2; padding-top: 3%;">
+            <div class="col-8" style="height: 100%; margin-bottom: 25px; margin: 0 auto;">
+                <div class="whiteBox" style="display: table; width: 100%;">
+                    <div style="width: 100%; display: inline-block; vertical-align: top;">
+                        <h1 class="nameTitle" style="padding: 2.5% 8px">{{genre.name}}</h1>
+                    </div>
+                </div>
+                &nbsp;
+                <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">
+                    <span style="font-size: 15px; text-align: left;">{{genre.description}}</span>
+                </div>
+                &nbsp;
+                <div class="whiteBox" style="display: block; padding: 18px;">
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'genre/'+ genre.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-    </button>
+                    <div class="filmography" style="text-transform: uppercase;">TOP 10 {{genre.name}} MOVIES</div>
+
+                    <div class="row" style="margin: 0 auto;">
+                        <div *ngFor="" class="col-3" style="margin-bottom: 40px;">
+
+                        </div>
+                    </div>
+
+                </div>
+                &nbsp;
+            </div>
+        </div>
+    </div>
+
 </div>
