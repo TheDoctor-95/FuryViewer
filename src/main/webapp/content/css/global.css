@@ -1449,14 +1449,12 @@ img::selection {
     z-index: 2;
 }
 
-
-
-.titol-section4 {
+.title-aboutus {
     margin-top: 2%;
     margin-bottom: 2%;
-    letter-spacing: 0.3em;
-    font-size: 1.3em;
+    letter-spacing: 0.2em;
+    font-size: 1.9em;
     text-transform: uppercase;
-    font-weight: 300;
-    font-family: Roboto;
+    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
 }

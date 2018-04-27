@@ -81,7 +81,7 @@
             <router-outlet></router-outlet>
             <router-outlet name="popup" class=""></router-outlet>
         </div>
-        <jhi-footer></jhi-footer>
+        <jhi-footer *ngIf="isAuthenticated()"></jhi-footer>
     </div>
 
 </ng-sidebar-container>
