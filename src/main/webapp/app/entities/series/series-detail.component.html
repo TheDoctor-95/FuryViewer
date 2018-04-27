@@ -218,28 +218,17 @@
                             </div>
                             <div class="row" style="padding-left: 30px; padding-right: 30px;">
                                 <div *ngFor="let artist of artists" class="col-6"
-                                     style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
-                                    <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
-                                        <img class="imgReparto"
-                                             style="width: 80px; border-radius: 5px;"
-                                             src="{{artist.imgUrl}}"/>
-                                        <div style="font-size: 15px;  margin-top: 6px;">{{artist.name}}</div>
-                                    </a>
+                                     style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px; cursor:pointer;">
+                                    <span [routerLink]="['/artist', artist?.id]">
+                                        <img class="imgReparto" style="width: 80px; border-radius: 5px;" src="{{artist.imgUrl}}"/>
+                                        <div style="font-size: 13px; font-family: Roboto; margin-top: 6px;">{{artist.name}}</div>
+                                    </span>
                                 </div>
                                 <div
                                     style="display: inline-block; width: 100%; text-align: center; margin-bottom: 20px;">
                                     <div class="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]">
                                         +
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row" style="padding-left: 30px; padding-right: 30px;">
-                                <div *ngFor="let artist of artists" class="col-6"
-                                     style="display: inline-block; vertical-align: top; padding: 10px; font-size: 15px; margin-top: 5px;">
-                                    <a class="infoArtist" [routerLink]="['/artist', artist?.id]">
-                                        <img style="width: 80px;" src="{{artist.imgUrl}}"/>
-                                        <div style="font-size: 15px;">{{artist.name}}</div>
-                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
@@ -8,6 +8,7 @@ import { Artist } from './artist.model';
 import { ArtistService } from './artist.service';
 import {ResponseWrapper} from "../../shared";
 import {FilmographyArtistModel} from "../../shared/model/filmographyArtist.model";
+import {type} from "os";
 
 @Component({
     selector: 'jhi-artist-detail',
@@ -41,7 +42,8 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
         private artistService: ArtistService,
         config: NgbRatingConfig,
         private route: ActivatedRoute,
-        private jhiAlertService: JhiAlertService
+        private jhiAlertService: JhiAlertService,
+        public router: Router
     ) {
         config.max = 5;
     }
@@ -53,6 +55,19 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
             console.log(this.filmography)
         });
         this.registerChangeInArtists();
+    }
+
+    goTo(type: String, id: number) {
+        switch (type) {
+            case 'series' : {
+                this.router.navigate(['/series', id]);
+                break;
+            }
+            case 'movie' : {
+                this.router.navigate(['/movie', id]);
+                break;
+            }
+        }
     }
 
     load(id) {

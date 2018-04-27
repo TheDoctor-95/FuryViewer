@@ -89,8 +89,7 @@
                     <div id="filmography">FILMOGRAPHY</div>
 
                     <div class="row" style="margin: 0 auto;">
-
-                            <div *ngFor="let film of filmography" class="col-3" style="margin-bottom: 40px;">
+                            <div *ngFor="let film of filmography" (click)="goTo(film.type, film.id)" class="col-3" style="margin-bottom: 40px; cursor:pointer;">
                                 <img src="{{film.urlCartel}}" class="img-rounded card-img-top imgFilm" style="width: 100% !important; height: 75% !important;">
                                 <p style="font-size: 15px; font-weight: 400; margin-top: 10px;">{{film.title}}</p>
                                 <p style="font-size: 11px; text-transform: uppercase; margin-top: -12px;">{{film.releaseDate}}</p>
