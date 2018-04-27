@@ -9,7 +9,7 @@ public class FindTmdbDTO {
 
     @SerializedName("movie_results")
     @Expose
-    private List<Object> movieResults = null;
+    private List<MovieResult> movieResults = null;
     @SerializedName("person_results")
     @Expose
     private List<Object> personResults = null;
@@ -23,11 +23,11 @@ public class FindTmdbDTO {
     @Expose
     private List<Object> tvSeasonResults = null;
 
-    public List<Object> getMovieResults() {
+    public List<MovieResult> getMovieResults() {
         return movieResults;
     }
 
-    public void setMovieResults(List<Object> movieResults) {
+    public void setMovieResults(List<MovieResult> movieResults) {
         this.movieResults = movieResults;
     }
 

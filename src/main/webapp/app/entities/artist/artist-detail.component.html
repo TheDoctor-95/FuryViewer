@@ -38,7 +38,7 @@
                             <img src="img/cake.png" height="24px" width="24px"/>
                         </div>
                         <div class="infoFilm">
-                            <span style="margin-left: 5px; font-size: 13px;">{{artist.birthdate | date:'mediumDate'}}</span>
+                            <span style="margin-left: 5px; font-size: 13px;">{{artist.birthdate | date:'shortDate'}}</span>
                         </div>
                     </div>
                     <!-- Deathdate -->
@@ -48,7 +48,7 @@
                         </div>
                         <div class="infoFilm">
                             <span
-                                style="margin-left: 5px; font-size: 13px;">{{artist.deathdate | date:'mediumDate'}}</span>
+                                style="margin-left: 5px; font-size: 13px;">{{artist.deathdate | date:'shortDate'}}</span>
                         </div>
                     </div>
 
@@ -90,9 +90,9 @@
 
                     <div class="row" style="margin: 0 auto;">
                             <div *ngFor="let film of filmography" (click)="goTo(film.type, film.id)" class="col-3" style="margin-bottom: 40px; cursor:pointer;">
-                                <img src="{{film.urlCartel}}" class="img-rounded card-img-top imgFilm" style="width: 100% !important; height: 75% !important;">
+                                <img src="{{film.urlCartel}}" class="img-rounded card-img-top" style="width: 100% !important; height: 75% !important; border-radius: 10px; width: 100%; object-fit: cover;">
                                 <p style="font-size: 15px; font-weight: 400; margin-top: 10px;">{{film.title}}</p>
-                                <p style="font-size: 11px; text-transform: uppercase; margin-top: -12px;">{{film.releaseDate}}</p>
+                                <p style="font-size: 11px; text-transform: uppercase; margin-top: -12px;">{{film.releaseDate | date:'shortDate'}}</p>
 
                             </div>
 

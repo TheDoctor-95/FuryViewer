@@ -24,15 +24,36 @@ public class FindTmdbDTOService {
     public int getIdTmdbSeriesByImdbId(String imdbId) throws IOException {
         int id = -1;
         FindTmdbDTO find;
-        Call<FindTmdbDTO> callArtist = apiTMDB.getFind(imdbId, apikey);
+        Call<FindTmdbDTO> callSeries = apiTMDB.getFind(imdbId, apikey);
 
-        Response<FindTmdbDTO> response = callArtist.execute();
+        Response<FindTmdbDTO> response = callSeries.execute();
 
         if(response.isSuccessful()){
             find = response.body();
             System.out.println(find);
             if (!find.getTvResults().isEmpty()) {
                 id = find.getTvResults().get(0).getId();
+            }
+        }
+        else {
+            throw new IOException(response.message());
+        }
+
+        return id;
+    }
+
+    public int getIdTmdbMovieByImdbId(String imdbId) throws IOException {
+        int id = -1;
+        FindTmdbDTO find;
+        Call<FindTmdbDTO> callMovie = apiTMDB.getFind(imdbId, apikey);
+
+        Response<FindTmdbDTO> response = callMovie.execute();
+
+        if(response.isSuccessful()){
+            find = response.body();
+            System.out.println(find);
+            if (!find.getMovieResults().isEmpty()) {
+                id = find.getMovieResults().get(0).getId();
             }
         }
         else {

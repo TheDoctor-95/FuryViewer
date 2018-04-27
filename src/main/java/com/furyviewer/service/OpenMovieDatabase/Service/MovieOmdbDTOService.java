@@ -4,6 +4,8 @@ import com.furyviewer.domain.Movie;
 import com.furyviewer.repository.MovieRepository;
 
 import com.furyviewer.service.OpenMovieDatabase.Repository.MovieOmdbDTORepository;
+import com.furyviewer.service.TheMovieDB.Service.FindTmdbDTOService;
+import com.furyviewer.service.TheMovieDB.Service.MovieTmdbDTOService;
 import com.furyviewer.service.TheMovieDB.Service.TrailerTmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
 import com.furyviewer.service.util.*;
@@ -62,6 +64,9 @@ public class MovieOmdbDTOService {
 
     @Autowired
     private TrailerTmdbDTOService trailerTmdbDTOService;
+
+    @Autowired
+    private MovieTmdbDTOService movieTmdbDTOService;
 
     /**
      * Devuelve la informacion de una movie a partir del titulo en el formato proporcionado por OpenMovieDataBase.
@@ -216,6 +221,8 @@ public class MovieOmdbDTOService {
         m = movieRepository.save(m);
 
         trailerTmdbDTOService.importMovieTrailer(m);
+
+        movieTmdbDTOService.importActors(m);
 
         return m;
     }

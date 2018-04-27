@@ -155,7 +155,8 @@ public class ArtistService {
         Set<Artist> artists = new HashSet<>();
 
         for (Cast cast : casting) {
-            Optional<Artist> optionalActor = artistRepository.findByName(cast.getName());
+            Optional<Artist> optionalActor = artistRepository.findByName(
+                stringApiCorrectorService.eraserEvilBytes(cast.getName()));
             Artist artist;
 
             //En caso de que el artista exista se comprueba si ya tiene asignado el tipo main_actor.

@@ -154,7 +154,7 @@ public class ArtistTmdbDTOService {
     public Artist importArtist(String artistName, ArtistType artistType) {
         Artist artist = new Artist();
 
-        artist.setName(artistName);
+        artist.setName(stringApiCorrectorService.eraserEvilBytes(artistName));
         artist.addArtistType(artistType);
         artist.setImgUrl("https://image.ibb.co/cdz3Rc/noartist.jpg");
 
