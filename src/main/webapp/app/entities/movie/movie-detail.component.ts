@@ -88,6 +88,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.newComent= new ReviewMovie();
         this.newComent.title='';
         this.newComent.review='';
+        this.stats='';
     }
 
     ngOnInit() {

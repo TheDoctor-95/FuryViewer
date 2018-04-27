@@ -12,7 +12,7 @@ import { EpisodeService } from './episode.service';
 import { Season, SeasonService } from '../season';
 import { Artist, ArtistService } from '../artist';
 import { ResponseWrapper } from '../../shared';
-import {EpisodeNextSeen} from "../../shared/model/EpisodeNextSeen.model";
+import {EpisodeNextSeen} from '../../shared/model/EpisodeNextSeen.model';
 
 @Component({
     selector: 'jhi-episode-dialog',
@@ -36,8 +36,6 @@ export class EpisodeDialogComponent implements OnInit {
     ) {
     }
 
-
-
     ngOnInit() {
         this.isSaving = false;
         this.seasonService.query()
@@ -51,11 +49,11 @@ export class EpisodeDialogComponent implements OnInit {
         this.activeModal.dismiss('cancel');
     }
 
-    goTo(id: number){
-        this.router.navigate(['/series',id]);
+    goTo(id: number) {
+        this.router.navigate(['/series', id]);
     }
 
-    loadNextEpisodes(){
+    loadNextEpisodes() {
         this.episodeService.nextEpisodes().subscribe(
             (res: ResponseWrapper) => {
                 this.episodePending = res.json;

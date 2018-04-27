@@ -3,8 +3,11 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.SeriesStats;
 
-import com.furyviewer.domain.enumeration.MovieStatsEnum;
+import com.furyviewer.domain.enumeration.SeriesStatsEnum;
+import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.repository.SeriesStatsRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +38,16 @@ public class SeriesStatsResource {
 
     private final SeriesStatsRepository seriesStatsRepository;
 
+    private final SeriesRepository seriesRepository;
 
-    public SeriesStatsResource(SeriesStatsRepository seriesStatsRepository) {
+    private final UserRepository userRepository;
+
+
+    public SeriesStatsResource(SeriesStatsRepository seriesStatsRepository, SeriesRepository seriesRepository, UserRepository userRepository) {
         this.seriesStatsRepository = seriesStatsRepository;
 
+        this.seriesRepository = seriesRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -54,6 +64,22 @@ public class SeriesStatsResource {
         if (seriesStats.getId() != null) {
             throw new BadRequestAlertException("A new seriesStats cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<SeriesStats> aux = seriesStatsRepository.findByUserAndSerieId(
+            userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get(), seriesStats.getSerie().getId());
+
+        if (aux.isPresent()) {
+            if (aux.get().getStatus() != null) {
+                if (seriesStats.getStatus().toString().equalsIgnoreCase(aux.get().getStatus().toString())) {
+                    seriesStats.setStatus(null);
+                }
+            }
+            seriesStats.setId(aux.get().getId());
+        }
+
+        seriesStats.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+        seriesStats.setDate(ZonedDateTime.now());
+
         SeriesStats result = seriesStatsRepository.save(seriesStats);
         return ResponseEntity.created(new URI("/api/series-stats/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -143,7 +169,17 @@ public class SeriesStatsResource {
 
     }
 
+    @PostMapping("/series-stats/idSeries/{id}/state/{state}")
+    @Timed
+    public ResponseEntity<SeriesStats> MovieState(@PathVariable Long id, @PathVariable String state) throws URISyntaxException {
 
+        SeriesStats ss = new SeriesStats();
+        ss.setSerie(seriesRepository.findOne(id));
+        if (state.equalsIgnoreCase("seen")) ss.setStatus(SeriesStatsEnum.SEEN);
+        else if (state.equalsIgnoreCase("pending")) ss.setStatus(SeriesStatsEnum.PENDING);
+        else ss.setStatus(SeriesStatsEnum.FOLLOWING);
+        return createSeriesStats(ss);
+    }
 
     /**
      * DELETE  /series-stats/:id : delete the "id" seriesStats.

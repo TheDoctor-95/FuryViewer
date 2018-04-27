@@ -70,15 +70,15 @@ public class SeriesStatsResourceIntTest {
     private SeriesStats seriesStats;
 
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final SeriesStatsResource seriesStatsResource = new SeriesStatsResource(seriesStatsRepository);
-        this.restSeriesStatsMockMvc = MockMvcBuilders.standaloneSetup(seriesStatsResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final SeriesStatsResource seriesStatsResource = new SeriesStatsResource(seriesStatsRepository, seriesRepository);
+//        this.restSeriesStatsMockMvc = MockMvcBuilders.standaloneSetup(seriesStatsResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter).build();
+//    }
 
     /**
      * Create an entity for this test.

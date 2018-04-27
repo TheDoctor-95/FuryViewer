@@ -6,7 +6,7 @@ export class FilmographyArtistModel {
         public type?: string,
         public urlCartel?: string,
         public stat?: string
-    ){
+    ) {
 
     }
 };

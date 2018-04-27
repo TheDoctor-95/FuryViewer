@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { SeriesStats } from './series-stats.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {UrlModel} from "../../shared/model/url.model";
 
 @Injectable()
 export class SeriesStatsService {
@@ -75,5 +76,18 @@ export class SeriesStatsService {
 
         copy.date = this.dateUtils.toDate(seriesStats.date);
         return copy;
+    }
+
+    getState(id: number): Observable<UrlModel> {
+        return this.http.get(`${this.resourceUrl}/status/${id}`).map((res: Response) => {
+            return res.json();
+        });
+    }
+
+    stat(id: number, stat: string): Observable<SeriesStats> {
+        return this.http.post(`${this.resourceUrl}/idSeries/${id}/state/${stat}`, "").map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
     }
 }

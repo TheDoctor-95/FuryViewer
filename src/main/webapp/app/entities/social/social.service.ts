@@ -5,7 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { Social } from './social.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
-import {UrlModel} from "../../shared/model/url.model";
+import {UrlModel} from '../../shared/model/url.model';
 
 @Injectable()
 export class SocialService {

@@ -7,8 +7,8 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Episode } from './episode.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
-import {EpisodeNextSeen} from "../../shared/model/EpisodeNextSeen.model";
-import {EpisodeSeasonModel} from "../../shared/model/EpisodeSeason.model";
+import {EpisodeNextSeen} from '../../shared/model/EpisodeNextSeen.model';
+import {EpisodeSeasonModel} from '../../shared/model/EpisodeSeason.model';
 
 @Injectable()
 export class EpisodeService {
@@ -74,7 +74,7 @@ export class EpisodeService {
         return new ResponseWrapper(res.headers, result, res.status);
     }
 
-    private convertNextEpisodeResponse(res: Response): ResponseWrapper{
+    private convertNextEpisodeResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
         for (let i = 0; i < jsonResponse.length; i++) {
@@ -83,7 +83,7 @@ export class EpisodeService {
         return new ResponseWrapper(res.headers, result, res.status);
     }
 
-    private convertSeasonEpisodeResponse(res: Response): ResponseWrapper{
+    private convertSeasonEpisodeResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
         for (let i = 0; i < jsonResponse.length; i++) {

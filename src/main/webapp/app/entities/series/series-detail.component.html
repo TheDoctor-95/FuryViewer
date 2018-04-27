@@ -179,17 +179,17 @@
 
             <div class="col-3" style="text-align: center;">
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
-                    <div class="boxList col-10"><i id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i>
+                    <div (click)="stat('seen')" class="boxList col-10" [ngStyle]="{'background-color':stats=='SEEN' ? '#ef9800' : 'white', 'color':stats=='SEEN' ? 'white' : '#ef9800'}"><i [ngStyle]="{'color':stats=='SEEN' ? 'white' : '#ef9800'}" id="icona" class="fa fa-eye-slash" style="color: #ef9800;"></i>
                         Viewed
                     </div>
                 </div>
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
 
-                    <div class="boxList col-10"><i class="fa fa-angle-double-right" style="color: #ef9800;"></i> Following</div>
+                    <div (click)="stat('following')" class="boxList col-10" [ngStyle]="{'background-color':stats=='FOLLOWING' ? '#ef9800' : 'white', 'color':stats=='FOLLOWING' ? 'white' : '#ef9800'}"><i [ngStyle]="{'color':stats=='FOLLOWING' ? 'white' : '#ef9800'}" class="fa fa-angle-double-right" style="color: #ef9800;"></i> Following</div>
                 </div>
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
 
-                    <div class="boxList col-10"><i class="fa fa-edit" style="color: #ef9800;"></i> Pending</div>
+                    <div (click)="stat('pending')" class="boxList col-10" [ngStyle]="{'background-color':stats=='PENDING' ? '#ef9800' : 'white', 'color':stats=='PENDING' ? 'white' : '#ef9800'}"><i [ngStyle]="{'color':stats=='PENDING' ? 'white' : '#ef9800'}" class="fa fa-edit" style="color: #ef9800;"></i> Pending</div>
                 </div>
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
                     <div class="col-10" style="padding-left: 0px; padding-right: 0px;">
