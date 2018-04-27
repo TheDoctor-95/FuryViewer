@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark navbar-expand-md jh-navbar">
+<nav *ngIf="isAuthenticated()" class="navbar navbar-dark navbar-expand-md jh-navbar">
     <div class="navbar-collapse collapse jh-logo-container float-left">
     </div>
     <div class="route-name" style=" text-transform: uppercase;
@@ -356,3 +356,4 @@
         </ul>
     </div>
 </nav>
+<nav *ngIf="!isAuthenticated()"></nav>

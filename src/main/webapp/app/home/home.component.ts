@@ -24,11 +24,13 @@ export class HomeComponent implements OnInit {
     companies: Company[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    modalRef: NgbModalRef;
 
     constructor(
         private companyService: CompanyService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
+        private loginModalService: LoginModalService,
         private principal: Principal
     ) {
     }
@@ -62,6 +64,10 @@ export class HomeComponent implements OnInit {
 
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
+    }
+
+    login() {
+        this.modalRef = this.loginModalService.open();
     }
 
 
