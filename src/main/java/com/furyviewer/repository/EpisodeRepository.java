@@ -2,6 +2,7 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.Episode;
+import com.furyviewer.domain.Series;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -30,5 +31,7 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     @Query("select e from Episode e where :artist member of e.actors order by e.releaseDate desc")
     List<Episode> getEpisodeByActorsOrderByReleaseDate(@Param("artist") Artist artist);
+
+    List<Episode> findBySeasonSeriesIn(List<Series> seriesList);
 
 }

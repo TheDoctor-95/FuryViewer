@@ -146,4 +146,20 @@ public class EpisodeService {
     return episodeSerieDTO;
 
     }
+
+    /**
+     * Funcion que devuelve todas los episodios que van a salir agrupados i ordenados por fechaSortedMap<LocalDate, List<Episode>>
+     * @return
+     */
+    public SortedMap<LocalDate, List<Episode>> calendar(){
+
+        return episodeRepository.
+            findBySeasonSeriesIn(
+                seriesStatsRepository.followingSeriesUser(SecurityUtils.getCurrentUserLogin()))
+            .stream()
+            .filter(episode -> episode.getReleaseDate() != null &&
+                (   episode.getReleaseDate().isEqual(LocalDate.now())
+                 || episode.getReleaseDate().isAfter(LocalDate.now())))
+            .collect(Collectors.groupingBy(Episode::getReleaseDate, TreeMap::new, Collectors.toList()));
+    }
 }

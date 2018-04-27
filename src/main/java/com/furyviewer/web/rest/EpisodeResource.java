@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.SortedMap;
 
 /**
  * REST controller for managing Episode.
@@ -169,6 +171,15 @@ public class EpisodeResource {
         }else{
             return episodesHomeDTOList.subList(0,5);
         }
+
+    }
+
+    @GetMapping("/episodes/calendar")
+    @Timed
+    @Transactional
+    public SortedMap<LocalDate, List<Episode>> calendar() {
+        log.debug("REST request to get all calendar");
+        return episodeService.calendar();
 
     }
 
