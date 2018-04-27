@@ -85,10 +85,18 @@
 
 
                 <div class="whiteBox" style="display: block; padding: 18px;">
-                    <div *ngFor="let film of filmography">
-                        <!--<img src="{{film.movie.imgUrl}}" class="img-rounded card-img-top imgFilm">-->
-                        {{film.title}}
-                        {{film.title}}
+
+                    <div id="filmography">FILMOGRAPHY</div>
+
+                    <div class="row" style="margin: 0 auto;">
+
+                            <div *ngFor="let film of filmography" class="col-3" style="margin-bottom: 40px;">
+                                <img src="{{film.urlCartel}}" class="img-rounded card-img-top imgFilm" style="width: 100% !important; height: 75% !important;">
+                                <p style="font-size: 15px; font-weight: 400; margin-top: 10px;">{{film.title}}</p>
+                                <p style="font-size: 11px; text-transform: uppercase; margin-top: -12px;">{{film.releaseDate}}</p>
+
+                            </div>
+
                     </div>
                 </div>
 

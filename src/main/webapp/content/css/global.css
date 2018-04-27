@@ -426,6 +426,13 @@ Social Buttons
     margin-bottom: 10px;
 }
 
+#filmography{
+    font-weight: 300;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
 #boxReparto {
     width: 80%;
     background-color: white;
