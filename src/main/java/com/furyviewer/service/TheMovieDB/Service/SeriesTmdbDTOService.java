@@ -299,41 +299,47 @@ public class SeriesTmdbDTOService {
 
             episodeNum = episodeNum - 1;
 
-            if (se.getEpisodes().get(episodeNum).getName() != null) {
-                ep.setName(stringApiCorrectorService.eraserEvilBytes(se.getEpisodes().get(episodeNum).getName()));
-            }
+            if (se.getEpisodes().size() > episodeNum) {
+                if (se.getEpisodes().get(episodeNum).getName() != null) {
+                    ep.setName(stringApiCorrectorService.eraserEvilBytes(se.getEpisodes().get(episodeNum).getName()));
+                }
+                ep.setDuration(getDurationEpisode(seriesId));
 
-            ep.setDuration(getDurationEpisode(seriesId));
+                if (se.getEpisodes().get(episodeNum).getAirDate() != null) {
+                    ep.setReleaseDate(dateConversorService.releaseDateOMDBSeason(
+                        se.getEpisodes().get(episodeNum).getAirDate()));
+                }
 
-            if (se.getEpisodes().get(episodeNum).getAirDate() != null) {
-                ep.setReleaseDate(dateConversorService.releaseDateOMDBSeason(
-                    se.getEpisodes().get(episodeNum).getAirDate()));
-            }
+                String imdbId = getImdbId(seriesId, season.getNumber(), episodeNum);
+                if (imdbId != null) {
+                    ep.setImdbId(imdbId);
+                }
 
-            String imdbId = getImdbId(seriesId, season.getNumber(), episodeNum);
-            if (imdbId != null) {
-                ep.setImdbId(imdbId);
-            }
+                ep.setSeason(season);
 
-            ep.setSeason(season);
+                if (se.getEpisodes().get(episodeNum).getOverview() != null) {
+                    ep.setDescription(stringApiCorrectorService.eraserEvilBytes(se.getEpisodes().get(episodeNum).getOverview()));
+                }
 
-            if (se.getEpisodes().get(episodeNum).getOverview() != null) {
-                ep.setDescription(stringApiCorrectorService.eraserEvilBytes(se.getEpisodes().get(episodeNum).getOverview()));
-            }
-
-            if (se.getEpisodes().get(episodeNum).getCrew() != null) {
-                for (Crew crew : se.getEpisodes().get(episodeNum).getCrew()) {
-                    if (crew.getJob().equalsIgnoreCase("Director")) {
-                        ep.setDirector(artistService.importDirector(crew.getName()));
-                    } else if (crew.getJob().equalsIgnoreCase("Writer")) {
-                        ep.setScriptwriter(artistService.importScripwriter(crew.getName()));
+                if (se.getEpisodes().get(episodeNum).getCrew() != null) {
+                    for (Crew crew : se.getEpisodes().get(episodeNum).getCrew()) {
+                        if (crew.getJob().equalsIgnoreCase("Director")) {
+                            ep.setDirector(artistService.importDirector(crew.getName()));
+                        } else if (crew.getJob().equalsIgnoreCase("Writer")) {
+                            ep.setScriptwriter(artistService.importScripwriter(crew.getName()));
+                        }
                     }
                 }
+            } else {
+                ep.setName("Episode " + episodeNum);
+                ep.setDuration(-1.0);
             }
 
             ep = episodeRepository.save(ep);
 
-            importActors(seriesId, ep);
+            if (se.getEpisodes().size() > episodeNum) {
+                importActors(seriesId, ep);
+            }
 
             System.out.println("==================\nImportado..." + seriesName + " " + season.getNumber() + "x" +
                 episodeNum + "\n==================");

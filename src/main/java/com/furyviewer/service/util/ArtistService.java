@@ -54,12 +54,12 @@ public class ArtistService {
             ArtistType atMainActor = artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR);
 
             for (String actorStr : actors) {
-                Optional<Artist> optionalActor = artistRepository.findByName(actorStr);
+                List<Artist> optionalActor = artistRepository.findArtistByName(actorStr);
                 Artist artist;
 
                 //En caso de que el artista exista se comprueba si ya tiene asignado el tipo main_actor.
-                if (optionalActor.isPresent()) {
-                    artist = optionalActor.get();
+                if (!optionalActor.isEmpty()) {
+                    artist = optionalActor.get(0);
 
                     if (!artist.getArtistTypes().contains(atMainActor)) {
                         artist.addArtistType(atMainActor);
@@ -90,12 +90,12 @@ public class ArtistService {
 
         if (stringApiCorrectorService.eraserNA(director) != null) {
             String[] directorArray = director.split(", | \\(");
-            Optional<Artist> optionalDirector = artistRepository.findByName(directorArray[0]);
+            List<Artist> optionalDirector = artistRepository.findArtistByName(directorArray[0]);
             ArtistType atDirector = artistTypeRepository.findByName(ArtistTypeEnum.DIRECTOR);
 
             //En caso de que el artista exista se comprueba si ya tiene asignado el tipo director.
-            if (optionalDirector.isPresent()) {
-                artist = optionalDirector.get();
+            if (!optionalDirector.isEmpty()) {
+                artist = optionalDirector.get(0);
 
                 if (!artist.getArtistTypes().contains(atDirector)) {
                     artist.addArtistType(atDirector);
@@ -123,12 +123,12 @@ public class ArtistService {
 
         if (stringApiCorrectorService.eraserNA(scripwriter) != null) {
             String[] scripwriterArray = scripwriter.split(", | \\(");
-            Optional<Artist> optionalScripwriter = artistRepository.findByName(scripwriterArray[0]);
+            List<Artist> optionalScripwriter = artistRepository.findArtistByName(scripwriterArray[0]);
             ArtistType atScripwriter = artistTypeRepository.findByName(ArtistTypeEnum.SCRIPTWRITER);
 
             //En caso de que el artista exista se comprueba si ya tiene asignado el tipo scriptwriter.
-            if (optionalScripwriter.isPresent()) {
-                artist = optionalScripwriter.get();
+            if (!optionalScripwriter.isEmpty()) {
+                artist = optionalScripwriter.get(0);
 
                 if (!artist.getArtistTypes().contains(atScripwriter)) {
                     artist.addArtistType(atScripwriter);
@@ -155,13 +155,13 @@ public class ArtistService {
         Set<Artist> artists = new HashSet<>();
 
         for (Cast cast : casting) {
-            Optional<Artist> optionalActor = artistRepository.findByName(
+            List<Artist> optionalActor = artistRepository.findArtistByName(
                 stringApiCorrectorService.eraserEvilBytes(cast.getName()));
             Artist artist;
 
             //En caso de que el artista exista se comprueba si ya tiene asignado el tipo main_actor.
-            if (optionalActor.isPresent()) {
-                artist = optionalActor.get();
+            if (!optionalActor.isEmpty()) {
+                artist = optionalActor.get(0);
 
                 if (!artist.getArtistTypes().contains(artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR))) {
                     artist.addArtistType(artistTypeRepository.findByName(ArtistTypeEnum.MAIN_ACTOR));
