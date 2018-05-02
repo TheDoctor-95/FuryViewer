@@ -54,6 +54,11 @@ export class SocialService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    seriesMarks(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/Series/${id}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

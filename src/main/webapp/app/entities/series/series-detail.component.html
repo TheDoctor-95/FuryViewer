@@ -115,8 +115,12 @@
                     </div>
                 </div>
                 <ng-template #notas id="divShowHide">
-                    <p class="infoWebs1">IMDB</p>
-                    <p class="infoWebs2">_ <i class="fa fa-star furyColor"></i></p></br>
+                    <span *ngFor="let mark of marks, let i = index" style="max-width: 100%!important;">
+                        <span class="infoWebs3">
+                            <p class="infoWebs1">{{mark.type}}</p>
+                            <p class="infoWebs2">{{mark.url}} <i class="fa fa-star furyColor"></i></p>
+                        </span>
+                    </span>
                 </ng-template>
                 &nbsp;
                 <div class="whiteBox" style="display: block; padding: 18px; text-align: left;">

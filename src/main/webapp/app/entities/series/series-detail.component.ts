@@ -22,6 +22,8 @@ import {HatredSeriesService} from '../hatred-series/hatred-series.service';
 import {ChapterSeen} from '../chapter-seen/chapter-seen.model';
 import {ChapterSeenService} from '../chapter-seen/chapter-seen.service';
 import {SeriesStats, SeriesStatsService} from '../series-stats';
+import {SocialService} from '../social';
+import {Social} from '../social/social.model';
 
 @Component({
     selector: 'jhi-series-detail',
@@ -57,6 +59,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     actualSeason: number;
     idSeasonActual: number;
     stats: string;
+    marks: Social[];
     constructor(
         private eventManager: JhiEventManager,
         private seriesService: SeriesService,
@@ -69,7 +72,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private favouriteSeriesService: FavouriteSeriesService,
         private hatredSeriesService: HatredSeriesService,
         private chapterSeenService: ChapterSeenService,
-        private seriesStatService: SeriesStatsService
+        private seriesStatService: SeriesStatsService,
+        private socialService: SocialService
 ) {
     this.director = new Artist();
     this.director.name = '';
@@ -90,10 +94,10 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadScriptwriter(params['id']);
             this.loadSeasons(params['id']);
             this.loadActualSeason(params['id']);
-
             this.loadState(params['id']);
             this.loadHate(params['id']);
             this.loadFav(params['id']);
+            this.loadMarks(params['id']);
 
         });
         this.registerChangeInSeries();
@@ -109,6 +113,15 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         this.artistService.seriesActorsQuery(id).subscribe(
             (res: ResponseWrapper) => {
                 this.artists = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
+
+    loadMarks(id: number) {
+        this.socialService.seriesMarks(id).subscribe(
+            (res: ResponseWrapper) => {
+                this.marks = res.json;
             },
             (res: ResponseWrapper) => this.onError(res.json)
         );

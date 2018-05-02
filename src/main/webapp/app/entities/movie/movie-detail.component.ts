@@ -2,10 +2,7 @@ import {Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener} from 
 import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
-
-
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser'
-
 import { Movie } from './movie.model';
 import { MovieService } from './movie.service';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -25,9 +22,9 @@ import {RateMovieService} from '../rate-movie/rate-movie.service';
 import {ReviewMovie} from '../review-movie/review-movie.model';
 import {ReviewMovieService} from '../review-movie/review-movie.service';
 import {BaseEntity} from '../../shared/model/base-entity';
-import  {MovieStatsService} from '../movie-stats/movie-stats.service';
+import {MovieStatsService} from '../movie-stats/movie-stats.service';
 import {MovieStats} from '../movie-stats/movie-stats.model';
-import {Principal} from "../../shared/auth/principal.service";
+import {Principal} from '../../shared/auth/principal.service';
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -82,16 +79,16 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
-        this.fav.liked=false;
+        this.fav.liked = false;
         this.hate = new HatredMovie();
-        this.hate.hated=false;
+        this.hate.hated = false;
         this.rateUser = new RateMovie()
         this.rateUser.rate = 0;
         this.media = '0';
-        this.newComent= new ReviewMovie();
-        this.newComent.title='';
-        this.newComent.review='';
-        this.stats='';
+        this.newComent = new ReviewMovie();
+        this.newComent.title = '';
+        this.newComent.review = '';
+        this.stats = '';
     }
 
     ngOnInit() {
@@ -107,8 +104,6 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadTrailer(params['id']);
             this.loadState(params['id']);
             console.log(this.trailer);
-
-
         });
         this.registerChangeInMovies();
 
@@ -119,7 +114,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.movie = movie;
         });
     }
-    loadArtist(id){
+    loadArtist(id) {
         this.artistService.findMovieActors(id).subscribe(
             (res: ResponseWrapper) => {
                 this.artistMovie = res.json;
@@ -128,7 +123,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         );
     }
 
-    loadRateUser(id: number){
+    loadRateUser(id: number) {
         this.rateMovieServie.markMovieUser(id).subscribe((rateMovie) => {
             this.rateUser = rateMovie;
         });
@@ -143,12 +138,11 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         );
     }
 
-    stat(stat: string){
+    stat(stat: string) {
         this.subscribeToSaveResponseStat(
             this.movieStatService.stat(this.movie.id, stat)
-    );
+        );
     }
-
 
     private subscribeToSaveResponseStat(result: Observable<MovieStats>) {
         result.subscribe((res: MovieStats) =>
@@ -161,26 +155,23 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
     }
 
-    loadMediumMark(id: number){
+    loadMediumMark(id: number) {
         this.rateMovieServie.mediaMovie(id).subscribe((rateMovie) => {
-            let ourMark = rateMovie.toPrecision(2);
+            const ourMark = rateMovie.toPrecision(2);
             this.media = ourMark;
-
-
-
         });
     }
 
-    loadTrailer(id: number){
+    loadTrailer(id: number) {
         this.socialService.movieTrailer(id).subscribe( (trailerLink) => {
-            if(trailerLink.url!=null) {
+            if (trailerLink.url != null) {
                 this.trailer = this.sanitizer.bypassSecurityTrustResourceUrl(trailerLink.url);
                 console.log(this.trailer);
             }
         });
     }
 
-    loadState(id: number){
+    loadState(id: number) {
         this.movieStatService.getState(id).subscribe((stat) => {
            this.stats = stat.url;
         });
@@ -194,33 +185,31 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.subscribeToLikeResponse(
             this.favouriteMovieService.favorite(this.movie.id)
         );
-
-
     }
 
-    hated(){
+    hated() {
         this.subscribeToHateResponse(
             this.hatredMovieService.hate(this.movie.id)
         );
     }
 
-    comentar(){
+    comentar() {
         console.log('aaa');
-        this.newComent.movie=this.movie;
+        this.newComent.movie = this.movie;
         console.log(this.newComent);
 
         this.subscribeToSaveResponseReview(
-            this.reviewMovieService.create(this.newComent));
-
+            this.reviewMovieService.create(this.newComent)
+        );
     }
 
-    rate(){
+    rate() {
         this.subscribeToSaveResponseRate(
             this.rateMovieServie.Rate(this.movie.id, this.rateUser.rate)
         );
     }
 
-    loadMarks(id:number){
+    loadMarks(id: number) {
         this.socialService.movieMarks(id).subscribe(
             (res: ResponseWrapper) => {
                 this.marks = res.json;
@@ -236,7 +225,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-    getIfHatred(id: number){
+    getIfHatred(id: number) {
         this.hatredMovieService.getIfHatred(id).subscribe((hatredMovie) => {
             console.log('load');
             this.hate = hatredMovie;
@@ -249,12 +238,11 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     }
     private onSaveSuccessLike(result: FavouriteMovie) {
         this.eventManager.broadcast({ name: 'favouriteMovieListModification', content: 'OK'});
-        this.fav=result;
-        if(this.hate.hated && this.fav.liked){
+        this.fav = result;
+        if (this.hate.hated && this.fav.liked) {
             this.subscribeToHateResponse(
                 this.hatredMovieService.hate(this.movie.id)
             );
-
         }
     }
 
@@ -262,10 +250,11 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         result.subscribe((res: HatredMovie) =>
             this.onSaveSuccessHate(res), (res: Response) => this.onSaveErrorLike());
     }
+
     private onSaveSuccessHate(result: HatredMovie) {
         this.eventManager.broadcast({ name: 'favouriteMovieListModification', content: 'OK'});
-        this.hate=result;
-        if(this.hate.hated && this.fav.liked){
+        this.hate = result;
+        if (this.hate.hated && this.fav.liked) {
             this.subscribeToLikeResponse(
                 this.favouriteMovieService.favorite(this.movie.id)
             );
@@ -279,11 +268,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
     private onSaveSuccessRate(result: RateMovie) {
         this.eventManager.broadcast({ name: 'rateMovieListModification', content: 'OK'});
-        this.rateUser=result;
+        this.rateUser = result;
         this.loadMediumMark(this.movie.id);
     }
-
-
 
     private onSaveErrorLike() {
 
@@ -313,8 +300,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
     private onSaveSuccessReview(result: ReviewMovie) {
         this.eventManager.broadcast({ name: 'reviewMovieListModification', content: 'OK'});
-        this.newComent.title='';
-        this.newComent.review='';
+        this.newComent.title = '';
+        this.newComent.review = '';
         this.loadReviews(this.movie.id);
     }
 
