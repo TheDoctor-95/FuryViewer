@@ -123,4 +123,15 @@ public class MarksService {
         double markInt = Double.parseDouble(markTransform) / 10;
         return " " + markInt;
     }
+
+    public Double totalFavHate(Long fav, Long hate) {
+        Integer aux = 0;
+        if (fav == null) fav = aux.longValue();
+        if (hate == null) hate = aux.longValue();
+
+        Double auxFav = fav.doubleValue();
+        Double auxHate = hate.doubleValue();
+
+        return auxFav / (auxFav + auxHate) * 100;
+    }
 }

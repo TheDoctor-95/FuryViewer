@@ -2,6 +2,7 @@ package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Series;
+import com.furyviewer.repository.FavouriteSeriesRepository;
 import com.furyviewer.repository.SeriesRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.SeriesOmdbDTOService;
 import com.furyviewer.service.SmartSearch.Series.SeriesQueryService;
@@ -9,12 +10,12 @@ import com.furyviewer.service.dto.OpenMovieDatabase.SeriesOmdbDTO;
 import com.furyviewer.repository.RateSeriesRepository;
 import com.furyviewer.repository.HatredSeriesRepository;
 import com.furyviewer.service.dto.Criteria.SeriesBCriteria;
+import com.furyviewer.service.util.MarksService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -37,20 +38,26 @@ public class SeriesResource {
 
     private final SeriesRepository seriesRepository;
 
-    @Autowired
     private RateSeriesRepository rateSeriesRepository;
 
-    @Autowired
     private HatredSeriesRepository hatredSeriesRepository;
 
-    @Autowired
-    SeriesOmdbDTOService seriesOmdbDTOService;
+    private FavouriteSeriesRepository favouriteSeriesRepository;
 
-    @Autowired
-    private SeriesQueryService seriesQueryService;
+    private final SeriesOmdbDTOService seriesOmdbDTOService;
 
-    public SeriesResource(SeriesRepository seriesRepository) {
+    private final MarksService marksService;
+
+    private final SeriesQueryService seriesQueryService;
+
+    public SeriesResource(SeriesRepository seriesRepository, RateSeriesRepository rateSeriesRepository, HatredSeriesRepository hatredSeriesRepository, FavouriteSeriesRepository favouriteSeriesRepository, SeriesOmdbDTOService seriesOmdbDTOService, MarksService marksService, SeriesQueryService seriesQueryService) {
         this.seriesRepository = seriesRepository;
+        this.rateSeriesRepository = rateSeriesRepository;
+        this.hatredSeriesRepository = hatredSeriesRepository;
+        this.favouriteSeriesRepository = favouriteSeriesRepository;
+        this.seriesOmdbDTOService = seriesOmdbDTOService;
+        this.marksService = marksService;
+        this.seriesQueryService = seriesQueryService;
     }
 
     /**
@@ -138,8 +145,13 @@ public class SeriesResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(series));
     }
 
-
-
+    @GetMapping("/series/totalFavHate/{id}")
+    @Timed
+    public Double getTotalFavHate(@PathVariable Long id) {
+        log.debug("REST request to get Movies by name");
+        return marksService.totalFavHate(favouriteSeriesRepository.countLikedSeries(id),
+            hatredSeriesRepository.countHatredSeries(id));
+    }
 
     /**
      * GET  /series/:id : get the "id" series.

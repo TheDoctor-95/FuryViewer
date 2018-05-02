@@ -61,6 +61,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     marks: Social[];
     rateUser: RateSeries;
     media: string;
+    progres: number;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -89,6 +90,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     this.rateUser = new RateSeries();
     this.rateUser.rate = 0;
     this.media = '0';
+    this.progres = 0;
 }
 
     ngOnInit() {
@@ -105,6 +107,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadMarks(params['id']);
             this.loadRateUser(params['id']);
             this.loadMediumMark(params['id']);
+            this.loadFavHate(params['id']);
         });
         this.registerChangeInSeries();
 
@@ -265,6 +268,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
                 this.hatredSeriesService.hatred(this.series.id)
             );
         }
+        this.loadFavHate(this.series.id);
     }
 
     private onSaveErrorLike() {
@@ -289,6 +293,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
                 this.favouriteSeriesService.favourite(this.series.id)
             );
         }
+        this.loadFavHate(this.series.id);
     }
 
     private onSaveErrorHatred() {
@@ -350,6 +355,12 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         this.rateSeriesService.mediaSeries(id).subscribe((rateSeries) => {
             const ourMark = rateSeries.toPrecision(2);
             this.media = ourMark;
+        });
+    }
+
+    loadFavHate(id: number) {
+        this.seriesService.getFavHate(id).subscribe((favHate) => {
+            this.progres = favHate;
         });
     }
 }
