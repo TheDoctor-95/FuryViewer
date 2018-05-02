@@ -1,8 +1,10 @@
 package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.HatredArtist;
 
+import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.HatredArtistRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
@@ -36,9 +38,12 @@ public class HatredArtistResource {
 
     private final UserRepository userRepository;
 
-    public HatredArtistResource(HatredArtistRepository hatredArtistRepository, UserRepository userRepository) {
+    private final ArtistRepository artistRepository;
+
+    public HatredArtistResource(HatredArtistRepository hatredArtistRepository, UserRepository userRepository, ArtistRepository artistRepository) {
         this.hatredArtistRepository = hatredArtistRepository;
         this.userRepository = userRepository;
+        this.artistRepository = artistRepository;
     }
 
     /**
@@ -59,7 +64,8 @@ public class HatredArtistResource {
         Optional<HatredArtist> existingHatredArtist = hatredArtistRepository.findByArtistAndUserLogin(hatredArtist.getArtist(), SecurityUtils.getCurrentUserLogin());
 
         if(existingHatredArtist.isPresent()){
-            throw new BadRequestAlertException("Artista ya añadido en Hatred", ENTITY_NAME, "hatredExist");
+            hatredArtist=existingHatredArtist.get();
+            hatredArtist.setHated(!hatredArtist.isHated());
         }
 
         hatredArtist.setDate(ZonedDateTime.now());
@@ -69,6 +75,20 @@ public class HatredArtistResource {
         return ResponseEntity.created(new URI("/api/hatred-artists/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/hatred-artists/Artist/{id}")
+    @Timed
+    public ResponseEntity<HatredArtist> createHatredArtist(@PathVariable Long id) throws URISyntaxException {
+        log.debug("REST request to save HatredSeries : {}", id);
+
+        Artist artist = artistRepository.findOne(id);
+
+        HatredArtist ha = new HatredArtist();
+        ha.setArtist(artist);
+        ha.setHated(true);
+
+        return createHatredArtist(ha);
     }
 
     /**

@@ -91,12 +91,7 @@ public class HatredMovieResource {
         hm.setHated(true);
 
         return createHatredMovie(hm);
-
     }
-
-
-
-
 
     /**
      * PUT  /hatred-movies : Updates an existing hatredMovie.

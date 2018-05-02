@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { HatredArtist } from './hatred-artist.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {HatredSeries} from '../hatred-series/hatred-series.model';
 
 @Injectable()
 export class HatredArtistService {
@@ -33,6 +34,13 @@ export class HatredArtistService {
 
     find(id: number): Observable<HatredArtist> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    hatred(id: number): Observable<HatredArtist> {
+        return this.http.post(`${this.resourceUrl}/Artist/${id}`, '').map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });

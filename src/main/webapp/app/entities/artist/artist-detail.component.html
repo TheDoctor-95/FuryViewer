@@ -103,14 +103,14 @@
 
             <div class="col-3" style="text-align: center;">
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
-                    <div class="boxList col-10" style="padding: 10px 0px"><i id="icona" class="fa fa-heart" style="color: #ef9800;"></i>
+                    <div class="boxList col-10" style="padding: 10px 0px" (click)="liked()" [ngStyle]="{'background-color':fav ? '#ef9800' : 'white', 'color':fav ? 'white' : '#ef9800'}"><i id="icona" class="fa fa-heart" style="color: #ef9800;"  [ngStyle]="{'color':fav ? 'white' : '#ef9800'}"></i>
                         Favorite
                     </div>
                 </div>
 
                 <div class="row" style="padding-left: 5%; padding-right: 7%;">
 
-                    <div class="boxList col-10" style="padding: 10px 0px"><i class="fa fa-thumbs-down" style="color: #ef9800;"></i> Hatred</div>
+                    <div class="boxList col-10" style="padding: 10px 0px" (click)="hated()" [ngStyle]="{'background-color':hate ? '#ef9800' : 'white', 'color':hate ? 'white' : '#ef9800'}"><i class="fa fa-thumbs-down" style="color: #ef9800;" [ngStyle]="{'color':hate ? 'white' : '#ef9800'}"></i> Hatred</div>
                 </div>
 
                 &nbsp;

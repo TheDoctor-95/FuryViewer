@@ -63,7 +63,8 @@ public class FavouriteArtistResource {
         Optional<FavouriteArtist> existingFavoriteArtist = favouriteArtistRepository.findByArtistAndUserLogin(favouriteArtist.getArtist(), SecurityUtils.getCurrentUserLogin());
 
         if(existingFavoriteArtist.isPresent()){
-            throw new BadRequestAlertException("ARTISTA JA AÑADIODP EM FAVPROTOS", ENTITY_NAME, "favoriteExists");
+            favouriteArtist=existingFavoriteArtist.get();
+            favouriteArtist.setLiked(!favouriteArtist.isLiked());
         }
 
         favouriteArtist.setDate(ZonedDateTime.now());
@@ -96,6 +97,20 @@ public class FavouriteArtistResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, favouriteArtist.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/favourite-artists/Artist/{id}")
+    @Timed
+    public ResponseEntity<FavouriteArtist> createFavouriteArtist(@PathVariable Long id) throws URISyntaxException {
+        log.debug("REST request to save HatredSeries : {}", id);
+
+        Artist artist = artistRepository.findOne(id);
+
+        FavouriteArtist fa = new FavouriteArtist();
+        fa.setArtist(artist);
+        fa.setLiked(true);
+
+        return createFavouriteArtist(fa);
     }
 
     /**

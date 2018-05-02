@@ -6,9 +6,13 @@ import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
 import { Artist } from './artist.model';
 import { ArtistService } from './artist.service';
-import {ResponseWrapper} from "../../shared";
-import {FilmographyArtistModel} from "../../shared/model/filmographyArtist.model";
-import {type} from "os";
+import {ResponseWrapper} from '../../shared';
+import {FilmographyArtistModel} from '../../shared/model/filmographyArtist.model';
+import {type} from 'os';
+import {Observable} from 'rxjs/Observable';
+import {HatredArtist} from '../hatred-artist';
+import {HatredArtistService} from '../hatred-artist';
+import {FavouriteArtist, FavouriteArtistService} from '../favourite-artist';
 
 @Component({
     selector: 'jhi-artist-detail',
@@ -36,6 +40,8 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private eventSubscriber: Subscription;
     public filmography: FilmographyArtistModel;
+    fav: boolean;
+    hate: boolean;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -43,6 +49,8 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
         config: NgbRatingConfig,
         private route: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
+        private hatredArtistService: HatredArtistService,
+        private favouriteArtistService: FavouriteArtistService,
         public router: Router
     ) {
         config.max = 5;
@@ -76,7 +84,7 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-    loadFilmography(id: number){
+    loadFilmography(id: number) {
         this.artistService.filmography(id).subscribe(
             (res: ResponseWrapper) => {
                 this.filmography = res.json;
@@ -104,5 +112,53 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
             'artistListModification',
             (response) => this.load(this.artist.id)
         );
+    }
+
+    hated() {
+        this.subscribeToSaveResponseHate(
+            this.hatredArtistService.hatred(this.artist.id)
+        );
+    }
+
+    private subscribeToSaveResponseHate(result: Observable<HatredArtist>) {
+        result.subscribe((res: HatredArtist) =>
+            this.onSaveSuccessHatred(res), (res: Response) => this.onSaveErrorHatred());
+    }
+
+    private onSaveSuccessHatred(result: HatredArtist) {
+        this.eventManager.broadcast({ name: 'hatredArtistListModification', content: 'OK'});
+        this.hate = result.hated;
+        if (this.hate && this.fav) {
+            this.subscribeToSaveResponseLiked(
+                this.favouriteArtistService.favourite(this.artist.id)
+            );
+        }
+    }
+
+    private onSaveErrorHatred() {
+    }
+
+    liked() {
+        this.subscribeToSaveResponseLiked(
+            this.favouriteArtistService.favourite(this.artist.id)
+        );
+    }
+
+    private subscribeToSaveResponseLiked(result: Observable<FavouriteArtist>) {
+        result.subscribe((res: FavouriteArtist) =>
+            this.onSaveSuccessLiked(res), (res: Response) => this.onSaveErrorLiked());
+    }
+
+    private onSaveSuccessLiked(result: FavouriteArtist) {
+        this.eventManager.broadcast({ name: 'favouriteArtistListModification', content: 'OK'});
+        this.fav = result.liked;
+        if (this.hate && this.fav) {
+            this.subscribeToSaveResponseHate(
+                this.hatredArtistService.hatred(this.artist.id)
+            );
+        }
+    }
+
+    private onSaveErrorLiked() {
     }
 }
