@@ -3,8 +3,12 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.RateSeries;
 
+import com.furyviewer.domain.Series;
 import com.furyviewer.repository.GenreRepository;
 import com.furyviewer.repository.RateSeriesRepository;
+import com.furyviewer.repository.SeriesRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.dto.RateSeriesStats;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +42,15 @@ public class RateSeriesResource {
 
     private final GenreRepository genreRepository;
 
-    public RateSeriesResource(RateSeriesRepository rateSeriesRepository, GenreRepository genreRepository) {
+    private final SeriesRepository seriesRepository;
+
+    private final UserRepository userRepository;
+
+    public RateSeriesResource(RateSeriesRepository rateSeriesRepository, GenreRepository genreRepository, SeriesRepository seriesRepository, UserRepository userRepository) {
         this.rateSeriesRepository = rateSeriesRepository;
         this.genreRepository = genreRepository;
+        this.seriesRepository = seriesRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -56,6 +67,17 @@ public class RateSeriesResource {
         if (rateSeries.getId() != null) {
             throw new BadRequestAlertException("A new rateSeries cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Optional<RateSeries> existingRateSeries =
+            rateSeriesRepository.findBySeriesAndUserLogin(rateSeries.getSeries(), SecurityUtils.getCurrentUserLogin());
+
+        if (existingRateSeries.isPresent()) {
+            rateSeries.setId(existingRateSeries.get().getId());
+        }
+
+        rateSeries.setDate(ZonedDateTime.now());
+        rateSeries.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         RateSeries result = rateSeriesRepository.save(rateSeries);
         return ResponseEntity.created(new URI("/api/rate-series/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -110,16 +132,6 @@ public class RateSeriesResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateSeries));
     }
 
-    @GetMapping("/rate-series-media/{id}")
-    @Timed
-    public ResponseEntity<Double> getRateSeriesMedia(@PathVariable Long id) {
-        log.debug("REST request to get RateSeries : {}", id);
-        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateSeries));
-        Double rate = rateSeriesRepository.RateSeriesMedia(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rate));
-    }
-
-
     /**
      * DELETE  /rate-series/:id : delete the "id" rateSeries.
      *
@@ -139,8 +151,33 @@ public class RateSeriesResource {
     public List<RateSeriesStats> getSeriesByIdGenre(@PathVariable Long idGenre) {
         Pageable topTen = new PageRequest(0, 10);
         return rateSeriesRepository.getSeriesStats(genreRepository.findOne(idGenre), topTen);
-
     }
 
+    @PostMapping("/rate-series/id/{idSeries}/rate/{rate}")
+    @Timed
+    public ResponseEntity<RateSeries> rateSeries(@PathVariable Long idSeries, @PathVariable int rate) throws URISyntaxException {
+        Series ss = seriesRepository.findOne(idSeries);
 
+        RateSeries rss = new RateSeries();
+        rss.setSeries(ss);
+        rss.setRate(rate);
+
+        return createRateSeries(rss);
+    }
+
+    @GetMapping("/rate-series/mediaSeries/{id}")
+    @Timed
+    public ResponseEntity<Double> getRateSeriesMedia(@PathVariable Long id) {
+        log.debug("REST request to get RateSeries : {}", id);
+        Double media = rateSeriesRepository.RateSeriesMedia(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(media));
+    }
+
+    @GetMapping("/rate-series/seriesRate/{id}")
+    @Timed
+    public ResponseEntity<RateSeries> getRateSeriesUser(@PathVariable Long id) {
+        log.debug("REST request to get RateSeries : {}", id);
+        RateSeries rateSeries = rateSeriesRepository.findByUserAndSeriesId(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get(), id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(rateSeries));
+    }
 }

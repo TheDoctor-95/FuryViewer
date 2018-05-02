@@ -38,6 +38,26 @@ export class RateSeriesService {
         });
     }
 
+    rate(id: number, mark: number): Observable<RateSeries> {
+        return this.http.post(`${this.resourceUrl}/id/${id}/rate/${mark}`, '').map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    mediaSeries(id: number): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/mediaSeries/${id}`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    markSeriesUser(id: number): Observable<RateSeries> {
+        return this.http.get(`${this.resourceUrl}/seriesRate/${id}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)

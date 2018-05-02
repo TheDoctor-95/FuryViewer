@@ -24,13 +24,11 @@ export class RateMovieService {
     }
 
     Rate(id: number, mark: number): Observable<RateMovie> {
-        return this.http.post(`${this.resourceUrl}/id/${id}/rate/${mark}`, "").map((res: Response) => {
+        return this.http.post(`${this.resourceUrl}/id/${id}/rate/${mark}`, '').map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
     }
-
-
 
     update(rateMovie: RateMovie): Observable<RateMovie> {
         const copy = this.convert(rateMovie);
@@ -47,7 +45,7 @@ export class RateMovieService {
         });
     }
 
-    mediaMovie(id: number): Observable<number>{
+    mediaMovie(id: number): Observable<number> {
         return this.http.get(`${this.resourceUrl}/mediaMovie/${id}`).map((res: Response) => {
                 return  res.json();
             });
@@ -59,8 +57,6 @@ export class RateMovieService {
             return this.convertItemFromServer(jsonResponse);
         });
     }
-
-
 
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);

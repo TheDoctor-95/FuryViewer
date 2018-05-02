@@ -32,7 +32,7 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     List<RateSeries> getRateSeries(@Param("name")String name);
     Optional<RateSeries> findBySeriesAndUserLogin(Series series, String login);
 
-    @Query("select avg(rate) from RateSeries rateSeries where rateSeries.id=:SeriesId")
+    @Query("select avg(rateSeries.rate) from RateSeries rateSeries where rateSeries.series.id=:SeriesId")
     Double RateSeriesMedia(@Param("SeriesId")Long id);
 
     @Query("select r.series from RateSeries r group by r.series order by avg (r.rate) desc")

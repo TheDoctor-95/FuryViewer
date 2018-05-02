@@ -88,7 +88,6 @@ public class RateMovieResource {
     @PostMapping("/rate-movies/id/{idMovie}/rate/{rate}")
     @Timed
     public ResponseEntity<RateMovie> RateMovie(@PathVariable Long idMovie, @PathVariable int rate) throws URISyntaxException {
-
         Movie m = movieRepository.findOne(idMovie);
 
         RateMovie rm = new RateMovie();
@@ -96,8 +95,6 @@ public class RateMovieResource {
         rm.setRate(rate);
 
         return createRateMovie(rm);
-
-
     }
 
     /**

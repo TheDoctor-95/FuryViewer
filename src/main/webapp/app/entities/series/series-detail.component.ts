@@ -9,8 +9,6 @@ import {Artist} from '../artist/artist.model';
 import {ResponseWrapper} from '../../shared/model/response-wrapper.model';
 import {ArtistService} from '../artist/artist.service';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
-import {FavouriteMovie} from '../favourite-movie/favourite-movie.model';
-import {HatredMovie} from '../hatred-movie/hatred-movie.model';
 import {FavouriteSeries} from '../favourite-series/favourite-series.model';
 import {HatredSeries} from '../hatred-series/hatred-series.model';
 import {SeasonService} from '../season/season.service';
@@ -24,6 +22,7 @@ import {ChapterSeenService} from '../chapter-seen/chapter-seen.service';
 import {SeriesStats, SeriesStatsService} from '../series-stats';
 import {SocialService} from '../social';
 import {Social} from '../social/social.model';
+import {RateSeries, RateSeriesService} from '../rate-series';
 
 @Component({
     selector: 'jhi-series-detail',
@@ -60,6 +59,9 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     idSeasonActual: number;
     stats: string;
     marks: Social[];
+    rateUser: RateSeries;
+    media: string;
+
     constructor(
         private eventManager: JhiEventManager,
         private seriesService: SeriesService,
@@ -73,7 +75,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private hatredSeriesService: HatredSeriesService,
         private chapterSeenService: ChapterSeenService,
         private seriesStatService: SeriesStatsService,
-        private socialService: SocialService
+        private socialService: SocialService,
+        private rateSeriesService: RateSeriesService
 ) {
     this.director = new Artist();
     this.director.name = '';
@@ -81,9 +84,11 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     this.scripwriter.name = '';
     this.stats = '';
     config.max = 5;
-        this.fav = false;
-
-        this.hate = false;
+    this.fav = false;
+    this.hate = false;
+    this.rateUser = new RateSeries();
+    this.rateUser.rate = 0;
+    this.media = '0';
 }
 
     ngOnInit() {
@@ -98,7 +103,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadHate(params['id']);
             this.loadFav(params['id']);
             this.loadMarks(params['id']);
-
+            this.loadRateUser(params['id']);
+            this.loadMediumMark(params['id']);
         });
         this.registerChangeInSeries();
 
@@ -109,6 +115,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.series = series;
         });
     }
+
     loadArtist(id: number) {
         this.artistService.seriesActorsQuery(id).subscribe(
             (res: ResponseWrapper) => {
@@ -309,6 +316,40 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     loadState(id: number) {
         this.seriesStatService.getState(id).subscribe((stat) => {
             this.stats = stat.url;
+        });
+    }
+
+    rate() {
+        this.subscribeToSaveResponseRate(
+            this.rateSeriesService.rate(this.series.id, this.rateUser.rate)
+        );
+    }
+
+    private subscribeToSaveResponseRate(result: Observable<RateSeries>) {
+        result.subscribe((res: RateSeries) =>
+            this.onSaveSuccessRate(res), (res: Response) => this.onSaveErrorRate());
+    }
+
+    private onSaveSuccessRate(result: RateSeries) {
+        this.eventManager.broadcast({ name: 'rateSeriesListModification', content: 'OK'});
+        this.rateUser = result;
+        this.loadMediumMark(this.series.id);
+    }
+
+    private onSaveErrorRate() {
+
+    }
+
+    loadRateUser(id: number) {
+        this.rateSeriesService.markSeriesUser(id).subscribe((rateSeries) => {
+            this.rateUser = rateSeries;
+        });
+    }
+
+    loadMediumMark(id: number) {
+        this.rateSeriesService.mediaSeries(id).subscribe((rateSeries) => {
+            const ourMark = rateSeries.toPrecision(2);
+            this.media = ourMark;
         });
     }
 }
