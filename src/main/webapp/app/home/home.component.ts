@@ -11,6 +11,7 @@ import {EpisodeNextSeen} from "../shared/model/EpisodeNextSeen.model";
 import {Company} from "../entities/company/company.model";
 import {CompanyService} from "../entities/company/company.service";
 import {Subscription} from "rxjs/Subscription";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
     selector: 'jhi-home',
@@ -31,7 +32,8 @@ export class HomeComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private loginModalService: LoginModalService,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router
     ) {
     }
 
@@ -49,6 +51,13 @@ export class HomeComponent implements OnInit {
             this.currentAccount = account;
         });
         this.registerChangeInCompanies();
+        if(this.isAuthenticated()){
+            this.router.navigate(['/home'])
+        }
+    }
+
+    isAuthenticated() {
+        return this.principal.isAuthenticated();
     }
 
     ngOnDestroy() {
