@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
@@ -27,6 +27,7 @@ import {ReviewMovieService} from '../review-movie/review-movie.service';
 import {BaseEntity} from '../../shared/model/base-entity';
 import  {MovieStatsService} from '../movie-stats/movie-stats.service';
 import {MovieStats} from '../movie-stats/movie-stats.model';
+import {Principal} from "../../shared/auth/principal.service";
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -75,7 +76,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private rateMovieServie: RateMovieService,
         private reviewMovieService: ReviewMovieService,
         private movieStatService: MovieStatsService,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private principal: Principal,
+        private router: Router
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
@@ -104,6 +107,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadTrailer(params['id']);
             this.loadState(params['id']);
             console.log(this.trailer);
+
 
         });
         this.registerChangeInMovies();

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'jhi-error',
@@ -10,11 +10,13 @@ export class ErrorComponent implements OnInit {
     error403: boolean;
 
     constructor(
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {
     }
 
     ngOnInit() {
+        this.router.navigate(['']);
         this.route.data.subscribe((routeData) => {
             if (routeData.error403) {
                 this.error403 = routeData.error403;
