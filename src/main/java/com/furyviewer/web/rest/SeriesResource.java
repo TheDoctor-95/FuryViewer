@@ -140,7 +140,7 @@ public class SeriesResource {
     @GetMapping("/series/topHatredSeries/")
     @Timed
     public ResponseEntity<List<Series>> findTopHatredSeries() {
-        log.debug("REST request to get Movies by name");
+        log.debug("REST request to get Series by name");
         List<Series> series = hatredSeriesRepository.topHatredSeries();
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(series));
     }
@@ -148,9 +148,16 @@ public class SeriesResource {
     @GetMapping("/series/totalFavHate/{id}")
     @Timed
     public Double getTotalFavHate(@PathVariable Long id) {
-        log.debug("REST request to get Movies by name");
+        log.debug("REST request to get Series by name");
         return marksService.totalFavHate(favouriteSeriesRepository.countLikedSeries(id),
             hatredSeriesRepository.countHatredSeries(id));
+    }
+
+    @GetMapping("/series/sumaFavHate/{id}")
+    @Timed
+    public Integer getSumaFavHate(@PathVariable Long id) {
+        log.debug("REST request to get Series by name");
+        return (favouriteSeriesRepository.countLikedSeries(id) + hatredSeriesRepository.countHatredSeries(id));
     }
 
     /**

@@ -124,13 +124,11 @@ public class MarksService {
         return " " + markInt;
     }
 
-    public Double totalFavHate(Long fav, Long hate) {
-        Integer aux = 0;
-        if (fav == null) fav = aux.longValue();
-        if (hate == null) hate = aux.longValue();
-
+    public Double totalFavHate(Integer fav, Integer hate) {
         Double auxFav = fav.doubleValue();
         Double auxHate = hate.doubleValue();
+
+        if (auxFav == 0 && auxHate == 0) return 0.0;
 
         return auxFav / (auxFav + auxHate) * 100;
     }

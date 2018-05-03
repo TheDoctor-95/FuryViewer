@@ -1458,3 +1458,7 @@ img::selection {
     font-weight: 500;
     font-family: 'Open Sans', sans-serif;
 }
+
+.bg-success{
+    background-color: #ffc843!important;
+}

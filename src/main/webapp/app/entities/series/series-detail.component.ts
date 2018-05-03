@@ -62,6 +62,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     rateUser: RateSeries;
     media: string;
     progres: number;
+    votesCount: string;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -91,6 +92,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     this.rateUser.rate = 0;
     this.media = '0';
     this.progres = 0;
+    this.votesCount = '0';
 }
 
     ngOnInit() {
@@ -108,6 +110,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadRateUser(params['id']);
             this.loadMediumMark(params['id']);
             this.loadFavHate(params['id']);
+            this.loadCountFavHate(params['id']);
         });
         this.registerChangeInSeries();
 
@@ -171,8 +174,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     markChapter(id: number) {
         this.subscribeToSaveResponseSeen(
             this.chapterSeenService.createId(id)
-
-    );
+        );
     }
 
     private subscribeToSaveResponseSeen(result: Observable<ChapterSeen>) {
@@ -249,15 +251,14 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     }
 
     like() {
-    this.subscribeToSaveResponseLike(
-        this.favouriteSeriesService.favourite(this.series.id)
-    );
-}
+        this.subscribeToSaveResponseLike(
+            this.favouriteSeriesService.favourite(this.series.id)
+        );
+    }
 
     private subscribeToSaveResponseLike(result: Observable<FavouriteSeries>) {
         result.subscribe((res: FavouriteSeries) =>
             this.onSaveSuccessLike(res), (res: Response) => this.onSaveErrorLike());
-
     }
 
     private onSaveSuccessLike(result: FavouriteSeries) {
@@ -269,6 +270,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             );
         }
         this.loadFavHate(this.series.id);
+        this.loadCountFavHate(this.series.id);
     }
 
     private onSaveErrorLike() {
@@ -294,6 +296,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             );
         }
         this.loadFavHate(this.series.id);
+        this.loadCountFavHate(this.series.id);
     }
 
     private onSaveErrorHatred() {
@@ -361,6 +364,12 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     loadFavHate(id: number) {
         this.seriesService.getFavHate(id).subscribe((favHate) => {
             this.progres = favHate;
+        });
+    }
+
+    loadCountFavHate(id: number) {
+        this.seriesService.getNumFavHate(id).subscribe((countFavHate) => {
+            this.votesCount = '' + countFavHate;
         });
     }
 }

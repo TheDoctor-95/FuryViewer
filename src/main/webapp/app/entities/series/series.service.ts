@@ -44,6 +44,12 @@ export class SeriesService {
         });
     }
 
+    getNumFavHate(id: number): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/sumaFavHate/${id}`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
