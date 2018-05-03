@@ -34,8 +34,6 @@ public interface FavouriteArtistRepository extends JpaRepository<FavouriteArtist
     @Query("select a.liked, user from FavouriteArtist a where a.artist.id=:id and a.user.id=:id ")
     Boolean selectFavouriteArtist(@Param("id") Long id);
 
-    @Query("select count(f.liked) from FavouriteArtist f where f.artist.id=:id")
-    Long countLikedArtist(@Param("id") Long id);
-
-
+    @Query("SELECT COUNT(f.liked) FROM FavouriteArtist f WHERE f.liked=true AND f.artist.id=:id")
+    Integer countLikedArtist(@Param("id") Long id);
 }

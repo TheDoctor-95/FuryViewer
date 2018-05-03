@@ -7,6 +7,7 @@ import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.ArtistType;
 import com.furyviewer.domain.enumeration.ArtistTypeEnum;
 import com.furyviewer.repository.ArtistRepository;
+import com.furyviewer.repository.FavouriteArtistRepository;
 import com.furyviewer.repository.HatredArtistRepository;
 import com.furyviewer.repository.ArtistTypeRepository;
 import com.furyviewer.service.SmartSearch.Artist.ArtistServiceSmart;
@@ -17,6 +18,7 @@ import com.furyviewer.service.dto.TheMovieDB.Artist.SimpleArtistTmdbDTO;
 import com.furyviewer.service.util.ArtistService;
 import com.furyviewer.service.util.EpisodeActorsService;
 import com.furyviewer.service.dto.util.MultimediaActorsDTO;
+import com.furyviewer.service.util.MarksService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -30,7 +32,6 @@ import org.springframework.web.bind.annotation.*;
 import com.furyviewer.service.SmartSearch.Artist.ArtistBQueryService;
 
 
-import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -52,27 +53,32 @@ public class ArtistResource {
 
     private final ArtistRepository artistRepository;
 
-    @Autowired
-    private HatredArtistRepository hatredArtistRepository;
+    private final HatredArtistRepository hatredArtistRepository;
 
-    @Autowired
-    private ArtistServiceSmart artistServiceSmart;
+    private final FavouriteArtistRepository favouriteArtistRepository;
 
-    @Autowired
-    private ArtistBQueryService artistBQueryService;
+    private final ArtistServiceSmart artistServiceSmart;
 
-    @Autowired
-    private ArtistService artistService;
+    private final ArtistBQueryService artistBQueryService;
 
-    @Autowired
-    private EpisodeActorsService episodeActorsService;
+    private final ArtistService artistService;
 
+    private final EpisodeActorsService episodeActorsService;
 
-    @Inject
-    private ArtistTypeRepository artistTypeRepository;
+    private final ArtistTypeRepository artistTypeRepository;
 
-    public ArtistResource(ArtistRepository artistRepository) {
+    private final MarksService marksService;
+
+    public ArtistResource(ArtistRepository artistRepository, HatredArtistRepository hatredArtistRepository, FavouriteArtistRepository favouriteArtistRepository, ArtistServiceSmart artistServiceSmart, ArtistBQueryService artistBQueryService, ArtistService artistService, EpisodeActorsService episodeActorsService, ArtistTypeRepository artistTypeRepository, MarksService marksService) {
         this.artistRepository = artistRepository;
+        this.hatredArtistRepository = hatredArtistRepository;
+        this.favouriteArtistRepository = favouriteArtistRepository;
+        this.artistServiceSmart = artistServiceSmart;
+        this.artistBQueryService = artistBQueryService;
+        this.artistService = artistService;
+        this.episodeActorsService = episodeActorsService;
+        this.artistTypeRepository = artistTypeRepository;
+        this.marksService = marksService;
     }
 
     /**
@@ -298,5 +304,20 @@ public class ArtistResource {
 
         return new ResponseEntity<>(episodeActorsService.getSeriesAndMoviesFromActor(artist)
             , HttpStatus.OK);
+    }
+
+    @GetMapping("/artists/totalFavHate/{id}")
+    @Timed
+    public Double getTotalFavHate(@PathVariable Long id) {
+        log.debug("REST request to get Series by name");
+        return marksService.totalFavHate(favouriteArtistRepository.countLikedArtist(id),
+            hatredArtistRepository.countHatredArtist(id));
+    }
+
+    @GetMapping("/artists/sumaFavHate/{id}")
+    @Timed
+    public Integer getSumaFavHate(@PathVariable Long id) {
+        log.debug("REST request to get Series by name");
+        return (favouriteArtistRepository.countLikedArtist(id) + hatredArtistRepository.countHatredArtist(id));
     }
 }

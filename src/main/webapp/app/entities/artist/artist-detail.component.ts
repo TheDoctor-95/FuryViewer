@@ -42,6 +42,8 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
     public filmography: FilmographyArtistModel;
     fav: boolean;
     hate: boolean;
+    progres: number;
+    votesCount: string;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -54,12 +56,16 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
         public router: Router
     ) {
         config.max = 5;
+        this.progres = 0;
+        this.votesCount = '0';
     }
 
     ngOnInit() {
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
             this.loadFilmography(params['id']);
+            this.loadFavHate(params['id']);
+            this.loadCountFavHate(params['id']);
             console.log(this.filmography)
         });
         this.registerChangeInArtists();
@@ -133,6 +139,8 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
                 this.favouriteArtistService.favourite(this.artist.id)
             );
         }
+        this.loadFavHate(this.artist.id);
+        this.loadCountFavHate(this.artist.id);
     }
 
     private onSaveErrorHatred() {
@@ -157,8 +165,22 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
                 this.hatredArtistService.hatred(this.artist.id)
             );
         }
+        this.loadFavHate(this.artist.id);
+        this.loadCountFavHate(this.artist.id);
     }
 
     private onSaveErrorLiked() {
+    }
+
+    loadFavHate(id: number) {
+        this.artistService.getFavHate(id).subscribe((favHate) => {
+            this.progres = favHate;
+        });
+    }
+
+    loadCountFavHate(id: number) {
+        this.artistService.getNumFavHate(id).subscribe((countFavHate) => {
+            this.votesCount = '' + countFavHate;
+        });
     }
 }

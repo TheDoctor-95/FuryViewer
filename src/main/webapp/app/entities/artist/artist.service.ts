@@ -7,7 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Artist } from './artist.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
-import { FilmographyArtistModel } from "../../shared/model/filmographyArtist.model";
+import { FilmographyArtistModel } from '../../shared/model/filmographyArtist.model';
 
 @Injectable()
 export class ArtistService {
@@ -42,6 +42,18 @@ export class ArtistService {
     filmography(id: number): Observable<ResponseWrapper> {
         return this.http.get(`${this.resourceUrl}/${id}/moviesAndSeriesOrderedByDate/`)
             .map((res: Response) => this.convertFilmographyResponse(res));
+    }
+
+    getFavHate(id: number): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/totalFavHate/${id}`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getNumFavHate(id: number): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/sumaFavHate/${id}`).map((res: Response) => {
+            return  res.json();
+        });
     }
 
     query(req?: any): Observable<ResponseWrapper> {
@@ -125,6 +137,4 @@ export class ArtistService {
             .convertLocalDateToServer(artist.deathdate);
         return copy;
     }
-
-
 }
