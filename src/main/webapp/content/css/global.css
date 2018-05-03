@@ -1,7 +1,7 @@
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800|Roboto:300,400,500,700');
-
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700,800|Roboto:200,300,400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400');
 
 /* ==============================================================
 Bootstrap tweaks
@@ -670,11 +670,11 @@ h2 {
 }
 
 button {
-    border-color: #ef9800 !important;
-    background-color: transparent !important;
-    border-style: solid !important;
-    color: #ef9800 !important;
-    font-size: 1rem !important;
+    border-color: #ef9800 ;
+    background-color: transparent ;
+    border-style: solid ;
+    color: #ef9800 ;
+    font-size: 1rem ;
 
 }
 

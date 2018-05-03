@@ -1,0 +1,58 @@
+.cuerpo {
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+
+    /* height: 75%;*/
+    /*
+    width: 70%;
+    margin: 12%;
+    margin-top: 2%;
+    margin-left: 15%;*/
+}
+
+.line-element-wrapper{
+    /*margin-left: 3rem;
+    margin-right: 3rem;
+    margin-bottom: 2rem;*/
+    margin:3rem;
+
+
+    border-bottom: 1px solid gray;
+    padding-bottom: 3rem;
+
+}
+.num-element{
+    font-family: 'Work Sans', sans-serif;
+    margin-top: -1rem;
+    font-size: 8em;
+    font-weight: 100;
+    color:gray;
+}
+.day-element{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 200;
+    font-size: 1.5em;
+    margin-top: -2rem;
+}
+.month-element{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 200;
+    font-size: 1.2em;
+}
+.line-element-wrapper:last-child{
+    border-bottom: none;
+}
+
+.botocalendari{
+    margin-right: 5rem;
+    margin-top: 3rem !important;
+    font-size: 1.1rem;
+
+}
+.botocalendari button{
+    margin-right: 0.5rem;
+    min-width: 6em;
+    padding: 0.2rem;
+    font-weight: 300;
+}

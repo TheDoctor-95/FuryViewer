@@ -1,64 +1,332 @@
-<div>
-    <h2>
-        <span jhiTranslate="furyViewerApp.season.home.title">Seasons</span>
-        <button class="btn btn-primary float-right jh-create-entity create-season" [routerLink]="['/', { outlets: { popup: ['season-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="furyViewerApp.season.home.createLabel">
-            Create new Season
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-    </div>
-    <br/>
-    <div class="table-responsive" *ngIf="seasons">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="furyViewerApp.season.number">Number</span></th>
-            <th><span jhiTranslate="furyViewerApp.season.releaseDate">Release Date</span></th>
-            <th><span jhiTranslate="furyViewerApp.season.series">Series</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let season of seasons ;trackBy: trackId">
-                <td><a [routerLink]="['../season', season.id ]">{{season.id}}</a></td>
-                <td>{{season.number}}</td>
-                <td>{{season.releaseDate | date:'mediumDate'}}</td>
-                <td>
-                    <div *ngIf="season.series">
-                        <a [routerLink]="['../series', season.series?.id ]" >{{season.series?.name}}</a>
+<div class="fons ">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="cuerpo">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row text-right">
+                                <div class="col botocalendari" id="botoncalendar">
+                                    <button> SERIES</button>
+                                    <button> FILMS</button>
+                                </div>
+                            </div>
+                            <div class="all-elements">
+                                <div class="line-element-wrapper">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="date-element" style="text-align: center;">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="num-element">
+                                                                    26
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="day-element">
+                                                                    MONDAY
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="month-element">
+                                                                    March
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="moviesseries-element">
+
+
+                                                        <div class="serpeli_body2">
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="line-element-wrapper">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="date-element" style="text-align: center;">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="num-element" style="color:orange">
+                                                                    26
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="day-element">
+                                                                    MONDAY
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="month-element">
+                                                                    March
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="moviesseries-element">
+
+
+                                                        <div class="serpeli_body2">
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="line-element-wrapper">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-3" style="padding-right: 0;">
+                                                    <div class="date-element" style="text-align: center;">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="num-element">
+                                                                    26
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="day-element">
+                                                                    MONDAY
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="month-element">
+                                                                    March
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-9" style="padding-left: 0;">
+                                                    <div class="moviesseries-element">
+
+
+                                                        <div class="serpeli_body2">
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="card portades">
+                                                                <img class="card-img-top"
+                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     alt="Card image">
+
+
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../season', season.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'season/'+ season.id + '/edit'} }]"
-                                replaceUrl="true"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'season/'+ season.id + '/delete'} }]"
-                                replaceUrl="true"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

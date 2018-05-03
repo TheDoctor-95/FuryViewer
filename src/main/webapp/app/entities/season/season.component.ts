@@ -9,7 +9,8 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-season',
-    templateUrl: './season.component.html'
+    templateUrl: './season.component.html',
+    styleUrls: ['season.css']
 })
 export class SeasonComponent implements OnInit, OnDestroy {
 seasons: Season[];
