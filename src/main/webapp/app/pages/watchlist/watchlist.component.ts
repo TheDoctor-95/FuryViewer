@@ -36,7 +36,6 @@ export class WatchlistComponent implements OnInit, OnDestroy {
             this.watchlistService.query({
                 page: this.page,
                 size: this.itemsPerPage,
-                sort: this.sort()
             }).subscribe(
                 (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
                 (res: ResponseWrapper) => this.onError(res.json)
