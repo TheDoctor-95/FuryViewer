@@ -294,9 +294,9 @@ Social Buttons
     border-radius: 10px;
     width: 100%;
     object-fit: cover;
-    -webkit-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    /*-webkit-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
     -moz-box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
-    box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);
+    box-shadow: -1px 0px 12px 3px rgba(239, 152, 0, 1);*/
 }
 
 .nameTitle {
@@ -306,7 +306,7 @@ Social Buttons
 
 .stars {
     font-size: 2.1em;
-    color: #ef9800;
+    color: #ffc946;
 }
 
 .furyColor {
