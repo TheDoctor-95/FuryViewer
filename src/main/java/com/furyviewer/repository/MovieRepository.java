@@ -31,6 +31,15 @@ public interface MovieRepository extends JpaRepository<Movie, Long> , JpaSpecifi
     @Query("select m from Movie m where :artist member of m.actorMains order by m.releaseDate desc")
     List<Movie> getByArtistOrderbyDate(@Param("artist") Artist artist);
 
+    //@Query("select m from Movie m where :artist member of m.director order by m.releaseDate desc")
+    //List<Movie> getByDirectorOrderbyDate(@Param("artist") Artist artist);
+
+    @Query("select movie from Movie movie left join fetch movie.director where movie.director =:artist order by movie.releaseDate desc")
+    List<Movie> findMovieByDirectorOrderByReleaseDate(@Param("artist") Artist artist);
+
+    @Query("select movie from Movie movie left join fetch movie.scriptwriter where movie.scriptwriter =:artist order by movie.releaseDate desc")
+    List<Movie> findMovieByScriptwriterOrderByReleaseDate(@Param("artist") Artist artist);
+
 
     @Query("select m from Movie m where :genre member of m.genres")
     List<Movie>getMoviesByGenre(@Param("genre")Genre genre);

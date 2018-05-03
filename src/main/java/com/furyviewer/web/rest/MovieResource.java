@@ -263,8 +263,18 @@ public class MovieResource {
         return movieRepository.getByArtistOrderbyDate(artistRepository.findOne(id));
     }
 
+    @GetMapping("/movies/by-director/{id}")
+    @Timed
+    public List<Movie> getAllMoviesFromDirector(@PathVariable Long id){
+        log.debug("Get to request movies from director order by date desc");
+        return movieRepository.findMovieByDirectorOrderByReleaseDate(artistRepository.findOne(id));
+    }
 
-
-
+    @GetMapping("/movies/by-scriptwriter/{id}")
+    @Timed
+    public List<Movie> getAllMoviesFromScriptWriter(@PathVariable Long id){
+        log.debug("Get to request movies from scriptwriter order by date desc");
+        return movieRepository.findMovieByScriptwriterOrderByReleaseDate(artistRepository.findOne(id));
+    }
 
 }

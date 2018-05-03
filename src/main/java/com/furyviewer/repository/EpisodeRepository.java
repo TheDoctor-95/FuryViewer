@@ -32,6 +32,18 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
     @Query("select e from Episode e where :artist member of e.actors order by e.releaseDate desc")
     List<Episode> getEpisodeByActorsOrderByReleaseDate(@Param("artist") Artist artist);
 
+    //@Query("select e from Episode e where :artist member of e.director order by e.releaseDate desc")
+    //List<Episode> getEpisodeByDirectorOrderByReleaseDate(@Param("artist") Artist artist);
+
+    //@Query("select e from Episode e where :artist member of e.scriptwriter order by e.releaseDate desc")
+    //List<Episode> getEpisodeByScriptwriterOrderByReleaseDate(@Param("artist") Artist artist);
+
+    @Query("select e from Episode e where e.director =:artist order by e.releaseDate desc")
+    List<Series> findEpisodeByDirectorOrderByReleaseDate(@Param("artist") Artist artist);
+
+    @Query("select e from Episode e where e.scriptwriter =:artist order by e.releaseDate desc")
+    List<Series> findEpisodeByScriptwriterOrderByReleaseDate(@Param("artist") Artist artist);
+
     List<Episode> findBySeasonSeriesIn(List<Series> seriesList);
 
 }

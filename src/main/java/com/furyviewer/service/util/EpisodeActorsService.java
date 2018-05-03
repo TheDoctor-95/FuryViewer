@@ -43,7 +43,35 @@ public class EpisodeActorsService {
             .collect(Collectors.toList());
 
 
+
+
+
         List<MultimediaActorsDTO> multimediaMoviesActorsDTOs = movieRepository.getByArtistOrderbyDate(artist)
+            .stream()
+            .distinct()
+            .map(movie ->  new MultimediaActorsDTO(
+                movie.getId(),
+                movie.getName(),
+                movie.getReleaseDate(),
+                "movie",
+                movie.getImgUrl()
+            ))
+            .collect(Collectors.toList());
+
+
+        List<MultimediaActorsDTO> multimediaMoviesDirectorsDTOs = movieRepository.findMovieByDirectorOrderByReleaseDate(artist)
+            .stream()
+            .distinct()
+            .map(movie ->  new MultimediaActorsDTO(
+                movie.getId(),
+                movie.getName(),
+                movie.getReleaseDate(),
+                "movie",
+                movie.getImgUrl()
+            ))
+            .collect(Collectors.toList());
+
+        List<MultimediaActorsDTO> multimediaMoviesScriptwritersDTOs = movieRepository.findMovieByScriptwriterOrderByReleaseDate(artist)
             .stream()
             .distinct()
             .map(movie ->  new MultimediaActorsDTO(
@@ -57,11 +85,16 @@ public class EpisodeActorsService {
 
         List<MultimediaActorsDTO> multimediaActorsDTO = new ArrayList<>();
         multimediaActorsDTO.addAll(multimediaMoviesActorsDTOs);
+        multimediaActorsDTO.addAll(multimediaMoviesDirectorsDTOs);
+        multimediaActorsDTO.addAll(multimediaMoviesScriptwritersDTOs);
         multimediaActorsDTO.addAll(multimediaSeriesActorsDTOs);
+
 
         multimediaActorsDTO.sort(Comparator.comparing(MultimediaActorsDTO::getReleaseDate).reversed());
 
         return multimediaActorsDTO;
+
+
 
     }
 }
