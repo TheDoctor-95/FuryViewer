@@ -23,8 +23,6 @@ export class MovieService {
         });
     }
 
-
-
     update(movie: Movie): Observable<Movie> {
         const copy = this.convert(movie);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
@@ -37,6 +35,18 @@ export class MovieService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    getFavHate(id: number): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/totalFavHate/${id}`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getNumFavHate(id: number): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/sumaFavHate/${id}`).map((res: Response) => {
+            return  res.json();
         });
     }
 

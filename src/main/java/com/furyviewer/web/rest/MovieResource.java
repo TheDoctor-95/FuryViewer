@@ -2,7 +2,6 @@ package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Artist;
-import com.furyviewer.domain.Genre;
 import com.furyviewer.domain.Movie;
 
 import com.furyviewer.repository.*;
@@ -11,18 +10,17 @@ import com.furyviewer.service.SmartSearch.Movie.MovieQueryService;
 import com.furyviewer.service.OpenMovieDatabase.Service.MovieOmdbDTOService;
 import com.furyviewer.service.dto.Criteria.MovieBCriteria;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
+import com.furyviewer.service.util.MarksService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -45,31 +43,35 @@ public class MovieResource {
 
     private final OkHttpClient client = new OkHttpClient();
 
-    @Autowired
-    private MovieQueryService movieQueryService;
+    private final MovieQueryService movieQueryService;
 
-    @Autowired
-    private HatredMovieRepository hatredMovieRepository;
+    private final HatredMovieRepository hatredMovieRepository;
 
-    @Autowired
-    private MovieStatsRepository movieStatsRepository;
+    private final FavouriteMovieRepository favouriteMovieRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final MovieStatsRepository movieStatsRepository;
 
-    @Autowired
-    private RateMovieRepository rateMovieRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private ArtistRepository artistRepository;
+    private final RateMovieRepository rateMovieRepository;
 
-    @Inject
-    private MovieOmdbDTOService movieOmdbDTOService;
+    private final ArtistRepository artistRepository;
 
+    private final MovieOmdbDTOService movieOmdbDTOService;
 
+    private final MarksService marksService;
 
-    public MovieResource(MovieRepository movieRepository) {
+    public MovieResource(MovieRepository movieRepository, MovieQueryService movieQueryService, HatredMovieRepository hatredMovieRepository, FavouriteMovieRepository favouriteMovieRepository, MovieStatsRepository movieStatsRepository, UserRepository userRepository, RateMovieRepository rateMovieRepository, ArtistRepository artistRepository, MovieOmdbDTOService movieOmdbDTOService, MarksService marksService) {
         this.movieRepository = movieRepository;
+        this.movieQueryService = movieQueryService;
+        this.hatredMovieRepository = hatredMovieRepository;
+        this.favouriteMovieRepository = favouriteMovieRepository;
+        this.movieStatsRepository = movieStatsRepository;
+        this.userRepository = userRepository;
+        this.rateMovieRepository = rateMovieRepository;
+        this.artistRepository = artistRepository;
+        this.movieOmdbDTOService = movieOmdbDTOService;
+        this.marksService = marksService;
     }
 
     /**
@@ -144,7 +146,21 @@ public class MovieResource {
         }else{
             return movieList.subList(0, 5);
         }
+    }
 
+    @GetMapping("/movies/totalFavHate/{id}")
+    @Timed
+    public Double getTotalFavHate(@PathVariable Long id) {
+        log.debug("REST request to get Series by name");
+        return marksService.totalFavHate(favouriteMovieRepository.countLikedMovie(id),
+            hatredMovieRepository.countHatredMovie(id));
+    }
+
+    @GetMapping("/movies/sumaFavHate/{id}")
+    @Timed
+    public Integer getSumaFavHate(@PathVariable Long id) {
+        log.debug("REST request to get Series by name");
+        return (favouriteMovieRepository.countLikedMovie(id) + hatredMovieRepository.countHatredMovie(id));
     }
 
 

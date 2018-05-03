@@ -23,23 +23,17 @@ public interface HatredMovieRepository extends JpaRepository<HatredMovie, Long> 
 
     Optional<HatredMovie> findByMovieAndUserLogin(Movie movie, String login);
 
-
     @Query("select count(hatred_movie) from HatredMovie hatred_movie where hatred_movie.id=:MovieId")
     Long HatredMovieT(@Param("MovieId") Long id);
-
 
     @Query("select h.movie from HatredMovie h group by h.movie order by avg (h.hated) desc")
     List<Movie> topHatredMovies();
 
-
     @Query("select h.hated from HatredMovie h where h.user=:User and h.movie.id = :id ")
     Integer markHatredMovie(@Param("User") User u, @Param("id") Long id);
 
-
-
     HatredMovie findByUserAndMovieId(User u, Long id);
 
-    @Query("select count(h.hated) from HatredMovie h where h.movie.id=:id")
-    Long countHatredMovie(@Param("id") Long id);
-
+    @Query("SELECT COUNT(h.hated) FROM HatredMovie h WHERE h.hated=true AND h.movie.id=:id")
+    Integer countHatredMovie(@Param("id") Long id);
 }

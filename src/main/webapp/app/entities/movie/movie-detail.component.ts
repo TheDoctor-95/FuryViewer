@@ -60,6 +60,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     newComent: ReviewMovie;
     trailer: SafeResourceUrl;
     stats: string;
+    progres: number;
+    votesCount: string;
+
     constructor(
         private eventManager: JhiEventManager,
         private movieService: MovieService,
@@ -89,6 +92,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.newComent.title = '';
         this.newComent.review = '';
         this.stats = '';
+        this.progres = 0;
+        this.votesCount = '0';
     }
 
     ngOnInit() {
@@ -103,6 +108,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadReviews(params['id']);
             this.loadTrailer(params['id']);
             this.loadState(params['id']);
+            this.loadFavHate(params['id']);
+            this.loadCountFavHate(params['id']);
             console.log(this.trailer);
         });
         this.registerChangeInMovies();
@@ -244,6 +251,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
                 this.hatredMovieService.hate(this.movie.id)
             );
         }
+        this.loadFavHate(this.movie.id);
+        this.loadCountFavHate(this.movie.id);
     }
 
     private subscribeToHateResponse(result: Observable<HatredMovie>) {
@@ -259,6 +268,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
                 this.favouriteMovieService.favorite(this.movie.id)
             );
         }
+        this.loadFavHate(this.movie.id);
+        this.loadCountFavHate(this.movie.id);
     }
 
     private subscribeToSaveResponseRate(result: Observable<RateMovie>) {
@@ -305,4 +316,15 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.loadReviews(this.movie.id);
     }
 
+    loadFavHate(id: number) {
+        this.movieService.getFavHate(id).subscribe((favHate) => {
+            this.progres = favHate;
+        });
+    }
+
+    loadCountFavHate(id: number) {
+        this.movieService.getNumFavHate(id).subscribe((countFavHate) => {
+            this.votesCount = '' + countFavHate;
+        });
+    }
 }
