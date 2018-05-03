@@ -2,6 +2,7 @@ package com.furyviewer.service.util;
 
 
 import com.codahale.metrics.annotation.Timed;
+import com.furyviewer.domain.ChapterSeen;
 import com.furyviewer.domain.Episode;
 import com.furyviewer.domain.Season;
 import com.furyviewer.domain.Series;
@@ -10,12 +11,14 @@ import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.dto.util.EpisodeSerieDTO;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
 import com.furyviewer.web.rest.EpisodeResource;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,7 +35,7 @@ public class EpisodeService {
     private EpisodeRepository episodeRepository;
 
     @Autowired
-    private SeasonRepository seasonRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private SeriesRepository seriesRepository;
@@ -161,5 +164,34 @@ public class EpisodeService {
                 (   episode.getReleaseDate().isEqual(LocalDate.now())
                  || episode.getReleaseDate().isAfter(LocalDate.now())))
             .collect(Collectors.groupingBy(Episode::getReleaseDate, TreeMap::new, Collectors.toList()));
+    }
+
+    public Boolean seasonSeen(Long seasonId) {
+        Boolean state;
+        List<Episode> episodes = episodeRepository.getEpisodeBySeason(seasonId);
+
+        int numEpisodesSeen =
+            chapterSeenRepository.countEpisodeSeenForSeason(seasonId, SecurityUtils.getCurrentUserLogin());
+
+        if(episodes.size() == numEpisodesSeen) state = false;
+        else state = true;
+
+        for(Episode episode : episodes) {
+            ChapterSeen chapterSeen = new ChapterSeen();
+
+            Optional<ChapterSeen> auxSeen =
+                chapterSeenRepository.findByUserLoginAndEpisodeId(SecurityUtils.getCurrentUserLogin(), episode.getId());
+
+            if(auxSeen.isPresent()) chapterSeen.setId(auxSeen.get().getId());
+
+            chapterSeen.setEpisode(episode);
+            chapterSeen.setSeen(state);
+            chapterSeen.setDate(ZonedDateTime.now());
+            chapterSeen.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
+            chapterSeenRepository.save(chapterSeen);
+        }
+
+        return state;
     }
 }

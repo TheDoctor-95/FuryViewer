@@ -7,7 +7,7 @@ import com.furyviewer.repository.ChapterSeenRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
-import com.furyviewer.web.rest.errors.BadRequestAlertException;
+import com.furyviewer.service.util.EpisodeService;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -39,10 +39,13 @@ public class ChapterSeenResource {
 
     private final UserRepository userRepository;
 
-    public ChapterSeenResource(ChapterSeenRepository chapterSeenRepository, EpisodeRepository episodeRepository, UserRepository userRepository) {
+    private final EpisodeService episodeService;
+
+    public ChapterSeenResource(ChapterSeenRepository chapterSeenRepository, EpisodeRepository episodeRepository, UserRepository userRepository, EpisodeService episodeService) {
         this.chapterSeenRepository = chapterSeenRepository;
         this.episodeRepository = episodeRepository;
         this.userRepository = userRepository;
+        this.episodeService = episodeService;
     }
 
     /**
@@ -83,7 +86,12 @@ public class ChapterSeenResource {
         chapterSeen.setSeen(true);
 
         return createChapterSeen(chapterSeen);
+    }
 
+    @PostMapping("/chapter-seens/seasonId/{id}")
+    @Timed
+    public Boolean seasonSeen(@PathVariable Long id) throws URISyntaxException {
+        return episodeService.seasonSeen(id);
     }
 
     /**
