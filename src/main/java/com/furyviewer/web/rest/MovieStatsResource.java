@@ -163,7 +163,7 @@ public class MovieStatsResource {
     @Timed
     public ResponseEntity<Map<String, String>> selectMovieStatus(@PathVariable Long id) {
         log.debug("REST request to get SeriesStatus : {}", id);
-        String status = movieStatsRepository.selectMovieStatus(id);
+        String status = movieStatsRepository.selectMovieStatus(id, SecurityUtils.getCurrentUserLogin());
         Map<String, String> statusMap = new HashMap<>();
         statusMap.put("url", status);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(statusMap));

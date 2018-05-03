@@ -162,7 +162,7 @@ public class SeriesStatsResource {
     @Timed
     public ResponseEntity<Map<String, String>> selectSeriesStatus(@PathVariable Long id) {
         log.debug("REST request to get SeriesStatus : {}", id);
-        String status = seriesStatsRepository.selectSeriesStatus(id);
+        String status = seriesStatsRepository.selectSeriesStatus(id, SecurityUtils.getCurrentUserLogin());
         Map<String, String> statusMap = new HashMap<>();
         statusMap.put("url", status);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(statusMap));
