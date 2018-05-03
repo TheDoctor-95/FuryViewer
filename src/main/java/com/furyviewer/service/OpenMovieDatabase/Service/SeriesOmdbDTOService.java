@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Call;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 /**
@@ -180,7 +181,10 @@ public class SeriesOmdbDTOService {
             ss.setState(SeriesEmittingEnum.ended);
         }
 
-        ss.setReleaseDate(dateConversorService.releseDateOMDB(seriesOmdbDTO.getReleased()));
+        if (!seriesOmdbDTO.getReleased().equalsIgnoreCase("N/A"))
+            ss.setReleaseDate(dateConversorService.releseDateOMDB(seriesOmdbDTO.getReleased()));
+        else
+            ss.releaseDate(LocalDate.of(2005,11,5));
 
         ss.setImgUrl(stringApiCorrectorService.eraserNA(seriesOmdbDTO.getPoster()));
         ss.setImdb_id(stringApiCorrectorService.eraserNA(seriesOmdbDTO.getImdbID()));

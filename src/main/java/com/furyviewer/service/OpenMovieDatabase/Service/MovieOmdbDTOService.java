@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 /**
@@ -199,7 +200,10 @@ public class MovieOmdbDTOService {
 
         m.setAwards(stringApiCorrectorService.eraserNA(movieOmdbDTO.getAwards()));
 
-        m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
+        if (!movieOmdbDTO.getReleased().equalsIgnoreCase("N/A"))
+            m.setReleaseDate(dateConversorService.releseDateOMDB(movieOmdbDTO.getReleased()));
+        else
+            m.releaseDate(LocalDate.of(2005,11,5));
         m.setCountry(countryService.importCountry(movieOmdbDTO.getCountry()));
         m.setDvd_release(dateConversorService.releseDateOMDB(movieOmdbDTO.getDVD()));
 
