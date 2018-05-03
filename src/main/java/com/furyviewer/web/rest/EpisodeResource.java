@@ -212,5 +212,18 @@ public class EpisodeResource {
         return  episodeRepository.getEpisodeByActorsOrderByReleaseDate(artistRepository.findOne(id));
     }
 
+    @GetMapping("/episodes/by-director/{id}")
+    @Timed
+    public List<Episode> getAllSeriesFromDirector(@PathVariable Long id){
+        log.debug("Get to request episodes from artist order by date desc");
+        return  episodeRepository.findEpisodeByDirectorOrderByReleaseDate(artistRepository.findOne(id));
+    }
+
+    @GetMapping("/episodes/by-scriptwriter/{id}")
+    @Timed
+    public List<Episode> getAllSeriesFromScriptwriter(@PathVariable Long id){
+        log.debug("Get to request episodes from artist order by date desc");
+        return  episodeRepository.findEpisodeByScriptwriterOrderByReleaseDate(artistRepository.findOne(id));
+    }
 
 }
