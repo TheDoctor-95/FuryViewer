@@ -1,6 +1,6 @@
 .glyphicon {
     font-size: 25px;
-    color: orange;
+    color: #ffc946;
     margin: auto;
     margin-right: 16%;
     margin-top: 16%;
@@ -10,10 +10,10 @@
     magin-left:-6%;
 }
 li:hover{
-    color:orange;
+    color:#ffc946;
 }
 #perfillink:hover{
-    color: orange;
+    color: #ffc946;
 
 }
 
@@ -26,7 +26,7 @@ a{
 
 .fa{
     font-size: 25px;
-    color: orange;
+    color: #ffc946;
     margin: auto;
     margin-right: 16%;
     margin-top: 16%;
