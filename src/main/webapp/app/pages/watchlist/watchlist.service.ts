@@ -5,11 +5,12 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { Watchlist } from './watchlist.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {FilmographyArtistModel} from "../../shared/model/filmographyArtist.model";
 2
 @Injectable()
 export class WatchlistService {
 
-    private resourceUrl = SERVER_API_URL + 'api/watchlist/watchlist';
+    private resourceUrl = SERVER_API_URL + 'api/watchlist';
 
     constructor(private http: Http) { }
 
@@ -17,6 +18,10 @@ export class WatchlistService {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
+    }
+
+    load(multimedia: string, option: string): Observable<FilmographyArtistModel>{
+
     }
 
     private convertResponse(res: Response): ResponseWrapper {

@@ -6,6 +6,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Watchlist } from './watchlist.model';
 import { WatchlistService } from './watchlist.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
+import {FilmographyArtistModel} from "../../shared/model/filmographyArtist.model";
 
 @Component({
     selector: 'jhi-watchlist',
@@ -23,13 +24,16 @@ export class WatchlistComponent implements OnInit, OnDestroy {
     reset;
     currentAccount: any;
     eventSubscriber: Subscription;
-
+    selectMovie: string = 'movie';
+    selectOption: string = 'pending';
+    filmography: FilmographyArtistModel;
     constructor(
         private watchlistService: WatchlistService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {
+
     }
 
     loadAll() {
@@ -50,6 +54,23 @@ export class WatchlistComponent implements OnInit, OnDestroy {
         });
 
         this.registerChangeInWatchlists();
+    }
+    option(option: string){
+        this.selectOption=option;
+        this.cargar();
+    }
+    change(multimedia: string){
+        this.selectMovie= multimedia;
+        if(this.selectMovie=='movie' &&
+        this.selectOption=='following'){
+            this.selectOption='pending';
+        }
+        this.cargar();
+    }
+
+    cargar(){
+        console.log('Cargando Info ' + this.selectMovie + ' ' + this.selectOption);
+
     }
 
     ngOnDestroy() {
