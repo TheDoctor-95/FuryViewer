@@ -42,27 +42,17 @@ a{
     margin-right: 15.5%;
 }
 
-#homeMenu:hover #homelink{
-    color: #ffc946 !important;
+
+
+
+.list-unstyled > .row{
+    padding-bottom: 2rem;
     cursor: pointer;
 }
-#perfilMenu:hover #perfillink{
-    color: #ffc946 !important;
-    cursor: pointer;
+.list-unstyled > .row:hover {
+    background-color: rgba(239,152,0,0.21);
 }
-#watchMenu:hover #watchlink{
-    color: #ffc946 !important;
-    cursor: pointer;
-}
-#searchMenu:hover #searchlink{
-    color: #ffc946 !important;
-    cursor: pointer;
-}
-#aboutMenu:hover #aboutlink{
-    color: #ffc946 !important;
-    cursor: pointer;
-}
-#calendarMenu:hover #calendarlink{
-    color: #ffc946 !important;
-    cursor: pointer;
+
+.list-unstyled > .row:hover a {
+    color:#ffc946;
 }

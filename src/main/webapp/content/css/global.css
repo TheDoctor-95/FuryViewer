@@ -531,8 +531,8 @@ HOME
 }
 
 .card-img-top {
-    width: 84%;
-    height: 11vw;
+    width: 100%;
+    height: 10rem;
     object-fit: cover;
 }
 
@@ -687,6 +687,7 @@ button:hover {
     background-color: #ef9800;
     border-style: solid;
     color: #ffffff;
+    cursor: pointer;
 
 }
 
@@ -1495,3 +1496,11 @@ img::selection {
     outline: none !important;
     box-shadow: none !important;
 }
+
+
+
+#logonavbar:hover{
+    cursor: pointer;
+}
+
+
