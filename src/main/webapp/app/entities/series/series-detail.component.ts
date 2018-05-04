@@ -54,7 +54,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private eventSubscriber: Subscription;
     seasons: number[];
-    chapters: EpisodeSeasonModel;
+    chapters: EpisodeSeasonModel[];
     actualSeason: number;
     idSeasonActual: number;
     stats: string;
@@ -63,6 +63,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     media: string;
     progres: number;
     votesCount: string;
+    numEpisodes: number;
+    numEpisodesSeen: number;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -93,6 +95,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     this.media = '0';
     this.progres = 0;
     this.votesCount = '0';
+    this.numEpisodes = 0;
+    this.numEpisodesSeen = 0;
 }
 
     ngOnInit() {
@@ -111,6 +115,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadMediumMark(params['id']);
             this.loadFavHate(params['id']);
             this.loadCountFavHate(params['id']);
+            this.loadNumEpisodesSeen();
+            this.loadNumEpisodes();
         });
         this.registerChangeInSeries();
 
@@ -160,6 +166,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onError(res.json)
 
         )
+        this.loadNumEpisodesSeen();
+        this.loadNumEpisodes();
     }
 
     loadActualSeason(id: number) {
@@ -175,16 +183,18 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         this.subscribeToSaveResponseSeen(
             this.chapterSeenService.createId(id)
         );
+        this.loadNumEpisodesSeen();
+        this.loadNumEpisodes();
     }
 
     private subscribeToSaveResponseSeen(result: Observable<ChapterSeen>) {
         result.subscribe((res: ChapterSeen) =>
             this.onSaveSuccessSeen(res), (res: Response) => this.onSaveErrorSeen());
-        this.loadEpisodes(this.idSeasonActual);
     }
 
     private onSaveSuccessSeen(result: ChapterSeen) {
         this.eventManager.broadcast({ name: 'chapterSeenListModification', content: 'OK'});
+        this.loadEpisodes(this.idSeasonActual);
     }
 
     private onSaveErrorSeen() {
@@ -199,7 +209,6 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             }
             i++;
         }
-
     }
 
     loadDirector(id: number) {
@@ -227,12 +236,6 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         this.hatredSeriesService.getIfHated(id).subscribe((hate) => {
             this.hate = hate.like;
         });
-    }
-
-    loadOneChapterIfSeen(id: number) {
-        for (const chapter in this.chapters) {
-            console.log(chapter);
-        }
     }
 
     ngOnDestroy() {
@@ -370,6 +373,39 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     loadCountFavHate(id: number) {
         this.seriesService.getNumFavHate(id).subscribe((countFavHate) => {
             this.votesCount = '' + countFavHate;
+        });
+    }
+
+    markSeason() {
+        this.subscribeToSaveResponseMarkSeason(
+            this.seasonService.getMarkSeason(this.idSeasonActual)
+        );
+    }
+
+    private subscribeToSaveResponseMarkSeason(result: Observable<Boolean>) {
+        result.subscribe((res: Boolean) =>
+            this.onSaveSuccessMarkSeason(res), (res: Response) => this.onSaveErrorMarkSeason());
+    }
+
+    private onSaveSuccessMarkSeason(result: Boolean) {
+        this.eventManager.broadcast({ name: 'markSeasonListModification', content: 'OK'});
+        this.loadEpisodes(this.idSeasonActual);
+        this.loadNumEpisodesSeen();
+        this.loadNumEpisodes();
+    }
+
+    private onSaveErrorMarkSeason() {
+    }
+
+    loadNumEpisodesSeen() {
+        this.seasonService.getNumEpisodesSeen(this.idSeasonActual).subscribe((numSeen) => {
+            this.numEpisodesSeen = numSeen;
+        });
+    }
+
+    loadNumEpisodes() {
+        this.seasonService.getNumEpisodes(this.idSeasonActual).subscribe((numEp) => {
+            this.numEpisodes = numEp;
         });
     }
 }

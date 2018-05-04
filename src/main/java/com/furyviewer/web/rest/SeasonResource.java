@@ -3,7 +3,9 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Season;
 
+import com.furyviewer.repository.ChapterSeenRepository;
 import com.furyviewer.repository.SeasonRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.OpenMovieDatabase.Service.SeasonOmdbDTOService;
 import com.furyviewer.service.dto.OpenMovieDatabase.SeasonOmdbDTO;
 import com.furyviewer.service.util.EpisodeService;
@@ -12,7 +14,6 @@ import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -38,12 +39,15 @@ public class SeasonResource {
 
     private final EpisodeService episodeService;
 
-    @Autowired
-    SeasonOmdbDTOService seasonOmdbDTOService;
+    private final SeasonOmdbDTOService seasonOmdbDTOService;
 
-    public SeasonResource(SeasonRepository seasonRepository, EpisodeService episodeService) {
+    private final ChapterSeenRepository chapterSeenRepository;
+
+    public SeasonResource(SeasonRepository seasonRepository, EpisodeService episodeService, SeasonOmdbDTOService seasonOmdbDTOService, ChapterSeenRepository chapterSeenRepository) {
         this.seasonRepository = seasonRepository;
         this.episodeService = episodeService;
+        this.seasonOmdbDTOService = seasonOmdbDTOService;
+        this.chapterSeenRepository = chapterSeenRepository;
     }
 
     /**
@@ -160,5 +164,24 @@ public class SeasonResource {
         return seasonOmdbDTOService.getSeason("American Horror Story", 1);
     }
 
+    @GetMapping("/seasons/markSeason/{id}")
+    @Timed
+    public Boolean markSeason(@PathVariable Long id) {
+        log.debug("REST request to get Season by name");
+        return episodeService.seasonSeen(id);
+    }
 
+    @GetMapping("/seasons/numEpisodesSeen/{id}")
+    @Timed
+    public int numEpisodesSeen(@PathVariable Long id) {
+        log.debug("REST request to get Season by name");
+        return chapterSeenRepository.countEpisodeSeenForSeason(id,SecurityUtils.getCurrentUserLogin());
+    }
+
+    @GetMapping("/seasons/numEpisodes/{id}")
+    @Timed
+    public int numEpisodes(@PathVariable Long id) {
+        log.debug("REST request to get Season by name");
+        return seasonRepository.countEpisodesForSeason(id);
+    }
 }

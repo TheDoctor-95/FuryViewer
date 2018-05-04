@@ -134,7 +134,8 @@
                                         (click)="loadEpisodes(season)">Season {{i+1}}
                                 </button>
                             </div>
-                            <button class="btn" id="allSeason">Mark All Season
+                            <button class="btn" id="allSeason" (click)="markSeason()">
+                                <span *ngIf="numEpisodes != numEpisodesSeen">Mark</span><span *ngIf="numEpisodes == numEpisodesSeen">Unmark</span> All Season
                             </button>
                         </div>
                     </div>

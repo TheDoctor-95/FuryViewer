@@ -3,33 +3,39 @@
         <div class="hola col-12">
             <div class="cos">
 
+
                 <div id="sidebarwatch">
                     <div id="botons_sidebar">
 
                         <div class="icon_text">
-                            <div class="rodona"><i class="fa fa-heart fa-3x"></i></div>
-                            FAVORITAS
+                            <div class="rodona" (click)="option('pending')" [ngStyle]="{'background-color':selectOption=='pending' ? '#ef9800' : 'white', 'color':selectOption=='pending' ? 'white' : '#ef9800'}"><i class="fa fa-edit fa-3x"></i></div>
+                            PENDING
+                        </div>
+                        <div class="icon_text" *ngIf="selectMovie=='series'">
+                            <div class="rodona" (click)="option('following')" [ngStyle]="{'background-color':selectOption=='following' ? '#ef9800' : 'white', 'color':selectOption=='following' ? 'white' : '#ef9800'}"><i class="fa fa-edit fa-3x"></i></div>
+                            FOLLOWING
                         </div>
                         <div class="icon_text">
-                            <div class="rodona"><i class="fa fa-edit fa-3x"></i></div>
-                            PENDIENTES
+                            <div class="rodona" (click)="option('seen')" [ngStyle]="{'background-color':selectOption=='seen' ? '#ef9800' : 'white', 'color':selectOption=='seen' ? 'white' : '#ef9800'}"><i class="fa fa-eye-slash fa-3x"></i></div>
+                            SEEN
                         </div>
                         <div class="icon_text">
-                            <div class="rodona"><i class="fa fa-eye-slash fa-3x"></i></div>
-                            VISTAS
+                            <div class="rodona" (click)="option('favorite')" [ngStyle]="{'background-color':selectOption=='favorite' ? '#ef9800' : 'white', 'color':selectOption=='favorite' ? 'white' : '#ef9800'}"><i class="fa fa-heart fa-3x"></i></div>
+                            FAVORITE
                         </div>
                         <div class="icon_text">
-                            <div class="rodona"><i class="fa fa-thumbs-down fa-3x"></i></div>
-                            ODIADAS
+                            <div class="rodona" (click)="option('hatred')" [ngStyle]="{'background-color':selectOption=='hatred' ? '#ef9800' : 'white', 'color':selectOption=='hatred' ? 'white' : '#ef9800'}"><i class="fa fa-thumbs-down fa-3x"></i></div>
+                            HATRED
                         </div>
 
                     </div>
                 </div>
 
+
                 <div id="botonspelser">
                     <div class="col botocalendari" id="botoncalendar">
-                        <button> SERIES</button>
-                        <button> FILMS</button>
+                        <button (click)="change('series')" [ngStyle]="{'background-color':selectMovie=='series' ? '#ef9800' : 'white', 'color':selectMovie=='series' ? 'white' : '#ef9800'}"> SERIES</button>
+                        <button (click)="change('movie')" [ngStyle]="{'background-color':selectMovie=='movie' ? '#ef9800' : 'white', 'color':selectMovie=='movie' ? 'white' : '#ef9800'}"> MOVIES</button>
                     </div>
 
                     <!--    <div class="text_switch"> SERIES</div>
@@ -39,7 +45,10 @@
                         <span class="slider round"></span>
                     </label>
 
-                    <div class="text_switch"> PELICULAS</div>  -->
+                    <div class="text_switch"> PELICULAS</div>
+
+                    <!--   <input type="checkbox" name="peliculas" value="male"> PELICULAS
+                       <input type="checkbox" name="series" value="female"> SERIES -->
 
                 </div>
 
@@ -47,120 +56,22 @@
                 <div class="card pendientes">
                     <div class="card-body">
                         <div class="serpeli_body2">
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+                            <div *ngFor="let film of filmography" class="card portades" (click)="goTo(film.type, film.id)">
+                                <img class="card-img-top" src="{{film.urlCartel}}" alt="Card image">
 
                                 <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
+                                    <h4 class="card-title">{{film.title}}</h4>
+                                    <h3 class="card-text">{{film.releaseDate}}</h3>
                                 </div>
 
 
 
                             </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
 
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                            </div>
                         </div>
 
 
-                        <div class="serpeli_body2">
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-                            </div>
-                        </div><!--
+                        <!--
                         <div class="serpeli_body2">
 
                             <div class="card portades" *ngFor="let movie of moviesPending" routerLink="/movie/{{movie.id}}">

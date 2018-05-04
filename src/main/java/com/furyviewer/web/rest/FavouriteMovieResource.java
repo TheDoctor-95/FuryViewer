@@ -180,4 +180,12 @@ public class FavouriteMovieResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
     }
 
+    @GetMapping("/favourite-movies/User/")
+    @Timed
+    public ResponseEntity<Integer> favoritesMoviesUser(@PathVariable Long id) {
+        log.debug("REST request to get number of likes of movie");
+        Integer num = Math.toIntExact(favouriteMovieRepository.countLikedMovie(id));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
 }
