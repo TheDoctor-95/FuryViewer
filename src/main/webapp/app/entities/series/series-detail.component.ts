@@ -190,11 +190,11 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     private subscribeToSaveResponseSeen(result: Observable<ChapterSeen>) {
         result.subscribe((res: ChapterSeen) =>
             this.onSaveSuccessSeen(res), (res: Response) => this.onSaveErrorSeen());
-        this.loadEpisodes(this.idSeasonActual);
     }
 
     private onSaveSuccessSeen(result: ChapterSeen) {
         this.eventManager.broadcast({ name: 'chapterSeenListModification', content: 'OK'});
+        this.loadEpisodes(this.idSeasonActual);
     }
 
     private onSaveErrorSeen() {
@@ -236,12 +236,6 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         this.hatredSeriesService.getIfHated(id).subscribe((hate) => {
             this.hate = hate.like;
         });
-    }
-
-    loadOneChapterIfSeen(id: number) {
-        for (const chapter in this.chapters) {
-            console.log(chapter);
-        }
     }
 
     ngOnDestroy() {
