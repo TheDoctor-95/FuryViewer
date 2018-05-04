@@ -38,6 +38,24 @@ export class SeasonService {
         });
     }
 
+    getMarkSeason(id: number): Observable<Boolean> {
+        return this.http.get(`${this.resourceUrl}/markSeason/${id}`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getNumEpisodesSeen(id: number): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/numEpisodesSeen/${id}`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getNumEpisodes(id: number): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/numEpisodes/${id}`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
