@@ -21,6 +21,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -294,7 +295,6 @@ public class SeriesTmdbDTOService {
             se = response.body();
             Episode ep = new Episode();
 
-
             ep.setNumber(episodeNum);
 
             episodeNum = episodeNum - 1;
@@ -308,6 +308,8 @@ public class SeriesTmdbDTOService {
                 if (se.getEpisodes().get(episodeNum).getAirDate() != null) {
                     ep.setReleaseDate(dateConversorService.releaseDateOMDBSeason(
                         se.getEpisodes().get(episodeNum).getAirDate()));
+                } else {
+                    ep.setReleaseDate(LocalDate.of(2005,11,5));
                 }
 
                 String imdbId = getImdbId(seriesId, season.getNumber(), episodeNum);

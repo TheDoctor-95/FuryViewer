@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * Servicio encargado de recuperar informacion de un Episode desde EpisodeOmdbDTORepository y la convierte al
@@ -117,7 +118,10 @@ public class EpisodeOmdbDTOService {
                             ep.setDuration(-1.0);
                         }
 
-                        ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));
+                        if (!episodeOmdbDTO.getReleased().equalsIgnoreCase("N/A"))
+                            ep.setReleaseDate(dateConversorService.releseDateOMDB(episodeOmdbDTO.getReleased()));
+                        else
+                            ep.setReleaseDate(LocalDate.of(2005,11,5));
 
                         ep.setImdbId(stringApiCorrectorService.eraserNA(episodeOmdbDTO.getImdbID()));
                         ep.setSeason(se);
