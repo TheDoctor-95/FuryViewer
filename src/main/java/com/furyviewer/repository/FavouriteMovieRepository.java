@@ -31,6 +31,9 @@ public interface FavouriteMovieRepository extends JpaRepository<FavouriteMovie, 
     @Query("select m.liked from FavouriteMovie m where m.movie.id=:id")
     Boolean selectFavouriteMovie(@Param("id") Long id);
 
+    @Query("select fm.movie from FavouriteMovie fm where fm.liked=true and fm.user.login=:login")
+    List<Movie> findFavoriteMovieUserLogin(@Param("login") String login);
+
     @Query("SELECT COUNT(f.liked) FROM FavouriteMovie f WHERE f.liked=true AND f.movie.id=:id")
     Integer countLikedMovie(@Param("id") Long id);
 }

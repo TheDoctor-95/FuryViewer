@@ -42,14 +42,15 @@ public class WatchlistResourceIntTest {
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final WatchlistResource watchlistResource = new WatchlistResource();
-        this.restWatchlistMockMvc = MockMvcBuilders.standaloneSetup(watchlistResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setMessageConverters(jacksonMessageConverter).build();
+//        MockitoAnnotations.initMocks(this);
+//        final WatchlistResource watchlistResource = new WatchlistResource();
+//        this.restWatchlistMockMvc = MockMvcBuilders.standaloneSetup(watchlistResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setMessageConverters(jacksonMessageConverter).build();
     }
 
+    public void fuckYou(){
 
-
+    }
 }
