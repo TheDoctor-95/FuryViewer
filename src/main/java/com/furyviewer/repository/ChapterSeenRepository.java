@@ -29,7 +29,7 @@ public interface ChapterSeenRepository extends JpaRepository<ChapterSeen, Long> 
 
     Optional<ChapterSeen> findByUserLoginAndEpisodeId(String login, Long id );
 
-    @Query("SELECT count(s.seen) from ChapterSeen s where s.episode.season.id=:id and s.user.login=:login")
+    @Query("SELECT COUNT(s.seen) FROM ChapterSeen s WHERE s.episode.season.id=:id AND s.seen=true AND s.user.login=:login")
     int countEpisodeSeenForSeason(@Param("id") Long id, @Param("login") String login);
 
 }
