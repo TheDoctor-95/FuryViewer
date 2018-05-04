@@ -17,6 +17,8 @@ import io.github.jhipster.web.util.ResponseUtil;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -188,6 +190,9 @@ public class MovieResource {
     }
 
 
+
+
+
     @GetMapping("/importMovieByName/{name}")
     @Timed
 
@@ -279,6 +284,8 @@ public class MovieResource {
         return movieRepository.getByArtistOrderbyDate(artistRepository.findOne(id));
     }
 
+
+
     @GetMapping("/movies/by-director/{id}")
     @Timed
     public List<Movie> getAllMoviesFromDirector(@PathVariable Long id){
@@ -293,4 +300,21 @@ public class MovieResource {
         return movieRepository.findMovieByScriptwriterOrderByReleaseDate(artistRepository.findOne(id));
     }
 
+    //@GetMapping("/movies/{id}/actors-limit")
+    //@Transactional
+    //@Timed
+    //public ResponseEntity<Set<Artist>> getActorsLimit(@PathVariable Long id) {
+    //    log.debug("REST request to get Movie : {}", id);
+    //    Pageable topEight = new PageRequest(0, 8);
+    //    List<Movie> movie = movieRepository.findOneWithEagerRelationshipsLimit(id, topEight);
+    //    return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie.getActorMains()));
+    //}
+
+    @GetMapping("/movies/{id}/actors-limit")
+    @Timed
+    public ResponseEntity<List<Movie>> getActorsLimit(@PathVariable Long id) {
+        Pageable topEight = new PageRequest(0, 8);
+        List<Movie> a = movieRepository.getMainActorsByMovie(id, topEight);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
+    }
 }

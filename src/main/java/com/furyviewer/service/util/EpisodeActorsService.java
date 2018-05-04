@@ -37,6 +37,7 @@ public class EpisodeActorsService {
                 series.getReleaseDate(),
                 "series",
                 series.getImgUrl()
+
             ))
             .collect(Collectors.toList());
 

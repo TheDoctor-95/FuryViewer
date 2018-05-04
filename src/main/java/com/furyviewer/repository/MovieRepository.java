@@ -3,6 +3,7 @@ package com.furyviewer.repository;
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.Genre;
 import com.furyviewer.domain.Movie;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -43,6 +44,14 @@ public interface MovieRepository extends JpaRepository<Movie, Long> , JpaSpecifi
 
     @Query("select m from Movie m where :genre member of m.genres")
     List<Movie>getMoviesByGenre(@Param("genre")Genre genre);
+
+
+
+    @Query("select distinct movie from Movie movie left join fetch movie.genres left join fetch movie.actorMains where movie.id =:id")
+    List<Movie> findOneWithEagerRelationshipsLimit(@Param("id") Long id, Pageable pageable);
+
+    @Query("select m.actorMains from Movie m where m.id=:id")
+    List<Movie> getMainActorsByMovie(@Param("id")Long id, Pageable pageable);
 
 
 }
