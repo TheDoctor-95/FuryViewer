@@ -20,8 +20,12 @@ export class WatchlistService {
             .map((res: Response) => this.convertResponse(res));
     }
 
-    load(multimedia: string, option: string): Observable<FilmographyArtistModel>{
-
+    load(multimedia: string, option: string): Observable<ResponseWrapper>{
+        return this.http.get(`${this.resourceUrl}/${multimedia}/option/${option}`).map(
+            (res: Response) => {
+                return this.convertFilmographyResponse(res);
+            }
+        );
     }
 
     private convertResponse(res: Response): ResponseWrapper {
@@ -33,11 +37,26 @@ export class WatchlistService {
         return new ResponseWrapper(res.headers, result, res.status);
     }
 
+    private convertFilmographyResponse(res: Response): ResponseWrapper {
+        const jsonResponse = res.json();
+        const result = [];
+        for (let i = 0; i < jsonResponse.length; i++) {
+            result.push(this.convertFilmographyFromServer(jsonResponse[i]));
+        }
+        return new ResponseWrapper(res.headers, result, res.status);
+    }
+
+
     /**
      * Convert a returned JSON object to Watchlist.
      */
     private convertItemFromServer(json: any): Watchlist {
         const entity: Watchlist = Object.assign(new Watchlist(), json);
+        return entity;
+    }
+
+    private convertFilmographyFromServer(json: any): FilmographyArtistModel {
+        const entity: FilmographyArtistModel = Object.assign(new FilmographyArtistModel(), json);
         return entity;
     }
 
@@ -48,4 +67,6 @@ export class WatchlistService {
         const copy: Watchlist = Object.assign({}, watchlist);
         return copy;
     }
+
+
 }

@@ -56,120 +56,22 @@
                 <div class="card pendientes">
                     <div class="card-body">
                         <div class="serpeli_body2">
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
+                            <div *ngFor="let film of filmography" class="card portades">
+                                <img class="card-img-top" src="{{film.urlCartel}}" alt="Card image">
 
                                 <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
+                                    <h4 class="card-title">{{film.title}}</h4>
+                                    <h3 class="card-text">{{film.releaseDate}}</h3>
                                 </div>
 
 
 
                             </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
 
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                            </div>
                         </div>
 
 
-                        <div class="serpeli_body2">
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-
-                            </div>
-                        </div><!--
+                        <!--
                         <div class="serpeli_body2">
 
                             <div class="card portades" *ngFor="let movie of moviesPending" routerLink="/movie/{{movie.id}}">

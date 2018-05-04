@@ -26,7 +26,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     selectMovie: string = 'movie';
     selectOption: string = 'pending';
-    filmography: FilmographyArtistModel;
+    filmography: FilmographyArtistModel[];
     constructor(
         private watchlistService: WatchlistService,
         private jhiAlertService: JhiAlertService,
@@ -52,6 +52,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
+        this.cargar();
 
         this.registerChangeInWatchlists();
     }
@@ -70,6 +71,13 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 
     cargar(){
         console.log('Cargando Info ' + this.selectMovie + ' ' + this.selectOption);
+        this.watchlistService.load(this.selectMovie, this.selectOption).subscribe(
+                (res: ResponseWrapper) => {
+                    this.filmography = res.json;
+                    console.log(this.filmography);
+                },
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
 
     }
 
