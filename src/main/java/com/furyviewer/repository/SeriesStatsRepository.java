@@ -37,6 +37,13 @@ public interface SeriesStatsRepository extends JpaRepository<SeriesStats, Long> 
     @Query("select ss.serie from SeriesStats ss where ss.status=com.furyviewer.domain.enumeration.SeriesStatsEnum.FOLLOWING and ss.user.login=:userLogin")
     List<Series>  followingSeriesUser(@Param("userLogin") String userLogin);
 
+    @Query("select ss.serie from SeriesStats ss where ss.status=com.furyviewer.domain.enumeration.SeriesStatsEnum.SEEN and ss.user.login=:userLogin")
+    List<Series>  seenSeriesUser(@Param("userLogin") String userLogin);
+
+    @Query("select ss.serie from SeriesStats ss where ss.status=com.furyviewer.domain.enumeration.SeriesStatsEnum.PENDING and ss.user.login=:userLogin")
+    List<Series>  pendingSeriesUser(@Param("userLogin") String userLogin);
+
+
     Optional<SeriesStats> findByUserAndSerieId(User user, Long id);
 
 }

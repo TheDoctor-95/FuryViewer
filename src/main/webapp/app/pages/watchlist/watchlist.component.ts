@@ -31,7 +31,8 @@ export class WatchlistComponent implements OnInit, OnDestroy {
         private watchlistService: WatchlistService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router
     ) {
 
     }
@@ -80,6 +81,20 @@ export class WatchlistComponent implements OnInit, OnDestroy {
             );
 
     }
+
+    goTo(type: String, id: number) {
+        switch (type) {
+            case 'series' : {
+                this.router.navigate(['/series', id]);
+                break;
+            }
+            case 'movie' : {
+                this.router.navigate(['/movie', id]);
+                break;
+            }
+        }
+    }
+
 
     ngOnDestroy() {
 

@@ -38,5 +38,7 @@ public interface FavouriteSeriesRepository extends JpaRepository<FavouriteSeries
     @Query("select s.liked from FavouriteSeries s where s.series.id=:id and s.user.login = :login")
     Boolean selectFavouriteSeriesAndUser(@Param("id") Long id, @Param("login") String login);
 
+    @Query("select fs.series from FavouriteSeries fs where fs.liked=true and fs.user.login=:login")
+    List<Series> findFavoriteSeriesUserLogin(@Param("login") String login);
 
 }
