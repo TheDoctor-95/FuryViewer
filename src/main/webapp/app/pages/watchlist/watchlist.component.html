@@ -56,7 +56,7 @@
                 <div class="card pendientes">
                     <div class="card-body">
                         <div class="serpeli_body2">
-                            <div *ngFor="let film of filmography" class="card portades">
+                            <div *ngFor="let film of filmography" class="card portades" (click)="goTo(film.type, film.id)">
                                 <img class="card-img-top" src="{{film.urlCartel}}" alt="Card image">
 
                                 <div class="card-body">
