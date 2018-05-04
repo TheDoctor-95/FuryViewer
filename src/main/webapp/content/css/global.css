@@ -678,6 +678,7 @@ button {
     border-style: solid;
     color: #ef9800;
     font-size: 1rem;
+    font-weight: 300;
 
 }
 
@@ -859,7 +860,7 @@ Watchlist
 ==================================================================================================================================================== */
 
 .cos {
-    width: 55rem;
+    width: 70%;
     height: 35rem;
     background-color: white;
     margin-bottom: 2rem;
