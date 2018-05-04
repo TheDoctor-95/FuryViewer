@@ -1,7 +1,7 @@
 <div class="fons ">
     <div class="row">
         <div class="hola col-12">
-            <div class="cos">
+            <div class="cos-watchlist">
 
 
                 <div id="sidebarwatch">
@@ -32,13 +32,13 @@
                 </div>
 
 
-                <div id="botonspelser">
-                    <div class="col botocalendari" id="botoncalendar">
+                <div id="botonspelser" class="text-right" style="padding-right: 2rem;">
+                    <div class="col botowatchlist" id="botoncalendar">
                         <button (click)="change('series')" [ngStyle]="{'background-color':selectMovie=='series' ? '#ef9800' : 'white', 'color':selectMovie=='series' ? 'white' : '#ef9800'}"> SERIES</button>
                         <button (click)="change('movie')" [ngStyle]="{'background-color':selectMovie=='movie' ? '#ef9800' : 'white', 'color':selectMovie=='movie' ? 'white' : '#ef9800'}"> MOVIES</button>
                     </div>
 
-                    <!--    <div class="text_switch"> SERIES</div>
+                    <!--<div class="text_switch"> SERIES</div>
 
                     <label class="switch">
                         <input type="checkbox">
@@ -88,16 +88,13 @@
 
                     </div>
 
-                    <div style="display: inline-block; height: 7vw;">
+                    <!--<div style="display: inline-block; height: 7vw;">
                         <div id="plus_watchlist" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]">+</div>
-                    </div>
+                    </div>-->
 
 
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
+</div>
