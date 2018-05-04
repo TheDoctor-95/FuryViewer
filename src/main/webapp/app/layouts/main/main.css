@@ -42,68 +42,27 @@ a{
     margin-right: 15.5%;
 }
 
-#homeMenu:hover{
+#homeMenu:hover #homelink{
+    color: #ffc946 !important;
     cursor: pointer;
-}
-#homeMenu:hover i{
-    color: white;
-}
-#homeMenu:hover #textHome{
-    color: #ef9800 !important;
-
-}
-
-#perfilMenu:hover{
-    cursor: pointer;
-}
-#perfilMenu:hover i{
-    color: white;
 }
 #perfilMenu:hover #perfillink{
-    color: #ef9800 !important;
-
-}
-
-#watchlistMenu:hover{
+    color: #ffc946 !important;
     cursor: pointer;
 }
-#watchlistMenu:hover i{
-    color: white;
-}
-#watchlistMenu:hover #watchlistText{
-    color: #ef9800 !important;
-
-}
-
-#searchMenu:hover{
+#watchMenu:hover #watchlink{
+    color: #ffc946 !important;
     cursor: pointer;
 }
-#searchMenu:hover i{
-    color: white;
-}
-#searchMenu:hover #searchText{
-    color: #ef9800 !important;
-
-}
-
-#calendarMenu:hover{
+#searchMenu:hover #searchlink{
+    color: #ffc946 !important;
     cursor: pointer;
 }
-#calendarMenu:hover i{
-    color: white;
-}
-#calendarMenu:hover #calendarText{
-    color: #ef9800 !important;
-
-}
-
-#aboutMenu:hover{
+#aboutMenu:hover #aboutlink{
+    color: #ffc946 !important;
     cursor: pointer;
 }
-#aboutMenu:hover i{
-    color: white;
-}
-#aboutMenu:hover #aboutText{
-    color: #ef9800 !important;
-
+#calendarMenu:hover #calendarlink{
+    color: #ffc946 !important;
+    cursor: pointer;
 }
