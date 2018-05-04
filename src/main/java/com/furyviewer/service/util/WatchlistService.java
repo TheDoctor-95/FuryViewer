@@ -1,6 +1,7 @@
 package com.furyviewer.service.util;
 
 import com.furyviewer.domain.FavouriteMovie;
+import com.furyviewer.domain.Multimedia;
 import com.furyviewer.repository.FavouriteMovieRepository;
 import com.furyviewer.repository.FavouriteSeriesRepository;
 import com.furyviewer.repository.HatredMovieRepository;
@@ -32,19 +33,36 @@ public class WatchlistService {
     public List<MultimediaActorsDTO> whatchlistMultimedia(String mulimedia, String option){
         List<MultimediaActorsDTO> multimediaActorsDTOList = new ArrayList<>();
 
-        favouriteMovieRepository.findFavoriteMovieUserLogin(SecurityUtils.getCurrentUserLogin()).forEach(
-            movie -> {
-                MultimediaActorsDTO multimediaActorsDTO = new MultimediaActorsDTO();
+        if(mulimedia.equalsIgnoreCase("movie")) {
 
-                multimediaActorsDTO.setId(movie.getId());
-                multimediaActorsDTO.setType("movie");
-                multimediaActorsDTO.setReleaseDate(movie.getReleaseDate());
-                multimediaActorsDTO.setTitle(movie.getName());
-                multimediaActorsDTO.setUrlCartel(movie.getImgUrl());
+            favouriteMovieRepository.findFavoriteMovieUserLogin(SecurityUtils.getCurrentUserLogin()).forEach(
+                movie -> {
+                    MultimediaActorsDTO multimediaActorsDTO = new MultimediaActorsDTO();
 
-                multimediaActorsDTOList.add(multimediaActorsDTO);
-            }
-        );
+                    multimediaActorsDTO.setId(movie.getId());
+                    multimediaActorsDTO.setType("movie");
+                    multimediaActorsDTO.setReleaseDate(movie.getReleaseDate());
+                    multimediaActorsDTO.setTitle(movie.getName());
+                    multimediaActorsDTO.setUrlCartel(movie.getImgUrl());
+
+                    multimediaActorsDTOList.add(multimediaActorsDTO);
+                }
+            );
+        }else{
+            favouriteSeriesRepository.findFavoriteSeriesUserLogin(SecurityUtils.getCurrentUserLogin()).forEach(
+                series -> {
+                    MultimediaActorsDTO multimediaActorsDTO = new MultimediaActorsDTO();
+
+                    multimediaActorsDTO.setId(series.getId());
+                    multimediaActorsDTO.setType("movie");
+                    multimediaActorsDTO.setReleaseDate(series.getReleaseDate());
+                    multimediaActorsDTO.setTitle(series.getName());
+                    multimediaActorsDTO.setUrlCartel(series.getImgUrl());
+
+                    multimediaActorsDTOList.add(multimediaActorsDTO);
+                }
+            );
+        }
 
         return multimediaActorsDTOList;
     }
