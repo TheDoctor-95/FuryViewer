@@ -11,7 +11,7 @@ import { SeasonDeletePopupComponent } from './season-delete-dialog.component';
 
 export const seasonRoute: Routes = [
     {
-        path: 'season',
+        path: 'calendar',
         component: SeasonComponent,
         data: {
             authorities: ['ROLE_USER'],
