@@ -292,6 +292,7 @@ public class ArtistResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
     }
 
+
     @GetMapping("/artists/{id}/moviesAndSeriesOrderedByDate/")
     @Timed
     public ResponseEntity<List<MultimediaActorsDTO>>f(@PathVariable Long id){

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,11 +45,6 @@ public interface ArtistRepository extends JpaRepository<Artist, Long>, JpaSpecif
 
     //@Query("select m from Movie m where :artist member of m.actorMains order by m.releaseDate desc")
     //List<Movie> getByArtistOrderbyDate(@Param("artist") Artist artist);
-
-
-
-
-
 
 
 

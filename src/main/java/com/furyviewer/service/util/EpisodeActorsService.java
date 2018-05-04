@@ -20,6 +20,7 @@ public class EpisodeActorsService {
 
     @Autowired
     private EpisodeRepository episodeRepository;
+
     @Autowired
     private ArtistRepository artistRepository;
 
@@ -39,6 +40,7 @@ public class EpisodeActorsService {
                 series.getReleaseDate(),
                 "series",
                 series.getImgUrl()
+
             ))
             .collect(Collectors.toList());
 
