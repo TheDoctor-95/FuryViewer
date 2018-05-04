@@ -1463,3 +1463,9 @@ img::selection {
 .bg-success {
     background-color: #ffc843 !important;
 }
+
+
+*:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
