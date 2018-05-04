@@ -72,15 +72,15 @@ public class ReviewSeriesResourceIntTest {
     private ReviewSeries reviewSeries;
 
     @Before
-    public void setup() {
+    /*public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ReviewSeriesResource reviewSeriesResource = new ReviewSeriesResource(reviewSeriesRepository);
+        final ReviewSeriesResource reviewSeriesResource = new ReviewSeriesResource(reviewSeriesRepository, userRepository);
         this.restReviewSeriesMockMvc = MockMvcBuilders.standaloneSetup(reviewSeriesResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
-    }
+    }*/
 
     /**
      * Create an entity for this test.

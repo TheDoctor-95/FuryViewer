@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.ReviewSeries;
 
 import com.furyviewer.repository.ReviewSeriesRepository;
+import com.furyviewer.repository.UserRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +34,11 @@ public class ReviewSeriesResource {
 
     private final ReviewSeriesRepository reviewSeriesRepository;
 
-    public ReviewSeriesResource(ReviewSeriesRepository reviewSeriesRepository) {
+    private final UserRepository userRepository;
+
+    public ReviewSeriesResource(ReviewSeriesRepository reviewSeriesRepository, UserRepository userRepository) {
         this.reviewSeriesRepository = reviewSeriesRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -49,6 +55,10 @@ public class ReviewSeriesResource {
         if (reviewSeries.getId() != null) {
             throw new BadRequestAlertException("A new reviewSeries cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        reviewSeries.setDate(ZonedDateTime.now());
+        reviewSeries.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
         ReviewSeries result = reviewSeriesRepository.save(reviewSeries);
         return ResponseEntity.created(new URI("/api/review-series/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -120,7 +130,7 @@ public class ReviewSeriesResource {
 
     @GetMapping("/review-series/series/{id}")
     @Timed
-    public ResponseEntity<List<ReviewSeries>> getReviewsOfAMovie(@PathVariable Long id) {
+    public ResponseEntity<List<ReviewSeries>> getReviewsOfASeries(@PathVariable Long id) {
         log.debug("REST request to get ReviewMovie : {}", id);
         List<ReviewSeries> reviewMovie = reviewSeriesRepository.findBySeriesIdOrderByDateDesc(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(reviewMovie));

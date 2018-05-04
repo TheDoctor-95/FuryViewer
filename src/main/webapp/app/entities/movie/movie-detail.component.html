@@ -131,30 +131,28 @@
                     <span style="font-family: Roboto; font-size: 15px; text-align: left;">{{movie.description}}</span>
                 </div>
                 <br *ngIf="movie.description != null" />
+
                 <div class="whiteBox" style="display: block; padding: 18px;">
                     <div style="width: 100%">
-
                         <div>
-
-                        <div class="row">
-
-                            <div class="col-3" style="vertical-align: top;">
-                                <img src="img/foto.JPG" class="imgComent"/>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" [(ngModel)]="newComent.title" placeholder="title" style="font-size: 14px; width: 100%; margin-bottom: 10px; margin-left: 0px !important;"/>
-                                </br>
-                                <textarea class="txtarea" name="comentario" placeholder="write here the commentary" style="width: 100%; font-size: 13px;" rows="4" [(ngModel)]="newComent.review"></textarea>
-                                <div style="display: block; width: 100%">
-                                    <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
-                                        <button id="btnComen" (click)="comentar()" >COMMENT</button>
+                            <div class="row">
+                                <div class="col-3" style="vertical-align: top;">
+                                    <img src="img/foto.JPG" class="imgComent"/>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" [(ngModel)]="newComent.title" placeholder="title" style="font-size: 14px; width: 100%; margin-bottom: 10px; margin-left: 0px !important;"/>
+                                    </br>
+                                    <textarea class="txtarea" name="comentario" placeholder="write here the commentary" style="width: 100%; font-size: 13px;" rows="4" [(ngModel)]="newComent.review"></textarea>
+                                    <div style="display: block; width: 100%">
+                                        <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
+                                            <button id="btnComen" (click)="comentar()" >COMMENT</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    </div>
                     <p *ngFor="let coment of reviewMovies" class="row" style="margin-top: 35px;">
                         <b class="col-3">
                             <img src="img/foto.JPG" class="imgComent"/>

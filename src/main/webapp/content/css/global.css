@@ -1277,9 +1277,6 @@ select.form-control:not([size]):not([multiple]) {
     margin-top: 1rem;
 }
 
-
-}
-
 .modal-title {
     text-transform: uppercase;
     letter-spacing: 1px;

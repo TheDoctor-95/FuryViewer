@@ -201,13 +201,12 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     }
 
     comentar() {
-        console.log('aaa');
-        this.newComent.movie = this.movie;
-        console.log(this.newComent);
-
-        this.subscribeToSaveResponseReview(
-            this.reviewMovieService.create(this.newComent)
-        );
+        if (this.newComent.title !== '' && this.newComent.review !== '') {
+            this.newComent.movie = this.movie;
+            this.subscribeToSaveResponseReview(
+                this.reviewMovieService.create(this.newComent)
+            );
+        }
     }
 
     rate() {
