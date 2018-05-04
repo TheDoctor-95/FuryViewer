@@ -22,9 +22,6 @@ public class EpisodeActorsService {
     private EpisodeRepository episodeRepository;
 
     @Autowired
-    private ArtistRepository artistRepository;
-
-    @Autowired
     private MovieRepository movieRepository;
 
 
@@ -57,7 +54,6 @@ public class EpisodeActorsService {
             ))
             .collect(Collectors.toList());
 
-
         List<MultimediaActorsDTO> multimediaSeriesScriptwritersDTOs = episodeRepository.findEpisodeByScriptwriterOrderByReleaseDate(artist)
             .stream()
             .map(episode -> episode.getSeason().getSeries())
@@ -71,9 +67,6 @@ public class EpisodeActorsService {
             ))
             .collect(Collectors.toList());
 
-
-
-
         List<MultimediaActorsDTO> multimediaMoviesActorsDTOs = movieRepository.getByArtistOrderbyDate(artist)
             .stream()
             .distinct()
@@ -85,7 +78,6 @@ public class EpisodeActorsService {
                 movie.getImgUrl()
             ))
             .collect(Collectors.toList());
-
 
         List<MultimediaActorsDTO> multimediaMoviesDirectorsDTOs = movieRepository.findMovieByDirectorOrderByReleaseDate(artist)
             .stream()
@@ -112,19 +104,27 @@ public class EpisodeActorsService {
             .collect(Collectors.toList());
 
         List<MultimediaActorsDTO> multimediaActorsDTO = new ArrayList<>();
-        multimediaActorsDTO.addAll(multimediaMoviesActorsDTOs);
-        multimediaActorsDTO.addAll(multimediaMoviesDirectorsDTOs);
-        multimediaActorsDTO.addAll(multimediaMoviesScriptwritersDTOs);
-        multimediaActorsDTO.addAll(multimediaSeriesActorsDTOs);
-        multimediaActorsDTO.addAll(multimediaSeriesDirectorsDTOs);
-        multimediaActorsDTO.addAll(multimediaSeriesScriptwritersDTOs);
 
+        multimediaActorsDTO = filterArtist(multimediaActorsDTO, multimediaMoviesActorsDTOs);
+        multimediaActorsDTO = filterArtist(multimediaActorsDTO, multimediaMoviesDirectorsDTOs);
+        multimediaActorsDTO = filterArtist(multimediaActorsDTO, multimediaMoviesScriptwritersDTOs);
+        multimediaActorsDTO = filterArtist(multimediaActorsDTO, multimediaSeriesActorsDTOs);
+        multimediaActorsDTO = filterArtist(multimediaActorsDTO, multimediaSeriesDirectorsDTOs);
+        multimediaActorsDTO = filterArtist(multimediaActorsDTO, multimediaSeriesScriptwritersDTOs);
 
         multimediaActorsDTO.sort(Comparator.comparing(MultimediaActorsDTO::getReleaseDate).reversed());
 
         return multimediaActorsDTO;
+    }
 
+    public List<MultimediaActorsDTO> filterArtist (List<MultimediaActorsDTO> multimediaActorsDTO, List<MultimediaActorsDTO> multimediaArtistDTOs)
+    {
+        for (MultimediaActorsDTO multi : multimediaArtistDTOs) {
+            if (multimediaActorsDTO.isEmpty()) multimediaActorsDTO.add(multi);
 
+            if(!multimediaActorsDTO.contains(multi)) multimediaActorsDTO.add(multi);
+        }
 
+        return multimediaActorsDTO;
     }
 }
