@@ -86,7 +86,7 @@ public class SearchOmdbDTOService {
                 }
 
                 if (searchOmdbDTO.getSearch().size() > 1)
-                    searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size() - 1);
+                    searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size());
 
                 if (searches != null) {
                     if (!searches.isEmpty()) {
