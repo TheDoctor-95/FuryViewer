@@ -74,7 +74,6 @@ public class SearchOmdbDTOService {
     public Multimedia multiImport (String title) {
         SearchOmdbDTO searchOmdbDTO = getSearchByTitle(title);
         List<Search> searches = null;
-
         Multimedia multimedia = null;
 
         if(searchOmdbDTO.getResponse().equalsIgnoreCase("true")) {
@@ -85,8 +84,8 @@ public class SearchOmdbDTOService {
                     multimedia = seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
                 }
 
-                if (searchOmdbDTO.getSearch().size() > 1)
-                    searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size() - 1);
+                if (Integer.parseInt(searchOmdbDTO.getTotalResults()) > 1)
+                    searches = searchOmdbDTO.getSearch().subList(1, Integer.parseInt(searchOmdbDTO.getTotalResults()));
 
                 if (searches != null) {
                     if (!searches.isEmpty()) {
