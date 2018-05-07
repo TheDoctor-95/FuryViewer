@@ -10,6 +10,8 @@ import com.furyviewer.service.SmartSearch.Movie.MovieQueryService;
 import com.furyviewer.service.OpenMovieDatabase.Service.MovieOmdbDTOService;
 import com.furyviewer.service.dto.Criteria.MovieBCriteria;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
+import com.furyviewer.service.dto.util.ActorsLimitDTO;
+import com.furyviewer.service.util.ArtistLimitService;
 import com.furyviewer.service.util.MarksService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -17,8 +19,6 @@ import io.github.jhipster.web.util.ResponseUtil;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +63,11 @@ public class MovieResource {
 
     private final MarksService marksService;
 
-    public MovieResource(MovieRepository movieRepository, MovieQueryService movieQueryService, HatredMovieRepository hatredMovieRepository, FavouriteMovieRepository favouriteMovieRepository, MovieStatsRepository movieStatsRepository, UserRepository userRepository, RateMovieRepository rateMovieRepository, ArtistRepository artistRepository, MovieOmdbDTOService movieOmdbDTOService, MarksService marksService) {
+    private final ArtistLimitService artistLimitService;
+
+
+
+    public MovieResource(MovieRepository movieRepository, MovieQueryService movieQueryService, HatredMovieRepository hatredMovieRepository, FavouriteMovieRepository favouriteMovieRepository, MovieStatsRepository movieStatsRepository, UserRepository userRepository, RateMovieRepository rateMovieRepository, ArtistRepository artistRepository, MovieOmdbDTOService movieOmdbDTOService, MarksService marksService, ArtistLimitService artistLimitService) {
         this.movieRepository = movieRepository;
         this.movieQueryService = movieQueryService;
         this.hatredMovieRepository = hatredMovieRepository;
@@ -74,6 +78,7 @@ public class MovieResource {
         this.artistRepository = artistRepository;
         this.movieOmdbDTOService = movieOmdbDTOService;
         this.marksService = marksService;
+        this.artistLimitService = artistLimitService;
     }
 
     /**
@@ -312,9 +317,10 @@ public class MovieResource {
 
     @GetMapping("/movies/{id}/actors-limit")
     @Timed
-    public ResponseEntity<List<Movie>> getActorsLimit(@PathVariable Long id) {
-        Pageable topEight = new PageRequest(0, 8);
-        List<Movie> a = movieRepository.getMainActorsByMovie(id, topEight);
+    public ResponseEntity<List<ActorsLimitDTO>> getActorsLimit(@PathVariable Long id) {
+        List<ActorsLimitDTO> a = artistLimitService.getInfoFromArtist(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
     }
+
+
 }

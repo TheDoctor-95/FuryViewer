@@ -3,6 +3,7 @@ package com.furyviewer.repository;
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.Genre;
 import com.furyviewer.domain.Movie;
+import com.furyviewer.service.dto.util.ActorsLimitDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
@@ -51,7 +52,12 @@ public interface MovieRepository extends JpaRepository<Movie, Long> , JpaSpecifi
     List<Movie> findOneWithEagerRelationshipsLimit(@Param("id") Long id, Pageable pageable);
 
     @Query("select m.actorMains from Movie m where m.id=:id")
-    List<Movie> getMainActorsByMovie(@Param("id")Long id, Pageable pageable);
+    List<Artist> getMainActorsByMovie(@Param("id")Long id);
+
+    @Query("select m.actorMains from Movie m where m.id=:id")
+    List<Artist> getMainActorsByMovieLimit(@Param("id")Long id, Pageable pageable);
+
+
 
 
 }
