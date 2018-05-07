@@ -40,6 +40,8 @@ public class EpisodeService {
     @Autowired
     private SeriesRepository seriesRepository;
 
+    @Autowired SeasonRepository seasonRepository;
+
     private final Logger log = LoggerFactory.getLogger(EpisodeResource.class);
 
     @Timed
@@ -84,11 +86,13 @@ public class EpisodeService {
 
     public Long actualSeason(Long id){
         Series series = seriesRepository.findOne(id);
-        if(nextEpisode(series).getSeason().getId()== null){
+        Episode e = nextEpisode(series);
+        if(e == null){
             //series.getSeasons().;
-            return null;
+            List<Long> ids = seasonRepository.findSeasons(id);
+            return ids.get(ids.size()-1);
         }else{
-            return nextEpisode(series).getSeason().getId();
+            return e.getSeason().getId();
         }
     }
 
