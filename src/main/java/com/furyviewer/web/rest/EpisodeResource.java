@@ -226,4 +226,6 @@ public class EpisodeResource {
         return  episodeRepository.findEpisodeByScriptwriterOrderByReleaseDate(artistRepository.findOne(id));
     }
 
+
+
 }
