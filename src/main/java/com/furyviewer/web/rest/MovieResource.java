@@ -322,5 +322,10 @@ public class MovieResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
     }
 
-
+    @GetMapping("/movies/{id}/actors-limitless")
+    @Timed
+    public ResponseEntity<List<ActorsLimitDTO>> getActorsLimitless(@PathVariable Long id) {
+        List<ActorsLimitDTO> a = artistLimitService.getInfoFromArtistLimitless(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
+    }
 }
