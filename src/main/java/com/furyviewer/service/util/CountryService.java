@@ -6,6 +6,7 @@ import com.furyviewer.service.GoogleMaps.Service.GoogleMapsDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -35,10 +36,10 @@ public class CountryService {
 
         if (stringApiCorrectorService.eraserNA(countryName) != null) {
             //Buscamos countryName
-            Optional<Country> c = countryRepository.findByName(googleMapsDTOService.getName(countryName));
+            List<Country> countries = countryRepository.findCountryByName(googleMapsDTOService.getName(countryName));
 
-            if (c.isPresent()) {
-                country = c.get();
+            if (!countries.isEmpty()) {
+                country = countries.get(0);
             } else {
                 country = googleMapsDTOService.importCountry(countryName);
             }

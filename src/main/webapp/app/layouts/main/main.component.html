@@ -33,42 +33,42 @@
             <div style="background-color: black; height: 100%; width: 100%;">
             <ul class="list-unstyled components container-fluid" style="text-transform: uppercase">
 
-                <li class="row" routerLink="/" id="homeMenu">
+                <li class="row" [routerLink]="['/home']" id="homeMenu">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;"><a  id="homelink" href="" [routerLink]="['/home']">Home</a></div>
+                    <div class="titol col-5" style="display: inline-block; color: white;"><a  id="homelink" >Home</a></div>
                     <i class="fa fa-home fa-2x col-2 "></i>
                 </li>
 
 
-                <li class="row" id="perfilMenu">
+                <li class="row"  [routerLink]="['/user-ext']" id="perfilMenu">
 
-                    <div  class="titol col-5" style="display: inline-block; color: white;"><a id="perfillink" href="" [routerLink]="['/user-ext']">Profile</a></div>
+                    <div  class="titol col-5" style="display: inline-block; color: white;"><a id="perfillink" >Profile</a></div>
                     <i class="fa fa-user fa-2x col-2  "></i>
                 </li>
 
 
-                <li class="row" id="watchMenu">
+                <li class="row" id="watchMenu" [routerLink]="['/watchlist']">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;"><a id="watchlink" href="" [routerLink]="['/watchlist']">Watchlist</a></div>
+                    <div class="titol col-5" style="display: inline-block; color: white;"><a id="watchlink" >Watchlist</a></div>
                     <i class="fa fa-eye fa-2x col-2"></i>
                 </li>
 
-                <li class="row" id="searchMenu">
+                <li class="row" id="searchMenu"  [routerLink]="['/search']">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;"><a  id="searchlist" href="" [routerLink]="['/search']">Search</a></div>
+                    <div class="titol col-5" style="display: inline-block; color: white;"><a  id="searchlist">Search</a></div>
                     <i class="fa fa-search fa-2x col-2 "></i>
                 </li>
 
-                <li class="row" id="calendarMenu">
+                <li class="row" id="calendarMenu" [routerLink]="['/calendar']">
 
-                    <div class="titol col-5" style="display: inline-block; color: white; "><a id="calendarlink" href="" [routerLink]="['/calendar']">Calendar</a></div>
+                    <div class="titol col-5" style="display: inline-block; color: white; "><a id="calendarlink" >Calendar</a></div>
                     <i class="fa fa-calendar fa-2x col-2 "></i>
                </li>
 
 
-                <li class="row"  id="aboutMenu">
+                <li class="row"  id="aboutMenu" [routerLink]="['/country']">
 
-                    <div class="titol col-5" style="display: inline-block; color: white;"><a  id="aboutlink" href="" [routerLink]="['/country']">About</a></div>
+                    <div class="titol col-5" style="display: inline-block; color: white;"><a  id="aboutlink" >About</a></div>
                     <i class="fa fa-info-circle fa-2x col-2 "></i>
                 </li>
 
