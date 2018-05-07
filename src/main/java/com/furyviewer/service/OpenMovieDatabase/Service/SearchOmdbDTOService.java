@@ -85,7 +85,7 @@ public class SearchOmdbDTOService {
                     multimedia = seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
                 }
 
-                if (searchOmdbDTO.getSearch().size() > 1)
+                if (Integer.parseInt(searchOmdbDTO.getTotalResults()) > 1)
                     searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size());
 
                 if (searches != null) {
