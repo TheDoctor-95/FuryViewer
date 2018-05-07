@@ -5,23 +5,23 @@
     margin-right: 16%;
     margin-top: 16%;
 }
+
 .titol{
     margin-top:17%;
     magin-left:-6%;
 }
+
 li:hover{
     color:#ffc946;
 }
 #perfillink:hover{
     color: #ffc946;
-
 }
 
 a{
     font-family: Roboto;
     color:white;
     text-decoration: none;
-
 }
 
 .fa{
@@ -32,23 +32,19 @@ a{
     margin-top: 16%;
 }
 
-
 .fa.fa-user{
     margin-right: 14%;
 }
-
 
 .fa.fa-info-circle{
     margin-right: 15.5%;
 }
 
-
-
-
 .list-unstyled > .row{
     padding-bottom: 2rem;
     cursor: pointer;
 }
+
 .list-unstyled > .row:hover {
     background-color: rgba(239,152,0,0.21);
 }

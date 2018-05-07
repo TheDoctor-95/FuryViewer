@@ -23,6 +23,8 @@ import {SeriesStats, SeriesStatsService} from '../series-stats';
 import {SocialService} from '../social';
 import {Social} from '../social/social.model';
 import {RateSeries, RateSeriesService} from '../rate-series';
+import {ReviewSeries} from '../review-series';
+import {ReviewSeriesService} from '../review-series';
 
 @Component({
     selector: 'jhi-series-detail',
@@ -65,6 +67,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     votesCount: string;
     numEpisodes: number;
     numEpisodesSeen: number;
+    reviewSeries: ReviewSeries[];
+    newComent: ReviewSeries;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -80,7 +84,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private chapterSeenService: ChapterSeenService,
         private seriesStatService: SeriesStatsService,
         private socialService: SocialService,
-        private rateSeriesService: RateSeriesService
+        private rateSeriesService: RateSeriesService,
+        private reviewSeriesService: ReviewSeriesService
 ) {
     this.director = new Artist();
     this.director.name = '';
@@ -97,6 +102,9 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     this.votesCount = '0';
     this.numEpisodes = 0;
     this.numEpisodesSeen = 0;
+    this.newComent = new ReviewSeries();
+    this.newComent.title = '';
+    this.newComent.review = '';
 }
 
     ngOnInit() {
@@ -117,6 +125,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadCountFavHate(params['id']);
             this.loadNumEpisodesSeen();
             this.loadNumEpisodes();
+            this.loadReviews(params['id']);
         });
         this.registerChangeInSeries();
 
@@ -407,5 +416,38 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         this.seasonService.getNumEpisodes(this.idSeasonActual).subscribe((numEp) => {
             this.numEpisodes = numEp;
         });
+    }
+
+    loadReviews(id: number) {
+        this.reviewSeriesService.findSeriesReviews(id).subscribe((res: ResponseWrapper) => {
+                this.reviewSeries = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
+
+    comentar() {
+        if (this.newComent.title !== '' && this.newComent.review !== '') {
+            this.newComent.series = this.series;
+            this.subscribeToSaveResponseReview(
+                this.reviewSeriesService.create(this.newComent)
+            );
+        }
+    }
+
+    private subscribeToSaveResponseReview(result: Observable<ReviewSeries>) {
+        result.subscribe((res: ReviewSeries) =>
+            this.onSaveSuccessReview(res), (res: Response) => this.onSaveErrorReview());
+
+    }
+
+    private onSaveSuccessReview(result: ReviewSeries) {
+        this.eventManager.broadcast({ name: 'reviewSeriesListModification', content: 'OK'});
+        this.newComent.title = '';
+        this.newComent.review = '';
+        this.loadReviews(this.series.id);
+    }
+
+    private onSaveErrorReview() {
     }
 }

@@ -38,6 +38,11 @@ export class ReviewSeriesService {
         });
     }
 
+    findSeriesReviews(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/series/${id}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)

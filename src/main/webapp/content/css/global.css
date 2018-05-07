@@ -1261,16 +1261,20 @@ select.form-control:not([size]):not([multiple]) {
 
 .modal-header {
     border-bottom: 4px solid orange;
-    background-color: #02020294;
+    background-color: black;
     color: white;
 }
 
 .modal-footer {
     border-top: none;
+    border-top: none;
 }
 
 .modal-body {
     padding-bottom: 4.5%;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-top: 1rem;
 }
 
 .modal-title {
@@ -1330,7 +1334,8 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .modal-dialog {
-    max-width: 90% !important;
+    margin-top: 10%;
+    max-width: 80% !important;
 }
 
 #plus_watchlist {

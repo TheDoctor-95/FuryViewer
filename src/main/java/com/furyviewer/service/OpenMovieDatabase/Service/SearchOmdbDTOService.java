@@ -73,6 +73,7 @@ public class SearchOmdbDTOService {
      */
     public Multimedia multiImport (String title) {
         SearchOmdbDTO searchOmdbDTO = getSearchByTitle(title);
+        List<Search> searches = null;
 
         Multimedia multimedia = null;
 
@@ -83,11 +84,15 @@ public class SearchOmdbDTOService {
                 } else if (searchOmdbDTO.getSearch().get(0).getType().equalsIgnoreCase("series")) {
                     multimedia = seriesOmdbDTOService.importSeriesByImdbId(searchOmdbDTO.getSearch().get(0).getImdbID());
                 }
-                List<Search> searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size() - 1);
 
-                if (!searches.isEmpty()) {
-                    //Se envian el resto de resultados para que se importen de forma asincrona.
-                    asyncImportTasksService.importAditionalinBackground(searches);
+                if (searchOmdbDTO.getSearch().size() > 1)
+                    searches = searchOmdbDTO.getSearch().subList(1, searchOmdbDTO.getSearch().size());
+
+                if (searches != null) {
+                    if (!searches.isEmpty()) {
+                        //Se envian el resto de resultados para que se importen de forma asincrona.
+                        asyncImportTasksService.importAditionalinBackground(searches);
+                    }
                 }
             }
         } else {
