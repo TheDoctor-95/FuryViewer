@@ -25,6 +25,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -281,14 +282,26 @@ public class ArtistResource {
 
 
     /**
-     * Top Hatred Movies
+     * Top Hatred Artist
      *
      */
-    @GetMapping("/artist/topHatredArtist/")
+    @GetMapping("/artists/topHatredArtist/")
     @Timed
     public ResponseEntity<List<Artist>> findHatredArtist() {
         log.debug("REST request to get top hatred Movies");
-        List<Artist> artist = hatredArtistRepository.topHatredArtist();
+        List<Artist> artist = hatredArtistRepository.topHatredArtist(new PageRequest(0,5));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
+    }
+
+    /**
+     * Top Favorite Artist
+     *
+     */
+    @GetMapping("/artists/topFavoriteArtist/")
+    @Timed
+    public ResponseEntity<List<Artist>> findFavoriteArtist() {
+        log.debug("REST request to get top hatred Movies");
+        List<Artist> artist = favouriteArtistRepository.topFavoriteArtis(new PageRequest(0,5));
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(artist));
     }
 

@@ -75,7 +75,7 @@
 
                                 </div>
                                 <ol class="list-group">
-                                    <li *ngFor="let serie of topSeries " class="list-group-item"> {{serie}}</li>
+                                    <li *ngFor="let serie of topSeries " class="list-group-item" [routerLink]="['/series', serie.id]"> {{serie.name}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                         <div class="card-body">
                             <div id="toppelis">
                                 <div class="row">
-                                    <h2 class="col-9">Top films</h2>
+                                    <h2 class="col-9">Top movies</h2>
 
                                     <label class="switchinv col-3">
                                         <input type="checkbox">
@@ -98,7 +98,7 @@
 
                                 </div>
                                 <ol class="list-group">
-                                    <li *ngFor="let movie of topPelis" class="list-group-item"> {{movie.name}}</li>
+                                    <li *ngFor="let movie of topPelis" class="list-group-item" [routerLink]="['/movie', movie.id]"> {{movie.name}}</li>
 
                                 </ol>
 
@@ -120,7 +120,7 @@
                                 <h2>Top Artist</h2>
 
                                 <ol class="list-group">
-                                    <li *ngFor="let serie of topSeries " class="list-group-item"> {{serie}}</li>
+                                    <li *ngFor="let artist of topArtist " class="list-group-item"> {{artist.name}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
 
 
                                 <ol class="list-group">
-                                    <li *ngFor="let movie of topPelis" class="list-group-item"> {{movie.name}}</li>
+                                    <li *ngFor="let artist of topArtistHate" class="list-group-item" [routerLink]="['/artist', artist.id]"> {{artist.name}}</li>
 
                                 </ol>
 

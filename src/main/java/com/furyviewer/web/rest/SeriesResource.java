@@ -16,6 +16,7 @@ import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -125,7 +126,7 @@ public class SeriesResource {
     @Timed
     public ResponseEntity<List<Series>> findTopSeries() {
         log.debug("REST request to get Movies by name");
-        List<Series> series = rateSeriesRepository.topSeries();
+        List<Series> series = rateSeriesRepository.topSeries(new PageRequest(0,5));
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(series));
     }
 

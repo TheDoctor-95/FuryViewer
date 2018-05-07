@@ -56,6 +56,11 @@ export class SeriesService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    topSeries(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/topSeries/`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

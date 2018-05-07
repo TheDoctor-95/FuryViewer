@@ -19,6 +19,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -232,7 +233,7 @@ public class MovieResource {
     @Timed
     public ResponseEntity<List<Movie>> findTopPelis() {
         log.debug("REST request to get Movies by name");
-        List<Movie> movie = rateMovieRepository.topPelis();
+        List<Movie> movie = rateMovieRepository.topPelis(new PageRequest(0, 5));
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(movie));
     }
 

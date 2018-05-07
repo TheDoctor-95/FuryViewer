@@ -3,10 +3,12 @@ package com.furyviewer.repository;
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.HatredArtist;
 import com.furyviewer.domain.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +29,7 @@ public interface HatredArtistRepository extends JpaRepository<HatredArtist, Long
     Long NumHatredArtist(@Param("ArtistId") Long id);
 
     @Query("select h.artist from HatredArtist h group by h.artist order by avg (h.hated) desc")
-    List<Artist> topHatredArtist();
+    List<Artist> topHatredArtist(Pageable pageable);
 
     HatredArtist findByUserAndArtistId(User u, Long id);
 

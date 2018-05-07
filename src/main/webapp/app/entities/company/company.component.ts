@@ -6,12 +6,14 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Company } from './company.model';
 import { CompanyService } from './company.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import {NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {Movie} from "../movie/movie.model";
-import {EpisodeNextSeen} from "../../shared/model/EpisodeNextSeen.model";
-import {LoginModalService} from "../../shared/login/login-modal.service";
-import {MovieService} from "../movie/movie.service";
-import {EpisodeService} from "../episode/episode.service";
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {Movie} from '../movie/movie.model';
+import {EpisodeNextSeen} from '../../shared/model/EpisodeNextSeen.model';
+import {LoginModalService} from '../../shared/login/login-modal.service';
+import {MovieService} from '../movie/movie.service';
+import {EpisodeService} from '../episode/episode.service';
+import {Series, SeriesService} from '../series';
+import {Artist, ArtistService} from '../artist';
 
 @Component({
     selector: 'jhi-company',
@@ -21,8 +23,10 @@ import {EpisodeService} from "../episode/episode.service";
 export class CompanyComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
-    topPelis: Movie;
-    topSeries: String[] = ['Doctor Who', 'The Flash', 'Arrow', 'Supergirl'];
+    topPelis: Movie[];
+    topSeries: Series[];
+    topArtist: Artist[];
+    topArtistHate: Artist[];
     moviesPending: Movie[];
     episodePending: EpisodeNextSeen[];
     $: any;
@@ -33,7 +37,9 @@ export class CompanyComponent implements OnInit {
         private eventManager: JhiEventManager,
         private movieService: MovieService,
         private jhiAlertService: JhiAlertService,
-        private episodeService: EpisodeService
+        private episodeService: EpisodeService,
+        private seriesService: SeriesService,
+        private artistService: ArtistService
     ) {
     }
 
@@ -45,6 +51,9 @@ export class CompanyComponent implements OnInit {
         this.registerAuthenticationSuccess();
         this.loadTopMovies();
         this.loadNextEpisodes();
+        this.loadTopSeries();
+        this.loadTopHatredArtist();
+        this.loadTopArtist();
     }
     loadPendingMovies() {
         this.movieService.pendingMovies5().subscribe(
@@ -63,7 +72,34 @@ export class CompanyComponent implements OnInit {
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
-    loadNextEpisodes(){
+    loadTopSeries() {
+        this.seriesService.topSeries().subscribe(
+            (res: ResponseWrapper) => {
+                this.topSeries = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        )
+    }
+
+    loadTopArtist() {
+        this.artistService.topFavoriteArtist().subscribe(
+            (res: ResponseWrapper) => {
+                this.topArtist = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        )
+    }
+
+    loadTopHatredArtist() {
+        this.artistService.topHatredArtist().subscribe(
+            (res: ResponseWrapper) => {
+                this.topArtistHate = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        )
+    }
+
+    loadNextEpisodes() {
         this.episodeService.nextEpisodes5().subscribe(
             (res: ResponseWrapper) => {
                 this.episodePending = res.json;
@@ -72,7 +108,6 @@ export class CompanyComponent implements OnInit {
             (res: ResponseWrapper) => this.onError(res.json)
         )
     }
-
 
     registerAuthenticationSuccess() {
         this.eventManager.subscribe('authenticationSuccess', (message) => {

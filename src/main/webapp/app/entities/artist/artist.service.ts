@@ -62,6 +62,16 @@ export class ArtistService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    topHatredArtist(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/topHatredArtist/`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
+    topFavoriteArtist(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/topFavoriteArtist/`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
     findMovieActors(id: number): Observable<ResponseWrapper> {
 
         return this.http.get(`${SERVER_API_URL}/api/movies/${id}/actors`)
@@ -85,7 +95,6 @@ export class ArtistService {
             return this.convertItemFromServer(jsonResponse);
         });
     }
-
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);

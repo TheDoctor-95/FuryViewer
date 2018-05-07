@@ -36,7 +36,7 @@ public interface RateSeriesRepository extends JpaRepository<RateSeries, Long> {
     Double RateSeriesMedia(@Param("SeriesId")Long id);
 
     @Query("select r.series from RateSeries r group by r.series order by avg (r.rate) desc")
-    List<Series> topSeries();
+    List<Series> topSeries(Pageable pageable);
 
     @Query("select r.rate from RateSeries r where r.user=:User and r.series.id = :id ")
     Integer markSeries(@Param("User") User u, @Param("id") Long id);
