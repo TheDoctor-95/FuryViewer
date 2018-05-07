@@ -28,6 +28,7 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
+import {Globals} from './shared/globals';
 
 @NgModule({
     imports: [
@@ -56,7 +57,8 @@ import {
         ProfileService,
         customHttpProvider(),
         PaginationConfig,
-        UserRouteAccessService
+        UserRouteAccessService,
+        Globals
     ],
     bootstrap: [ JhiMainComponent ]
 })

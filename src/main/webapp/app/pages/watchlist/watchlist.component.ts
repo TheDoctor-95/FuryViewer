@@ -7,6 +7,7 @@ import { Watchlist } from './watchlist.model';
 import { WatchlistService } from './watchlist.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import {FilmographyArtistModel} from "../../shared/model/filmographyArtist.model";
+import {Globals} from '../../shared/globals';
 
 @Component({
     selector: 'jhi-watchlist',
@@ -24,15 +25,14 @@ export class WatchlistComponent implements OnInit, OnDestroy {
     reset;
     currentAccount: any;
     eventSubscriber: Subscription;
-    selectMovie: string = 'movie';
-    selectOption: string = 'pending';
     filmography: FilmographyArtistModel[];
     constructor(
         private watchlistService: WatchlistService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal,
-        private router: Router
+        private router: Router,
+        public globals: Globals
     ) {
 
     }
@@ -57,22 +57,24 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 
         this.registerChangeInWatchlists();
     }
-    option(option: string){
-        this.selectOption=option;
+    option(option: string) {
+        this.globals.opcio = option;
         this.cargar();
     }
-    change(multimedia: string){
-        this.selectMovie= multimedia;
-        if(this.selectMovie=='movie' &&
-        this.selectOption=='following'){
-            this.selectOption='pending';
+    change(multimedia: string) {
+        this.globals.multimedia = multimedia;
+        if (this.globals.multimedia === 'movie') {
+            if ('following' === this.globals.opcio) {
+    this.globals.multimedia = 'pending';
+}
         }
+
         this.cargar();
     }
 
-    cargar(){
-        console.log('Cargando Info ' + this.selectMovie + ' ' + this.selectOption);
-        this.watchlistService.load(this.selectMovie, this.selectOption).subscribe(
+    cargar() {
+        console.log('Cargando Info ' + this.globals.multimedia + ' ' + this.globals.opcio);
+        this.watchlistService.load(this.globals.multimedia, this.globals.opcio).subscribe(
                 (res: ResponseWrapper) => {
                     this.filmography = res.json;
                     console.log(this.filmography);

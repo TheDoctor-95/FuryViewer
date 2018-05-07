@@ -2,29 +2,30 @@
     <div class="row">
         <div class="hola col-12">
             <div class="cos-watchlist">
+                {{globals.role}}
 
 
                 <div id="sidebarwatch">
                     <div id="botons_sidebar">
 
                         <div class="icon_text">
-                            <div class="rodona" (click)="option('pending')" [ngStyle]="{'background-color':selectOption=='pending' ? '#ef9800' : 'white', 'color':selectOption=='pending' ? 'white' : '#ef9800'}"><i class="fa fa-edit fa-3x"></i></div>
+                            <div class="rodona" (click)="option('pending')" [ngStyle]="{'background-color':globals.opcio=='pending' ? '#ef9800' : 'white', 'color':globals.opcio=='pending' ? 'white' : '#ef9800'}"><i class="fa fa-edit fa-3x"></i></div>
                             PENDING
                         </div>
-                        <div class="icon_text" *ngIf="selectMovie=='series'">
-                            <div class="rodona" (click)="option('following')" [ngStyle]="{'background-color':selectOption=='following' ? '#ef9800' : 'white', 'color':selectOption=='following' ? 'white' : '#ef9800'}"><i class="fa fa-edit fa-3x"></i></div>
+                        <div class="icon_text" *ngIf="globals.multimedia=='series'">
+                            <div class="rodona" (click)="option('following')" [ngStyle]="{'background-color':globals.opcio=='following' ? '#ef9800' : 'white', 'color':globals.opcio=='following' ? 'white' : '#ef9800'}"><i class="fa fa-edit fa-3x"></i></div>
                             FOLLOWING
                         </div>
                         <div class="icon_text">
-                            <div class="rodona" (click)="option('seen')" [ngStyle]="{'background-color':selectOption=='seen' ? '#ef9800' : 'white', 'color':selectOption=='seen' ? 'white' : '#ef9800'}"><i class="fa fa-eye-slash fa-3x"></i></div>
+                            <div class="rodona" (click)="option('seen')" [ngStyle]="{'background-color':globals.opcio=='seen' ? '#ef9800' : 'white', 'color':globals.opcio=='seen' ? 'white' : '#ef9800'}"><i class="fa fa-eye-slash fa-3x"></i></div>
                             SEEN
                         </div>
                         <div class="icon_text">
-                            <div class="rodona" (click)="option('favorite')" [ngStyle]="{'background-color':selectOption=='favorite' ? '#ef9800' : 'white', 'color':selectOption=='favorite' ? 'white' : '#ef9800'}"><i class="fa fa-heart fa-3x"></i></div>
+                            <div class="rodona" (click)="option('favorite')" [ngStyle]="{'background-color':globals.opcio=='favorite' ? '#ef9800' : 'white', 'color':globals.opcio=='favorite' ? 'white' : '#ef9800'}"><i class="fa fa-heart fa-3x"></i></div>
                             FAVORITE
                         </div>
                         <div class="icon_text">
-                            <div class="rodona" (click)="option('hatred')" [ngStyle]="{'background-color':selectOption=='hatred' ? '#ef9800' : 'white', 'color':selectOption=='hatred' ? 'white' : '#ef9800'}"><i class="fa fa-thumbs-down fa-3x"></i></div>
+                            <div class="rodona" (click)="option('hatred')" [ngStyle]="{'background-color':globals.opcio=='hatred' ? '#ef9800' : 'white', 'color':globals.opcio=='hatred' ? 'white' : '#ef9800'}"><i class="fa fa-thumbs-down fa-3x"></i></div>
                             HATRED
                         </div>
 
@@ -34,8 +35,8 @@
 
                 <div id="botonspelser" class="text-right" style="padding-right: 2rem;">
                     <div class="col botowatchlist" id="botoncalendar">
-                        <button (click)="change('series')" [ngStyle]="{'background-color':selectMovie=='series' ? '#ef9800' : 'white', 'color':selectMovie=='series' ? 'white' : '#ef9800'}"> SERIES</button>
-                        <button (click)="change('movie')" [ngStyle]="{'background-color':selectMovie=='movie' ? '#ef9800' : 'white', 'color':selectMovie=='movie' ? 'white' : '#ef9800'}"> MOVIES</button>
+                        <button (click)="change('series')" [ngStyle]="{'background-color':globals.multimedia=='series' ? '#ef9800' : 'white', 'color':globals.multimedia=='series' ? 'white' : '#ef9800'}"> SERIES</button>
+                        <button (click)="change('movie')" [ngStyle]="{'background-color':globals.multimedia=='movie' ? '#ef9800' : 'white', 'color':globals.multimedia=='movie' ? 'white' : '#ef9800'}"> MOVIES</button>
                     </div>
 
                     <!--<div class="text_switch"> SERIES</div>
