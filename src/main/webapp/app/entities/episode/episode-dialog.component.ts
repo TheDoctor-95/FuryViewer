@@ -24,6 +24,7 @@ export class EpisodeDialogComponent implements OnInit {
     seasons: Season[];
     artists: Artist[];
     episodePending: EpisodeNextSeen[];
+    loading: boolean;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -59,10 +60,11 @@ export class EpisodeDialogComponent implements OnInit {
     }
 
     loadNextEpisodes() {
+        this.loading = true;
         this.episodeService.nextEpisodes().subscribe(
             (res: ResponseWrapper) => {
                 this.episodePending = res.json;
-                console.log(this.episodePending);
+                this.loading = false;
             },
             (res: ResponseWrapper) => this.onError(res.json)
         )

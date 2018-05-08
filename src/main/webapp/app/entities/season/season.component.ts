@@ -6,6 +6,8 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Season } from './season.model';
 import { SeasonService } from './season.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
+import {EpisodeService} from '../episode/episode.service';
+import {Episode} from '../episode/episode.model';
 
 @Component({
     selector: 'jhi-season',
@@ -16,12 +18,14 @@ export class SeasonComponent implements OnInit, OnDestroy {
 seasons: Season[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    episodes: Episode[];
 
     constructor(
         private seasonService: SeasonService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private episodeService: EpisodeService
     ) {
     }
 
@@ -37,6 +41,7 @@ seasons: Season[];
         this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+            this.loadCalendar();
         });
         this.registerChangeInSeasons();
     }
@@ -50,6 +55,16 @@ seasons: Season[];
     }
     registerChangeInSeasons() {
         this.eventSubscriber = this.eventManager.subscribe('seasonListModification', (response) => this.loadAll());
+    }
+
+    loadCalendar() {
+        this.episodeService.calendar().subscribe(
+            (res: ResponseWrapper) => {
+                this.episodes = res.json;
+                console.log(this.episodes);
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        )
     }
 
     private onError(error) {

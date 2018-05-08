@@ -40,6 +40,11 @@ export class EpisodeService {
         });
     }
 
+    calendar(): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/calendar`)
+            .map((res: Response) => this.convertResponseCalendar(res));
+    }
+
     nextEpisodes(): Observable<ResponseWrapper> {
         return this.http.get(`${this.resourceUrl}/next`)
             .map((res: Response) => this.convertNextEpisodeResponse(res));
@@ -66,6 +71,15 @@ export class EpisodeService {
     }
 
     private convertResponse(res: Response): ResponseWrapper {
+        const jsonResponse = res.json();
+        const result = [];
+        for (let i = 0; i < jsonResponse.length; i++) {
+            result.push(this.convertItemFromServer(jsonResponse[i]));
+        }
+        return new ResponseWrapper(res.headers, result, res.status);
+    }
+
+    private convertResponseCalendar(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
         for (let i = 0; i < jsonResponse.length; i++) {

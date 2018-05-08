@@ -15,8 +15,12 @@
                                 <h3 class="card-text seriesTitle" style="letter-spacing: 0.7px; text-transform: uppercase"> {{episode.titleSeries}} </h3>
                             </div>
                         </div>
-                        <div style="display: inline-block; height: 11vw;">
+                        <div *ngIf="!loadinSeries" style="display: inline-block; height: 11vw;">
                             <div id="plus" [routerLink]="['/', { outlets: { popup: ['episode-next'] } }]">+</div>
+                        </div>
+
+                        <div *ngIf="loadinSeries" class="loader">
+                            <img  src="../../../content/images/loader.gif" />
                         </div>
                     </div>
                 </div>
@@ -32,8 +36,12 @@
                                 <h4 style="font-size: 15px; font-weight: 300;">{{movie.name}}</h4>
                             </div>
                         </div>
-                        <div style="display: inline-block; height: 11vw;">
+                        <div  *ngIf="!loadingMovies" style="display: inline-block; height: 11vw;">
                             <div id="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]">+</div>
+                        </div>
+
+                        <div *ngIf="loadingMovies" class="loader">
+                            <img  src="../../../content/images/loader.gif" />
                         </div>
                     </div>
                 </div>

@@ -32,6 +32,7 @@ export class MovieDialogComponent implements OnInit {
 
     countries: Country[];
     releaseDateDp: any;
+    loading: boolean = true;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -55,7 +56,7 @@ export class MovieDialogComponent implements OnInit {
         this.activeModal.dismiss('cancel');
     }
 
-    goTo(id: number){
+    goTo(id: number) {
         this.route.navigate(['movie', id]).then(
             () => {
                 this.clear();
@@ -64,9 +65,11 @@ export class MovieDialogComponent implements OnInit {
     }
 
     loadPendingMovies() {
+        this.loading = true;
         this.movieService.pendingMovies().subscribe(
             (res: ResponseWrapper) => {
                 this.moviesPending = res.json;
+                this.loading = false;
             },
             (res: ResponseWrapper) => this.onError(res.json)
         );

@@ -30,6 +30,8 @@ export class CompanyComponent implements OnInit {
     moviesPending: Movie[];
     episodePending: EpisodeNextSeen[];
     $: any;
+    loadinSeries: boolean;
+    loadingMovies: boolean;
 
     constructor(
         private principal: Principal,
@@ -56,9 +58,11 @@ export class CompanyComponent implements OnInit {
         this.loadTopArtist();
     }
     loadPendingMovies() {
+        this.loadingMovies = true;
         this.movieService.pendingMovies5().subscribe(
             (res: ResponseWrapper) => {
                 this.moviesPending = res.json;
+                this.loadingMovies = false;
             },
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -100,10 +104,11 @@ export class CompanyComponent implements OnInit {
     }
 
     loadNextEpisodes() {
+        this.loadinSeries = true;
         this.episodeService.nextEpisodes5().subscribe(
             (res: ResponseWrapper) => {
                 this.episodePending = res.json;
-                console.log(this.episodePending);
+                this.loadinSeries = false;
             },
             (res: ResponseWrapper) => this.onError(res.json)
         )

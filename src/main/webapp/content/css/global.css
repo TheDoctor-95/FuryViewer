@@ -873,8 +873,8 @@ Watchlist
 
 .cos-watchlist {
     width: 72%;
-   /* height: 35rem;*/
-    min-height: 35rem;
+    height: fit-content;
+    min-height: 40rem;
     background-color: white;
     margin-bottom: 2rem;
     margin-top: 2%;
@@ -1508,4 +1508,12 @@ img::selection {
     cursor: pointer;
 }
 
+.loader{
+    text-align: center !important;
+    width: 100%;
+ }
+
+.loader img{
+    display: inline-block;
+}
 
