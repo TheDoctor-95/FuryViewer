@@ -3,14 +3,14 @@ import { Component, ElementRef, Input, Renderer } from '@angular/core';
 @Component({
     selector: 'jhi-password-strength-bar',
     template: `
-        <div id="strength">
+        <div id="strength" style="margin-left: 4%;">
             <small jhiTranslate="global.messages.validate.newpassword.strength">Password strength:</small>
             <ul id="strengthBar">
-                <li class="point"></li>
-                <li class="point"></li>
-                <li class="point"></li>
-                <li class="point"></li>
-                <li class="point"></li>
+                <li class="point passSignIn"></li>
+                <li class="point passSignIn"></li>
+                <li class="point passSignIn"></li>
+                <li class="point passSignIn"></li>
+                <li class="point passSignIn"></li>
             </ul>
         </div>`,
     styleUrls: [

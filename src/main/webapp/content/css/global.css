@@ -1516,4 +1516,39 @@ img::selection {
 .loader img{
     display: inline-block;
 }
+.signIn{
+    margin-left: 0% !important;
+    font-size: 14px;
+}
 
+.labelSignIn{
+    margin-left: 4%;
+}
+
+.signIn:focus{
+    border-color: #ef9800;
+}
+
+.passSignIn{
+    margin-left: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.btnSignIn{
+    width: 90%;
+    color: white;
+    border: 1px solid orange !important;
+    background-color: orange !important;
+    margin-bottom: 1rem;
+}
+
+.btnSignIn:hover{
+
+    color: orange;
+    border: 1px solid orange !important;
+    background-color: transparent !important;
+}

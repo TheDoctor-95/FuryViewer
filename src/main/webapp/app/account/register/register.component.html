@@ -1,7 +1,10 @@
 <div>
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h1 jhiTranslate="register.title">Registration</h1>
+        <div class="col-md-8" style="margin-top: 20px;">
+
+            <img class="col-2" style="background-color: black; border-radius: 82px; padding: 0px; padding-left: 2px; padding-bottom: 2px;" src="../../../content/images/Logo_Inicio.png"/>
+
+            <p style="margin-top: 15px; margin-bottom: 25px; font-size: 24px; font-weight: 300; letter-spacing: -0.5px;">Sign in to FuryViewer</p>
 
             <div class="alert alert-success" *ngIf="success" jhiTranslate="register.messages.success">
                 <strong>Registration saved!</strong> Please check your email for confirmation.
@@ -25,11 +28,11 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success">
+        <div class="col-md-3 whiteBox" style="font-size: 14px; font-weight: 500; margin-bottom: 40px;">
+            <form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success" style="margin-top: 1rem; text-align: left;">
                 <div class="form-group">
-                    <label class="form-control-label" for="login" jhiTranslate="global.form.username">Username</label>
-                    <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder="{{'global.form.username.placeholder' | translate}}"
+                    <label class="form-control-label labelSignIn" for="login" jhiTranslate="global.form.username">Username</label>
+                    <input type="text" class="form-control signIn" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder="{{'global.form.username.placeholder' | translate}}"
                             required minlength="1" maxlength="50" pattern="^[_'.@A-Za-z0-9-]*$">
                     <div *ngIf="login.dirty && login.invalid">
                         <small class="form-text text-danger" *ngIf="login.errors.required" jhiTranslate="register.messages.validate.login.required">
@@ -50,8 +53,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="email" jhiTranslate="global.form.email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" #email="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
+                    <label class="form-control-label labelSignIn" for="email" jhiTranslate="global.form.email">Email</label>
+                    <input type="email" class="form-control signIn" id="email" name="email" #email="ngModel" placeholder="{{'global.form.email.placeholder' | translate}}"
                             [(ngModel)]="registerAccount.email" minlength=5 maxlength=100 email required>
                     <div *ngIf="email.dirty && email.invalid">
                         <small class="form-text text-danger" *ngIf="email.errors.required"
@@ -73,8 +76,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="password" jhiTranslate="global.form.newpassword">New password</label>
-                    <input type="password" class="form-control" id="password" name="password" #password="ngModel" placeholder="{{'global.form.newpassword.placeholder' | translate}}"
+                    <label class="form-control-label labelSignIn" for="password" jhiTranslate="global.form.newpassword">New password</label>
+                    <input type="password" class="form-control signIn" id="password" name="password" #password="ngModel" placeholder="{{'global.form.newpassword.placeholder' | translate}}"
                             [(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required>
                     <div *ngIf="password.dirty && password.invalid">
                         <small class="form-text text-danger" *ngIf="password.errors.required"
@@ -93,8 +96,8 @@
                     <jhi-password-strength-bar [passwordToCheck]="registerAccount.password"></jhi-password-strength-bar>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="confirmPassword" jhiTranslate="global.form.confirmpassword">New password confirmation</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
+                    <label class="form-control-label labelSignIn" for="confirmPassword" jhiTranslate="global.form.confirmpassword">New password confirmation</label>
+                    <input type="password" class="form-control signIn" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
                             [(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>
                     <div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
                         <small class="form-text text-danger" *ngIf="confirmPasswordInput.errors.required"
@@ -111,27 +114,26 @@
                         </small>
                     </div>
                 </div>
+
+                <!--
                 <div class="form-group">
                     <label class="form-control-label" for="googleMapsUrl" jhiTranslate="global.form.urlMaps">Url Maps</label>
                     <input type="url" class="form-control" id="googleMapsUrl" name="googleMapsUrl"  placeholder="{{'global.form.urlMaps.placeholder' | translate}}"
                            [(ngModel)]="urlMaps" required>
 
                 </div>
-
-                <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary" jhiTranslate="register.form.button">Register</button>
+                -->
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary btnSignIn" jhiTranslate="register.form.button">Register</button>
+                </div>
             </form>
             <p></p>
+            <!--
             <div class="alert alert-warning">
                 <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
                 <a class="alert-link" (click)="openLogin()" jhiTranslate="global.messages.info.authenticated.link">sign in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
             </div>
-        </div>
-        <div class="col-md-4">
-            <br/>
-            <jhi-social provider="google"></jhi-social>
-            <jhi-social provider="facebook"></jhi-social>
-            <jhi-social provider="twitter"></jhi-social>
-            <!-- jhipster-needle-add-social-button -->
+            -->
         </div>
     </div>
 </div>
