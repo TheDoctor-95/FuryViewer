@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, HostListener} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
@@ -6,7 +6,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { Watchlist } from './watchlist.model';
 import { WatchlistService } from './watchlist.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import {FilmographyArtistModel} from "../../shared/model/filmographyArtist.model";
+import {FilmographyArtistModel} from '../../shared/model/filmographyArtist.model';
 import {Globals} from '../../shared/globals';
 
 @Component({
@@ -26,6 +26,8 @@ export class WatchlistComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     filmography: FilmographyArtistModel[];
+    loading: boolean;
+    pagenumber = 1;
     constructor(
         private watchlistService: WatchlistService,
         private jhiAlertService: JhiAlertService,
@@ -34,7 +36,17 @@ export class WatchlistComponent implements OnInit, OnDestroy {
         private router: Router,
         public globals: Globals
     ) {
+        this.onWindowScroll = this.onWindowScroll.bind(this);
+    }
 
+    onWindowScroll(): void {
+        console.log('scrolling!');
+        if ((window.innerHeight + window.scrollY) >= document.getElementsByClassName('pendientes')[0].scrollHeight && !this.loading) {
+            console.log('bottom!');
+            console.log(this);
+            this.pagenumber = this.pagenumber + 1;
+            this.load()
+        }
     }
 
     loadAll() {
@@ -48,20 +60,22 @@ export class WatchlistComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
+        window.addEventListener('scroll', this.onWindowScroll, true);
         this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.cargar();
+        this.load();
 
         this.registerChangeInWatchlists();
     }
     option(option: string) {
         this.globals.opcio = option;
-        this.cargar();
+        this.pagenumber = 1;
+        this.load();
     }
     change(multimedia: string) {
+        this.pagenumber = 1;
         this.globals.multimedia = multimedia;
         if (this.globals.multimedia === 'movie') {
             if ('following' === this.globals.opcio) {
@@ -69,15 +83,24 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 }
         }
 
-        this.cargar();
+        this.load();
     }
 
-    cargar() {
+    load(): void {
+        this.loading = true;
         console.log('Cargando Info ' + this.globals.multimedia + ' ' + this.globals.opcio);
         this.watchlistService.load(this.globals.multimedia, this.globals.opcio).subscribe(
                 (res: ResponseWrapper) => {
-                    this.filmography = res.json;
+                    if (this.pagenumber === 1) {
+                        this.filmography = res.json;
+                    }else {
+                        console.log('json ');
+                        console.log(res.json);
+                        this.filmography = this.filmography.concat(res.json)
+                        console.log('after concat' , this.filmography);
+                    }
                     console.log(this.filmography);
+                    this.loading = false;
                 },
                 (res: ResponseWrapper) => this.onError(res.json)
             );
@@ -96,7 +119,6 @@ export class WatchlistComponent implements OnInit, OnDestroy {
             }
         }
     }
-
 
     ngOnDestroy() {
 
