@@ -6,7 +6,7 @@ import { SERVER_API_URL } from '../../app.constants';
 import { Watchlist } from './watchlist.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 import {FilmographyArtistModel} from "../../shared/model/filmographyArtist.model";
-2
+
 @Injectable()
 export class WatchlistService {
 
@@ -20,8 +20,8 @@ export class WatchlistService {
             .map((res: Response) => this.convertResponse(res));
     }
 
-    load(multimedia: string, option: string): Observable<ResponseWrapper>{
-        return this.http.get(`${this.resourceUrl}/${multimedia}/option/${option}`).map(
+    load(multimedia: string, option: string, page: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/${multimedia}/option/${option}/page/${page}`).map(
             (res: Response) => {
                 return this.convertFilmographyResponse(res);
             }

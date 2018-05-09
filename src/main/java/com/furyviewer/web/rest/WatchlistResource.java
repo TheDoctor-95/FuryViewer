@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,11 +40,11 @@ public class WatchlistResource {
     }
 
 
-    @GetMapping("/{multimedia}/option/{option}")
+    @GetMapping("/{multimedia}/option/{option}/page/{page}")
     @Timed
-    public List<MultimediaActorsDTO> multimedia(@PathVariable String multimedia, @PathVariable String option) {
+    public List<MultimediaActorsDTO> multimedia(@PathVariable String multimedia, @PathVariable String option, @PathVariable Integer page) {
 
-        return watchlistService.whatchlistMultimedia(multimedia, option);
+        return watchlistService.whatchlistMultimedia(multimedia, option, new PageRequest(page,15));
     }
 
 }

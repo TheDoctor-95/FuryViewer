@@ -3,6 +3,7 @@ package com.furyviewer.repository;
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.FavouriteMovie;
 import com.furyviewer.domain.Movie;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -32,7 +33,7 @@ public interface FavouriteMovieRepository extends JpaRepository<FavouriteMovie, 
     Boolean selectFavouriteMovie(@Param("id") Long id);
 
     @Query("select fm.movie from FavouriteMovie fm where fm.liked=true and fm.user.login=:login")
-    List<Movie> findFavoriteMovieUserLogin(@Param("login") String login);
+    List<Movie> findFavoriteMovieUserLogin(@Param("login") String login, Pageable pageable);
 
     @Query("SELECT COUNT(f.liked) FROM FavouriteMovie f WHERE f.liked=true AND f.movie.id=:id")
     Integer countLikedMovie(@Param("id") Long id);

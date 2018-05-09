@@ -5,7 +5,9 @@ import com.furyviewer.repository.*;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.dto.util.MultimediaActorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,7 @@ public class WatchlistService {
     @Autowired
     private MovieStatsRepository movieStatsRepository;
 
-    public List<MultimediaActorsDTO> whatchlistMultimedia(String mulimedia, String option) {
+    public List<MultimediaActorsDTO> whatchlistMultimedia(String mulimedia, String option, Pageable pageable) {
         List<MultimediaActorsDTO> multimediaActorsDTOList = new ArrayList<>();
 
         if (mulimedia.equalsIgnoreCase("movie")) {
@@ -43,22 +45,22 @@ public class WatchlistService {
             switch (option){
                 case "hatred":
 
-                    movieList = hatredMovieRepository.findHatedMovieUser(SecurityUtils.getCurrentUserLogin());
+                    movieList = hatredMovieRepository.findHatedMovieUser(SecurityUtils.getCurrentUserLogin(), pageable);
                     break;
 
                 case "favorite":
 
-                    movieList = favouriteMovieRepository.findFavoriteMovieUserLogin(SecurityUtils.getCurrentUserLogin());
+                    movieList = favouriteMovieRepository.findFavoriteMovieUserLogin(SecurityUtils.getCurrentUserLogin(),pageable);
                     break;
 
                 case "pending":
 
-                    movieList = movieStatsRepository.pendingMoviesUserLogin(SecurityUtils.getCurrentUserLogin());
+                    movieList = movieStatsRepository.pendingMoviesUserLogin(SecurityUtils.getCurrentUserLogin(),pageable);
                     break;
 
                 case "seen":
 
-                    movieList = movieStatsRepository.seenMovie(SecurityUtils.getCurrentUserLogin());
+                    movieList = movieStatsRepository.seenMovie(SecurityUtils.getCurrentUserLogin(),pageable);
                     break;
             }
 
@@ -76,27 +78,26 @@ public class WatchlistService {
             switch (option){
                 case "hatred":
 
-                    seriesList = hatredSeriesRepository.findHatedSeriesUser(SecurityUtils.getCurrentUserLogin());
-                    break;
+                    seriesList = hatredSeriesRepository.findHatedSeriesUser(SecurityUtils.getCurrentUserLogin(),pageable);
 
                 case "favorite":
 
-                    seriesList = favouriteSeriesRepository.findFavoriteSeriesUserLogin(SecurityUtils.getCurrentUserLogin());
+                    seriesList = favouriteSeriesRepository.findFavoriteSeriesUserLogin(SecurityUtils.getCurrentUserLogin(),pageable);
                     break;
 
                 case "following":
 
-                    seriesList = seriesStatsRepository.followingSeriesUser(SecurityUtils.getCurrentUserLogin());
+                    seriesList = seriesStatsRepository.followingSeriesUserPageable(SecurityUtils.getCurrentUserLogin(),pageable);
                     break;
 
                 case "pending":
 
-                    seriesList = seriesStatsRepository.pendingSeriesUser(SecurityUtils.getCurrentUserLogin());
+                    seriesList = seriesStatsRepository.pendingSeriesUser(SecurityUtils.getCurrentUserLogin(),pageable);
                     break;
 
                 case "seen":
 
-                    seriesList = seriesStatsRepository.seenSeriesUser(SecurityUtils.getCurrentUserLogin());
+                    seriesList = seriesStatsRepository.seenSeriesUser(SecurityUtils.getCurrentUserLogin(),pageable);
                     break;
 
             }

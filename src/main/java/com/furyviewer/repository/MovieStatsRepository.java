@@ -3,6 +3,7 @@ package com.furyviewer.repository;
 import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.MovieStats;
 import com.furyviewer.domain.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -36,11 +37,11 @@ public interface MovieStatsRepository extends JpaRepository<MovieStats, Long> {
     List<Movie> pendingMovies(@Param("User")User user);
 
     @Query("select movieStats.movie from MovieStats movieStats where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.PENDING and movieStats.user.login=:login")
-    List<Movie> pendingMoviesUserLogin(@Param("login")String user);
+    List<Movie> pendingMoviesUserLogin(@Param("login")String user, Pageable pageable);
 
 
     @Query("select movieStats.movie from MovieStats movieStats where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.SEEN and movieStats.user.login=:login")
-    List<Movie> seenMovie(@Param("login")String login);
+    List<Movie> seenMovie(@Param("login")String login, Pageable pageable);
 
     Optional<MovieStats> findByUserAndMovieId(User user, Long id);
 

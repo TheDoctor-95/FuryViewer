@@ -4,6 +4,7 @@ import com.furyviewer.domain.FavouriteSeries;
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.User;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +40,6 @@ public interface FavouriteSeriesRepository extends JpaRepository<FavouriteSeries
     Boolean selectFavouriteSeriesAndUser(@Param("id") Long id, @Param("login") String login);
 
     @Query("select fs.series from FavouriteSeries fs where fs.liked=true and fs.user.login=:login")
-    List<Series> findFavoriteSeriesUserLogin(@Param("login") String login);
+    List<Series> findFavoriteSeriesUserLogin(@Param("login") String login, Pageable pageable);
 
 }

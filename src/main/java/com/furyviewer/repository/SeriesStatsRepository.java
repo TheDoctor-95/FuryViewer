@@ -3,6 +3,7 @@ package com.furyviewer.repository;
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.SeriesStats;
 import com.furyviewer.domain.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -37,11 +38,14 @@ public interface SeriesStatsRepository extends JpaRepository<SeriesStats, Long> 
     @Query("select ss.serie from SeriesStats ss where ss.status=com.furyviewer.domain.enumeration.SeriesStatsEnum.FOLLOWING and ss.user.login=:userLogin")
     List<Series>  followingSeriesUser(@Param("userLogin") String userLogin);
 
+    @Query("select ss.serie from SeriesStats ss where ss.status=com.furyviewer.domain.enumeration.SeriesStatsEnum.FOLLOWING and ss.user.login=:userLogin")
+    List<Series>  followingSeriesUserPageable(@Param("userLogin") String userLogin, Pageable pageable);
+
     @Query("select ss.serie from SeriesStats ss where ss.status=com.furyviewer.domain.enumeration.SeriesStatsEnum.SEEN and ss.user.login=:userLogin")
-    List<Series>  seenSeriesUser(@Param("userLogin") String userLogin);
+    List<Series>  seenSeriesUser(@Param("userLogin") String userLogin, Pageable pageable);
 
     @Query("select ss.serie from SeriesStats ss where ss.status=com.furyviewer.domain.enumeration.SeriesStatsEnum.PENDING and ss.user.login=:userLogin")
-    List<Series>  pendingSeriesUser(@Param("userLogin") String userLogin);
+    List<Series>  pendingSeriesUser(@Param("userLogin") String userLogin, Pageable pageable);
 
 
     Optional<SeriesStats> findByUserAndSerieId(User user, Long id);
