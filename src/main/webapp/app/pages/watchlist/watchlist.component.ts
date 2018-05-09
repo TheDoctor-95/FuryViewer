@@ -41,7 +41,10 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 
     onWindowScroll(): void {
         console.log('scrolling!');
-        if ((window.innerHeight + window.scrollY) >= document.getElementsByClassName('pendientes')[0].scrollHeight && !this.loading) {
+        console.log(document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollHeight, document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].clientHeight, document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollTop);
+        if (( document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].clientHeight + document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollTop) ==
+            document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollHeight
+            && !this.loading) {
             console.log('bottom!');
             console.log(this);
             this.pagenumber = this.pagenumber + 1;

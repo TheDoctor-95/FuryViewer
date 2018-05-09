@@ -6,6 +6,10 @@ Navbar
     color: #ccc
 }
 
+.navbar{
+    height: 15vh;
+}
+
 .jh-navbar {
     background-color: #000;
     padding: .2em 1em;

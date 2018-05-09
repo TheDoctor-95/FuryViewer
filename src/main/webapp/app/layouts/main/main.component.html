@@ -20,7 +20,7 @@
 </div>
 -->
 
-<ng-sidebar-container style="height: 100vh;">
+<ng-sidebar-container id="scroll" style="min-height: 85vh">
     <ng-sidebar *ngIf="isAuthenticated()" [(opened)]="_opened"
                 [mode]="'over'"
                 [dock]="dock"
@@ -78,7 +78,7 @@
 
     <div ng-sidebar-content>
         <div style="left: 0vh;" class="card jh-card">
-            <router-outlet></router-outlet>
+            <router-outlet id="main"></router-outlet>
             <router-outlet name="popup" class=""></router-outlet>
         </div>
         <jhi-footer *ngIf="isAuthenticated()"></jhi-footer>
