@@ -20,7 +20,7 @@
 </div>
 -->
 
-<ng-sidebar-container id="scroll" style="min-height: 85vh">
+<ng-sidebar-container  [ngStyle]="{'height': isAuthenticated() ? '85vh' : '100vh' }">
     <ng-sidebar *ngIf="isAuthenticated()" [(opened)]="_opened"
                 [mode]="'over'"
                 [dock]="dock"
