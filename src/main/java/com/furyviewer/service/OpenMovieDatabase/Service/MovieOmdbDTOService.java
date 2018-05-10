@@ -156,11 +156,15 @@ public class MovieOmdbDTOService {
 
         Optional<Movie> mdb = movieRepository.findMovieByImdbIdExternalApi(imdbId);
 
-        if (mdb.isPresent()) {
-            return mdb.get();
-        }
-
         Movie m = new Movie();
+
+        if (mdb.isPresent()) {
+            m = mdb.get();
+            m.setDvd_release(dateConversorService.releseDateOMDB(movieOmdbDTO.getDVD()));
+            m = movieRepository.save(m);
+
+            return m;
+        }
 
         //Comprobamos que la API nos devuelve información.
         if (movieOmdbDTO.getResponse().equalsIgnoreCase("true")) {

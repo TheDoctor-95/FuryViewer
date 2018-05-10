@@ -14,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Servicio encargado de recuperar informacion de una Season desde SeasonOmdbDTORepository y la convierte al
@@ -84,12 +85,13 @@ public class SeasonOmdbDTOService {
     /**
      * Convierte la informacion de una season de OMDB al formato de Furyviewer.
      * @param title String | Titulo de la serie.
+     * @param initSeason int | Season por la queempezara importar.
      * @param totalSeasons int | Numero total de seasons de la serie.
      */
-    public void importSeason(String title, int totalSeasons, String imdbId) {
+    public void importSeason(String title, int initSeason, int totalSeasons, String imdbId) {
         Series ss = seriesRepository.findByImdb_id(imdbId).get();
 
-        for (int i = 1; i <= totalSeasons; i++) {
+        for (int i = initSeason; i <= totalSeasons; i++) {
 
             //Ponemos mote al bucle y lo utilizamos para hacer la petición hasta tres veces para asegurarnos de que
             // podemos realizar la petición a la api.
@@ -102,6 +104,10 @@ public class SeasonOmdbDTOService {
 
                     //Comprobamos que la API nos devuelve información.
                     if (seasonOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+                        Optional<Season> so = seasonRepository.getSeason(ss.getId(),i);
+
+                        if (so.isPresent()) se.setId(so.get().getId());
+
                         se.setNumber(i);
                         se.setReleaseDate(dateConversorService.
                             releaseDateOMDBSeason(seasonOmdbDTO.getEpisodes().get(0).getReleased()));

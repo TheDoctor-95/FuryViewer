@@ -17,6 +17,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * Servicio encargado de recuperar informacion de un Episode desde EpisodeOmdbDTORepository y la convierte al
@@ -109,6 +110,10 @@ public class EpisodeOmdbDTOService {
 
                     //Comprobamos que la API nos devuelve información.
                     if (episodeOmdbDTO.getResponse().equalsIgnoreCase("true")) {
+                        Optional<Episode> episode = episodeRepository.getEpisode(se.getId(),i);
+
+                        if (episode.isPresent()) ep.setId(episode.get().getId());
+
                         ep.setNumber(i);
                         ep.setName(episodeOmdbDTO.getTitle());
 

@@ -23,6 +23,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Servicio encargado de recuperar informacion de una Series desde SeriesTmdbDTORepository.
@@ -294,6 +295,10 @@ public class SeriesTmdbDTOService {
         if (response.isSuccessful()) {
             se = response.body();
             Episode ep = new Episode();
+
+            Optional<Episode> epi = episodeRepository.getEpisode(season.getId(),episodeNum);
+
+            if (epi.isPresent()) ep.setId(epi.get().getId());
 
             ep.setNumber(episodeNum);
 

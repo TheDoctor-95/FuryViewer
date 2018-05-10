@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Servicio encargado de recuperar informacion de una Movie desde MovieTmdbDTORepository.
+ *
  * @author IFriedkin
  * @see com.furyviewer.service.TheMovieDB.Repository.MovieTmdbDTORepository
  */
@@ -43,8 +44,10 @@ public class MovieTmdbDTOService {
 
     /**
      * Devuelve el id de la api de TMDB a partir del nombre de la movie.
+     *
      * @param movieTitle String | Nombre de la movie a buscar.
      * @return int | id de la movie.
+     * @deprecated
      */
     public int getIdTmdbMovie(String movieTitle) {
         int id = -1;
@@ -58,7 +61,7 @@ public class MovieTmdbDTOService {
                 movie = response.body();
                 System.out.println(movie);
 
-                if(movie.getTotalResults() != 0) {
+                if (movie.getTotalResults() != 0) {
                     id = movie.getResults().get(0).getId();
                 }
             }
@@ -69,31 +72,28 @@ public class MovieTmdbDTOService {
         return id;
     }
 
-    public void importActors (Movie movie) {
+    public void importActors(Movie movie) {
         int idTmdb = -1;
 
-        try {
-            idTmdb = findTmdbDTOService.getIdTmdbMovieByImdbId(movie.getImdbIdExternalApi());
+        idTmdb = findTmdbDTOService.getIdTmdbMovieByImdbId(movie.getImdbIdExternalApi());
 
-            if (idTmdb != -1) {
-                Call<EpisodeCastingDTO> callCredits = apiTMDB.getCredits(idTmdb, apikey);
+        if (idTmdb != -1) {
+            Call<EpisodeCastingDTO> callCredits = apiTMDB.getCredits(idTmdb, apikey);
 
-                try {
-                    Response<EpisodeCastingDTO> response = callCredits.execute();
+            try {
+                Response<EpisodeCastingDTO> response = callCredits.execute();
 
-                    if (response.isSuccessful()) {
-                        List<Cast> casting = response.body().getCast();
+                if (response.isSuccessful()) {
+                    List<Cast> casting = response.body().getCast();
 
-                        movie.setActorMains(artistService.importActorsTMdb(casting));
+                    movie.setActorMains(artistService.importActorsTMdb(casting));
 
-                        movieRepository.save(movie);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    movieRepository.save(movie);
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
     }
 }

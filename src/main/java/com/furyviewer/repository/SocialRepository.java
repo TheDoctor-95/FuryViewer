@@ -39,5 +39,9 @@ public interface SocialRepository extends JpaRepository<Social, Long> {
     @Query("SELECT s.url as urlTrailer FROM Social s WHERE s.movie.id=:id AND s.type='Trailer'")
     String selectMoviesIdForTrailer(@Param("id") Long id);
 
+    @Query("SELECT s FROM Social s WHERE s.series.id=:id AND s.type='Trailer'")
+    Optional<Social> getSocialSeries(@Param("id") Long id);
 
+    @Query("SELECT s FROM Social s WHERE s.movie.id=:id AND s.type='Trailer'")
+    Optional<Social> getSocialMovie(@Param("id") Long id);
 }

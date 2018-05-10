@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -49,4 +50,6 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     List<Episode> findBySeasonSeriesIn(List<Series> seriesList);
 
+    @Query("SELECT e FROM Episode e WHERE e.season.id=:id AND e.number=:numEpisode")
+    Optional<Episode> getEpisode(@Param("id") Long id, @Param("numEpisode") Integer numEpisode);
 }
