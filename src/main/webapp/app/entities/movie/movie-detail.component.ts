@@ -25,6 +25,7 @@ import {BaseEntity} from '../../shared/model/base-entity';
 import {MovieStatsService} from '../movie-stats/movie-stats.service';
 import {MovieStats} from '../movie-stats/movie-stats.model';
 import {Principal} from '../../shared/auth/principal.service';
+import {ArtistLimitModel} from '../../shared/model/artistLimit.model';
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -53,7 +54,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     fav: FavouriteMovie;
     marks: Social[];
     hate: HatredMovie;
-    artistMovie: Artist[];
+    artistMovie: ArtistLimitModel[];
     rateUser: RateMovie;
     media: string;
     reviewMovies: ReviewMovie[];
@@ -121,8 +122,9 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.movie = movie;
         });
     }
-    loadArtist(id) {
-        this.artistService.findMovieActors(id).subscribe(
+
+    loadArtist(id: number) {
+        this.movieService.findActorsLimit(id).subscribe(
             (res: ResponseWrapper) => {
                 this.artistMovie = res.json;
             },
