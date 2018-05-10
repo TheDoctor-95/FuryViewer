@@ -31,10 +31,19 @@ export class MovieService {
         });
     }
 
+
+
     find(id: number): Observable<Movie> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
+        });
+    }
+    superQuery(criteria: string): Observable<ResponseWrapper> {
+        return this.http.get(`api/movie-s?${criteria}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            console.log(jsonResponse);
+            return this.convertResponse(res);
         });
     }
 

@@ -38,7 +38,8 @@
                                                                                     <div class="col-7">
                                                                                         <input class="form-control"
                                                                                                type="text"
-                                                                                               value=" "
+                                                                                               name="name"
+                                                                                               [(ngModel)]="name"
                                                                                                id="example-text-input">
                                                                                     </div>
                                                                                 </div>
@@ -93,7 +94,9 @@
                                                                                      style="margin-top: 2%;">
                                                                                     <button type="submit"
                                                                                             class="btn btn-primary"
-                                                                                            style="background-color: orange; border: none; margin-right: 0.5rem; min-width: 6em; padding: 0.5rem; font-weight: 300;">
+                                                                                            style="background-color: orange; border: none; margin-right: 0.5rem; min-width: 6em; padding: 0.5rem; font-weight: 300;"
+                                                                                            (click)="buscarMovies()"
+                                                                                    >
                                                                                         SEARCH
                                                                                     </button>
                                                                                 </div>
@@ -108,108 +111,17 @@
 
 
                                                 <div class="serpeli_body2">
-                                                    <div class="card portades" style="margin-right: 2%;">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
+                                                    <div class="card portades" style="margin-right: 2%;" *ngFor="let movie of movies">
+                                                        <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image"
                                                              style=" width: 7rem; height: 10rem;">
 
                                                         <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
+                                                            <h4 class="card-title">{{movie.name}}</h4>
+                                                            <h3 class="card-text">{{movie.releaseDate}}</h3>
                                                         </div>
 
                                                     </div>
-                                                    <div class="card portades" style="margin-right: 2%;">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
-                                                             style=" width: 7rem; height: 10rem;">
 
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card portades" style="margin-right: 2%;">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
-                                                             style=" width: 7rem; height: 10rem;">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card portades" style="margin-right: 2%;">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
-                                                             style=" width: 7rem; height: 10rem;">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card portades">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
-                                                             style=" width: 7rem; height: 10rem;">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="serpeli_body2">
-                                                    <div class="card portades">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
-                                                             style=" width: 7rem; height: 10rem;">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card portades">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
-                                                             style=" width: 7rem; height: 10rem;">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card portades">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
-                                                             style=" width: 7rem; height: 10rem;">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card portades">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
-                                                             style=" width: 7rem; height: 10rem;">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card portades">
-                                                        <img class="card-img-top" src="doctorwho.jpg" alt="Card image"
-                                                             style=" width: 7rem; height: 10rem;">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">3x04 Blink</h4>
-                                                            <h3 class="card-text">Doctor Who</h3>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

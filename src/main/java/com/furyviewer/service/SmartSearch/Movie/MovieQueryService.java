@@ -54,6 +54,11 @@ public class MovieQueryService extends QueryService<Movie> {
      * @return Page | Lista paginada de las Movie encontradas.
      */
     @Transactional(readOnly = true)
+
+
+
+
+
     public Page<Movie> findByCriteria(MovieBCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specifications<Movie> specification = createSpecification(criteria);

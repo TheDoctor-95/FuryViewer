@@ -7,6 +7,8 @@ import {Search} from './search.model';
 import {SearchService} from './search.service';
 import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../shared';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import {MovieService} from '../../entities/movie/movie.service';
+import {Movie} from "../../entities/movie/movie.model";
 
 @Component({
     selector: 'jhi-search',
@@ -35,11 +37,16 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     currentAccount: any;
     eventSubscriber: Subscription;
+    name = 'Thor';
+    movies: Movie[];
+    date: string;
+    countryId = 1;
 
     constructor(private searchService: SearchService,
                 private jhiAlertService: JhiAlertService,
                 private eventManager: JhiEventManager,
                 private principal: Principal,
+                private movieService: MovieService,
                 config: NgbRatingConfig) {
         config.max = 5;
     }
@@ -49,11 +56,27 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-
     }
 
     ngOnDestroy() {
 
+    }
+
+    buscarMovies() {
+        let criteria = '';
+
+        if (this.name !== '' ) {
+            console.log(this.name);
+            criteria += 'name.contains=' + this.name;
+        }
+
+        console.log(criteria)
+        this.movieService.superQuery(criteria).subscribe(
+            (res: ResponseWrapper) => {
+                console.log(res);
+                this.movies = res.json;
+            }
+        );
     }
 
     private onError(error) {
