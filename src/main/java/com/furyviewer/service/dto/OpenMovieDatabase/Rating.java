@@ -30,6 +30,10 @@ public class Rating {
         return source;
     }
 
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     /**
      * Devuelve la nota de la movie/series de una pagina externa.
      * @return String | Nota de la pagina externa.

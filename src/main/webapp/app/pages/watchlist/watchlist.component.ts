@@ -28,6 +28,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
     filmography: FilmographyArtistModel[];
     loading: boolean;
     pagenumber = 0;
+    toShow: number = 0;
 
     constructor(private watchlistService: WatchlistService,
                 private jhiAlertService: JhiAlertService,
@@ -40,9 +41,11 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 
     onWindowScroll(): void {
         console.log('scrolling!');
-        if (( document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].clientHeight + document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollTop) ==
+        console.log(this.toShow, this.filmography.length);
+        console.log(this.filmography);
+        if (( document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].clientHeight + document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollTop) ===
             document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollHeight
-            && !this.loading) {
+            && !this.loading && this.toShow !== this.filmography.length) {
             this.pagenumber = this.pagenumber + 1;
             this.load()
         }
@@ -65,13 +68,14 @@ export class WatchlistComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.load();
-
         this.registerChangeInWatchlists();
+        this.loadToShow();
     }
 
     option(option: string) {
         this.globals.opcio = option;
         this.pagenumber = 0;
+        this.loadToShow();
         this.load();
     }
 
@@ -83,7 +87,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
                 this.globals.opcio = 'pending';
             }
         }
-
+        this.loadToShow();
         this.load();
     }
 
@@ -106,6 +110,15 @@ export class WatchlistComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onError(res.json)
         );
 
+    }
+
+    loadToShow() {
+        this.watchlistService.count(this.globals.multimedia, this.globals.opcio).subscribe(
+            (res: number) => {
+                this.toShow = res;
+            } ,
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
     }
 
     goTo(type: String, id: number) {

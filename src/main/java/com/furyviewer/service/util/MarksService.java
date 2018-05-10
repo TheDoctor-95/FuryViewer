@@ -14,6 +14,7 @@ import java.util.Optional;
 /**
  * Servicio que se encarga de guardar en la base de datos las notas de paginas externas tanto de Movie como de Series
  * proporcionadas por la api OpenMovieDatabase.
+ *
  * @author TheDoctor-95
  */
 @Service
@@ -23,34 +24,31 @@ public class MarksService {
 
     /**
      * Convierte la informacion de los votos de paginas externas proporcionados por la api al formato FuryViewer.
+     *
      * @param ratings List | Lista con as diferentes votaciones proporcionadas por la api.
-     * @param ss Series | Series de la cual se quiere guardar las votaciones.
+     * @param ss      Series | Series de la cual se quiere guardar las votaciones.
      */
     public void markTransformationSeries(List<Rating> ratings, Series ss) {
         for (Rating r : ratings) {
+            if (r.getSource().equalsIgnoreCase("Internet Movie Database")) r.setSource("IMDB");
             Optional<Social> seriesOptional = socialRepository.findBySeriesAndType(ss, r.getSource());
+            Social s = new Social();
 
-            if (!seriesOptional.isPresent()) {
-                Social s = new Social();
+            if (seriesOptional.isPresent()) s.setId(seriesOptional.get().getId());
 
-                if(r.getSource().equalsIgnoreCase("Internet Movie Database")) {
-                    s.setType("IMDB");
-                } else {
-                    s.setType(r.getSource());
-                }
+            s.setType(r.getSource());
+            s.setSeries(ss);
+            s.setUrl(markTranformation(r.getSource(), r.getValue()));
 
-                s.setSeries(ss);
-                s.setUrl(markTranformation(r.getSource(), r.getValue()));
-
-                socialRepository.save(s);
-            }
+            socialRepository.save(s);
         }
     }
 
     /**
      * Devuelve la puntuacion dependiendo de la pagina externa.
+     *
      * @param source String | Nombre de la pagina externa a la que pertenece la votacion.
-     * @param value String | Votacion en el formato de la pagina externa.
+     * @param value  String | Votacion en el formato de la pagina externa.
      * @return String | Votacion convertida a una media sobre 10.
      */
     private String markTranformation(String source, String value) {
@@ -68,32 +66,29 @@ public class MarksService {
 
     /**
      * Convierte la informacion de los votos de paginas externas proporcionados por la api al formato FuryViewer.
+     *
      * @param ratings List | Lista con as diferentes votaciones proporcionadas por la api.
-     * @param m Movie | Movie de la cual se quiere guardar las votaciones.
+     * @param m       Movie | Movie de la cual se quiere guardar las votaciones.
      */
     public void markTransformationMovie(List<Rating> ratings, Movie m) {
         for (Rating r : ratings) {
+            if (r.getSource().equalsIgnoreCase("Internet Movie Database")) r.setSource("IMDB");
             Optional<Social> movieOptional = socialRepository.findByMovieAndType(m, r.getSource());
+            Social s = new Social();
 
-            if (!movieOptional.isPresent()) {
-                Social s = new Social();
+            if (movieOptional.isPresent()) s.setId(movieOptional.get().getId());
 
-                if(r.getSource().equalsIgnoreCase("Internet Movie Database")) {
-                    s.setType("IMDB");
-                } else {
-                    s.setType(r.getSource());
-                }
+            s.setType(r.getSource());
+            s.setMovie(m);
+            s.setUrl(markTranformation(r.getSource(), r.getValue()));
 
-                s.setMovie(m);
-                s.setUrl(markTranformation(r.getSource(), r.getValue()));
-
-                socialRepository.save(s);
-            }
+            socialRepository.save(s);
         }
     }
 
     /**
      * Devuelve la votacion sobre 10 de IMDB.
+     *
      * @param mark String | Votacion en el formato INMDB.
      * @return String | Votacion sobre 10.
      */
@@ -104,6 +99,7 @@ public class MarksService {
 
     /**
      * Devuelve la votacion sobre 10 de Rotten Tomatoes.
+     *
      * @param mark String | Votacion en el formato Rotten Tomatoes.
      * @return String | Votacion sobre 10.
      */
@@ -115,6 +111,7 @@ public class MarksService {
 
     /**
      * Devuelve la votacion sobre 10 de MetaCritic.
+     *
      * @param mark String | Votacion en el formato Metacritic.
      * @return String | Votacion sobre 10.
      */

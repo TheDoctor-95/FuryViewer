@@ -43,6 +43,13 @@ public interface MovieStatsRepository extends JpaRepository<MovieStats, Long> {
     @Query("select movieStats.movie from MovieStats movieStats where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.SEEN and movieStats.user.login=:login")
     List<Movie> seenMovie(@Param("login")String login, Pageable pageable);
 
+    @Query("select count(movieStats.movie) from MovieStats movieStats where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.PENDING and movieStats.user.login=:login")
+    Integer countPendingMoviesUserLogin(@Param("login")String user);
+
+
+    @Query("select count(movieStats.movie) from MovieStats movieStats where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.SEEN and movieStats.user.login=:login")
+    Integer countSeenMovie(@Param("login")String login);
+
     Optional<MovieStats> findByUserAndMovieId(User user, Long id);
 
     @Query("select m.status from MovieStats m where m.movie.id=:id and m.user.login= :login")

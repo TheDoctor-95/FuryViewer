@@ -21,43 +21,68 @@ public class FindTmdbDTOService {
     private final FindTmdbDTORepository apiTMDB =
         FindTmdbDTORepository.retrofit.create(FindTmdbDTORepository.class);
 
-    public int getIdTmdbSeriesByImdbId(String imdbId) throws IOException {
+    public int getIdTmdbSeriesByImdbId(String imdbId) {
         int id = -1;
-        FindTmdbDTO find;
-        Call<FindTmdbDTO> callSeries = apiTMDB.getFind(imdbId, apikey);
 
-        Response<FindTmdbDTO> response = callSeries.execute();
+        getTrailer:
+        for (int i = 0; i <3; i++) {
+            try {
+                FindTmdbDTO find;
+                Call<FindTmdbDTO> callSeries = apiTMDB.getFind(imdbId, apikey);
 
-        if(response.isSuccessful()){
-            find = response.body();
-            System.out.println(find);
-            if (!find.getTvResults().isEmpty()) {
-                id = find.getTvResults().get(0).getId();
+                Response<FindTmdbDTO> response = callSeries.execute();
+
+                if(response.isSuccessful()){
+                    find = response.body();
+                    System.out.println(find);
+                    if (!find.getTvResults().isEmpty()) {
+                        id = find.getTvResults().get(0).getId();
+                    }
+                }
+
+                break getTrailer;
+            } catch (IOException e) {
+                e.printStackTrace();
+                try {
+                    Thread.sleep(3000L);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
-        }
-        else {
-            throw new IOException(response.message());
         }
 
         return id;
     }
 
-    public int getIdTmdbMovieByImdbId(String imdbId) throws IOException {
+    public int getIdTmdbMovieByImdbId(String imdbId) {
         int id = -1;
-        FindTmdbDTO find;
-        Call<FindTmdbDTO> callMovie = apiTMDB.getFind(imdbId, apikey);
 
-        Response<FindTmdbDTO> response = callMovie.execute();
+        getTrailer:
+        for (int i = 0; i <3; i++) {
+            try {
+                FindTmdbDTO find;
 
-        if(response.isSuccessful()){
-            find = response.body();
-            System.out.println(find);
-            if (!find.getMovieResults().isEmpty()) {
-                id = find.getMovieResults().get(0).getId();
+                Call<FindTmdbDTO> callMovie = apiTMDB.getFind(imdbId, apikey);
+
+                Response<FindTmdbDTO> response = callMovie.execute();
+
+                if (response.isSuccessful()) {
+                    find = response.body();
+                    System.out.println(find);
+                    if (!find.getMovieResults().isEmpty()) {
+                        id = find.getMovieResults().get(0).getId();
+                    }
+                }
+
+                break getTrailer;
+            } catch (IOException e) {
+                e.printStackTrace();
+                try {
+                    Thread.sleep(3000L);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
-        }
-        else {
-            throw new IOException(response.message());
         }
 
         return id;

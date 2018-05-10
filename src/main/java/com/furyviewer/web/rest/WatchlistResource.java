@@ -47,4 +47,11 @@ public class WatchlistResource {
         return watchlistService.whatchlistMultimedia(multimedia, option, new PageRequest(page,15));
     }
 
+    @GetMapping("/{multimedia}/option/{option}/count")
+    @Timed
+    public Integer multimediaCount(@PathVariable String multimedia, @PathVariable String option) {
+
+        return watchlistService.countList(multimedia, option);
+    }
+
 }

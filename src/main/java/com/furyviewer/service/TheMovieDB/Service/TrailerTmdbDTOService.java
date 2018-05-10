@@ -14,6 +14,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Servicio encargado de recuperar informacion de un Trailer desde TrailerTmdbDTORepository y la convierte al
@@ -46,6 +47,9 @@ public class TrailerTmdbDTOService {
     private SeriesTmdbDTOService seriesTmdbDTOService;
 
     @Autowired
+    private FindTmdbDTOService findTmdbDTOService;
+
+    @Autowired
     private SocialRepository socialRepository;
 
     /**
@@ -53,11 +57,14 @@ public class TrailerTmdbDTOService {
      * @param movie Movie | Movie de la que se quiere encontrar el trailer.
      */
     public void importMovieTrailer(Movie movie) {
-        Social social = new Social();
-        int id = movieTmdbDTOService.getIdTmdbMovie(movie.getName());
+        int id = findTmdbDTOService.getIdTmdbMovieByImdbId(movie.getImdbIdExternalApi());
 
         if(id != -1) {
             Call<TrailerTmdbDTO> callTrailer = apiTMDB.getMovieTrailer(id, apikey);
+            Optional<Social> optionalSocial = socialRepository.getSocialMovie(movie.getId());
+            Social social = new Social();
+
+            if (optionalSocial.isPresent()) social.setId(optionalSocial.get().getId());
 
             try {
                 Response<TrailerTmdbDTO> response = callTrailer.execute();
@@ -95,11 +102,14 @@ public class TrailerTmdbDTOService {
      * @param ss Series | Series de la que se quiere encontrar el trailer.
      */
     public void importSeriesTrailer(Series ss) {
-        Social social = new Social();
-        int id = seriesTmdbDTOService.getIdTmdbSeries(ss.getName());
+        int id = findTmdbDTOService.getIdTmdbSeriesByImdbId(ss.getImdb_id());
 
         if(id != -1) {
             Call<TrailerTmdbDTO> callTrailer = apiTMDB.getSeriesTrailer(id, apikey);
+            Optional<Social> optionalSocial = socialRepository.getSocialSeries(ss.getId());
+            Social social = new Social();
+
+            if (optionalSocial.isPresent()) social.setId(optionalSocial.get().getId());
 
             try {
                 Response<TrailerTmdbDTO> response = callTrailer.execute();

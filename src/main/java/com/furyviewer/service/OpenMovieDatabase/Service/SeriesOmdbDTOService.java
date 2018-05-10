@@ -120,6 +120,10 @@ public class SeriesOmdbDTOService {
         Optional<Series> s = seriesRepository.findByImdb_id(seriesOmdbDTO.getImdbID());
 
         if(s.isPresent()){
+            if (s.get().getState().equals(SeriesEmittingEnum.emiting)) {
+                return importSeries(seriesOmdbDTO, s.get().getSeasons().size());
+            }
+
             return s.get();
         }
 
@@ -127,7 +131,7 @@ public class SeriesOmdbDTOService {
 
         //Comprobamos que la API nos devuelve información.
         if (seriesOmdbDTO.getResponse().equalsIgnoreCase("true")) {
-            ss = importSeries(seriesOmdbDTO);
+            ss = importSeries(seriesOmdbDTO, 1);
         } else {
             System.out.println("==================\nBúsqueda sin resultados\n==================");
         }
@@ -149,6 +153,10 @@ public class SeriesOmdbDTOService {
         Optional<Series> s = seriesRepository.findByImdb_id(seriesOmdbDTO.getImdbID());
 
         if(s.isPresent()){
+            if (s.get().getState().equals(SeriesEmittingEnum.emiting)) {
+                return importSeries(seriesOmdbDTO, s.get().getSeasons().size());
+            }
+
             return s.get();
         }
 
@@ -156,7 +164,7 @@ public class SeriesOmdbDTOService {
 
         //Comprobamos que la API nos devuelve información.
         if (seriesOmdbDTO.getResponse().equalsIgnoreCase("true")) {
-            ss = importSeries(seriesOmdbDTO);
+            ss = importSeries(seriesOmdbDTO,1);
         } else {
             System.out.println("==================\nBúsqueda sin resultados\n==================");
         }
@@ -169,8 +177,14 @@ public class SeriesOmdbDTOService {
      * @param seriesOmdbDTO SeriesOmdbDTO | Informacion de la Series propocionada por la api.
      * @return Series | Contiene la informacion de una series en el formato FuryViewer.
      */
-    public Series importSeries (SeriesOmdbDTO seriesOmdbDTO) {
+    public Series importSeries (SeriesOmdbDTO seriesOmdbDTO, int initSeason) {
         Series ss = new Series();
+
+        Optional<Series> s = seriesRepository.findByImdb_id(seriesOmdbDTO.getImdbID());
+
+        if(s.isPresent()){
+            ss.setId(s.get().getId());
+        }
 
         ss.setName(seriesOmdbDTO.getTitle());
         ss.setDescription(stringApiCorrectorService.eraserNA(seriesOmdbDTO.getPlot()));
@@ -206,7 +220,7 @@ public class SeriesOmdbDTOService {
         marksService.markTransformationSeries(seriesOmdbDTO.getRatings(), ss);
 
         if(!seriesOmdbDTO.getTotalSeasons().equalsIgnoreCase("N/A")) {
-            seasonOmdbDTOService.importSeason(seriesOmdbDTO.getTitle(),
+            seasonOmdbDTOService.importSeason(seriesOmdbDTO.getTitle(), initSeason,
                 Integer.parseInt(seriesOmdbDTO.getTotalSeasons()), seriesOmdbDTO.getImdbID());
         }
 
