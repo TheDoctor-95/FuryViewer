@@ -28,6 +28,14 @@ export class WatchlistService {
         );
     }
 
+    count(multimedia: string, option: string): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/${multimedia}/option/${option}/count`).map(
+            (res: Response) => {
+                return res.json();
+            }
+        );
+    }
+
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
