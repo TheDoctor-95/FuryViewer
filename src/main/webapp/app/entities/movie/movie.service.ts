@@ -31,8 +31,6 @@ export class MovieService {
         });
     }
 
-
-
     find(id: number): Observable<Movie> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
@@ -59,6 +57,16 @@ export class MovieService {
         });
     }
 
+    findActorsLimit(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/${id}/actors-limit`).
+        map((res: Response) => this.convertResponse(res));
+    }
+
+    findActorsLimitless(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/${id}/actors-limitless`).
+        map((res: Response) => this.convertResponse(res));
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
@@ -78,7 +86,6 @@ export class MovieService {
         return this.http.get(`${this.resourceUrl}/topPelis/`)
             .map((res: Response) => this.convertResponse(res));
     }
-
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);

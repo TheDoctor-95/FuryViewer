@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
@@ -13,6 +13,8 @@ import { Country, CountryService } from '../country';
 import { ArtistType, ArtistTypeService } from '../artist-type';
 import { Movie, MovieService } from '../movie';
 import { ResponseWrapper } from '../../shared';
+import {ArtistLimitModel} from '../../shared/model/artistLimit.model';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'jhi-artist-dialog',
@@ -23,9 +25,14 @@ export class ArtistDialogComponent implements OnInit {
     artist: Artist;
     isSaving: boolean;
 
+    artistLimitless: ArtistLimitModel[];
+
     countries: Country[];
+    movieId: number;
 
     artisttypes: ArtistType[];
+    router: Router;
+    route: ActivatedRoute;
 
     movies: Movie[];
     birthdateDp: any;
@@ -43,13 +50,17 @@ export class ArtistDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.isSaving = false;
-        this.countryService.query()
-            .subscribe((res: ResponseWrapper) => { this.countries = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.artistTypeService.query()
-            .subscribe((res: ResponseWrapper) => { this.artisttypes = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.movieService.query()
-            .subscribe((res: ResponseWrapper) => { this.movies = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.loadMovieId();
+        console.log(this.movieId);
+        this.loadCompleteCasting(this.movieId);
+    }
+
+    goTo(id: number) {
+        this.router.navigate(['artist', id]).then(
+            () => {
+                this.clear();
+            }
+        )
     }
 
     clear() {
@@ -65,6 +76,21 @@ export class ArtistDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.artistService.create(this.artist));
         }
+    }
+
+    loadCompleteCasting(id: number) {
+        this.movieService.findActorsLimitless(id).subscribe(
+            (res: ResponseWrapper) => {
+                this.artistLimitless = res.json;
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
+
+    loadMovieId() {
+        this.route.params.subscribe((params: Params) => {
+            this.movieId = Number.parseInt(params['movieId']);
+        });
     }
 
     private subscribeToSaveResponse(result: Observable<Artist>) {
