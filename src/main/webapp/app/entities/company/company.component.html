@@ -128,7 +128,7 @@
                                 <h2>Top Artist</h2>
 
                                 <ol class="list-group">
-                                    <li *ngFor="let artist of topArtist " class="list-group-item"> {{artist.name}}</li>
+                                    <li *ngFor="let artist of topArtist " class="list-group-item" [routerLink]="['/artist', artist.id]"> {{artist.name}}</li>
                                 </ol>
                             </div>
                         </div>
