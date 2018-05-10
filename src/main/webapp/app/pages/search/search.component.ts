@@ -9,6 +9,7 @@ import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../shared';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import {MovieService} from '../../entities/movie/movie.service';
 import {Movie} from "../../entities/movie/movie.model";
+import {Genre, GenreService} from '../../entities/genre';
 
 @Component({
     selector: 'jhi-search',
@@ -37,18 +38,23 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     currentAccount: any;
     eventSubscriber: Subscription;
-    name = 'Thor';
-    movies: Movie[];
-    date: string;
+    name = '';
+    movies: Movie[] = [];
+    date: number;
     countryId = 1;
+    loading = false;
+    actualYear;
+    genres: Genre[];
 
     constructor(private searchService: SearchService,
                 private jhiAlertService: JhiAlertService,
                 private eventManager: JhiEventManager,
                 private principal: Principal,
                 private movieService: MovieService,
+                private genreService: GenreService,
                 config: NgbRatingConfig) {
         config.max = 5;
+        this.actualYear = (new Date()).getFullYear();
     }
 
     ngOnInit() {
@@ -56,6 +62,17 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
+        this.loadGenres();
+    }
+
+    loadGenres() {
+        this.genreService.query().subscribe(
+            (res: ResponseWrapper) => {
+                this.genres = res.json;
+                console.log(this.genres);
+            },
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
     }
 
     ngOnDestroy() {
@@ -63,6 +80,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     buscarMovies() {
+        this.loading = true;
         let criteria = '';
 
         if (this.name !== '' ) {
@@ -70,13 +88,25 @@ export class SearchComponent implements OnInit, OnDestroy {
             criteria += 'name.contains=' + this.name;
         }
 
+        if (this.date !== 0 && this.date !== undefined) {
+            if (criteria !== '') {
+                criteria += '&';
+            }
+            criteria += 'release_date.greaterThan=' + this.date + '-01-01&release_date.lessThan=' + this.date + '-12-31' ;
+        }
+
         console.log(criteria)
         this.movieService.superQuery(criteria).subscribe(
             (res: ResponseWrapper) => {
                 console.log(res);
+                this.loading = false;
                 this.movies = res.json;
             }
         );
+        this.searchService.import(this.name).subscribe(
+            (res: Movie) => {
+                console.log(res);
+            });
     }
 
     private onError(error) {

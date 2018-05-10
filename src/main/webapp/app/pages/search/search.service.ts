@@ -5,6 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { Search } from './search.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {Movie} from '../../entities/movie';
 
 @Injectable()
 export class SearchService {
@@ -20,6 +21,13 @@ export class SearchService {
             result.push(this.convertItemFromServer(jsonResponse[i]));
         }
         return new ResponseWrapper(res.headers, result, res.status);
+    }
+
+    public import(name: string): Observable<Movie> {
+        return this.http.get(`api/multiImportByTitle/${name}`)
+            .map((res: ResponseWrapper) => {
+                return res.json;
+            });
     }
 
     /**
