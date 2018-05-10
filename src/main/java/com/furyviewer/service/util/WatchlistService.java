@@ -33,10 +33,10 @@ public class WatchlistService {
     @Autowired
     private MovieStatsRepository movieStatsRepository;
 
-    public List<MultimediaActorsDTO> whatchlistMultimedia(String mulimedia, String option, Pageable pageable) {
+    public List<MultimediaActorsDTO> whatchlistMultimedia(String multimedia, String option, Pageable pageable) {
         List<MultimediaActorsDTO> multimediaActorsDTOList = new ArrayList<>();
 
-        if (mulimedia.equalsIgnoreCase("movie")) {
+        if (multimedia.equalsIgnoreCase("movie")) {
 
             List<Movie> movieList = new ArrayList<>();
 
@@ -133,5 +133,63 @@ public class WatchlistService {
         }
 
         return multimediaActorsDTO;
+    }
+
+    public Integer countList(String multimedia, String option){
+        if (multimedia.equalsIgnoreCase("movie")) {
+
+            switch (option){
+                case "hatred":
+
+                    return  hatredMovieRepository.countHatredMovieUser(SecurityUtils.getCurrentUserLogin());
+
+
+                case "favorite":
+
+                    return  favouriteMovieRepository.countLikesUser(SecurityUtils.getCurrentUserLogin());
+
+
+                case "pending":
+
+                    return  movieStatsRepository.countPendingMoviesUserLogin(SecurityUtils.getCurrentUserLogin());
+
+
+                case "seen":
+
+                    return  movieStatsRepository.countSeenMovie(SecurityUtils.getCurrentUserLogin());
+
+            }
+
+        } else {
+
+            switch (option){
+                case "hatred":
+
+                    return hatredSeriesRepository.countHatedSeriesUser(SecurityUtils.getCurrentUserLogin());
+
+                case "favorite":
+
+                    return favouriteSeriesRepository.countFavoriteSeriesUserLogin(SecurityUtils.getCurrentUserLogin());
+
+
+                case "following":
+
+                    return seriesStatsRepository.countFollowingSeriesUser(SecurityUtils.getCurrentUserLogin());
+
+
+                case "pending":
+
+                    return seriesStatsRepository.countPendingSeriesUser(SecurityUtils.getCurrentUserLogin());
+
+
+                case "seen":
+
+                    return seriesStatsRepository.countSeenSeriesUser(SecurityUtils.getCurrentUserLogin());
+
+
+            }
+
+        }
+        return 0;
     }
 }
