@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400');
 
+
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -555,6 +556,10 @@ HOME
 
 .card {
     border: none;
+
+    text-align: center;
+    border-radius: 10px ;
+
 }
 
 #lateralDret > .row {
@@ -601,10 +606,7 @@ h2 {
     margin-top: 1.5%;
 }
 
-.card {
-    text-align: center;
-    border-radius: 8px !important;
-}
+
 
 .card h4 {
     font-size: 1.1rem;
@@ -630,6 +632,9 @@ h2 {
     margin-left: -6%;
     margin-bottom: 4%;
 
+}
+.card.topSeries{
+    max-width: 103%;
 }
 
 .card.calendario {
@@ -695,6 +700,7 @@ button:hover {
     width: 84%;
     height: 11vw;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .portades > .card-body {
@@ -861,7 +867,7 @@ Watchlist
 
 .cos {
     width: 72%;
-   /* height: 35rem;*/
+    /* height: 35rem;*/
     min-height: 35rem;
     background-color: white;
     margin-bottom: 2rem;
@@ -873,8 +879,8 @@ Watchlist
 
 .cos-watchlist {
     width: 72%;
-    height: fit-content;
-    min-height: 40rem;
+    /* height: 35rem;*/
+    min-height: 35rem;
     background-color: white;
     margin-bottom: 2rem;
     margin-top: 2%;
@@ -921,8 +927,8 @@ input {
 
 #botons_sidebar {
     left: 0;
-    margin-top: 8%;
-    margin-bottom: 8%;
+    margin-top: 10%;
+    margin-bottom: 10%;
     margin-left: -10%;
     font-size: 10px;
     text-align: center;
@@ -1076,10 +1082,11 @@ input:checked + .slider:before {
 
 .cos_perfil {
     width: 70%;
-    padding-bottom: 1%;
+    padding-bottom: 3rem;
+    padding-top: 2rem;
     background-color: white;
-    margin: 12%;
-    margin-top: 2%;
+    margin-bottom: 3%;
+    margin-top: 3%;
     margin-left: 15%;
     border-radius: 10px;
     text-align: center;
@@ -1213,6 +1220,7 @@ input:checked + .slider:before {
 .info .button {
     text-align: right;
     margin-right: 2%;
+    margin-top: 1rem;
 }
 
 .txtarea:focus {
@@ -1483,63 +1491,61 @@ img::selection {
     background-color: #ffc843 !important;
 }
 
-.botowatchlist{
+.botowatchlist {
     margin-right: 5rem;
-    margin-top: 1rem ;
+    margin-top: 1rem;
     font-size: 1.1rem;
 
 }
-.botowatchlist button{
+
+.botowatchlist button {
     margin-right: 0.5rem;
     min-width: 6em;
     padding: 0.2rem;
     font-weight: 300;
 }
 
-
-
-*:focus{
+*:focus {
     outline: none !important;
     box-shadow: none !important;
 }
 
-
-
-#logonavbar:hover{
+#logonavbar:hover {
     cursor: pointer;
 }
 
-.loader{
+.loader {
     text-align: center !important;
     width: 100%;
- }
+}
 
-.loader img{
+.loader img {
     display: inline-block;
 }
-.signIn{
+
+.signIn {
     margin-left: 0% !important;
     font-size: 14px;
 }
 
-.labelSignIn{
+.labelSignIn {
     margin-left: 4%;
 }
 
-.signIn:focus{
+.signIn:focus {
     border-color: #ef9800;
 }
 
-.passSignIn{
+.passSignIn {
     margin-left: 0px !important;
     margin-bottom: 0px !important;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
-.btnSignIn{
+.btnSignIn {
     width: 90%;
     color: white;
     border: 1px solid orange !important;
@@ -1547,9 +1553,73 @@ button:hover{
     margin-bottom: 1rem;
 }
 
-.btnSignIn:hover{
+.fondotochos {
+    background-image: url(../../content/images/inicio.jpg);
 
-    color: orange;
-    border: 1px solid orange !important;
-    background-color: transparent !important;
 }
+
+/*scroll bar*/
+body{
+    scrollbar-base-color: #0A0A0A;
+    scrollbar-base-color: #0A0A0A;
+    scrollbar-3dlight-color: #0A0A0A;
+    scrollbar-highlight-color: #0A0A0A;
+    scrollbar-track-color: #0A0A0A;
+    scrollbar-arrow-color: #1682FB;
+    scrollbar-shadow-color: #1682FB;
+    scrollbar-dark-shadow-color: #0A0A0A;
+}
+
+@-moz-document url-prefix(http://),url-prefix(https://) {
+    scrollbar {
+        -moz-appearance: none !important;
+        background: rgb(0,255,0) !important;
+    }
+    thumb,scrollbarbutton {
+        -moz-appearance: none !important;
+        background-color: rgb(0,0,255) !important;
+    }
+
+    thumb:hover,scrollbarbutton:hover {
+        -moz-appearance: none !important;
+        background-color: rgb(255,0,0) !important;
+    }
+
+    scrollbarbutton {
+        display: none !important;
+    }
+
+    scrollbar[orient="vertical"] {
+        min-width: 15px !important;
+    }
+}
+/**/
+.scrollbar-container {
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    margin: 20px;
+
+    border: 4px solid rgba(0, 0, 0, 0.2);
+    overflow: auto;
+    background-color: #0A0A0A;
+}
+.scrollbar-container .inner {
+    height: 2011px;
+    width: 1985px;
+    padding: 1em;
+    background-color: #0A0A0A;
+    font-family: sans-serif;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb { /*1682fb*/
+    background-color: orange /*rgba(16, 82, fb, 0.2)*/;
+    border: solid #0A0A0A 1px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: orange;
+}
+
+
