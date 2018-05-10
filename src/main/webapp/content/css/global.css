@@ -1251,12 +1251,15 @@ select.form-control:not([size]):not([multiple]) {
     height: auto;
 }
 
-.formulari {
+
+.all-formulari{
     border-bottom-style: solid;
     border-bottom-color: black;
     border-width: 1px;
-    padding-bottom: 2%;
     margin-bottom: 4%;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+
 }
 
 .selector-movieserie {
@@ -1393,8 +1396,8 @@ img::selection {
 .imgAbout {
     border-radius: 50%;
     border: 10px solid #e5e5e5;
-    width: 300px;
-    height: 300px;
+    width: 15rem;
+    height: 15rem;
     margin-top: 25px;
     position: relative;
     -webkit-transition: border-width 1s, opacity 1s, transform 1s, -webkit-transform 1s;
@@ -1614,11 +1617,70 @@ body{
     background: #0A0A0A;
 }
 ::-webkit-scrollbar-thumb { /*1682fb*/
-    background-color: orange /*rgba(16, 82, fb, 0.2)*/;
-    border: solid #0A0A0A 1px;
+        background-color: orange /*rgba(16, 82, fb, 0.2)*/;
+    /*border: solid #0A0A0A 1px;*/
 }
 ::-webkit-scrollbar-thumb:hover {
     background-color: orange;
 }
 
+
+
+.ng-sidebar__content.ng-sidebar__content--animate{
+    overflow-x: hidden  ;
+}
+.ng-sidebar--animate .ng-sidebar .ng-sidebar--closed .ng-sidebar--left .ng-sidebar--over .ng-sidebar--docked{
+    overflow-x: hidden  ;
+}
+
+
+
+
+/* SEARCH*/
+.cuerpo {
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+
+    /* height: 75%;*/
+/*
+width: 70%;
+margin: 12%;
+margin-top: 2%;
+margin-left: 15%;*/
+}
+
+
+.botosearch{
+   /* margin-right: 3rem;
+    margin-top: 3rem !important;
+    margin-bottom: 1rem ;
+*/
+    font-size: 1.1rem;
+    border-right: 1px solid darkgray;
+    padding-right: 11rem;
+}
+
+.botosearch button{
+    margin-right: 0.5rem;
+    min-width: 6em;
+    padding: 0.2rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.cos-search {
+    /* height: 35rem;*/
+    min-height: 35rem;
+    background-color: white;
+    margin-bottom: 2rem;
+    margin-top: 2%;
+    border-radius: 10px;
+    text-align: center;
+}
+#botonsearch{
+    padding-left: 3rem;
+    padding-right: 10rem;
+    padding-top: 1rem;
+}
 

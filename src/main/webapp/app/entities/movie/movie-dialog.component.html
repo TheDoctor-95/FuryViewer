@@ -3,13 +3,19 @@
     <div class="modal-header">
         <h4 class="modal-title" id="myMovieLabel" style="margin-left: 15px;">Pending Films</h4>
         <button type="button" class="close closed" data-dismiss="modal" aria-hidden="true"
-                (click)="clear()">&times;</button>
+                (click)="clear()" style="  background-color: transparent !important;
+    color: white !important;
+    opacity: unset;
+    text-shadow: none !important;
+    font-size: 2em !important;
+    padding-right: 1%;
+    font-weight: 300;">&times;</button>
     </div>
     <div class="modal-body">
         <div class="row">
             <div class="card portades col-2" *ngFor="let movie of moviesPending"
-                 (click)="goTo(movie.id)">
-                <img class="card-img-top" style="width: 100%; height: 18.5vw;" src="{{movie.imgUrl}}" alt="Card image">
+                 (click)="goTo(movie.id)" style="margin-right: 3%;">
+                <img class="card-img-top" style="width: 9rem; height: 13rem;" src="{{movie.imgUrl}}" alt="Card image">
 
                 <div class="card-body">
                     <h4 style="text-transform: uppercase;">{{movie.name}}</h4>
