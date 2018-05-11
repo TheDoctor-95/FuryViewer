@@ -26,6 +26,7 @@ import {MovieStatsService} from '../movie-stats/movie-stats.service';
 import {MovieStats} from '../movie-stats/movie-stats.model';
 import {Principal} from '../../shared/auth/principal.service';
 import {ArtistLimitModel} from '../../shared/model/artistLimit.model';
+import {Globals} from "../../shared/globals";
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -79,7 +80,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private movieStatService: MovieStatsService,
         private sanitizer: DomSanitizer,
         private principal: Principal,
-        private router: Router
+        private router: Router,
+        public globals: Globals
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
@@ -111,6 +113,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadState(params['id']);
             this.loadFavHate(params['id']);
             this.loadCountFavHate(params['id']);
+            this.globals.movieId = (params['id']);
             console.log(this.trailer);
         });
         this.registerChangeInMovies();

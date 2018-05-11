@@ -31,7 +31,7 @@ export const artistRoute: Routes = [
 
 export const artistPopupRoute: Routes = [
     {
-        path: 'casting-complete/:movieId',
+        path: 'casting-complete',
         component: ArtistPopupComponent,
         data: {
             authorities: ['ROLE_USER'],

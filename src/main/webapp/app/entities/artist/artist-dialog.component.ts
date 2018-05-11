@@ -15,6 +15,7 @@ import { Movie, MovieService } from '../movie';
 import { ResponseWrapper } from '../../shared';
 import {ArtistLimitModel} from '../../shared/model/artistLimit.model';
 import {Router} from '@angular/router';
+import {Globals} from "../../shared/globals";
 
 @Component({
     selector: 'jhi-artist-dialog',
@@ -45,14 +46,14 @@ export class ArtistDialogComponent implements OnInit {
         private countryService: CountryService,
         private artistTypeService: ArtistTypeService,
         private movieService: MovieService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        public global: Globals
     ) {
     }
 
     ngOnInit() {
-        this.loadMovieId();
-        console.log(this.movieId);
-        this.loadCompleteCasting(this.movieId);
+
+        this.loadCompleteCasting(this.global.movieId);
     }
 
     goTo(id: number) {
@@ -85,12 +86,6 @@ export class ArtistDialogComponent implements OnInit {
             },
             (res: ResponseWrapper) => this.onError(res.json)
         );
-    }
-
-    loadMovieId() {
-        this.route.params.subscribe((params: Params) => {
-            this.movieId = Number.parseInt(params['movieId']);
-        });
     }
 
     private subscribeToSaveResponse(result: Observable<Artist>) {
