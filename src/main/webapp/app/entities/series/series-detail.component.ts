@@ -69,6 +69,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     numEpisodesSeen: number;
     reviewSeries: ReviewSeries[];
     newComent: ReviewSeries;
+    actualDate: any;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -105,6 +106,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     this.newComent = new ReviewSeries();
     this.newComent.title = '';
     this.newComent.review = '';
+    this.actualDate = new Date();
 }
 
     ngOnInit() {

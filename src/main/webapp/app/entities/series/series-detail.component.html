@@ -150,7 +150,8 @@
                             <td class="col-7" style="text-align: left;" [ngStyle]="{'color':chapter.seen ? '#bdb9b7' : 'black'}"> {{chapter.title}}</td>
                             <td style="color: #bdb9b7" class="col-2">{{chapter.releaseDate | date: "shortDate"}}</td>
                             <td style="color: #bdb9b7" class="col-1">{{chapter.duration}} min</td>
-                            <td class="col-1" (click)="markChapter(chapter.id)"><i style="font-size: 17pt" class="fa fa-eye"
+                            <td class="col-1" (click)="markChapter(chapter.id)"><i *ngIf="chapter.releaseDate>actualDate" style="color: #bdb9b7; font-size: 17pt" class="fa fa-eye"
+                                                                                     ></i><i *ngIf="chapter.releaseDate<=actualDate" style="font-size: 17pt" class="fa fa-eye"
                                                  [ngStyle]="{'color':chapter.seen ? '#ef9800' : 'black'}"  placement="top" ngbTooltip="Viewed"></i></td>
                         </tr>
                     </table>
