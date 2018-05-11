@@ -26,6 +26,8 @@ import {RateSeries, RateSeriesService} from '../rate-series';
 import {ReviewSeries} from '../review-series';
 import {ReviewSeriesService} from '../review-series';
 import { Title } from '@angular/platform-browser';
+import { ArtistLimitModel } from '../../shared/model/artistLimit.model';
+import {Globals} from '../../shared/globals';
 
 @Component({
     selector: 'jhi-series-detail',
@@ -48,7 +50,7 @@ import { Title } from '@angular/platform-browser';
   `]
 })
 export class SeriesDetailComponent implements OnInit, OnDestroy {
-    artists: Artist[];
+    artists: ArtistLimitModel[];
     director: Artist;
     scripwriter: Artist;
     series: Series;
@@ -88,7 +90,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private socialService: SocialService,
         private rateSeriesService: RateSeriesService,
         private reviewSeriesService: ReviewSeriesService,
-        private titleService: Title
+        private titleService: Title,
+        public globals: Globals
 ) {
     this.director = new Artist();
     this.director.name = '';
@@ -130,6 +133,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
             this.loadNumEpisodesSeen();
             this.loadNumEpisodes();
             this.loadReviews(params['id']);
+            this.globals.multimediaId = (params['id']);
+            this.globals.multimedia = 'series';
         });
         this.registerChangeInSeries();
 
@@ -138,12 +143,12 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.seriesService.find(id).subscribe((series) => {
             this.series = series;
-            this.titleService.setTitle(this.series.name+" - FuryViewer");
+            this.titleService.setTitle(this.series.name + ' - FuryViewer');
         });
     }
 
     loadArtist(id: number) {
-        this.artistService.seriesActorsQuery(id).subscribe(
+        this.episodeService.findActorsLimit(id).subscribe(
             (res: ResponseWrapper) => {
                 this.artists = res.json;
             },

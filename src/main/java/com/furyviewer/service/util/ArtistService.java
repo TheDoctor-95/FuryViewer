@@ -185,6 +185,7 @@ public class ArtistService {
      *
      * @param serieID Long | id de la Series.
      * @return List | List que contiene la informacion de todos los Artist.
+     * @deprecated
      */
     @Transactional
     public List<Artist> findActorBySerieId(Long serieID) {

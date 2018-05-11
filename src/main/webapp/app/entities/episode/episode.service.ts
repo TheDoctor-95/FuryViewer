@@ -9,7 +9,7 @@ import { Episode } from './episode.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 import {EpisodeNextSeen} from '../../shared/model/EpisodeNextSeen.model';
 import {EpisodeSeasonModel} from '../../shared/model/EpisodeSeason.model';
-import {Movie} from "../movie/movie.model";
+import {Movie} from '../movie/movie.model';
 
 @Injectable()
 export class EpisodeService {
@@ -63,6 +63,15 @@ export class EpisodeService {
             .map((res: Response) => this.convertSeasonEpisodeResponse(res));
     }
 
+    findActorsLimit(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/actors-limit/${id}`)
+            .map((res: Response) => this.convertSeasonEpisodeResponse(res));
+    }
+    findActorsLimitless(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/actors-limitless/${id}`)
+            .map((res: Response) => this.convertSeasonEpisodeResponse(res));
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
@@ -81,7 +90,6 @@ export class EpisodeService {
         }
         return new ResponseWrapper(res.headers, result, res.status);
     }
-
 
     private convertNextEpisodeResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();

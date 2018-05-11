@@ -15,7 +15,8 @@ import { Movie, MovieService } from '../movie';
 import { ResponseWrapper } from '../../shared';
 import {ArtistLimitModel} from '../../shared/model/artistLimit.model';
 import {Router} from '@angular/router';
-import {Globals} from "../../shared/globals";
+import {Globals} from '../../shared/globals';
+import {EpisodeService} from '../episode';
 
 @Component({
     selector: 'jhi-artist-dialog',
@@ -48,7 +49,8 @@ export class ArtistDialogComponent implements OnInit {
         private movieService: MovieService,
         private eventManager: JhiEventManager,
         public global: Globals,
-        private router: Router
+        private router: Router,
+        private episodeService: EpisodeService
     ) {
     }
 
@@ -84,6 +86,13 @@ export class ArtistDialogComponent implements OnInit {
     loadCompleteCasting(id: number) {
         if (this.global.multimedia === 'movie') {
             this.movieService.findActorsLimitless(id).subscribe(
+                (res: ResponseWrapper) => {
+                    this.artistLimitless = res.json;
+                },
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        } else {
+            this.episodeService.findActorsLimitless(id).subscribe(
                 (res: ResponseWrapper) => {
                     this.artistLimitless = res.json;
                 },

@@ -126,7 +126,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.movieService.find(id).subscribe((movie) => {
             this.movie = movie;
-            this.titleService.setTitle(this.movie.name+" - FuryViewer");
+            this.titleService.setTitle(this.movie.name + ' - FuryViewer');
         });
     }
 

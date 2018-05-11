@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.lang.Long.compare;
+
 
 @Service
 public class ArtistLimitService {
@@ -30,7 +30,6 @@ public class ArtistLimitService {
     private EpisodeRepository episodeRepository;
 
     public List<ActorLimitDTO> getInfoFromArtist(Long id){
-
         Pageable top = new PageRequest(0, 4);
         List<ActorLimitDTO> list = movieRepository.getMainActorsByMovieLimit(id, top)
         .stream()
@@ -41,13 +40,10 @@ public class ArtistLimitService {
         ))
             .collect(Collectors.toList());
 
-    return list;
-
+        return list;
     }
 
-
     public List<ActorLimitDTO> getInfoFromArtistLimitless(Long id){
-
         List<ActorLimitDTO> list = movieRepository.getMainActorsByMovie(id)
             .stream()
             .map(artist -> new ActorLimitDTO(
@@ -58,7 +54,6 @@ public class ArtistLimitService {
             .collect(Collectors.toList());
 
         return list;
-
     }
 
 
@@ -80,12 +75,10 @@ public class ArtistLimitService {
                 artist.getImgUrl()
             ))
             .collect(Collectors.toList());
-
     }
 
     @Transactional
     public List<ActorLimitDTO> findActorBySerieIdLimit(Long serieID) {
-
         List<ActorLimitDTO> a = artistRepository.findAllWithEagerRelationships().stream()
             .filter(artist -> artist.getEpisodes().stream()
                 .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
@@ -104,11 +97,16 @@ public class ArtistLimitService {
             .collect(Collectors.toList());
 
         if(a.size() > 4){
-            return a.subList(0,5);
+            return a.subList(0,4);
         }else{
             return a;
         }
+    }
 
+    public int compare(long l1, long l2) {
+        if (l1 > l2) return -1;
+        else if (l1 < l2) return 1;
+        else return 0;
     }
 }
 
