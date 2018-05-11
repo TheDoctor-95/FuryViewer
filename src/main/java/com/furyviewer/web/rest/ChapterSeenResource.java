@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -60,21 +61,26 @@ public class ChapterSeenResource {
     public ResponseEntity<ChapterSeen> createChapterSeen(@RequestBody ChapterSeen chapterSeen) throws URISyntaxException {
         log.debug("REST request to save ChapterSeen : {}", chapterSeen);
 
-        Optional<ChapterSeen> chapterSeenOptional = chapterSeenRepository.findByUserLoginAndEpisodeId(SecurityUtils.getCurrentUserLogin(), chapterSeen.getEpisode().getId());
+        if (chapterSeen.getEpisode().getReleaseDate().isBefore(LocalDate.now()) ||
+            chapterSeen.getEpisode().getReleaseDate().isEqual(LocalDate.now())) {
+            Optional<ChapterSeen> chapterSeenOptional = chapterSeenRepository.findByUserLoginAndEpisodeId(SecurityUtils.getCurrentUserLogin(), chapterSeen.getEpisode().getId());
 
-        if(chapterSeenOptional.isPresent()){
-            chapterSeen.setId(chapterSeenOptional.get().getId());
-            chapterSeen.setSeen(!chapterSeenOptional.get().isSeen());
+            if (chapterSeenOptional.isPresent()) {
+                chapterSeen.setId(chapterSeenOptional.get().getId());
+                chapterSeen.setSeen(!chapterSeenOptional.get().isSeen());
 
+            }
+
+            chapterSeen.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+            chapterSeen.setDate(ZonedDateTime.now());
+
+            ChapterSeen result = chapterSeenRepository.save(chapterSeen);
+
+            return ResponseEntity.created(new URI("/api/chapter-seens/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
         }
-
-        chapterSeen.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
-        chapterSeen.setDate(ZonedDateTime.now());
-
-        ChapterSeen result = chapterSeenRepository.save(chapterSeen);
-        return ResponseEntity.created(new URI("/api/chapter-seens/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return null;
     }
 
     @PostMapping("/chapter-seens/chapterId/{id}")
