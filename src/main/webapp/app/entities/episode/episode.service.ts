@@ -9,6 +9,7 @@ import { Episode } from './episode.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 import {EpisodeNextSeen} from '../../shared/model/EpisodeNextSeen.model';
 import {EpisodeSeasonModel} from '../../shared/model/EpisodeSeason.model';
+import {Movie} from "../movie/movie.model";
 
 @Injectable()
 export class EpisodeService {
@@ -40,9 +41,11 @@ export class EpisodeService {
         });
     }
 
-    calendar(): Observable<ResponseWrapper> {
+    calendar(): Observable<Map<string, Movie[]>> {
         return this.http.get(`${this.resourceUrl}/calendar`)
-            .map((res: Response) => this.convertResponseCalendar(res));
+            .map((res: Response) => {
+                return res.json();
+            });
     }
 
     nextEpisodes(): Observable<ResponseWrapper> {
@@ -79,14 +82,6 @@ export class EpisodeService {
         return new ResponseWrapper(res.headers, result, res.status);
     }
 
-    private convertResponseCalendar(res: Response): ResponseWrapper {
-        const jsonResponse = res.json();
-        const result = [];
-        for (let i = 0; i < jsonResponse.length; i++) {
-            result.push(this.convertItemFromServer(jsonResponse[i]));
-        }
-        return new ResponseWrapper(res.headers, result, res.status);
-    }
 
     private convertNextEpisodeResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
@@ -117,6 +112,7 @@ export class EpisodeService {
     }
 
     private convertNextEpisodeFromServer(json: any): EpisodeNextSeen {
+
         const entity: EpisodeNextSeen = Object.assign(new EpisodeNextSeen(), json);
         return entity;
     }
