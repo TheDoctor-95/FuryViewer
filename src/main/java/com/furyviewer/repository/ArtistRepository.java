@@ -2,13 +2,14 @@ package com.furyviewer.repository;
 
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.ArtistType;
+import com.furyviewer.service.dto.util.ActorLimitDTO;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.awt.print.Pageable;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,8 @@ public interface ArtistRepository extends JpaRepository<Artist, Long>, JpaSpecif
     //@Query("select m from Movie m where :artist member of m.actorMains order by m.releaseDate desc")
     //List<Movie> getByArtistOrderbyDate(@Param("artist") Artist artist);
 
+    @Query("select distinct artist from Artist artist left join fetch artist.artistTypes")
+    List<Artist> findAllWithEagerRelationships(@Param("pageable") Pageable pageable);
 
 
 }

@@ -113,7 +113,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
             this.loadState(params['id']);
             this.loadFavHate(params['id']);
             this.loadCountFavHate(params['id']);
-            this.globals.movieId = (params['id']);
+            this.globals.multimediaId = (params['id']);
+            this.globals.multimedia = 'movie';
             console.log(this.trailer);
         });
         this.registerChangeInMovies();

@@ -1,13 +1,16 @@
 package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.Episode;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.EpisodeOmdbDTOService;
+import com.furyviewer.service.dto.util.ActorLimitDTO;
 import com.furyviewer.service.dto.util.EpisodeSerieDTO;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
+import com.furyviewer.service.util.ArtistLimitService;
 import com.furyviewer.service.util.EpisodeService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -48,9 +51,13 @@ public class EpisodeResource {
 
     private final EpisodeService episodeService;
 
-    public EpisodeResource(EpisodeRepository episodeRepository, EpisodeService episodeService) {
+    @Autowired
+    private final ArtistLimitService artistLimitService;
+
+    public EpisodeResource(EpisodeRepository episodeRepository, EpisodeService episodeService, ArtistLimitService artistLimitService) {
         this.episodeRepository = episodeRepository;
         this.episodeService = episodeService;
+        this.artistLimitService = artistLimitService;
     }
 
     /**
@@ -224,6 +231,20 @@ public class EpisodeResource {
     public List<Episode> getAllSeriesFromScriptwriter(@PathVariable Long id){
         log.debug("Get to request episodes from artist order by date desc");
         return  episodeRepository.findEpisodeByScriptwriterOrderByReleaseDate(artistRepository.findOne(id));
+    }
+
+    @GetMapping("/episodes/actors-limitless/{id}")
+    @Timed
+    public ResponseEntity<List<ActorLimitDTO>> getActorsLimitS(@PathVariable Long id) {
+        List<ActorLimitDTO> a = artistLimitService.findActorBySerieId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
+    }
+
+    @GetMapping("/episodes/actors-limit/{id}")
+    @Timed
+    public ResponseEntity<List<ActorLimitDTO>> getActorsLimitlessS(@PathVariable Long id) {
+        List<ActorLimitDTO> a = artistLimitService.findActorBySerieIdLimit(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
     }
 
 

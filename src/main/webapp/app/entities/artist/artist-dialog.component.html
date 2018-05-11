@@ -14,11 +14,13 @@
         <div class="row">
             <div class="card portades col-2" *ngFor="let artist of artistLimitless"
                  (click)="goTo(artist.id)" style=" margin-right: 3%;">
-                <img class="card-img-top" style="width: 9rem; height: 13rem;" src="{{artist.imgUrl}}" alt="Card image">
 
-                <div class="card-body">
-                    <h4 style="text-transform: uppercase;">{{artist.name}}</h4>
-                </div>
+                    <img class="card-img-top" style="width: 9rem; height: 13rem;" src="{{artist.imgUrl}}" alt="Card image">
+
+                    <div class="card-body">
+                        <h4 style="text-transform: uppercase;">{{artist.name}}</h4>
+                    </div>
+
             </div>
         </div>
     </div>
