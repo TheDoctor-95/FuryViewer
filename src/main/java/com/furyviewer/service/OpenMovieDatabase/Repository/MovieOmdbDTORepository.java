@@ -22,6 +22,12 @@ public interface MovieOmdbDTORepository {
     @GET("/?type=movie&plot=full")
     Call<MovieOmdbDTO> getMovie(@Query("apikey") String apikey, @Query("t") String title);
 
+    /**
+     * Devuelve toda la informacion de una Movie proporcionada por la api de OpenMovieDataBase.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @param ImdbId String | id de IMDB de la Movie que se quiere buscar.
+     * @return Call | Contiene toda la informacion de Movie devuelta por la api.
+     */
     @GET("/?type=movie&plot=full")
     Call<MovieOmdbDTO> getMovieByImdbId(@Query("apikey") String apikey, @Query("i") String ImdbId);
 

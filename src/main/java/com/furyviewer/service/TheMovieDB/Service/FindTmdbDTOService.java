@@ -8,6 +8,11 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
+/**
+ * Servicio encargado de recuperar los id de series y movies de TMDB.
+ * @author IFriedkin
+ * @see com.furyviewer.service.TheMovieDB.Repository.FindTmdbDTORepository
+ */
 @Service
 public class FindTmdbDTOService {
     /**
@@ -21,6 +26,11 @@ public class FindTmdbDTOService {
     private final FindTmdbDTORepository apiTMDB =
         FindTmdbDTORepository.retrofit.create(FindTmdbDTORepository.class);
 
+    /**
+     * Devuelve el id de TMDB de una series a partir del id de IMDB.
+     * @param imdbId String | id de IMDB.
+     * @return int | id de TMDB.
+     */
     public int getIdTmdbSeriesByImdbId(String imdbId) {
         int id = -1;
 
@@ -54,6 +64,11 @@ public class FindTmdbDTOService {
         return id;
     }
 
+    /**
+     * Devuelve el id de TMDB de una movie a partir del id de IMDB.
+     * @param imdbId String | id de IMDB.
+     * @return int | id de TMDB.
+     */
     public int getIdTmdbMovieByImdbId(String imdbId) {
         int id = -1;
 

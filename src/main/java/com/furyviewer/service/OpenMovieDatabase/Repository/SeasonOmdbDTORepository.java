@@ -23,6 +23,13 @@ public interface SeasonOmdbDTORepository {
     @GET("/?type=season")
     Call<SeasonOmdbDTO> getSeason(@Query("apikey") String apikey, @Query("t") String title, @Query("Season") int season);
 
+    /**
+     * Devuelve toda la informacion de una Season proporcionada por la api de OpenMovieDataBase.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @param imdbId String | id de IMDB de la Series que se quiere buscar.
+     * @param season int | Numero de la Season que se quiere buscar.
+     * @return Call | Contiene toda la informacion de Season devuelta por la api.
+     */
     @GET("/?type=season")
     Call<SeasonOmdbDTO> getSeasonByImdbId(@Query("apikey") String apikey, @Query("i") String imdbId, @Query("Season") int season);
 

@@ -23,6 +23,7 @@ import java.util.Optional;
  * Servicio encargado de recuperar informacion de una Movie desde MovieOmdbDTORepository y la convierte al
  * formato FuryViewer.
  *
+ * @author IFriedkin
  * @author TheDoctor-95
  * @see com.furyviewer.service.OpenMovieDatabase.Repository.MovieOmdbDTORepository
  */
@@ -158,6 +159,7 @@ public class MovieOmdbDTOService {
 
         Movie m = new Movie();
 
+        //En caso de tener la movie en la base de datos renovamos la informacion dde la release date del dvd.
         if (mdb.isPresent()) {
             m = mdb.get();
             m.setDvd_release(dateConversorService.releseDateOMDB(movieOmdbDTO.getDVD()));

@@ -8,8 +8,18 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+/**
+ * Repositorio encargado de conectar con la api de TheMovieDB para recuperar la informacion de Find.
+ * @author IFriedkin
+ * @see com.furyviewer.service.dto.TheMovieDB.find.FindTmdbDTO
+ */
 public interface FindTmdbDTORepository {
-
+    /**
+     * Devuelve la informacion del find proporcionada por la api.
+     * @param imdbId String | id de IMDB.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @return
+     */
     @GET("/3/find/{imdbId}?external_source=imdb_id")
     Call<FindTmdbDTO> getFind(@Path("imdbId") String imdbId, @Query("api_key") String apikey);
 

@@ -1,6 +1,5 @@
 package com.furyviewer.service.util;
 
-
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.ChapterSeen;
 import com.furyviewer.domain.Episode;
@@ -22,9 +21,13 @@ import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio encargado de gestionar la interacción con los episodes.
+ * @author IFriedkin
+ * @author TheDoctor-95
+ */
 @Service
 public class EpisodeService {
-
     @Autowired
     private SeriesStatsRepository seriesStatsRepository;
 
@@ -40,14 +43,18 @@ public class EpisodeService {
     @Autowired
     private SeriesRepository seriesRepository;
 
-    @Autowired SeasonRepository seasonRepository;
+    @Autowired
+    private SeasonRepository seasonRepository;
 
     private final Logger log = LoggerFactory.getLogger(EpisodeResource.class);
 
+    /**
+     * Prepara los episodes de una season en el formato de EpisodeHomeDTO para optimizar la query para el frontend.
+     * @return List | Informacion optimizada de los episodes.
+     * @see com.furyviewer.service.dto.util.EpisodesHomeDTO
+     */
     @Timed
     public List<EpisodesHomeDTO> getNextEpisodes(){
-
-
         log.debug("getNextEpisodes current time: 1 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
 
         List<EpisodesHomeDTO> episodes = new ArrayList<>();
@@ -73,17 +80,25 @@ public class EpisodeService {
                 log.debug("getNextEpisodes current time: 9", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
             }
         );
-        return episodes;
 
+        return episodes;
     }
 
+    /**
+     * Mapea el resultado de los siguientes episodes por fecha.
+     * @return Map | Episodes ordenados por fecha.
+     */
     @Timed
     public Map<LocalDate, List<EpisodesHomeDTO>> getNextEpisodesGroupedByDate(){
         return getNextEpisodes().stream()
             .collect(Collectors.groupingBy(EpisodesHomeDTO::getReleaseDate));
-
     }
 
+    /**
+     * Devuelve la season por la que va el usuario.
+     * @param id Long | Id de la series que se quiere saber la season.
+     * @return Long | Id de la season actual.
+     */
     public Long actualSeason(Long id){
         Series series = seriesRepository.findOne(id);
         Episode e = nextEpisode(series);
@@ -96,13 +111,15 @@ public class EpisodeService {
         }
     }
 
+    /**
+     * Obtiene el siguiente episode que le toca ver al usuario.
+     * @param series Series | Series de la que se quiere averiguar el siguiente episode.
+     * @return Episode | SSiguiente episode que tiene que ver el usuario.
+     */
     public Episode nextEpisode(Series series){
-
-
         Optional<Season> maxSeasonSeenOptional = chapterSeenRepository.findBySeenAndEpisodeSeasonSeriesIdAndUserLogin(true, series.getId(), SecurityUtils.getCurrentUserLogin()).stream()
             .map(chapterSeen ->  chapterSeen.getEpisode().getSeason())
             .max(Comparator.comparing(com.furyviewer.domain.Season::getNumber));
-
 
         log.debug("getNextEpisodes current time: 3 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
         if (maxSeasonSeenOptional.isPresent()){
@@ -123,10 +140,15 @@ public class EpisodeService {
         }else{
             log.debug("getNextEpisodes current time: 7 ", com.codahale.metrics.Clock.CpuTimeClock.defaultClock().getTime());
             return episodeRepository.findByNumberAndSeasonNumberAndSeasonSeriesId(1,1,series.getId());
-
         }
     }
 
+    /**
+     * Prepara los episodes de una season en el formato de EpisodeSerieDTO para optimizar la query para el frontend.
+     * @param id Long | Id de la season a buscar.
+     * @return List | Informacion optimizada de los episodes.
+     * @see com.furyviewer.service.dto.util.EpisodeSerieDTO
+     */
     public List<EpisodeSerieDTO> chaptersSeriesBySeasonId(Long id){
         List<EpisodeSerieDTO> episodeSerieDTO = new ArrayList<EpisodeSerieDTO>();
         episodeRepository.getEpisodeBySeason(id).forEach(
@@ -145,18 +167,16 @@ public class EpisodeService {
                 }
 
                 episodeSerieDTO.add(esdto);
-
-
             }
         );
-    episodeSerieDTO.stream().sorted();
-    return episodeSerieDTO;
+        episodeSerieDTO.stream().sorted();
 
+        return episodeSerieDTO;
     }
 
     /**
-     * Funcion que devuelve todas los episodios que van a salir agrupados i ordenados por fechaSortedMap<LocalDate, List<Episode>>
-     * @return
+     * Funcion que devuelve todos los episodios que van a salir agrupados i ordenados por fecha.
+     * @return SortedMap | Lista de episodes ordenada por fecha.
      */
     public SortedMap<LocalDate, List<Episode>> calendar(){
 
@@ -170,6 +190,12 @@ public class EpisodeService {
             .collect(Collectors.groupingBy(Episode::getReleaseDate, TreeMap::new, Collectors.toList()));
     }
 
+    /**
+     * Marca o desmarca todos los episodes de una season como vistos a excepcion de los que todavia no han sido
+     * emitidos.
+     * @param seasonId Long | Id de la season a marcar como vista.
+     * @return Boolean | Devuelve true o false en funcion de si marcamos o desmarcamos los episodes.
+     */
     public Boolean seasonSeen(Long seasonId) {
         Boolean state;
         List<Episode> episodes = episodeRepository.getEpisodeBySeason(seasonId);

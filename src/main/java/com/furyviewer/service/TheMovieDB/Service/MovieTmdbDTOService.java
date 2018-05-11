@@ -72,6 +72,10 @@ public class MovieTmdbDTOService {
         return id;
     }
 
+    /**
+     * Busca los artist de una movie en la api y los vuelca en la base de datos.
+     * @param movie Movie | Movie de la que se quiere conocer los artist.
+     */
     public void importActors(Movie movie) {
         int idTmdb = -1;
 
@@ -94,6 +98,5 @@ public class MovieTmdbDTOService {
                 e.printStackTrace();
             }
         }
-
     }
 }

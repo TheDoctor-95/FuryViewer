@@ -25,6 +25,14 @@ public interface EpisodeOmdbDTORepository {
     Call<EpisodeOmdbDTO> getEpisode(@Query("apikey") String apikey, @Query("t") String title,
                                    @Query("Season") int season, @Query("Episode") int episode);
 
+    /**
+     * Devuelve toda la informacion de un Episode proporcionada por la api de OpenMovieDataBase.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @param imdbId String | id de IMDB de la Series que se quiere buscar.
+     * @param season int | Numero de la Season que se quiere buscar.
+     * @param episode int | Numero del Episode que se quiere buscar.
+     * @return Call | Contiene toda la informacion de Episode devuelta por la api.
+     */
     @GET("/?type=episode")
     Call<EpisodeOmdbDTO> getEpisodebyImdbId(@Query("apikey") String apikey, @Query("i") String imdbId,
                                     @Query("Season") int season, @Query("Episode") int episode);

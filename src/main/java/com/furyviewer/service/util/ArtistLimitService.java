@@ -1,9 +1,6 @@
 package com.furyviewer.service.util;
 
-
-import com.furyviewer.domain.Artist;
 import com.furyviewer.repository.ArtistRepository;
-import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.repository.MovieRepository;
 import com.furyviewer.service.dto.util.ActorLimitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +12,24 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-
+/**
+ * Service que se encarga de optimizar la informacion de los artist al modelo de ActorLimitDTO.
+ * @author Whoger
+ * @see com.furyviewer.service.dto.util.ActorLimitDTO
+ */
 @Service
 public class ArtistLimitService {
-
     @Autowired
     private MovieRepository movieRepository;
 
     @Autowired
     private ArtistRepository artistRepository;
 
-    @Autowired
-    private EpisodeRepository episodeRepository;
-
+    /**
+     * Prepara cuatro artist de una movie en el formato de ActorsLimitDTO para optimizar la query para el frontend.
+     * @param id Long | Id de la movie de la que se quieren saber los artist.
+     * @return List | Informacion optimizada de los artist.
+     */
     public List<ActorLimitDTO> getInfoFromArtist(Long id){
         Pageable top = new PageRequest(0, 4);
         List<ActorLimitDTO> list = movieRepository.getMainActorsByMovieLimit(id, top)
@@ -43,6 +44,11 @@ public class ArtistLimitService {
         return list;
     }
 
+    /**
+     * Prepara todos los artist de una movie en el formato de ActorsLimitDTO para optimizar la query para el frontend.
+     * @param id Long | Id de la movie de la que se quieren saber los artist.
+     * @return List | Informacion optimizada de los artist.
+     */
     public List<ActorLimitDTO> getInfoFromArtistLimitless(Long id){
         List<ActorLimitDTO> list = movieRepository.getMainActorsByMovie(id)
             .stream()
@@ -56,7 +62,11 @@ public class ArtistLimitService {
         return list;
     }
 
-
+    /**
+     * Prepara todoss los artist de una series en el formato de ActorsLimitDTO para optimizar la query para el frontend.
+     * @param serieID Long | Id de la series de la que se quieren saber los artist.
+     * @return List | Informacion optimizada de los artist.
+     */
     @Transactional
     public List<ActorLimitDTO> findActorBySerieId(Long serieID) {
         return artistRepository.findAllWithEagerRelationships().stream()
@@ -77,6 +87,11 @@ public class ArtistLimitService {
             .collect(Collectors.toList());
     }
 
+    /**
+     * Prepara cuatro artist de una series en el formato de ActorsLimitDTO para optimizar la query para el frontend.
+     * @param serieID Long | Id de la series de la que se quieren saber los artist.
+     * @return List | Informacion optimizada de los artist.
+     */
     @Transactional
     public List<ActorLimitDTO> findActorBySerieIdLimit(Long serieID) {
         List<ActorLimitDTO> a = artistRepository.findAllWithEagerRelationships().stream()
@@ -103,6 +118,12 @@ public class ArtistLimitService {
         }
     }
 
+    /**
+     * Ayuda a ordenar en orden descendiente los artist.
+     * @param l1 long | Valor 1 a comparar.
+     * @param l2 long | Valor 2 a comparar.
+     * @return int
+     */
     public int compare(long l1, long l2) {
         if (l1 > l2) return -1;
         else if (l1 < l2) return 1;

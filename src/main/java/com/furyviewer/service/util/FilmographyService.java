@@ -14,19 +14,25 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Service que se encarga de crear una lista de movies y series para un artista.
+ * @author IFriedkin
+ * @author Whoger
+ */
 @Service
-public class EpisodeActorsService {
-
+public class FilmographyService {
     @Autowired
     private EpisodeRepository episodeRepository;
 
     @Autowired
     private MovieRepository movieRepository;
 
-
+    /**
+     * Se encarga de buscar todos los lugares donde ha trabajado un artist para construir una filmografia.
+     * @param artist Artist
+     * @return List | Lista con todas las movies y series donde ha trabajado el artist.
+     */
     public List<MultimediaActorsDTO> getSeriesAndMoviesFromActor(Artist artist){
-
         List<MultimediaActorsDTO> multimediaSeriesActorsDTOs = episodeRepository.getEpisodeByActorsOrderByReleaseDate(artist)
             .stream()
             .map(episode -> episode.getSeason().getSeries())
@@ -117,8 +123,14 @@ public class EpisodeActorsService {
         return multimediaActorsDTO;
     }
 
-    public List<MultimediaActorsDTO> filterArtist (List<MultimediaActorsDTO> multimediaActorsDTO, List<MultimediaActorsDTO> multimediaArtistDTOs)
-    {
+    /**
+     * Filtra los artist para que en caso de aparecer en diferentes movies o series no se repitan.
+     * @param multimediaActorsDTO List | Se guardará la información de las movies y series sin que se re
+     * @param multimediaArtistDTOs List | Lista de movies o series que se quiere filtrar.
+     * @return List | Lista filtrada de movies y series.
+     */
+    public List<MultimediaActorsDTO> filterArtist (List<MultimediaActorsDTO> multimediaActorsDTO,
+                                                   List<MultimediaActorsDTO> multimediaArtistDTOs) {
         for (MultimediaActorsDTO multi : multimediaArtistDTOs) {
             if (multimediaActorsDTO.isEmpty()) multimediaActorsDTO.add(multi);
 

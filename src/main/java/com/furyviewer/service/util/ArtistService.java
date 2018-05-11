@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ArtistService {
-
     @Autowired
     private ArtistRepository artistRepository;
 
@@ -74,6 +73,7 @@ public class ArtistService {
                 artists.add(artist);
             }
         }
+
         return artists;
     }
 
@@ -257,6 +257,12 @@ public class ArtistService {
         return null;
     }
 
+    /**
+     * Ayuda a ordenar en orden descendiente los artist.
+     * @param l1 long | Valor 1 a comparar.
+     * @param l2 long | Valor 2 a comparar.
+     * @return int
+     */
     public int compare(long l1, long l2) {
         if (l1 > l2) return -1;
         else if (l1 < l2) return 1;

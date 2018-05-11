@@ -22,6 +22,12 @@ public interface SeriesOmdbDTORepository {
     @GET("/?type=series&plot=full")
     Call<SeriesOmdbDTO> getSeries(@Query("apikey") String apikey, @Query("t") String title);
 
+    /**
+     * Devuelve toda la informacion de una Series proporcionada por la api de OpenMovieDataBase.
+     * @param apikey String | Key requerida por la api para poder hacer peticiones.
+     * @param ImdbId String | id de IMDB de la Series que se quiere buscar.
+     * @return Call | Contiene toda la informacion de Series devuelta por la api.
+     */
     @GET("/?type=series&plot=full")
     Call<SeriesOmdbDTO> getSeriesByImdbId(@Query("apikey") String apikey, @Query("i") String ImdbId);
 

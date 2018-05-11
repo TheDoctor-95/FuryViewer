@@ -74,6 +74,14 @@ public class EpisodeOmdbDTOService {
         return episode;
     }
 
+    /**
+     * Devuelve la informacion de un episode en el formato proporcionado por OpenMovieDataBase.
+     * @param imdbId String | id de IMDB a buscar.
+     * @param seasonNum int | Numero de la Season a buscar.
+     * @param episodeNum int | Numero del Episode a buscar.
+     * @return EpisodeOmdbDTO | Informacion con el formato proporcionado por la API.
+     * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la excepcion.
+     */
     public EpisodeOmdbDTO getEpisodeByImdbId(String imdbId, int seasonNum, int episodeNum) throws IOException {
         EpisodeOmdbDTO episode;
         Call<EpisodeOmdbDTO> callEpisode = apiService.getEpisode(apikey, imdbId, seasonNum, episodeNum);

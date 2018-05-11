@@ -24,6 +24,12 @@ public interface MovieTmdbDTORepository {
     @GET("/3/search/movie")
     Call<SimpleMovieTmdbDTO> getSimpleMovie(@Query("api_key") String apikey, @Query("query") String movieName);
 
+    /**
+     * Devuelve la informacion del casting que ha participado en una movie.
+     * @param id int | id interno de la API para reconocer la movie.
+     * @param apikey String | Titulo de la Movie que se quiere buscar.
+     * @return Call | Contiene toda la informacion del casting proporcionada por la api.
+     */
     @GET("/3/movie/{id}/credits")
     Call<EpisodeCastingDTO> getCredits(@Path("id") int id, @Query("api_key") String apikey);
 

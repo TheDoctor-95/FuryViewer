@@ -16,7 +16,7 @@ import com.furyviewer.service.dto.Criteria.ArtistBCriteria;
 import com.furyviewer.service.dto.TheMovieDB.Artist.CompleteArtistTmdbDTO;
 import com.furyviewer.service.dto.TheMovieDB.Artist.SimpleArtistTmdbDTO;
 import com.furyviewer.service.util.ArtistService;
-import com.furyviewer.service.util.EpisodeActorsService;
+import com.furyviewer.service.util.FilmographyService;
 import com.furyviewer.service.dto.util.MultimediaActorsDTO;
 import com.furyviewer.service.util.MarksService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
@@ -64,20 +64,20 @@ public class ArtistResource {
 
     private final ArtistService artistService;
 
-    private final EpisodeActorsService episodeActorsService;
+    private final FilmographyService filmographyService;
 
     private final ArtistTypeRepository artistTypeRepository;
 
     private final MarksService marksService;
 
-    public ArtistResource(ArtistRepository artistRepository, HatredArtistRepository hatredArtistRepository, FavouriteArtistRepository favouriteArtistRepository, ArtistServiceSmart artistServiceSmart, ArtistBQueryService artistBQueryService, ArtistService artistService, EpisodeActorsService episodeActorsService, ArtistTypeRepository artistTypeRepository, MarksService marksService) {
+    public ArtistResource(ArtistRepository artistRepository, HatredArtistRepository hatredArtistRepository, FavouriteArtistRepository favouriteArtistRepository, ArtistServiceSmart artistServiceSmart, ArtistBQueryService artistBQueryService, ArtistService artistService, FilmographyService filmographyService, ArtistTypeRepository artistTypeRepository, MarksService marksService) {
         this.artistRepository = artistRepository;
         this.hatredArtistRepository = hatredArtistRepository;
         this.favouriteArtistRepository = favouriteArtistRepository;
         this.artistServiceSmart = artistServiceSmart;
         this.artistBQueryService = artistBQueryService;
         this.artistService = artistService;
-        this.episodeActorsService = episodeActorsService;
+        this.filmographyService = filmographyService;
         this.artistTypeRepository = artistTypeRepository;
         this.marksService = marksService;
     }
@@ -316,7 +316,7 @@ public class ArtistResource {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(episodeActorsService.getSeriesAndMoviesFromActor(artist)
+        return new ResponseEntity<>(filmographyService.getSeriesAndMoviesFromActor(artist)
             , HttpStatus.OK);
     }
 

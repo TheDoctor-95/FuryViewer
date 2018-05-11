@@ -67,6 +67,13 @@ public class SeasonOmdbDTOService {
         return season;
     }
 
+    /**
+     * Devuelve la informacion de una season en el formato proporcionado por OpenMovieDataBase.
+     * @param imdbId String | id de IMDB.
+     * @param seasonNum int | Numero de la season a buscar.
+     * @return SeasonOmdbDTO | Informacion con el formato proporcionado por la API.
+     * @throws IOException En caso de que no se pueda hacer la peticion a la api se lanza la excepcion.
+     */
     public SeasonOmdbDTO getSeasonByImdbId(String imdbId, int seasonNum) throws IOException {
         SeasonOmdbDTO season;
         Call<SeasonOmdbDTO> callSeason = apiService.getSeasonByImdbId(apikey, imdbId, seasonNum);
