@@ -48,9 +48,8 @@ public interface ArtistRepository extends JpaRepository<Artist, Long>, JpaSpecif
     //List<Movie> getByArtistOrderbyDate(@Param("artist") Artist artist);
 
     @Query("select distinct artist from Artist artist left join fetch artist.artistTypes")
-    List<Artist> findAllWithEagerRelationshipsLimit(@Param("pageable") Pageable pageable);
+    List<Artist> findAllWithEagerRelationships(@Param("pageable") Pageable pageable);
 
-    @Query("select distinct artist from Artist artist left join fetch artist.artistTypes")
-    List<ActorLimitDTO> findAllWithEagerRelationshipsActors();
+
 }
 

@@ -233,17 +233,17 @@ public class EpisodeResource {
         return  episodeRepository.findEpisodeByScriptwriterOrderByReleaseDate(artistRepository.findOne(id));
     }
 
-    @GetMapping("/episodes/actors-limit/{id}")
+    @GetMapping("/episodes/actors-limitless/{id}")
     @Timed
     public ResponseEntity<List<ActorLimitDTO>> getActorsLimitS(@PathVariable Long id) {
         List<ActorLimitDTO> a = artistLimitService.findActorBySerieId(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
     }
 
-    @GetMapping("/episodes/actors-limitless/{id}")
+    @GetMapping("/episodes/actors-limit/{id}")
     @Timed
     public ResponseEntity<List<ActorLimitDTO>> getActorsLimitlessS(@PathVariable Long id) {
-        List<ActorLimitDTO> a = artistLimitService.findActorBySeriesIdLimit(id);
+        List<ActorLimitDTO> a = artistLimitService.findActorBySerieIdLimit(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
     }
 

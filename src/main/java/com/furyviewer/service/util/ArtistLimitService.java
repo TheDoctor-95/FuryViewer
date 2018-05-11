@@ -74,7 +74,6 @@ public class ArtistLimitService {
                     .count();
                 return compare(numEpisodes1, numEpisodes2);
             })
-
             .map(artist -> new ActorLimitDTO(
                 artist.getId(),
                 artist.getName(),
@@ -85,10 +84,9 @@ public class ArtistLimitService {
     }
 
     @Transactional
-    public List<ActorLimitDTO> findActorBySeriesIdLimit(Long serieID) {
-        Pageable top = new PageRequest(0, 4);
-        return artistRepository.findAllWithEagerRelationshipsLimit(top)
-            .stream()
+    public List<ActorLimitDTO> findActorBySerieIdLimit(Long serieID) {
+
+        List<ActorLimitDTO> a = artistRepository.findAllWithEagerRelationships().stream()
             .filter(artist -> artist.getEpisodes().stream()
                 .anyMatch(episode -> episode.getSeason().getSeries().getId().equals(serieID)))
             .sorted((a1, a2) -> {
@@ -105,8 +103,13 @@ public class ArtistLimitService {
             ))
             .collect(Collectors.toList());
 
+        if(a.size() > 4){
+            return a.subList(0,5);
+        }else{
+            return a;
         }
 
+    }
 }
 
 
