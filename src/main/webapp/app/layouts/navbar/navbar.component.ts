@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiLanguageService } from 'ng-jhipster';
 
@@ -35,6 +35,10 @@ export class NavbarComponent implements OnInit {
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
+        router.events.subscribe((val) => {
+            // see also
+            console.log(val.toString())
+        });
     }
 
     ngOnInit() {

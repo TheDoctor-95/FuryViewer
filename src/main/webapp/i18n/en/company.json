@@ -2,7 +2,7 @@
     "furyViewerApp": {
         "company" : {
             "home": {
-                "title": "Companies",
+                "title": "Home - FuryViewer",
                 "createLabel": "Create a new Company",
                 "createOrEditLabel": "Create or edit a Company"
             },

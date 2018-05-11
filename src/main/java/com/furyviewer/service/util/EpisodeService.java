@@ -186,14 +186,17 @@ public class EpisodeService {
             Optional<ChapterSeen> auxSeen =
                 chapterSeenRepository.findByUserLoginAndEpisodeId(SecurityUtils.getCurrentUserLogin(), episode.getId());
 
-            if(auxSeen.isPresent()) chapterSeen.setId(auxSeen.get().getId());
+            if (episode.getReleaseDate().isBefore(LocalDate.now()) ||
+                episode.getReleaseDate().isEqual(LocalDate.now())) {
+                if (auxSeen.isPresent()) chapterSeen.setId(auxSeen.get().getId());
 
-            chapterSeen.setEpisode(episode);
-            chapterSeen.setSeen(state);
-            chapterSeen.setDate(ZonedDateTime.now());
-            chapterSeen.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+                chapterSeen.setEpisode(episode);
+                chapterSeen.setSeen(state);
+                chapterSeen.setDate(ZonedDateTime.now());
+                chapterSeen.setUser(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
 
-            chapterSeenRepository.save(chapterSeen);
+                chapterSeenRepository.save(chapterSeen);
+            }
         }
 
         return state;

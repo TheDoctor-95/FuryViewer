@@ -5,16 +5,17 @@ import com.furyviewer.domain.Episode;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.EpisodeOmdbDTOService;
+import com.furyviewer.service.dto.util.ActorLimitDTO;
 import com.furyviewer.service.dto.util.EpisodeSerieDTO;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
+import com.furyviewer.service.util.ArtistLimitService;
 import com.furyviewer.service.util.EpisodeService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -40,17 +41,20 @@ public class EpisodeResource {
 
     private final EpisodeRepository episodeRepository;
 
-    @Autowired
-    EpisodeOmdbDTOService episodeOmdbDTOService;
+    private final EpisodeOmdbDTOService episodeOmdbDTOService;
 
-    @Autowired
-    private ArtistRepository artistRepository;
+    private final ArtistRepository artistRepository;
 
     private final EpisodeService episodeService;
 
-    public EpisodeResource(EpisodeRepository episodeRepository, EpisodeService episodeService) {
+    private final ArtistLimitService artistLimitService;
+
+    public EpisodeResource(EpisodeRepository episodeRepository, EpisodeOmdbDTOService episodeOmdbDTOService, ArtistRepository artistRepository, EpisodeService episodeService, ArtistLimitService artistLimitService) {
         this.episodeRepository = episodeRepository;
+        this.episodeOmdbDTOService = episodeOmdbDTOService;
+        this.artistRepository = artistRepository;
         this.episodeService = episodeService;
+        this.artistLimitService = artistLimitService;
     }
 
     /**
@@ -224,6 +228,20 @@ public class EpisodeResource {
     public List<Episode> getAllSeriesFromScriptwriter(@PathVariable Long id){
         log.debug("Get to request episodes from artist order by date desc");
         return  episodeRepository.findEpisodeByScriptwriterOrderByReleaseDate(artistRepository.findOne(id));
+    }
+
+    @GetMapping("/episodes/actors-limitless/{id}")
+    @Timed
+    public ResponseEntity<List<ActorLimitDTO>> getActorsLimitS(@PathVariable Long id) {
+        List<ActorLimitDTO> a = artistLimitService.findActorBySerieId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
+    }
+
+    @GetMapping("/episodes/actors-limit/{id}")
+    @Timed
+    public ResponseEntity<List<ActorLimitDTO>> getActorsLimitlessS(@PathVariable Long id) {
+        List<ActorLimitDTO> a = artistLimitService.findActorBySerieIdLimit(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
     }
 
 

@@ -3,6 +3,7 @@ package com.furyviewer.repository;
 import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.Episode;
 import com.furyviewer.domain.Series;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -52,4 +53,13 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     @Query("SELECT e FROM Episode e WHERE e.season.id=:id AND e.number=:numEpisode")
     Optional<Episode> getEpisode(@Param("id") Long id, @Param("numEpisode") Integer numEpisode);
+    @Query("select distinct episode from Episode episode left join fetch episode.actors where episode.id =:id")
+    List<Episode> findOneWithEagerRelationshipsLimit(@Param("id") Long id, Pageable pageable);
+
+    @Query("select e.actors from Episode e where e.id=:id")
+    List<Artist> getMainActorsByEpisode(@Param("id")Long id);
+
+    @Query("select e.actors from Episode e where e.id=:id")
+    List<Artist> getMainActorsByEpisodeLimit(@Param("id")Long id, Pageable pageable);
+
 }

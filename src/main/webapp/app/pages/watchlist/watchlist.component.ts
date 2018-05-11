@@ -8,6 +8,7 @@ import {WatchlistService} from './watchlist.service';
 import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../shared';
 import {FilmographyArtistModel} from '../../shared/model/filmographyArtist.model';
 import {Globals} from '../../shared/globals';
+import {Title} from '@angular/platform-browser';
 
 @Component({
     selector: 'jhi-watchlist',
@@ -35,7 +36,8 @@ export class WatchlistComponent implements OnInit, OnDestroy {
                 private eventManager: JhiEventManager,
                 private principal: Principal,
                 private router: Router,
-                public globals: Globals) {
+                public globals: Globals,
+                private titleService: Title) {
         this.onWindowScroll = this.onWindowScroll.bind(this);
     }
 
@@ -70,6 +72,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
         this.load();
         this.registerChangeInWatchlists();
         this.loadToShow();
+        this.titleService.setTitle("Watchlist - FuryViewer");
     }
 
     option(option: string) {

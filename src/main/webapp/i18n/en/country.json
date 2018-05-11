@@ -2,7 +2,7 @@
     "furyViewerApp": {
         "country" : {
             "home": {
-                "title": "Countries",
+                "title": "About - FuryViewer",
                 "createLabel": "Create a new Country",
                 "createOrEditLabel": "Create or edit a Country"
             },

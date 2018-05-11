@@ -2,7 +2,7 @@
     "furyViewerApp": {
         "season" : {
             "home": {
-                "title": "Seasons",
+                "title": "Calendar - FuryViewer",
                 "createLabel": "Create a new Season",
                 "createOrEditLabel": "Create or edit a Season"
             },

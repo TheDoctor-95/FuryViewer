@@ -10,6 +10,7 @@ import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import {MovieService} from '../../entities/movie/movie.service';
 import {Movie} from "../../entities/movie/movie.model";
 import {Genre, GenreService} from '../../entities/genre';
+import {Title} from '@angular/platform-browser';
 
 @Component({
     selector: 'jhi-search',
@@ -52,7 +53,8 @@ export class SearchComponent implements OnInit, OnDestroy {
                 private principal: Principal,
                 private movieService: MovieService,
                 private genreService: GenreService,
-                config: NgbRatingConfig) {
+                config: NgbRatingConfig,
+                private titleService: Title) {
         config.max = 5;
         this.actualYear = (new Date()).getFullYear();
     }
@@ -63,6 +65,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.loadGenres();
+        this.titleService.setTitle("Search - FuryViewer");
     }
 
     loadGenres() {

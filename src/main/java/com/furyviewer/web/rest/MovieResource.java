@@ -10,7 +10,7 @@ import com.furyviewer.service.SmartSearch.Movie.MovieQueryService;
 import com.furyviewer.service.OpenMovieDatabase.Service.MovieOmdbDTOService;
 import com.furyviewer.service.dto.Criteria.MovieBCriteria;
 import com.furyviewer.service.dto.OpenMovieDatabase.MovieOmdbDTO;
-import com.furyviewer.service.dto.util.ActorsLimitDTO;
+import com.furyviewer.service.dto.util.ActorLimitDTO;
 import com.furyviewer.service.util.ArtistLimitService;
 import com.furyviewer.service.util.MarksService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
@@ -318,15 +318,15 @@ public class MovieResource {
 
     @GetMapping("/movies/{id}/actors-limit")
     @Timed
-    public ResponseEntity<List<ActorsLimitDTO>> getActorsLimit(@PathVariable Long id) {
-        List<ActorsLimitDTO> a = artistLimitService.getInfoFromArtist(id);
+    public ResponseEntity<List<ActorLimitDTO>> getActorsLimit(@PathVariable Long id) {
+        List<ActorLimitDTO> a = artistLimitService.getInfoFromArtist(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
     }
 
     @GetMapping("/movies/{id}/actors-limitless")
     @Timed
-    public ResponseEntity<List<ActorsLimitDTO>> getActorsLimitless(@PathVariable Long id) {
-        List<ActorsLimitDTO> a = artistLimitService.getInfoFromArtistLimitless(id);
+    public ResponseEntity<List<ActorLimitDTO>> getActorsLimitless(@PathVariable Long id) {
+        List<ActorLimitDTO> a = artistLimitService.getInfoFromArtistLimitless(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(a));
     }
 }

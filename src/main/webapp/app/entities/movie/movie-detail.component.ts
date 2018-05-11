@@ -27,6 +27,7 @@ import {MovieStats} from '../movie-stats/movie-stats.model';
 import {Principal} from '../../shared/auth/principal.service';
 import {ArtistLimitModel} from '../../shared/model/artistLimit.model';
 import {Globals} from "../../shared/globals";
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'jhi-movie-detail',
@@ -81,7 +82,8 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         private sanitizer: DomSanitizer,
         private principal: Principal,
         private router: Router,
-        public globals: Globals
+        public globals: Globals,
+        private titleService: Title
     ) {
         config.max = 5;
         this.fav = new FavouriteMovie();
@@ -124,6 +126,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.movieService.find(id).subscribe((movie) => {
             this.movie = movie;
+            this.titleService.setTitle(this.movie.name+" - FuryViewer");
         });
     }
 
