@@ -15,6 +15,7 @@ import { Movie, MovieService } from '../movie';
 import { ResponseWrapper } from '../../shared';
 import {ArtistLimitModel} from '../../shared/model/artistLimit.model';
 import {Router} from '@angular/router';
+import {Globals} from "../../shared/globals";
 
 @Component({
     selector: 'jhi-artist-dialog',
@@ -31,7 +32,7 @@ export class ArtistDialogComponent implements OnInit {
     movieId: number;
 
     artisttypes: ArtistType[];
-    router: Router;
+
     route: ActivatedRoute;
 
     movies: Movie[];
@@ -45,17 +46,19 @@ export class ArtistDialogComponent implements OnInit {
         private countryService: CountryService,
         private artistTypeService: ArtistTypeService,
         private movieService: MovieService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        public global: Globals,
+        private router: Router
     ) {
     }
 
     ngOnInit() {
-        this.loadMovieId();
-        console.log(this.movieId);
-        this.loadCompleteCasting(this.movieId);
+
+        this.loadCompleteCasting(this.global.multimediaId);
     }
 
     goTo(id: number) {
+        console.log(id);
         this.router.navigate(['artist', id]).then(
             () => {
                 this.clear();
@@ -79,18 +82,14 @@ export class ArtistDialogComponent implements OnInit {
     }
 
     loadCompleteCasting(id: number) {
-        this.movieService.findActorsLimitless(id).subscribe(
-            (res: ResponseWrapper) => {
-                this.artistLimitless = res.json;
-            },
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
-    }
-
-    loadMovieId() {
-        this.route.params.subscribe((params: Params) => {
-            this.movieId = Number.parseInt(params['movieId']);
-        });
+        if (this.global.multimedia === 'movie') {
+            this.movieService.findActorsLimitless(id).subscribe(
+                (res: ResponseWrapper) => {
+                    this.artistLimitless = res.json;
+                },
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        }
     }
 
     private subscribeToSaveResponse(result: Observable<Artist>) {
