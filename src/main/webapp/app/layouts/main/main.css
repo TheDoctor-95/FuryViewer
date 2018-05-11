@@ -43,6 +43,9 @@ a{
 .list-unstyled > .row{
     padding-bottom: 2rem;
     cursor: pointer;
+    transform: scale(1);
+    transition: background-color 1.5s, opacity 1.5s, transform 1.5s, -webkit-transform 1.5s;
+
 }
 
 .list-unstyled > .row:hover {
@@ -51,6 +54,23 @@ a{
 
 .list-unstyled > .row:hover a {
     color:#ffc946;
+}
+
+.list-unstyled > .row::after {
+    background-color: rgba(239,152,0,0.21);
+    position: absolute;
+    content: '';
+    top:0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transform-origin:left;
+    transition:width 0.4s ease;
+    z-index:-1;
+}
+
+.list-unstyled > .row:hover::after {
+    width: 100%;
 }
 
 

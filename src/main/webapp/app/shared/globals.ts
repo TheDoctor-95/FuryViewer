@@ -4,6 +4,5 @@ import { Injectable } from '@angular/core';
 export class Globals {
     opcio = 'pending';
     multimedia = 'movie';
-    movieId: number;
-    seriesId: number;
+    multimediaId: number;
 }
