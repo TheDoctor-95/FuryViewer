@@ -32,7 +32,7 @@ export class ArtistDialogComponent implements OnInit {
     movieId: number;
 
     artisttypes: ArtistType[];
-    router: Router;
+
     route: ActivatedRoute;
 
     movies: Movie[];
@@ -47,16 +47,18 @@ export class ArtistDialogComponent implements OnInit {
         private artistTypeService: ArtistTypeService,
         private movieService: MovieService,
         private eventManager: JhiEventManager,
-        public global: Globals
+        public global: Globals,
+        private router: Router
     ) {
     }
 
     ngOnInit() {
 
-        this.loadCompleteCasting(this.global.movieId);
+        this.loadCompleteCasting(this.global.multimediaId);
     }
 
     goTo(id: number) {
+        console.log(id);
         this.router.navigate(['artist', id]).then(
             () => {
                 this.clear();
@@ -80,12 +82,14 @@ export class ArtistDialogComponent implements OnInit {
     }
 
     loadCompleteCasting(id: number) {
-        this.movieService.findActorsLimitless(id).subscribe(
-            (res: ResponseWrapper) => {
-                this.artistLimitless = res.json;
-            },
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
+        if (this.global.multimedia === 'movie') {
+            this.movieService.findActorsLimitless(id).subscribe(
+                (res: ResponseWrapper) => {
+                    this.artistLimitless = res.json;
+                },
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        }
     }
 
     private subscribeToSaveResponse(result: Observable<Artist>) {
