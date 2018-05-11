@@ -941,14 +941,14 @@ input {
 }
 
 .rodona:hover {
-    border-style: solid;
-    border-color: orange;
-    background-color: transparent;
-    border-radius: 50px;
-    width: 47px;
-    height: 47px;
-    color: orange;
-
+    border-style: solid !important;
+    border-color: orange !important;
+    background-color: orange !important;
+    border-radius: 50px !important;
+    width: 47px !important;
+    height: 47px !important;
+    color: white !important;
+    cursor: pointer !important;
 }
 
 .rodona {
