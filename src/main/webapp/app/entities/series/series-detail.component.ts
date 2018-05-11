@@ -25,6 +25,7 @@ import {Social} from '../social/social.model';
 import {RateSeries, RateSeriesService} from '../rate-series';
 import {ReviewSeries} from '../review-series';
 import {ReviewSeriesService} from '../review-series';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'jhi-series-detail',
@@ -86,7 +87,8 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
         private seriesStatService: SeriesStatsService,
         private socialService: SocialService,
         private rateSeriesService: RateSeriesService,
-        private reviewSeriesService: ReviewSeriesService
+        private reviewSeriesService: ReviewSeriesService,
+        private titleService: Title
 ) {
     this.director = new Artist();
     this.director.name = '';
@@ -136,6 +138,7 @@ export class SeriesDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.seriesService.find(id).subscribe((series) => {
             this.series = series;
+            this.titleService.setTitle(this.series.name+" - FuryViewer");
         });
     }
 

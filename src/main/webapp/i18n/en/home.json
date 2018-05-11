@@ -1,7 +1,7 @@
 {
     "home": {
-        "title": "Welcome, Java Hipster!",
-        "subtitle": "This is your homepage",
+        "title": "FuryViewer",
+        "subtitle": "This is your page",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         },

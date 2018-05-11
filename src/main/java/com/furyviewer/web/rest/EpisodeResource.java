@@ -1,7 +1,6 @@
 package com.furyviewer.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.furyviewer.domain.Artist;
 import com.furyviewer.domain.Episode;
 import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.EpisodeRepository;
@@ -17,7 +16,6 @@ import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -43,19 +41,18 @@ public class EpisodeResource {
 
     private final EpisodeRepository episodeRepository;
 
-    @Autowired
-    EpisodeOmdbDTOService episodeOmdbDTOService;
+    private final EpisodeOmdbDTOService episodeOmdbDTOService;
 
-    @Autowired
-    private ArtistRepository artistRepository;
+    private final ArtistRepository artistRepository;
 
     private final EpisodeService episodeService;
 
-    @Autowired
     private final ArtistLimitService artistLimitService;
 
-    public EpisodeResource(EpisodeRepository episodeRepository, EpisodeService episodeService, ArtistLimitService artistLimitService) {
+    public EpisodeResource(EpisodeRepository episodeRepository, EpisodeOmdbDTOService episodeOmdbDTOService, ArtistRepository artistRepository, EpisodeService episodeService, ArtistLimitService artistLimitService) {
         this.episodeRepository = episodeRepository;
+        this.episodeOmdbDTOService = episodeOmdbDTOService;
+        this.artistRepository = artistRepository;
         this.episodeService = episodeService;
         this.artistLimitService = artistLimitService;
     }
