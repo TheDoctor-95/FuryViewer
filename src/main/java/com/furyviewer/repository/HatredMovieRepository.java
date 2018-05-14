@@ -48,5 +48,6 @@ public interface HatredMovieRepository extends JpaRepository<HatredMovie, Long> 
     @Query("SELECT count(h) FROM HatredMovie h WHERE h.hated=true")
     Integer countAllHatred();
 
-
+    @Query("SELECT COUNT(h) FROM HatredMovie h WHERE h.hated=true")
+    Integer countTotalMovieHatred();
 }

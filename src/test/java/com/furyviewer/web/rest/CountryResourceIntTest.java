@@ -70,15 +70,15 @@ public class CountryResourceIntTest {
     private Country country;
 
     @Before
-    public void setup() {
+    /*public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CountryResource countryResource = new CountryResource(countryRepository);
+        final CountryResource countryResource = new CountryResource(countryRepository, homeService, googleMapsDTOService);
         this.restCountryMockMvc = MockMvcBuilders.standaloneSetup(countryResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
-    }
+    }*/
 
     /**
      * Create an entity for this test.

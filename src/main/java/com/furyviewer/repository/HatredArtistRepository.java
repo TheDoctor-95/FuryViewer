@@ -35,4 +35,7 @@ public interface HatredArtistRepository extends JpaRepository<HatredArtist, Long
 
     @Query("SELECT COUNT(h.hated) FROM HatredArtist h WHERE h.hated=true AND h.artist.id=:id")
     Integer countHatredArtist(@Param("id") Long id);
+
+    @Query("SELECT COUNT(h) FROM HatredArtist h WHERE h.hated=true")
+    Integer countTotalArtistHatred();
 }

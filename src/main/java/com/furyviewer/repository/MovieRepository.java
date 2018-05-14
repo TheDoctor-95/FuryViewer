@@ -56,6 +56,8 @@ public interface MovieRepository extends JpaRepository<Movie, Long> , JpaSpecifi
     @Query("select m.actorMains from Movie m where m.id=:id")
     List<Artist> getMainActorsByMovieLimit(@Param("id")Long id, Pageable pageable);
 
+    @Query("SELECT COUNT(m) FROM Movie m")
+    Integer totalMovies();
 
 
 

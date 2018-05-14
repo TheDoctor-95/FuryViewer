@@ -31,4 +31,6 @@ public interface SeriesRepository extends JpaRepository<Series, Long>, JpaSpecif
     //@Query("select s from Series s where :genre member of m.genres order by avg(m.rateSeries.rate)")
     //List<Series> seriesByGenre(@Param("genre") Genre genre);
 
+    @Query("SELECT COUNT(s) FROM Series s")
+    Integer totalSeries();
 }

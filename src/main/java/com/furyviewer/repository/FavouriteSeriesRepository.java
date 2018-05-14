@@ -45,4 +45,6 @@ public interface FavouriteSeriesRepository extends JpaRepository<FavouriteSeries
     @Query("select count(fs.series) from FavouriteSeries fs where fs.liked=true and fs.user.login=:login")
     Integer countFavoriteSeriesUserLogin(@Param("login") String login);
 
+    @Query("SELECT COUNT(f) FROM FavouriteSeries f WHERE f.liked=true")
+    Integer countTotalSeriesFav();
 }

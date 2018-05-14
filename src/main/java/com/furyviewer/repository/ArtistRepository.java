@@ -50,6 +50,7 @@ public interface ArtistRepository extends JpaRepository<Artist, Long>, JpaSpecif
     @Query("select distinct artist from Artist artist left join fetch artist.artistTypes")
     List<Artist> findAllWithEagerRelationships(@Param("pageable") Pageable pageable);
 
-
+    @Query("SELECT COUNT(a) FROM Artist a")
+    Integer totalArtist();
 }
 

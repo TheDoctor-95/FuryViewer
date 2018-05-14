@@ -3,7 +3,7 @@ package com.furyviewer.service.util;
 import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.Social;
-import com.furyviewer.repository.SocialRepository;
+import com.furyviewer.repository.*;
 import com.furyviewer.service.dto.OpenMovieDatabase.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +21,24 @@ import java.util.Optional;
 public class MarksService {
     @Autowired
     SocialRepository socialRepository;
+
+    @Autowired
+    private FavouriteArtistRepository favouriteArtistRepository;
+
+    @Autowired
+    private FavouriteMovieRepository favouriteMovieRepository;
+
+    @Autowired
+    private FavouriteSeriesRepository favouriteSeriesRepository;
+
+    @Autowired
+    private HatredArtistRepository hatredArtistRepository;
+
+    @Autowired
+    private HatredMovieRepository hatredMovieRepository;
+
+    @Autowired
+    private HatredSeriesRepository hatredSeriesRepository;
 
     /**
      * Convierte la informacion de los votos de paginas externas proporcionados por la api al formato FuryViewer.
@@ -121,6 +139,12 @@ public class MarksService {
         return " " + markInt;
     }
 
+    /**
+     * Devuelve el tanto por ciento de favs más hates.
+     * @param fav int | Numero de favs.
+     * @param hate int | Numero de hatreds.
+     * @return Double | Tanto por ciento de favs y hatreds.
+     */
     public Double totalFavHate(Integer fav, Integer hate) {
         Double auxFav = fav.doubleValue();
         Double auxHate = hate.doubleValue();
@@ -128,5 +152,23 @@ public class MarksService {
         if (auxFav == 0 && auxHate == 0) return 0.0;
 
         return auxFav / (auxFav + auxHate) * 100;
+    }
+
+    /**
+     * Numero total de favoutites de FuryViewer.
+     * @return int | Total de favs.
+     */
+    public int totalFavorites() {
+        return favouriteArtistRepository.countTotalArtistFav() + favouriteMovieRepository.countTotalMovieFav() +
+            favouriteSeriesRepository.countTotalSeriesFav();
+    }
+
+    /**
+     * Numero total de hatreds de FuryViewer.
+     * @return int | Total de hates.
+     */
+    public int totalHatreds() {
+        return hatredArtistRepository.countTotalArtistHatred() + hatredMovieRepository.countTotalMovieHatred() +
+            hatredSeriesRepository.countTotalSeriesHatred();
     }
 }

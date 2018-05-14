@@ -36,6 +36,43 @@ export class CountryService {
         });
     }
 
+    getAbsoluteTotalFav(): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/count-absolute-favourite/`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getAbsoluteTotalHatred(): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/count-absolute-hatred/`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getAbsoluteTotalArtist(): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/count-absolute-artist/`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getAbsoluteTotalMovie(): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/count-absolute-movie/`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getAbsoluteTotalSeries(): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/count-absolute-series/`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getAbsoluteTotalUser(): Observable<number> {
+        return this.http.get(`${this.resourceUrl}/count-absolute-user/`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)

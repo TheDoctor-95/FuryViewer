@@ -3,15 +3,15 @@ package com.furyviewer.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.Country;
 
-import com.furyviewer.repository.CountryRepository;
+import com.furyviewer.repository.*;
 import com.furyviewer.service.GoogleMaps.Service.GoogleMapsDTOService;
 import com.furyviewer.service.dto.GoogleMaps.GoogleMapsDTO;
+import com.furyviewer.service.util.MarksService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,11 +34,26 @@ public class CountryResource {
 
     private final CountryRepository countryRepository;
 
-    @Autowired
-    GoogleMapsDTOService googleMapsDTOService;
+    private final MarksService homeService;
 
-    public CountryResource(CountryRepository countryRepository) {
+    private final GoogleMapsDTOService googleMapsDTOService;
+
+    private final ArtistRepository artistRepository;
+
+    private final MovieRepository movieRepository;
+
+    private final SeriesRepository seriesRepository;
+
+    private final UserRepository userRepository;
+
+    public CountryResource(CountryRepository countryRepository, MarksService homeService, GoogleMapsDTOService googleMapsDTOService, ArtistRepository artistRepository, MovieRepository movieRepository, SeriesRepository seriesRepository, UserRepository userRepository) {
         this.countryRepository = countryRepository;
+        this.homeService = homeService;
+        this.googleMapsDTOService = googleMapsDTOService;
+        this.artistRepository = artistRepository;
+        this.movieRepository = movieRepository;
+        this.seriesRepository = seriesRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -142,5 +157,53 @@ public class CountryResource {
     @Timed
     public GoogleMapsDTO getTestInicial() throws Exception {
         return  googleMapsDTOService.getCoordinates("usa");
+    }
+
+    @GetMapping("/countries/count-absolute-favourite/")
+    @Timed
+    public ResponseEntity<Integer> absoluteCountFav() {
+        log.debug("REST request to get number of likes of artist");
+        Integer num = Math.toIntExact(homeService.totalFavorites());
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
+    @GetMapping("/countries/count-absolute-hatred/")
+    @Timed
+    public ResponseEntity<Integer> absoluteCountHatred() {
+        log.debug("REST request to get number of likes of artist");
+        Integer num = Math.toIntExact(homeService.totalHatreds());
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
+    @GetMapping("/countries/count-absolute-artist/")
+    @Timed
+    public ResponseEntity<Integer> absoluteCountArtist() {
+        log.debug("REST request to get number of likes of artist");
+        Integer num = Math.toIntExact(artistRepository.totalArtist());
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
+    @GetMapping("/countries/count-absolute-movie/")
+    @Timed
+    public ResponseEntity<Integer> absoluteCountMovie() {
+        log.debug("REST request to get number of likes of artist");
+        Integer num = Math.toIntExact(movieRepository.totalMovies());
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
+    @GetMapping("/countries/count-absolute-series/")
+    @Timed
+    public ResponseEntity<Integer> absoluteCountSeries() {
+        log.debug("REST request to get number of likes of artist");
+        Integer num = Math.toIntExact(seriesRepository.totalSeries());
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
+    @GetMapping("/countries/count-absolute-user/")
+    @Timed
+    public ResponseEntity<Integer> absoluteCountUser() {
+        log.debug("REST request to get number of likes of artist");
+        Integer num = Math.toIntExact(userRepository.totalUsers());
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
     }
 }
