@@ -11,6 +11,11 @@ import {MovieService} from '../../entities/movie/movie.service';
 import {Movie} from "../../entities/movie/movie.model";
 import {Genre, GenreService} from '../../entities/genre';
 import {Title} from '@angular/platform-browser';
+import {Globals} from "../../shared/globals";
+import {Series} from "../../entities/series/series.model";
+import {SeriesService} from "../../entities/series/series.service";
+import {Artist} from "../../entities/artist/artist.model";
+import {ArtistService} from "../../entities/artist/artist.service";
 
 @Component({
     selector: 'jhi-search',
@@ -41,11 +46,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     name = '';
     movies: Movie[] = [];
+    series: Series[] = [];
+    artists: Artist[] = [];
     date: number;
     countryId = 1;
     loading = false;
     actualYear;
     genres: Genre[];
+    importando: boolean = false;
 
     constructor(private searchService: SearchService,
                 private jhiAlertService: JhiAlertService,
@@ -53,10 +61,27 @@ export class SearchComponent implements OnInit, OnDestroy {
                 private principal: Principal,
                 private movieService: MovieService,
                 private genreService: GenreService,
+                private seriesService: SeriesService,
+                private artistService: ArtistService,
                 config: NgbRatingConfig,
+                public globals: Globals,
                 private titleService: Title) {
         config.max = 5;
         this.actualYear = (new Date()).getFullYear();
+    }
+
+    change(multimedia: string) {
+        this.globals.multimedia = multimedia;
+        if (this.globals.multimedia === 'movie') {
+            if ('following' === this.globals.opcio) {
+                this.globals.opcio = 'pending';
+            }
+        }
+        if (this.globals.multimedia === 'movie') {
+            this.buscarMovies();
+        } else if (this.globals.multimedia === 'series') {
+            this.buscarSeries()
+        }
     }
 
     ngOnInit() {
@@ -85,17 +110,20 @@ export class SearchComponent implements OnInit, OnDestroy {
     buscarMovies() {
         this.loading = true;
         let criteria = '';
+        this.movies = [];
+        this.series = [];
+        this.artists = [];
 
-        if (this.name !== '' ) {
+        if (this.name !== '') {
             console.log(this.name);
             criteria += 'name.contains=' + this.name;
         }
 
-        if (this.date !== 0 && this.date !== undefined) {
+        if (this.date !== 0 && this.date !== undefined && this.date !== null) {
             if (criteria !== '') {
                 criteria += '&';
             }
-            criteria += 'release_date.greaterThan=' + this.date + '-01-01&release_date.lessThan=' + this.date + '-12-31' ;
+            criteria += 'release_date.greaterThan=' + this.date + '-01-01&release_date.lessThan=' + this.date + '-12-31';
         }
 
         console.log(criteria)
@@ -106,10 +134,79 @@ export class SearchComponent implements OnInit, OnDestroy {
                 this.movies = res.json;
             }
         );
-        this.searchService.import(this.name).subscribe(
-            (res: Movie) => {
+        if (!this.importando) {
+            this.importando = true;
+            this.searchService.import(this.name).subscribe(
+                (res: Movie) => {
+                    this.importando = false;
+                });
+        }
+    }
+
+    buscarSeries() {
+        this.loading = true;
+        let criteria = '';
+        this.movies = [];
+        this.series = [];
+        this.artists = [];
+
+        if (this.name !== '') {
+            console.log(this.name);
+            criteria += 'name.contains=' + this.name;
+        }
+
+        if (this.date !== 0 && this.date !== undefined && this.date !== null) {
+            if (criteria !== '') {
+                criteria += '&';
+            }
+            criteria += 'release_date.greaterThan=' + this.date + '-01-01&release_date.lessThan=' + this.date + '-12-31';
+        }
+
+        console.log(criteria)
+        this.seriesService.superQuery(criteria).subscribe(
+            (res: ResponseWrapper) => {
                 console.log(res);
-            });
+                this.loading = false;
+                this.series = res.json;
+            }
+        );
+        if (!this.importando) {
+            this.importando = true;
+            this.searchService.import(this.name).subscribe(
+                (res: Movie) => {
+                    this.importando = false;
+                });
+        }
+    }
+
+    buscarArtist() {
+        this.loading = true;
+        let criteria = '';
+        this.movies = [];
+        this.series = [];
+        this.artists = [];
+
+        if (this.name !== '') {
+            console.log(this.name);
+            criteria += 'name.contains=' + this.name;
+        }
+
+        if (this.date !== 0 && this.date !== undefined && this.date !== null) {
+            if (criteria !== '') {
+                criteria += '&';
+            }
+            criteria += 'birthdate.greaterThan=' + this.date + '-01-01&birthdate.lessThan=' + this.date + '-12-31';
+        }
+
+        console.log(criteria);
+
+        this.artistService.superQuery(criteria).subscribe(
+            (res: ResponseWrapper) => {
+                console.log(res);
+                this.loading = false;
+                this.artists = res.json;
+            }
+        );
     }
 
     private onError(error) {

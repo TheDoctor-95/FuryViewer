@@ -19,9 +19,9 @@
                                                 <div class="row">
                                                         <div class="col-2">
                                                             <div class=" botosearch" id="botonsearch">
-                                                                <button> SERIES</button>
-                                                                <button> MOVIES</button>
-                                                                <button> ARTIST</button>
+                                                                <button (click)="change('series')" [ngStyle]="{'background-color':globals.multimedia=='series' ? '#ef9800' : 'white', 'color':globals.multimedia=='series' ? 'white' : '#ef9800'}"> SERIES</button>
+                                                                <button (click)="change('movie')" [ngStyle]="{'background-color':globals.multimedia=='movie' ? '#ef9800' : 'white', 'color':globals.multimedia=='movie' ? 'white' : '#ef9800'}"> MOVIES</button>
+                                                                <button (click)="change('artist')" [ngStyle]="{'background-color':globals.multimedia=='artist' ? '#ef9800' : 'white', 'color':globals.multimedia=='artist' ? 'white' : '#ef9800'}"> ARTIST</button>
                                                             </div>
                                                         </div>
                                                         <div class="col-10">
@@ -93,12 +93,29 @@
                                                                             <div class="col">
                                                                                 <div class="form-group "
                                                                                      style="margin-top: 2%;">
-                                                                                    <button type="submit"
+                                                                                    <button *ngIf="globals.multimedia==='movie'"
+                                                                                        type="submit"
                                                                                             class="btn btn-primary"
                                                                                             style="background-color: orange; border: none; margin-right: 0.5rem; min-width: 6em; padding: 0.5rem; font-weight: 300;"
                                                                                             (click)="buscarMovies()"
                                                                                     >
-                                                                                        SEARCH
+                                                                                        SEARCH MOVIE
+                                                                                    </button>
+                                                                                    <button *ngIf="globals.multimedia==='series'"
+                                                                                        type="submit"
+                                                                                             class="btn btn-primary"
+                                                                                             style="background-color: orange; border: none; margin-right: 0.5rem; min-width: 6em; padding: 0.5rem; font-weight: 300;"
+                                                                                             (click)="buscarSeries()"
+                                                                                    >
+                                                                                        SEARCH SERIES
+                                                                                    </button>
+                                                                                    <button *ngIf="globals.multimedia==='artist'"
+                                                                                        type="submit"
+                                                                                             class="btn btn-primary"
+                                                                                             style="background-color: orange; border: none; margin-right: 0.5rem; min-width: 6em; padding: 0.5rem; font-weight: 300;"
+                                                                                             (click)="buscarArtist()"
+                                                                                    >
+                                                                                        SEARCH ACTOR
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -112,13 +129,35 @@
 
 
                                                 <div class="serpeli_body2" >
-                                                    <div class="card portades" style="margin-right: 2%;" *ngFor="let movie of movies">
+                                                    <div class="card portades" style="margin-right: 2%;" *ngFor="let movie of movies" [routerLink]="['/movie', movie.id ]">
                                                         <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image"
                                                              style=" width: 7rem; height: 10rem;">
 
                                                         <div class="card-body">
                                                             <h4 class="card-title">{{movie.name}}</h4>
-                                                            <h3 class="card-text">{{movie.releaseDate}}</h3>
+                                                            <h3 class="card-text">{{movie.releaseDate | date:'shortDate'}}</h3>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="card portades" style="margin-right: 2%;" *ngFor="let ss of series" [routerLink]="['/series', ss.id ]">
+                                                        <img class="card-img-top" src="{{ss.imgUrl}}" alt="Card image"
+                                                             style=" width: 7rem; height: 10rem;">
+
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">{{ss.name}}</h4>
+                                                            <h3 class="card-text">{{ss.releaseDate | date:'shortDate'}}</h3>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="card portades" style="margin-right: 2%;" *ngFor="let artist of artists" [routerLink]="['/artist', artist.id ]">
+                                                        <img class="card-img-top" src="{{artist.imgUrl}}" alt="Card image"
+                                                             style=" width: 7rem; height: 10rem;">
+
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">{{artist.name}}</h4>
+                                                            <h3 class="card-text">{{artist.birthdate | date:'shortDate'}}</h3>
                                                         </div>
 
                                                     </div>
@@ -127,7 +166,8 @@
                                                         <img src="../../../content/images/loader.gif" />
                                                     </div>
 
-                                                    <div class="jumbotron" *ngIf="movies.length==0 && !loader">
+
+                                                    <div class="jumbotron" *ngIf="movies.length==0 && series.length==0 && artists.length==0 && !loader">
                                                         WE DIDN'T FIND ANY RESULT
                                                     </div>
 

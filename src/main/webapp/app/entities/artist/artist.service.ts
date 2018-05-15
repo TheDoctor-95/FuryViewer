@@ -78,6 +78,15 @@ export class ArtistService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    superQuery(criteria: string): Observable<ResponseWrapper> {
+        return this.http.get(`api/artist-s?${criteria}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            console.log(jsonResponse);
+            return this.convertResponse(res);
+        });
+    }
+
+
     seriesActorsQuery(id: number): Observable<ResponseWrapper> {
 
         return this.http.get(`${SERVER_API_URL}/api/ActorBySeriesID/${id}`)

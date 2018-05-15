@@ -73,6 +73,9 @@ export class WatchlistComponent implements OnInit, OnDestroy {
         this.registerChangeInWatchlists();
         this.loadToShow();
         this.titleService.setTitle("Watchlist - FuryViewer");
+        if (this.globals.multimedia === 'artist'){
+            this.globals.multimedia = 'movie';
+        }
     }
 
     option(option: string) {

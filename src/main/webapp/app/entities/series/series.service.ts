@@ -50,6 +50,14 @@ export class SeriesService {
         });
     }
 
+    superQuery(criteria: string): Observable<ResponseWrapper> {
+        return this.http.get(`api/series-s?${criteria}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            console.log(jsonResponse);
+            return this.convertResponse(res);
+        });
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
