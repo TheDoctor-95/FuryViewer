@@ -5,7 +5,7 @@ export class FilmographyArtistModel {
         public releaseDate?: any,
         public type?: string,
         public urlCartel?: string,
-        public stat?: string
+        public averageMark?: number
     ) {
 
     }

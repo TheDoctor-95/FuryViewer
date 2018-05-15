@@ -10,6 +10,8 @@ import com.furyviewer.repository.RateMovieRepository;
 import com.furyviewer.repository.UserRepository;
 import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.dto.RateMovieStats;
+import com.furyviewer.service.dto.util.MultimediaActorsDTO;
+import com.furyviewer.service.util.FilmographyService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -46,12 +48,15 @@ public class RateMovieResource {
 
     private final GenreRepository genreRepository;
 
-    public RateMovieResource(RateMovieRepository rateMovieRepository, UserRepository userRepository, MovieRepository movieRepository, GenreRepository genreRepository) {
+    private final FilmographyService filmographyService;
+
+    public RateMovieResource(RateMovieRepository rateMovieRepository, UserRepository userRepository, MovieRepository movieRepository, GenreRepository genreRepository, FilmographyService filmographyService) {
         this.rateMovieRepository = rateMovieRepository;
         this.userRepository=userRepository;
         this.movieRepository = movieRepository;
 
         this.genreRepository = genreRepository;
+        this.filmographyService = filmographyService;
     }
 
     /**
@@ -178,11 +183,7 @@ public class RateMovieResource {
 
     @GetMapping("/rate-movies/get-top-movies-by-genre/{idGenre}")
     @Timed
-    public List<RateMovieStats> getMoviesByIdGenre(@PathVariable Long idGenre) {
-
-        Pageable topTen = new PageRequest(0, 10);
-        return rateMovieRepository.getMovieStats(genreRepository.findOne(idGenre), topTen);
-
+    public List<MultimediaActorsDTO> getMoviesByIdGenre(@PathVariable Long idGenre) {
+        return filmographyService.topByGenre(idGenre);
     }
-
 }
