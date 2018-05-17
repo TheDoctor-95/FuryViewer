@@ -7,6 +7,7 @@ import com.furyviewer.domain.Season;
 import com.furyviewer.domain.Series;
 import com.furyviewer.repository.*;
 import com.furyviewer.security.SecurityUtils;
+import com.furyviewer.service.dto.util.CalendarDTO;
 import com.furyviewer.service.dto.util.EpisodeSerieDTO;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
 import com.furyviewer.web.rest.EpisodeResource;
@@ -178,9 +179,11 @@ public class EpisodeService {
      * Funcion que devuelve todos los episodios que van a salir agrupados i ordenados por fecha.
      * @return SortedMap | Lista de episodes ordenada por fecha.
      */
-    public SortedMap<LocalDate, List<Episode>> calendar(){
+    public List<CalendarDTO> calendar(){
 
-        return episodeRepository.
+        List<CalendarDTO> calendarDTOList = new ArrayList<>();
+
+        SortedMap<LocalDate, List<Episode>> map = episodeRepository.
             findBySeasonSeriesIn(
                 seriesStatsRepository.followingSeriesUser(SecurityUtils.getCurrentUserLogin()))
             .stream()
@@ -188,6 +191,14 @@ public class EpisodeService {
                 (   episode.getReleaseDate().isEqual(LocalDate.now())
                  || episode.getReleaseDate().isAfter(LocalDate.now())))
             .collect(Collectors.groupingBy(Episode::getReleaseDate, TreeMap::new, Collectors.toList()));
+
+        for (LocalDate releseDate:
+             map.keySet()) {
+            CalendarDTO calendarDTO = new CalendarDTO(releseDate, map.get(releseDate));
+            calendarDTOList.add(calendarDTO);
+        }
+
+        return calendarDTOList;
     }
 
     /**

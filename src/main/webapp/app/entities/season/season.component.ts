@@ -9,6 +9,7 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import {EpisodeService} from '../episode/episode.service';
 import {Episode} from '../episode/episode.model';
 import {Movie} from "../movie/movie.model";
+import {CalendarModel} from "../../shared/model/Calendar.model";
 
 @Component({
     selector: 'jhi-season',
@@ -19,8 +20,7 @@ export class SeasonComponent implements OnInit, OnDestroy {
 seasons: Season[];
     currentAccount: any;
     eventSubscriber: Subscription;
-    episodes: Map<string, Movie[]>;
-    dates;
+    episodes: CalendarModel[];
 
     constructor(
         private seasonService: SeasonService,
@@ -61,9 +61,8 @@ seasons: Season[];
 
     loadCalendar() {
         this.episodeService.calendar().subscribe(
-            (res: Map<string, Movie[]>) => {
-                this.episodes = res;
-                console.log('episodes', this.episodes.values())
+            (res: ResponseWrapper) => {
+                this.episodes = res.json;
                 console.log(this.episodes);
             },
             (res: ResponseWrapper) => this.onError(res.json)

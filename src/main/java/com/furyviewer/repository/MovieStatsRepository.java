@@ -33,10 +33,12 @@ public interface MovieStatsRepository extends JpaRepository<MovieStats, Long> {
      * @param user User | Usuario con pelicula pendiente
      * @return Listado de peliculas pendientes s
      */
-    @Query("select movieStats.movie from MovieStats movieStats where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.PENDING and movieStats.user=:User")
+    @Query("select movieStats.movie from MovieStats movieStats " +
+        "where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.PENDING and movieStats.user=:User")
     List<Movie> pendingMovies(@Param("User")User user);
 
-    @Query("select movieStats.movie from MovieStats movieStats where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.PENDING and movieStats.user.login=:login")
+    @Query("select movieStats.movie from MovieStats movieStats " +
+        "where movieStats.status= com.furyviewer.domain.enumeration.MovieStatsEnum.PENDING and movieStats.user.login=:login")
     List<Movie> pendingMoviesUserLogin(@Param("login")String user, Pageable pageable);
 
 

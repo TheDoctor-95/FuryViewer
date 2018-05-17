@@ -45,7 +45,8 @@ export class WatchlistComponent implements OnInit, OnDestroy {
         console.log('scrolling!');
         console.log(this.toShow, this.filmography.length);
         console.log(this.filmography);
-        if (( document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].clientHeight + document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollTop) ===
+        if (( document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].clientHeight
+            + document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollTop) ===
             document.getElementsByClassName('ng-sidebar__content ng-sidebar__content--animate')[0].scrollHeight
             && !this.loading && this.toShow !== this.filmography.length) {
             this.pagenumber = this.pagenumber + 1;
@@ -107,7 +108,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
                 } else {
                     console.log('json ');
                     console.log(res.json);
-                    this.filmography = this.filmography.concat(res.json)
+                    this.filmography = this.filmography.concat(res.json);
                     console.log('after concat', this.filmography);
                 }
                 console.log(this.filmography);

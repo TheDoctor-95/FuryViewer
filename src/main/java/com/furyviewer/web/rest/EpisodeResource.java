@@ -6,6 +6,7 @@ import com.furyviewer.repository.ArtistRepository;
 import com.furyviewer.repository.EpisodeRepository;
 import com.furyviewer.service.OpenMovieDatabase.Service.EpisodeOmdbDTOService;
 import com.furyviewer.service.dto.util.ActorLimitDTO;
+import com.furyviewer.service.dto.util.CalendarDTO;
 import com.furyviewer.service.dto.util.EpisodeSerieDTO;
 import com.furyviewer.service.dto.OpenMovieDatabase.EpisodeOmdbDTO;
 import com.furyviewer.service.dto.util.EpisodesHomeDTO;
@@ -181,7 +182,7 @@ public class EpisodeResource {
     @GetMapping("/episodes/calendar")
     @Timed
     @Transactional
-    public SortedMap<LocalDate, List<Episode>> calendar() {
+    public List<CalendarDTO> calendar() {
         log.debug("REST request to get all calendar");
         return episodeService.calendar();
 

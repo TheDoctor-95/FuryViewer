@@ -13,11 +13,11 @@
                             </div>
                             <div *ngIf="episodes!=undefined" class="all-elements">
                                 <!-- Fila-->
-                                <div class="line-element-wrapper" *ngFor="let episode of episodes.values()">
+                                <div class="line-element-wrapper" *ngFor="let calendar of episodes">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
-
+                                                {{calendar.releaseDate}}
 
                                                 <div class="col-3">
                                                     <div class="date-element" style="text-align: center;">
@@ -51,13 +51,13 @@
 
 
                                                         <div class="serpeli_body2">
-                                                            <div class="card portades">
+                                                            <div class="card portades" *ngFor="let episode of calendar.episodes">
                                                                 <img class="card-img-top"
                                                                      src="../../../content/images/doctorwho.jpg"
                                                                      alt="Card image">
 
                                                                 <div class="card-body">
-                                                                    <h4 class="card-title">3x04 Blink</h4>
+                                                                    <h4 class="card-title">3x{{episode.number}} {{episode.name}}</h4>
                                                                     <h3 class="card-text">Doctor Who</h3>
                                                                 </div>
 
