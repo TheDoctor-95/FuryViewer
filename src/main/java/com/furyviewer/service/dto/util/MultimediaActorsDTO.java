@@ -10,6 +10,7 @@ public class MultimediaActorsDTO {
     private LocalDate releaseDate;
     private String type;
     private String urlCartel;
+    private Double averageMark;
 
     public MultimediaActorsDTO() {
     }
@@ -20,6 +21,15 @@ public class MultimediaActorsDTO {
         this.releaseDate = releaseDate;
         this.type = type;
         this.urlCartel = urlCartel;
+    }
+
+    public MultimediaActorsDTO(Long id, String title, LocalDate releaseDate, String type, String urlCartel, Double averageMark) {
+        this.id = id;
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.type = type;
+        this.urlCartel = urlCartel;
+        this.averageMark = averageMark;
     }
 
     public Long getId() {

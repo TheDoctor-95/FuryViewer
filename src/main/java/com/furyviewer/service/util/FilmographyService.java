@@ -1,11 +1,12 @@
 package com.furyviewer.service.util;
 
 import com.furyviewer.domain.Artist;
-import com.furyviewer.repository.ArtistRepository;
-import com.furyviewer.repository.EpisodeRepository;
-import com.furyviewer.repository.MovieRepository;
+import com.furyviewer.repository.*;
+import com.furyviewer.service.dto.RateMovieStats;
 import com.furyviewer.service.dto.util.MultimediaActorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -26,6 +27,12 @@ public class FilmographyService {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private RateMovieRepository rateMovieRepository;
+
+    @Autowired
+    private GenreRepository genreRepository;
 
     /**
      * Se encarga de buscar todos los lugares donde ha trabajado un artist para construir una filmografia.
@@ -135,6 +142,22 @@ public class FilmographyService {
             if (multimediaActorsDTO.isEmpty()) multimediaActorsDTO.add(multi);
 
             if(!multimediaActorsDTO.contains(multi)) multimediaActorsDTO.add(multi);
+        }
+
+        return multimediaActorsDTO;
+    }
+
+    public List<MultimediaActorsDTO> topByGenre(Long idGenre) {
+        Pageable topTen = new PageRequest(0, 10);
+        List<RateMovieStats> rateMovieStats = rateMovieRepository.getMovieStats(genreRepository.findOne(idGenre), topTen);
+        List<MultimediaActorsDTO> multimediaActorsDTO = null;
+
+        for (RateMovieStats rate : rateMovieStats) {
+            MultimediaActorsDTO multimediaActors =
+                new MultimediaActorsDTO(rate.getMovie().getId(),rate.getMovie().getName(),
+                    rate.getMovie().getReleaseDate(),"movie",rate.getMovie().getImgUrl(),rate.getAvg());
+
+            multimediaActorsDTO.add(multimediaActors);
         }
 
         return multimediaActorsDTO;
