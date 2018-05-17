@@ -17,28 +17,26 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
-                                                {{calendar.releaseDate}}
-
                                                 <div class="col-3">
                                                     <div class="date-element" style="text-align: center;">
-                                                        <div class="row">
+                                                        <div class="row" [ngStyle]="{'color':calendar.releaseDate===today ? '#ef9800' : 'grey'}">
                                                             <div class="col">
                                                                 <div class="num-element">
-                                                                    26
+                                                                    {{calendar.releaseDate | date: 'dd'}}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="day-element">
-                                                                    MONDAY
+                                                                    {{calendar.releaseDate | date: 'EEEE'}}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <div class="month-element">
-                                                                    March
+                                                                    {{calendar.releaseDate | date: 'LLLL'}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -51,14 +49,14 @@
 
 
                                                         <div class="serpeli_body2">
-                                                            <div class="card portades" *ngFor="let episode of calendar.episodes">
+                                                            <div class="card portades" *ngFor="let episode of calendar.episodes" [routerLink]="['/series', episode?.id]">
                                                                 <img class="card-img-top"
-                                                                     src="../../../content/images/doctorwho.jpg"
+                                                                     src="{{episode.urlCartel}}"
                                                                      alt="Card image">
 
                                                                 <div class="card-body">
-                                                                    <h4 class="card-title">3x{{episode.number}} {{episode.name}}</h4>
-                                                                    <h3 class="card-text">Doctor Who</h3>
+                                                                    <h4 class="card-title">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
+                                                                    <h3 class="card-text">{{episode.titleSeries}}</h3>
                                                                 </div>
 
 

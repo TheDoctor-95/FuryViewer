@@ -8,9 +8,9 @@ import java.util.List;
 public class CalendarDTO {
 
     private LocalDate releaseDate;
-    private List<Episode> episodes;
+    private List<EpisodesHomeDTO> episodes;
 
-    public CalendarDTO(LocalDate releaseDate, List<Episode> episodes) {
+    public CalendarDTO(LocalDate releaseDate, List<EpisodesHomeDTO> episodes) {
         this.releaseDate = releaseDate;
         this.episodes = episodes;
     }
@@ -26,11 +26,11 @@ public class CalendarDTO {
         this.releaseDate = releaseDate;
     }
 
-    public List<Episode> getEpisodes() {
+    public List<EpisodesHomeDTO> getEpisodes() {
         return episodes;
     }
 
-    public void setEpisodes(List<Episode> episodes) {
+    public void setEpisodes(List<EpisodesHomeDTO> episodes) {
         this.episodes = episodes;
     }
 }

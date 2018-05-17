@@ -1,9 +1,9 @@
-import {Episode} from '../../entities/episode/episode.model';
+import {EpisodeNextSeen} from './EpisodeNextSeen.model';
 
 export class CalendarModel {
     constructor(
         public releaseDate?: any,
-        public episodes?: Episode[]
+        public episodes?: EpisodeNextSeen[]
     ) {
 
     }

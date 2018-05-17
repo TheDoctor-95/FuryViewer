@@ -21,6 +21,7 @@ seasons: Season[];
     currentAccount: any;
     eventSubscriber: Subscription;
     episodes: CalendarModel[];
+    today: any;
 
     constructor(
         private seasonService: SeasonService,
@@ -46,6 +47,7 @@ seasons: Season[];
             this.loadCalendar();
         });
         this.registerChangeInSeasons();
+        this.today = Date.now();
     }
 
     ngOnDestroy() {

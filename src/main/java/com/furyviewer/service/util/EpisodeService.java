@@ -194,7 +194,23 @@ public class EpisodeService {
 
         for (LocalDate releseDate:
              map.keySet()) {
-            CalendarDTO calendarDTO = new CalendarDTO(releseDate, map.get(releseDate));
+            List<EpisodesHomeDTO> episodesHomeDTOList = new ArrayList<>();
+            for (Episode e:
+                 map.get(releseDate)) {
+                EpisodesHomeDTO episodesHomeDTO = new EpisodesHomeDTO();
+                episodesHomeDTO.setUrlCartel(e.getSeason().getSeries().getImgUrl());
+                episodesHomeDTO.setTitleEpisode(e.getName());
+                episodesHomeDTO.setSeasonNumber(e.getSeason().getNumber());
+                episodesHomeDTO.setId(e.getSeason().getSeries().getId());
+                episodesHomeDTO.setEpisodeNumber(e.getNumber());
+                episodesHomeDTO.setTitleSeries(e.getSeason().getSeries().getName());
+
+                episodesHomeDTOList.add(episodesHomeDTO);
+
+
+            }
+
+            CalendarDTO calendarDTO = new CalendarDTO(releseDate, episodesHomeDTOList);
             calendarDTOList.add(calendarDTO);
         }
 
