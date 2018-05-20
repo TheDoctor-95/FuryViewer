@@ -10,7 +10,7 @@
                              [routerLink]="['/series', episode?.id]">
                             <img class="card-img-top" src="{{episode.urlCartel}}" alt="Card image">
                             <div class="card-body">
-                                <h4 class="card-title seriesChapter" style="font-size: 15px; font-weight: 400;">{{episode.seasonNumber}}x{{episode.episodeNumber}}
+                                <h4 class="card-title seriesChapter limit" style="font-size: 15px; font-weight: 400;">{{episode.seasonNumber | number:'2.0-0' }}x{{episode.episodeNumber | number: '2.0-0'}}
                                     {{episode.titleEpisode}}</h4>
                                 <h3 class="card-text seriesTitle" style="letter-spacing: 0.7px; text-transform: uppercase"> {{episode.titleSeries}} </h3>
                             </div>

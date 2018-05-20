@@ -1685,3 +1685,8 @@ margin-left: 15%;*/
     padding-top: 1rem;
 }
 
+.limit{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

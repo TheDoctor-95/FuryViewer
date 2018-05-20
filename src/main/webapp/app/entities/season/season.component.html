@@ -55,7 +55,7 @@
                                                                      alt="Card image">
 
                                                                 <div class="card-body">
-                                                                    <h4 class="card-title">{{episode.seasonNumber}}x{{episode.episodeNumber}} {{episode.titleEpisode}}</h4>
+                                                                    <h4 class="card-title limit">{{episode.seasonNumber | number:'2.0-0' }}x{{episode.episodeNumber | number:'2.0-0' }} {{episode.titleEpisode}}</h4>
                                                                     <h3 class="card-text">{{episode.titleSeries}}</h3>
                                                                 </div>
 
