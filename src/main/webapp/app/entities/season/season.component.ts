@@ -22,6 +22,7 @@ seasons: Season[];
     eventSubscriber: Subscription;
     episodes: CalendarModel[];
     today: any;
+    loading: boolean;
 
     constructor(
         private seasonService: SeasonService,
@@ -30,6 +31,7 @@ seasons: Season[];
         private principal: Principal,
         private episodeService: EpisodeService
     ) {
+        this.episodes = [];
     }
 
     loadAll() {
@@ -47,7 +49,7 @@ seasons: Season[];
             this.loadCalendar();
         });
         this.registerChangeInSeasons();
-        this.today = Date.now();
+        this.today = new Date();
     }
 
     ngOnDestroy() {
@@ -62,10 +64,12 @@ seasons: Season[];
     }
 
     loadCalendar() {
+        this.loading = true;
         this.episodeService.calendar().subscribe(
             (res: ResponseWrapper) => {
                 this.episodes = res.json;
                 console.log(this.episodes);
+                this.loading = false;
             },
             (res: ResponseWrapper) => this.onError(res.json)
         )

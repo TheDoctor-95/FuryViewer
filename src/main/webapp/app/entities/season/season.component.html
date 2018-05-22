@@ -5,23 +5,26 @@
                 <div class="cuerpo">
                     <div class="row">
                         <div class="col-12">
-                            <div class="row text-right">
-                                <div class="col botocalendari" id="botoncalendar">
-                                    <button> SERIES</button>
-                                    <button> MOVIES</button>
-                                </div>
-                            </div>
-                            <div *ngIf="episodes!=undefined" class="all-elements">
+
+
+
+                            <div class="all-elements">
                                 <!-- Fila-->
+                                <div class="loader" *ngIf="loading">
+                                    <img src="../../../content/images/loader.gif" />
+                                </div>
+                                <div class="jumbotron" *ngIf="episodes.length==0 && !loading">
+                                    NO EPISODES UPCOMING
+                                </div>
                                 <div class="line-element-wrapper" *ngFor="let calendar of episodes">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-3">
                                                     <div class="date-element" style="text-align: center;">
-                                                        <div class="row" [ngStyle]="{'color':calendar.releaseDate===today ? '#ef9800' : 'grey'}">
+                                                        <div class="row">
                                                             <div class="col">
-                                                                <div class="num-element">
+                                                                <div class="num-element" [ngStyle]="{'color':calendar.releaseDate<=today ? '#ef9800' : 'grey'}">
                                                                     {{calendar.releaseDate | date: 'dd'}}
                                                                 </div>
                                                             </div>
