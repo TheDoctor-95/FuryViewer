@@ -161,13 +161,13 @@ public class FavouriteArtistResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    @GetMapping("/favourite-artists/check-favorite-artist{id}")
+    @GetMapping("/favourite-artists/check-favorite-artist/{id}")
     @Timed
     public ResponseEntity<Map<String, Boolean>> selectFavouriteArtist(@PathVariable Long id){
         log.debug("REST request to get Artist if favourite: {}", id );
-        Boolean check = favouriteArtistRepository.selectFavouriteArtist(id);
+        Boolean check = favouriteArtistRepository.selectFavouriteArtist(id,SecurityUtils.getCurrentUserLogin());
         Map<String, Boolean> checkMap = new HashMap<>();
-        checkMap.put("status", check);
+        checkMap.put("like", check);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(checkMap));
     }
 

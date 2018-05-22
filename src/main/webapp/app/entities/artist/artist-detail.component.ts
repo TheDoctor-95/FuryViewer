@@ -13,6 +13,7 @@ import {Observable} from 'rxjs/Observable';
 import {HatredArtist} from '../hatred-artist';
 import {HatredArtistService} from '../hatred-artist';
 import {FavouriteArtist, FavouriteArtistService} from '../favourite-artist';
+import {BooleanModel} from "../../shared/model/boolean.model";
 
 @Component({
     selector: 'jhi-artist-detail',
@@ -66,9 +67,25 @@ export class ArtistDetailComponent implements OnInit, OnDestroy {
             this.loadFilmography(params['id']);
             this.loadFavHate(params['id']);
             this.loadCountFavHate(params['id']);
-            console.log(this.filmography)
+            this.loadHate(params['id']);
+            this.loadFav(params['id']);
         });
         this.registerChangeInArtists();
+    }
+
+    loadHate(id: number) {
+        this.hatredArtistService.getHate(id).subscribe(
+            (res) => {
+                this.hate = res.like;
+            }
+        )
+    }
+    loadFav(id: number) {
+        this.favouriteArtistService.fav(id).subscribe(
+            (res) => {
+                this.fav = res.like;
+            }
+        )
     }
 
     goTo(type: String, id: number) {

@@ -20,7 +20,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -137,6 +139,16 @@ public class HatredArtistResource {
         log.debug("REST request to get HatredArtist : {}", id);
         HatredArtist hatredArtist = hatredArtistRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(hatredArtist));
+    }
+
+    @GetMapping("/hatred-artists/user/{id}")
+    @Timed
+    public ResponseEntity<Map<String,Boolean>> getHatredArtistUser(@PathVariable Long id) {
+        log.debug("REST request to get HatredArtist : {}", id);
+        Boolean hatredArtist = hatredArtistRepository.getIfHatredUser(id, SecurityUtils.getCurrentUserLogin());
+        Map<String, Boolean> likeMap = new HashMap<>();
+        likeMap.put("like", hatredArtist);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(likeMap));
     }
     @GetMapping("/num-hatred-artists/{id}")
     @Timed

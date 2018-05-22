@@ -8,6 +8,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 import { HatredArtist } from './hatred-artist.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 import {HatredSeries} from '../hatred-series/hatred-series.model';
+import {BooleanModel} from "../../shared/model/boolean.model";
 
 @Injectable()
 export class HatredArtistService {
@@ -36,6 +37,12 @@ export class HatredArtistService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    getHate(id: number): Observable<BooleanModel> {
+        return this.http.get(`${this.resourceUrl}/user/${id}`).map((res: Response) => {
+            return res.json();
         });
     }
 
