@@ -12,6 +12,9 @@
     </div>
     <div class="modal-body">
         <div class="row">
+            <div *ngIf="loading" class="loader">
+                <img  src="../../../content/images/loader.gif" />
+            </div>
             <div class="card portades col-2" *ngFor="let artist of artistLimitless"
                  (click)="goTo(artist.id)" style=" margin-right: 3%;">
 

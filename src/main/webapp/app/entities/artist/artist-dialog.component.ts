@@ -33,7 +33,7 @@ export class ArtistDialogComponent implements OnInit {
     movieId: number;
 
     artisttypes: ArtistType[];
-
+    loading: boolean;
     route: ActivatedRoute;
 
     movies: Movie[];
@@ -84,10 +84,12 @@ export class ArtistDialogComponent implements OnInit {
     }
 
     loadCompleteCasting(id: number) {
+        this.loading = true;
         if (this.global.multimedia === 'movie') {
             this.movieService.findActorsLimitless(id).subscribe(
                 (res: ResponseWrapper) => {
                     this.artistLimitless = res.json;
+                    this.loading=false;
                 },
                 (res: ResponseWrapper) => this.onError(res.json)
             );
@@ -95,6 +97,7 @@ export class ArtistDialogComponent implements OnInit {
             this.episodeService.findActorsLimitless(id).subscribe(
                 (res: ResponseWrapper) => {
                     this.artistLimitless = res.json;
+                    this.loading = false;
                 },
                 (res: ResponseWrapper) => this.onError(res.json)
             );
@@ -117,6 +120,7 @@ export class ArtistDialogComponent implements OnInit {
     }
 
     private onError(error: any) {
+        this.loading=false;
         this.jhiAlertService.error(error.message, null, null);
     }
 
