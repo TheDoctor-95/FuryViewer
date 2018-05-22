@@ -5,7 +5,7 @@
             <div class="card pendientes">
                 <div class="card-body">
                     <div class="serpeli_body">
-                        <h2 class="card-title" style="font-size: 30px;">PENDING CHAPTERS</h2>
+                        <h2 class="card-title" style="font-size: 30px;">PENDING EPISODES</h2>
                         <div class="card portades" *ngFor="let episode of episodePending"
                              [routerLink]="['/series', episode?.id]">
                             <img class="card-img-top" src="{{episode.urlCartel}}" alt="Card image">
@@ -28,7 +28,7 @@
             <div class="card pendientes align-top">
                 <div class="card-body">
                     <div class="serpeli_body">
-                        <h2 class="card-title container" style="font-size: 30px;">PENDING FILMS</h2>
+                        <h2 class="card-title container" style="font-size: 30px;">PENDING MOVIES</h2>
                         <div class="card portades" *ngFor="let movie of moviesPending"
                              routerLink="/movie/{{movie.id}}">
                             <img class="card-img-top" src="{{movie.imgUrl}}" alt="Card image">
