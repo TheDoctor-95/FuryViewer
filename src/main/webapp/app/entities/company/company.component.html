@@ -2,7 +2,7 @@
 <div class="fons container-fluid ">
     <div class="row ">
         <div class="col-lg-8 col-md-12">
-            <div class="card pendientes">
+            <div class="card pendientes" style="height: 24rem;">
                 <div class="card-body">
                     <div class="serpeli_body">
                         <h2 class="card-title" style="font-size: 30px;">PENDING EPISODES</h2>
@@ -19,13 +19,13 @@
                             <div id="plus" [routerLink]="['/', { outlets: { popup: ['episode-next'] } }]">+</div>
                         </div>
 
-                        <div *ngIf="loadinSeries" class="loader">
+                        <div *ngIf="loadinSeries" class="loader" style="margin-top:8%;">
                             <img  src="../../../content/images/loader.gif" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card pendientes align-top">
+            <div class="card pendientes align-top" style="height: 24rem;">
                 <div class="card-body">
                     <div class="serpeli_body">
                         <h2 class="card-title container" style="font-size: 30px;">PENDING MOVIES</h2>
@@ -40,7 +40,7 @@
                             <div id="plus2" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]">+</div>
                         </div>
 
-                        <div *ngIf="loadingMovies" class="loader">
+                        <div *ngIf="loadingMovies" class="loader" style="margin-top:8%;">
                             <img  src="../../../content/images/loader.gif" />
                         </div>
                     </div>
