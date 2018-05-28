@@ -6,6 +6,7 @@ import com.furyviewer.service.TheMovieDB.Service.CompanyTmdbDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,10 +37,10 @@ public class CompanyService {
         Company c = null;
 
         if (stringApiCorrectorService.eraserNA(name) != null) {
-            Optional<Company> optionalCompany = companyRepository.findCompanyByName(name);
+            List<Company> optionalCompany = companyRepository.findCompanyByName(name);
 
-            if (optionalCompany.isPresent()) {
-                c = optionalCompany.get();
+            if (!optionalCompany.isEmpty()) {
+                c = optionalCompany.get(0);
             } else {
                 c = companyTmdbDTOService.importCompany(name);
             }
