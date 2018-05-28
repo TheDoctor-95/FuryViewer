@@ -117,9 +117,9 @@ public class CompanyResource {
      */
     @GetMapping("/companiesByName/{name}")
     @Timed
-    public ResponseEntity<Optional<Company>> findCompanyByName(@PathVariable String name) {
+    public ResponseEntity<List<Company>> findCompanyByName(@PathVariable String name) {
         log.debug("REST request to get Companies by name", name);
-        Optional<Company> company = companyRepository.findCompanyByName(name);
+        List<Company> company = companyRepository.findCompanyByName(name);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(company));
     }
 
