@@ -71,7 +71,7 @@ public class MarksService {
      */
     private String markTranformation(String source, String value) {
         switch (source.toLowerCase()) {
-            case "internet movie database":
+            case "IMDB":
                 return tranformIMDB(value);
             case "rotten tomatoes":
                 return tranformRT(value);
