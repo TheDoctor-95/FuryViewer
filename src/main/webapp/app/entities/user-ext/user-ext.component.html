@@ -1,198 +1,145 @@
 <script src="index.ts"></script>
 <div class="fons ">
     <div class="row">
-        <div class="hola col-12">
+        <div class="hola col-12" style="padding-top: 100px;">
 
-            <div class="info_perfil container">
-                <div class="row">
-
-                    <div class="info col-sm-12 col-md-12 col-lg-4 " >
-                      <img src="../../../content/images/fotoperfil.png" class="imatgeperf" width="105px" height="105px" style="position: absolute "/>
-
-
-                        <div class="text_info" style="position: relative">
-                            <h2 style="text-align: left; padding-left: 4%;">PEDRO MARTÍN</h2>
-                            <div class="inf"><i class="fa fa-envelope fa-1x"></i> pedromartin@gmail.com</div>
-                            <div class="inf"><i class="fa fa-calendar fa-1x"></i> 21 years</div>
-                            <div class="inf"><i class="fa fa-map-marker fa-1x"></i> New York, EEUU</div>
-
-                        </div>
-                        <div class="button">
-                            <button [routerLink]="['/', { outlets: { popup: ['user-edit'] } }]">EDITAR PERFIL</button>
-                        </div>
-
-                    </div>
-
-                    <div class="info2 col-sm-offset-0 col-8 ">
-                    </div>
-
+            <div class="row infoProfile">
+                <div class="col-12">
+                    <img src="../../../content/images/fotoperfil.png" class="imatgeperf" style="display: block;"/>
                 </div>
-            </div>
+                <div class="col-12">
+                    <h2 style="display: block;">PEDRO MARTÍN</h2>
+                </div>
 
+            </div>
 
             <div class="cos_perfil">
 
 
-                <div id="sidebarwatch_perfil">
-                    <div id="botons_sidebar">
 
-                        <div class="icon_text">
-                            <div class="rodona"><i class="fa fa-star fa-3x"></i></div>
-                            VALORACIONES
-                        </div>
-                        <div class="icon_text">
-                            <div class="rodona"><i class="fa fa-edit fa-3x"></i></div>
-                            PELICULAS
-                        </div>
-                        <div class="icon_text">
-                            <div class="rodona"><i class="fa fa-eye-slash fa-3x"></i></div>
-                            SERIES
-                        </div>
-                        <div class="icon_text">
-                            <div class="rodona"><i class="fa fa-thumbs-down fa-3x"></i></div>
-                            LOGROS
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="card pendientes" style="margin-bottom: 0px !important;">
-                    <div class="card-body">
-
-                        <div class="serpeli_body2">
-
-
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Whoos</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="serpeli_body2">
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-                            </div>
-                            <div class="card portades">
-                                <img class="card-img-top" src="doctorwho.jpg" alt="Card image">
-
-
-                                <div class="card-body">
-                                    <h4 class="card-title">3x04 Blink</h4>
-                                    <h3 class="card-text">Doctor Who</h3>
-                                </div>
-
-                                <div class="valoracio"><h2>5</h2></div>
-
-
-                            </div>
-                        </div>
-
+                    <div class="row" style="padding-left: 50px; padding-right: 50px;">
+                        <div class="col-4" style="border-top: 3px solid #a2a2a259;margin-top: 5%;"></div>
+                        <div class="col-4 title-aboutus" style="font-size: 1.5em;">SERIES</div>
+                        <div class="col-4" style="border-top: 3px solid #a2a2a259;margin-top: 5%;"></div>
                     </div>
 
-                    <!--<div style="display: inline-block; height: 7vw;">
-                        <div id="plus_watchlist" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]">+</div>
-                    </div>-->
+                    <div class="card pendientes" style="margin-bottom: 0px !important;">
+                        <div ass="card-body" style="padding-top: 15px;">
+
+                        <div class="serpeli_body2" style="padding-left: 20px; padding-right: 20px;">
+
+                            <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="col-2" style="text-align: center;">
+                                        <i class="fa fa-eye-slash fa-2x iconProfile" style=""></i>
+                                        <p class="numberProfile">88</p>
+                                        <p class="txtProfile">VIEWED</p>
+                                    </div>
+                                    <div class="col-2" style="text-align: center;">
+                                        <i class="fa fa-angle-double-right fa-2x iconProfile"></i>
+                                        <p class="numberProfile">88</p>
+                                        <p class="txtProfile">FOLLOWING</p>
+                                    </div>
+                                    <div class="col-2" style="text-align: center;">
+                                        <i class="fa fa-edit fa-2x iconProfile"></i>
+                                        <p class="numberProfile">88</p>
+                                        <p class="txtProfile">PENDING</p>
+                                    </div>
+                                    <div class="col-2" style="text-align: center;">
+                                        <i class="fa fa-heart fa-2x iconProfile"></i>
+                                        <p class="numberProfile">88</p>
+                                        <p class="txtProfile">FAVORITES</p>
+                                    </div>
+                                    <div class="col-2" style="text-align: center;">
+                                        <i class="fa fa-thumbs-down fa-2x iconProfile"></i>
+                                        <p class="numberProfile">88</p>
+                                        <p class="txtProfile">HATRED</p>
+                                    </div>
+                                    <div class="col-1"></div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="row" style="padding-left: 50px; padding-right: 50px; padding-top: 60px;">
+                            <div class="col-4" style="border-top: 3px solid #a2a2a259;margin-top: 5%;"></div>
+                            <div class="col-4 title-aboutus" style="font-size: 1.5em;">MOVIES</div>
+                            <div class="col-4" style="border-top: 3px solid #a2a2a259;margin-top: 5%;"></div>
+                        </div>
+
+                        <div class="card pendientes" style="margin-bottom: 0px !important;">
+                            <div class="card-body" style="padding-top: 15px;">
+
+                                <div class="serpeli_body2" style="padding-left: 20px; padding-right: 20px;">
+
+                                    <div class="row">
+
+                                        <div class="col-2"></div>
+
+                                        <div class="col-2" style="text-align: center;">
+                                            <i class="fa fa-eye-slash fa-2x iconProfile" style=""></i>
+                                            <p class="numberProfile">88</p>
+                                            <p class="txtProfile">VIEWED</p>
+                                        </div>
+                                        <div class="col-2" style="text-align: center;">
+                                            <i class="fa fa-edit fa-2x iconProfile"></i>
+                                            <p class="numberProfile">88</p>
+                                            <p class="txtProfile">PENDING</p>
+                                        </div>
+                                        <div class="col-2" style="text-align: center;">
+                                            <i class="fa fa-heart fa-2x iconProfile"></i>
+                                            <p class="numberProfile">88</p>
+                                            <p class="txtProfile">FAVORITES</p>
+                                        </div>
+                                        <div class="col-2" style="text-align: center;">
+                                            <i class="fa fa-thumbs-down fa-2x iconProfile"></i>
+                                            <p class="numberProfile">88</p>
+                                            <p class="txtProfile">HATRED</p>
+                                        </div>
+
+                                        <div class="col-2"></div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row" style="padding-left: 50px; padding-right: 50px; padding-top: 60px;">
+                                    <div class="col-4" style="border-top: 3px solid #a2a2a259;margin-top: 5%;"></div>
+                                    <div class="col-4 title-aboutus" style="font-size: 1.5em;">ARTISTS</div>
+                                    <div class="col-4" style="border-top: 3px solid #a2a2a259;margin-top: 5%;"></div>
+                                </div>
+
+                                <div class="card pendientes" style="margin-bottom: 0px !important;">
+                                    <div class="card-body" style="padding-top: 15px;">
+
+                                        <div class="serpeli_body2" style="padding-left: 20px; padding-right: 20px;">
+
+                                            <div class="row">
+
+                                                <div class="col-4"></div>
+
+                                                <div class="col-2" style="text-align: center;">
+                                                    <i class="fa fa-heart fa-2x iconProfile"></i>
+                                                    <p class="numberProfile">88</p>
+                                                    <p class="txtProfile">FAVORITES</p>
+                                                </div>
+                                                <div class="col-2" style="text-align: center;">
+                                                    <i class="fa fa-thumbs-down fa-2x iconProfile"></i>
+                                                    <p class="numberProfile">88</p>
+                                                    <p class="txtProfile">HATRED</p>
+                                                </div>
+
+                                                <div class="col-4"></div>
+                                            </div>
+
+
+                                        </div>
+
+
+                      <!--<div style="display: inline-block; height: 7vw;">
+                          <div id="plus_watchlist" [routerLink]="['/', { outlets: { popup: ['movie-pending'] } }]">+</div>
+                      </div>-->
 
                 </div>
 
