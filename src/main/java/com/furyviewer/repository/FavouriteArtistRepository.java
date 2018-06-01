@@ -38,7 +38,7 @@ public interface FavouriteArtistRepository extends JpaRepository<FavouriteArtist
     @Query("SELECT COUNT(f.liked) FROM FavouriteArtist f WHERE f.liked=true AND f.artist.id=:id")
     Integer countLikedArtist(@Param("id") Long id);
 
-    @Query("select f.artist from FavouriteArtist f where f.liked=true group by f.artist order by avg (f.liked) desc")
+    @Query("select f.artist from FavouriteArtist f where f.liked=true group by f.artist order by count (f.liked) desc")
     List<Artist> topFavoriteArtis(Pageable pageable);
 
     @Query("SELECT COUNT(f) FROM FavouriteArtist f WHERE f.liked=true")
