@@ -11,7 +11,7 @@
 
     <groupId>com.furyviewer</groupId>
     <artifactId>fury-viewer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>war</packaging>
     <name>Fury Viewer</name>
 

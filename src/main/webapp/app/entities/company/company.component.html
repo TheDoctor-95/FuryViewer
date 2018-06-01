@@ -74,14 +74,9 @@
                     <div class="card topSeries">
                         <div class="card-body">
                             <div id="topseries">
-                                <div class="row">
-                                    <h2 class="col-9">Top series</h2>
-                                    <label class="switchinv col-3">
-                                        <input type="checkbox">
-                                        <span class="sliderinv roundinv"></span>
-                                    </label>
 
-                                </div>
+                                    <h2>Top series</h2>
+
                                 <ol class="list-group">
                                     <li *ngFor="let serie of topSeries " class="list-group-item" [routerLink]="['/series', serie.id]"> {{serie.name}}</li>
                                 </ol>
@@ -96,15 +91,9 @@
 
                         <div class="card-body">
                             <div id="toppelis">
-                                <div class="row">
-                                    <h2 class="col-9">Top movies</h2>
 
-                                    <label class="switchinv col-3">
-                                        <input type="checkbox">
-                                        <span class="sliderinv roundinv"></span>
-                                    </label>
+                                    <h2>Top movies</h2>
 
-                                </div>
                                 <ol class="list-group">
                                     <li *ngFor="let movie of topPelis" class="list-group-item" [routerLink]="['/movie', movie.id]"> {{movie.name}}</li>
 
