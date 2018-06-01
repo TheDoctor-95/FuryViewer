@@ -4,7 +4,9 @@ import com.furyviewer.domain.Movie;
 import com.furyviewer.domain.Series;
 import com.furyviewer.domain.Social;
 import com.furyviewer.repository.*;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.service.dto.OpenMovieDatabase.Rating;
+import com.furyviewer.service.dto.util.UserStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,12 @@ public class MarksService {
 
     @Autowired
     private HatredSeriesRepository hatredSeriesRepository;
+
+    @Autowired
+    private SeriesStatsRepository seriesStatsRepository;
+
+    @Autowired
+    private MovieStatsRepository movieStatsRepository;
 
     /**
      * Convierte la informacion de los votos de paginas externas proporcionados por la api al formato FuryViewer.
@@ -170,5 +178,29 @@ public class MarksService {
     public int totalHatreds() {
         return hatredArtistRepository.countTotalArtistHatred() + hatredMovieRepository.countTotalMovieHatred() +
             hatredSeriesRepository.countTotalSeriesHatred();
+    }
+
+    public UserStats stats() {
+        int[] series = new int[5];
+        int[] movies = new int[4];
+        int[] artists = new int[2];
+
+        series[0] = seriesStatsRepository.countSeenSeriesUser(SecurityUtils.getCurrentUserLogin());
+        series[1] = seriesStatsRepository.countFollowingSeriesUser(SecurityUtils.getCurrentUserLogin());
+        series[2] = seriesStatsRepository.countPendingSeriesUser(SecurityUtils.getCurrentUserLogin());
+        series[3] = favouriteSeriesRepository.countUserSeriesFav(SecurityUtils.getCurrentUserLogin());
+        series[4] = hatredSeriesRepository.countUserSeriesHatred(SecurityUtils.getCurrentUserLogin());
+
+        movies[0] = movieStatsRepository.countSeenMovie(SecurityUtils.getCurrentUserLogin());
+        movies[1] = movieStatsRepository.countPendingMoviesUserLogin(SecurityUtils.getCurrentUserLogin());
+        movies[2] = favouriteMovieRepository.countLikesUser(SecurityUtils.getCurrentUserLogin());
+        movies[3] = hatredMovieRepository.countHatredMovieUser(SecurityUtils.getCurrentUserLogin());
+
+        artists[0] = favouriteArtistRepository.countUserArtistFav(SecurityUtils.getCurrentUserLogin());
+        artists[1] = hatredArtistRepository.countUserArtistsHatred(SecurityUtils.getCurrentUserLogin());
+
+        UserStats userStats = new UserStats(series, movies, artists);
+
+        return userStats;
     }
 }

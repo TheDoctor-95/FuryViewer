@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.furyviewer.domain.UserExt;
 
 import com.furyviewer.repository.UserExtRepository;
+import com.furyviewer.security.SecurityUtils;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -115,5 +118,13 @@ public class UserExtResource {
         log.debug("REST request to delete UserExt : {}", id);
         userExtRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/user-exts/username/")
+    @Timed
+    public ResponseEntity<Map<String,String>> absoluteUserStats() {
+        Map<String,String> map = new HashMap<>();
+        map.put("url", SecurityUtils.getCurrentUserLogin());
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(map));
     }
 }

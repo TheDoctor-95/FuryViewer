@@ -6,6 +6,7 @@ import com.furyviewer.domain.Country;
 import com.furyviewer.repository.*;
 import com.furyviewer.service.GoogleMaps.Service.GoogleMapsDTOService;
 import com.furyviewer.service.dto.GoogleMaps.GoogleMapsDTO;
+import com.furyviewer.service.dto.util.UserStats;
 import com.furyviewer.service.util.MarksService;
 import com.furyviewer.web.rest.errors.BadRequestAlertException;
 import com.furyviewer.web.rest.util.HeaderUtil;
@@ -205,5 +206,11 @@ public class CountryResource {
         log.debug("REST request to get number of likes of artist");
         Integer num = Math.toIntExact(userRepository.totalUsers());
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(num));
+    }
+
+    @GetMapping("/countries/user-stats/")
+    @Timed
+    public ResponseEntity<UserStats> absoluteUserStats() {
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(homeService.stats()));
     }
 }

@@ -5,6 +5,8 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { UserExt } from './user-ext.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {UserStatsModel} from "../../shared/model/userStats.model";
+import {UrlModel} from "../../shared/model/url.model";
 
 @Injectable()
 export class UserExtService {
@@ -33,6 +35,12 @@ export class UserExtService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
+    getUsername(): Observable<UrlModel> {
+        return this.http.get(`${this.resourceUrl}/username/`).map((res: Response) => {
+            return  res.json();
         });
     }
 

@@ -5,6 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { Country } from './country.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import {UserStatsModel} from "../../shared/model/userStats.model";
 
 @Injectable()
 export class CountryService {
@@ -68,6 +69,12 @@ export class CountryService {
 
     getAbsoluteTotalUser(): Observable<number> {
         return this.http.get(`${this.resourceUrl}/count-absolute-user/`).map((res: Response) => {
+            return  res.json();
+        });
+    }
+
+    getAbsoluteStatsUser(): Observable<UserStatsModel> {
+        return this.http.get(`${this.resourceUrl}/user-stats/`).map((res: Response) => {
             return  res.json();
         });
     }

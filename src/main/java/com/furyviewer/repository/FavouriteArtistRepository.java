@@ -43,4 +43,7 @@ public interface FavouriteArtistRepository extends JpaRepository<FavouriteArtist
 
     @Query("SELECT COUNT(f) FROM FavouriteArtist f WHERE f.liked=true")
     Integer countTotalArtistFav();
+
+    @Query("SELECT COUNT(f) FROM FavouriteArtist f WHERE f.liked=true AND f.user.login=:userLogin")
+    Integer countUserArtistFav(@Param("userLogin") String userLogin);
 }
