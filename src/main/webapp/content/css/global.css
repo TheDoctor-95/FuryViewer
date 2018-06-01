@@ -698,7 +698,7 @@ button:hover {
 
 .card-img-top {
     width: 84%;
-    height: 11vw;
+    height: 12vw;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -1716,7 +1716,7 @@ margin-left: 15%;*/
     margin-left: 0px;
     margin-right: 0px;
     margin-top: -33px;
-    background-color: #3b3b3b;
+    background-color: transparent;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     text-align: center;

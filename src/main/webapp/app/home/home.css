@@ -196,11 +196,12 @@
     height: 18rem;
     margin-bottom: 6rem;
 
-    background-size: 32rem;
+    background-size: cover;
+    background-position:center;
 }
 
 #element1 {
-    background-image: url("../../content/images/home.png");
+    background-image: url("../../content/images/home/home.png");
     position: relative;
 }
 
@@ -231,23 +232,23 @@
 }
 
 #element2 {
-    background-image: url("../../content/images/profile.png");
+    background-image: url("../../content/images/home/profile.png");
 }
 
 #element3 {
-    background-image: url("../../content/images/home.png");
+    background-image: url("../../content/images/home/whatchlist.png");
 }
 
 #element4 {
-    background-image: url("../../content/images/profile.png");
+    background-image: url("../../content/images/home/search.png");
 }
 
 #element5 {
-    background-image: url("../../content/images/home.png");
+    background-image: url("../../content/images/home/calendar.jpg");
 }
 
 #element6 {
-    background-image: url("../../content/images/profile.png");
+    background-image: url("../../content/images/home/about us.png");
 }
 
 .titol-section4 {
